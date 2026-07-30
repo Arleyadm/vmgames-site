@@ -259,3 +259,54 @@ footer.rodape a { margin: 0 8px; }
     background: linear-gradient(0deg, rgba(8,6,15,.96) 30%, rgba(8,6,15,.35) 100%);
   }
 }
+
+/* ---------- galeria de capturas ---------- */
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 20px 0 8px;
+}
+.galeria.retrato { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+
+.galeria button {
+  padding: 0;
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--superficie);
+  cursor: zoom-in;
+  transition: border-color .15s ease, transform .15s ease;
+  display: block;
+  width: 100%;
+}
+.galeria button:hover { border-color: var(--magenta); transform: translateY(-2px); }
+.galeria img { width: 100%; height: auto; display: block; }
+
+.legenda-galeria { font-size: 13.5px; color: var(--texto-fraco); margin: 0 0 26px; }
+
+/* visualizador */
+dialog.lupa {
+  border: none;
+  background: transparent;
+  padding: 0;
+  max-width: 96vw;
+  max-height: 96vh;
+  overflow: visible;
+}
+dialog.lupa::backdrop { background: rgba(4, 3, 10, .93); }
+dialog.lupa img { max-width: 96vw; max-height: 88vh; border-radius: 10px; display: block; }
+dialog.lupa .fechar {
+  position: absolute;
+  top: -14px; right: -14px;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--borda);
+  background: var(--superficie2);
+  color: var(--texto);
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+}
+dialog.lupa .fechar:hover { border-color: var(--magenta); color: var(--magenta); }
