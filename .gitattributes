@@ -1,0 +1,4 @@
+# app-ads.txt precisa manter quebra de linha Unix: o rastreador do AdMob le
+# texto puro, e CRLF ja causou problema em outros publishers.
+app-ads.txt text eol=lf
+CNAME       text eol=lf

@@ -4,56 +4,92 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VM Games — jogos para Android</title>
-<meta name="description" content="Estúdio independente de Arley Vieira. Turbo Race, Sky Vanguard e Sugar Strike — jogos para Android feitos em Catalão, Goiás.">
+<meta name="description" content="Estúdio independente de Arley Vieira, em Catalão/GO. Turbo Race, Sky Vanguard e Sugar Strike — jogos gratuitos para Android.">
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+
+<header class="barra">
+  <div class="envolucro">
+    <a class="marca" href="/"><span class="vm">VM</span> <span class="games">GAMES</span></a>
+    <nav>
+      <a href="#jogos">Jogos</a>
+      <a href="sugar-strike/jogar/">Jogar no navegador</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
 <div class="envolucro">
 
-  <header class="topo">
-    <a class="marca" href="/"><span class="vm">VM</span> <span class="games">GAMES</span></a>
-    <div class="assinatura">Jogos para Android</div>
-  </header>
-
-  <h1>Jogos feitos no interior de Goiás.</h1>
-  <p>
-    VM Games é o estúdio independente de <strong>Arley Vieira</strong>, em Catalão.
-    Aqui ficam os jogos, as políticas de privacidade e o suporte.
-  </p>
-
-  <div class="jogos">
-
-    <a class="jogo" href="turbo-race/">
-      <span class="gen">Corrida arcade</span>
-      <h3>Turbo Race</h3>
+  <section class="destaque">
+    <img class="arte" src="img/hero-turbo.webp" alt="Cenário de corrida do Turbo Race ao pôr do sol">
+    <div class="conteudo">
+      <span class="etiqueta">Em destaque</span>
+      <h1>Turbo Race</h1>
       <p>
         Corrida em perspectiva no estilo dos clássicos de 16 bits. 28 fases por
         Brasil, Estados Unidos, Japão e Itália, com garagem, turbo e multiplayer
         local por Bluetooth.
       </p>
+      <div class="botoes">
+        <a class="botao destaque-cor" href="https://play.google.com/store/apps/details?id=com.turboroad.racer">Baixar grátis</a>
+        <a class="botao" href="turbo-race/">Saiba mais</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="secao-titulo" id="jogos">
+    <h2>Nossos jogos</h2>
+    <span>três títulos, todos gratuitos</span>
+  </div>
+
+  <div class="grade">
+
+    <a class="cartao" href="turbo-race/">
+      <div class="capa"><img src="img/card-turbo.webp" alt="Pista noturna com luzes de neon no Turbo Race" loading="lazy"></div>
+      <div class="info">
+        <span class="genero">Corrida arcade</span>
+        <h3>Turbo Race</h3>
+        <p>28 fases por quatro países, garagem para melhorar o carro e corrida contra amigos por Bluetooth.</p>
+        <span class="selo">Grátis</span>
+      </div>
     </a>
 
-    <a class="jogo" href="sky-vanguard/">
-      <span class="gen">Nave / shmup</span>
-      <h3>Sky Vanguard</h3>
-      <p>
-        Tiro vertical com ondas de inimigos, chefes e evolução de nave.
-        Ação rápida, na tradição dos fliperamas.
-      </p>
+    <a class="cartao" href="sky-vanguard/">
+      <div class="capa"><img src="img/card-sky.webp" alt="Cenário aéreo de uma fase do Sky Vanguard" loading="lazy"></div>
+      <div class="info">
+        <span class="genero">Nave / shmup</span>
+        <h3>Sky Vanguard</h3>
+        <p>Tiro vertical com ondas de inimigos, chefes e evolução de nave. Partidas curtas, na tradição dos fliperamas.</p>
+        <span class="selo">Grátis</span>
+      </div>
     </a>
 
-    <a class="jogo" href="sugar-strike/">
-      <span class="gen">FPS cartoon</span>
-      <h3>Sugar Strike</h3>
-      <p>
-        Tiro em primeira pessoa numa cidade de doces, com visual de desenho
-        animado. Tem partida online e roda direto no navegador, sem instalar.
-      </p>
+    <a class="cartao" href="sugar-strike/">
+      <div class="capa"><img src="img/card-sugar.webp" alt="Rua da cidade de doces do Sugar Strike" loading="lazy"></div>
+      <div class="info">
+        <span class="genero">FPS cartoon</span>
+        <h3>Sugar Strike</h3>
+        <p>Tiro em primeira pessoa numa cidade de doces, com partida online. Roda direto no navegador.</p>
+        <span class="selo jogavel">Jogue sem instalar</span>
+      </div>
     </a>
 
   </div>
 
-  <h2>Contato</h2>
+  <div class="secao-titulo">
+    <h2>Sobre o estúdio</h2>
+  </div>
+  <p>
+    VM Games é o estúdio independente de <strong>Arley Vieira</strong>, em Catalão, Goiás.
+    Os jogos são feitos do zero — o Turbo Race e o Sugar Strike nem usam engine: a pista em
+    perspectiva e o mundo 3D de doces são desenhados por renderizadores escritos à mão.
+  </p>
+
+  <div class="secao-titulo" id="contato">
+    <h2>Contato</h2>
+  </div>
   <p>
     Dúvida, problema técnico ou pedido sobre dados pessoais:
     <a href="mailto:arleyadm@gmail.com">arleyadm@gmail.com</a>.

@@ -1,195 +1,261 @@
 /*
-  VM Games — estilo compartilhado.
+  VM Games — estilo do site.
 
   Sem fontes externas, sem CDN, sem biblioteca: tudo que a página pede é ela
-  mesma. Isso deixa o site rápido, funciona offline no navegador do jogador e
-  evita que qualquer terceiro receba o IP de quem visita — o que é coerente com
-  um site que hospeda políticas de privacidade.
+  mesma. Deixa o site rápido e evita que qualquer terceiro receba o IP de quem
+  visita — coerente com um site que hospeda políticas de privacidade.
 
   As cores vêm do próprio jogo (res/values/colors.xml do Turbo Race).
 */
 
 :root {
-  --fundo: #0a0818;
-  --fundo2: #14002f;
-  --painel: #17082f;
+  --fundo: #08060f;
+  --superficie: #12102a;
+  --superficie2: #1a1738;
   --ciano: #00f5ff;
   --magenta: #ff2daa;
   --roxo: #8a5cff;
   --ambar: #ffd24d;
-  --texto: #f2eefc;
-  --texto-fraco: #b9aee0;
-  --borda: #2b1d52;
+  --texto: #f4f1ff;
+  --texto-fraco: #a79fd0;
+  --borda: #2a2350;
+  --raio: 14px;
 }
 
 * { box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
+
 body {
   margin: 0;
   background: var(--fundo);
-  background-image:
-    radial-gradient(1200px 600px at 50% -10%, #2a0b4d 0%, transparent 60%),
-    linear-gradient(180deg, var(--fundo) 0%, var(--fundo2) 100%);
-  background-attachment: fixed;
   color: var(--texto);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   line-height: 1.65;
   -webkit-text-size-adjust: 100%;
 }
 
-.envolucro {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 20px 72px;
+img { max-width: 100%; display: block; }
+
+.envolucro { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+.envolucro.texto { max-width: 860px; padding-bottom: 72px; }
+
+/* ---------- barra do topo ---------- */
+
+.barra {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(8, 6, 15, .88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--borda);
 }
-
-/* ---------- cabeçalho ---------- */
-
-header.topo {
-  padding: 40px 0 8px;
-  text-align: center;
+.barra .envolucro {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  height: 62px;
 }
-
 .marca {
-  display: inline-block;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   text-decoration: none;
   color: var(--texto);
+  white-space: nowrap;
 }
 .marca .vm { color: var(--ciano); }
 .marca .games { color: var(--magenta); }
 
-.assinatura {
+.barra nav { margin-left: auto; display: flex; gap: 20px; flex-wrap: wrap; }
+.barra nav a {
   color: var(--texto-fraco);
-  font-size: 14px;
-  margin-top: 2px;
-}
-
-/* ---------- textos ---------- */
-
-h1 {
-  font-size: clamp(28px, 5vw, 42px);
-  line-height: 1.15;
-  margin: 28px 0 10px;
-}
-
-h2 {
-  font-size: 21px;
-  margin: 34px 0 10px;
-  color: var(--ciano);
-}
-
-h3 {
-  font-size: 17px;
-  margin: 22px 0 6px;
-  color: var(--ambar);
-}
-
-p, li { color: var(--texto-fraco); }
-strong { color: var(--texto); }
-
-a { color: var(--ciano); }
-a:hover { color: var(--magenta); }
-
-/* ---------- cartões de jogo ---------- */
-
-.jogos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-  margin: 30px 0;
-}
-
-.jogo {
-  display: block;
-  background: var(--painel);
-  border: 1px solid var(--borda);
-  border-radius: 14px;
-  padding: 22px;
   text-decoration: none;
-  color: inherit;
-  transition: transform .15s ease, border-color .15s ease;
+  font-size: 14.5px;
+  font-weight: 600;
 }
-.jogo:hover {
-  transform: translateY(-3px);
-  border-color: var(--magenta);
+.barra nav a:hover { color: var(--ciano); }
+
+/* ---------- destaque (hero) ---------- */
+
+.destaque {
+  position: relative;
+  margin: 26px 0 12px;
+  border-radius: var(--raio);
+  overflow: hidden;
+  border: 1px solid var(--borda);
+  min-height: 340px;
+  display: flex;
+  align-items: flex-end;
 }
-.jogo h3 { margin: 0 0 6px; color: var(--texto); font-size: 20px; }
-.jogo .gen {
+.destaque img.arte {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.destaque::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(8,6,15,.94) 0%, rgba(8,6,15,.75) 45%, rgba(8,6,15,.15) 100%),
+              linear-gradient(0deg, rgba(8,6,15,.9) 0%, transparent 55%);
+  z-index: 1;
+}
+.destaque .conteudo {
+  position: relative;
+  z-index: 2;
+  padding: 34px;
+  max-width: 620px;
+}
+.destaque .etiqueta {
   display: inline-block;
-  font-size: 12px;
-  letter-spacing: 1px;
+  font-size: 11.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--ciano);
-  margin-bottom: 10px;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
-.jogo p { margin: 0; font-size: 15px; }
+.destaque h1 { margin: 0 0 10px; font-size: clamp(30px, 5.5vw, 48px); line-height: 1.08; }
+.destaque p { margin: 0 0 20px; color: #d6d0f0; font-size: 16px; }
+
+/* ---------- grade de jogos ---------- */
+
+.secao-titulo {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 46px 0 18px;
+}
+.secao-titulo h2 { margin: 0; font-size: 22px; }
+.secao-titulo span { color: var(--texto-fraco); font-size: 14px; }
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.cartao {
+  display: block;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .16s ease, border-color .16s ease;
+}
+.cartao:hover { transform: translateY(-4px); border-color: var(--magenta); }
+.cartao .capa { aspect-ratio: 16 / 9; overflow: hidden; background: var(--superficie2); }
+.cartao .capa img { width: 100%; height: 100%; object-fit: cover; }
+.cartao .info { padding: 15px 17px 18px; }
+.cartao .genero {
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--ciano);
+  font-weight: 700;
+}
+.cartao h3 { margin: 5px 0 7px; font-size: 18.5px; }
+.cartao p { margin: 0 0 12px; font-size: 14.5px; color: var(--texto-fraco); }
+.selo {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(0, 245, 255, .12);
+  color: var(--ciano);
+  border: 1px solid rgba(0, 245, 255, .3);
+}
+.selo.jogavel { background: rgba(255,45,170,.12); color: var(--magenta); border-color: rgba(255,45,170,.32); }
 
 /* ---------- botões ---------- */
 
-.botoes { margin: 26px 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.botoes { display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0; }
 
 .botao {
   display: inline-block;
-  padding: 13px 22px;
+  padding: 13px 24px;
   border-radius: 10px;
   font-weight: 700;
+  font-size: 15px;
   text-decoration: none;
   border: 1px solid var(--borda);
-  background: var(--painel);
+  background: var(--superficie2);
   color: var(--texto);
 }
-.botao.destaque {
+.botao.destaque-cor {
   background: linear-gradient(135deg, var(--magenta), var(--roxo));
   border-color: transparent;
   color: #fff;
 }
-.botao:hover { border-color: var(--ciano); color: var(--texto); }
+.botao:hover { border-color: var(--ciano); }
 
-/* ---------- blocos de aviso ---------- */
+/* ---------- páginas de texto ---------- */
+
+.capa-pagina {
+  aspect-ratio: 21 / 7;
+  border-radius: var(--raio);
+  overflow: hidden;
+  border: 1px solid var(--borda);
+  margin: 24px 0 6px;
+}
+.capa-pagina img { width: 100%; height: 100%; object-fit: cover; }
+
+h1 { font-size: clamp(27px, 5vw, 40px); line-height: 1.15; margin: 26px 0 10px; }
+h2 { font-size: 21px; margin: 34px 0 10px; color: var(--ciano); }
+h3 { font-size: 17px; margin: 22px 0 6px; color: var(--ambar); }
+p, li { color: var(--texto-fraco); }
+strong { color: var(--texto); }
+code { background: var(--superficie2); padding: 1px 6px; border-radius: 5px; font-size: 13.5px; }
+a { color: var(--ciano); }
+a:hover { color: var(--magenta); }
 
 .caixa {
-  background: var(--painel);
+  background: var(--superficie);
   border: 1px solid var(--borda);
   border-left: 3px solid var(--ciano);
   border-radius: 10px;
   padding: 16px 18px;
   margin: 20px 0;
 }
-.caixa p:last-child { margin-bottom: 0; }
 .caixa p:first-child { margin-top: 0; }
+.caixa p:last-child { margin-bottom: 0; }
 
-/* ---------- tabela ---------- */
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 18px 0;
-  font-size: 15px;
-}
-th, td {
-  text-align: left;
-  padding: 10px 12px;
-  border-bottom: 1px solid var(--borda);
-  vertical-align: top;
-}
-th { color: var(--ciano); font-size: 13px; text-transform: uppercase; letter-spacing: .5px; }
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 15px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--borda); vertical-align: top; }
+th { color: var(--ciano); font-size: 12.5px; text-transform: uppercase; letter-spacing: .5px; }
 td { color: var(--texto-fraco); }
-
 .rolagem { overflow-x: auto; }
+
+.voltar { display: inline-block; margin-top: 26px; font-size: 15px; }
 
 /* ---------- rodapé ---------- */
 
 footer.rodape {
   border-top: 1px solid var(--borda);
-  margin-top: 54px;
-  padding-top: 22px;
+  margin-top: 56px;
+  padding: 26px 0 40px;
   color: var(--texto-fraco);
   font-size: 14px;
   text-align: center;
 }
 footer.rodape a { margin: 0 8px; }
 
-.voltar { display: inline-block; margin-top: 26px; font-size: 15px; }
+/* ---------- telas pequenas ---------- */
+
+@media (max-width: 620px) {
+  .barra .envolucro { height: auto; padding-top: 10px; padding-bottom: 10px; flex-wrap: wrap; gap: 10px 16px; }
+  .barra nav { margin-left: 0; width: 100%; gap: 16px; }
+  .destaque { min-height: 300px; }
+  .destaque .conteudo { padding: 22px; }
+  .destaque::after {
+    background: linear-gradient(0deg, rgba(8,6,15,.96) 30%, rgba(8,6,15,.35) 100%);
+  }
+}
