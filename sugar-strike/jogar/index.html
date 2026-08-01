@@ -58,6 +58,8 @@
   #bFire{right:24px;bottom:34px;width:104px;height:104px;font-size:16px}
   #bJump{right:140px;bottom:44px;width:66px;height:66px}
   #bReload{right:34px;bottom:150px;width:66px;height:66px}
+  #bScope{right:146px;bottom:150px;width:66px;height:66px;font-size:11px}
+  #bScope.on{background:rgba(255,207,77,.85);border-color:rgba(74,59,51,.85)}
 
   #hint{position:absolute;bottom:76px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:1.5px;opacity:.9}
   #dmg{position:absolute;inset:0;background:radial-gradient(circle,transparent 45%,rgba(220,60,60,.55));opacity:0;transition:opacity .18s}
@@ -162,6 +164,8 @@
   <div class="tbtn" id="bFire">ATIRAR</div>
   <div class="tbtn" id="bJump">PULO</div>
   <div class="tbtn" id="bReload">REC</div>
+  <!-- so aparece quando a arma na mao tem luneta -->
+  <div class="tbtn" id="bScope">MIRA</div>
 
   <div class="pill" id="board"><h3>PLACAR</h3><div id="boardRows"></div></div>
   <div class="pill hide" id="hint">MOVA O MOUSE PARA MIRAR &middot; LEVE AT&Eacute; A BORDA PARA GIRAR 360&deg;</div>
@@ -176,6 +180,7 @@
       <span class="key">W A S D</span> mover &nbsp; <span class="key">MOUSE</span> mirar &nbsp;
       <span class="key">CLIQUE</span> atirar<br>
       <span class="key">1</span> arma &nbsp; <span class="key">2</span> acess&oacute;rio &nbsp;
+      <span class="key">BOT&Atilde;O DIREITO</span> luneta &nbsp;
       <span class="key">R</span> recarregar &nbsp;
       <span class="key">SHIFT</span> correr &nbsp; <span class="key">ESPA&Ccedil;O</span> pular &nbsp;
       <span class="key">TAB</span> placar<br>
@@ -225,7 +230,11 @@ function shade(hex,f){
 /* --------------------------------------------------------------- canvas */
 const cv=document.getElementById('game');
 const ctx=cv.getContext('2d',{alpha:false});
-const FOV=1.30, NEAR=0.12, FAR=190, FAR2=FAR*FAR;
+/* FOV deixa de ser fixo: a luneta da sniper fecha o angulo para dar o zoom.
+   Quem recalcula F (resize) sempre le o FOV atual, entao basta mexer aqui. */
+const BASE_FOV=1.30;
+let FOV=BASE_FOV;
+const NEAR=0.12, FAR=190, FAR2=FAR*FAR;
 let W=0,H=0,HW=0,HH=0,F=0,RS=1;
 function resize(){
   const w=window.innerWidth,h=window.innerHeight;
@@ -616,10 +625,12 @@ const WEAPONS=[
           dmg:30, rate:0.090, mag:30, res:90, maxRes:90, spread:0.013, move:0.042, pellets:1, auto:true,
           reload:2.20, kick:0.037, side:0.012, range:92, fall:[60,0.78], weight:0.27, price:400,
           snd:380, tone:'crack', color:'#8fd9c8', accent:'#fdf7ec'},
- /* 2 */ {name:'PIRULITO SNIPER', role:'PRECISAO', desc:'Alcance e precisao extremos. Lenta para atirar e para recarregar.',
-          dmg:105, rate:1.45, mag:5, res:25, maxRes:25, spread:0.0032, move:0.170, pellets:1, auto:false,
+ /* 2 */ {name:'PIRULITO SNIPER', role:'PRECISAO', desc:'Alcance e precisao extremos pela luneta. No quadril nao acerta nada.',
+          dmg:105, rate:1.45, mag:5, res:25, maxRes:25, spread:0.055, move:0.170, pellets:1, auto:false,
           reload:3.40, kick:0.115, side:0.008, range:175, fall:[140,0.92], weight:0.62, price:900,
-          snd:150, tone:'boom', color:'#f6a9c3', accent:'#ffcf4d'},
+          snd:150, tone:'boom', color:'#f6a9c3', accent:'#ffcf4d',
+          /* com a luneta no olho: angulo fechado, mira firme e mao mais lenta */
+          scope:{fov:0.40, spread:0.0028, move:0.140, sens:0.34, speed:0.52}},
  /* 3 */ {name:'CHOCOLATE EAGLE', role:'PISTOLA', desc:'Pistola pesadissima. Poucos tiros, muito estrago e recuo bravo.',
           dmg:58, rate:0.32, mag:7, res:35, maxRes:35, spread:0.016, move:0.078, pellets:1, auto:false,
           reload:2.10, kick:0.095, side:0.028, range:85, fall:[45,0.70], weight:0.14, price:320,
@@ -649,9 +660,11 @@ const WEAPONS=[
           reload:5.40, kick:0.045, side:0.032, range:78, fall:[50,0.65], weight:0.75, price:820,
           snd:260, tone:'crack', color:'#f6a9c3', accent:'#c9b4ec'},
  /* 10 */{name:'FACA DE ACUCAR', role:'ACESSORIO', acc:true, melee:true,
-          desc:'Golpe curto e rapido. Nunca acaba e nao pesa nada.',
+          desc:'A primeira facada derruba de uma vez. Depois de acertar, precisa carregar de novo.',
           dmg:55, rate:0.45, mag:0, res:0, maxRes:0, spread:0.010, move:0, pellets:1, auto:false,
           reload:0, kick:0, side:0, range:2.6, weight:0, price:0,
+          /* golpe carregado: mata de primeira e so volta depois de recarregar */
+          first:100, firstDelay:1.6,
           snd:900, tone:'swish', color:'#e8dcc2', accent:'#f6a9c3'},
  /* 11 */{name:'GRANADA DE GOMA', role:'ACESSORIO', acc:true, thrown:true,
           desc:'Estoura numa bola de goma. Duas por vida, recarrega ao renascer.',
@@ -690,6 +703,41 @@ function rangeScale(w,dist){
   if(dist>=w.range) return floor;
   return 1-(1-floor)*((dist-start)/(w.range-start));
 }
+/* ------------------------------------------------------------- luneta
+   Vale para qualquer arma que traga um bloco `scope`. Hoje so a sniper tem. */
+let scoped=false;
+function scopeOf(e){ return WEAPONS[(e||player).wep].scope||null; }
+function applyFov(){
+  const s=scoped?scopeOf(player):null;
+  FOV=s?s.fov:BASE_FOV;
+  if(H>0) F=H/(2*Math.tan(FOV/2));
+}
+/* o quanto a mira fica mais lenta com a luneta no olho */
+function aimScale(){
+  const s=scoped?scopeOf(player):null;
+  return s?(s.sens||0.4):1;
+}
+function setScoped(on){
+  const s=scopeOf(player);
+  const want=!!on&&!!s&&!paused&&!player.dead;
+  if(want===scoped) return;
+  scoped=want;
+  applyFov();
+  snd.swap();
+  const button=document.getElementById('bScope');
+  if(button) button.classList.toggle('on',scoped);
+}
+function toggleScope(){ setScoped(!scoped); }
+/* qualquer coisa que tire a arma da mao fecha a luneta */
+function dropScope(){ if(scoped){ scoped=false; applyFov();
+  const b=document.getElementById('bScope'); if(b) b.classList.remove('on'); } }
+/* mostra o botao de mira so quando a arma na mao tem luneta */
+function refreshScopeButton(){
+  const button=document.getElementById('bScope');
+  if(!button) return;
+  button.style.display=(isTouch&&scopeOf(player))?'flex':'none';
+}
+
 /* efeitos do equipamento comprado na loja; sem loja, tudo fica neutro */
 function gearMod(name,fallback){
   return (window.SugarEnhance&&SugarEnhance.gearMod)?SugarEnhance.gearMod(name,fallback):fallback;
@@ -752,8 +800,10 @@ function respawn(e){
   for(let i=0;i<WEAPONS.length;i++){ e.mags[i]=WEAPONS[i].mag; e.ress[i]=WEAPONS[i].maxRes; }
   const w=WEAPONS[e.wep];
   e.mag=w.mag; e.res=w.maxRes; e.reloadT=0; e.fireT=0.8; e.spray=0;
+  e.meleeT=0;                  /* golpe carregado volta cheio ao renascer */
   e.prot=1.6; e.target=null; e.goal=null; e.shield=0; e.slow=0; e.streak=0;
   if(e===player){
+    dropScope();
     /* cinto de municao e colete valem a partir do renascimento */
     const extra=gearMod('ammo',1);
     if(extra!==1){
@@ -858,6 +908,7 @@ function traceShot(ox,oy,oz,dx,dy,dz,shooter,w,scale){
   }else if(bestT<range){
     burst(hx,hy,hz,'#e8dcc2',3);
   }
+  return registered;          /* quem chamou precisa saber se acertou */
 }
 function shoot(e){
   const w=WEAPONS[e.wep];
@@ -877,8 +928,14 @@ function shoot(e){
       const assisted=SugarEnhance.assistAim(bx,by,bz);
       bx=assisted[0];by=assisted[1];bz=assisted[2];
     }
-    /* mira e joelheira compradas na loja entram aqui */
-    spread=w.spread*gearMod('spread',1)+(w.move||0)*moveFactor(e)*gearMod('move',1);
+    /* mira e joelheira compradas na loja entram aqui.
+       Com a luneta aberta valem os numeros muito melhores do bloco scope. */
+    const sc=scoped?scopeOf(e):null;
+    const baseSpread=sc?sc.spread:w.spread;
+    const baseMove=sc?sc.move:(w.move||0);
+    spread=baseSpread*gearMod('spread',1)+baseMove*moveFactor(e)*gearMod('move',1);
+    /* golpe carregado do corpo a corpo: derruba de uma facada so */
+    if(w.melee&&w.first&&(e.meleeT||0)<=0) scale=w.first/w.dmg;
     /* rajada emendada sobe o cano e abre a mira, como numa arma de verdade */
     e.spray=(e.spray||0)+1;
     const grow=1+Math.min(1.7,(e.spray-1)*0.13);
@@ -909,13 +966,19 @@ function shoot(e){
     snd.shotSpatial(w.snd,e.x-player.x,e.z-player.z);
     if(!w.melee) muzzles.push({x:ex,y:ey,z:ez,t:0.06});
   }
+  let acertou=false;
   for(let i=0;i<w.pellets;i++){
     let dx=bx,dy=by,dz=bz;
     if(w.pellets>1||spread>0){
       dx+=rnd(-spread,spread); dy+=rnd(-spread,spread); dz+=rnd(-spread,spread);
       const l=Math.hypot(dx,dy,dz); dx/=l;dy/=l;dz/=l;
     }
-    traceShot(ex,ey,ez,dx,dy,dz,e,w,scale);
+    if(traceShot(ex,ey,ez,dx,dy,dz,e,w,scale)) acertou=true;
+  }
+  /* o golpe carregado so se gasta quando acerta; errar nao tira a carga */
+  if(w.melee&&w.first&&acertou&&(e.meleeT||0)<=0){
+    e.meleeT=w.firstDelay||1.5;
+    if(e===player) updateHUD();
   }
 }
 function reload(e){
@@ -1325,19 +1388,24 @@ cv.addEventListener('mousedown',e=>{
   wantLock();
   dragging=true; lastMX=e.clientX; lastMY=e.clientY;
   if(e.button===0){ firing=true; tryShoot(); }
+  /* botao direito abre e fecha a luneta */
+  if(e.button===2) toggleScope();
 });
+/* sem menu de contexto: o botao direito e da mira */
+cv.addEventListener('contextmenu',e=>e.preventDefault());
 addEventListener('mouseup',()=>{ firing=false; dragging=false; });
 addEventListener('mousemove',e=>{
   if(paused||isTouch) return;
+  const sens=mouseSens*aimScale();   /* com a luneta a mao fica mais firme */
   if(document.pointerLockElement===cv){
     hadLock=true; edgeOn=false;
-    cam.yaw-=e.movementX*mouseSens;
-    cam.pitch=clamp(cam.pitch-e.movementY*mouseSens,-1.35,1.35);
+    cam.yaw-=e.movementX*sens;
+    cam.pitch=clamp(cam.pitch-e.movementY*sens,-1.35,1.35);
   }else{
     /* sem pointer lock: a mira segue o mouse 1:1, sem precisar segurar botao */
     if(mouseSeen){
-      cam.yaw-=(e.clientX-lastMX)*mouseSens*1.7;
-      cam.pitch=clamp(cam.pitch-(e.clientY-lastMY)*mouseSens*1.7,-1.35,1.35);
+      cam.yaw-=(e.clientX-lastMX)*sens*1.7;
+      cam.pitch=clamp(cam.pitch-(e.clientY-lastMY)*sens*1.7,-1.35,1.35);
     }
     lastMX=e.clientX; lastMY=e.clientY; mouseSeen=true;
     edgeX=e.clientX; edgeOn=true;
@@ -1376,6 +1444,8 @@ function setWeapon(i){
   if(paused||player.dead||player.wep===i) return;
   player.mags[player.wep]=player.mag; player.ress[player.wep]=player.res;
   player.wep=i;
+  dropScope();                 /* trocar de arma sempre fecha a luneta */
+  refreshScopeButton();
   player.reloadT=0; player.fireT=0.18;
   player.mag=player.mags[i]; player.res=player.ress[i];
   snd.swap();
@@ -1397,7 +1467,8 @@ function enableTouchUI(){
   document.getElementById('ptxt').innerHTML=
     'Deathmatch numa cidade de doces. Elimine os rivais at&eacute; bater a meta.<br><br>'+
     'Joystick <b>esquerdo</b> para andar &middot; <b>arraste</b> na tela para mirar &middot; bot&atilde;o <b>ATIRAR</b> para disparar.<br>'+
-    'Voc&ecirc; leva <b>uma arma</b> e <b>um acess&oacute;rio</b>: o <b>1</b> e o <b>2</b> trocam entre eles.';
+    'Voc&ecirc; leva <b>uma arma</b> e <b>um acess&oacute;rio</b>: o <b>1</b> e o <b>2</b> trocam entre eles.<br>'+
+    'Com a Pirulito Sniper na m&atilde;o aparece o bot&atilde;o <b>MIRA</b>, que abre a luneta.';
 }
 if(isTouch) enableTouchUI();
 function tpos(t){ return {x:t.clientX,y:t.clientY}; }
@@ -1427,8 +1498,9 @@ addEventListener('touchmove',e=>{
       joy.dx=dx/max; joy.dy=dy/max;
       knob.style.transform='translate('+dx+'px,'+dy+'px)';
     }else if(t.identifier===look.id){
-      const sx=window.SugarSettings?SugarSettings.touchSensX:0.0052;
-      const sy=window.SugarSettings?SugarSettings.touchSensY:0.0052;
+      const zoom=aimScale();   /* com a luneta a mira anda mais devagar */
+      const sx=(window.SugarSettings?SugarSettings.touchSensX:0.0052)*zoom;
+      const sy=(window.SugarSettings?SugarSettings.touchSensY:0.0052)*zoom;
       const rawDX=t.clientX-look.x, rawDY=t.clientY-look.y;
       if(Number.isFinite(rawDX)&&Number.isFinite(rawDY)&&Math.abs(rawDX)<180&&Math.abs(rawDY)<180){
         const safeDX=clamp(rawDX,-55,55), safeDY=clamp(rawDY,-55,55);
@@ -1463,6 +1535,7 @@ function bindHold(id,down,up){
 bindHold('bFire',()=>{firing=true;tryShoot();},()=>firing=false);
 bindHold('bJump',()=>{keys.Space=true;setTimeout(()=>keys.Space=false,120);});
 bindHold('bReload',()=>reload(player));
+bindHold('bScope',()=>toggleScope());
 document.querySelectorAll('.slot').forEach(s=>{
   s.addEventListener('click',()=>setWeapon(+s.dataset.w));
   s.addEventListener('touchstart',e=>{e.preventDefault();setWeapon(+s.dataset.w);},{passive:false});
@@ -1483,9 +1556,13 @@ function updateHUD(){
   hpFill.style.background=player.hp>55?'linear-gradient(#9fe08a,#5fbf55)':player.hp>25?'linear-gradient(#ffd97a,#f0a93c)':'linear-gradient(#f79a8a,#e8615a)';
   hpTxt.textContent=Math.max(0,Math.round(player.hp));
   wName.textContent=w.name;
-  /* corpo a corpo nao tem municao: o HUD mostra o simbolo de infinito */
-  magV.textContent=w.melee?'∞':(player.reloadT>0?'--':player.mag);
+  /* corpo a corpo nao tem municao: o HUD mostra o simbolo de infinito.
+     Se a arma tem golpe carregado, a estrela avisa que ele esta pronto. */
+  magV.textContent=w.melee
+    ? (w.first?((player.meleeT||0)<=0?'★':'∞'):'∞')
+    : (player.reloadT>0?'--':player.mag);
   resV.textContent=w.melee?'':(w.thrown?'':'/'+player.res);
+  refreshScopeButton();
   scoreV.textContent=player.score;
   let lead=ents[0];
   for(const e of ents) if(e.score>lead.score) lead=e;
@@ -1616,9 +1693,15 @@ el('sens').addEventListener('input',e=>{ mouseSens=e.target.value/10000; });
 /* --------------------------------------------------------- jogador */
 function updatePlayer(dt){
   if(player.dead){
+    dropScope();
     player.respawnT-=dt;
     if(player.respawnT<=0){ respawn(player); updateHUD(); }
     return;
+  }
+  /* golpe carregado do corpo a corpo voltando a ficar pronto */
+  if(player.meleeT>0){
+    player.meleeT-=dt;
+    if(player.meleeT<=0){ player.meleeT=0; updateHUD(); }
   }
   let ix=0,iz=0;
   if(keys.KeyW||keys.ArrowUp) iz+=1;
@@ -1635,7 +1718,10 @@ function updatePlayer(dt){
     const boost=window.SugarEnhance?SugarEnhance.playerSpeed(player):1;
     /* arma pesada anda menos: a Algodao Pesado cobra caro pelos 100 tiros */
     const heavy=1-(WEAPONS[player.wep].weight||0)*0.32;
-    const sp=6.2*sprint*boost*heavy*dt*Math.min(1,l);
+    /* com a luneta no olho quase nao da para correr */
+    const sc=scoped?scopeOf(player):null;
+    const zoomSlow=sc?(sc.speed||0.5):1;
+    const sp=6.2*sprint*boost*heavy*zoomSlow*dt*Math.min(1,l);
     moveXZ(player,(fx*iz+rx*ix)*sp,(fz*iz+rz*ix)*sp,0.4);
     bobT+=dt*(9*sprint); bobAmt=lerp(bobAmt,1,dt*8);
   }else bobAmt=lerp(bobAmt,0,dt*8);
@@ -1752,7 +1838,48 @@ function rrect(x,y,w,h,r){
 }
 const FONT='ui-rounded,"Trebuchet MS","Segoe UI",system-ui,sans-serif';
 
+/* luneta: escurece tudo em volta e deixa um circulo limpo com a cruz fina */
+function drawScope(){
+  const cx=HW, cy=HH;
+  const r=Math.min(W,H)*0.40;
+  ctx.save();
+  /* o preto de fora do circulo */
+  ctx.fillStyle='rgba(24,18,15,.94)';
+  ctx.beginPath();
+  ctx.rect(0,0,W,H);
+  ctx.arc(cx,cy,r,0,6.2832,true);   /* sentido inverso abre o buraco */
+  ctx.fill();
+  /* aro do pirulito, em duas cores para lembrar a arma */
+  ctx.lineWidth=Math.max(4,9*RS);
+  ctx.strokeStyle='#f6a9c3';
+  ctx.beginPath(); ctx.arc(cx,cy,r,0,6.2832); ctx.stroke();
+  ctx.lineWidth=Math.max(2,4*RS);
+  ctx.strokeStyle='#ffcf4d';
+  ctx.beginPath(); ctx.arc(cx,cy,r-Math.max(3,6*RS),0,6.2832); ctx.stroke();
+  /* cruz fina de ponta a ponta */
+  ctx.strokeStyle='rgba(63,52,46,.85)';
+  ctx.lineWidth=Math.max(1,1.6*RS);
+  ctx.beginPath();
+  ctx.moveTo(cx-r,cy); ctx.lineTo(cx-r*0.10,cy);
+  ctx.moveTo(cx+r*0.10,cy); ctx.lineTo(cx+r,cy);
+  ctx.moveTo(cx,cy-r); ctx.lineTo(cx,cy-r*0.10);
+  ctx.moveTo(cx,cy+r*0.10); ctx.lineTo(cx,cy+r);
+  ctx.stroke();
+  /* risquinhos de medida, como numa luneta de verdade */
+  ctx.lineWidth=Math.max(1,2*RS);
+  for(let i=1;i<=4;i++){
+    const d=r*0.16*i, t=Math.max(3,6*RS)*(i%2?1:0.6);
+    ctx.beginPath();
+    ctx.moveTo(cx-t,cy+d); ctx.lineTo(cx+t,cy+d);
+    ctx.moveTo(cx-t,cy-d); ctx.lineTo(cx+t,cy-d);
+    ctx.stroke();
+  }
+  ctx.fillStyle='rgba(232,97,90,.95)';
+  ctx.beginPath(); ctx.arc(cx,cy,Math.max(1.5,2.2*RS),0,6.2832); ctx.fill();
+  ctx.restore();
+}
 function drawCrosshair(){
+  if(scoped){ drawScope(); return; }
   const cx=HW, cy=HH, g=Math.max(3,7*RS);
   ctx.strokeStyle='rgba(63,52,46,.9)'; ctx.lineWidth=Math.max(2,3*RS);
   ctx.lineCap='round';
@@ -1907,6 +2034,7 @@ function frame(t){
 
 /* o viewmodel usa um emissor proprio (pontos ja em espaco de camera) */
 function drawVM(){
+  if(scoped) return;      /* de olho na luneta a arma some da tela */
   vmMode=true;
   drawViewmodel();
   vmMode=false;

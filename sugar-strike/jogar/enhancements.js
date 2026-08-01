@@ -1185,10 +1185,12 @@
     return '<i class="statBar"><b style="width:' + (filled * 20) + '%"></b></i>';
   }
   function weaponStats(weapon) {
+    // Quem tem luneta e julgado pela mira no olho, nao pelo tiro de quadril.
+    const aim = weapon.scope ? weapon.scope.spread : weapon.spread;
     const rows = [
       ["DANO", bar(weapon.dmg * weapon.pellets, 110), weapon.dmg * (weapon.pellets > 1 ? weapon.pellets : 1)],
       ["ALCANCE", bar(weapon.range, 175), Math.round(weapon.range) + "m"],
-      ["PRECISAO", bar(weapon.spread, 0.0032, true), ""],
+      ["PRECISAO", bar(aim, 0.0028, true), ""],
       ["CADENCIA", bar(weapon.rate, 0.066, true), ""],
       ["MOBILIDADE", bar(1 - (weapon.weight || 0), 1), ""]
     ];
