@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sobre — VM Games</title>
+<meta name="description" content="Quem faz os jogos da VM Games, como são feitos e como falar com o autor.">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<header class="barra">
+  <div class="envolucro">
+    <a class="marca" href="/"><span class="vm">VM</span> <span class="games">GAMES</span></a>
+    <nav>
+      <a href="/#jogos">Jogos</a>
+      <a href="/sugar-strike/jogar/">Jogar no navegador</a>
+      <a href="/sobre.html">Sobre</a>
+      <a href="/#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<div class="envolucro texto">
+
+  <h1>Sobre a VM Games</h1>
+  <p>
+    VM Games é o estúdio independente de <strong>Arley Vieira</strong>, desenvolvedor
+    em Catalão, Goiás. Um estúdio de uma pessoa só: a mesma pessoa escreve o código,
+    desenha, testa e publica.
+  </p>
+
+  <div class="caixa">
+    <p>
+      Todos os jogos daqui são feitos do zero, em português, e são gratuitos. Dois deles
+      nem usam motor de jogo: tanto a pista em perspectiva do Turbo Race quanto o mundo
+      3D de doces do Sugar Strike são desenhados por renderizadores escritos à mão.
+    </p>
+  </div>
+
+  <h2>Os jogos</h2>
+  <p>
+    <strong>Sugar Strike</strong> — tiro em primeira pessoa numa cidade de doces, com
+    salas online, dez armas e loja de equipamentos. Roda direto no navegador e também
+    está na Google Play. <a href="/sugar-strike/">Ver a página</a> ·
+    <a href="/sugar-strike/jogar/">Jogar agora</a>
+  </p>
+  <p>
+    <strong>Turbo Race</strong> — corrida em perspectiva no estilo dos arcades antigos,
+    escrita em Kotlin puro, sem engine. <a href="/turbo-race/">Ver a página</a>
+  </p>
+  <p>
+    <strong>Sky Vanguard</strong> — jogo de nave com ondas de inimigos e chefes.
+    <a href="/sky-vanguard/">Ver a página</a>
+  </p>
+
+  <h2>Como os jogos são feitos</h2>
+  <p>
+    O Sugar Strike é o exemplo mais extremo da ideia: o jogo inteiro é uma página web,
+    sem nenhuma biblioteca externa. O mundo 3D é desenhado por um rasterizador escrito
+    do zero sobre o canvas 2D do navegador, com projeção em perspectiva, recorte no
+    plano próximo, descarte de faces traseiras e ordenação por profundidade. O visual de
+    desenho animado vem justamente daí: cada face é preenchida e contornada
+    individualmente, o que dá o traço preto característico de graça.
+  </p>
+  <p>
+    O multiplayer online é um servidor de repasse próprio, também escrito do zero, que
+    mantém várias salas ao mesmo tempo e apaga as salas vazias sozinho.
+  </p>
+
+  <h2>Por que tem anúncio</h2>
+  <p>
+    Os jogos são e continuam gratuitos, sem cobrança para jogar e sem venda de vantagem
+    dentro da partida. Os anúncios nas laterais das telas de menu servem para pagar a
+    hospedagem do site e do servidor de partidas. Eles não aparecem durante a partida e
+    não aparecem no celular — a ideia é que ninguém precise fechar nada para jogar.
+  </p>
+
+  <h2>Falar com o autor</h2>
+  <p>
+    Sugestão, erro encontrado ou só para dizer o que achou:
+    <a href="mailto:arleyadm@gmail.com">arleyadm@gmail.com</a>. Respondo pessoalmente.
+  </p>
+
+  <a class="voltar" href="/">← Voltar para o início</a>
+
+  <footer class="rodape">
+    <p>
+      <a href="/privacidade.html">Privacidade</a> ·
+      <a href="/termos.html">Termos de uso</a> ·
+      <a href="/sobre.html">Sobre</a>
+    </p>
+    <p>VM Games — Arley Vieira, Catalão/GO</p>
+  </footer>
+
+</div>
+</body>
+</html>

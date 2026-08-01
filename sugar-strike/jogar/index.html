@@ -83,6 +83,18 @@
           color:rgba(255,253,247,.72);font-weight:900;letter-spacing:3px;font-size:15px;line-height:1.9;
           text-align:center;background:rgba(30,22,18,.35)}
   .adDemo small{letter-spacing:2px;font-size:11px;opacity:.7}
+  /* Rodape legal do menu: exigido por quem exibe anuncio, discreto o bastante
+     para nao competir com os botoes. O anuncios.js o remove dentro do app. */
+  #rodapeWeb{margin-top:14px;font-size:10px;letter-spacing:.8px;opacity:.6;line-height:1.9}
+  #rodapeWeb a{color:var(--ink);text-decoration:underline}
+  #avisoCookies{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:95;
+                display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;
+                max-width:min(720px,calc(100% - 32px));background:var(--pill);color:var(--ink);
+                border:3px solid var(--ink);border-radius:16px;padding:10px 16px;
+                box-shadow:0 5px 0 rgba(0,0,0,.22);font-size:12px;font-weight:800;line-height:1.5}
+  #avisoCookies a{color:var(--red)}
+  #avisoCookies button{border:3px solid var(--ink);border-radius:11px;background:var(--yellow);
+                color:var(--ink);font:900 11px var(--font);letter-spacing:1px;padding:7px 14px;cursor:pointer}
   /* Tela estreita nao tem espaco: no celular a faixa nunca aparece. */
   @media (max-width:1239px),(max-height:619px){ body.com-anuncio .adFaixa{display:none} }
   #loading{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -212,6 +224,12 @@
     <div id="sensWrap" style="margin-top:12px">
       <div class="lab" style="text-align:left">SENSIBILIDADE</div>
       <input type="range" id="sens" min="4" max="40" value="16">
+    </div>
+    <div id="rodapeWeb">
+      <a href="/privacidade.html">Privacidade</a> &middot;
+      <a href="/termos.html">Termos de uso</a> &middot;
+      <a href="/sobre.html">Sobre</a><br>
+      VM Games &mdash; Arley Vieira, Catal&atilde;o/GO
     </div>
   </div>
 </div>

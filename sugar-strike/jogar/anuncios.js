@@ -28,7 +28,13 @@
   var ALTURA_MINIMA = 620;
 
   // Regra 1: o app expoe esta ponte nativa. Se ela existe, estamos no aplicativo.
-  if (typeof SugarAndroid !== "undefined") return;
+  // Ali nao ha anuncio nem cookie, e os links do rodape apontam para o site,
+  // que o WebView nem carrega. Entao some com eles e desiste.
+  if (typeof SugarAndroid !== "undefined") {
+    var soWeb = document.getElementById("rodapeWeb");
+    if (soWeb) soWeb.remove();
+    return;
+  }
 
   // Sem identificador preenchido so mostramos o contorno, e olhe la: apenas
   // durante o desenvolvimento, para dar para conferir o layout.
@@ -93,13 +99,39 @@
     preencher(direita, SLOT_DIR);
   }
 
+  /* ------------------------------------------------------------ cookies
+     Aviso da LGPD, informativo: quem pede consentimento de verdade na Europa
+     e o CMP certificado do proprio Google, ligado no painel do AdSense. Dois
+     avisos brigando so confundem, entao este aqui nao bloqueia nada.        */
+  function avisoCookies() {
+    try {
+      if (localStorage.getItem("sugarstrike.avisoCookies")) return;
+    } catch (erro) {
+      return;
+    }
+    var caixa = document.createElement("div");
+    caixa.id = "avisoCookies";
+    caixa.innerHTML =
+      '<span>Este site usa cookies do Google para exibir an&uacute;ncios nas telas de menu. ' +
+      'Veja a <a href="/privacidade.html">Pol&iacute;tica de Privacidade</a>.</span>' +
+      '<button type="button">ENTENDI</button>';
+    caixa.querySelector("button").addEventListener("click", function () {
+      try { localStorage.setItem("sugarstrike.avisoCookies", "1"); } catch (erro) {}
+      caixa.remove();
+    });
+    document.body.appendChild(caixa);
+  }
+
   var visivel = false;
   function revisar() {
     var mostrar = cabeNaTela() && emMenu();
     if (mostrar === visivel) return;
     visivel = mostrar;
     document.body.classList.toggle("com-anuncio", mostrar);
-    if (mostrar) carregarUmaVez();
+    if (mostrar) {
+      carregarUmaVez();
+      avisoCookies();
+    }
   }
 
   // Uma olhada a cada 400 ms custa nada e nao encosta no laco do jogo.
