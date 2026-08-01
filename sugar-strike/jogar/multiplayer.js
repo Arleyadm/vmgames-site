@@ -1571,7 +1571,7 @@
       const wasDead = entity.dead;
 
       if (entity === player) {
-        applyEntityFields(entity, data, false);
+        applyEntityFields(entity, data, false, true);
         if ((!wasDead && entity.dead) || (wasDead && !entity.dead)) {
           entity.x = finite(data.x, entity.x);
           entity.y = finite(data.y, entity.y);
@@ -1609,7 +1609,7 @@
     updateHUD();
   }
 
-  function applyEntityFields(entity, data, includePosition) {
+  function applyEntityFields(entity, data, includePosition, keepOwnWeapon) {
     if (includePosition) {
       entity.x = finite(data.x, 0);
       entity.y = finite(data.y, 0);
@@ -1621,7 +1621,9 @@
     entity.dead = !!data.dead;
     entity.score = data.score | 0;
     entity.deaths = data.deaths | 0;
-    entity.wep = clamp(data.wep | 0, 0, WEAPONS.length - 1);
+    // A propria arma do cliente e escolha local: o pacote do dono chega atrasado
+    // (ate um ciclo de rede) e sobrescrever aqui desfazia a troca que acabou de acontecer.
+    if (!keepOwnWeapon) entity.wep = clamp(data.wep | 0, 0, WEAPONS.length - 1);
     entity.team = data.team | 0;
     entity.shield = Math.max(0, finite(data.shield, entity.shield || 0));
     entity.shots = data.shots | 0;
