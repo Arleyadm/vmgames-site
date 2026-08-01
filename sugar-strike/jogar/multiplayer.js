@@ -1020,8 +1020,8 @@
           ? " - VERSAO " + entry.version
           : "";
         // Mostra o que cada um vai levar para a partida.
-        const kit = WEAPONS[clamp(entry.weapon | 0, 0, WEAPONS.length - 1)].name +
-          " + " + WEAPONS[clamp(entry.accessory | 0, 0, WEAPONS.length - 1)].name;
+        const kit = WEAPONS[safePrimary(entry.weapon)].name +
+          " + " + WEAPONS[safeAccessory(entry.accessory)].name;
         detail.textContent = connection + version + " · " + kit;
         label.appendChild(name);
         label.appendChild(detail);
@@ -1053,6 +1053,16 @@
     return window.SugarEnhance && SugarEnhance.startingWeapon
       ? SugarEnhance.startingWeapon()
       : LOADOUT[0];
+  }
+  // Um pacote sem o campo, ou com o indice errado, nao pode acabar mostrando
+  // uma arma principal no lugar do acessorio (0 vira CARAMELO ASSAULT).
+  function safePrimary(value) {
+    const index = clamp(value | 0, 0, WEAPONS.length - 1);
+    return PRIMARIES.indexOf(index) >= 0 ? index : LOADOUT[0];
+  }
+  function safeAccessory(value) {
+    const index = clamp(value | 0, 0, WEAPONS.length - 1);
+    return ACCESSORIES.indexOf(index) >= 0 ? index : ACCESSORIES[0];
   }
   function selectedAccessory() {
     return window.SugarEnhance && SugarEnhance.startingAccessory
@@ -1195,8 +1205,8 @@
         ping: 0,
         version: String(message.version || ""),
         skin: message.skin || null,
-        weapon: clamp(message.weapon | 0, 0, WEAPONS.length - 1),
-        accessory: clamp(message.accessory | 0, 0, WEAPONS.length - 1)
+        weapon: safePrimary(message.weapon),
+        accessory: safeAccessory(message.accessory)
       });
       setStatus(peers.get(id).name + " entrou na sala.");
       broadcastRoster();
@@ -1231,7 +1241,8 @@
             ping: entry.ping | 0,
             version: String(entry.version || ""),
             skin: entry.skin || null,
-            weapon: clamp(entry.weapon | 0, 0, WEAPONS.length - 1)
+            weapon: safePrimary(entry.weapon),
+            accessory: safeAccessory(entry.accessory)
           });
         }
       });
