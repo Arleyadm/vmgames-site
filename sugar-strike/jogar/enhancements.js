@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.5.0";
+  const VERSION = "1.6.0";
   const SETTINGS_KEY = "sugarstrike.settings.v11";
   const PROFILE_KEY = "sugarstrike.profile.v12";
   const OLD_PROFILE_KEY = "sugarstrike.profile.v11";
@@ -984,6 +984,68 @@
     return {won: won, xp: xp, candies: candies, accuracy: accuracy};
   }
 
+  const END_MATCH_AD_REWARD = 50;
+  let rewardAdPending = false;
+  let rewardGrantedForResult = false;
+
+  function closeEndMatchRewardOffer() {
+    const overlay = document.getElementById("adRewardOverlay");
+    if (overlay) overlay.classList.remove("open");
+  }
+
+  function showEndMatchRewardOffer() {
+    if (!window.SugarAndroid || typeof SugarAndroid.showEndMatchRewardAd !== "function") return;
+    const overlay = document.getElementById("adRewardOverlay");
+    const watchButton = document.getElementById("adRewardWatch");
+    const status = document.getElementById("adRewardStatus");
+    if (!overlay || !watchButton || !status) return;
+    rewardAdPending = false;
+    rewardGrantedForResult = false;
+    watchButton.disabled = false;
+    status.textContent = "ASSISTA ATE O FIM PARA RECEBER A RECOMPENSA.";
+    overlay.classList.add("open");
+  }
+
+  function requestEndMatchRewardAd() {
+    if (rewardAdPending || rewardGrantedForResult) return;
+    const watchButton = document.getElementById("adRewardWatch");
+    const status = document.getElementById("adRewardStatus");
+    rewardAdPending = true;
+    if (watchButton) watchButton.disabled = true;
+    if (status) status.textContent = "CARREGANDO ANUNCIO...";
+    try {
+      SugarAndroid.showEndMatchRewardAd();
+    } catch (error) {
+      onRewardedInterstitialResult("failed");
+    }
+  }
+
+  function onRewardedInterstitialResult(result) {
+    const status = document.getElementById("adRewardStatus");
+    const watchButton = document.getElementById("adRewardWatch");
+    rewardAdPending = false;
+    if (result === "rewarded") {
+      if (rewardGrantedForResult) return;
+      rewardGrantedForResult = true;
+      profile.candies += END_MATCH_AD_REWARD;
+      saveProfile();
+      updateCandyHud();
+      if (status) status.textContent = "+50 DOCES RECEBIDOS!";
+      if (watchButton) watchButton.disabled = true;
+      showToast("+50 DOCES DO ANUNCIO!");
+      vibrate("0,45,50,80");
+      setTimeout(closeEndMatchRewardOffer, 1200);
+      return;
+    }
+    if (watchButton) watchButton.disabled = false;
+    if (result === "closed") {
+      if (status) status.textContent = "ANUNCIO FECHADO. NENHUM DOCE FOI ADICIONADO.";
+    } else {
+      if (status) status.textContent = "ANUNCIO INDISPONIVEL AGORA. TENTE NA PROXIMA PARTIDA.";
+    }
+    setTimeout(closeEndMatchRewardOffer, 1800);
+  }
+
   endMatch = function (winner) {
     if (matchOver) return;
     const result = recordResult(winner);
@@ -1003,6 +1065,7 @@
       '</div></div>' + existing;
     panelEl.classList.add("result-pop");
     setTimeout(function () { panelEl.classList.remove("result-pop"); }, 650);
+    setTimeout(showEndMatchRewardOffer, 850);
   };
 
   function showToast(text) {
@@ -1561,6 +1624,9 @@
       ".statList{display:grid;gap:3px;margin-top:2px}.statRow{display:grid;grid-template-columns:52px 1fr 30px;align-items:center;gap:5px;font-size:8px;font-weight:900}.statRow em{font-style:normal;opacity:.68}.statRow u{text-decoration:none;text-align:right;opacity:.68}.statBar{display:block;height:7px;border:2px solid #4a3b33;border-radius:5px;background:#fffdf7;overflow:hidden}.statBar b{display:block;height:100%;background:#e8615a}" +
       ".swatch{display:flex;gap:4px}.swatch i{flex:1;height:22px;border:2px solid #4a3b33;border-radius:7px}" +
       ".tutorial{display:grid;gap:8px;text-align:left}.tutorial div{background:#f0e6da;border-radius:12px;padding:10px}.tutorial b,.tutorial span{display:block}.tutorial span{font-size:12px;margin-top:3px}" +
+      "#adRewardOverlay{position:fixed;inset:0;z-index:130;display:none;align-items:center;justify-content:center;background:rgba(30,22,18,.84);padding:16px}" +
+      "#adRewardOverlay.open{display:flex}.adRewardCard{width:min(430px,100%);background:#fffdf7;border:5px solid #4a3b33;border-radius:24px;padding:20px;color:#4a3b33;text-align:center;filter:drop-shadow(0 9px 0 rgba(0,0,0,.24))}" +
+      ".adRewardGift{font-size:42px;line-height:1}.adRewardCard h2{margin:5px 0;color:#e8615a}.adRewardCard strong{color:#ba4c99}.adRewardCard p{font-size:12px;font-weight:800}.adRewardActions{display:grid;grid-template-columns:1.3fr .8fr;gap:8px;margin-top:12px}.adRewardActions .big-btn{margin:0}.adRewardStatus{min-height:18px;margin-top:8px!important;font-size:9px!important;letter-spacing:.6px}" +
       "@media(max-width:560px){#menuExtras{grid-template-columns:repeat(2,1fr)}.settingGrid,.shopGrid{grid-template-columns:1fr}.resultGrid{grid-template-columns:1fr 1fr}#modeHud{top:55px;font-size:7px;max-width:62%;overflow:hidden;text-overflow:ellipsis}#candyHud{top:54px;font-size:8px}#minimap{right:142px;top:42px;width:76px;height:76px}#slots{gap:3px}.slot{width:32px}}" ;
     document.head.appendChild(style);
 
@@ -1597,6 +1663,18 @@
     minimapCanvas.height = 180;
     minimapCtx = minimapCanvas.getContext("2d");
     document.getElementById("hud").appendChild(minimapCanvas);
+    const rewardOverlay = document.createElement("div");
+    rewardOverlay.id = "adRewardOverlay";
+    rewardOverlay.innerHTML =
+      '<div class="adRewardCard" role="dialog" aria-modal="true" aria-labelledby="adRewardTitle">' +
+      '<div class="adRewardGift">🍬</div><h2 id="adRewardTitle">GANHE <strong>+50 DOCES</strong></h2>' +
+      '<p>Assista a um anuncio curto para aumentar sua recompensa desta partida.</p>' +
+      '<div class="adRewardActions"><button id="adRewardWatch" class="big-btn">ASSISTIR E GANHAR</button>' +
+      '<button id="adRewardSkip" class="big-btn sub-btn">AGORA NAO</button></div>' +
+      '<p id="adRewardStatus" class="adRewardStatus"></p></div>';
+    document.body.appendChild(rewardOverlay);
+    document.getElementById("adRewardWatch").addEventListener("click", requestEndMatchRewardAd);
+    document.getElementById("adRewardSkip").addEventListener("click", closeEndMatchRewardOffer);
     installWeaponSlots();
     installControls();
     applyControlStyle();
@@ -1651,6 +1729,7 @@
     skyPalette: skyPalette,
     rebuildMap: rebuildSelectedMap,
     applyNetworkConfig: applyNetworkConfig,
+    onRewardedInterstitialResult: onRewardedInterstitialResult,
     assignTeams: assignTeams,
     shouldSkipFrame: shouldSkipFrame,
     game: game,

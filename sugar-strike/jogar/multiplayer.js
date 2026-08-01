@@ -14,7 +14,7 @@
 
   const nativeAvailable = typeof SugarAndroid !== "undefined";
   // Os indices das armas mudaram nesta versao: cliente antigo nao pode entrar.
-  const APP_VERSION = "1.5.0";
+  const APP_VERSION = "1.6.0";
   const peers = new Map();
   const rooms = new Map();
   let ui = null;
