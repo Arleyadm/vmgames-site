@@ -71,6 +71,20 @@
 
   #overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
            background:rgba(30,22,18,.62);backdrop-filter:blur(3px);pointer-events:auto;padding:16px}
+
+  /* Faixas de anuncio da versao web. Ficam escondidas por padrao: quem manda
+     nelas e o anuncios.js, que so as mostra fora do jogo e em tela larga. */
+  .adFaixa{position:fixed;top:50%;transform:translateY(-50%);width:300px;height:600px;
+           z-index:90;display:none;align-items:center;justify-content:center;pointer-events:auto}
+  #adEsq{left:26px} #adDir{right:26px}
+  body.com-anuncio .adFaixa{display:flex}
+  .adDemo{width:300px;height:600px;display:flex;flex-direction:column;align-items:center;
+          justify-content:center;gap:6px;border:4px dashed rgba(255,253,247,.55);border-radius:20px;
+          color:rgba(255,253,247,.72);font-weight:900;letter-spacing:3px;font-size:15px;line-height:1.9;
+          text-align:center;background:rgba(30,22,18,.35)}
+  .adDemo small{letter-spacing:2px;font-size:11px;opacity:.7}
+  /* Tela estreita nao tem espaco: no celular a faixa nunca aparece. */
+  @media (max-width:1239px),(max-height:619px){ body.com-anuncio .adFaixa{display:none} }
   #loading{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
            background:linear-gradient(145deg,#ffcf4d,#f6a9c3 52%,#8fd9c8);color:var(--ink);
            transition:opacity .35s ease;pointer-events:auto}
@@ -168,8 +182,14 @@
   <div class="tbtn" id="bScope">MIRA</div>
 
   <div class="pill" id="board"><h3>PLACAR</h3><div id="boardRows"></div></div>
+
   <div class="pill hide" id="hint">MOVA O MOUSE PARA MIRAR &middot; LEVE AT&Eacute; A BORDA PARA GIRAR 360&deg;</div>
 </div>
+
+<!-- Espaco dos anuncios laterais. Fica fora do #hud de proposito: aquele bloco
+     ignora cliques, e o anuncio precisa receber. So a versao web usa. -->
+<aside class="adFaixa" id="adEsq" aria-label="Anuncio"></aside>
+<aside class="adFaixa" id="adDir" aria-label="Anuncio"></aside>
 
 <div id="overlay">
   <div id="panel">
@@ -2062,5 +2082,7 @@ setTimeout(()=>{const l=document.getElementById('loading');if(l){l.classList.add
 </script>
 <script src="multiplayer.js"></script>
 <script src="enhancements.js"></script>
+<!-- Faixas de anuncio: o proprio arquivo se desliga dentro do app Android. -->
+<script src="anuncios.js"></script>
 </body>
 </html>
