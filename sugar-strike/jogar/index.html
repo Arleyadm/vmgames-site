@@ -152,10 +152,10 @@
 
   <div id="feed"></div>
 
+  <!-- dois espacos: arma principal e acessorio. A loja troca o data-w. -->
   <div id="slots">
-    <div class="slot pill" data-w="0">1</div>
-    <div class="slot pill" data-w="1">2</div>
-    <div class="slot pill on" data-w="2">3</div>
+    <div class="slot pill on" data-slot="0" data-w="4">1</div>
+    <div class="slot pill" data-slot="1" data-w="10">2</div>
   </div>
 
   <div id="stick"><div id="knob"></div></div>
@@ -175,7 +175,8 @@
       Deathmatch numa cidade de doces. Elimine os rivais at&eacute; bater a meta de pontos.<br><br>
       <span class="key">W A S D</span> mover &nbsp; <span class="key">MOUSE</span> mirar &nbsp;
       <span class="key">CLIQUE</span> atirar<br>
-      <span class="key">1 2 3</span> armas &nbsp; <span class="key">R</span> recarregar &nbsp;
+      <span class="key">1</span> arma &nbsp; <span class="key">2</span> acess&oacute;rio &nbsp;
+      <span class="key">R</span> recarregar &nbsp;
       <span class="key">SHIFT</span> correr &nbsp; <span class="key">ESPA&Ccedil;O</span> pular &nbsp;
       <span class="key">TAB</span> placar<br>
       No celular: joystick + arraste na tela para mirar.
@@ -597,14 +598,110 @@ function rayAABB(ox,oy,oz,dx,dy,dz,x0,y0,z0,x1,y1,z1,maxT){
   return t0>0.01?t0:-1;
 }
 
-/* ------------------------------------------------------------- armas */
+/* ------------------------------------------------------------- armas
+   Dez armas principais (0-9) e cinco acessorios (10-14). Cada jogador leva
+   uma principal e um acessorio para a partida.
+     spread = imprecisao parado        move   = imprecisao andando
+     kick   = recuo vertical           side   = recuo lateral
+     fall   = [distancia, piso]        onde o dano comeca a cair e ate onde
+     weight = peso, tira velocidade    price  = preco em doces na loja
+   A regra de equilibrio: quem alcanca longe e preciso paga caro e atira
+   devagar; quem cospe rapido perde dano ou perde precisao na distancia.  */
 const WEAPONS=[
-  {name:'CHICLETE', dmg:26, rate:0.26, mag:12, res:96, maxRes:96, spread:0.012, pellets:1, auto:false, reload:1.1, kick:0.028, range:80, snd:520},
-  {name:'CARAMELO', dmg:11, rate:0.78, mag:6,  res:42, maxRes:42, spread:0.075, pellets:8, auto:false, reload:1.7, kick:0.075, range:38, snd:220},
-  {name:'PIRULITO', dmg:19, rate:0.11, mag:30, res:150,maxRes:150,spread:0.028, pellets:1, auto:true,  reload:1.5, kick:0.020, range:95, snd:700},
-  {name:'MARSHMALLOW',dmg:34,rate:0.86,mag:5,res:30,maxRes:30,spread:0.018,pellets:1,auto:false,reload:2.0,kick:0.085,range:70,snd:165,explosive:3.8},
-  {name:'CHOCO CANHAO',dmg:42,rate:0.68,mag:8,res:48,maxRes:48,spread:0.022,pellets:1,auto:false,reload:2.2,kick:0.065,range:78,snd:120,slow:2.4}
+ /* 0 */ {name:'CARAMELO ASSAULT', role:'FUZIL', desc:'Dano alto e coice forte. Perdoa pouco, mas derruba rapido.',
+          dmg:36, rate:0.100, mag:30, res:90, maxRes:90, spread:0.020, move:0.058, pellets:1, auto:true,
+          reload:2.40, kick:0.055, side:0.020, range:90, fall:[55,0.72], weight:0.30, price:420,
+          snd:300, tone:'crack', color:'#c98f5e', accent:'#6d3a2a'},
+ /* 1 */ {name:'MENTA DEFENDER', role:'FUZIL', desc:'Equilibrada e precisa. A escolha segura para qualquer distancia.',
+          dmg:30, rate:0.090, mag:30, res:90, maxRes:90, spread:0.013, move:0.042, pellets:1, auto:true,
+          reload:2.20, kick:0.037, side:0.012, range:92, fall:[60,0.78], weight:0.27, price:400,
+          snd:380, tone:'crack', color:'#8fd9c8', accent:'#fdf7ec'},
+ /* 2 */ {name:'PIRULITO SNIPER', role:'PRECISAO', desc:'Alcance e precisao extremos. Lenta para atirar e para recarregar.',
+          dmg:105, rate:1.45, mag:5, res:25, maxRes:25, spread:0.0032, move:0.170, pellets:1, auto:false,
+          reload:3.40, kick:0.115, side:0.008, range:175, fall:[140,0.92], weight:0.62, price:900,
+          snd:150, tone:'boom', color:'#f6a9c3', accent:'#ffcf4d'},
+ /* 3 */ {name:'CHOCOLATE EAGLE', role:'PISTOLA', desc:'Pistola pesadissima. Poucos tiros, muito estrago e recuo bravo.',
+          dmg:58, rate:0.32, mag:7, res:35, maxRes:35, spread:0.016, move:0.078, pellets:1, auto:false,
+          reload:2.10, kick:0.095, side:0.028, range:85, fall:[45,0.70], weight:0.14, price:320,
+          snd:200, tone:'boom', color:'#6d3a2a', accent:'#c98f5e'},
+ /* 4 */ {name:'GOMA-18', role:'PISTOLA', desc:'Rapida e leve. Dano baixo, mas nunca custa nada.',
+          dmg:17, rate:0.130, mag:20, res:80, maxRes:80, spread:0.019, move:0.044, pellets:1, auto:true,
+          reload:1.65, kick:0.022, side:0.010, range:62, fall:[26,0.55], weight:0.06, price:0,
+          snd:620, tone:'pop', color:'#f6a9c3', accent:'#fdf7ec'},
+ /* 5 */ {name:'BAUNILHA SILENCIOSA', role:'PISTOLA', desc:'Precisa e silenciosa. Carregador curto exige pontaria.',
+          dmg:26, rate:0.19, mag:12, res:48, maxRes:48, spread:0.009, move:0.030, pellets:1, auto:false,
+          reload:1.90, kick:0.028, side:0.008, range:72, fall:[40,0.62], weight:0.09, price:180,
+          snd:520, tone:'hush', silent:true, color:'#fdf7ec', accent:'#e8dcc2'},
+ /* 6 */ {name:'DOCE-RAJADA', role:'RAJADA', desc:'Cadencia altissima e carregador enorme. Espalha muito longe.',
+          dmg:15, rate:0.066, mag:50, res:100, maxRes:100, spread:0.028, move:0.038, pellets:1, auto:true,
+          reload:2.90, kick:0.024, side:0.015, range:55, fall:[22,0.42], weight:0.20, price:340,
+          snd:760, tone:'pop', color:'#ffcf4d', accent:'#e8615a'},
+ /* 7 */ {name:'MENTA-SD', role:'RAJADA', desc:'Silenciosa e agil. Manda muito bem de perto.',
+          dmg:19, rate:0.080, mag:30, res:90, maxRes:90, spread:0.019, move:0.034, pellets:1, auto:true,
+          reload:2.50, kick:0.026, side:0.010, range:62, fall:[26,0.50], weight:0.18, price:300,
+          snd:560, tone:'hush', silent:true, color:'#7ec96b', accent:'#8fd9c8'},
+ /* 8 */ {name:'BISCOITO BOOM', role:'ESCOPETA', desc:'Nove farelos por tiro. Devastadora colada, inutil longe.',
+          dmg:12, rate:0.85, mag:8, res:32, maxRes:32, spread:0.052, move:0.024, pellets:9, auto:false,
+          reload:2.80, kick:0.085, side:0.022, range:40, fall:[10,0.18], weight:0.35, price:380,
+          snd:170, tone:'boom', color:'#c98f5e', accent:'#f3e0a2'},
+ /* 9 */ {name:'ALGODAO PESADO', role:'METRALHADORA', desc:'Cem tiros sem parar. Pesada, imprecisa e lenta para recarregar.',
+          dmg:22, rate:0.066, mag:100, res:100, maxRes:100, spread:0.042, move:0.105, pellets:1, auto:true,
+          reload:5.40, kick:0.045, side:0.032, range:78, fall:[50,0.65], weight:0.75, price:820,
+          snd:260, tone:'crack', color:'#f6a9c3', accent:'#c9b4ec'},
+ /* 10 */{name:'FACA DE ACUCAR', role:'ACESSORIO', acc:true, melee:true,
+          desc:'Golpe curto e rapido. Nunca acaba e nao pesa nada.',
+          dmg:55, rate:0.45, mag:0, res:0, maxRes:0, spread:0.010, move:0, pellets:1, auto:false,
+          reload:0, kick:0, side:0, range:2.6, weight:0, price:0,
+          snd:900, tone:'swish', color:'#e8dcc2', accent:'#f6a9c3'},
+ /* 11 */{name:'GRANADA DE GOMA', role:'ACESSORIO', acc:true, thrown:true,
+          desc:'Estoura numa bola de goma. Duas por vida, recarrega ao renascer.',
+          dmg:70, rate:1.10, mag:2, res:0, maxRes:0, spread:0.030, move:0.040, pellets:1, auto:false,
+          reload:0, kick:0.030, side:0.010, range:34, explosive:4.6, weight:0.05, price:260,
+          snd:210, tone:'boom', color:'#e8615a', accent:'#ffcf4d'},
+ /* 12 */{name:'PAU DE CANELA', role:'ACESSORIO', acc:true, melee:true,
+          desc:'Pancada pesada que deixa o rival tonto e lento.',
+          dmg:68, rate:0.72, mag:0, res:0, maxRes:0, spread:0.012, move:0, pellets:1, auto:false,
+          reload:0, kick:0, side:0, range:2.9, slow:1.6, weight:0.08, price:220,
+          snd:180, tone:'thud', color:'#a5643c', accent:'#c98f5e'},
+ /* 13 */{name:'VASSOURA DE ALGODAO', role:'ACESSORIO', acc:true, melee:true,
+          desc:'Alcance bem maior que a faca, em troca de menos dano.',
+          dmg:34, rate:0.28, mag:0, res:0, maxRes:0, spread:0.014, move:0, pellets:1, auto:true,
+          reload:0, kick:0, side:0, range:3.4, weight:0.04, price:200,
+          snd:1100, tone:'swish', color:'#f6a9c3', accent:'#f3e0a2'},
+ /* 14 */{name:'BOMBINHA DE CONFETE', role:'ACESSORIO', acc:true, thrown:true,
+          desc:'Explosao larga que gruda confete e mela a corrida do inimigo.',
+          dmg:38, rate:0.95, mag:3, res:0, maxRes:0, spread:0.034, move:0.045, pellets:1, auto:false,
+          reload:0, kick:0.022, side:0.008, range:30, explosive:5.2, slow:2.6, weight:0.04, price:240,
+          snd:340, tone:'pop', color:'#c9b4ec', accent:'#8fd9c8'}
 ];
+/* indices das dez principais e dos cinco acessorios */
+const PRIMARIES=[0,1,2,3,4,5,6,7,8,9];
+const ACCESSORIES=[10,11,12,13,14];
+/* armas que os bots podem sortear (so principais) */
+const BOT_WEAPONS=[0,1,3,4,5,6,7,8];
+/* o que o jogador leva: [arma principal, acessorio]. A loja troca isso. */
+let LOADOUT=[4,10];
+
+/* o dano cai conforme a distancia, do jeito descrito em w.fall */
+function rangeScale(w,dist){
+  if(!w.fall) return 1;
+  const start=w.fall[0], floor=w.fall[1];
+  if(dist<=start) return 1;
+  if(dist>=w.range) return floor;
+  return 1-(1-floor)*((dist-start)/(w.range-start));
+}
+/* efeitos do equipamento comprado na loja; sem loja, tudo fica neutro */
+function gearMod(name,fallback){
+  return (window.SugarEnhance&&SugarEnhance.gearMod)?SugarEnhance.gearMod(name,fallback):fallback;
+}
+/* o quanto quem atira estava se mexendo, de 0 (parado) a ~1.6 (correndo no ar) */
+function moveFactor(e){
+  if(e===player){
+    const air=Math.abs(player.y-player.ground)>0.14?0.75:0;
+    return clamp(bobAmt+air,0,1.6);
+  }
+  return clamp((e.speed||0)*1.1,0,1);
+}
 
 /* ------------------------------------------------------------ entidades */
 const NAMES=['BUBBLEGUM','TAFFY','GUMDROP','NOUGAT','SHERBET','PRALINE','LICORICE','MARSHMALLOW','JELLYBEAN','TOFFEE'];
@@ -648,18 +745,30 @@ function spawnPoint(){
 function respawn(e){
   const p=spawnPoint();
   e.x=p.x; e.z=p.z; e.y=0; e.vy=0; e.hp=100; e.dead=false; e.hurt=0;
-  e.wep = e.bot ? (Math.random()<0.34?1:(Math.random()<0.5?0:2)) : e.wep;
+  /* bots sorteiam uma principal; so o jogador local volta com o que equipou.
+     Jogadores remotos mantem a arma que eles proprios escolheram. */
+  if(e.bot) e.wep=pick(BOT_WEAPONS);
+  else if(e===player&&LOADOUT.indexOf(e.wep)<0) e.wep=LOADOUT[0];
   for(let i=0;i<WEAPONS.length;i++){ e.mags[i]=WEAPONS[i].mag; e.ress[i]=WEAPONS[i].maxRes; }
   const w=WEAPONS[e.wep];
-  e.mag=w.mag; e.res=w.maxRes; e.reloadT=0; e.fireT=0.8;
+  e.mag=w.mag; e.res=w.maxRes; e.reloadT=0; e.fireT=0.8; e.spray=0;
   e.prot=1.6; e.target=null; e.goal=null; e.shield=0; e.slow=0; e.streak=0;
+  if(e===player){
+    /* cinto de municao e colete valem a partir do renascimento */
+    const extra=gearMod('ammo',1);
+    if(extra!==1){
+      for(let i=0;i<WEAPONS.length;i++) e.ress[i]=Math.round(WEAPONS[i].maxRes*extra);
+      e.res=e.ress[e.wep];
+    }
+    e.shield=gearMod('shield',0);
+  }
   if(e===player){ camShake=0; dmgDir=0; dmgFlash=0; dmgEl.style.opacity=0; }
 }
 
 function initMatch(){
   ents=[]; particles=[]; feed=[]; matchOver=false;
   player=newEnt('VOCE',false);
-  player.wep=2;
+  player.wep=LOADOUT[0];
   ents.push(player);
   const pool=NAMES.slice();
   for(let i=0;i<7;i++){
@@ -682,6 +791,7 @@ function damage(e,amount,by,head){
   if(e.dead||matchOver) return false;
   if(e.prot>0) return false;                       // protecao de renascimento
   if(window.SugarEnhance&&!SugarEnhance.canDamage(e,by)) return false;
+  if(e===player&&head) amount*=gearMod('head',1);   /* capacete de biscoito */
   if(e.shield>0){ amount*=0.45; e.shield=Math.max(0,e.shield-amount); }
   e.hp-=amount; e.lastHitBy=by; e.hurt=0.18;
   if(e===player){
@@ -736,7 +846,9 @@ function traceShot(ox,oy,oz,dx,dy,dz,shooter,w,scale){
     }
     burst(hx,hy,hz,'#fffdf7',18);
   }else if(victim){
-      registered=damage(victim,(head?w.dmg*2:w.dmg)*scale,shooter,head);
+      /* longe do alvo a bala chega mais fraca, do jeito descrito em w.fall */
+      const far=rangeScale(w,bestT);
+      registered=damage(victim,(head?w.dmg*2:w.dmg)*scale*far,shooter,head);
       if(registered&&w.slow) victim.slow=Math.max(victim.slow||0,w.slow);
       if(registered&&window.SugarEnhance) SugarEnhance.onHit(shooter,victim,head);
   }
@@ -749,10 +861,14 @@ function traceShot(ox,oy,oz,dx,dy,dz,shooter,w,scale){
 }
 function shoot(e){
   const w=WEAPONS[e.wep];
-  if(e.reloadT>0||e.mag<=0) return;
-  e.mag--; e.fireT=w.rate;
+  if(e.reloadT>0) return;
+  if(!w.melee&&e.mag<=0) return;
+  if(!w.melee) e.mag--;
+  e.fireT=w.rate;
   const ex=e.x, ey=e.y+(e===player?1.55:1.45), ez=e.z;
   let bx,by,bz, scale=1;
+  /* imprecisao do tiro: base + o quanto quem atira estava andando */
+  let spread=w.spread+(w.move||0)*moveFactor(e);
   if(e===player){
     bx=-Math.sin(cam.yaw)*Math.cos(cam.pitch);
     by=Math.sin(cam.pitch);
@@ -761,9 +877,21 @@ function shoot(e){
       const assisted=SugarEnhance.assistAim(bx,by,bz);
       bx=assisted[0];by=assisted[1];bz=assisted[2];
     }
-    recoil+=w.kick; camShake=Math.max(camShake,w.kick*7);
-    flash=0.055; wKick=1;
-    snd.shot(w.snd);
+    /* mira e joelheira compradas na loja entram aqui */
+    spread=w.spread*gearMod('spread',1)+(w.move||0)*moveFactor(e)*gearMod('move',1);
+    /* rajada emendada sobe o cano e abre a mira, como numa arma de verdade */
+    e.spray=(e.spray||0)+1;
+    const grow=1+Math.min(1.7,(e.spray-1)*0.13);
+    spread+=w.spread*Math.min(1.5,(e.spray-1)*0.055);
+    if(!w.melee){
+      const soft=gearMod('recoil',1);
+      recoil+=w.kick*grow*soft;
+      recoilSide+=(w.side||0)*grow*soft*Math.sin(e.spray*2.17);
+      camShake=Math.max(camShake,w.kick*7);
+      if(!w.thrown) flash=0.055;
+    }
+    wKick=1;
+    snd.fire(w);
     if(window.SugarEnhance) SugarEnhance.onShot(e,w);
     updateHUD();
   }else{
@@ -773,20 +901,18 @@ function shoot(e){
     const l=Math.hypot(dx,dy,dz)||1;
     bx=dx/l; by=dy/l; bz=dz/l;
     /* pontaria dos bots: piora com a distancia e com o alvo em movimento */
-    const sp=w.spread+0.05+l*0.0045;
-    bx+=rnd(-sp,sp); by+=rnd(-sp*0.7,sp*0.7); bz+=rnd(-sp,sp);
-    const l2=Math.hypot(bx,by,bz); bx/=l2;by/=l2;bz/=l2;
+    spread=w.spread+0.05+l*0.0045;
     scale=BOT_DMG;
     e.fireT=w.rate*(w.auto?2.6:1.7)+rnd(0,0.3);
     e.burst=(e.burst||0)+1;
     if(w.auto&&e.burst>=3){ e.burst=0; e.fireT+=rnd(0.5,1.1); }
     snd.shotSpatial(w.snd,e.x-player.x,e.z-player.z);
-    muzzles.push({x:ex,y:ey,z:ez,t:0.06});
+    if(!w.melee) muzzles.push({x:ex,y:ey,z:ez,t:0.06});
   }
   for(let i=0;i<w.pellets;i++){
     let dx=bx,dy=by,dz=bz;
-    if(w.pellets>1||w.spread>0){
-      dx+=rnd(-w.spread,w.spread); dy+=rnd(-w.spread,w.spread); dz+=rnd(-w.spread,w.spread);
+    if(w.pellets>1||spread>0){
+      dx+=rnd(-spread,spread); dy+=rnd(-spread,spread); dz+=rnd(-spread,spread);
       const l=Math.hypot(dx,dy,dz); dx/=l;dy/=l;dz/=l;
     }
     traceShot(ex,ey,ez,dx,dy,dz,e,w,scale);
@@ -794,8 +920,9 @@ function shoot(e){
 }
 function reload(e){
   const w=WEAPONS[e.wep];
+  if(w.melee||w.thrown) return;          /* faca nao recarrega; granada so ao renascer */
   if(e.reloadT>0||e.mag>=w.mag||e.res<=0) return;
-  e.reloadT=w.reload;
+  e.reloadT=w.reload*(e===player?gearMod('reload',1):1);
   if(e===player){ snd.reload(); updateHUD(); }
 }
 function finishReload(e){
@@ -949,19 +1076,99 @@ function drawEnt(e){
   const aim=(e.target&&!e.target.dead)||e.aiming?-0.95:-0.35;
   boxM(mMul(mMul(base,mMul(mT(-0.36,1.32,0),mRX(aim))),mT(0,-0.3,0)),0.1,0.32,0.11,B,Qw);
   boxM(mMul(mMul(base,mMul(mT(0.36,1.32,0),mRX(aim))),mT(0,-0.3,0)),0.1,0.32,0.11,B,Qw);
-  const gm=mMul(base,mT(0,1.28,-0.62));
-  const gc=['#f6a9c3','#f79a5e','#c9b4ec','#8fd9c8','#6d3a2a'][clamp(e.wep|0,0,4)];
-  boxM(gm,0.07,0.08,0.34,gc,Qw);
-  boxM(mMul(gm,mT(0,-0.02,-0.42)),0.05,0.05,0.14,'#fdf7ec',Qw);
+  const ew=WEAPONS[clamp(e.wep|0,0,WEAPONS.length-1)];
+  const gm=mMul(base,mT(0,1.28,ew.melee?-0.46:-0.62));
+  /* o que os outros carregam segue a cor e o tamanho da propria arma */
+  const len=ew.melee?0.20:(ew.range>120?0.46:(ew.range<50?0.24:0.34));
+  boxM(gm,0.07,0.08,len,ew.color||'#f6a9c3',Qw);
+  boxM(mMul(gm,mT(0,-0.02,-len-0.08)),0.05,0.05,ew.melee?0.08:0.14,ew.accent||'#fdf7ec',Qw);
 }
 
 /* --------------------------------------------------- arma em 1a pessoa */
-let wKick=0, flash=0, recoil=0, camShake=0, hitMark=0, dmgFlash=0, dmgDir=0;
+let wKick=0, flash=0, recoil=0, recoilSide=0, camShake=0, hitMark=0, dmgFlash=0, dmgDir=0;
 const muzzles=[];
 let muzzleTip=null;
 
+/* Cada modelo e uma lista de caixas:
+   [x, y, z, meia-largura, meia-altura, meio-comprimento, cor, giro em X]
+   A cor pode ser um hex fixo, 'main' (cor da arma / skin comprada) ou
+   'accent' (cor de destaque). A origem fica na coronha, cano para -Z. */
+const VM_MODELS=[
+ /* 0 CARAMELO ASSAULT */[
+  [0,0,-0.42,0.075,0.100,0.44,'main'], [0,0.015,-0.95,0.040,0.040,0.16,'accent'],
+  [0,-0.15,-0.44,0.055,0.130,0.09,'accent',0.34], [0,-0.07,-0.66,0.060,0.055,0.16,'#c98f5e'],
+  [0,0.15,-0.50,0.030,0.050,0.05,'#4a3b33'], [0,-0.02,-0.02,0.060,0.085,0.12,'#a5643c']],
+ /* 1 MENTA DEFENDER */[
+  [0,0,-0.40,0.070,0.095,0.42,'main'], [0,0.01,-0.92,0.036,0.036,0.18,'accent'],
+  [0,0.145,-0.46,0.055,0.035,0.22,'#fdf7ec'], [0,0.19,-0.40,0.030,0.030,0.07,'#4a3b33'],
+  [0,-0.18,-0.36,0.045,0.140,0.06,'accent',0.10], [0,-0.10,-0.66,0.050,0.050,0.14,'#7ec96b'],
+  [0,0.005,-0.02,0.065,0.080,0.10,'accent']],
+ /* 2 PIRULITO SNIPER */[
+  [0,0,-0.48,0.070,0.095,0.50,'main'], [0,0.01,-1.10,0.030,0.030,0.30,'#e8dcc2'],
+  [0,0.01,-1.44,0.048,0.048,0.06,'accent'], [0,0.20,-0.52,0.048,0.048,0.26,'#4a3b33'],
+  [0,0.20,-0.79,0.042,0.042,0.03,'#9ec9f2'], [0,0.25,-0.52,0.030,0.020,0.20,'accent'],
+  [0,-0.16,-0.42,0.045,0.110,0.07,'accent'], [0,-0.02,0.02,0.062,0.100,0.14,'main']],
+ /* 3 CHOCOLATE EAGLE */[
+  [0,0,-0.30,0.070,0.095,0.24,'main'], [0,0.09,-0.34,0.055,0.045,0.28,'accent'],
+  [0,0.03,-0.64,0.038,0.038,0.10,'#4a2b22'], [0,-0.20,-0.14,0.058,0.140,0.07,'#4a2b22',0.26],
+  [0,-0.09,-0.24,0.020,0.040,0.03,'#ffcf4d']],
+ /* 4 GOMA-18 */[
+  [0,0,-0.26,0.062,0.085,0.20,'main'], [0,0.075,-0.30,0.050,0.040,0.24,'accent'],
+  [0,0.02,-0.55,0.030,0.030,0.07,'#fdf7ec'], [0,-0.18,-0.12,0.052,0.130,0.062,'#8fd9c8',0.28],
+  [0,0.115,-0.44,0.018,0.018,0.03,'#4a3b33']],
+ /* 5 BAUNILHA SILENCIOSA */[
+  [0,0,-0.26,0.060,0.082,0.20,'main'], [0,0.072,-0.30,0.048,0.038,0.24,'accent'],
+  [0,0.02,-0.66,0.042,0.042,0.24,'#e8dcc2'], [0,0.02,-0.90,0.046,0.046,0.03,'#c9b4ec'],
+  [0,-0.18,-0.12,0.050,0.130,0.060,'#c98f5e',0.28]],
+ /* 6 DOCE-RAJADA */[
+  [0,-0.02,-0.40,0.080,0.105,0.42,'main'], [0,0.13,-0.42,0.070,0.035,0.34,'accent'],
+  [0,-0.01,-0.88,0.034,0.034,0.10,'#e8dcc2'], [0,0.19,-0.46,0.028,0.030,0.10,'#4a3b33'],
+  [0,-0.15,-0.60,0.045,0.090,0.06,'#e8615a',0.18]],
+ /* 7 MENTA-SD */[
+  [0,0,-0.36,0.068,0.090,0.34,'main'], [0,0.01,-0.82,0.055,0.055,0.28,'accent'],
+  [0,0.01,-1.11,0.050,0.050,0.03,'#fdf7ec'], [0,-0.19,-0.40,0.042,0.140,0.055,'accent',0.06],
+  [0,0.14,-0.44,0.030,0.045,0.12,'#4a3b33'], [0,0,-0.02,0.050,0.070,0.10,'#4a3b33']],
+ /* 8 BISCOITO BOOM */[
+  [0,0,-0.40,0.080,0.095,0.38,'main'], [0,0.03,-0.90,0.058,0.058,0.24,'accent'],
+  [0,0.03,-1.16,0.064,0.064,0.04,'#4a3b33'], [0,-0.08,-0.72,0.058,0.052,0.14,'#f3e0a2'],
+  [0,-0.06,-0.02,0.065,0.100,0.14,'#c98f5e',0.12]],
+ /* 9 ALGODAO PESADO */[
+  [0,0,-0.46,0.095,0.115,0.46,'main'], [0,-0.17,-0.40,0.105,0.100,0.16,'accent'],
+  [0,0.02,-1.00,0.045,0.045,0.30,'#e8dcc2'], [0,0.02,-0.80,0.055,0.055,0.14,'accent'],
+  [0,0.16,-0.50,0.032,0.048,0.20,'#4a3b33'], [0,-0.16,-0.96,0.020,0.100,0.020,'#4a3b33',0.5],
+  [0,0,-0.02,0.070,0.090,0.12,'accent']],
+ /* 10 FACA DE ACUCAR */[
+  [0,0.05,-0.36,0.020,0.075,0.26,'main'], [0,0.05,-0.62,0.014,0.040,0.06,'#fffdf7'],
+  [0,0,-0.08,0.075,0.020,0.030,'accent'], [0,-0.06,0.02,0.030,0.060,0.10,'#a5643c']],
+ /* 11 GRANADA DE GOMA */[
+  [0,-0.02,-0.30,0.105,0.105,0.105,'main'], [0,0.07,-0.34,0.045,0.030,0.045,'accent'],
+  [0,0.10,-0.30,0.020,0.040,0.020,'#e8dcc2'], [0.08,0.02,-0.30,0.018,0.070,0.018,'#c98f5e']],
+ /* 12 PAU DE CANELA */[
+  [0,0.02,-0.34,0.045,0.048,0.34,'main'], [0,0.03,-0.56,0.058,0.058,0.06,'accent'],
+  [0,0.03,-0.68,0.050,0.050,0.07,'main'], [0,0,-0.06,0.048,0.048,0.06,'#f6a9c3']],
+ /* 13 VASSOURA DE ALGODAO */[
+  [0,0.02,-0.44,0.026,0.026,0.46,'#c98f5e'], [0,0.02,-0.98,0.085,0.085,0.11,'main'],
+  [0,0.10,-0.98,0.055,0.055,0.08,'accent'], [0,0.02,-0.84,0.036,0.036,0.04,'#e8dcc2']],
+ /* 14 BOMBINHA DE CONFETE */[
+  [0,-0.02,-0.30,0.070,0.070,0.13,'main'], [0,-0.02,-0.45,0.075,0.075,0.03,'accent'],
+  [0,0.09,-0.30,0.012,0.045,0.012,'#4a3b33'], [0,-0.02,-0.30,0.078,0.030,0.078,'accent']]
+];
+/* ponta do cano de cada arma: e de onde sai o clarao do tiro */
+const VM_TIPS=[
+  [0,0.015,-1.12],[0,0.01,-1.12],[0,0.01,-1.52],[0,0.03,-0.76],[0,0.02,-0.64],
+  [0,0.02,-0.96],[0,-0.01,-1.00],[0,0.01,-1.18],[0,0.03,-1.24],[0,0.02,-1.34],
+  [0,0.05,-0.66],[0,0,-0.42],[0,0.03,-0.76],[0,0.02,-1.10],[0,-0.02,-0.52]
+];
+/* onde a mao aparece segurando cada modelo */
+const VM_HANDS=[
+  [-0.01,-0.16,-0.18],[-0.01,-0.16,-0.18],[-0.01,-0.16,-0.18],[0,-0.14,-0.14],[0,-0.13,-0.12],
+  [0,-0.13,-0.12],[-0.01,-0.16,-0.30],[-0.01,-0.16,-0.20],[-0.01,-0.16,-0.20],[-0.01,-0.18,-0.20],
+  [0,-0.07,0.02],[0,-0.08,-0.18],[0,0,-0.06],[0,0.02,-0.14],[0,-0.08,-0.20]
+];
+
 function drawViewmodel(dt){
-  const w=player.wep;
+  const wi=clamp(player.wep|0,0,WEAPONS.length-1);
+  const w=WEAPONS[wi];
   const cosmetic=window.SugarEnhance?SugarEnhance.weaponColors():null;
   const mainCosmetic=cosmetic?cosmetic[0]:null, accentCosmetic=cosmetic?cosmetic[1]:null;
   const bob=Math.sin(bobT*2)*0.012*bobAmt;
@@ -969,49 +1176,35 @@ function drawViewmodel(dt){
   const kick=wKick;
   /* A origem local da arma fica na CORONHA e o cano aponta para -Z.
      Assim nenhuma parte encosta no plano proximo (que deformava tudo). */
-  const m=mMul(mT(0.21+bob*2, -0.25-bob2*2+swayY, -0.80+kick*0.26),
-               mMul(mRY(-0.07+swayX), mMul(mRX(0.035-kick*0.42), mS(0.78))));
-  if(w===0){                      /* CHICLETE - pistola de bola de goma */
-    boxM(mMul(m,mT(0,0,-0.28)),0.07,0.09,0.20,mainCosmetic||'#f6a9c3',Qv);
-    boxM(mMul(m,mT(0,0.01,-0.55)),0.04,0.045,0.10,'#fdf7ec',Qv);
-    boxM(mMul(mMul(m,mT(0,-0.19,-0.14)),mRX(0.26)),0.06,0.13,0.07,'#fdf7ec',Qv);
-    boxM(mMul(m,mT(0,0.11,-0.30)),0.025,0.025,0.14,'#ffcf4d',Qv);
-    boxM(mMul(m,mT(0,-0.02,-0.62)),0.055,0.055,0.05,'#8fd9c8',Qv);
-    muzzleTip=mApply(m,0,0.01,-0.70);
-  }else if(w===1){                /* CARAMELO - escopeta */
-    boxM(mMul(m,mT(0,0,-0.34)),0.075,0.09,0.34,mainCosmetic||'#f79a5e',Qv);
-    boxM(mMul(m,mT(0,0.02,-0.80)),0.05,0.05,0.16,'#e8dcc2',Qv);
-    boxM(mMul(m,mT(0,-0.07,-0.62)),0.055,0.05,0.14,'#fdf7ec',Qv);
-    boxM(mMul(mMul(m,mT(0,-0.17,-0.16)),mRX(0.30)),0.06,0.13,0.07,'#c98f5e',Qv);
-    boxM(mMul(m,mT(0,0.05,-0.03)),0.07,0.07,0.12,'#ffcf4d',Qv);
-    boxM(mMul(m,mT(0,0.12,-0.40)),0.03,0.03,0.20,'#f6a9c3',Qv);
-    muzzleTip=mApply(m,0,0.02,-0.96);
-  }else if(w===2){                /* PIRULITO - fuzil */
-    boxM(mMul(m,mT(0,0,-0.40)),0.075,0.10,0.42,mainCosmetic||'#c9b4ec',Qv);
-    boxM(mMul(m,mT(0,0.01,-0.92)),0.042,0.042,0.14,accentCosmetic||'#b9a2e2',Qv);
-    boxM(mMul(m,mT(0,0.15,-0.46)),0.06,0.05,0.14,accentCosmetic||'#8fd9c8',Qv);
-    boxM(mMul(m,mT(0,0.19,-0.46)),0.035,0.03,0.16,'#fdf7ec',Qv);
-    boxM(mMul(mMul(m,mT(0,-0.20,-0.20)),mRX(0.30)),0.06,0.14,0.07,'#fdf7ec',Qv);
-    boxM(mMul(m,mT(0,-0.13,-0.52)),0.05,0.06,0.10,'#ffcf4d',Qv);
-    boxM(mMul(m,mT(0,0.01,-0.02)),0.07,0.085,0.10,'#f6a9c3',Qv);
-    muzzleTip=mApply(m,0,0.01,-1.08);
-  }else if(w===3){                /* LANCADOR DE MARSHMALLOW */
-    boxM(mMul(m,mT(0,0,-0.46)),0.12,0.13,0.40,mainCosmetic||'#f6a9c3',Qv);
-    boxM(mMul(m,mT(0,0,-0.93)),0.10,0.10,0.12,'#fffdf7',Qv);
-    boxM(mMul(m,mT(0,0,-1.06)),0.075,0.075,0.05,accentCosmetic||'#8fd9c8',Qv);
-    boxM(mMul(mMul(m,mT(0,-0.20,-0.22)),mRX(0.28)),0.07,0.14,0.08,'#ffcf4d',Qv);
-    boxM(mMul(m,mT(0,0.16,-0.42)),0.08,0.045,0.16,'#fffdf7',Qv);
-    muzzleTip=mApply(m,0,0,-1.14);
-  }else{                          /* CANHAO DE CHOCOLATE */
-    boxM(mMul(m,mT(0,0,-0.46)),0.13,0.14,0.42,mainCosmetic||'#6d3a2a',Qv);
-    boxM(mMul(m,mT(0,0,-0.95)),0.10,0.10,0.15,accentCosmetic||'#c98f5e',Qv);
-    boxM(mMul(m,mT(0,0,-1.12)),0.12,0.12,0.06,'#4a2b22',Qv);
-    boxM(mMul(mMul(m,mT(0,-0.22,-0.22)),mRX(0.28)),0.075,0.15,0.08,'#8fd9c8',Qv);
-    boxM(mMul(m,mT(0,0.17,-0.46)),0.07,0.05,0.15,'#ffcf4d',Qv);
-    muzzleTip=mApply(m,0,0,-1.22);
+  let m;
+  if(w.melee){
+    /* corpo a corpo nao recua: o golpe atravessa a tela em diagonal */
+    m=mMul(mT(0.26+bob*2, -0.30-bob2*2+swayY, -0.62+kick*0.10),
+           mMul(mRY(-0.34+swayX+kick*1.05),
+                mMul(mRZ(0.46-kick*1.35), mMul(mRX(0.12-kick*0.55), mS(0.78)))));
+  }else if(w.thrown){
+    /* o arremesso levanta a mao antes de soltar */
+    m=mMul(mT(0.24+bob*2, -0.30-bob2*2+swayY+kick*0.16, -0.58+kick*0.18),
+           mMul(mRY(-0.16+swayX), mMul(mRX(0.10-kick*0.80), mS(0.78))));
+  }else{
+    m=mMul(mT(0.21+bob*2, -0.25-bob2*2+swayY, -0.80+kick*0.26),
+           mMul(mRY(-0.07+swayX), mMul(mRX(0.035-kick*0.42), mS(0.78))));
   }
+  const parts=VM_MODELS[wi];
+  for(let i=0;i<parts.length;i++){
+    const p=parts[i];
+    let mm=mMul(m,mT(p[0],p[1],p[2]));
+    if(p[7]) mm=mMul(mm,mRX(p[7]));
+    const tint=p[6];
+    const col=tint==='main'?(mainCosmetic||w.color)
+             :(tint==='accent'?(accentCosmetic||w.accent):tint);
+    boxM(mm,p[3],p[4],p[5],col,Qv);
+  }
+  const tip=VM_TIPS[wi];
+  muzzleTip=mApply(m,tip[0],tip[1],tip[2]);
   /* mao segurando o punho */
-  boxM(mMul(m,mT(-0.01,-0.16,-0.18)),0.065,0.06,0.07,'#ffd9a8',Qv);
+  const hand=VM_HANDS[wi];
+  boxM(mMul(m,mT(hand[0],hand[1],hand[2])),0.065,0.06,0.07,'#ffd9a8',Qv);
   /* fila do viewmodel usa coordenadas ja em espaco de camera */
 }
 /* emite faces do viewmodel: matrizes acima produzem pontos em espaco de camera,
@@ -1045,6 +1238,33 @@ const snd=(function(){
   return {
     resume(){ const a=ac(); if(a&&a.state==='suspended') a.resume(); },
     shot(f){ tone(f,f*0.35,0.09,0.055); noise(0.09,0.06,2200); },
+    /* cada familia de arma tem um timbre proprio */
+    fire(w){
+      const f=w.snd||500, t=w.tone||'pop';
+      if(t==='crack'){          /* fuzis: estalo seco com corpo grave */
+        tone(f*1.6,f*0.45,0.075,0.055,'square');
+        tone(f*0.6,f*0.25,0.130,0.045,'sawtooth');
+        noise(0.10,0.055,2600);
+      }else if(t==='boom'){     /* sniper, escopeta, magnum: estouro longo */
+        tone(f,f*0.28,0.240,0.075,'sawtooth');
+        tone(f*2.1,f*0.50,0.090,0.040,'square');
+        noise(0.26,0.080,900);
+      }else if(t==='pop'){      /* pistolas e rajada leve */
+        tone(f,f*0.35,0.070,0.050,'square');
+        noise(0.06,0.035,3200);
+      }else if(t==='hush'){     /* silenciadas: quase so o ar saindo */
+        tone(f*0.5,f*0.22,0.060,0.022,'sine');
+        noise(0.07,0.030,700);
+      }else if(t==='swish'){    /* faca e vassoura cortando o ar */
+        noise(0.13,0.050,5200);
+        tone(f,f*2.2,0.090,0.022,'sine');
+      }else if(t==='thud'){     /* pancada do pau de canela */
+        tone(f*0.8,f*0.30,0.160,0.060,'triangle');
+        noise(0.12,0.050,600);
+      }else{
+        tone(f,f*0.35,0.09,0.055); noise(0.09,0.06,2200);
+      }
+    },
     shotFar(f,d){ const v=clamp(1-d/50,0,1)*0.35; if(v<0.02)return; tone(f*0.9,f*0.35,0.08,0.05*v); },
     shotSpatial(f,dx,dz){
       const a=ac(); if(!a) return;
@@ -1082,11 +1302,8 @@ addEventListener('keydown',e=>{
   if(e.code==='Tab'){e.preventDefault(); showBoard(true);}
   keys[e.code]=true;
   if(e.code==='KeyR') reload(player);
-  if(e.code==='Digit1') setWeapon(0);
-  if(e.code==='Digit2') setWeapon(1);
-  if(e.code==='Digit3') setWeapon(2);
-  if(e.code==='Digit4') setWeapon(3);
-  if(e.code==='Digit5') setWeapon(4);
+  if(e.code==='Digit1') setWeapon(LOADOUT[0]);   /* arma principal */
+  if(e.code==='Digit2') setWeapon(LOADOUT[1]);   /* acessorio */
   if(e.code==='Escape') togglePause(true);
 });
 addEventListener('keyup',e=>{
@@ -1137,7 +1354,9 @@ function edgeTurn(dt){
 cv.addEventListener('contextmenu',e=>e.preventDefault());
 addEventListener('wheel',e=>{
   if(paused) return;
-  setWeapon((player.wep+(e.deltaY>0?1:WEAPONS.length-1))%WEAPONS.length);
+  /* a roda alterna entre a arma principal e o acessorio equipados */
+  const at=LOADOUT.indexOf(player.wep);
+  setWeapon(LOADOUT[(at<0?0:at+(e.deltaY>0?1:LOADOUT.length-1))%LOADOUT.length]);
 },{passive:true});
 document.addEventListener('pointerlockchange',()=>{
   if(document.pointerLockElement===cv){ hadLock=true; hintEl.classList.add('hide'); }
@@ -1149,7 +1368,7 @@ function tryShoot(){
   if(paused||player.dead) return;
   const w=WEAPONS[player.wep];
   if(player.reloadT>0) return;
-  if(player.mag<=0){ reload(player); return; }
+  if(!w.melee&&player.mag<=0){ reload(player); return; }
   if(player.fireT>0) return;
   shoot(player);
 }
@@ -1178,7 +1397,7 @@ function enableTouchUI(){
   document.getElementById('ptxt').innerHTML=
     'Deathmatch numa cidade de doces. Elimine os rivais at&eacute; bater a meta.<br><br>'+
     'Joystick <b>esquerdo</b> para andar &middot; <b>arraste</b> na tela para mirar &middot; bot&atilde;o <b>ATIRAR</b> para disparar.<br>'+
-    'Toque nos n&uacute;meros <b>1 2 3 4 5</b> para trocar de arma.';
+    'Voc&ecirc; leva <b>uma arma</b> e <b>um acess&oacute;rio</b>: o <b>1</b> e o <b>2</b> trocam entre eles.';
 }
 if(isTouch) enableTouchUI();
 function tpos(t){ return {x:t.clientX,y:t.clientY}; }
@@ -1264,8 +1483,9 @@ function updateHUD(){
   hpFill.style.background=player.hp>55?'linear-gradient(#9fe08a,#5fbf55)':player.hp>25?'linear-gradient(#ffd97a,#f0a93c)':'linear-gradient(#f79a8a,#e8615a)';
   hpTxt.textContent=Math.max(0,Math.round(player.hp));
   wName.textContent=w.name;
-  magV.textContent=player.reloadT>0?'--':player.mag;
-  resV.textContent='/'+player.res;
+  /* corpo a corpo nao tem municao: o HUD mostra o simbolo de infinito */
+  magV.textContent=w.melee?'∞':(player.reloadT>0?'--':player.mag);
+  resV.textContent=w.melee?'':(w.thrown?'':'/'+player.res);
   scoreV.textContent=player.score;
   let lead=ents[0];
   for(const e of ents) if(e.score>lead.score) lead=e;
@@ -1413,7 +1633,9 @@ function updatePlayer(dt){
     const fx=-Math.sin(cam.yaw), fz=-Math.cos(cam.yaw);
     const rx=Math.cos(cam.yaw), rz=-Math.sin(cam.yaw);
     const boost=window.SugarEnhance?SugarEnhance.playerSpeed(player):1;
-    const sp=6.2*sprint*boost*dt*Math.min(1,l);
+    /* arma pesada anda menos: a Algodao Pesado cobra caro pelos 100 tiros */
+    const heavy=1-(WEAPONS[player.wep].weight||0)*0.32;
+    const sp=6.2*sprint*boost*heavy*dt*Math.min(1,l);
     moveXZ(player,(fx*iz+rx*ix)*sp,(fz*iz+rz*ix)*sp,0.4);
     bobT+=dt*(9*sprint); bobAmt=lerp(bobAmt,1,dt*8);
   }else bobAmt=lerp(bobAmt,0,dt*8);
@@ -1431,6 +1653,8 @@ function updatePlayer(dt){
   /* tiro */
   player.fireT-=dt;
   const w=WEAPONS[player.wep];
+  /* solta o gatilho e a mira volta a fechar */
+  if(!firing) player.spray=Math.max(0,(player.spray||0)-dt*14);
   if(firing&&w.auto) tryShoot();
   if(player.reloadT>0){
     player.reloadT-=dt;
@@ -1443,10 +1667,13 @@ function updatePlayer(dt){
   cam.x=player.x; cam.z=player.z;
   cam.y=player.y+1.62+Math.sin(bobT*2)*0.045*bobAmt;
   recoil=lerp(recoil,0,dt*9);
+  recoilSide=lerp(recoilSide,0,dt*9);
   cam.pitch=clamp(cam.pitch+recoilDelta(),-1.4,1.4);
+  cam.yaw+=recoilSideDelta();
 }
-let lastRecoil=0;
+let lastRecoil=0, lastRecoilSide=0;
 function recoilDelta(){ const d=recoil-lastRecoil; lastRecoil=recoil; return d; }
+function recoilSideDelta(){ const d=recoilSide-lastRecoilSide; lastRecoilSide=recoilSide; return d; }
 
 /* ------------------------------------------------------------- ceu */
 const clouds=[];

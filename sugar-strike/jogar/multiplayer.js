@@ -13,7 +13,8 @@
   };
 
   const nativeAvailable = typeof SugarAndroid !== "undefined";
-  const APP_VERSION = "1.4.0";
+  // Os indices das armas mudaram nesta versao: cliente antigo nao pode entrar.
+  const APP_VERSION = "1.5.0";
   const peers = new Map();
   const rooms = new Map();
   let ui = null;
@@ -22,6 +23,12 @@
   let onlineReconnectWanted = false;
   let onlineReconnectTimer = 0;
   let onlineEverConnected = false;
+  // Saguão de salas online: lista pública, sala atual e o relógio que atualiza a lista.
+  let onlineRooms = [];
+  let onlineRoomId = "";
+  let onlineRoomInfo = null;
+  let roomPollTimer = 0;
+  let lobbySocket = null;
   // Sala online oficial do jogo. Quem preferir outro servidor é só digitar por cima.
   // Precisa ficar declarada antes de loadOnlineServer() ser chamada, logo abaixo.
   const DEFAULT_ONLINE_SERVER = "wss://sugarstrike-servidor.onrender.com";
@@ -153,7 +160,8 @@
             ping: 0,
             version: APP_VERSION,
             skin: selectedSkin(),
-            weapon: selectedWeapon()
+            weapon: selectedWeapon(),
+            accessory: selectedAccessory()
           });
           setStatus(
             transportMode === "online"
@@ -277,7 +285,15 @@
       ".net-btn.alt{background:#f0e6da}.net-btn.red{background:#f6a9c3}.net-btn:disabled{opacity:.42}",
       ".net-btn.online{background:#8fd9c8}",
       "#netStatus,#netOnlineStatus,#netLobbyStatus{min-height:34px;margin:10px 0 7px;padding:7px 10px;border-radius:11px;background:#f0e6da;font-size:12px;line-height:1.35;font-weight:800}",
-      "#netRooms,#netPlayers{display:flex;flex-direction:column;gap:7px;margin:7px 0 10px}",
+      "#netRooms,#netPlayers,#netRoomList{display:flex;flex-direction:column;gap:7px;margin:7px 0 10px}",
+      "#netRoomList{max-height:38vh;overflow:auto;touch-action:pan-y;overscroll-behavior:contain}",
+      "#netCreateBox{border:3px dashed #4a3b33;border-radius:14px;padding:9px;margin-top:9px;background:#f7efe5}",
+      "#netCreateGrid{display:grid;grid-template-columns:1fr;gap:6px;margin-top:6px}",
+      "#netCreateGrid .net-field{font-size:11px;height:38px;padding:4px}",
+      "#netServerBox{margin-top:10px;text-align:left}",
+      "#netServerBox summary{font-size:9px;letter-spacing:1.2px;font-weight:900;opacity:.6;padding:4px 2px;cursor:pointer}",
+      ".net-room .roomMeta{display:block;font-size:9px;opacity:.66;margin-top:2px}",
+      ".net-count{flex:0 0 auto;font-size:11px;font-weight:900;background:#f0e6da;border:2px solid #4a3b33;border-radius:9px;padding:3px 6px;margin-left:auto;margin-right:6px}",
       ".net-room,.net-player{display:flex;align-items:center;justify-content:space-between;gap:8px;border:2px solid #4a3b33;border-radius:12px;padding:8px 10px;background:#fff}",
       ".net-room{text-align:left;touch-action:manipulation}.net-room b,.net-player b{font-size:13px}.net-room small,.net-player small{display:block;font-size:10px;opacity:.64}",
       ".net-badge{flex:0 0 auto;border-radius:9px;background:#8fd9c8;padding:4px 7px;font-size:9px;font-weight:900;letter-spacing:.7px}",
@@ -328,11 +344,27 @@
             '<div><div class="net-label">SEU NOME</div><input id="netOnlineName" class="net-field" maxlength="14"></div>' +
             '<div><div class="net-label">SENHA DA SALA (OPCIONAL)</div><input id="netOnlinePassword" class="net-field" maxlength="12" placeholder="SEM SENHA"></div>' +
           '</div>' +
-          '<div style="margin-top:8px"><div class="net-label">ENDEREÇO DO SERVIDOR</div><input id="netServer" class="net-field" maxlength="180" placeholder="wss://sugarstrike-servidor.onrender.com"></div>' +
-          '<button id="netOnlineConnect" class="net-btn online" style="margin-top:10px">ENTRAR NA SALA ONLINE</button>' +
-          '<div id="netOnlineStatus">Ligue o servidor neste computador e cole aqui o endereço mostrado por ele.</div>' +
-          '<div class="net-online-hint">O primeiro jogador conectado será o criador da partida. Os próximos entram como convidados.</div>' +
-          '<button id="netOnlineBack" class="net-btn alt">VOLTAR</button>' +
+          '<div style="margin-top:8px"><div class="net-label">PROCURAR SALA PELO NOME</div>' +
+            '<input id="netRoomSearch" class="net-field" maxlength="24" placeholder="DIGITE PARA FILTRAR"></div>' +
+          '<div class="net-grid" style="margin-top:10px">' +
+            '<button id="netNewRoom" class="net-btn online">CRIAR SALA</button>' +
+            '<button id="netRefresh" class="net-btn alt">ATUALIZAR</button>' +
+          '</div>' +
+          '<div id="netCreateBox" class="net-hide">' +
+            '<div class="net-label">NOME DA NOVA SALA</div>' +
+            '<input id="netNewName" class="net-field" maxlength="24" value="SALA DOCE">' +
+            '<div id="netCreateGrid">' +
+              '<select id="netNewMap" class="net-field"><option value="village">VILA CONFEITO</option><option value="factory">FABRICA DE CHOCOLATE</option><option value="park">PARQUE DE PIRULITOS</option><option value="castle">CASTELO DE BOLO</option></select>' +
+              '<select id="netNewMode" class="net-field"><option value="deathmatch">MATA-MATA</option><option value="team">EQUIPES</option><option value="capture">CAPTURAR O DOCE</option><option value="king">REI DO POTE</option><option value="survival">SOBREVIVENCIA</option></select>' +
+              '<select id="netNewMax" class="net-field"><option value="2">2 JOGADORES</option><option value="4">4 JOGADORES</option><option value="6">6 JOGADORES</option><option value="8" selected>8 JOGADORES</option><option value="10">10 JOGADORES</option><option value="12">12 JOGADORES</option></select>' +
+            '</div>' +
+            '<button id="netCreateConfirm" class="net-btn online" style="margin-top:9px">ABRIR A SALA</button>' +
+          '</div>' +
+          '<div id="netOnlineStatus">Procurando salas abertas…</div>' +
+          '<div id="netRoomList"></div>' +
+          '<details id="netServerBox"><summary>ENDEREÇO DO SERVIDOR</summary>' +
+            '<input id="netServer" class="net-field" maxlength="180" placeholder="wss://sugarstrike-servidor.onrender.com"></details>' +
+          '<button id="netOnlineBack" class="net-btn alt" style="margin-top:9px">VOLTAR</button>' +
         '</div>' +
         '<div id="netLobby" class="net-hide">' +
           '<div id="netLobbyStatus">Aguardando a conexão da sala…</div>' +
@@ -368,6 +400,9 @@
       status: el("netStatus"),
       lobbyStatus: el("netLobbyStatus"),
       rooms: el("netRooms"),
+      roomList: el("netRoomList"),
+      roomSearch: el("netRoomSearch"),
+      createBox: el("netCreateBox"),
       players: el("netPlayers"),
       start: el("netStart"),
       ready: el("netReady"),
@@ -384,9 +419,14 @@
     el("netSearch").addEventListener("click", searchRooms);
     el("netBack").addEventListener("click", closeNetworkMenu);
     el("netOnlineBack").addEventListener("click", closeNetworkMenu);
-    el("netOnlineConnect").addEventListener("click", function () {
-      connectOnline(false);
+    el("netRefresh").addEventListener("click", function () { fetchRooms(true); });
+    ui.roomSearch.addEventListener("input", renderOnlineRooms);
+    el("netNewRoom").addEventListener("click", function () {
+      const opening = ui.createBox.classList.contains("net-hide");
+      ui.createBox.classList.toggle("net-hide", !opening);
+      el("netNewRoom").textContent = opening ? "FECHAR" : "CRIAR SALA";
     });
+    el("netCreateConfirm").addEventListener("click", createOnlineRoom);
     el("netLeave").addEventListener("click", leaveRoom);
     ui.start.addEventListener("click", startHostMatch);
     ui.ready.addEventListener("click", toggleReady);
@@ -428,8 +468,8 @@
 
   function openOnlineMenu() {
     transportMode = "online";
-    ui.title.textContent = "SALA ONLINE";
-    ui.subtitle.textContent = "UM SERVIDOR · ATÉ 8 JOGADORES";
+    ui.title.textContent = "SALAS ONLINE";
+    ui.subtitle.textContent = "VARIAS SALAS AO MESMO TEMPO";
     showNetworkOverlay();
     if (Net.connected) {
       showLobby();
@@ -438,7 +478,219 @@
       ui.setup.classList.add("net-hide");
       ui.onlineSetup.classList.remove("net-hide");
       ui.lobby.classList.add("net-hide");
+      startRoomPolling();
     }
+  }
+
+  // ------------------------------------------------------- saguão de salas
+  // A lista chega por um WebSocket próprio, e não por HTTP: dentro do app o
+  // jogo roda de file:// e o navegador proíbe buscar outra origem por HTTP.
+  // De quebra, a lista passa a se atualizar sozinha, sem ficar perguntando.
+  function startRoomPolling() {
+    if (lobbySocket) return;
+    openLobbyWatch(false);
+  }
+  function stopRoomPolling() {
+    clearTimeout(roomPollTimer);
+    roomPollTimer = 0;
+    if (lobbySocket) {
+      const socket = lobbySocket;
+      lobbySocket = null;
+      try {
+        socket.onclose = null;
+        socket.close(1000, "saiu do saguao");
+      } catch (error) {}
+    }
+  }
+
+  function openLobbyWatch(loud) {
+    const base = normalizeOnlineAddress(ui.server.value || onlineServerAddress);
+    if (!base) {
+      setStatus("Digite o endereço do servidor para ver as salas.");
+      return;
+    }
+    onlineServerAddress = base.replace(/\/game$/, "");
+    stopRoomPolling();
+    setStatus(loud ? "Atualizando a lista de salas…" : "Procurando salas abertas…");
+    try {
+      lobbySocket = new WebSocket(base + "?lobby=1");
+    } catch (error) {
+      setStatus("O endereço do servidor não é válido.");
+      return;
+    }
+    const mine = lobbySocket;
+    // Um servidor da versão antiga aceita a conexão e nunca manda a lista.
+    // Sem este prazo a tela ficaria "Procurando…" para sempre, sem explicar nada.
+    clearTimeout(roomPollTimer);
+    roomPollTimer = setTimeout(function () {
+      if (mine !== lobbySocket) return;
+      setStatus("Este servidor ainda é da versão antiga, sem salas separadas. " +
+        "Atualize o servidor para ver a lista.");
+    }, 9000);
+    mine.onmessage = function (event) {
+      if (mine !== lobbySocket) return;
+      let message;
+      try {
+        message = JSON.parse(String(event.data || ""));
+      } catch (error) {
+        return;
+      }
+      if (message.net !== "rooms") return;
+      clearTimeout(roomPollTimer);
+      onlineRooms = Array.isArray(message.rooms) ? message.rooms : [];
+      renderOnlineRooms();
+      setStatus(onlineRooms.length
+        ? onlineRooms.length + (onlineRooms.length === 1 ? " sala aberta." : " salas abertas.")
+        : "Nenhuma sala aberta agora. Toque em CRIAR SALA para abrir a sua.");
+    };
+    mine.onerror = function () {
+      if (mine !== lobbySocket) return;
+      setStatus("Não foi possível alcançar o servidor.");
+    };
+    mine.onclose = function () {
+      if (mine !== lobbySocket) return;
+      lobbySocket = null;
+      onlineRooms = [];
+      renderOnlineRooms();
+      setStatus("O servidor pode estar acordando. Toque em ATUALIZAR daqui a pouco.");
+    };
+  }
+
+  function fetchRooms(loud) {
+    openLobbyWatch(loud);
+  }
+
+  const MAP_LABELS = {
+    village: "VILA CONFEITO", factory: "FABRICA DE CHOCOLATE",
+    park: "PARQUE DE PIRULITOS", castle: "CASTELO DE BOLO"
+  };
+  const MODE_LABELS = {
+    deathmatch: "MATA-MATA", team: "EQUIPES", capture: "CAPTURAR O DOCE",
+    king: "REI DO POTE", survival: "SOBREVIVENCIA"
+  };
+
+  function renderOnlineRooms() {
+    if (!ui) return;
+    const filter = cleanName(ui.roomSearch.value, "", 24).toUpperCase();
+    const visible = onlineRooms.filter(function (room) {
+      return !filter || String(room.name || "").toUpperCase().indexOf(filter) >= 0;
+    });
+    ui.roomList.innerHTML = "";
+    if (!visible.length) {
+      const empty = document.createElement("div");
+      empty.style.cssText = "font-size:11px;opacity:.6;padding:8px";
+      empty.textContent = filter
+        ? 'Nenhuma sala com "' + filter + '" no nome.'
+        : "Nenhuma sala aberta ainda.";
+      ui.roomList.appendChild(empty);
+      return;
+    }
+    visible.forEach(function (room) {
+      const players = room.players | 0;
+      const max = room.max | 0;
+      const playing = room.status === "playing";
+      const full = players >= max;
+      const button = document.createElement("button");
+      button.className = "net-room";
+      button.type = "button";
+
+      const label = document.createElement("span");
+      const title = document.createElement("b");
+      title.textContent = cleanName(room.name, "SALA SUGAR STRIKE", 24);
+      const meta = document.createElement("small");
+      meta.className = "roomMeta";
+      meta.textContent = (MAP_LABELS[room.map] || String(room.map || "").toUpperCase()) +
+        " · " + (MODE_LABELS[room.mode] || String(room.mode || "").toUpperCase()) +
+        " · " + (playing ? "EM PARTIDA" : "AGUARDANDO") +
+        (room.locked ? " · SENHA" : "");
+      label.appendChild(title);
+      label.appendChild(meta);
+
+      const count = document.createElement("span");
+      count.className = "net-count";
+      count.textContent = players + "/" + max;
+
+      const badge = document.createElement("span");
+      badge.className = "net-badge" + (full ? " bad" : (playing ? " wait" : ""));
+      // Entrar numa sala em partida é permitido: você espera a próxima rodada.
+      badge.textContent = full ? "CHEIA" : (playing ? "AGUARDAR" : "ENTRAR");
+
+      button.appendChild(label);
+      button.appendChild(count);
+      button.appendChild(badge);
+      button.disabled = full;
+      button.addEventListener("click", function () {
+        if (full) return;
+        joinOnlineRoom(room);
+      });
+      ui.roomList.appendChild(button);
+    });
+  }
+
+  // A sala escolhida manda no mapa e no modo da partida.
+  function applyRoomToConfig(room) {
+    if (!room) return;
+    if (room.map) Net.config.map = room.map;
+    if (room.mode) Net.config.mode = room.mode;
+    if (ui) {
+      const mapSelect = el("netMap"), modeSelect = el("netMode");
+      if (mapSelect && room.map) mapSelect.value = room.map;
+      if (modeSelect && room.mode) modeSelect.value = room.mode;
+    }
+    updateLobbyTitle();
+  }
+
+  function updateLobbyTitle() {
+    if (!ui || !onlineRoomInfo || transportMode !== "online") return;
+    ui.title.textContent = cleanName(onlineRoomInfo.name, "SALA ONLINE", 24);
+    ui.subtitle.textContent = (MAP_LABELS[onlineRoomInfo.map] || "VILA CONFEITO") +
+      " · " + (onlineRoomInfo.players | 0) + "/" + (onlineRoomInfo.max | 0) + " JOGADORES";
+  }
+
+  // Só o dono da sala muda o que a lista pública mostra.
+  function publishRoomStatus(status) {
+    if (transportMode !== "online" || Net.role !== "host") return;
+    Net.send({ctl: "status", status: status});
+  }
+  function publishRoomConfig() {
+    if (transportMode !== "online" || Net.role !== "host") return;
+    Net.send({ctl: "config", map: Net.config.map, mode: Net.config.mode});
+  }
+
+  // Volta para a lista de salas sem sair do menu online.
+  function showOnlineBrowser() {
+    if (!ui) return;
+    Net.connected = false;
+    Net.role = "solo";
+    Net.myId = null;
+    peers.clear();
+    onlineRoomInfo = null;
+    ui.title.textContent = "SALAS ONLINE";
+    ui.subtitle.textContent = "VARIAS SALAS AO MESMO TEMPO";
+    ui.setup.classList.add("net-hide");
+    ui.lobby.classList.add("net-hide");
+    ui.onlineSetup.classList.remove("net-hide");
+    startRoomPolling();
+  }
+
+  function joinOnlineRoom(room) {
+    stopRoomPolling();
+    onlineRoomInfo = room;
+    setStatus("Entrando em " + cleanName(room.name, "SALA", 24) + "…");
+    connectOnline(false, {room: room.id});
+  }
+
+  function createOnlineRoom() {
+    const name = cleanName(el("netNewName").value, "SALA DOCE", 24).toUpperCase();
+    const map = el("netNewMap").value;
+    const mode = el("netNewMode").value;
+    const max = clamp(parseInt(el("netNewMax").value, 10) || 8, 2, 12);
+    stopRoomPolling();
+    Net.config.map = map;
+    Net.config.mode = mode;
+    onlineRoomInfo = null;
+    setStatus("Abrindo a sala " + name + "…");
+    connectOnline(false, {create: {name: name, map: map, mode: mode, max: max}});
   }
 
   function closeNetworkMenu() {
@@ -454,6 +706,7 @@
   function hideNetworkOverlay() {
     if (!ui) return;
     ui.root.classList.add("net-hide");
+    stopRoomPolling();
     if (Net.inMatch && !matchOver) {
       paused = false;
       overlay.style.display = "none";
@@ -474,6 +727,8 @@
     ui.ready.style.display = Net.role === "host" ? "none" : "block";
     ui.configPanel.style.display = Net.role === "host" ? "grid" : "none";
     ui.continueButton.classList.toggle("net-hide", !(Net.inMatch && !matchOver));
+    stopRoomPolling();
+    updateLobbyTitle();
   }
 
   function setStatus(text) {
@@ -493,11 +748,15 @@
     return address.replace(/\/+$/, "") + "/game";
   }
 
-  function connectOnline(reconnecting) {
+  function connectOnline(reconnecting, spec) {
     if (!reconnecting) {
       rememberPlayerName(ui.onlineName);
       Net.roomPassword = cleanName(ui.onlinePassword.value, "", 12);
       onlineEverConnected = false;
+      // Entrada nova: a sessão antiga não vale para outra sala.
+      onlineSession = "";
+      onlineRoomId = spec && spec.room ? String(spec.room) : "";
+      saveOnlineSession(onlineServerAddress, "");
     }
     const baseAddress = normalizeOnlineAddress(ui.server.value || onlineServerAddress);
     if (!baseAddress) {
@@ -505,9 +764,6 @@
       return;
     }
     onlineServerAddress = baseAddress.replace(/\/game$/, "");
-    if (!reconnecting && !onlineSession) {
-      onlineSession = loadOnlineSession(onlineServerAddress);
-    }
     ui.server.value = onlineServerAddress;
     saveOnlineServer(onlineServerAddress);
     transportMode = "online";
@@ -519,11 +775,24 @@
         onlineSocket.close();
       } catch (error) {}
     }
-    setStatus(reconnecting ? "Reconectando à sala online…" : "Conectando à sala online…");
-    let socketAddress = baseAddress;
-    if (onlineSession) {
-      socketAddress += "?session=" + encodeURIComponent(onlineSession);
+    setStatus(reconnecting ? "Reconectando à sala…" : "Conectando à sala…");
+
+    // Monta o pedido: criar uma sala, entrar numa existente ou retomar a sessão.
+    const query = [];
+    if (onlineSession) query.push("session=" + encodeURIComponent(onlineSession));
+    if (!reconnecting && spec && spec.create) {
+      query.push("create=1");
+      query.push("name=" + encodeURIComponent(spec.create.name));
+      query.push("map=" + encodeURIComponent(spec.create.map));
+      query.push("mode=" + encodeURIComponent(spec.create.mode));
+      query.push("max=" + encodeURIComponent(String(spec.create.max)));
+      if (Net.roomPassword) query.push("locked=1");
+    } else if (onlineRoomId) {
+      // Numa reconexão isto garante que a sala criada não vire uma segunda sala.
+      query.push("room=" + encodeURIComponent(onlineRoomId));
     }
+    query.push("player=" + encodeURIComponent(Net.localName));
+    const socketAddress = baseAddress + (query.length ? "?" + query.join("&") : "");
     try {
       onlineSocket = new WebSocket(socketAddress);
     } catch (error) {
@@ -544,10 +813,77 @@
         onlineEverConnected = true;
         onlineSession = cleanName(message.session, "", 80);
         saveOnlineSession(onlineServerAddress, onlineSession);
+        if (message.room) {
+          onlineRoomInfo = message.room;
+          onlineRoomId = String(message.room.id || "");
+          applyRoomToConfig(message.room);
+        }
+        stopRoomPolling();
         Net.onNativeEvent({
           event: "connected",
           role: message.role,
           resumed: !!message.resumed
+        });
+        return;
+      }
+      if (message.net === "room_update") {
+        if (message.room) {
+          onlineRoomInfo = message.room;
+          updateLobbyTitle();
+        }
+        return;
+      }
+      if (message.net === "no_room") {
+        // A sala foi apagada (duas horas... ou dois minutos vazia) ou nunca existiu.
+        onlineReconnectWanted = false;
+        onlineRoomId = "";
+        onlineSession = "";
+        saveOnlineSession(onlineServerAddress, "");
+        setStatus(message.reason === "SERVIDOR_LOTADO"
+          ? "O servidor está com todas as salas ocupadas. Tente daqui a pouco."
+          : "Essa sala não existe mais. Escolha outra na lista ou crie a sua.");
+        showOnlineBrowser();
+        return;
+      }
+      if (message.net === "promoted") {
+        // O dono saiu e a vez de comandar a sala passou para este aparelho.
+        Net.role = "host";
+        Net.myId = "host";
+        Net.ready = true;
+        Net.inMatch = false;
+        peers.clear();
+        peers.set("host", {
+          id: "host", name: Net.localName, ready: true, ping: 0,
+          version: APP_VERSION, skin: selectedSkin(),
+          weapon: selectedWeapon(), accessory: selectedAccessory()
+        });
+        if (message.room) onlineRoomInfo = message.room;
+        setStatus("O dono saiu. Agora a sala é sua — aguarde todos ficarem prontos.");
+        showLobby();
+        renderPlayers();
+        broadcastRoster();
+        publishRoomStatus("lobby");
+        return;
+      }
+      if (message.net === "host_changed") {
+        // Outro jogador virou dono: reapresente-se para entrar no novo elenco.
+        Net.role = "client";
+        Net.ready = false;
+        Net.inMatch = false;
+        peers.clear();
+        if (message.room) onlineRoomInfo = message.room;
+        if (ui && ui.ready) ui.ready.textContent = "ESTOU PRONTO";
+        setStatus("O dono da sala mudou. Reconectando ao novo dono…");
+        showLobby();
+        renderPlayers();
+        Net.send({
+          t: "hello",
+          name: Net.localName,
+          version: APP_VERSION,
+          password: Net.roomPassword,
+          skin: selectedSkin(),
+          weapon: selectedWeapon(),
+          accessory: selectedAccessory()
         });
         return;
       }
@@ -601,7 +937,8 @@
     peers.clear();
     peers.set("host", {
       id: "host", name: Net.localName, ready: true, ping: 0,
-      version: APP_VERSION, skin: selectedSkin(), weapon: selectedWeapon()
+      version: APP_VERSION, skin: selectedSkin(), weapon: selectedWeapon(),
+      accessory: selectedAccessory()
     });
     showLobby();
     renderPlayers();
@@ -682,7 +1019,10 @@
         const version = entry.version && entry.version !== APP_VERSION
           ? " - VERSAO " + entry.version
           : "";
-        detail.textContent = connection + version;
+        // Mostra o que cada um vai levar para a partida.
+        const kit = WEAPONS[clamp(entry.weapon | 0, 0, WEAPONS.length - 1)].name +
+          " + " + WEAPONS[clamp(entry.accessory | 0, 0, WEAPONS.length - 1)].name;
+        detail.textContent = connection + version + " · " + kit;
         label.appendChild(name);
         label.appendChild(detail);
         const badge = document.createElement("span");
@@ -712,7 +1052,12 @@
   function selectedWeapon() {
     return window.SugarEnhance && SugarEnhance.startingWeapon
       ? SugarEnhance.startingWeapon()
-      : 0;
+      : LOADOUT[0];
+  }
+  function selectedAccessory() {
+    return window.SugarEnhance && SugarEnhance.startingAccessory
+      ? SugarEnhance.startingAccessory()
+      : LOADOUT[1];
   }
 
   function updateLobbyConfig() {
@@ -722,7 +1067,10 @@
     Net.config.duration = clamp(parseInt(el("netDuration").value, 10) || 5, 1, 30);
     Net.config.bots = clamp(parseInt(el("netBots").value, 10) || 0, 0, 12);
     Net.config.target = clamp(parseInt(el("netTarget").value, 10) || 25, 5, 100);
-    if (Net.role === "host" && Net.connected) broadcastRoster();
+    if (Net.role === "host" && Net.connected) {
+      broadcastRoster();
+      publishRoomConfig();   // mapa e modo novos aparecem na lista pública
+    }
   }
 
   function toggleReady() {
@@ -765,6 +1113,10 @@
     Net.ready = false;
     peers.clear();
     rooms.clear();
+    // Sai da sala online de vez: nada de reconectar sozinho nela depois.
+    stopRoomPolling();
+    onlineRoomId = "";
+    onlineRoomInfo = null;
     firing = false;
     matchOver = false;
     paused = true;
@@ -803,7 +1155,8 @@
         version: APP_VERSION,
         password: Net.roomPassword,
         skin: selectedSkin(),
-        weapon: selectedWeapon()
+        weapon: selectedWeapon(),
+        accessory: selectedAccessory()
       });
       return;
     }
@@ -842,7 +1195,8 @@
         ping: 0,
         version: String(message.version || ""),
         skin: message.skin || null,
-        weapon: clamp(message.weapon | 0, 0, WEAPONS.length - 1)
+        weapon: clamp(message.weapon | 0, 0, WEAPONS.length - 1),
+        accessory: clamp(message.accessory | 0, 0, WEAPONS.length - 1)
       });
       setStatus(peers.get(id).name + " entrou na sala.");
       broadcastRoster();
@@ -956,6 +1310,7 @@
     rebuildTown(seed);
     createHostEntities();
     beginNetworkRound();
+    publishRoomStatus("playing");   // a lista pública passa a mostrar EM PARTIDA
     Net.send({
       t: "start",
       seed: seed,
@@ -977,8 +1332,10 @@
     if (selectedSkin()) player.skin = selectedSkin();
     ents.push(player);
 
+    // O limite de gente é o que o dono escolheu ao criar a sala.
+    const seats = onlineRoomInfo ? clamp(onlineRoomInfo.max | 0, 2, 12) : 8;
     peers.forEach(function (entry, id) {
-      if (id === "host" || ents.length >= 8) return;
+      if (id === "host" || ents.length >= seats) return;
       const remote = newEnt(entry.name, false);
       remote.netId = id;
       remote.remote = true;
@@ -1069,6 +1426,7 @@
 
   function finishNetworkRoundUi() {
     firing = false;
+    publishRoomStatus("lobby");   // a sala volta a aparecer como AGUARDANDO
     el("bPlay").classList.add("hide");
     const roomButton = el(transportMode === "online" ? "bOnline" : "bMulti");
     const otherButton = el(transportMode === "online" ? "bMulti" : "bOnline");

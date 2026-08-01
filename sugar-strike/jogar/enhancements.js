@@ -1,9 +1,10 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.4.0";
+  const VERSION = "1.5.0";
   const SETTINGS_KEY = "sugarstrike.settings.v11";
-  const PROFILE_KEY = "sugarstrike.profile.v11";
+  const PROFILE_KEY = "sugarstrike.profile.v12";
+  const OLD_PROFILE_KEY = "sugarstrike.profile.v11";
   const HISTORY_LIMIT = 10;
   const originalBuildTown = buildTown;
   const originalInitMatch = initMatch;
@@ -34,13 +35,17 @@
     headshots: 0,
     shots: 0,
     hits: 0,
-    candies: 75,
-    ownedWeapons: [0],
-    selectedWeapon: 0,
+    candies: 180,
+    // A Goma-18 e a faca de acucar vem de graca com o jogo.
+    ownedWeapons: [4, 10],
+    primary: 4,
+    accessory: 10,
     skin: 0,
     unlockedSkins: [0],
     weaponSkin: 0,
     unlockedWeaponSkins: [0],
+    gear: 0,
+    unlockedGear: [0],
     achievements: [],
     daily: {day: "", kills: 0, matches: 0, claimed: false},
     history: []
@@ -58,26 +63,116 @@
   try {
     profile.name = localStorage.getItem("sugarstrike.player") || profile.name;
   } catch (error) {}
+  // Quem vinha da versao anterior traz os doces e as estatisticas junto.
+  try {
+    if (!localStorage.getItem(PROFILE_KEY)) {
+      const old = JSON.parse(localStorage.getItem(OLD_PROFILE_KEY) || "{}");
+      if (old && typeof old === "object") {
+        ["xp", "level", "matches", "wins", "kills", "deaths", "headshots", "shots", "hits"]
+          .forEach(function (key) {
+            if (Number.isFinite(old[key])) profile[key] = old[key];
+          });
+        if (Number.isFinite(old.candies)) {
+          profile.candies = Math.max(profile.candies, Math.floor(old.candies));
+        }
+        if (Array.isArray(old.unlockedSkins)) profile.unlockedSkins = old.unlockedSkins;
+        if (Array.isArray(old.achievements)) profile.achievements = old.achievements;
+        if (Array.isArray(old.history)) profile.history = old.history;
+      }
+    }
+  } catch (error) {}
+
+  // ------------------------------------------------------------- catalogos
+  // Roupas: so mudam as cores do boneco, usando a paleta SKINS do jogo.
+  const OUTFITS = [
+    {name: "CONFEITEIRO PADRAO", price: 0},
+    {name: "AVENTAL DE MENTA", price: 120},
+    {name: "UNIFORME DE MEL", price: 180},
+    {name: "MANTO DE UVA", price: 240},
+    {name: "JALECO DE PESSEGO", price: 260},
+    {name: "CAPUZ DE MIRTILO", price: 320},
+    {name: "ROUPA DE MACA VERDE", price: 360},
+    {name: "CASACO DE MORANGO", price: 420},
+    {name: "SOBRETUDO DE AMORA", price: 480},
+    {name: "VESTIDO DE ALGODAO", price: 560}
+  ];
+  // Skins de arma: repintam qualquer arma. A primeira mantem as cores de fabrica.
+  const WEAPON_SKINS = [
+    {name: "CORES ORIGINAIS", price: 0, colors: [null, null]},
+    {name: "UVA REAL", price: 150, colors: ["#c9b4ec", "#8fd9c8"]},
+    {name: "MEL DOURADO", price: 200, colors: ["#ffcf4d", "#e8615a"]},
+    {name: "NOITE DE AMORA", price: 260, colors: ["#5b5f8f", "#9ec9f2"]},
+    {name: "CHOCOLATE AMARGO", price: 300, colors: ["#6d3a2a", "#f6a9c3"]},
+    {name: "MENTA GELADA", price: 340, colors: ["#8fd9c8", "#fffdf7"]},
+    {name: "MORANGO CREME", price: 380, colors: ["#f6a9c3", "#fdf7ec"]},
+    {name: "CARAMELO QUEIMADO", price: 420, colors: ["#c98f5e", "#ffcf4d"]},
+    {name: "CONFETE DE FESTA", price: 520, colors: ["#e8615a", "#ffcf4d"]}
+  ];
+  // Equipamentos: um de cada vez, e estes mexem de verdade nos numeros.
+  const GEAR = [
+    {name: "SEM EQUIPAMENTO", price: 0, desc: "Nenhum bonus.", mods: {}},
+    {name: "TENIS DE CARAMELO", price: 260, desc: "Corre 10% mais rapido.", mods: {speed: 1.10}},
+    {name: "COLETE DE MARSHMALLOW", price: 340, desc: "Nasce com 25 de escudo.", mods: {shield: 25}},
+    {name: "LUVA DE CONFEITEIRO", price: 300, desc: "Segura 20% do recuo.", mods: {recoil: 0.80}},
+    {name: "MIRA DE ACUCAR", price: 420, desc: "Fecha 18% da dispersao.", mods: {spread: 0.82}},
+    {name: "CINTO DE MUNICAO", price: 380, desc: "40% mais municao reserva.", mods: {ammo: 1.40}},
+    {name: "JOELHEIRA DE GELATINA", price: 290, desc: "Perde 35% menos mira andando.", mods: {move: 0.65}},
+    {name: "CAPACETE DE BISCOITO", price: 520, desc: "Tiro na cabeca doi 35% menos.", mods: {head: 0.65}},
+    {name: "BOTAS DE ALCACUZ", price: 640, desc: "14% mais rapido e recarrega 15% antes.", mods: {speed: 1.14, reload: 0.85}}
+  ];
+
   profile.history = Array.isArray(profile.history) ? profile.history : [];
   profile.achievements = Array.isArray(profile.achievements) ? profile.achievements : [];
-  profile.unlockedSkins = Array.isArray(profile.unlockedSkins) ? profile.unlockedSkins : [0];
-  profile.unlockedWeaponSkins = Array.isArray(profile.unlockedWeaponSkins)
-    ? profile.unlockedWeaponSkins
-    : [0];
   profile.candies = Math.max(0, Number(profile.candies) || 0);
-  profile.ownedWeapons = Array.isArray(profile.ownedWeapons) ? profile.ownedWeapons : [0];
+
+  function normalizeList(value, floor, limit) {
+    const list = Array.isArray(value) ? value : [floor];
+    const clean = list
+      .map(function (item) { return clamp(item | 0, 0, limit); })
+      .filter(function (item, index, all) { return all.indexOf(item) === index; });
+    if (clean.indexOf(floor) < 0) clean.unshift(floor);
+    return clean;
+  }
+  profile.unlockedSkins = normalizeList(profile.unlockedSkins, 0, OUTFITS.length - 1);
+  profile.unlockedWeaponSkins = normalizeList(profile.unlockedWeaponSkins, 0, WEAPON_SKINS.length - 1);
+  profile.unlockedGear = normalizeList(profile.unlockedGear, 0, GEAR.length - 1);
+  profile.ownedWeapons = Array.isArray(profile.ownedWeapons) ? profile.ownedWeapons : [];
   profile.ownedWeapons = profile.ownedWeapons
     .map(function (weapon) { return clamp(weapon | 0, 0, WEAPONS.length - 1); })
     .filter(function (weapon, index, list) { return list.indexOf(weapon) === index; });
-  if (profile.ownedWeapons.indexOf(0) < 0) profile.ownedWeapons.unshift(0);
-  if (profile.ownedWeapons.indexOf(profile.selectedWeapon | 0) < 0) profile.selectedWeapon = 0;
-  const weaponPrices = [0, 120, 260, 480, 750];
-  const weaponThemes = [
-    ["#c9b4ec", "#8fd9c8"],
-    ["#ffcf4d", "#e8615a"],
-    ["#5b5f8f", "#9ec9f2"],
-    ["#6d3a2a", "#f6a9c3"]
-  ];
+  // As duas gratuitas nunca podem sumir, senao o jogador fica sem nada para levar.
+  PRIMARIES.concat(ACCESSORIES).forEach(function (index) {
+    if (WEAPONS[index].price === 0 && profile.ownedWeapons.indexOf(index) < 0) {
+      profile.ownedWeapons.push(index);
+    }
+  });
+  function firstOwned(pool) {
+    for (let i = 0; i < pool.length; i++) {
+      if (profile.ownedWeapons.indexOf(pool[i]) >= 0) return pool[i];
+    }
+    return pool[0];
+  }
+  if (PRIMARIES.indexOf(profile.primary | 0) < 0 ||
+      profile.ownedWeapons.indexOf(profile.primary | 0) < 0) {
+    profile.primary = firstOwned(PRIMARIES);
+  }
+  if (ACCESSORIES.indexOf(profile.accessory | 0) < 0 ||
+      profile.ownedWeapons.indexOf(profile.accessory | 0) < 0) {
+    profile.accessory = firstOwned(ACCESSORIES);
+  }
+  profile.skin = clamp(profile.skin | 0, 0, OUTFITS.length - 1);
+  profile.weaponSkin = clamp(profile.weaponSkin | 0, 0, WEAPON_SKINS.length - 1);
+  profile.gear = clamp(profile.gear | 0, 0, GEAR.length - 1);
+  if (profile.unlockedSkins.indexOf(profile.skin) < 0) profile.skin = 0;
+  if (profile.unlockedWeaponSkins.indexOf(profile.weaponSkin) < 0) profile.weaponSkin = 0;
+  if (profile.unlockedGear.indexOf(profile.gear) < 0) profile.gear = 0;
+
+  // Deixa o jogo saber o que foi equipado.
+  function syncLoadout() {
+    LOADOUT[0] = profile.primary | 0;
+    LOADOUT[1] = profile.accessory | 0;
+  }
+  syncLoadout();
 
   const game = {
     map: "village",
@@ -141,7 +236,15 @@
     return SKINS[clamp(profile.skin | 0, 0, SKINS.length - 1)];
   }
   function weaponColors() {
-    return weaponThemes[clamp(profile.weaponSkin | 0, 0, weaponThemes.length - 1)];
+    return WEAPON_SKINS[clamp(profile.weaponSkin | 0, 0, WEAPON_SKINS.length - 1)].colors;
+  }
+  function currentGear() {
+    return GEAR[clamp(profile.gear | 0, 0, GEAR.length - 1)];
+  }
+  // O index.html pergunta por aqui o efeito de cada equipamento.
+  function gearMod(name, fallback) {
+    const mods = currentGear().mods || {};
+    return Object.prototype.hasOwnProperty.call(mods, name) ? mods[name] : fallback;
   }
   function skyPalette() {
     const palettes = {
@@ -159,7 +262,10 @@
     return ownsWeapon(index) || game.tempWeapons.indexOf(index | 0) >= 0;
   }
   function startingWeapon() {
-    return canUseWeapon(profile.selectedWeapon | 0) ? profile.selectedWeapon | 0 : 0;
+    return canUseWeapon(profile.primary | 0) ? profile.primary | 0 : firstOwned(PRIMARIES);
+  }
+  function startingAccessory() {
+    return canUseWeapon(profile.accessory | 0) ? profile.accessory | 0 : firstOwned(ACCESSORIES);
   }
   setWeapon = function (index) {
     index = clamp(index | 0, 0, WEAPONS.length - 1);
@@ -225,7 +331,8 @@
     if (victim === player) vibrate("35,25,55");
   }
   function playerSpeed() {
-    return performance.now() < game.speedUntil ? 1.38 : 1;
+    const boost = performance.now() < game.speedUntil ? 1.38 : 1;
+    return boost * (gearMod("speed", 1) || 1);
   }
 
   function assignTeams(list, mode) {
@@ -441,7 +548,8 @@
         type: types[index], active: true, respawn: 0, spin: index
       };
       if (pickup.type === "candy") pickup.value = 5 + (index % 2) * 5;
-      if (pickup.type === "weapon") pickup.weapon = index === 3 ? 3 : 4;
+      // As caixas roxas emprestam as duas armas mais caras por uma partida.
+      if (pickup.type === "weapon") pickup.weapon = index === 3 ? 2 : 9;
       game.pickups.push({
         x: pickup.x, y: pickup.y, z: pickup.z, type: pickup.type,
         value: pickup.value, weapon: pickup.weapon,
@@ -467,7 +575,11 @@
     player.name = (profile.name || "VOCE").toUpperCase().slice(0, 14);
     player.skin = selectedSkin();
     game.tempWeapons = profile.ownedWeapons.slice();
-    const chosenWeapon = startingWeapon();
+    // O jogador entra com a arma principal na mao e o acessorio no bolso.
+    syncLoadout();
+    LOADOUT[0] = startingWeapon();
+    LOADOUT[1] = startingAccessory();
+    const chosenWeapon = LOADOUT[0];
     player.wep = chosenWeapon;
     player.mag = player.mags[chosenWeapon];
     player.res = player.ress[chosenWeapon];
@@ -818,12 +930,12 @@
   }
   function calculateLevel() {
     profile.level = Math.max(1, Math.floor(Math.sqrt(profile.xp / 220)) + 1);
-    const unlock = Math.min(SKINS.length - 1, Math.floor(profile.level / 3));
+    const unlock = Math.min(OUTFITS.length - 1, Math.floor(profile.level / 3));
     if (profile.unlockedSkins.indexOf(unlock) < 0) {
       profile.unlockedSkins.push(unlock);
       showToast("NOVA ROUPA DESBLOQUEADA!");
     }
-    const weaponUnlock = Math.min(weaponThemes.length - 1, Math.floor(profile.level / 4));
+    const weaponUnlock = Math.min(WEAPON_SKINS.length - 1, Math.floor(profile.level / 4));
     if (profile.unlockedWeaponSkins.indexOf(weaponUnlock) < 0) {
       profile.unlockedWeaponSkins.push(weaponUnlock);
       showToast("NOVA PINTURA DE ARMA!");
@@ -1001,13 +1113,16 @@
       : '<p>Nenhuma partida registrada.</p>';
     const skins = profile.unlockedSkins.map(function (skin) {
       return '<button class="skinPick ' + (profile.skin === skin ? "on" : "") + '" data-skin="' + skin +
-        '" style="background:' + SKINS[skin].b + '">ROUPA ' + (skin + 1) + '</button>';
+        '" style="background:' + SKINS[skin].b + '">' + escapeHtml(OUTFITS[skin].name) + '</button>';
     }).join("");
     const weaponSkins = profile.unlockedWeaponSkins.map(function (skin) {
+      const colors = WEAPON_SKINS[skin].colors;
+      const style = colors[0]
+        ? 'background:linear-gradient(135deg,' + colors[0] + ' 50%,' + colors[1] + ' 50%)'
+        : 'background:#f0e6da';
       return '<button class="weaponSkinPick ' + (profile.weaponSkin === skin ? "on" : "") +
-        '" data-weapon-skin="' + skin + '" style="background:linear-gradient(135deg,' +
-        weaponThemes[skin][0] + ' 50%,' + weaponThemes[skin][1] + ' 50%)">PINTURA ' +
-        (skin + 1) + '</button>';
+        '" data-weapon-skin="' + skin + '" style="' + style + '">' +
+        escapeHtml(WEAPON_SKINS[skin].name) + '</button>';
     }).join("");
     modal("PERFIL · NIVEL " + profile.level,
       '<label class="profileName">NOME<input id="profileName" maxlength="14" value="' + escapeHtml(profile.name) + '"></label>' +
@@ -1049,50 +1164,181 @@
     if (hud) hud.textContent = "DOCES " + Math.floor(profile.candies);
   }
 
+  // Os dois espacos do HUD apontam sempre para o que esta equipado.
   function updateWeaponSlots() {
-    document.querySelectorAll(".slot[data-w]").forEach(function (slot) {
-      const index = parseInt(slot.dataset.w, 10);
+    document.querySelectorAll("#slots .slot").forEach(function (slot) {
+      const seat = parseInt(slot.dataset.slot, 10) || 0;
+      const index = clamp(LOADOUT[seat] | 0, 0, WEAPONS.length - 1);
+      const weapon = WEAPONS[index];
       const available = canUseWeapon(index);
+      slot.dataset.w = String(index);
       slot.classList.toggle("locked", !available);
-      slot.textContent = available ? String(index + 1) : "$";
-      slot.title = WEAPONS[index].name + (available ? "" : " · BLOQUEADA");
+      slot.textContent = available ? String(seat + 1) : "$";
+      slot.title = weapon.name + (available ? "" : " · BLOQUEADA");
     });
   }
 
-  function openShop() {
-    const cards = WEAPONS.map(function (weapon, index) {
-      const owned = ownsWeapon(index);
-      const equipped = profile.selectedWeapon === index;
-      const buttonText = equipped ? "EQUIPADA" : (owned ? "USAR" : "COMPRAR · " + weaponPrices[index] + " DOCES");
+  // Converte um numero cru em barrinhas, para dar para comparar de relance.
+  function bar(value, best, invert) {
+    const ratio = clamp(invert ? best / Math.max(value, 0.0001) : value / best, 0, 1);
+    const filled = Math.max(1, Math.round(ratio * 5));
+    return '<i class="statBar"><b style="width:' + (filled * 20) + '%"></b></i>';
+  }
+  function weaponStats(weapon) {
+    const rows = [
+      ["DANO", bar(weapon.dmg * weapon.pellets, 110), weapon.dmg * (weapon.pellets > 1 ? weapon.pellets : 1)],
+      ["ALCANCE", bar(weapon.range, 175), Math.round(weapon.range) + "m"],
+      ["PRECISAO", bar(weapon.spread, 0.0032, true), ""],
+      ["CADENCIA", bar(weapon.rate, 0.066, true), ""],
+      ["MOBILIDADE", bar(1 - (weapon.weight || 0), 1), ""]
+    ];
+    return '<div class="statList">' + rows.map(function (row) {
+      return '<span class="statRow"><em>' + row[0] + '</em>' + row[1] +
+        '<u>' + row[2] + '</u></span>';
+    }).join("") + '</div>';
+  }
+  function priceTag(price, owned) {
+    if (owned) return "COMPRADO";
+    return price === 0 ? "GRATIS" : price + " DOCES";
+  }
+
+  let shopTab = "primary";
+  function shopCardsFor(tab) {
+    if (tab === "primary" || tab === "accessory") {
+      const pool = tab === "primary" ? PRIMARIES : ACCESSORIES;
+      return pool.map(function (index) {
+        const weapon = WEAPONS[index];
+        const owned = ownsWeapon(index);
+        const equipped = (tab === "primary" ? profile.primary : profile.accessory) === index;
+        const action = equipped ? "EQUIPADA" : (owned ? "EQUIPAR" : "COMPRAR · " + priceTag(weapon.price, false));
+        return '<div class="shopCard ' + (equipped ? "equipped" : "") + '">' +
+          '<div class="shopHead"><b>' + escapeHtml(weapon.name) + '</b>' +
+          '<span class="shopRole">' + escapeHtml(weapon.role) + '</span></div>' +
+          '<small>' + escapeHtml(weapon.desc) + '</small>' +
+          weaponStats(weapon) +
+          '<button class="shopBuy big-btn sub-btn" data-kind="' + tab + '" data-item="' + index + '" ' +
+          (equipped ? "disabled" : "") + '>' + action + '</button></div>';
+      }).join("");
+    }
+    if (tab === "outfit") {
+      return OUTFITS.map(function (outfit, index) {
+        const owned = profile.unlockedSkins.indexOf(index) >= 0;
+        const equipped = profile.skin === index;
+        const skin = SKINS[index];
+        return '<div class="shopCard ' + (equipped ? "equipped" : "") + '">' +
+          '<div class="shopHead"><b>' + escapeHtml(outfit.name) + '</b></div>' +
+          '<div class="swatch"><i style="background:' + skin.b + '"></i>' +
+          '<i style="background:' + skin.h + '"></i><i style="background:' + skin.p + '"></i></div>' +
+          '<small>Muda as cores do seu confeiteiro.</small>' +
+          '<button class="shopBuy big-btn sub-btn" data-kind="outfit" data-item="' + index + '" ' +
+          (equipped ? "disabled" : "") + '>' +
+          (equipped ? "VESTIDA" : (owned ? "VESTIR" : "COMPRAR · " + priceTag(outfit.price, false))) +
+          '</button></div>';
+      }).join("");
+    }
+    if (tab === "skin") {
+      return WEAPON_SKINS.map(function (item, index) {
+        const owned = profile.unlockedWeaponSkins.indexOf(index) >= 0;
+        const equipped = profile.weaponSkin === index;
+        const colors = item.colors;
+        const swatch = colors[0]
+          ? '<div class="swatch"><i style="background:' + colors[0] + '"></i><i style="background:' + colors[1] + '"></i></div>'
+          : '<div class="swatch"><i style="background:#f0e6da"></i></div>';
+        return '<div class="shopCard ' + (equipped ? "equipped" : "") + '">' +
+          '<div class="shopHead"><b>' + escapeHtml(item.name) + '</b></div>' + swatch +
+          '<small>' + (colors[0] ? "Repinta qualquer arma equipada." : "Cada arma fica com a cor de fabrica.") + '</small>' +
+          '<button class="shopBuy big-btn sub-btn" data-kind="skin" data-item="' + index + '" ' +
+          (equipped ? "disabled" : "") + '>' +
+          (equipped ? "EM USO" : (owned ? "USAR" : "COMPRAR · " + priceTag(item.price, false))) +
+          '</button></div>';
+      }).join("");
+    }
+    return GEAR.map(function (item, index) {
+      const owned = profile.unlockedGear.indexOf(index) >= 0;
+      const equipped = profile.gear === index;
       return '<div class="shopCard ' + (equipped ? "equipped" : "") + '">' +
-        '<div class="shopWeaponNo">' + (index + 1) + '</div>' +
-        '<div><b>' + escapeHtml(weapon.name) + '</b>' +
-        '<small>DANO ' + weapon.dmg + ' · PENTE ' + weapon.mag + ' · ALCANCE ' + weapon.range + '</small></div>' +
-        '<button class="shopBuy big-btn sub-btn" data-weapon="' + index + '" ' +
-        (equipped ? "disabled" : "") + '>' + buttonText + '</button></div>';
+        '<div class="shopHead"><b>' + escapeHtml(item.name) + '</b></div>' +
+        '<small>' + escapeHtml(item.desc) + '</small>' +
+        '<button class="shopBuy big-btn sub-btn" data-kind="gear" data-item="' + index + '" ' +
+        (equipped ? "disabled" : "") + '>' +
+        (equipped ? "EQUIPADO" : (owned ? "EQUIPAR" : "COMPRAR · " + priceTag(item.price, false))) +
+        '</button></div>';
     }).join("");
-    modal("LOJA DE ARMAS",
+  }
+
+  function priceOf(kind, index) {
+    if (kind === "primary" || kind === "accessory") return WEAPONS[index].price;
+    if (kind === "outfit") return OUTFITS[index].price;
+    if (kind === "skin") return WEAPON_SKINS[index].price;
+    return GEAR[index].price;
+  }
+  function alreadyOwns(kind, index) {
+    if (kind === "primary" || kind === "accessory") return ownsWeapon(index);
+    if (kind === "outfit") return profile.unlockedSkins.indexOf(index) >= 0;
+    if (kind === "skin") return profile.unlockedWeaponSkins.indexOf(index) >= 0;
+    return profile.unlockedGear.indexOf(index) >= 0;
+  }
+  function registerPurchase(kind, index) {
+    if (kind === "primary" || kind === "accessory") profile.ownedWeapons.push(index);
+    else if (kind === "outfit") profile.unlockedSkins.push(index);
+    else if (kind === "skin") profile.unlockedWeaponSkins.push(index);
+    else profile.unlockedGear.push(index);
+  }
+  function equipItem(kind, index) {
+    if (kind === "primary") { profile.primary = index; syncLoadout(); }
+    else if (kind === "accessory") { profile.accessory = index; syncLoadout(); }
+    else if (kind === "outfit") profile.skin = index;
+    else if (kind === "skin") profile.weaponSkin = index;
+    else profile.gear = index;
+  }
+  function itemName(kind, index) {
+    if (kind === "primary" || kind === "accessory") return WEAPONS[index].name;
+    if (kind === "outfit") return OUTFITS[index].name;
+    if (kind === "skin") return WEAPON_SKINS[index].name;
+    return GEAR[index].name;
+  }
+
+  function openShop(tab) {
+    shopTab = tab || shopTab;
+    const tabs = [
+      ["primary", "ARMAS"], ["accessory", "ACESSORIOS"],
+      ["outfit", "ROUPAS"], ["skin", "PINTURAS"], ["gear", "EQUIPAMENTOS"]
+    ].map(function (item) {
+      return '<button class="shopTab ' + (shopTab === item[0] ? "on" : "") +
+        '" data-tab="' + item[0] + '">' + item[1] + '</button>';
+    }).join("");
+    modal("LOJA DE DOCES",
       '<div class="shopBalance">SALDO <strong>' + Math.floor(profile.candies) + ' DOCES</strong></div>' +
-      '<p class="shopHint">Armas compradas ficam liberadas para sempre. Armas pegas na fase duram uma partida.</p>' +
-      '<div class="shopGrid">' + cards + '</div>');
+      '<div class="loadoutNow">LEVANDO: <b>' + escapeHtml(WEAPONS[profile.primary].name) +
+      '</b> + <b>' + escapeHtml(WEAPONS[profile.accessory].name) + '</b></div>' +
+      '<div class="shopTabs">' + tabs + '</div>' +
+      '<p class="shopHint">Voce leva uma arma principal e um acessorio por partida. ' +
+      'O que e comprado fica para sempre; o que aparece na fase dura so a partida.</p>' +
+      '<div class="shopGrid">' + shopCardsFor(shopTab) + '</div>');
+    document.querySelectorAll(".shopTab").forEach(function (button) {
+      button.addEventListener("click", function () { openShop(button.dataset.tab); });
+    });
     document.querySelectorAll(".shopBuy").forEach(function (button) {
       button.addEventListener("click", function () {
-        const index = parseInt(button.dataset.weapon, 10);
-        if (!ownsWeapon(index)) {
-          const price = weaponPrices[index];
+        const kind = button.dataset.kind;
+        const index = parseInt(button.dataset.item, 10);
+        if (!alreadyOwns(kind, index)) {
+          const price = priceOf(kind, index);
           if (profile.candies < price) {
-            showToast("FALTAM " + (price - profile.candies) + " DOCES");
+            showToast("FALTAM " + Math.ceil(price - profile.candies) + " DOCES");
             vibrate(45);
             return;
           }
           profile.candies -= price;
-          profile.ownedWeapons.push(index);
-          showToast(WEAPONS[index].name + " COMPRADA!");
+          registerPurchase(kind, index);
+          showToast(itemName(kind, index) + " COMPRADO!");
+          vibrate("20,30,40");
         }
-        profile.selectedWeapon = index;
+        equipItem(kind, index);
         saveProfile();
         updateWeaponSlots();
-        openShop();
+        if (player && player.skin && kind === "outfit") player.skin = selectedSkin();
+        openShop(kind === "gear" ? "gear" : shopTab);
       });
     });
   }
@@ -1238,20 +1484,8 @@
     });
   }
 
+  // Sao so dois espacos fixos, ja escritos no HTML; aqui so o texto e ajustado.
   function installWeaponSlots() {
-    const slots = document.getElementById("slots");
-    for (let i = 3; i < WEAPONS.length; i++) {
-      const button = document.createElement("div");
-      button.className = "slot pill";
-      button.dataset.w = String(i);
-      button.textContent = String(i + 1);
-      button.title = WEAPONS[i].name;
-      button.addEventListener("click", function () { setWeapon(i); });
-      button.addEventListener("touchstart", function (event) {
-        event.preventDefault(); setWeapon(i);
-      }, {passive: false});
-      slots.appendChild(button);
-    }
     updateWeaponSlots();
   }
 
@@ -1274,16 +1508,17 @@
 
   function showTutorial() {
     try {
-      if (localStorage.getItem("sugarstrike.tutorial.v11")) return;
-      localStorage.setItem("sugarstrike.tutorial.v11", "1");
+      if (localStorage.getItem("sugarstrike.tutorial.v12")) return;
+      localStorage.setItem("sugarstrike.tutorial.v12", "1");
     } catch (error) {}
     modal("COMO JOGAR",
       '<div class="tutorial">' +
       '<div><b>1. MOVA</b><span>Use o joystick esquerdo.</span></div>' +
       '<div><b>2. MIRE</b><span>Arraste o lado direito da tela.</span></div>' +
-      '<div><b>3. COLETE</b><span>Pegue municao, armas temporarias e doces espalhados pela fase.</span></div>' +
-      '<div><b>4. EVOLUA</b><span>Use os doces na loja para liberar armas permanentemente.</span></div>' +
-      '<div><b>5. JOGUE COM AMIGOS</b><span>Crie uma sala Wi-Fi Direct e espere todos ficarem prontos.</span></div>' +
+      '<div><b>3. EQUIPE</b><span>Voce leva UMA arma principal e UM acessorio. Troque no botao 1 e 2.</span></div>' +
+      '<div><b>4. COLETE</b><span>Pegue municao, armas emprestadas e doces espalhados pela fase.</span></div>' +
+      '<div><b>5. EVOLUA</b><span>Gaste os doces na loja em armas, roupas, pinturas e equipamentos.</span></div>' +
+      '<div><b>6. JOGUE ONLINE</b><span>Crie uma sala com nome ou entre em qualquer sala da lista.</span></div>' +
       '</div>');
   }
 
@@ -1317,7 +1552,12 @@
       ".xpBar{height:16px;background:#f0e6da;border:2px solid #4a3b33;border-radius:9px;overflow:hidden;margin:9px 0}.xpBar i{display:block;height:100%;background:#8fd9c8}" +
       ".skinList{display:flex;gap:6px;overflow:auto}.skinPick,.weaponSkinPick{min-width:80px;border:3px solid #4a3b33;border-radius:10px;padding:8px;font-weight:900;color:#4a3b33}.skinPick.on,.weaponSkinPick.on{outline:4px solid #ffcf4d}" +
       ".historyRow{display:flex;justify-content:space-between;background:#f0e6da;border-radius:8px;padding:6px;margin:4px 0;font-size:11px}" +
-      ".slot.locked{opacity:.48;filter:grayscale(1);border-style:dashed}.shopBalance{background:#ffcf4d;border:3px solid #4a3b33;border-radius:14px;padding:10px;margin-bottom:8px}.shopBalance strong{font-size:18px}.shopHint{font-size:11px}.shopGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.shopCard{display:grid;grid-template-columns:36px 1fr;align-items:center;gap:7px;text-align:left;background:#f0e6da;border:3px solid #4a3b33;border-radius:14px;padding:8px}.shopCard.equipped{outline:4px solid #ffcf4d}.shopWeaponNo{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#c9b4ec;border:2px solid #4a3b33;font-weight:900}.shopCard small{display:block;font-size:9px;margin-top:3px}.shopCard .shopBuy{grid-column:1/-1;margin:0;font-size:10px;padding:8px}.shopCard .shopBuy:disabled{opacity:.65}" +
+      ".slot.locked{opacity:.48;filter:grayscale(1);border-style:dashed}.shopBalance{background:#ffcf4d;border:3px solid #4a3b33;border-radius:14px;padding:10px;margin-bottom:8px}.shopBalance strong{font-size:18px}.shopHint{font-size:11px;margin:6px 0}.shopGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.shopCard{display:flex;flex-direction:column;gap:5px;text-align:left;background:#f0e6da;border:3px solid #4a3b33;border-radius:14px;padding:9px}.shopCard.equipped{outline:4px solid #ffcf4d}.shopCard small{display:block;font-size:9px;line-height:1.35;opacity:.78}.shopCard .shopBuy{margin:6px 0 0;font-size:10px;padding:8px;width:100%}.shopCard .shopBuy:disabled{opacity:.65}" +
+      ".shopHead{display:flex;align-items:baseline;justify-content:space-between;gap:6px}.shopHead b{font-size:11px;letter-spacing:.4px;line-height:1.2}.shopRole{flex:0 0 auto;font-size:7px;font-weight:900;letter-spacing:.6px;background:#c9b4ec;border:2px solid #4a3b33;border-radius:7px;padding:2px 5px}" +
+      ".shopTabs{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}.shopTab{flex:1 1 auto;border:3px solid #4a3b33;border-radius:11px;background:#fffdf7;color:#4a3b33;font:900 9px ui-rounded,'Trebuchet MS',sans-serif;letter-spacing:.5px;padding:8px 5px}.shopTab.on{background:#ffcf4d}" +
+      ".loadoutNow{background:#8fd9c8;border:3px solid #4a3b33;border-radius:12px;padding:7px;font-size:10px;font-weight:900;letter-spacing:.4px}" +
+      ".statList{display:grid;gap:3px;margin-top:2px}.statRow{display:grid;grid-template-columns:52px 1fr 30px;align-items:center;gap:5px;font-size:8px;font-weight:900}.statRow em{font-style:normal;opacity:.68}.statRow u{text-decoration:none;text-align:right;opacity:.68}.statBar{display:block;height:7px;border:2px solid #4a3b33;border-radius:5px;background:#fffdf7;overflow:hidden}.statBar b{display:block;height:100%;background:#e8615a}" +
+      ".swatch{display:flex;gap:4px}.swatch i{flex:1;height:22px;border:2px solid #4a3b33;border-radius:7px}" +
       ".tutorial{display:grid;gap:8px;text-align:left}.tutorial div{background:#f0e6da;border-radius:12px;padding:10px}.tutorial b,.tutorial span{display:block}.tutorial span{font-size:12px;margin-top:3px}" +
       "@media(max-width:560px){#menuExtras{grid-template-columns:repeat(2,1fr)}.settingGrid,.shopGrid{grid-template-columns:1fr}.resultGrid{grid-template-columns:1fr 1fr}#modeHud{top:55px;font-size:7px;max-width:62%;overflow:hidden;text-overflow:ellipsis}#candyHud{top:54px;font-size:8px}#minimap{right:142px;top:42px;width:76px;height:76px}#slots{gap:3px}.slot{width:32px}}" ;
     document.head.appendChild(style);
@@ -1329,17 +1569,17 @@
       '<button id="bSettings" class="big-btn sub-btn">CONFIGURACOES</button>' +
       '<button id="bProfile" class="big-btn sub-btn">PERFIL E PROGRESSO</button>' +
       '<button id="bTutorial" class="big-btn sub-btn">COMO JOGAR</button>' +
-      '<button id="bShop" class="big-btn sub-btn">LOJA DE ARMAS</button>' +
+      '<button id="bShop" class="big-btn sub-btn">LOJA E EQUIPAR</button>' +
       '<button id="bExitGame" class="big-btn menuDanger">SAIR DO JOGO</button>';
     document.getElementById("sensWrap").insertAdjacentElement("afterend", extras);
     document.getElementById("bSoloConfig").addEventListener("click", openMatchConfig);
     document.getElementById("bSettings").addEventListener("click", openSettings);
     document.getElementById("bProfile").addEventListener("click", openProfile);
-    document.getElementById("bShop").addEventListener("click", openShop);
+    document.getElementById("bShop").addEventListener("click", function () { openShop(); });
     document.getElementById("bExitGame").addEventListener("click", confirmExitGame);
     document.getElementById("bTutorial").addEventListener("click", function () {
       modal("COMO JOGAR",
-        '<div class="tutorial"><div><b>MOVER E CORRER</b><span>Joystick + botao CORRER.</span></div><div><b>MIRAR</b><span>Arraste no lado direito. A ajuda de mira e configuravel.</span></div><div><b>ITENS DA FASE</b><span>Verde cura, amarelo acelera, azul protege, laranja da municao, rosa da doces e roxo libera uma arma na partida.</span></div><div><b>LOJA</b><span>Junte doces e compre armas que ficam liberadas para sempre.</span></div></div>');
+        '<div class="tutorial"><div><b>MOVER E CORRER</b><span>Joystick + botao CORRER.</span></div><div><b>MIRAR</b><span>Arraste no lado direito. A ajuda de mira e configuravel.</span></div><div><b>SEUS DOIS ESPACOS</b><span>Uma arma principal e um acessorio. O botao 1 e o 2 trocam entre eles.</span></div><div><b>ITENS DA FASE</b><span>Verde cura, amarelo acelera, azul protege, laranja da municao, rosa da doces e roxo empresta uma arma cara pela partida.</span></div><div><b>LOJA</b><span>Junte doces e compre armas, acessorios, roupas, pinturas e equipamentos.</span></div></div>');
     });
     const modeHud = document.createElement("div");
     modeHud.id = "modeHud";
@@ -1402,6 +1642,9 @@
     playerSpeed: playerSpeed,
     selectedSkin: selectedSkin,
     startingWeapon: startingWeapon,
+    startingAccessory: startingAccessory,
+    gearMod: gearMod,
+    openShop: openShop,
     weaponColors: weaponColors,
     skyPalette: skyPalette,
     rebuildMap: rebuildSelectedMap,
