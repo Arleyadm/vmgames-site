@@ -1181,7 +1181,16 @@ function drawEnt(e){
   if(d2>FAR2) return;
   const sk=e.skin;
   const hurt=e.hurt>0;
-  const B=hurt?'#ffffff':sk.b, HD=hurt?'#ffffff':sk.h, P=hurt?'#ffffff':sk.p;
+  /* No modo Equipes, a roupa escolhida na loja cede lugar ao uniforme oficial.
+     Fora desse modo, a skin pessoal continua aparecendo normalmente. */
+  const officialTeamMode=window.SugarEnhance&&SugarEnhance.game&&SugarEnhance.game.mode==='team';
+  const army=officialTeamMode&&e.team===1;
+  const swat=officialTeamMode&&e.team===2;
+  const B=hurt?'#ffffff':(army?'#596b3b':(swat?'#171c22':sk.b));
+  const HD=hurt?'#ffffff':sk.h;
+  const P=hurt?'#ffffff':(army?'#8a8056':(swat?'#080b0f':sk.p));
+  const armor=hurt?'#ffffff':(army?'#3e4c2a':'#242c35');
+  const detail=hurt?'#ffffff':(army?'#b39b66':'#8ba4b8');
   const base=mMul(mT(e.x,e.y,e.z),mRY(e.yaw));
   const sw=Math.sin(e.walk)*0.55*(e.speed||0);
   const sw2=Math.sin(e.walk+Math.PI)*0.55*(e.speed||0);
@@ -1190,9 +1199,35 @@ function drawEnt(e){
   boxM(mMul(mMul(base,mMul(mT(0.17,0.72,0),mRX(sw2))),mT(0,-0.36,0)),0.13,0.38,0.14,P,Qw);
   /* tronco */
   boxM(mMul(base,mT(0,1.06,0)),0.28,0.35,0.18,B,Qw);
+  if(army||swat){
+    /* colete tatico, ombreiras e bolsos deixam as equipes reconheciveis
+       mesmo quando o nome do jogador nao esta visivel. */
+    boxM(mMul(base,mT(0,1.08,-0.19)),0.30,0.28,0.055,armor,Qw);
+    boxM(mMul(base,mT(-0.22,0.99,-0.255)),0.075,0.075,0.035,detail,Qw);
+    boxM(mMul(base,mT(0.22,0.99,-0.255)),0.075,0.075,0.035,detail,Qw);
+    boxM(mMul(base,mT(-0.34,1.35,0)),0.075,0.13,0.15,armor,Qw);
+    boxM(mMul(base,mT(0.34,1.35,0)),0.075,0.13,0.15,armor,Qw);
+  }
+  if(army){
+    /* manchas discretas de camuflagem e faixa inspirada no exercito americano */
+    boxM(mMul(base,mT(-0.12,1.18,-0.255)),0.055,0.045,0.025,'#26351f',Qw);
+    boxM(mMul(base,mT(0.13,1.30,-0.255)),0.07,0.035,0.025,'#726b45',Qw);
+    boxM(mMul(base,mT(-0.17,0.47,-0.15)),0.065,0.10,0.025,'#34452a',Qw);
+    boxM(mMul(base,mT(0.18,0.65,-0.15)),0.055,0.08,0.025,'#b39b66',Qw);
+    boxM(mMul(base,mT(0.355,1.42,-0.08)),0.012,0.055,0.075,'#b22234',Qw);
+  }
   /* cabeca */
   boxM(mMul(base,mT(0,1.65,0)),0.25,0.25,0.24,HD,Qw);
   boxM(mMul(base,mT(0,1.86,0)),0.27,0.09,0.26,P,Qw);
+  if(swat){
+    /* capacete, mascara e visor azulado do uniforme SWAT preto */
+    boxM(mMul(base,mT(0,1.82,0.01)),0.285,0.12,0.275,armor,Qw);
+    emitWorld([mApply(base,-0.20,1.69,-0.252),mApply(base,0.20,1.69,-0.252),
+               mApply(base,0.20,1.79,-0.252),mApply(base,-0.20,1.79,-0.252)],detail,Qw,true);
+    emitWorld([mApply(base,-0.21,1.53,-0.253),mApply(base,0.21,1.53,-0.253),
+               mApply(base,0.21,1.66,-0.253),mApply(base,-0.21,1.66,-0.253)],'#080b0f',Qw,true);
+    boxM(mMul(base,mT(0,1.15,-0.265)),0.115,0.035,0.022,'#e7edf2',Qw);
+  }
   /* olhos */
   emitWorld([mApply(base,-0.13,1.68,-0.245),mApply(base,-0.05,1.68,-0.245),
              mApply(base,-0.05,1.76,-0.245),mApply(base,-0.13,1.76,-0.245)],'#3f342e',Qw,true);
@@ -2172,8 +2207,8 @@ paused=true;
 requestAnimationFrame(frame);
 setTimeout(()=>{const l=document.getElementById('loading');if(l){l.classList.add('out');setTimeout(()=>l.remove(),420);}},450);
 </script>
-<script src="multiplayer.js?v=1.7.0"></script>
-<script src="enhancements.js?v=1.7.0"></script>
+<script src="multiplayer.js?v=1.7.1"></script>
+<script src="enhancements.js?v=1.7.1"></script>
 <!-- Faixas de anuncio: o proprio arquivo se desliga dentro do app Android. -->
 <script src="anuncios.js"></script>
 </body>

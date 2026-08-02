@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.7.0";
+  const VERSION = "1.7.1";
   const SETTINGS_KEY = "sugarstrike.settings.v11";
   const PROFILE_KEY = "sugarstrike.profile.v12";
   const OLD_PROFILE_KEY = "sugarstrike.profile.v11";
@@ -355,8 +355,8 @@
     return {
       visible: true,
       ally: ally,
-      color: target.team === 1 ? "#e8615a" : (target.team === 2 ? "#7ec96b" : "#ffcf4d"),
-      symbol: target.team === 1 ? "◆" : (target.team === 2 ? "●" : "")
+      color: target.team === 1 ? "#9bad68" : (target.team === 2 ? "#8ba4b8" : "#ffcf4d"),
+      symbol: target.team === 1 ? "★" : (target.team === 2 ? "■" : "")
     };
   }
 
@@ -1457,16 +1457,22 @@
   }
 
   function confirmExitGame() {
+    const androidApp = !!(window.SugarAndroid && typeof SugarAndroid.exitGame === "function");
     modal("SAIR DO JOGO?",
-      '<p>Seu progresso e seus doces ja estao salvos.</p>' +
+      '<p>Seu progresso sera salvo antes de sair.</p>' +
+      '<p>' + (androidApp ? 'O aplicativo sera fechado.' : 'Voce voltara para a pagina inicial do site.') + '</p>' +
       '<button id="confirmExitGame" class="big-btn menuDanger">SIM, SAIR</button>');
     document.getElementById("confirmExitGame").addEventListener("click", function () {
+      /* localStorage e sincrono: perfil e configuracoes terminam de ser gravados
+         antes de fechar o app ou trocar de pagina. */
       saveProfile();
+      saveSettings();
+      try { localStorage.setItem("sugarstrike.player", profile.name); } catch (error) {}
       try {
-        if (window.SugarAndroid && SugarAndroid.exitGame) SugarAndroid.exitGame();
-        else window.close();
+        if (androidApp) SugarAndroid.exitGame();
+        else window.location.replace("/");
       } catch (error) {
-        window.close();
+        if (!androidApp) window.location.href = "/";
       }
     });
   }

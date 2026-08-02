@@ -18,7 +18,7 @@
 
   const nativeAvailable = typeof SugarAndroid !== "undefined";
   // Os indices das armas mudaram nesta versao: cliente antigo nao pode entrar.
-  const APP_VERSION = "1.7.0";
+  const APP_VERSION = "1.7.1";
   const peers = new Map();
   const rooms = new Map();
   let ui = null;
@@ -331,7 +331,7 @@
       ".net-room{text-align:left;touch-action:manipulation}.net-room b,.net-player b{font-size:13px}.net-room small,.net-player small{display:block;font-size:10px;opacity:.64}",
       ".net-badge{flex:0 0 auto;border-radius:9px;background:#8fd9c8;padding:4px 7px;font-size:9px;font-weight:900;letter-spacing:.7px}",
       ".net-badge.wait{background:#f0e6da}.net-badge.bad{background:#f6a9c3}",
-      ".net-badge.team1{background:#e8615a;color:#fff}.net-badge.team2{background:linear-gradient(90deg,#7ec96b 0 55%,#ffcf4d 55%)}",
+      ".net-badge.team1{background:linear-gradient(135deg,#596b3b 0 58%,#b39b66 58%);color:#fff}.net-badge.team2{background:linear-gradient(135deg,#080b0f 0 62%,#354554 62%);color:#fff}",
       ".net-room-actions{display:flex;flex-direction:column;gap:4px;flex:0 0 auto}.net-room-actions button{border:2px solid #4a3b33;border-radius:8px;padding:4px 7px;font:900 9px ui-rounded,'Trebuchet MS',sans-serif;background:#8fd9c8}.net-room-actions .watch{background:#c9b4ec}",
       "#netConfig{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 0}",
       "#netConfig .net-field{font-size:11px;height:38px;padding:4px}",
@@ -1134,7 +1134,7 @@
         const kit = WEAPONS[safePrimary(entry.weapon)].name +
           " + " + WEAPONS[safeAccessory(entry.accessory)].name;
         const team = entry.spectator ? "ESPECTADOR" :
-          (entry.team === 1 ? "EQUIPE VERMELHA" : (entry.team === 2 ? "EQUIPE VERDE E AMARELA" : "SEM EQUIPE"));
+          (entry.team === 1 ? "EXERCITO AMERICANO" : (entry.team === 2 ? "SWAT" : "SEM EQUIPE"));
         detail.textContent = connection + version + " · " + team + (entry.spectator ? "" : " · " + kit);
         label.appendChild(name);
         label.appendChild(detail);
@@ -1694,8 +1694,8 @@
     }
     const weapon = WEAPONS[clamp(target.wep | 0, 0, WEAPONS.length - 1)];
     const accessory = WEAPONS[safeAccessory(target.accessory)];
-    const team = target.team === 1 ? "VERMELHA" :
-      (target.team === 2 ? "VERDE E AMARELA" : "SEM EQUIPE");
+    const team = target.team === 1 ? "EXERCITO AMERICANO" :
+      (target.team === 2 ? "SWAT" : "SEM EQUIPE");
     const ammo = weapon.melee ? "∞" : Math.max(0, target.mag | 0) + "/" + Math.max(0, target.res | 0);
     el("specName").textContent = target.name;
     el("specData").textContent = "EQUIPE " + team + " · VIDA " + Math.round(target.hp) +
