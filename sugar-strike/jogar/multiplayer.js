@@ -5,16 +5,20 @@
     updateBot: updateBot,
     updatePlayer: updatePlayer,
     shoot: shoot,
+    reload: reload,
+    finishReload: finishReload,
+    setWeapon: setWeapon,
     respawn: respawn,
     damage: damage,
     addFeed: addFeed,
     endMatch: endMatch,
+    drawDeadOverlay: drawDeadOverlay,
     togglePause: togglePause
   };
 
   const nativeAvailable = typeof SugarAndroid !== "undefined";
   // Os indices das armas mudaram nesta versao: cliente antigo nao pode entrar.
-  const APP_VERSION = "1.6.1";
+  const APP_VERSION = "1.7.0";
   const peers = new Map();
   const rooms = new Map();
   let ui = null;
@@ -29,6 +33,8 @@
   let onlineRoomInfo = null;
   let roomPollTimer = 0;
   let lobbySocket = null;
+  let spectatorTargetId = "";
+  let spectatorHud = null;
   // Sala online oficial do jogo. Quem preferir outro servidor é só digitar por cima.
   // Precisa ficar declarada antes de loadOnlineServer() ser chamada, logo abaixo.
   const DEFAULT_ONLINE_SERVER = "wss://sugarstrike-servidor.onrender.com";
@@ -55,6 +61,22 @@
       // O nome continua válido durante esta execução.
     }
   }
+
+  function loadPlayerIdentity() {
+    try {
+      let identity = String(localStorage.getItem("sugarstrike.identity") || "");
+      if (!/^[a-z0-9-]{12,64}$/i.test(identity)) {
+        identity = "ss-" + Date.now().toString(36) + "-" +
+          Math.random().toString(36).slice(2, 14);
+        localStorage.setItem("sugarstrike.identity", identity);
+      }
+      return identity;
+    } catch (error) {
+      return "ss-session-" + Math.random().toString(36).slice(2, 14);
+    }
+  }
+
+  const playerIdentity = loadPlayerIdentity();
 
   function loadOnlineServer() {
     try {
@@ -110,16 +132,21 @@
     stateClock: 0,
     worldClock: 0,
     sequence: 0,
+    matchSeed: 0,
     pingSequence: 0,
     roomPassword: "",
     ready: false,
+    spectator: false,
+    team: 0,
     migration: null,
     config: {
       bots: 4,
       target: 25,
       duration: 5,
       map: "village",
-      mode: "deathmatch"
+      mode: "deathmatch",
+      allowSpectators: true,
+      friendlyFire: false
     },
 
     onNativeEvent: function (event) {
@@ -151,6 +178,8 @@
       if (event.event === "connected") {
         Net.connected = true;
         Net.role = event.role === "host" ? "host" : "client";
+        Net.spectator = !!event.spectator;
+        Net.team = event.team | 0;
         if (Net.role === "host") {
           Net.myId = "host";
           peers.set("host", {
@@ -161,7 +190,9 @@
             version: APP_VERSION,
             skin: selectedSkin(),
             weapon: selectedWeapon(),
-            accessory: selectedAccessory()
+            accessory: selectedAccessory(),
+            team: Net.team,
+            spectator: false
           });
           setStatus(
             transportMode === "online"
@@ -171,9 +202,11 @@
           showLobby();
           broadcastRoster();
         } else {
-          Net.ready = false;
+          Net.ready = Net.spectator;
           if (ui && ui.ready) ui.ready.textContent = "ESTOU PRONTO";
-          setStatus("Conectado. Identificando você na sala…");
+          setStatus(Net.spectator
+            ? "Você entrou como espectador. Aguarde ou acompanhe a partida em andamento."
+            : "Conectado. Identificando você na sala…");
           showLobby();
         }
         renderPlayers();
@@ -298,9 +331,14 @@
       ".net-room{text-align:left;touch-action:manipulation}.net-room b,.net-player b{font-size:13px}.net-room small,.net-player small{display:block;font-size:10px;opacity:.64}",
       ".net-badge{flex:0 0 auto;border-radius:9px;background:#8fd9c8;padding:4px 7px;font-size:9px;font-weight:900;letter-spacing:.7px}",
       ".net-badge.wait{background:#f0e6da}.net-badge.bad{background:#f6a9c3}",
+      ".net-badge.team1{background:#e8615a;color:#fff}.net-badge.team2{background:linear-gradient(90deg,#7ec96b 0 55%,#ffcf4d 55%)}",
+      ".net-room-actions{display:flex;flex-direction:column;gap:4px;flex:0 0 auto}.net-room-actions button{border:2px solid #4a3b33;border-radius:8px;padding:4px 7px;font:900 9px ui-rounded,'Trebuchet MS',sans-serif;background:#8fd9c8}.net-room-actions .watch{background:#c9b4ec}",
       "#netConfig{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 0}",
       "#netConfig .net-field{font-size:11px;height:38px;padding:4px}",
       "#netHint{font-size:10px;line-height:1.4;opacity:.68;margin:8px 0}",
+      "#spectatorHud{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:45;display:none;min-width:min(520px,92vw);padding:10px 14px;border:3px solid #4a3b33;border-radius:16px;background:rgba(255,253,247,.94);color:#4a3b33;text-align:center;box-shadow:0 5px 0 rgba(0,0,0,.22);pointer-events:auto}",
+      "#spectatorHud.show{display:block}#spectatorHud .spec-title{font-size:10px;letter-spacing:1.5px;opacity:.68}#spectatorHud .spec-name{font-size:18px;font-weight:1000;margin:2px 0}#spectatorHud .spec-data{font-size:11px;font-weight:800;line-height:1.45}#spectatorHud .spec-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:7px}#spectatorHud button{border:2px solid #4a3b33;border-radius:10px;background:#ffcf4d;padding:6px;font-weight:1000}",
+      ".spectating #bFire,.spectating #bReload,.spectating #bJump,.spectating #bSprint,.spectating #slots,.spectating #scopeBtn{display:none!important}",
       "@media(max-height:500px){#netPanel{padding:11px 16px}#netPanel h1{font-size:21px}#netPanel h2{margin-bottom:6px}.net-field{height:38px}.net-btn{min-height:38px}#netStatus{margin:6px 0}}"
     ].join("");
     document.head.appendChild(style);
@@ -357,6 +395,8 @@
               '<select id="netNewMap" class="net-field"><option value="village">VILA CONFEITO</option><option value="factory">FABRICA DE CHOCOLATE</option><option value="park">PARQUE DE PIRULITOS</option><option value="castle">CASTELO DE BOLO</option></select>' +
               '<select id="netNewMode" class="net-field"><option value="deathmatch">MATA-MATA</option><option value="team">EQUIPES</option><option value="capture">CAPTURAR O DOCE</option><option value="king">REI DO POTE</option><option value="survival">SOBREVIVENCIA</option></select>' +
               '<select id="netNewMax" class="net-field"><option value="2">2 JOGADORES</option><option value="4">4 JOGADORES</option><option value="6">6 JOGADORES</option><option value="8" selected>8 JOGADORES</option><option value="10">10 JOGADORES</option><option value="12">12 JOGADORES</option></select>' +
+              '<select id="netNewSpectators" class="net-field"><option value="1" selected>ESPECTADORES: SIM</option><option value="0">ESPECTADORES: NÃO</option></select>' +
+              '<select id="netNewFriendly" class="net-field"><option value="0" selected>DANO ALIADO: NÃO</option><option value="1">DANO ALIADO: SIM</option></select>' +
             '</div>' +
             '<button id="netCreateConfirm" class="net-btn online" style="margin-top:9px">ABRIR A SALA</button>' +
           '</div>' +
@@ -375,6 +415,8 @@
             '<select id="netDuration" class="net-field"><option value="3">3 MIN</option><option value="5" selected>5 MIN</option><option value="8">8 MIN</option><option value="12">12 MIN</option></select>' +
             '<input id="netBots" class="net-field" type="number" min="0" max="12" value="4" aria-label="Quantidade de bots">' +
             '<input id="netTarget" class="net-field" type="number" min="5" max="100" value="25" aria-label="Meta de pontos">' +
+            '<select id="netSpectators" class="net-field"><option value="1">ESPECTADORES: SIM</option><option value="0">ESPECTADORES: NÃO</option></select>' +
+            '<select id="netFriendly" class="net-field"><option value="0">DANO ALIADO: NÃO</option><option value="1">DANO ALIADO: SIM</option></select>' +
           '</div>' +
           '<button id="netReady" class="net-btn">ESTOU PRONTO</button>' +
           '<button id="netStart" class="net-btn" disabled>INICIAR PARTIDA</button>' +
@@ -383,6 +425,15 @@
         '</div>' +
       '</div>';
     document.body.appendChild(root);
+
+    spectatorHud = document.createElement("div");
+    spectatorHud.id = "spectatorHud";
+    spectatorHud.innerHTML =
+      '<div class="spec-title">MODO ESPECTADOR</div>' +
+      '<div class="spec-name" id="specName">AGUARDANDO JOGADOR</div>' +
+      '<div class="spec-data" id="specData"></div>' +
+      '<div class="spec-controls"><button id="specPrev">◀ ANTERIOR</button><button id="specNext">PRÓXIMO ▶</button></div>';
+    document.body.appendChild(spectatorHud);
 
     ui = {
       root: root,
@@ -427,10 +478,12 @@
       el("netNewRoom").textContent = opening ? "FECHAR" : "CRIAR SALA";
     });
     el("netCreateConfirm").addEventListener("click", createOnlineRoom);
+    el("specPrev").addEventListener("click", function () { cycleSpectator(-1); });
+    el("specNext").addEventListener("click", function () { cycleSpectator(1); });
     el("netLeave").addEventListener("click", leaveRoom);
     ui.start.addEventListener("click", startHostMatch);
     ui.ready.addEventListener("click", toggleReady);
-    ["netMode", "netMap", "netDuration", "netBots", "netTarget"].forEach(function (id) {
+    ["netMode", "netMap", "netDuration", "netBots", "netTarget", "netSpectators", "netFriendly"].forEach(function (id) {
       el(id).addEventListener("change", updateLobbyConfig);
     });
     ui.continueButton.addEventListener("click", hideNetworkOverlay);
@@ -587,12 +640,12 @@
     }
     visible.forEach(function (room) {
       const players = room.players | 0;
+      const spectators = room.spectators | 0;
       const max = room.max | 0;
       const playing = room.status === "playing";
       const full = players >= max;
-      const button = document.createElement("button");
+      const button = document.createElement("div");
       button.className = "net-room";
-      button.type = "button";
 
       const label = document.createElement("span");
       const title = document.createElement("b");
@@ -608,21 +661,30 @@
 
       const count = document.createElement("span");
       count.className = "net-count";
-      count.textContent = players + "/" + max;
+      count.textContent = players + "/" + max + " · 👁 " + spectators;
 
-      const badge = document.createElement("span");
-      badge.className = "net-badge" + (full ? " bad" : (playing ? " wait" : ""));
-      // Entrar numa sala em partida é permitido: você espera a próxima rodada.
-      badge.textContent = full ? "CHEIA" : (playing ? "AGUARDAR" : "ENTRAR");
+      const actions = document.createElement("span");
+      actions.className = "net-room-actions";
+      const join = document.createElement("button");
+      join.type = "button";
+      join.textContent = full ? "CHEIA" : (playing ? "AGUARDAR" : "ENTRAR");
+      join.disabled = full;
+      join.addEventListener("click", function () {
+        if (!full) joinOnlineRoom(room, false);
+      });
+      actions.appendChild(join);
+      if (room.allowSpectators !== false) {
+        const watch = document.createElement("button");
+        watch.type = "button";
+        watch.className = "watch";
+        watch.textContent = "ASSISTIR";
+        watch.addEventListener("click", function () { joinOnlineRoom(room, true); });
+        actions.appendChild(watch);
+      }
 
       button.appendChild(label);
       button.appendChild(count);
-      button.appendChild(badge);
-      button.disabled = full;
-      button.addEventListener("click", function () {
-        if (full) return;
-        joinOnlineRoom(room);
-      });
+      button.appendChild(actions);
       ui.roomList.appendChild(button);
     });
   }
@@ -632,10 +694,14 @@
     if (!room) return;
     if (room.map) Net.config.map = room.map;
     if (room.mode) Net.config.mode = room.mode;
+    if (typeof room.allowSpectators === "boolean") Net.config.allowSpectators = room.allowSpectators;
+    if (typeof room.friendlyFire === "boolean") Net.config.friendlyFire = room.friendlyFire;
     if (ui) {
       const mapSelect = el("netMap"), modeSelect = el("netMode");
       if (mapSelect && room.map) mapSelect.value = room.map;
       if (modeSelect && room.mode) modeSelect.value = room.mode;
+      if (el("netSpectators")) el("netSpectators").value = Net.config.allowSpectators ? "1" : "0";
+      if (el("netFriendly")) el("netFriendly").value = Net.config.friendlyFire ? "1" : "0";
     }
     updateLobbyTitle();
   }
@@ -644,7 +710,8 @@
     if (!ui || !onlineRoomInfo || transportMode !== "online") return;
     ui.title.textContent = cleanName(onlineRoomInfo.name, "SALA ONLINE", 24);
     ui.subtitle.textContent = (MAP_LABELS[onlineRoomInfo.map] || "VILA CONFEITO") +
-      " · " + (onlineRoomInfo.players | 0) + "/" + (onlineRoomInfo.max | 0) + " JOGADORES";
+      " · " + (onlineRoomInfo.players | 0) + "/" + (onlineRoomInfo.max | 0) + " JOGADORES" +
+      " · " + (onlineRoomInfo.spectators | 0) + " ESPECTADORES";
   }
 
   // Só o dono da sala muda o que a lista pública mostra.
@@ -654,7 +721,13 @@
   }
   function publishRoomConfig() {
     if (transportMode !== "online" || Net.role !== "host") return;
-    Net.send({ctl: "config", map: Net.config.map, mode: Net.config.mode});
+    Net.send({
+      ctl: "config",
+      map: Net.config.map,
+      mode: Net.config.mode,
+      allowSpectators: !!Net.config.allowSpectators,
+      friendlyFire: !!Net.config.friendlyFire
+    });
   }
 
   // Volta para a lista de salas sem sair do menu online.
@@ -673,11 +746,11 @@
     startRoomPolling();
   }
 
-  function joinOnlineRoom(room) {
+  function joinOnlineRoom(room, spectator) {
     stopRoomPolling();
     onlineRoomInfo = room;
-    setStatus("Entrando em " + cleanName(room.name, "SALA", 24) + "…");
-    connectOnline(false, {room: room.id});
+    setStatus((spectator ? "Entrando para assistir " : "Entrando em ") + cleanName(room.name, "SALA", 24) + "…");
+    connectOnline(false, {room: room.id, spectator: !!spectator});
   }
 
   function createOnlineRoom() {
@@ -685,12 +758,19 @@
     const map = el("netNewMap").value;
     const mode = el("netNewMode").value;
     const max = clamp(parseInt(el("netNewMax").value, 10) || 8, 2, 12);
+    const allowSpectators = el("netNewSpectators").value !== "0";
+    const friendlyFire = el("netNewFriendly").value === "1";
     stopRoomPolling();
     Net.config.map = map;
     Net.config.mode = mode;
+    Net.config.allowSpectators = allowSpectators;
+    Net.config.friendlyFire = friendlyFire;
     onlineRoomInfo = null;
     setStatus("Abrindo a sala " + name + "…");
-    connectOnline(false, {create: {name: name, map: map, mode: mode, max: max}});
+    connectOnline(false, {create: {
+      name: name, map: map, mode: mode, max: max,
+      allowSpectators: allowSpectators, friendlyFire: friendlyFire
+    }});
   }
 
   function closeNetworkMenu() {
@@ -724,7 +804,7 @@
     ui.onlineSetup.classList.add("net-hide");
     ui.lobby.classList.remove("net-hide");
     ui.start.style.display = Net.role === "host" ? "block" : "none";
-    ui.ready.style.display = Net.role === "host" ? "none" : "block";
+    ui.ready.style.display = Net.role === "client" && !Net.spectator ? "block" : "none";
     ui.configPanel.style.display = Net.role === "host" ? "grid" : "none";
     ui.continueButton.classList.toggle("net-hide", !(Net.inMatch && !matchOver));
     stopRoomPolling();
@@ -786,12 +866,16 @@
       query.push("map=" + encodeURIComponent(spec.create.map));
       query.push("mode=" + encodeURIComponent(spec.create.mode));
       query.push("max=" + encodeURIComponent(String(spec.create.max)));
+      query.push("spectators=" + (spec.create.allowSpectators ? "1" : "0"));
+      query.push("friendlyFire=" + (spec.create.friendlyFire ? "1" : "0"));
       if (Net.roomPassword) query.push("locked=1");
     } else if (onlineRoomId) {
       // Numa reconexão isto garante que a sala criada não vire uma segunda sala.
       query.push("room=" + encodeURIComponent(onlineRoomId));
     }
+    if (!reconnecting && spec && spec.spectator) query.push("spectator=1");
     query.push("player=" + encodeURIComponent(Net.localName));
+    query.push("identity=" + encodeURIComponent(playerIdentity));
     const socketAddress = baseAddress + (query.length ? "?" + query.join("&") : "");
     try {
       onlineSocket = new WebSocket(socketAddress);
@@ -822,7 +906,9 @@
         Net.onNativeEvent({
           event: "connected",
           role: message.role,
-          resumed: !!message.resumed
+          resumed: !!message.resumed,
+          spectator: !!message.spectator,
+          team: message.team | 0
         });
         return;
       }
@@ -845,17 +931,42 @@
         showOnlineBrowser();
         return;
       }
+      if (message.net === "spectator_blocked" || message.net === "spectator_full") {
+        onlineReconnectWanted = false;
+        onlineRoomId = "";
+        onlineSession = "";
+        saveOnlineSession(onlineServerAddress, "");
+        setStatus(message.net === "spectator_full"
+          ? "O espaço para espectadores desta sala está cheio."
+          : "O dono desta sala bloqueou espectadores.");
+        showOnlineBrowser();
+        return;
+      }
+      if (message.net === "ammo" && player) {
+        const weapon = clamp(message.w | 0, 0, WEAPONS.length - 1);
+        player.mags[weapon] = Math.max(0, message.mag | 0);
+        player.ress[weapon] = Math.max(0, message.res | 0);
+        if (player.wep === weapon && player.reloadT <= 0) {
+          player.mag = player.mags[weapon];
+          player.res = player.ress[weapon];
+        }
+        updateHUD();
+        return;
+      }
       if (message.net === "promoted") {
         // O dono saiu e a vez de comandar a sala passou para este aparelho.
         Net.role = "host";
         Net.myId = "host";
         Net.ready = true;
+        Net.spectator = false;
+        Net.team = message.team | 0;
         Net.inMatch = false;
         peers.clear();
         peers.set("host", {
           id: "host", name: Net.localName, ready: true, ping: 0,
           version: APP_VERSION, skin: selectedSkin(),
-          weapon: selectedWeapon(), accessory: selectedAccessory()
+          weapon: selectedWeapon(), accessory: selectedAccessory(),
+          team: Net.team, spectator: false
         });
         if (message.room) onlineRoomInfo = message.room;
         setStatus("O dono saiu. Agora a sala é sua — aguarde todos ficarem prontos.");
@@ -1022,13 +1133,17 @@
         // Mostra o que cada um vai levar para a partida.
         const kit = WEAPONS[safePrimary(entry.weapon)].name +
           " + " + WEAPONS[safeAccessory(entry.accessory)].name;
-        detail.textContent = connection + version + " · " + kit;
+        const team = entry.spectator ? "ESPECTADOR" :
+          (entry.team === 1 ? "EQUIPE VERMELHA" : (entry.team === 2 ? "EQUIPE VERDE E AMARELA" : "SEM EQUIPE"));
+        detail.textContent = connection + version + " · " + team + (entry.spectator ? "" : " · " + kit);
         label.appendChild(name);
         label.appendChild(detail);
         const badge = document.createElement("span");
-        badge.className = "net-badge" + (entry.ready ? "" : " wait") +
+        badge.className = "net-badge" + (entry.ready || entry.spectator ? "" : " wait") +
+          (entry.team === 1 ? " team1" : (entry.team === 2 ? " team2" : "")) +
           (entry.version && entry.version !== APP_VERSION ? " bad" : "");
-        badge.textContent = entry.id === Net.myId ? "VOCE" : (entry.ready ? "PRONTO" : "AGUARDE");
+        badge.textContent = entry.id === Net.myId ? "VOCÊ" :
+          (entry.spectator ? "ASSISTINDO" : (entry.ready ? "PRONTO" : "AGUARDE"));
         row.appendChild(label);
         row.appendChild(badge);
         ui.players.appendChild(row);
@@ -1037,10 +1152,11 @@
     const compatible = list.every(function (entry) {
       return !entry.version || entry.version === APP_VERSION;
     });
-    const everyoneReady = list.every(function (entry) {
+    const combatants = list.filter(function (entry) { return !entry.spectator; });
+    const everyoneReady = combatants.every(function (entry) {
       return entry.id === "host" || entry.ready;
     });
-    ui.start.disabled = Net.role !== "host" || list.length < 2 || !Net.connected ||
+    ui.start.disabled = Net.role !== "host" || combatants.length < 2 || !Net.connected ||
       !compatible || !everyoneReady;
   }
 
@@ -1077,6 +1193,8 @@
     Net.config.duration = clamp(parseInt(el("netDuration").value, 10) || 5, 1, 30);
     Net.config.bots = clamp(parseInt(el("netBots").value, 10) || 0, 0, 12);
     Net.config.target = clamp(parseInt(el("netTarget").value, 10) || 25, 5, 100);
+    Net.config.allowSpectators = el("netSpectators").value !== "0";
+    Net.config.friendlyFire = el("netFriendly").value === "1";
     if (Net.role === "host" && Net.connected) {
       broadcastRoster();
       publishRoomConfig();   // mapa e modo novos aparecem na lista pública
@@ -1084,7 +1202,7 @@
   }
 
   function toggleReady() {
-    if (Net.role !== "client" || !Net.connected) return;
+    if (Net.role !== "client" || !Net.connected || Net.spectator) return;
     Net.ready = !Net.ready;
     ui.ready.textContent = Net.ready ? "CANCELAR PRONTO" : "ESTOU PRONTO";
     Net.send({t: "ready", ready: Net.ready});
@@ -1159,6 +1277,8 @@
 
     if (message.net === "welcome") {
       Net.myId = cleanName(message.id, "p?", 12);
+      Net.spectator = !!message.spectator;
+      Net.team = message.team | 0;
       Net.send({
         t: "hello",
         name: Net.localName,
@@ -1206,11 +1326,22 @@
         version: String(message.version || ""),
         skin: message.skin || null,
         weapon: safePrimary(message.weapon),
-        accessory: safeAccessory(message.accessory)
+        accessory: safeAccessory(message.accessory),
+        team: message.team | 0,
+        spectator: !!message.spectator
       });
       setStatus(peers.get(id).name + " entrou na sala.");
       broadcastRoster();
       renderPlayers();
+      if (peers.get(id).spectator && Net.inMatch) {
+        Net.send({
+          t: "start",
+          to: id,
+          seed: Net.matchSeed,
+          config: Net.config,
+          entities: ents.map(fullEntity)
+        });
+      }
       return;
     }
     if (message.t === "join_denied" && Net.role === "client") {
@@ -1224,7 +1355,7 @@
     if (message.t === "ready" && Net.role === "host") {
       const readyPeer = peers.get(String(message.from || ""));
       if (readyPeer) {
-        readyPeer.ready = !!message.ready;
+        if (!readyPeer.spectator) readyPeer.ready = !!message.ready;
         broadcastRoster();
         renderPlayers();
       }
@@ -1242,7 +1373,9 @@
             version: String(entry.version || ""),
             skin: entry.skin || null,
             weapon: safePrimary(entry.weapon),
-            accessory: safeAccessory(entry.accessory)
+            accessory: safeAccessory(entry.accessory),
+            team: entry.team | 0,
+            spectator: !!entry.spectator
           });
         }
       });
@@ -1281,12 +1414,28 @@
       hostRemoteShoot(String(message.from || ""), message);
       return;
     }
+    if (message.t === "reload_start" && Net.role === "host" && Net.inMatch) {
+      hostRemoteReloadStart(String(message.from || ""), message);
+      return;
+    }
+    if (message.t === "reload_commit" && Net.role === "host" && Net.inMatch) {
+      hostRemoteReloadCommit(String(message.from || ""), message);
+      return;
+    }
+    if (message.t === "reload_cancel" && Net.role === "host" && Net.inMatch) {
+      hostRemoteReloadCancel(String(message.from || ""));
+      return;
+    }
     if (message.t === "world" && Net.role === "client" && Net.inMatch) {
       applyWorld(message);
       return;
     }
     if (message.t === "fx_shot" && Net.role === "client" && Net.inMatch) {
       showRemoteShot(message);
+      return;
+    }
+    if (message.t === "fx_reload" && Net.role === "client" && Net.inMatch) {
+      showRemoteReload(message);
       return;
     }
     if (message.t === "feed" && Net.role === "client") {
@@ -1311,13 +1460,15 @@
   }
 
   function startHostMatch() {
-    if (Net.role !== "host" || peers.size < 2 || !Net.connected) return;
+    const combatants = Array.from(peers.values()).filter(function (entry) { return !entry.spectator; });
+    if (Net.role !== "host" || combatants.length < 2 || !Net.connected) return;
     updateLobbyConfig();
     TARGET = Net.config.target;
     if (window.SugarEnhance && SugarEnhance.applyNetworkConfig) {
       SugarEnhance.applyNetworkConfig(Net.config);
     }
     const seed = (Date.now() ^ (Math.random() * 0x7fffffff)) >>> 0;
+    Net.matchSeed = seed;
     Net.roundEnding = false;
     Net.inMatch = true;
     Net.stateClock = 0;
@@ -1345,18 +1496,22 @@
     player.netId = "host";
     player.remote = false;
     player.wep = selectedWeapon();
+    player.accessory = selectedAccessory();
+    player.team = Net.team || 1;
     if (selectedSkin()) player.skin = selectedSkin();
     ents.push(player);
 
     // O limite de gente é o que o dono escolheu ao criar a sala.
     const seats = onlineRoomInfo ? clamp(onlineRoomInfo.max | 0, 2, 12) : 8;
     peers.forEach(function (entry, id) {
-      if (id === "host" || ents.length >= seats) return;
+      if (id === "host" || entry.spectator || ents.length >= seats) return;
       const remote = newEnt(entry.name, false);
       remote.netId = id;
       remote.remote = true;
       remote.aiming = false;
       remote.wep = clamp(entry.weapon | 0, 0, WEAPONS.length - 1);
+      remote.accessory = safeAccessory(entry.accessory);
+      remote.team = entry.team | 0;
       if (entry.skin) remote.skin = entry.skin;
       ents.push(remote);
     });
@@ -1377,6 +1532,14 @@
     if (window.SugarEnhance && SugarEnhance.assignTeams) {
       SugarEnhance.assignTeams(ents, Net.config.mode);
     }
+    // Para jogadores humanos, a equipe que veio do servidor sempre prevalece.
+    ents.forEach(function (entity) {
+      if (!entity.bot && entity.netId === "host") entity.team = Net.team || entity.team || 1;
+      else if (!entity.bot) {
+        const official = peers.get(entity.netId);
+        if (official && official.team) entity.team = official.team;
+      }
+    });
     for (const entity of ents) original.respawn(entity);
     ents.forEach(function (entity) {
       const weapon = clamp(entity.wep | 0, 0, WEAPONS.length - 1);
@@ -1409,18 +1572,29 @@
       if (entity) ents.push(entity);
     });
     player = ents.find(function (entity) { return entity.netId === Net.myId; }) || null;
-    if (!player) {
+    if (!player && !Net.spectator) {
       setStatus("Seu jogador não foi incluído nesta rodada.");
       showNetworkOverlay();
       return;
     }
-    player.bot = false;
-    player.remote = false;
-    cam.x = player.x;
-    cam.y = player.y + 1.62;
-    cam.z = player.z;
-    cam.yaw = player.yaw || Math.PI;
-    cam.pitch = player.pitch || 0;
+    if (Net.spectator) {
+      // O observador local não existe no mundo físico e nunca é enviado ao servidor.
+      player = newEnt(Net.localName, false);
+      player.netId = "spectator-local";
+      player.spectator = true;
+      player.dead = true;
+      player.remote = false;
+      spectatorTargetId = "";
+      chooseSpectatorTarget(1);
+    } else {
+      player.bot = false;
+      player.remote = false;
+      cam.x = player.x;
+      cam.y = player.y + 1.62;
+      cam.z = player.z;
+      cam.yaw = player.yaw || Math.PI;
+      cam.pitch = player.pitch || 0;
+    }
     Net.roundEnding = false;
     Net.inMatch = true;
     Net.stateClock = 0;
@@ -1437,6 +1611,7 @@
     el("ptxt").style.display = "none";
     el(transportMode === "online" ? "bOnline" : "bMulti").textContent = "VOLTAR À SALA";
     hideNetworkOverlay();
+    document.documentElement.classList.toggle("spectating", !!Net.spectator);
     afterStart();
   }
 
@@ -1449,7 +1624,86 @@
     roomButton.classList.remove("hide");
     roomButton.textContent = "VOLTAR À SALA";
     otherButton.classList.add("hide");
+    document.documentElement.classList.remove("spectating");
+    if (spectatorHud) spectatorHud.classList.remove("show");
   }
+
+  function spectatorCandidates() {
+    return ents.filter(function (entity) {
+      return entity && !entity.dead && !entity.spectator;
+    });
+  }
+
+  function chooseSpectatorTarget(direction) {
+    const candidates = spectatorCandidates();
+    if (!candidates.length) {
+      spectatorTargetId = "";
+      return null;
+    }
+    let index = candidates.findIndex(function (entity) {
+      return entity.netId === spectatorTargetId;
+    });
+    if (index < 0) index = direction < 0 ? 0 : -1;
+    index = (index + direction + candidates.length) % candidates.length;
+    spectatorTargetId = candidates[index].netId;
+    return candidates[index];
+  }
+
+  function observedEntity() {
+    let target = findEntity(spectatorTargetId);
+    if (!target || target.dead) target = chooseSpectatorTarget(1);
+    return target || null;
+  }
+
+  function cycleSpectator(direction) {
+    if (!Net.inMatch || !(Net.spectator || (player && player.dead))) return;
+    chooseSpectatorTarget(direction < 0 ? -1 : 1);
+    updateSpectatorHud();
+  }
+
+  function updateSpectatorCamera(dt) {
+    const target = observedEntity();
+    if (!target) {
+      updateSpectatorHud();
+      return;
+    }
+    const yaw = finite(target.yaw, 0);
+    const desiredX = target.x + Math.sin(yaw) * 4.2;
+    const desiredZ = target.z + Math.cos(yaw) * 4.2;
+    const desiredY = target.y + 2.55;
+    const amount = Math.min(1, dt * 9);
+    cam.x = lerp(cam.x, desiredX, amount);
+    cam.y = lerp(cam.y, desiredY, amount);
+    cam.z = lerp(cam.z, desiredZ, amount);
+    cam.yaw = yaw;
+    cam.pitch = -0.14;
+    updateSpectatorHud();
+  }
+
+  function updateSpectatorHud() {
+    if (!spectatorHud) return;
+    const active = Net.inMatch && (Net.spectator || (player && player.dead));
+    spectatorHud.classList.toggle("show", !!active);
+    document.documentElement.classList.toggle("spectating", !!active);
+    if (!active) return;
+    const target = observedEntity();
+    if (!target) {
+      el("specName").textContent = "AGUARDANDO JOGADOR VIVO";
+      el("specData").textContent = "Nenhum combatente disponível.";
+      return;
+    }
+    const weapon = WEAPONS[clamp(target.wep | 0, 0, WEAPONS.length - 1)];
+    const accessory = WEAPONS[safeAccessory(target.accessory)];
+    const team = target.team === 1 ? "VERMELHA" :
+      (target.team === 2 ? "VERDE E AMARELA" : "SEM EQUIPE");
+    const ammo = weapon.melee ? "∞" : Math.max(0, target.mag | 0) + "/" + Math.max(0, target.res | 0);
+    el("specName").textContent = target.name;
+    el("specData").textContent = "EQUIPE " + team + " · VIDA " + Math.round(target.hp) +
+      " · " + weapon.name + " · MUNIÇÃO " + ammo + " · " + accessory.name +
+      " · " + (target.score | 0) + " ELIMINAÇÕES";
+  }
+
+  Net.observedEntity = observedEntity;
 
   function rebuildTown(seed) {
     if (window.SugarEnhance && SugarEnhance.rebuildMap) {
@@ -1513,6 +1767,11 @@
       speed: round3(entity.speed || 0),
       aiming: !!entity.aiming,
       team: entity.team | 0,
+      mag: Math.max(0, entity.mag | 0),
+      res: Math.max(0, entity.res | 0),
+      accessory: safeAccessory(entity.accessory),
+      reload: round3(entity.reloadT || 0),
+      reloadDuration: round3(entity.reloadDuration || 0),
       shield: round3(entity.shield || 0),
       shots: entity.shots | 0,
       hits: entity.hits | 0,
@@ -1559,7 +1818,12 @@
     }
     entity.yaw = finite(message.yaw, entity.yaw);
     entity.pitch = clamp(finite(message.pitch, 0), -1.4, 1.4);
-    entity.wep = clamp(message.wep | 0, 0, WEAPONS.length - 1);
+    const nextWeapon = clamp(message.wep | 0, 0, WEAPONS.length - 1);
+    if (nextWeapon !== entity.wep) {
+      entity.reloadT = 0;
+      entity.reloadDuration = 0;
+    }
+    entity.wep = nextWeapon;
     entity.aiming = !!message.aiming;
     entity.speed = message.moving ? 1 : 0;
     if (entity.speed) entity.walk += 0.5;
@@ -1630,6 +1894,13 @@
     // (ate um ciclo de rede) e sobrescrever aqui desfazia a troca que acabou de acontecer.
     if (!keepOwnWeapon) entity.wep = clamp(data.wep | 0, 0, WEAPONS.length - 1);
     entity.team = data.team | 0;
+    entity.mag = Math.max(0, finite(data.mag, entity.mag) | 0);
+    entity.res = Math.max(0, finite(data.res, entity.res) | 0);
+    entity.mags[entity.wep] = entity.mag;
+    entity.ress[entity.wep] = entity.res;
+    entity.accessory = safeAccessory(data.accessory);
+    entity.reloadT = Math.max(0, finite(data.reload, entity.reloadT || 0));
+    entity.reloadDuration = Math.max(entity.reloadT, finite(data.reloadDuration, entity.reloadDuration || 0));
     entity.shield = Math.max(0, finite(data.shield, entity.shield || 0));
     entity.shots = data.shots | 0;
     entity.hits = data.hits | 0;
@@ -1688,7 +1959,7 @@
 
   function hostRemoteShoot(id, message) {
     const entity = findEntity(id);
-    if (!entity || !entity.remote || entity.dead || entity.fireT > 0) return;
+    if (!entity || !entity.remote || entity.dead || entity.fireT > 0 || entity.reloadT > 0) return;
     const weaponIndex = clamp(message.w | 0, 0, WEAPONS.length - 1);
     if (weaponIndex !== entity.wep) return;
     const direction = Array.isArray(message.d) ? message.d : [];
@@ -1702,6 +1973,13 @@
     dz /= length;
 
     const weapon = WEAPONS[entity.wep];
+    if (!weapon.melee && finite(message.serverMag, -1) < 0) return;
+    if (!weapon.melee) {
+      entity.mag = Math.max(0, message.serverMag | 0);
+      entity.res = Math.max(0, message.serverRes | 0);
+      entity.mags[entity.wep] = entity.mag;
+      entity.ress[entity.wep] = entity.res;
+    }
     entity.fireT = weapon.rate;
     entity.aiming = true;
     const charged = !!(weapon.melee && weapon.first && (entity.meleeT || 0) <= 0);
@@ -1728,6 +2006,49 @@
     }
     if (!weapon.melee) muzzles.push({x: ex, y: ey, z: ez, t: 0.06});
     Net.send({t: "fx_shot", id: entity.netId, x: ex, y: ey, z: ez, w: entity.wep});
+  }
+
+  function hostRemoteReloadStart(id, message) {
+    const entity = findEntity(id);
+    if (!entity || !entity.remote || entity.dead) return;
+    const weapon = clamp(message.w | 0, 0, WEAPONS.length - 1);
+    if (weapon !== entity.wep || WEAPONS[weapon].melee || WEAPONS[weapon].thrown) return;
+    entity.reloadDuration = Math.max(0.2, finite(message.duration, WEAPONS[weapon].reload));
+    entity.reloadT = entity.reloadDuration;
+    entity.reloadWep = weapon;
+    entity.reloadStage = 0;
+    Net.send({t: "fx_reload", id: id, w: weapon, duration: entity.reloadDuration});
+  }
+
+  function hostRemoteReloadCommit(id, message) {
+    const entity = findEntity(id);
+    if (!entity || !entity.remote) return;
+    const weapon = clamp(message.w | 0, 0, WEAPONS.length - 1);
+    if (weapon !== entity.wep) return;
+    entity.mag = Math.max(0, message.mag | 0);
+    entity.res = Math.max(0, message.res | 0);
+    entity.mags[weapon] = entity.mag;
+    entity.ress[weapon] = entity.res;
+    entity.reloadT = 0;
+    entity.reloadDuration = 0;
+    entity.reloadStage = 0;
+  }
+
+  function hostRemoteReloadCancel(id) {
+    const entity = findEntity(id);
+    if (!entity || !entity.remote) return;
+    entity.reloadT = 0;
+    entity.reloadDuration = 0;
+    entity.reloadStage = 0;
+  }
+
+  function showRemoteReload(message) {
+    const entity = findEntity(String(message.id || ""));
+    if (!entity || entity === player) return;
+    entity.reloadDuration = Math.max(0.2, finite(message.duration, WEAPONS[entity.wep].reload));
+    entity.reloadT = entity.reloadDuration;
+    entity.reloadWep = clamp(message.w | 0, 0, WEAPONS.length - 1);
+    if (snd.reload) snd.reload();
   }
 
   function showRemoteShot(message) {
@@ -1810,11 +2131,13 @@
   };
 
   updatePlayer = function (dt) {
-    if (Net.inMatch && Net.role === "client" && player && player.dead) {
+    if (Net.inMatch && player && (Net.spectator || (Net.role === "client" && player.dead))) {
+      updateSpectatorCamera(dt);
       Net.tick(dt);
       return;
     }
     original.updatePlayer(dt);
+    updateSpectatorHud();
     if (Net.inMatch) Net.tick(dt);
   };
 
@@ -1824,6 +2147,7 @@
   };
 
   shoot = function (entity) {
+    if (Net.inMatch && (Net.spectator || (entity && entity.spectator))) return;
     if (Net.inMatch && Net.role === "client" && entity === player) {
       clientShoot(entity);
       return;
@@ -1844,6 +2168,56 @@
         w: entity.wep
       });
     }
+  };
+
+  reload = function (entity) {
+    if (Net.inMatch && (Net.spectator || !entity || entity.spectator)) return;
+    const before = entity.reloadT || 0;
+    original.reload(entity);
+    if (entity.reloadT > before) {
+      entity.reloadDuration = entity.reloadT;
+      entity.reloadWep = entity.wep;
+      entity.reloadStage = 0;
+      if (Net.inMatch && Net.role === "client" && entity === player) {
+        Net.send({t: "reload_start", w: entity.wep, duration: entity.reloadDuration});
+      } else if (Net.inMatch && Net.role === "host" && entity === player) {
+        Net.send({t: "fx_reload", id: entity.netId, w: entity.wep, duration: entity.reloadDuration});
+      }
+    }
+  };
+
+  finishReload = function (entity) {
+    if (Net.inMatch && Net.role === "host" && entity && entity.remote) {
+      // A munição remota só muda quando o servidor aceitar reload_commit.
+      entity.reloadT = 0.001;
+      return;
+    }
+    const weapon = entity ? entity.wep : -1;
+    original.finishReload(entity);
+    if (entity) {
+      entity.reloadT = 0;
+      entity.reloadDuration = 0;
+      entity.reloadStage = 0;
+    }
+    if (Net.inMatch && Net.role === "client" && entity === player) {
+      Net.send({t: "reload_commit", w: weapon});
+    }
+  };
+
+  setWeapon = function (index) {
+    if (Net.inMatch && Net.spectator) return;
+    const wasReloading = !!(player && player.reloadT > 0);
+    original.setWeapon(index);
+    if (Net.inMatch && Net.role === "client" && wasReloading && player && player.wep === index) {
+      player.reloadDuration = 0;
+      player.reloadStage = 0;
+      Net.send({t: "reload_cancel"});
+    }
+  };
+
+  drawDeadOverlay = function () {
+    if (Net.inMatch && (Net.spectator || (player && player.dead && observedEntity()))) return;
+    original.drawDeadOverlay();
   };
 
   damage = function (entity, amount, by, head) {

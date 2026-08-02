@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.6.1";
+  const VERSION = "1.7.0";
   const SETTINGS_KEY = "sugarstrike.settings.v11";
   const PROFILE_KEY = "sugarstrike.profile.v12";
   const OLD_PROFILE_KEY = "sugarstrike.profile.v11";
@@ -185,6 +185,7 @@
     speedUntil: 0,
     kingScore: [0, 0, 0],
     teamScore: [0, 0, 0],
+    friendlyFire: false,
     captureScore: [0, 0, 0],
     flag: null,
     wave: 1,
@@ -315,9 +316,48 @@
   function canDamage(victim, attacker) {
     if (!victim || !attacker || victim === attacker) return victim !== attacker;
     if (game.mode === "team" || game.mode === "capture" || game.mode === "survival") {
-      return victim.team !== attacker.team;
+      return game.friendlyFire || victim.team !== attacker.team;
     }
     return true;
+  }
+
+  function viewerEntity() {
+    if (
+      window.SugarNet && SugarNet.inMatch && SugarNet.observedEntity &&
+      (SugarNet.spectator || (player && player.dead))
+    ) {
+      return SugarNet.observedEntity() || player;
+    }
+    return player;
+  }
+
+  // Decide se uma identificação pode ser desenhada sem entregar posição por
+  // parede. Aliados recebem a cor da equipe; inimigos exigem linha de visão.
+  function labelInfo(target) {
+    const viewer = viewerEntity();
+    if (!viewer || !target || target === viewer || target.dead) return {visible: false};
+    const teamMode = game.mode === "team" || game.mode === "capture" || game.mode === "survival";
+    const ally = !!(teamMode && viewer.team && target.team === viewer.team);
+    const dx = target.x - viewer.x;
+    const dy = (target.y + 1.35) - (viewer.y + 1.55);
+    const dz = target.z - viewer.z;
+    const distance = Math.hypot(dx, dy, dz);
+    const limit = ally ? 52 : 34;
+    if (distance < 0.1 || distance > limit) return {visible: false, ally: ally};
+    if (!ally) {
+      const clearDistance = rayWorld(
+        viewer.x, viewer.y + 1.55, viewer.z,
+        dx / distance, dy / distance, dz / distance,
+        distance
+      );
+      if (clearDistance < distance - 0.75) return {visible: false, ally: false};
+    }
+    return {
+      visible: true,
+      ally: ally,
+      color: target.team === 1 ? "#e8615a" : (target.team === 2 ? "#7ec96b" : "#ffcf4d"),
+      symbol: target.team === 1 ? "◆" : (target.team === 2 ? "●" : "")
+    };
   }
 
   function onShot(entity) {
@@ -356,6 +396,7 @@
     game.bots = clamp(config.bots | 0, 0, 12);
     game.target = clamp(config.target | 0, 5, 100);
     game.duration = clamp(config.duration | 0, 1, 30);
+    game.friendlyFire = !!config.friendlyFire;
     TARGET = game.target;
     targetV.textContent = TARGET;
     game.remaining = game.duration * 60;
@@ -772,12 +813,14 @@
 
   function drawThreats() {
     if (!player) return;
+    const viewer = viewerEntity() || player;
     const enemies = ents.filter(function (entity) {
-      return entity !== player && !entity.dead && canDamage(player, entity) &&
-        Math.hypot(entity.x - player.x, entity.z - player.z) < 24;
+      const info = labelInfo(entity);
+      return entity !== player && !entity.dead && canDamage(player, entity) && info.visible &&
+        Math.hypot(entity.x - viewer.x, entity.z - viewer.z) < 24;
     });
     enemies.slice(0, 5).forEach(function (enemy) {
-      const angle = Math.atan2(enemy.x - player.x, enemy.z - player.z) - cam.yaw;
+      const angle = Math.atan2(enemy.x - viewer.x, enemy.z - viewer.z) - cam.yaw;
       const radius = Math.min(W, H) * 0.39;
       const x = HW + Math.sin(angle) * radius;
       const y = HH - Math.cos(angle) * radius;
@@ -837,11 +880,16 @@
     const rightX = Math.cos(cam.yaw);
     const rightZ = -Math.sin(cam.yaw);
     let enemyCount = 0;
+    const viewer = viewerEntity() || player;
     ents.forEach(function (entity) {
-      if (entity === player || entity.dead || !canDamage(entity, player)) return;
-      enemyCount++;
-      const dx = entity.x - player.x;
-      const dz = entity.z - player.z;
+      if (entity === viewer || entity.dead) return;
+      const info = labelInfo(entity);
+      const teamMode = game.mode === "team" || game.mode === "capture" || game.mode === "survival";
+      const ally = !!(teamMode && viewer.team && entity.team === viewer.team);
+      if (!ally && !info.visible) return;
+      if (!ally) enemyCount++;
+      const dx = entity.x - viewer.x;
+      const dz = entity.z - viewer.z;
       const distance = Math.hypot(dx, dz);
       if (distance < 0.01) return;
       const mapX = dx * rightX + dz * rightZ;
@@ -853,7 +901,7 @@
       const atEdge = distance > range;
       const pulse = 1 + Math.sin(performance.now() / 180 + distance) * 0.16;
 
-      context.fillStyle = atEdge ? "#ffcf4d" : "#e8615a";
+      context.fillStyle = ally ? (info.color || "#8fd9c8") : (atEdge ? "#ffcf4d" : "#e8615a");
       context.strokeStyle = "#fffdf7";
       context.lineWidth = 2.2;
       context.beginPath();
@@ -1731,6 +1779,8 @@
     applyNetworkConfig: applyNetworkConfig,
     onRewardedInterstitialResult: onRewardedInterstitialResult,
     assignTeams: assignTeams,
+    labelInfo: labelInfo,
+    viewerEntity: viewerEntity,
     shouldSkipFrame: shouldSkipFrame,
     game: game,
     profile: profile

@@ -811,7 +811,7 @@ let ents=[], player=null, particles=[], feed=[], matchOver=false;
 function newEnt(name,bot){
   return {name:name,bot:bot,x:0,y:0,z:0,yaw:0,vy:0,hp:100,dead:false,score:0,deaths:0,
     skin:pick(SKINS),walk:0,speed:0,fireT:0,think:0,target:null,see:false,goal:null,
-    wep:0,mag:0,res:0,reloadT:0,blocked:false,lastHitBy:null,hurt:0,ground:0,respawnT:0,
+    wep:0,accessory:10,mag:0,res:0,reloadT:0,reloadDuration:0,reloadWep:-1,reloadStage:0,blocked:false,lastHitBy:null,hurt:0,ground:0,respawnT:0,
     aim:0,burst:0,prot:0,regen:0,strafe:1,team:0,shield:0,slow:0,
     shots:0,hits:0,headshots:0,streak:0,bestStreak:0,
     mags:WEAPONS.map(w=>w.mag),
@@ -837,7 +837,7 @@ function respawn(e){
   else if(e===player&&LOADOUT.indexOf(e.wep)<0) e.wep=LOADOUT[0];
   for(let i=0;i<WEAPONS.length;i++){ e.mags[i]=WEAPONS[i].mag; e.ress[i]=WEAPONS[i].maxRes; }
   const w=WEAPONS[e.wep];
-  e.mag=w.mag; e.res=w.maxRes; e.reloadT=0; e.fireT=0.8; e.spray=0;
+  e.mag=w.mag; e.res=w.maxRes; e.reloadT=0; e.reloadDuration=0; e.reloadWep=-1; e.reloadStage=0; e.fireT=0.8; e.spray=0;
   e.meleeT=0;                  /* golpe carregado volta cheio ao renascer */
   e.prot=1.6; e.target=null; e.goal=null; e.shield=0; e.slow=0; e.streak=0;
   if(e===player){
@@ -1024,14 +1024,39 @@ function reload(e){
   if(w.melee||w.thrown) return;          /* faca nao recarrega; granada so ao renascer */
   if(e.reloadT>0||e.mag>=w.mag||e.res<=0) return;
   e.reloadT=w.reload*(e===player?gearMod('reload',1):1);
+  e.reloadDuration=e.reloadT; e.reloadWep=e.wep; e.reloadStage=0;
   if(e===player){ snd.reload(); updateHUD(); }
 }
 function finishReload(e){
+  if(e.reloadWep>=0&&e.reloadWep!==e.wep){
+    e.reloadT=0; e.reloadDuration=0; e.reloadWep=-1; e.reloadStage=0;
+    return;
+  }
   const w=WEAPONS[e.wep];
   const need=w.mag-e.mag, take=Math.min(need,e.res);
   e.mag+=take; e.res-=take;
   if(e.bot) e.res=w.maxRes;              // bots nao ficam sem municao
+  e.reloadT=0; e.reloadDuration=0; e.reloadWep=-1; e.reloadStage=0;
   if(e===player) updateHUD();
+}
+function tickReload(e,dt){
+  if(!e||e.reloadT<=0) return;
+  e.reloadT-=dt;
+  const duration=Math.max(0.001,e.reloadDuration||WEAPONS[e.wep].reload||1);
+  const progress=clamp(1-e.reloadT/duration,0,1);
+  if(e===player&&e.reloadStage<1&&progress>=0.30){
+    e.reloadStage=1; tone(250,180,0.07,0.035,'triangle');
+  }
+  if(e===player&&e.reloadStage<2&&progress>=0.66){
+    e.reloadStage=2; tone(360,520,0.075,0.045,'triangle');
+  }
+  if(e===player&&e.reloadStage<3&&progress>=0.88){
+    e.reloadStage=3;
+    const role=WEAPONS[e.wep].role;
+    if(role==='FUZIL'||role==='PRECISAO'||role==='RAJADA'||role==='METRALHADORA')
+      tone(620,390,0.065,0.035,'square');
+  }
+  if(e.reloadT<=0) finishReload(e);
 }
 
 /* ------------------------------------------------------------ particulas */
@@ -1174,15 +1199,22 @@ function drawEnt(e){
   emitWorld([mApply(base,0.05,1.68,-0.245),mApply(base,0.13,1.68,-0.245),
              mApply(base,0.13,1.76,-0.245),mApply(base,0.05,1.76,-0.245)],'#3f342e',Qw,true);
   /* bracos + arma */
-  const aim=(e.target&&!e.target.dead)||e.aiming?-0.95:-0.35;
+  const reloading=e.reloadT>0;
+  const reloadProgress=reloading?clamp(1-e.reloadT/Math.max(0.001,e.reloadDuration||1),0,1):0;
+  const aim=reloading?(-0.30+Math.sin(reloadProgress*Math.PI)*0.38):
+    ((e.target&&!e.target.dead)||e.aiming?-0.95:-0.35);
   boxM(mMul(mMul(base,mMul(mT(-0.36,1.32,0),mRX(aim))),mT(0,-0.3,0)),0.1,0.32,0.11,B,Qw);
   boxM(mMul(mMul(base,mMul(mT(0.36,1.32,0),mRX(aim))),mT(0,-0.3,0)),0.1,0.32,0.11,B,Qw);
   const ew=WEAPONS[clamp(e.wep|0,0,WEAPONS.length-1)];
-  const gm=mMul(base,mT(0,1.28,ew.melee?-0.46:-0.62));
-  /* o que os outros carregam segue a cor e o tamanho da propria arma */
-  const len=ew.melee?0.20:(ew.range>120?0.46:(ew.range<50?0.24:0.34));
-  boxM(gm,0.07,0.08,len,ew.color||'#f6a9c3',Qw);
-  boxM(mMul(gm,mT(0,-0.02,-len-0.08)),0.05,0.05,ew.melee?0.08:0.14,ew.accent||'#fdf7ec',Qw);
+  let gm=mMul(base,mT(0,1.34,ew.melee?-0.34:-0.42));
+  if(reloading) gm=mMul(gm,mMul(mRZ(Math.sin(reloadProgress*Math.PI)*0.42),mRX(0.38)));
+  drawCharacterWeapon(clamp(e.wep|0,0,WEAPONS.length-1),gm,0.48);
+  /* O acessório guardado continua visível nas costas enquanto a principal está na mão. */
+  const accessory=clamp(e.accessory===undefined?10:e.accessory|0,10,14);
+  if(accessory!==e.wep){
+    const back=mMul(base,mMul(mT(0.28,1.16,0.18),mMul(mRZ(-0.55),mRX(-0.18))));
+    drawCharacterWeapon(accessory,back,0.30);
+  }
 }
 
 /* --------------------------------------------------- arma em 1a pessoa */
@@ -1267,6 +1299,30 @@ const VM_HANDS=[
   [0,-0.07,0.02],[0,-0.08,-0.18],[0,0,-0.06],[0,0.02,-0.14],[0,-0.08,-0.20]
 ];
 
+function drawCharacterWeapon(index,origin,scale){
+  const wi=clamp(index|0,0,VM_MODELS.length-1);
+  const weapon=WEAPONS[wi];
+  const parts=VM_MODELS[wi]||[];
+  const root=mMul(origin,mS(scale||0.48));
+  for(let i=0;i<parts.length;i++){
+    const p=parts[i];
+    let mm=mMul(root,mT(p[0],p[1],p[2]));
+    if(p[7]) mm=mMul(mm,mRX(p[7]));
+    const color=p[6]==='main'?weapon.color:(p[6]==='accent'?weapon.accent:p[6]);
+    boxM(mm,p[3],p[4],p[5],color,Qw);
+  }
+}
+
+function reloadPose(weapon,progress){
+  const wave=Math.sin(progress*Math.PI);
+  const role=weapon.role;
+  if(role==='PISTOLA') return {x:-0.10*wave,y:-0.10*wave,z:0.12*wave,rx:0.30*wave,ry:-0.34*wave,rz:-0.55*wave};
+  if(role==='ESCOPETA') return {x:0.06*wave,y:-0.16*wave,z:0.08*wave,rx:0.58*wave,ry:0.10*wave,rz:0.22*wave};
+  if(role==='PRECISAO') return {x:-0.08*wave,y:-0.19*wave,z:0.16*wave,rx:0.44*wave,ry:-0.22*wave,rz:-0.30*wave};
+  if(role==='METRALHADORA') return {x:-0.14*wave,y:-0.24*wave,z:0.18*wave,rx:0.50*wave,ry:-0.30*wave,rz:-0.46*wave};
+  return {x:-0.11*wave,y:-0.18*wave,z:0.14*wave,rx:0.40*wave,ry:-0.24*wave,rz:-0.38*wave};
+}
+
 function drawViewmodel(dt){
   const wi=clamp(player.wep|0,0,WEAPONS.length-1);
   const w=WEAPONS[wi];
@@ -1275,6 +1331,9 @@ function drawViewmodel(dt){
   const bob=Math.sin(bobT*2)*0.012*bobAmt;
   const bob2=Math.abs(Math.cos(bobT))*0.014*bobAmt;
   const kick=wKick;
+  const reloadProgress=player.reloadT>0
+    ?clamp(1-player.reloadT/Math.max(0.001,player.reloadDuration||w.reload||1),0,1):0;
+  const pose=reloadProgress>0?reloadPose(w,reloadProgress):{x:0,y:0,z:0,rx:0,ry:0,rz:0};
   /* A origem local da arma fica na CORONHA e o cano aponta para -Z.
      Assim nenhuma parte encosta no plano proximo (que deformava tudo). */
   let m;
@@ -1288,8 +1347,9 @@ function drawViewmodel(dt){
     m=mMul(mT(0.24+bob*2, -0.30-bob2*2+swayY+kick*0.16, -0.58+kick*0.18),
            mMul(mRY(-0.16+swayX), mMul(mRX(0.10-kick*0.80), mS(0.78))));
   }else{
-    m=mMul(mT(0.21+bob*2, -0.25-bob2*2+swayY, -0.80+kick*0.26),
-           mMul(mRY(-0.07+swayX), mMul(mRX(0.035-kick*0.42), mS(0.78))));
+    m=mMul(mT(0.21+bob*2+pose.x, -0.25-bob2*2+swayY+pose.y, -0.80+kick*0.26+pose.z),
+           mMul(mRY(-0.07+swayX+pose.ry),
+                mMul(mRZ(pose.rz),mMul(mRX(0.035-kick*0.42+pose.rx), mS(0.78)))));
   }
   const parts=VM_MODELS[wi];
   for(let i=0;i<parts.length;i++){
@@ -1306,6 +1366,19 @@ function drawViewmodel(dt){
   /* mao segurando o punho */
   const hand=VM_HANDS[wi];
   boxM(mMul(m,mT(hand[0],hand[1],hand[2])),0.065,0.06,0.07,'#ffd9a8',Qv);
+  if(reloadProgress>0&&!w.melee&&!w.thrown){
+    /* A segunda mão busca o carregador; no meio da animação ele fica fora da arma. */
+    const handWave=Math.sin(reloadProgress*Math.PI);
+    boxM(mMul(m,mT(-0.16*handWave,-0.24+0.12*handWave,-0.32)),0.065,0.06,0.07,'#ffd9a8',Qv);
+    if(w.role!=='ESCOPETA'&&reloadProgress>0.22&&reloadProgress<0.76){
+      const drop=(reloadProgress-0.22)/0.54;
+      boxM(mMul(m,mT(-0.10-0.08*drop,-0.26-0.24*drop,-0.38)),0.045,0.11,0.06,w.accent||'#4a3b33',Qv);
+    }
+    if(w.role==='ESCOPETA'){
+      const shellX=-0.10+reloadProgress*0.18;
+      boxM(mMul(m,mT(shellX,-0.18,-0.56)),0.025,0.025,0.07,'#e8615a',Qv);
+    }
+  }
   /* fila do viewmodel usa coordenadas ja em espaco de camera */
 }
 /* emite faces do viewmodel: matrizes acima produzem pontos em espaco de camera,
@@ -1484,7 +1557,7 @@ function setWeapon(i){
   player.wep=i;
   dropScope();                 /* trocar de arma sempre fecha a luneta */
   refreshScopeButton();
-  player.reloadT=0; player.fireT=0.18;
+  player.reloadT=0; player.reloadDuration=0; player.reloadWep=-1; player.reloadStage=0; player.fireT=0.18;
   player.mag=player.mags[i]; player.res=player.ress[i];
   snd.swap();
   document.querySelectorAll('.slot').forEach(s=>s.classList.toggle('on',+s.dataset.w===i));
@@ -1780,10 +1853,7 @@ function updatePlayer(dt){
   /* solta o gatilho e a mira volta a fechar */
   if(!firing) player.spray=Math.max(0,(player.spray||0)-dt*14);
   if(firing&&w.auto) tryShoot();
-  if(player.reloadT>0){
-    player.reloadT-=dt;
-    if(player.reloadT<=0){ finishReload(player); }
-  }
+  if(player.reloadT>0) tickReload(player,dt);
   if(player.mag<=0&&player.res>0&&player.reloadT<=0) reload(player);
   player.mags[player.wep]=player.mag; player.ress[player.wep]=player.res;
 
@@ -1844,6 +1914,9 @@ function drawLabels(){
   /* nomes dos bots */
   for(const e of ents){
     if(e===player||e.dead) continue;
+    const info=(window.SugarEnhance&&SugarEnhance.labelInfo)
+      ?SugarEnhance.labelInfo(e):{visible:true,ally:false,color:'#4a3b33',symbol:''};
+    if(!info.visible) continue;
     const dx=e.x-cam.x, dz=e.z-cam.z;
     const d2=dx*dx+dz*dz;
     if(d2>2400) continue;
@@ -1851,14 +1924,15 @@ function drawLabels(){
     if(!p) continue;
     const s=clamp(p.s*0.16,7,20);
     ctx.font='800 '+s.toFixed(1)+'px '+FONT;
-    const tw=ctx.measureText(e.name).width;
+    const label=(info.symbol?info.symbol+' ':'')+e.name;
+    const tw=ctx.measureText(label).width;
     const pad=s*0.45, h=s*1.5;
     ctx.fillStyle='rgba(255,253,247,.92)';
-    ctx.strokeStyle=STROKE; ctx.lineWidth=Math.max(1,s*0.14);
+    ctx.strokeStyle=info.color||STROKE; ctx.lineWidth=Math.max(1,s*0.18);
     rrect(p.x-tw/2-pad,p.y-h/2,tw+pad*2,h,h*0.42);
     ctx.fill(); ctx.stroke();
     ctx.fillStyle='#4a3b33';
-    ctx.fillText(e.name,p.x,p.y+s*0.06);
+    ctx.fillText(label,p.x,p.y+s*0.06);
     /* barra de vida */
     const bw=tw+pad*2, bh=Math.max(2.5,s*0.22);
     ctx.fillStyle='#e0d4c4';
@@ -2007,7 +2081,7 @@ function frame(t){
       if(e===player) continue;
       if(e.dead){ e.respawnT-=dt; if(e.respawnT<=0) respawn(e); continue; }
       e.fireT-=0;
-      if(e.reloadT>0){ e.reloadT-=dt; if(e.reloadT<=0) finishReload(e); }
+      if(e.reloadT>0) tickReload(e,dt);
       updateBot(e,dt);
       if(e.hurt>0) e.hurt-=dt;
     }
