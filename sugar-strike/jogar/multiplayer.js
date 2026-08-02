@@ -14,7 +14,7 @@
 
   const nativeAvailable = typeof SugarAndroid !== "undefined";
   // Os indices das armas mudaram nesta versao: cliente antigo nao pode entrar.
-  const APP_VERSION = "1.6.0";
+  const APP_VERSION = "1.6.1";
   const peers = new Map();
   const rooms = new Map();
   let ui = null;
@@ -1298,6 +1298,11 @@
       snd.hit(!!message.head);
       return;
     }
+    if (message.t === "melee_cooldown" && Net.role === "client" && player) {
+      player.meleeT = Math.max(player.meleeT || 0, finite(message.time, 0));
+      updateHUD();
+      return;
+    }
     if (message.t === "end" && Net.role === "client" && Net.inMatch) {
       const winner = findEntity(message.winner);
       if (winner) endMatch(winner);
@@ -1652,8 +1657,11 @@
 
   function clientShoot(entity) {
     const weapon = WEAPONS[entity.wep];
-    if (entity.reloadT > 0 || entity.mag <= 0 || entity.fireT > 0) return;
-    entity.mag--;
+    if (entity.reloadT > 0 || entity.fireT > 0) return;
+    // Corpo a corpo usa mag=0 por definicao. So armas com municao podem ser
+    // bloqueadas ou descontadas por carregador vazio.
+    if (!weapon.melee && entity.mag <= 0) return;
+    if (!weapon.melee) entity.mag--;
     entity.fireT = weapon.rate;
     let dx = -Math.sin(cam.yaw) * Math.cos(cam.pitch);
     let dy = Math.sin(cam.pitch);
@@ -1662,11 +1670,13 @@
       const assisted = SugarEnhance.assistAim(entity, dx, dy, dz);
       dx = assisted.dx; dy = assisted.dy; dz = assisted.dz;
     }
-    recoil += weapon.kick;
-    camShake = Math.max(camShake, weapon.kick * 7);
-    flash = 0.055;
+    if (!weapon.melee) {
+      recoil += weapon.kick;
+      camShake = Math.max(camShake, weapon.kick * 7);
+      if (!weapon.thrown) flash = 0.055;
+    }
     wKick = 1;
-    snd.shot(weapon.snd);
+    snd.fire(weapon);
     if (window.SugarEnhance && SugarEnhance.onShot) SugarEnhance.onShot(entity);
     updateHUD();
     Net.send({
@@ -1694,9 +1704,12 @@
     const weapon = WEAPONS[entity.wep];
     entity.fireT = weapon.rate;
     entity.aiming = true;
+    const charged = !!(weapon.melee && weapon.first && (entity.meleeT || 0) <= 0);
+    const damageScale = charged ? weapon.first / Math.max(1, weapon.dmg) : 1;
     const ex = entity.x;
     const ey = entity.y + 1.55;
     const ez = entity.z;
+    let registered = false;
     for (let i = 0; i < weapon.pellets; i++) {
       let sx = dx + rnd(-weapon.spread, weapon.spread);
       let sy = dy + rnd(-weapon.spread, weapon.spread);
@@ -1705,23 +1718,31 @@
       sx /= spreadLength;
       sy /= spreadLength;
       sz /= spreadLength;
-      traceShot(ex, ey, ez, sx, sy, sz, entity, weapon, 1);
+      if (traceShot(ex, ey, ez, sx, sy, sz, entity, weapon, damageScale)) {
+        registered = true;
+      }
     }
-    muzzles.push({x: ex, y: ey, z: ez, t: 0.06});
+    if (charged && registered) {
+      entity.meleeT = weapon.firstDelay || 1.5;
+      Net.send({t: "melee_cooldown", to: id, time: entity.meleeT});
+    }
+    if (!weapon.melee) muzzles.push({x: ex, y: ey, z: ez, t: 0.06});
     Net.send({t: "fx_shot", id: entity.netId, x: ex, y: ey, z: ez, w: entity.wep});
   }
 
   function showRemoteShot(message) {
     const entity = findEntity(String(message.id || ""));
     if (!entity || entity === player) return;
-    entity.aiming = true;
-    muzzles.push({
-      x: finite(message.x, entity.x),
-      y: finite(message.y, entity.y + 1.45),
-      z: finite(message.z, entity.z),
-      t: 0.06
-    });
     const weapon = WEAPONS[clamp(message.w | 0, 0, WEAPONS.length - 1)];
+    entity.aiming = true;
+    if (!weapon.melee) {
+      muzzles.push({
+        x: finite(message.x, entity.x),
+        y: finite(message.y, entity.y + 1.45),
+        z: finite(message.z, entity.z),
+        t: 0.06
+      });
+    }
     if (snd.shotSpatial) snd.shotSpatial(weapon.snd, entity.x, entity.z);
     else snd.shotFar(weapon.snd, Math.hypot(entity.x - player.x, entity.z - player.z));
     setTimeout(function () { entity.aiming = false; }, 120);
@@ -1780,6 +1801,7 @@
     if (Net.inMatch && (Net.role === "client" || entity.remote)) {
       if (Net.role === "host" && entity.remote) {
         entity.fireT = Math.max(0, entity.fireT - dt);
+        entity.meleeT = Math.max(0, (entity.meleeT || 0) - dt);
       }
       interpolateRemote(entity, dt);
       return;
@@ -1807,8 +1829,12 @@
       return;
     }
     const before = entity.mag;
+    const beforeFireT = entity.fireT;
+    const weapon = WEAPONS[entity.wep];
     original.shoot(entity);
-    if (Net.inMatch && Net.role === "host" && entity.mag < before) {
+    const fired = entity.mag < before ||
+      (weapon.melee && entity.fireT > beforeFireT);
+    if (Net.inMatch && Net.role === "host" && fired) {
       Net.send({
         t: "fx_shot",
         id: entity.netId,

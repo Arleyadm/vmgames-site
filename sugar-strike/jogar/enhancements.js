@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.6.0";
+  const VERSION = "1.6.1";
   const SETTINGS_KEY = "sugarstrike.settings.v11";
   const PROFILE_KEY = "sugarstrike.profile.v12";
   const OLD_PROFILE_KEY = "sugarstrike.profile.v11";
