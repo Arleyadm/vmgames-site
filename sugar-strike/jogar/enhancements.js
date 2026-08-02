@@ -195,7 +195,9 @@
     mapRepairing: false,
     lastPickupSeed: 0,
     finished: false,
-    resultSaved: false
+    resultSaved: false,
+    // Presente do anuncio de derrota seguida: {kind, index, name}, vale so para a proxima partida.
+    giftItem: null
   };
   try {
     const savedMatch = JSON.parse(localStorage.getItem("sugarstrike.match.v11") || "{}");
@@ -233,13 +235,24 @@
     } catch (error) {}
   }
 
+  // As funcoes abaixo checam game.giftItem primeiro: e o presente ganho no anuncio de
+  // derrota seguida, e vale so pela partida que esta comecando (ver requestGiftRewardAd).
   function selectedSkin() {
+    if (game.giftItem && game.giftItem.kind === "outfit") {
+      return SKINS[clamp(game.giftItem.index | 0, 0, SKINS.length - 1)];
+    }
     return SKINS[clamp(profile.skin | 0, 0, SKINS.length - 1)];
   }
   function weaponColors() {
+    if (game.giftItem && game.giftItem.kind === "skin") {
+      return WEAPON_SKINS[clamp(game.giftItem.index | 0, 0, WEAPON_SKINS.length - 1)].colors;
+    }
     return WEAPON_SKINS[clamp(profile.weaponSkin | 0, 0, WEAPON_SKINS.length - 1)].colors;
   }
   function currentGear() {
+    if (game.giftItem && game.giftItem.kind === "gear") {
+      return GEAR[clamp(game.giftItem.index | 0, 0, GEAR.length - 1)];
+    }
     return GEAR[clamp(profile.gear | 0, 0, GEAR.length - 1)];
   }
   // O index.html pergunta por aqui o efeito de cada equipamento.
@@ -260,12 +273,19 @@
     return profile.ownedWeapons.indexOf(index | 0) >= 0;
   }
   function canUseWeapon(index) {
-    return ownsWeapon(index) || game.tempWeapons.indexOf(index | 0) >= 0;
+    index = index | 0;
+    if (game.giftItem && (game.giftItem.kind === "primary" || game.giftItem.kind === "accessory") &&
+        (game.giftItem.index | 0) === index) {
+      return true;
+    }
+    return ownsWeapon(index) || game.tempWeapons.indexOf(index) >= 0;
   }
   function startingWeapon() {
+    if (game.giftItem && game.giftItem.kind === "primary") return game.giftItem.index | 0;
     return canUseWeapon(profile.primary | 0) ? profile.primary | 0 : firstOwned(PRIMARIES);
   }
   function startingAccessory() {
+    if (game.giftItem && game.giftItem.kind === "accessory") return game.giftItem.index | 0;
     return canUseWeapon(profile.accessory | 0) ? profile.accessory | 0 : firstOwned(ACCESSORIES);
   }
   setWeapon = function (index) {
@@ -1094,8 +1114,119 @@
     setTimeout(closeEndMatchRewardOffer, 1800);
   }
 
+  // Presente ganho no anuncio de derrota so vale para a partida que acabou de rodar com ele.
+  function pickGiftCandidate() {
+    const candidates = [];
+    PRIMARIES.forEach(function (index) {
+      if (!ownsWeapon(index)) candidates.push({kind: "primary", index: index, name: WEAPONS[index].name});
+    });
+    ACCESSORIES.forEach(function (index) {
+      if (!ownsWeapon(index)) candidates.push({kind: "accessory", index: index, name: WEAPONS[index].name});
+    });
+    OUTFITS.forEach(function (outfit, index) {
+      if (profile.unlockedSkins.indexOf(index) < 0) candidates.push({kind: "outfit", index: index, name: outfit.name});
+    });
+    WEAPON_SKINS.forEach(function (item, index) {
+      if (profile.unlockedWeaponSkins.indexOf(index) < 0) candidates.push({kind: "skin", index: index, name: item.name});
+    });
+    GEAR.forEach(function (item, index) {
+      if (profile.unlockedGear.indexOf(index) < 0) candidates.push({kind: "gear", index: index, name: item.name});
+    });
+    if (!candidates.length) return null;
+    return candidates[(Math.random() * candidates.length) | 0];
+  }
+
+  let giftAdPending = false;
+  let giftGrantedForOffer = false;
+  let pendingGiftCandidate = null;
+
+  function closeGiftRewardOffer() {
+    const overlay = document.getElementById("giftRewardOverlay");
+    if (overlay) overlay.classList.remove("open");
+  }
+
+  function showGiftRewardOffer(candidate) {
+    if (!window.SugarAndroid || typeof SugarAndroid.showGiftRewardedAd !== "function") return;
+    const overlay = document.getElementById("giftRewardOverlay");
+    const title = document.getElementById("giftRewardTitle");
+    const watchButton = document.getElementById("giftRewardWatch");
+    const status = document.getElementById("giftRewardStatus");
+    if (!overlay || !title || !watchButton || !status) return;
+    pendingGiftCandidate = candidate;
+    giftAdPending = false;
+    giftGrantedForOffer = false;
+    watchButton.disabled = false;
+    title.innerHTML = 'GANHE <strong>' + escapeHtml(candidate.name) + '</strong> DE GRACA';
+    status.textContent = "VALE SO PARA A PROXIMA PARTIDA.";
+    overlay.classList.add("open");
+  }
+
+  function requestGiftRewardAd() {
+    if (giftAdPending || giftGrantedForOffer || !pendingGiftCandidate) return;
+    const watchButton = document.getElementById("giftRewardWatch");
+    const status = document.getElementById("giftRewardStatus");
+    giftAdPending = true;
+    if (watchButton) watchButton.disabled = true;
+    if (status) status.textContent = "CARREGANDO ANUNCIO...";
+    try {
+      SugarAndroid.showGiftRewardedAd();
+    } catch (error) {
+      onGiftRewardedResult("failed");
+    }
+  }
+
+  function onGiftRewardedResult(result) {
+    const status = document.getElementById("giftRewardStatus");
+    const watchButton = document.getElementById("giftRewardWatch");
+    giftAdPending = false;
+    if (result === "rewarded") {
+      if (giftGrantedForOffer || !pendingGiftCandidate) return;
+      giftGrantedForOffer = true;
+      game.giftItem = pendingGiftCandidate;
+      if (status) status.textContent = pendingGiftCandidate.name + " LIBERADO PARA A PROXIMA PARTIDA!";
+      if (watchButton) watchButton.disabled = true;
+      showToast(pendingGiftCandidate.name + " NA PROXIMA PARTIDA!");
+      vibrate("0,45,50,80");
+      setTimeout(closeGiftRewardOffer, 1400);
+      return;
+    }
+    if (watchButton) watchButton.disabled = false;
+    if (result === "closed") {
+      if (status) status.textContent = "ANUNCIO FECHADO. NENHUM PRESENTE DESSA VEZ.";
+    } else {
+      if (status) status.textContent = "ANUNCIO INDISPONIVEL AGORA. TENTE NA PROXIMA DERROTA.";
+    }
+    setTimeout(closeGiftRewardOffer, 1800);
+  }
+
+  // Depois do intersticial obrigatorio (se houver nesta partida), segue pro opcional de sempre.
+  let pendingPostMandatoryGift = null;
+  function proceedToOptionalOffer(giftCandidate) {
+    if (giftCandidate) showGiftRewardOffer(giftCandidate);
+    else showEndMatchRewardOffer();
+  }
+  function requestMandatoryInterstitial(giftCandidate) {
+    pendingPostMandatoryGift = giftCandidate;
+    if (!window.SugarAndroid || typeof SugarAndroid.showMandatoryInterstitial !== "function") {
+      proceedToOptionalOffer(giftCandidate);
+      return;
+    }
+    try {
+      SugarAndroid.showMandatoryInterstitial();
+    } catch (error) {
+      proceedToOptionalOffer(giftCandidate);
+    }
+  }
+  function onMandatoryInterstitialResult() {
+    const giftCandidate = pendingPostMandatoryGift;
+    pendingPostMandatoryGift = null;
+    proceedToOptionalOffer(giftCandidate);
+  }
+
   endMatch = function (winner) {
     if (matchOver) return;
+    // O presente, se tinha um, ja foi usado na partida que acabou agora.
+    game.giftItem = null;
     const result = recordResult(winner);
     originalEndMatch(winner);
     if (!result) return;
@@ -1113,7 +1244,14 @@
       '</div></div>' + existing;
     panelEl.classList.add("result-pop");
     setTimeout(function () { panelEl.classList.remove("result-pop"); }, 650);
-    setTimeout(showEndMatchRewardOffer, 850);
+    // Morreu 2+ vezes nesta partida: oferece um item sorteado da loja em vez do anuncio de doces.
+    const giftCandidate = (player.deaths || 0) >= 2 ? pickGiftCandidate() : null;
+    // A cada 4a partida (contando desde sempre), um intersticial obrigatorio abre antes do resto.
+    const mandatory = profile.matches % 4 === 0;
+    setTimeout(function () {
+      if (mandatory) requestMandatoryInterstitial(giftCandidate);
+      else proceedToOptionalOffer(giftCandidate);
+    }, 850);
   };
 
   function showToast(text) {
@@ -1678,8 +1816,8 @@
       ".statList{display:grid;gap:3px;margin-top:2px}.statRow{display:grid;grid-template-columns:52px 1fr 30px;align-items:center;gap:5px;font-size:8px;font-weight:900}.statRow em{font-style:normal;opacity:.68}.statRow u{text-decoration:none;text-align:right;opacity:.68}.statBar{display:block;height:7px;border:2px solid #4a3b33;border-radius:5px;background:#fffdf7;overflow:hidden}.statBar b{display:block;height:100%;background:#e8615a}" +
       ".swatch{display:flex;gap:4px}.swatch i{flex:1;height:22px;border:2px solid #4a3b33;border-radius:7px}" +
       ".tutorial{display:grid;gap:8px;text-align:left}.tutorial div{background:#f0e6da;border-radius:12px;padding:10px}.tutorial b,.tutorial span{display:block}.tutorial span{font-size:12px;margin-top:3px}" +
-      "#adRewardOverlay{position:fixed;inset:0;z-index:130;display:none;align-items:center;justify-content:center;background:rgba(30,22,18,.84);padding:16px}" +
-      "#adRewardOverlay.open{display:flex}.adRewardCard{width:min(430px,100%);background:#fffdf7;border:5px solid #4a3b33;border-radius:24px;padding:20px;color:#4a3b33;text-align:center;filter:drop-shadow(0 9px 0 rgba(0,0,0,.24))}" +
+      "#adRewardOverlay,#giftRewardOverlay{position:fixed;inset:0;z-index:130;display:none;align-items:center;justify-content:center;background:rgba(30,22,18,.84);padding:16px}" +
+      "#adRewardOverlay.open,#giftRewardOverlay.open{display:flex}.adRewardCard{width:min(430px,100%);background:#fffdf7;border:5px solid #4a3b33;border-radius:24px;padding:20px;color:#4a3b33;text-align:center;filter:drop-shadow(0 9px 0 rgba(0,0,0,.24))}" +
       ".adRewardGift{font-size:42px;line-height:1}.adRewardCard h2{margin:5px 0;color:#e8615a}.adRewardCard strong{color:#ba4c99}.adRewardCard p{font-size:12px;font-weight:800}.adRewardActions{display:grid;grid-template-columns:1.3fr .8fr;gap:8px;margin-top:12px}.adRewardActions .big-btn{margin:0}.adRewardStatus{min-height:18px;margin-top:8px!important;font-size:9px!important;letter-spacing:.6px}" +
       "@media(max-width:560px){#menuExtras{grid-template-columns:repeat(2,1fr)}.settingGrid,.shopGrid{grid-template-columns:1fr}.resultGrid{grid-template-columns:1fr 1fr}#modeHud{top:55px;font-size:7px;max-width:62%;overflow:hidden;text-overflow:ellipsis}#candyHud{top:54px;font-size:8px}#minimap{right:142px;top:42px;width:76px;height:76px}#slots{gap:3px}.slot{width:32px}}" ;
     document.head.appendChild(style);
@@ -1729,6 +1867,18 @@
     document.body.appendChild(rewardOverlay);
     document.getElementById("adRewardWatch").addEventListener("click", requestEndMatchRewardAd);
     document.getElementById("adRewardSkip").addEventListener("click", closeEndMatchRewardOffer);
+    const giftOverlay = document.createElement("div");
+    giftOverlay.id = "giftRewardOverlay";
+    giftOverlay.innerHTML =
+      '<div class="adRewardCard" role="dialog" aria-modal="true" aria-labelledby="giftRewardTitle">' +
+      '<div class="adRewardGift">🎁</div><h2 id="giftRewardTitle"></h2>' +
+      '<p>Voce morreu bastante nessa partida. Assista a um anuncio curto e leve um item de graca so na proxima.</p>' +
+      '<div class="adRewardActions"><button id="giftRewardWatch" class="big-btn">ASSISTIR E GANHAR</button>' +
+      '<button id="giftRewardSkip" class="big-btn sub-btn">AGORA NAO</button></div>' +
+      '<p id="giftRewardStatus" class="adRewardStatus"></p></div>';
+    document.body.appendChild(giftOverlay);
+    document.getElementById("giftRewardWatch").addEventListener("click", requestGiftRewardAd);
+    document.getElementById("giftRewardSkip").addEventListener("click", closeGiftRewardOffer);
     installWeaponSlots();
     installControls();
     applyControlStyle();
@@ -1784,6 +1934,8 @@
     rebuildMap: rebuildSelectedMap,
     applyNetworkConfig: applyNetworkConfig,
     onRewardedInterstitialResult: onRewardedInterstitialResult,
+    onGiftRewardedResult: onGiftRewardedResult,
+    onMandatoryInterstitialResult: onMandatoryInterstitialResult,
     assignTeams: assignTeams,
     labelInfo: labelInfo,
     viewerEntity: viewerEntity,
