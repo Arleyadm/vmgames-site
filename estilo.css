@@ -260,6 +260,18 @@ footer.rodape a { margin: 0 8px; }
   }
 }
 
+/* ---------- vídeo de gameplay ---------- */
+
+.video-gameplay {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  background: var(--superficie);
+  margin: 20px 0 26px;
+}
+
 /* ---------- galeria de capturas ---------- */
 
 .galeria {
