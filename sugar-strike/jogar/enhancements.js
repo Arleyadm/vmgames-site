@@ -44,7 +44,8 @@
     unlockedSkins: [0],
     weaponSkin: 0,
     unlockedWeaponSkins: [0],
-    gear: 0,
+    gear: 0,           // herdado: o unico equipamento das versoes antigas
+    gearSet: null,     // o que esta vestido agora, varios ao mesmo tempo
     unlockedGear: [0],
     grenadeStock: 0,
     achievements: [],
@@ -154,6 +155,17 @@
   if (profile.unlockedSkins.indexOf(profile.skin) < 0) profile.skin = 0;
   if (profile.unlockedWeaponSkins.indexOf(profile.weaponSkin) < 0) profile.weaponSkin = 0;
   if (profile.unlockedGear.indexOf(profile.gear) < 0) profile.gear = 0;
+  /* Perfil antigo guardava um equipamento so: ele vira o primeiro da lista.
+     O indice 0 e "sem equipamento", entao nunca entra na lista de vestidos. */
+  if (!Array.isArray(profile.gearSet)) {
+    profile.gearSet = (profile.gear | 0) > 0 ? [profile.gear | 0] : [];
+  }
+  profile.gearSet = profile.gearSet
+    .map(function (index) { return index | 0; })
+    .filter(function (index, at, list) {
+      return index > 0 && index < GEAR.length &&
+        profile.unlockedGear.indexOf(index) >= 0 && list.indexOf(index) === at;
+    });
   profile.grenadeStock = clamp(profile.grenadeStock | 0, 0, 8);
 
   /* Os dois primeiros espacos sao o que o jogador equipou na loja. Do 3 ao 5
@@ -251,16 +263,33 @@
     }
     return WEAPON_SKINS[clamp(profile.weaponSkin | 0, 0, WEAPON_SKINS.length - 1)].colors;
   }
-  function currentGear() {
-    if (game.giftItem && game.giftItem.kind === "gear") {
-      return GEAR[clamp(game.giftItem.index | 0, 0, GEAR.length - 1)];
+  /* Tudo o que esta vestido ao mesmo tempo. O presente do anuncio entra junto
+     por cima, valendo so pela partida que comeca.                          */
+  function equippedGear() {
+    const list = (profile.gearSet || []).slice();
+    if (game.giftItem && game.giftItem.kind === "gear" &&
+        list.indexOf(game.giftItem.index | 0) < 0) {
+      list.push(game.giftItem.index | 0);
     }
-    return GEAR[clamp(profile.gear | 0, 0, GEAR.length - 1)];
+    return list.filter(function (index) { return GEAR[index]; });
   }
-  // O index.html pergunta por aqui o efeito de cada equipamento.
+  /* Somar quantos equipamentos o jogador quiser exige separar as contas:
+     o escudo e um valor bruto e se acumula somando; o resto sao fatores
+     (velocidade, recuo, dispersao...) e se acumulam multiplicando. Somar
+     fatores faria dois itens de 10% virarem 20%, e nao 21%.               */
+  const GEAR_ADDITIVE = {shield: true};
   function gearMod(name, fallback) {
-    const mods = currentGear().mods || {};
-    return Object.prototype.hasOwnProperty.call(mods, name) ? mods[name] : fallback;
+    const list = equippedGear();
+    let found = false;
+    let total = GEAR_ADDITIVE[name] ? 0 : 1;
+    list.forEach(function (index) {
+      const mods = GEAR[index].mods || {};
+      if (!Object.prototype.hasOwnProperty.call(mods, name)) return;
+      found = true;
+      if (GEAR_ADDITIVE[name]) total += mods[name];
+      else total *= mods[name];
+    });
+    return found ? total : fallback;
   }
   function skyPalette() {
     const palettes = {
@@ -1886,17 +1915,30 @@
           '</button></div>';
       }).join("");
     }
-    return grenadeCard() + GEAR.map(function (item, index) {
+    const worn = profile.gearSet.length;
+    const resumo = '<div class="loadoutNow gearSummary">' +
+      escapeHtml(SugarI18n.t("GEAR_WEARING", {n: worn})) +
+      (worn ? ' <b>' + profile.gearSet.map(function (index) {
+        return escapeHtml(GEAR[index].name);
+      }).join('</b> + <b>') + '</b>' : '') + '</div>';
+    return resumo + grenadeCard() + GEAR.map(function (item, index) {
       const owned = profile.unlockedGear.indexOf(index) >= 0;
-      const equipped = profile.gear === index;
+      const equipped = profile.gearSet.indexOf(index) >= 0;
+      /* O item 0 nao e equipamento: e o botao de tirar tudo. */
+      const none = index === 0;
+      const action = none
+        ? (worn ? SugarI18n.t("GEAR_REMOVE_ALL") : SugarI18n.t("ACTION_EQUIPPED_M"))
+        : (equipped ? SugarI18n.t("GEAR_TAKE_OFF")
+          : (owned ? SugarI18n.t("ACTION_EQUIP")
+            : SugarI18n.t("ACTION_BUY_PREFIX") + priceTag(item.price, false)));
       return '<div class="shopCard ' + (equipped ? "equipped" : "") + '">' +
-        '<div class="shopHead"><b>' + escapeHtml(item.name) + '</b></div>' +
+        '<div class="shopHead"><b>' + escapeHtml(item.name) + '</b>' +
+        (equipped ? '<span class="shopRole">' + escapeHtml(SugarI18n.t("GEAR_ON")) + '</span>' : '') +
+        '</div>' +
         '<div class="itemArt"><canvas class="gearCanvas" data-gear="' + index + '"></canvas></div>' +
         '<small>' + escapeHtml(item.desc) + '</small>' +
         '<button class="shopBuy big-btn sub-btn" data-kind="gear" data-item="' + index + '" ' +
-        (equipped ? "disabled" : "") + '>' +
-        (equipped ? SugarI18n.t("ACTION_EQUIPPED_M") : (owned ? SugarI18n.t("ACTION_EQUIP") : SugarI18n.t("ACTION_BUY_PREFIX") + priceTag(item.price, false))) +
-        '</button></div>';
+        (none && !worn ? "disabled" : "") + '>' + escapeHtml(action) + '</button></div>';
     }).join("");
   }
 
@@ -1932,13 +1974,32 @@
     }
     else profile.unlockedGear.push(index);
   }
-  function equipItem(kind, index) {
+  /* Equipamento nao substitui: entra na lista. Comprar ja veste, e clicar de
+     novo tira. O item 0 e o "sem equipamento", que limpa a lista inteira.  */
+  function toggleGear(index, forceOn) {
+    index = index | 0;
+    if (index === 0) { profile.gearSet = []; return; }
+    const at = profile.gearSet.indexOf(index);
+    if (at >= 0 && !forceOn) profile.gearSet.splice(at, 1);
+    else if (at < 0) profile.gearSet.push(index);
+    profile.gear = profile.gearSet.length ? profile.gearSet[0] : 0;   // compatibilidade
+  }
+  /* Velocidade, recuo, dispersao e afins sao lidos a cada quadro, entao valem
+     assim que a lista muda. O escudo e um valor que so entra no renascimento;
+     aqui ele e ajustado na hora, sem somar duas vezes: gearMod ja devolve o
+     total de tudo o que esta vestido.                                      */
+  function applyGearNow() {
+    if (!player || player.dead) return;
+    player.shield = Math.max(player.shield || 0, gearMod("shield", 0));
+    updateHUD();
+  }
+  function equipItem(kind, index, justBought) {
     if (kind === "grenade") return;
     if (kind === "primary") { profile.primary = index; syncLoadout(); }
     else if (kind === "accessory") { profile.accessory = index; syncLoadout(); }
     else if (kind === "outfit") profile.skin = index;
     else if (kind === "skin") profile.weaponSkin = index;
-    else profile.gear = index;
+    else toggleGear(index, justBought);
   }
   function itemName(kind, index) {
     if (kind === "primary" || kind === "accessory") return WEAPONS[index].name;
@@ -1980,6 +2041,7 @@
       button.addEventListener("click", function () {
         const kind = button.dataset.kind;
         const index = parseInt(button.dataset.item, 10);
+        let justBought = false;
         if (!alreadyOwns(kind, index)) {
           const price = priceOf(kind, index);
           if (profile.candies < price) {
@@ -1991,8 +2053,11 @@
           registerPurchase(kind, index);
           showToast(SugarI18n.t("TOAST_PURCHASED", {item: itemName(kind, index)}));
           vibrate("20,30,40");
+          justBought = true;
         }
-        equipItem(kind, index);
+        // Acabou de comprar: veste na hora, sem precisar de um segundo clique.
+        equipItem(kind, index, justBought);
+        if (kind === "gear") applyGearNow();
         saveProfile();
         updateWeaponSlots();
         if (player && player.skin && kind === "outfit") player.skin = selectedSkin();
@@ -2230,6 +2295,7 @@
       ".shopHead{display:flex;align-items:baseline;justify-content:space-between;gap:6px}.shopHead b{font-size:11px;letter-spacing:.4px;line-height:1.2}.shopRole{flex:0 0 auto;font-size:7px;font-weight:900;letter-spacing:.6px;background:#c9b4ec;border:2px solid #4a3b33;border-radius:7px;padding:2px 5px}" +
       ".shopTabs{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}.shopTab{flex:1 1 auto;border:3px solid #4a3b33;border-radius:11px;background:#fffdf7;color:#4a3b33;font:900 9px ui-rounded,'Trebuchet MS',sans-serif;letter-spacing:.5px;padding:8px 5px}.shopTab.on{background:#ffcf4d}" +
       ".loadoutNow{background:#8fd9c8;border:3px solid #4a3b33;border-radius:12px;padding:7px;font-size:10px;font-weight:900;letter-spacing:.4px}" +
+      ".gearSummary{grid-column:1/-1;margin-bottom:2px;text-align:left;line-height:1.45}" +
       ".statList{display:grid;gap:3px;margin-top:2px}.statRow{display:grid;grid-template-columns:52px 1fr 30px;align-items:center;gap:5px;font-size:8px;font-weight:900}.statRow em{font-style:normal;opacity:.68}.statRow u{text-decoration:none;text-align:right;opacity:.68}.statBar{display:block;height:7px;border:2px solid #4a3b33;border-radius:5px;background:#fffdf7;overflow:hidden}.statBar b{display:block;height:100%;background:#e8615a}" +
       ".swatch{display:flex;gap:4px}.swatch i{flex:1;height:22px;border:2px solid #4a3b33;border-radius:7px}" +
       ".outfitArt{height:132px;border:2px solid #4a3b33;border-radius:11px;background:radial-gradient(circle at 50% 38%,#fffdf7,#e6d9c6 78%);overflow:hidden}" +
