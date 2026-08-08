@@ -19,6 +19,13 @@
   const nativeAvailable = typeof SugarAndroid !== "undefined";
   // Os indices das armas mudaram nesta versao: cliente antigo nao pode entrar.
   const APP_VERSION = "1.7.1";
+  /* Tamanho da sala. O teto tem que bater com MAX_ROOM_SIZE do servidor:
+     pedir mais do que ele aceita so faz a sala nascer menor do que o
+     escolhido, sem aviso nenhum para quem criou.                          */
+  const MIN_ROOM_SIZE = 2;
+  const MAX_ROOM_SIZE = 24;
+  const DEFAULT_ROOM_SIZE = 8;
+  const ROOM_SIZES = [2, 4, 6, 8, 10, 12, 16, 20, 24];
   const peers = new Map();
   const rooms = new Map();
   let ui = null;
@@ -41,6 +48,12 @@
   let onlineServerAddress = loadOnlineServer();
   let onlineSession = loadOnlineSession(onlineServerAddress);
 
+  function escapeHtml(value) {
+    return String(value || "").replace(/[&<>"']/g, function (char) {
+      return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[char];
+    });
+  }
+
   function cleanName(value, fallback, max) {
     const text = String(value || "").replace(/[<>\u0000-\u001f]/g, "").trim();
     return (text || fallback).slice(0, max);
@@ -48,9 +61,9 @@
 
   function loadName() {
     try {
-      return cleanName(localStorage.getItem("sugarstrike.player"), "CONFEITEIRO", 14);
+      return cleanName(localStorage.getItem("sugarstrike.player"), SugarI18n.t("DEFAULT_PLAYER_NAME"), 14);
     } catch (error) {
-      return "CONFEITEIRO";
+      return SugarI18n.t("DEFAULT_PLAYER_NAME");
     }
   }
 
@@ -196,17 +209,17 @@
           });
           setStatus(
             transportMode === "online"
-              ? "Sala online pronta. Compartilhe o endereço do servidor com seus amigos."
-              : "Sala pronta. Aguarde pelo menos um amigo e toque em INICIAR."
+              ? SugarI18n.t("NET_ROOM_READY_ONLINE")
+              : SugarI18n.t("NET_ROOM_READY_WIFI")
           );
           showLobby();
           broadcastRoster();
         } else {
           Net.ready = Net.spectator;
-          if (ui && ui.ready) ui.ready.textContent = "ESTOU PRONTO";
+          if (ui && ui.ready) ui.ready.textContent = SugarI18n.t("NET_READY");
           setStatus(Net.spectator
-            ? "Você entrou como espectador. Aguarde ou acompanhe a partida em andamento."
-            : "Conectado. Identificando você na sala…");
+            ? SugarI18n.t("NET_JOINED_SPECTATOR")
+            : SugarI18n.t("NET_CONNECTED_IDENTIFYING"));
           showLobby();
         }
         renderPlayers();
@@ -218,14 +231,14 @@
           transportMode === "wifi" && event.event === "transport_error" &&
           Net.role === "client" && !Net.migration
         ) {
-          setStatus("Sinal perdido. Tentando reconectar automaticamente…");
+          setStatus(SugarI18n.t("NET_SIGNAL_LOST"));
           setTimeout(function () {
             try { SugarAndroid.reconnect(); } catch (error) {}
           }, 900);
         } else if (transportMode === "online" && onlineReconnectWanted) {
           setStatus(onlineEverConnected
-            ? "Internet interrompida. Tentando reconectar automaticamente…"
-            : "O servidor pode estar acordando. Tentando entrar, aguarde…");
+            ? SugarI18n.t("NET_INTERNET_INTERRUPTED")
+            : SugarI18n.t("NET_SERVER_WAKING_TRYING"));
           clearTimeout(onlineReconnectTimer);
           onlineReconnectTimer = setTimeout(function () {
             connectOnline(true);
@@ -234,12 +247,12 @@
         if (Net.inMatch) {
           firing = false;
           showNetworkOverlay();
-          setStatus("A conexão da partida foi encerrada.");
+          setStatus(SugarI18n.t("NET_MATCH_CONN_CLOSED"));
         }
         return;
       }
       if (event.event === "unsupported") {
-        setStatus("Este aparelho não possui Wi-Fi Direct.");
+        setStatus(SugarI18n.t("NET_NO_WIFI_DIRECT"));
         return;
       }
       if (event.event === "message" && event.data) {
@@ -256,7 +269,7 @@
         try {
           onlineSocket.send(JSON.stringify(message));
         } catch (error) {
-          setStatus("Não foi possível enviar um pacote da partida online.");
+          setStatus(SugarI18n.t("NET_SEND_FAIL_ONLINE"));
         }
         return;
       }
@@ -264,7 +277,7 @@
       try {
         SugarAndroid.send(JSON.stringify(message));
       } catch (error) {
-        setStatus("Não foi possível enviar um pacote da partida.");
+        setStatus(SugarI18n.t("NET_SEND_FAIL"));
       }
     },
 
@@ -346,82 +359,94 @@
     const multiButton = document.createElement("button");
     multiButton.className = "big-btn sub-btn";
     multiButton.id = "bMulti";
-    multiButton.textContent = "MULTIPLAYER WI-FI DIRECT";
+    multiButton.textContent = SugarI18n.t("BTN_MULTI_WIFI");
     el("bPlay").insertAdjacentElement("afterend", multiButton);
 
     const onlineButton = document.createElement("button");
     onlineButton.className = "big-btn sub-btn";
     onlineButton.id = "bOnline";
-    onlineButton.textContent = "JOGAR ONLINE";
+    onlineButton.textContent = SugarI18n.t("BTN_PLAY_ONLINE");
     multiButton.insertAdjacentElement("afterend", onlineButton);
 
     const root = document.createElement("div");
     root.id = "netOverlay";
     root.className = "net-hide";
+    const t = SugarI18n.t.bind(SugarI18n);
+    const modeOpts = ["deathmatch", "team", "capture", "king", "survival"].map(function (id, i) {
+      return '<option value="' + id + '"' + (i === 0 ? " selected" : "") + '>' + escapeHtml(SugarI18n.modeLabel(id)) + '</option>';
+    }).join("");
+    const mapOpts = ["village", "factory", "park", "castle"].map(function (id, i) {
+      return '<option value="' + id + '"' + (i === 0 ? " selected" : "") + '>' + escapeHtml(SugarI18n.mapLabel(id)) + '</option>';
+    }).join("");
+    // Tamanhos de sala, de dois em dois ate o teto do servidor.
+    const maxOpts = ROOM_SIZES.map(function (size) {
+      return '<option value="' + size + '"' + (size === DEFAULT_ROOM_SIZE ? " selected" : "") + '>' +
+        size + escapeHtml(t("NET_PLAYERS_SUFFIX")) + '</option>';
+    }).join("");
     root.innerHTML =
       '<div id="netPanel">' +
-        '<h1>SALA WI-FI DIRECT</h1>' +
-        '<h2>MULTIPLAYER LOCAL · SEM INTERNET</h2>' +
+        '<h1>' + escapeHtml(t("NET_TITLE_WIFI")) + '</h1>' +
+        '<h2>' + escapeHtml(t("NET_SUBTITLE_WIFI")) + '</h2>' +
         '<div id="netSetup">' +
           '<div class="net-grid">' +
-            '<div><div class="net-label">SEU NOME</div><input id="netName" class="net-field" maxlength="14"></div>' +
-            '<div><div class="net-label">NOME DA SALA</div><input id="netRoomName" class="net-field" maxlength="24" value="SALA DOCE"></div>' +
+            '<div><div class="net-label">' + escapeHtml(t("NET_YOUR_NAME")) + '</div><input id="netName" class="net-field" maxlength="14"></div>' +
+            '<div><div class="net-label">' + escapeHtml(t("NET_ROOM_NAME")) + '</div><input id="netRoomName" class="net-field" maxlength="24" value="' + escapeHtml(t("NET_DEFAULT_ROOM")) + '"></div>' +
           '</div>' +
-          '<div style="margin-top:8px"><div class="net-label">SENHA DA SALA (OPCIONAL)</div><input id="netPassword" class="net-field" maxlength="12" placeholder="SEM SENHA"></div>' +
+          '<div style="margin-top:8px"><div class="net-label">' + escapeHtml(t("NET_ROOM_PASSWORD")) + '</div><input id="netPassword" class="net-field" maxlength="12" placeholder="' + escapeHtml(t("NET_NO_PASSWORD")) + '"></div>' +
           '<div class="net-grid" style="margin-top:10px">' +
-            '<button id="netCreate" class="net-btn">CRIAR SALA</button>' +
-            '<button id="netSearch" class="net-btn">PROCURAR SALAS</button>' +
+            '<button id="netCreate" class="net-btn">' + escapeHtml(t("NET_CREATE_ROOM")) + '</button>' +
+            '<button id="netSearch" class="net-btn">' + escapeHtml(t("NET_SEARCH_ROOMS")) + '</button>' +
           '</div>' +
-          '<div id="netStatus">Escolha criar uma sala ou procurar a sala de um amigo.</div>' +
+          '<div id="netStatus">' + escapeHtml(t("NET_CHOOSE_CREATE_OR_SEARCH")) + '</div>' +
           '<div id="netRooms"></div>' +
-          '<div id="netHint">O Android poderá pedir acesso a aparelhos próximos. Todos devem estar com o Wi-Fi ligado e próximos uns dos outros.</div>' +
-          '<button id="netBack" class="net-btn alt">VOLTAR</button>' +
+          '<div id="netHint">' + escapeHtml(t("NET_WIFI_HINT")) + '</div>' +
+          '<button id="netBack" class="net-btn alt">' + escapeHtml(t("NET_BACK")) + '</button>' +
         '</div>' +
         '<div id="netOnlineSetup" class="net-hide">' +
           '<div class="net-grid">' +
-            '<div><div class="net-label">SEU NOME</div><input id="netOnlineName" class="net-field" maxlength="14"></div>' +
-            '<div><div class="net-label">SENHA DA SALA (OPCIONAL)</div><input id="netOnlinePassword" class="net-field" maxlength="12" placeholder="SEM SENHA"></div>' +
+            '<div><div class="net-label">' + escapeHtml(t("NET_YOUR_NAME")) + '</div><input id="netOnlineName" class="net-field" maxlength="14"></div>' +
+            '<div><div class="net-label">' + escapeHtml(t("NET_ROOM_PASSWORD")) + '</div><input id="netOnlinePassword" class="net-field" maxlength="12" placeholder="' + escapeHtml(t("NET_NO_PASSWORD")) + '"></div>' +
           '</div>' +
-          '<div style="margin-top:8px"><div class="net-label">PROCURAR SALA PELO NOME</div>' +
-            '<input id="netRoomSearch" class="net-field" maxlength="24" placeholder="DIGITE PARA FILTRAR"></div>' +
+          '<div style="margin-top:8px"><div class="net-label">' + escapeHtml(t("NET_SEARCH_BY_NAME")) + '</div>' +
+            '<input id="netRoomSearch" class="net-field" maxlength="24" placeholder="' + escapeHtml(t("NET_TYPE_TO_FILTER")) + '"></div>' +
           '<div class="net-grid" style="margin-top:10px">' +
-            '<button id="netNewRoom" class="net-btn online">CRIAR SALA</button>' +
-            '<button id="netRefresh" class="net-btn alt">ATUALIZAR</button>' +
+            '<button id="netNewRoom" class="net-btn online">' + escapeHtml(t("NET_CREATE_ROOM")) + '</button>' +
+            '<button id="netRefresh" class="net-btn alt">' + escapeHtml(t("NET_REFRESH")) + '</button>' +
           '</div>' +
           '<div id="netCreateBox" class="net-hide">' +
-            '<div class="net-label">NOME DA NOVA SALA</div>' +
-            '<input id="netNewName" class="net-field" maxlength="24" value="SALA DOCE">' +
+            '<div class="net-label">' + escapeHtml(t("NET_NEW_ROOM_NAME")) + '</div>' +
+            '<input id="netNewName" class="net-field" maxlength="24" value="' + escapeHtml(t("NET_DEFAULT_ROOM")) + '">' +
             '<div id="netCreateGrid">' +
-              '<select id="netNewMap" class="net-field"><option value="village">VILA CONFEITO</option><option value="factory">FABRICA DE CHOCOLATE</option><option value="park">PARQUE DE PIRULITOS</option><option value="castle">CASTELO DE BOLO</option></select>' +
-              '<select id="netNewMode" class="net-field"><option value="deathmatch">MATA-MATA</option><option value="team">EQUIPES</option><option value="capture">CAPTURAR O DOCE</option><option value="king">REI DO POTE</option><option value="survival">SOBREVIVENCIA</option></select>' +
-              '<select id="netNewMax" class="net-field"><option value="2">2 JOGADORES</option><option value="4">4 JOGADORES</option><option value="6">6 JOGADORES</option><option value="8" selected>8 JOGADORES</option><option value="10">10 JOGADORES</option><option value="12">12 JOGADORES</option></select>' +
-              '<select id="netNewSpectators" class="net-field"><option value="1" selected>ESPECTADORES: SIM</option><option value="0">ESPECTADORES: NÃO</option></select>' +
-              '<select id="netNewFriendly" class="net-field"><option value="0" selected>DANO ALIADO: NÃO</option><option value="1">DANO ALIADO: SIM</option></select>' +
+              '<select id="netNewMap" class="net-field">' + mapOpts + '</select>' +
+              '<select id="netNewMode" class="net-field">' + modeOpts + '</select>' +
+              '<select id="netNewMax" class="net-field">' + maxOpts + '</select>' +
+              '<select id="netNewSpectators" class="net-field"><option value="1" selected>' + escapeHtml(t("NET_SPECTATORS_YES")) + '</option><option value="0">' + escapeHtml(t("NET_SPECTATORS_NO")) + '</option></select>' +
+              '<select id="netNewFriendly" class="net-field"><option value="0" selected>' + escapeHtml(t("NET_FRIENDLY_FIRE_NO")) + '</option><option value="1">' + escapeHtml(t("NET_FRIENDLY_FIRE_YES")) + '</option></select>' +
             '</div>' +
-            '<button id="netCreateConfirm" class="net-btn online" style="margin-top:9px">ABRIR A SALA</button>' +
+            '<button id="netCreateConfirm" class="net-btn online" style="margin-top:9px">' + escapeHtml(t("NET_OPEN_ROOM")) + '</button>' +
           '</div>' +
-          '<div id="netOnlineStatus">Procurando salas abertas…</div>' +
+          '<div id="netOnlineStatus">' + escapeHtml(t("NET_SEARCHING_ROOMS")) + '</div>' +
           '<div id="netRoomList"></div>' +
-          '<details id="netServerBox"><summary>ENDEREÇO DO SERVIDOR</summary>' +
+          '<details id="netServerBox"><summary>' + escapeHtml(t("NET_SERVER_ADDRESS")) + '</summary>' +
             '<input id="netServer" class="net-field" maxlength="180" placeholder="wss://sugarstrike-servidor.onrender.com"></details>' +
-          '<button id="netOnlineBack" class="net-btn alt" style="margin-top:9px">VOLTAR</button>' +
+          '<button id="netOnlineBack" class="net-btn alt" style="margin-top:9px">' + escapeHtml(t("NET_BACK")) + '</button>' +
         '</div>' +
         '<div id="netLobby" class="net-hide">' +
-          '<div id="netLobbyStatus">Aguardando a conexão da sala…</div>' +
+          '<div id="netLobbyStatus">' + escapeHtml(t("NET_WAITING_CONNECTION")) + '</div>' +
           '<div id="netPlayers"></div>' +
           '<div id="netConfig">' +
-            '<select id="netMode" class="net-field"><option value="deathmatch">MATA-MATA</option><option value="team">EQUIPES</option><option value="capture">CAPTURAR O DOCE</option><option value="king">REI DO POTE</option><option value="survival">SOBREVIVENCIA</option></select>' +
-            '<select id="netMap" class="net-field"><option value="village">VILA CONFEITO</option><option value="factory">FABRICA DE CHOCOLATE</option><option value="park">PARQUE DE PIRULITOS</option><option value="castle">CASTELO DE BOLO</option></select>' +
-            '<select id="netDuration" class="net-field"><option value="3">3 MIN</option><option value="5" selected>5 MIN</option><option value="8">8 MIN</option><option value="12">12 MIN</option></select>' +
-            '<input id="netBots" class="net-field" type="number" min="0" max="12" value="4" aria-label="Quantidade de bots">' +
-            '<input id="netTarget" class="net-field" type="number" min="5" max="100" value="25" aria-label="Meta de pontos">' +
-            '<select id="netSpectators" class="net-field"><option value="1">ESPECTADORES: SIM</option><option value="0">ESPECTADORES: NÃO</option></select>' +
-            '<select id="netFriendly" class="net-field"><option value="0">DANO ALIADO: NÃO</option><option value="1">DANO ALIADO: SIM</option></select>' +
+            '<select id="netMode" class="net-field">' + modeOpts + '</select>' +
+            '<select id="netMap" class="net-field">' + mapOpts + '</select>' +
+            '<select id="netDuration" class="net-field"><option value="3">3' + escapeHtml(t("MIN_SUFFIX")) + '</option><option value="5" selected>5' + escapeHtml(t("MIN_SUFFIX")) + '</option><option value="8">8' + escapeHtml(t("MIN_SUFFIX")) + '</option><option value="12">12' + escapeHtml(t("MIN_SUFFIX")) + '</option></select>' +
+            '<input id="netBots" class="net-field" type="number" min="0" max="' + (MAX_ROOM_SIZE - 1) + '" value="4" aria-label="Bots">' +
+            '<input id="netTarget" class="net-field" type="number" min="5" max="100" value="25" aria-label="Target">' +
+            '<select id="netSpectators" class="net-field"><option value="1">' + escapeHtml(t("NET_SPECTATORS_YES")) + '</option><option value="0">' + escapeHtml(t("NET_SPECTATORS_NO")) + '</option></select>' +
+            '<select id="netFriendly" class="net-field"><option value="0">' + escapeHtml(t("NET_FRIENDLY_FIRE_NO")) + '</option><option value="1">' + escapeHtml(t("NET_FRIENDLY_FIRE_YES")) + '</option></select>' +
           '</div>' +
-          '<button id="netReady" class="net-btn">ESTOU PRONTO</button>' +
-          '<button id="netStart" class="net-btn" disabled>INICIAR PARTIDA</button>' +
-          '<button id="netContinue" class="net-btn net-hide">CONTINUAR</button>' +
-          '<button id="netLeave" class="net-btn red" style="margin-top:8px">SAIR DA SALA</button>' +
+          '<button id="netReady" class="net-btn">' + escapeHtml(t("NET_READY")) + '</button>' +
+          '<button id="netStart" class="net-btn" disabled>' + escapeHtml(t("NET_START_MATCH")) + '</button>' +
+          '<button id="netContinue" class="net-btn net-hide">' + escapeHtml(t("NET_CONTINUE")) + '</button>' +
+          '<button id="netLeave" class="net-btn red" style="margin-top:8px">' + escapeHtml(t("NET_LEAVE_ROOM")) + '</button>' +
         '</div>' +
       '</div>';
     document.body.appendChild(root);
@@ -429,10 +454,10 @@
     spectatorHud = document.createElement("div");
     spectatorHud.id = "spectatorHud";
     spectatorHud.innerHTML =
-      '<div class="spec-title">MODO ESPECTADOR</div>' +
-      '<div class="spec-name" id="specName">AGUARDANDO JOGADOR</div>' +
+      '<div class="spec-title">' + escapeHtml(t("NET_SPECTATOR_MODE")) + '</div>' +
+      '<div class="spec-name" id="specName">' + escapeHtml(t("NET_WAITING_PLAYER")) + '</div>' +
       '<div class="spec-data" id="specData"></div>' +
-      '<div class="spec-controls"><button id="specPrev">◀ ANTERIOR</button><button id="specNext">PRÓXIMO ▶</button></div>';
+      '<div class="spec-controls"><button id="specPrev">' + escapeHtml(t("NET_PREV")) + '</button><button id="specNext">' + escapeHtml(t("NET_NEXT")) + '</button></div>';
     document.body.appendChild(spectatorHud);
 
     ui = {
@@ -475,7 +500,7 @@
     el("netNewRoom").addEventListener("click", function () {
       const opening = ui.createBox.classList.contains("net-hide");
       ui.createBox.classList.toggle("net-hide", !opening);
-      el("netNewRoom").textContent = opening ? "FECHAR" : "CRIAR SALA";
+      el("netNewRoom").textContent = opening ? SugarI18n.t("NET_CLOSE") : SugarI18n.t("NET_CREATE_ROOM");
     });
     el("netCreateConfirm").addEventListener("click", createOnlineRoom);
     el("specPrev").addEventListener("click", function () { cycleSpectator(-1); });
@@ -491,7 +516,7 @@
 
   function rememberPlayerName(input) {
     const source = input || ui.name;
-    Net.localName = cleanName(source.value, "CONFEITEIRO", 14).toUpperCase();
+    Net.localName = cleanName(source.value, SugarI18n.t("DEFAULT_PLAYER_NAME"), 14).toUpperCase();
     ui.name.value = Net.localName;
     ui.onlineName.value = Net.localName;
     saveName(Net.localName);
@@ -500,15 +525,15 @@
   function openNetworkMenu() {
     if (!nativeAvailable && transportMode !== "online") return;
     if (!Net.connected) transportMode = "wifi";
-    ui.title.textContent = transportMode === "online" ? "SALA ONLINE" : "SALA WI-FI DIRECT";
+    ui.title.textContent = transportMode === "online" ? SugarI18n.t("NET_TITLE_ONLINE") : SugarI18n.t("NET_TITLE_WIFI");
     ui.subtitle.textContent = transportMode === "online"
-      ? "UM SERVIDOR · ATÉ 8 JOGADORES"
-      : "MULTIPLAYER LOCAL · SEM INTERNET";
+      ? SugarI18n.t("NET_SUBTITLE_ONLINE")
+      : SugarI18n.t("NET_SUBTITLE_WIFI");
     showNetworkOverlay();
     if (Net.connected) {
       showLobby();
       if (Net.inMatch && !matchOver) {
-        setStatus("Partida em andamento.");
+        setStatus(SugarI18n.t("NET_MATCH_IN_PROGRESS"));
         ui.continueButton.classList.remove("net-hide");
       } else {
         ui.continueButton.classList.add("net-hide");
@@ -521,8 +546,8 @@
 
   function openOnlineMenu() {
     transportMode = "online";
-    ui.title.textContent = "SALAS ONLINE";
-    ui.subtitle.textContent = "VARIAS SALAS AO MESMO TEMPO";
+    ui.title.textContent = SugarI18n.t("NET_TITLE_ONLINE_LIST");
+    ui.subtitle.textContent = SugarI18n.t("NET_SUBTITLE_ONLINE_LIST");
     showNetworkOverlay();
     if (Net.connected) {
       showLobby();
@@ -559,16 +584,16 @@
   function openLobbyWatch(loud) {
     const base = normalizeOnlineAddress(ui.server.value || onlineServerAddress);
     if (!base) {
-      setStatus("Digite o endereço do servidor para ver as salas.");
+      setStatus(SugarI18n.t("NET_TYPE_SERVER_ADDRESS"));
       return;
     }
     onlineServerAddress = base.replace(/\/game$/, "");
     stopRoomPolling();
-    setStatus(loud ? "Atualizando a lista de salas…" : "Procurando salas abertas…");
+    setStatus(loud ? SugarI18n.t("NET_UPDATING_LIST") : SugarI18n.t("NET_SEARCHING_ROOMS"));
     try {
       lobbySocket = new WebSocket(base + "?lobby=1");
     } catch (error) {
-      setStatus("O endereço do servidor não é válido.");
+      setStatus(SugarI18n.t("NET_INVALID_SERVER"));
       return;
     }
     const mine = lobbySocket;
@@ -577,8 +602,7 @@
     clearTimeout(roomPollTimer);
     roomPollTimer = setTimeout(function () {
       if (mine !== lobbySocket) return;
-      setStatus("Este servidor ainda é da versão antiga, sem salas separadas. " +
-        "Atualize o servidor para ver a lista.");
+      setStatus(SugarI18n.t("NET_SERVER_OUTDATED"));
     }, 9000);
     mine.onmessage = function (event) {
       if (mine !== lobbySocket) return;
@@ -593,19 +617,19 @@
       onlineRooms = Array.isArray(message.rooms) ? message.rooms : [];
       renderOnlineRooms();
       setStatus(onlineRooms.length
-        ? onlineRooms.length + (onlineRooms.length === 1 ? " sala aberta." : " salas abertas.")
-        : "Nenhuma sala aberta agora. Toque em CRIAR SALA para abrir a sua.");
+        ? onlineRooms.length + (onlineRooms.length === 1 ? SugarI18n.t("NET_ROOM_OPEN_ONE") : SugarI18n.t("NET_ROOM_OPEN_MANY"))
+        : SugarI18n.t("NET_NO_ROOM_TAP_CREATE"));
     };
     mine.onerror = function () {
       if (mine !== lobbySocket) return;
-      setStatus("Não foi possível alcançar o servidor.");
+      setStatus(SugarI18n.t("NET_SERVER_UNREACHABLE"));
     };
     mine.onclose = function () {
       if (mine !== lobbySocket) return;
       lobbySocket = null;
       onlineRooms = [];
       renderOnlineRooms();
-      setStatus("O servidor pode estar acordando. Toque em ATUALIZAR daqui a pouco.");
+      setStatus(SugarI18n.t("NET_SERVER_WAKING"));
     };
   }
 
@@ -613,14 +637,8 @@
     openLobbyWatch(loud);
   }
 
-  const MAP_LABELS = {
-    village: "VILA CONFEITO", factory: "FABRICA DE CHOCOLATE",
-    park: "PARQUE DE PIRULITOS", castle: "CASTELO DE BOLO"
-  };
-  const MODE_LABELS = {
-    deathmatch: "MATA-MATA", team: "EQUIPES", capture: "CAPTURAR O DOCE",
-    king: "REI DO POTE", survival: "SOBREVIVENCIA"
-  };
+  const MAP_LABELS = new Proxy({}, {get: function (target, map) { return SugarI18n.mapLabel(map); }});
+  const MODE_LABELS = new Proxy({}, {get: function (target, mode) { return SugarI18n.modeLabel(mode); }});
 
   function renderOnlineRooms() {
     if (!ui) return;
@@ -633,8 +651,8 @@
       const empty = document.createElement("div");
       empty.style.cssText = "font-size:11px;opacity:.6;padding:8px";
       empty.textContent = filter
-        ? 'Nenhuma sala com "' + filter + '" no nome.'
-        : "Nenhuma sala aberta ainda.";
+        ? SugarI18n.t("NET_NO_ROOM_NAMED", {filter: filter})
+        : SugarI18n.t("NET_NO_ROOM_YET");
       ui.roomList.appendChild(empty);
       return;
     }
@@ -649,13 +667,13 @@
 
       const label = document.createElement("span");
       const title = document.createElement("b");
-      title.textContent = cleanName(room.name, "SALA SUGAR STRIKE", 24);
+      title.textContent = cleanName(room.name, SugarI18n.t("NET_DEFAULT_ROOM_NAME"), 24);
       const meta = document.createElement("small");
       meta.className = "roomMeta";
-      meta.textContent = (MAP_LABELS[room.map] || String(room.map || "").toUpperCase()) +
-        " · " + (MODE_LABELS[room.mode] || String(room.mode || "").toUpperCase()) +
-        " · " + (playing ? "EM PARTIDA" : "AGUARDANDO") +
-        (room.locked ? " · SENHA" : "");
+      meta.textContent = MAP_LABELS[room.map] +
+        " · " + MODE_LABELS[room.mode] +
+        " · " + (playing ? SugarI18n.t("NET_IN_MATCH") : SugarI18n.t("NET_WAITING")) +
+        (room.locked ? " · " + SugarI18n.t("NET_PASSWORD_BADGE") : "");
       label.appendChild(title);
       label.appendChild(meta);
 
@@ -667,7 +685,7 @@
       actions.className = "net-room-actions";
       const join = document.createElement("button");
       join.type = "button";
-      join.textContent = full ? "CHEIA" : (playing ? "AGUARDAR" : "ENTRAR");
+      join.textContent = full ? SugarI18n.t("NET_FULL") : (playing ? SugarI18n.t("NET_WAIT") : SugarI18n.t("NET_JOIN"));
       join.disabled = full;
       join.addEventListener("click", function () {
         if (!full) joinOnlineRoom(room, false);
@@ -677,7 +695,7 @@
         const watch = document.createElement("button");
         watch.type = "button";
         watch.className = "watch";
-        watch.textContent = "ASSISTIR";
+        watch.textContent = SugarI18n.t("NET_WATCH");
         watch.addEventListener("click", function () { joinOnlineRoom(room, true); });
         actions.appendChild(watch);
       }
@@ -708,10 +726,10 @@
 
   function updateLobbyTitle() {
     if (!ui || !onlineRoomInfo || transportMode !== "online") return;
-    ui.title.textContent = cleanName(onlineRoomInfo.name, "SALA ONLINE", 24);
-    ui.subtitle.textContent = (MAP_LABELS[onlineRoomInfo.map] || "VILA CONFEITO") +
-      " · " + (onlineRoomInfo.players | 0) + "/" + (onlineRoomInfo.max | 0) + " JOGADORES" +
-      " · " + (onlineRoomInfo.spectators | 0) + " ESPECTADORES";
+    ui.title.textContent = cleanName(onlineRoomInfo.name, SugarI18n.t("NET_DEFAULT_ONLINE_ROOM"), 24);
+    ui.subtitle.textContent = MAP_LABELS[onlineRoomInfo.map] +
+      " · " + (onlineRoomInfo.players | 0) + "/" + (onlineRoomInfo.max | 0) + SugarI18n.t("NET_PLAYERS_SUFFIX") +
+      " · " + (onlineRoomInfo.spectators | 0) + " " + SugarI18n.t("NET_SPECTATOR")
   }
 
   // Só o dono da sala muda o que a lista pública mostra.
@@ -738,8 +756,8 @@
     Net.myId = null;
     peers.clear();
     onlineRoomInfo = null;
-    ui.title.textContent = "SALAS ONLINE";
-    ui.subtitle.textContent = "VARIAS SALAS AO MESMO TEMPO";
+    ui.title.textContent = SugarI18n.t("NET_TITLE_ONLINE_LIST");
+    ui.subtitle.textContent = SugarI18n.t("NET_SUBTITLE_ONLINE_LIST");
     ui.setup.classList.add("net-hide");
     ui.lobby.classList.add("net-hide");
     ui.onlineSetup.classList.remove("net-hide");
@@ -749,15 +767,15 @@
   function joinOnlineRoom(room, spectator) {
     stopRoomPolling();
     onlineRoomInfo = room;
-    setStatus((spectator ? "Entrando para assistir " : "Entrando em ") + cleanName(room.name, "SALA", 24) + "…");
+    setStatus((spectator ? SugarI18n.t("NET_JOINING_SPECTATE") : SugarI18n.t("NET_JOINING")) + cleanName(room.name, SugarI18n.t("NET_DEFAULT_ROOM_NAME"), 24) + "…");
     connectOnline(false, {room: room.id, spectator: !!spectator});
   }
 
   function createOnlineRoom() {
-    const name = cleanName(el("netNewName").value, "SALA DOCE", 24).toUpperCase();
+    const name = cleanName(el("netNewName").value, SugarI18n.t("NET_DEFAULT_ROOM"), 24).toUpperCase();
     const map = el("netNewMap").value;
     const mode = el("netNewMode").value;
-    const max = clamp(parseInt(el("netNewMax").value, 10) || 8, 2, 12);
+    const max = clamp(parseInt(el("netNewMax").value, 10) || DEFAULT_ROOM_SIZE, MIN_ROOM_SIZE, MAX_ROOM_SIZE);
     const allowSpectators = el("netNewSpectators").value !== "0";
     const friendlyFire = el("netNewFriendly").value === "1";
     stopRoomPolling();
@@ -766,7 +784,7 @@
     Net.config.allowSpectators = allowSpectators;
     Net.config.friendlyFire = friendlyFire;
     onlineRoomInfo = null;
-    setStatus("Abrindo a sala " + name + "…");
+    setStatus(SugarI18n.t("NET_OPENING_ROOM") + name + "…");
     connectOnline(false, {create: {
       name: name, map: map, mode: mode, max: max,
       allowSpectators: allowSpectators, friendlyFire: friendlyFire
@@ -840,7 +858,7 @@
     }
     const baseAddress = normalizeOnlineAddress(ui.server.value || onlineServerAddress);
     if (!baseAddress) {
-      setStatus("Digite o endereço mostrado pelo servidor neste computador.");
+      setStatus(SugarI18n.t("NET_TYPE_SERVER_SHOWN"));
       return;
     }
     onlineServerAddress = baseAddress.replace(/\/game$/, "");
@@ -880,11 +898,11 @@
     try {
       onlineSocket = new WebSocket(socketAddress);
     } catch (error) {
-      setStatus("O endereço do servidor não é válido.");
+      setStatus(SugarI18n.t("NET_INVALID_SERVER"));
       return;
     }
     onlineSocket.onopen = function () {
-      setStatus("Servidor encontrado. Entrando na sala…");
+      setStatus(SugarI18n.t("NET_SERVER_FOUND"));
     };
     onlineSocket.onmessage = function (event) {
       let message;
@@ -969,7 +987,7 @@
           team: Net.team, spectator: false
         });
         if (message.room) onlineRoomInfo = message.room;
-        setStatus("O dono saiu. Agora a sala é sua — aguarde todos ficarem prontos.");
+        setStatus(SugarI18n.t("NET_HOST_LEFT_YOURS"));
         showLobby();
         renderPlayers();
         broadcastRoster();
@@ -983,8 +1001,8 @@
         Net.inMatch = false;
         peers.clear();
         if (message.room) onlineRoomInfo = message.room;
-        if (ui && ui.ready) ui.ready.textContent = "ESTOU PRONTO";
-        setStatus("O dono da sala mudou. Reconectando ao novo dono…");
+        if (ui && ui.ready) ui.ready.textContent = SugarI18n.t("NET_READY");
+        setStatus(SugarI18n.t("NET_HOST_CHANGED"));
         showLobby();
         renderPlayers();
         Net.send({
@@ -1003,13 +1021,13 @@
         return;
       }
       if (message.net === "host_left") {
-        setStatus("O criador saiu. A sala será reiniciada automaticamente…");
+        setStatus(SugarI18n.t("NET_CREATOR_LEFT_RESTART"));
         return;
       }
       Net.onNativeEvent({event: "message", data: message});
     };
     onlineSocket.onerror = function () {
-      setStatus("Não foi possível alcançar o servidor online.");
+      setStatus(SugarI18n.t("NET_CANT_REACH_ONLINE"));
     };
     onlineSocket.onclose = function () {
       onlineSocket = null;
@@ -1053,9 +1071,9 @@
     });
     showLobby();
     renderPlayers();
-    setStatus("Criando o grupo Wi-Fi Direct…");
+    setStatus(SugarI18n.t("NET_CREATING_WIFI_GROUP"));
     SugarAndroid.createRoom(
-      cleanName(ui.roomName.value, "SALA DOCE", 24),
+      cleanName(ui.roomName.value, SugarI18n.t("NET_DEFAULT_ROOM"), 24),
       !!Net.roomPassword
     );
   }
@@ -1068,7 +1086,7 @@
     Net.connected = false;
     rooms.clear();
     renderRooms();
-    setStatus("Procurando salas próximas…");
+    setStatus(SugarI18n.t("NET_SEARCHING_NEARBY"));
     SugarAndroid.discoverRooms();
   }
 
@@ -1088,14 +1106,14 @@
       button.type = "button";
       const label = document.createElement("span");
       const title = document.createElement("b");
-      title.textContent = cleanName(room.name, "SALA SUGAR STRIKE", 24);
+      title.textContent = cleanName(room.name, SugarI18n.t("NET_DEFAULT_ROOM_NAME"), 24);
       const device = document.createElement("small");
-      device.textContent = cleanName(room.device, "APARELHO PRÓXIMO", 28);
+      device.textContent = cleanName(room.device, SugarI18n.t("NET_NEARBY_DEVICE"), 28);
       label.appendChild(title);
       label.appendChild(device);
       const badge = document.createElement("span");
       badge.className = "net-badge";
-      badge.textContent = room.locked ? "SENHA" : "ENTRAR";
+      badge.textContent = room.locked ? SugarI18n.t("NET_PASSWORD_BADGE") : SugarI18n.t("NET_JOIN");
       button.appendChild(label);
       button.appendChild(badge);
       button.addEventListener("click", function () {
@@ -1126,15 +1144,14 @@
         const name = document.createElement("b");
         name.textContent = entry.name;
         const detail = document.createElement("small");
-        const connection = entry.id === "host" ? "CRIADOR DA SALA" : ((entry.ping || 0) + " ms");
+        const connection = entry.id === "host" ? SugarI18n.t("NET_HOST_BADGE") : ((entry.ping || 0) + " ms");
         const version = entry.version && entry.version !== APP_VERSION
           ? " - VERSAO " + entry.version
           : "";
         // Mostra o que cada um vai levar para a partida.
         const kit = WEAPONS[safePrimary(entry.weapon)].name +
           " + " + WEAPONS[safeAccessory(entry.accessory)].name;
-        const team = entry.spectator ? "ESPECTADOR" :
-          (entry.team === 1 ? "EXERCITO AMERICANO" : (entry.team === 2 ? "SWAT" : "SEM EQUIPE"));
+        const team = entry.spectator ? SugarI18n.t("NET_SPECTATOR") : SugarI18n.teamLabel(entry.team);
         detail.textContent = connection + version + " · " + team + (entry.spectator ? "" : " · " + kit);
         label.appendChild(name);
         label.appendChild(detail);
@@ -1142,8 +1159,8 @@
         badge.className = "net-badge" + (entry.ready || entry.spectator ? "" : " wait") +
           (entry.team === 1 ? " team1" : (entry.team === 2 ? " team2" : "")) +
           (entry.version && entry.version !== APP_VERSION ? " bad" : "");
-        badge.textContent = entry.id === Net.myId ? "VOCÊ" :
-          (entry.spectator ? "ASSISTINDO" : (entry.ready ? "PRONTO" : "AGUARDE"));
+        badge.textContent = entry.id === Net.myId ? SugarI18n.t("NET_YOU") :
+          (entry.spectator ? SugarI18n.t("NET_WATCHING") : (entry.ready ? SugarI18n.t("NET_READY_BADGE") : SugarI18n.t("NET_WAIT_BADGE")));
         row.appendChild(label);
         row.appendChild(badge);
         ui.players.appendChild(row);
@@ -1191,7 +1208,7 @@
     Net.config.mode = el("netMode").value;
     Net.config.map = el("netMap").value;
     Net.config.duration = clamp(parseInt(el("netDuration").value, 10) || 5, 1, 30);
-    Net.config.bots = clamp(parseInt(el("netBots").value, 10) || 0, 0, 12);
+    Net.config.bots = clamp(parseInt(el("netBots").value, 10) || 0, 0, MAX_ROOM_SIZE - 1);
     Net.config.target = clamp(parseInt(el("netTarget").value, 10) || 25, 5, 100);
     Net.config.allowSpectators = el("netSpectators").value !== "0";
     Net.config.friendlyFire = el("netFriendly").value === "1";
@@ -1204,7 +1221,7 @@
   function toggleReady() {
     if (Net.role !== "client" || !Net.connected || Net.spectator) return;
     Net.ready = !Net.ready;
-    ui.ready.textContent = Net.ready ? "CANCELAR PRONTO" : "ESTOU PRONTO";
+    ui.ready.textContent = Net.ready ? SugarI18n.t("NET_CANCEL_READY") : SugarI18n.t("NET_READY");
     Net.send({t: "ready", ready: Net.ready});
   }
 
@@ -1222,7 +1239,7 @@
         Net.send({
           t: "migrate",
           successor: successor.id,
-          room: cleanName(ui.roomName.value, "SALA DOCE", 24),
+          room: cleanName(ui.roomName.value, SugarI18n.t("NET_DEFAULT_ROOM"), 24),
           password: Net.roomPassword,
           config: Net.config
         });
@@ -1251,14 +1268,14 @@
     hideNetworkOverlay();
     overlay.style.display = "flex";
     el("bPlay").classList.remove("hide");
-    el("bPlay").textContent = "JOGAR";
+    el("bPlay").textContent = SugarI18n.t("BTN_PLAY");
     el("bResume").classList.add("hide");
     el("bMulti").classList.remove("hide");
     el("bOnline").classList.remove("hide");
-    el("bMulti").textContent = "MULTIPLAYER WI-FI DIRECT";
-    el("bOnline").textContent = "JOGAR ONLINE";
+    el("bMulti").textContent = SugarI18n.t("BTN_MULTI_WIFI");
+    el("bOnline").textContent = SugarI18n.t("BTN_PLAY_ONLINE");
     panelEl.querySelector("h1").textContent = "SUGAR STRIKE";
-    panelEl.querySelector("h2").textContent = "DOCE GUERRA NA VILA CONFEITO";
+    panelEl.querySelector("h2").textContent = SugarI18n.t("SUBTITLE");
     el("ptxt").style.display = "block";
     el("sensWrap").style.display = "block";
   }
@@ -1291,11 +1308,11 @@
       return;
     }
     if (message.net === "full") {
-      setStatus("Essa sala já está cheia.");
+      setStatus(SugarI18n.t("NET_ROOM_FULL_MSG"));
       return;
     }
     if (message.net === "peer_join" && Net.role === "host") {
-      setStatus("Um amigo entrou. Aguardando o nome dele…");
+      setStatus(SugarI18n.t("NET_FRIEND_JOINED"));
       return;
     }
     if (message.net === "peer_leave" && Net.role === "host") {
@@ -1320,7 +1337,7 @@
       }
       peers.set(id, {
         id: id,
-        name: cleanName(message.name, "CONVIDADO", 14).toUpperCase(),
+        name: cleanName(message.name, SugarI18n.t("NET_GUEST"), 14).toUpperCase(),
         ready: false,
         ping: 0,
         version: String(message.version || ""),
@@ -1367,7 +1384,7 @@
         if (entry && entry.id) {
           peers.set(String(entry.id), {
             id: String(entry.id),
-            name: cleanName(entry.name, "JOGADOR", 14),
+            name: cleanName(entry.name, SugarI18n.t("NET_PLAYER"), 14),
             ready: !!entry.ready,
             ping: entry.ping | 0,
             version: String(entry.version || ""),
@@ -1383,7 +1400,7 @@
         Net.config = Object.assign(Net.config, message.config);
       }
       renderPlayers();
-      setStatus("Na sala. Aguarde o criador iniciar a partida.");
+      setStatus(SugarI18n.t("NET_IN_ROOM_WAIT_HOST"));
       return;
     }
     if (message.t === "ping") {
@@ -1502,7 +1519,7 @@
     ents.push(player);
 
     // O limite de gente é o que o dono escolheu ao criar a sala.
-    const seats = onlineRoomInfo ? clamp(onlineRoomInfo.max | 0, 2, 12) : 8;
+    const seats = onlineRoomInfo ? clamp(onlineRoomInfo.max | 0, MIN_ROOM_SIZE, MAX_ROOM_SIZE) : DEFAULT_ROOM_SIZE;
     peers.forEach(function (entry, id) {
       if (id === "host" || entry.spectator || ents.length >= seats) return;
       const remote = newEnt(entry.name, false);
@@ -1522,7 +1539,7 @@
     while (ents.length < desiredTotal) {
       const name = pool.length
         ? pool.splice((Math.random() * pool.length) | 0, 1)[0]
-        : "BOT " + (botNumber + 1);
+        : SugarI18n.t("NET_BOT") + " " + (botNumber + 1);
       const bot = newEnt(name, true);
       bot.netId = "bot" + botNumber++;
       bot.remote = false;
@@ -1573,7 +1590,7 @@
     });
     player = ents.find(function (entity) { return entity.netId === Net.myId; }) || null;
     if (!player && !Net.spectator) {
-      setStatus("Seu jogador não foi incluído nesta rodada.");
+      setStatus(SugarI18n.t("NET_PLAYER_NOT_INCLUDED"));
       showNetworkOverlay();
       return;
     }
@@ -1609,7 +1626,7 @@
     boardEl.style.display = "none";
     overlay.style.display = "none";
     el("ptxt").style.display = "none";
-    el(transportMode === "online" ? "bOnline" : "bMulti").textContent = "VOLTAR À SALA";
+    el(transportMode === "online" ? "bOnline" : "bMulti").textContent = SugarI18n.t("NET_BACK_TO_ROOM");
     hideNetworkOverlay();
     document.documentElement.classList.toggle("spectating", !!Net.spectator);
     afterStart();
@@ -1622,7 +1639,7 @@
     const roomButton = el(transportMode === "online" ? "bOnline" : "bMulti");
     const otherButton = el(transportMode === "online" ? "bMulti" : "bOnline");
     roomButton.classList.remove("hide");
-    roomButton.textContent = "VOLTAR À SALA";
+    roomButton.textContent = SugarI18n.t("NET_BACK_TO_ROOM");
     otherButton.classList.add("hide");
     document.documentElement.classList.remove("spectating");
     if (spectatorHud) spectatorHud.classList.remove("show");
@@ -1688,17 +1705,16 @@
     if (!active) return;
     const target = observedEntity();
     if (!target) {
-      el("specName").textContent = "AGUARDANDO JOGADOR VIVO";
+      el("specName").textContent = SugarI18n.t("NET_WAITING_LIVE_PLAYER");
       el("specData").textContent = "Nenhum combatente disponível.";
       return;
     }
     const weapon = WEAPONS[clamp(target.wep | 0, 0, WEAPONS.length - 1)];
     const accessory = WEAPONS[safeAccessory(target.accessory)];
-    const team = target.team === 1 ? "EXERCITO AMERICANO" :
-      (target.team === 2 ? "SWAT" : "SEM EQUIPE");
+    const team = SugarI18n.teamLabel(target.team);
     const ammo = weapon.melee ? "∞" : Math.max(0, target.mag | 0) + "/" + Math.max(0, target.res | 0);
     el("specName").textContent = target.name;
-    el("specData").textContent = "EQUIPE " + team + " · VIDA " + Math.round(target.hp) +
+    el("specData").textContent = SugarI18n.t("NET_TEAM_PREFIX") + team + SugarI18n.t("NET_LIFE_PREFIX") + Math.round(target.hp) +
       " · " + weapon.name + " · MUNIÇÃO " + ammo + " · " + accessory.name +
       " · " + (target.score | 0) + " ELIMINAÇÕES";
   }
@@ -1738,7 +1754,7 @@
 
   function entityFromFull(data) {
     if (!data || !data.id) return null;
-    const entity = newEnt(cleanName(data.name, "JOGADOR", 14), !!data.bot);
+    const entity = newEnt(cleanName(data.name, SugarI18n.t("NET_PLAYER"), 14), !!data.bot);
     entity.netId = String(data.id);
     entity.remote = entity.netId !== Net.myId;
     entity.skin = data.skin || entity.skin;
@@ -1947,6 +1963,8 @@
       if (!weapon.thrown) flash = 0.055;
     }
     wKick = 1;
+    // O cliente ve a propria granada voando; o dano quem aplica e o host.
+    if (weapon.thrown) throwGrenade(entity, weapon, dx, dy, dz, 1, true);
     snd.fire(weapon);
     if (window.SugarEnhance && SugarEnhance.onShot) SugarEnhance.onShot(entity);
     updateHUD();
@@ -1987,6 +2005,13 @@
     const ex = entity.x;
     const ey = entity.y + 1.55;
     const ez = entity.z;
+    // Granada de jogador remoto tambem voa: quem decide o dano continua sendo o host.
+    if (weapon.thrown) {
+      throwGrenade(entity, weapon, dx, dy, dz, 1);
+      Net.send({t: "fx_shot", id: entity.netId, x: ex, y: ey, z: ez, w: entity.wep,
+        dx: round3(dx), dy: round3(dy), dz: round3(dz)});
+      return;
+    }
     let registered = false;
     for (let i = 0; i < weapon.pellets; i++) {
       let sx = dx + rnd(-weapon.spread, weapon.spread);
@@ -2056,6 +2081,10 @@
     if (!entity || entity === player) return;
     const weapon = WEAPONS[clamp(message.w | 0, 0, WEAPONS.length - 1)];
     entity.aiming = true;
+    // Granada dos outros tambem aparece voando, mas sem aplicar dano aqui.
+    if (weapon.thrown && finite(message.dx, null) !== null) {
+      throwGrenade(entity, weapon, message.dx, message.dy, message.dz, 1, true);
+    }
     if (!weapon.melee) {
       muzzles.push({
         x: finite(message.x, entity.x),
@@ -2075,7 +2104,7 @@
     entity.remote = false;
     entity.bot = true;
     entity.netId = "left-" + id;
-    entity.name = cleanName(entity.name, "JOGADOR", 10) + " BOT";
+    entity.name = cleanName(entity.name, SugarI18n.t("NET_PLAYER"), 10) + " " + SugarI18n.t("NET_BOT");
     entity.target = null;
     entity.think = 0;
   }
@@ -2086,12 +2115,12 @@
 
   function beginMigration(message) {
     if (transportMode === "online") return;
-    const room = cleanName(message.room, "SALA DOCE", 24);
+    const room = cleanName(message.room, SugarI18n.t("NET_DEFAULT_ROOM"), 24);
     Net.migration = {room: room, config: message.config || Net.config};
     Net.config = Object.assign(Net.config, Net.migration.config);
     Net.roomPassword = cleanName(message.password, "", 12);
     Net.inMatch = false;
-    setStatus("O criador saiu. Transferindo a sala...");
+    setStatus(SugarI18n.t("NET_CREATOR_LEFT_TRANSFER"));
     try { SugarAndroid.disconnect(); } catch (error) {}
     if (String(message.successor || "") === Net.myId) {
       setTimeout(function () {
@@ -2159,14 +2188,25 @@
     const fired = entity.mag < before ||
       (weapon.melee && entity.fireT > beforeFireT);
     if (Net.inMatch && Net.role === "host" && fired) {
-      Net.send({
+      const shot = {
         t: "fx_shot",
         id: entity.netId,
         x: entity.x,
         y: entity.y + (entity === player ? 1.55 : 1.45),
         z: entity.z,
         w: entity.wep
-      });
+      };
+      // Sem a direcao, os clientes nao teriam como desenhar a granada voando.
+      if (weapon.thrown) {
+        const thrown = grenades[grenades.length - 1];
+        if (thrown) {
+          const length = Math.hypot(thrown.vx, thrown.vy, thrown.vz) || 1;
+          shot.dx = round3(thrown.vx / length);
+          shot.dy = round3(thrown.vy / length);
+          shot.dz = round3(thrown.vz / length);
+        }
+      }
+      Net.send(shot);
     }
   };
 
@@ -2259,7 +2299,7 @@
         showNetworkOverlay();
         showLobby();
         ui.continueButton.classList.remove("net-hide");
-        setStatus("Partida em andamento. Toque em CONTINUAR para voltar.");
+        setStatus(SugarI18n.t("NET_MATCH_IN_PROGRESS_TAP"));
       } else {
         hideNetworkOverlay();
       }

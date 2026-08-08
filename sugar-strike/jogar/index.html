@@ -149,7 +149,7 @@
 <div id="loading">
   <div id="loadingCandy"></div>
   <div id="loadingLogo">SUGAR STRIKE</div>
-  <div id="loadingText">PREPARANDO A VILA...</div>
+  <div id="loadingText" data-i18n="LOADING_TEXT">PREPARANDO A VILA...</div>
 </div>
 <canvas id="game"></canvas>
 
@@ -162,14 +162,14 @@
   </div>
 
   <div id="topMid">
-    <div class="pill"><div class="lab">PONTOS</div><div class="val" id="scoreV">0</div></div>
-    <div class="pill"><div class="lab">L&Iacute;DER</div><div class="val" id="leaderV">-</div></div>
-    <div class="pill"><div class="lab">META</div><div class="val" id="targetV">25</div></div>
+    <div class="pill"><div class="lab" data-i18n="HUD_SCORE">PONTOS</div><div class="val" id="scoreV">0</div></div>
+    <div class="pill"><div class="lab" data-i18n="HUD_LEADER">L&Iacute;DER</div><div class="val" id="leaderV">-</div></div>
+    <div class="pill"><div class="lab" data-i18n="HUD_TARGET">META</div><div class="val" id="targetV">25</div></div>
   </div>
 
   <div id="leftStack">
     <div class="pill" style="padding:6px 10px">
-      <div class="lab" style="text-align:left;margin-bottom:4px">VITALIDADE</div>
+      <div class="lab" style="text-align:left;margin-bottom:4px" data-i18n="HUD_HEALTH">VITALIDADE</div>
       <div id="hpOuter"><div id="hpFill"></div><div id="hpTxt">100</div></div>
     </div>
     <div class="pill" style="padding:6px 10px">
@@ -187,27 +187,29 @@
   </div>
 
   <div id="stick"><div id="knob"></div></div>
-  <div class="tbtn" id="bFire">ATIRAR</div>
-  <div class="tbtn" id="bJump">PULO</div>
-  <div class="tbtn" id="bReload">REC</div>
+  <div class="tbtn" id="bFire" data-i18n="BTN_FIRE">ATIRAR</div>
+  <div class="tbtn" id="bJump" data-i18n="BTN_JUMP">PULO</div>
+  <div class="tbtn" id="bReload" data-i18n="BTN_RELOAD">REC</div>
   <!-- so aparece quando a arma na mao tem luneta -->
-  <div class="tbtn" id="bScope">MIRA</div>
+  <div class="tbtn" id="bScope" data-i18n="BTN_SCOPE">MIRA</div>
 
-  <div class="pill" id="board"><h3>PLACAR</h3><div id="boardRows"></div></div>
+  <div class="pill" id="board"><h3 data-i18n="BOARD_TITLE">PLACAR</h3><div id="boardRows"></div></div>
 
-  <div class="pill hide" id="hint">MOVA O MOUSE PARA MIRAR &middot; LEVE AT&Eacute; A BORDA PARA GIRAR 360&deg;</div>
+  <div class="pill hide" id="hint" data-i18n="HINT_AIM">MOVA O MOUSE PARA MIRAR &middot; LEVE AT&Eacute; A BORDA PARA GIRAR 360&deg;</div>
 </div>
 
 <!-- Espaco dos anuncios laterais. Fica fora do #hud de proposito: aquele bloco
      ignora cliques, e o anuncio precisa receber. So a versao web usa. -->
 <aside class="adFaixa" id="adEsq" aria-label="Anuncio"></aside>
 <aside class="adFaixa" id="adDir" aria-label="Anuncio"></aside>
+<script src="i18n.js?v=1.8.1"></script>
+<script>window.SugarI18n.applyStatic();</script>
 
 <div id="overlay">
   <div id="panel">
     <h1>SUGAR STRIKE</h1>
-    <h2>DOCE GUERRA NA VILA CONFEITO</h2>
-    <p id="ptxt">
+    <h2 data-i18n="SUBTITLE">DOCE GUERRA NA VILA CONFEITO</h2>
+    <p id="ptxt" data-i18n-html="INSTRUCTIONS_HTML">
       Deathmatch numa cidade de doces. Elimine os rivais at&eacute; bater a meta de pontos.<br><br>
       <span class="key">W A S D</span> mover &nbsp; <span class="key">MOUSE</span> mirar &nbsp;
       <span class="key">CLIQUE</span> atirar<br>
@@ -218,11 +220,11 @@
       <span class="key">TAB</span> placar<br>
       No celular: joystick + arraste na tela para mirar.
     </p>
-    <button class="big-btn" id="bPlay">JOGAR</button>
-    <button class="big-btn sub-btn hide" id="bMainMenu">MENU PRINCIPAL</button>
-    <button class="big-btn sub-btn hide" id="bResume">CONTINUAR</button>
+    <button class="big-btn" id="bPlay" data-i18n="BTN_PLAY">JOGAR</button>
+    <button class="big-btn sub-btn hide" id="bMainMenu" data-i18n="BTN_MAIN_MENU">MENU PRINCIPAL</button>
+    <button class="big-btn sub-btn hide" id="bResume" data-i18n="BTN_RESUME">CONTINUAR</button>
     <div id="sensWrap" style="margin-top:12px">
-      <div class="lab" style="text-align:left">SENSIBILIDADE</div>
+      <div class="lab" style="text-align:left" data-i18n="SENSITIVITY">SENSIBILIDADE</div>
       <input type="range" id="sens" min="4" max="40" value="16">
     </div>
     <div id="rodapeWeb">
@@ -655,72 +657,72 @@ function rayAABB(ox,oy,oz,dx,dy,dz,x0,y0,z0,x1,y1,z1,maxT){
    A regra de equilibrio: quem alcanca longe e preciso paga caro e atira
    devagar; quem cospe rapido perde dano ou perde precisao na distancia.  */
 const WEAPONS=[
- /* 0 */ {name:'CARAMELO ASSAULT', role:'FUZIL', desc:'Dano alto e coice forte. Perdoa pouco, mas derruba rapido.',
+ /* 0 */ {name:'CARAMELO ASSAULT', role:'FUZIL', get desc(){return SugarI18n.t('WEAPON_DESC_0');},
           dmg:36, rate:0.100, mag:30, res:90, maxRes:90, spread:0.020, move:0.058, pellets:1, auto:true,
           reload:2.40, kick:0.055, side:0.020, range:90, fall:[55,0.72], weight:0.30, price:420,
           snd:300, tone:'crack', color:'#c98f5e', accent:'#6d3a2a'},
- /* 1 */ {name:'MENTA DEFENDER', role:'FUZIL', desc:'Equilibrada e precisa. A escolha segura para qualquer distancia.',
+ /* 1 */ {name:'MENTA DEFENDER', role:'FUZIL', get desc(){return SugarI18n.t('WEAPON_DESC_1');},
           dmg:30, rate:0.090, mag:30, res:90, maxRes:90, spread:0.013, move:0.042, pellets:1, auto:true,
           reload:2.20, kick:0.037, side:0.012, range:92, fall:[60,0.78], weight:0.27, price:400,
           snd:380, tone:'crack', color:'#8fd9c8', accent:'#fdf7ec'},
- /* 2 */ {name:'PIRULITO SNIPER', role:'PRECISAO', desc:'Alcance e precisao extremos pela luneta. No quadril nao acerta nada.',
+ /* 2 */ {name:'PIRULITO SNIPER', role:'PRECISAO', get desc(){return SugarI18n.t('WEAPON_DESC_2');},
           dmg:105, rate:1.45, mag:5, res:25, maxRes:25, spread:0.055, move:0.170, pellets:1, auto:false,
           reload:3.40, kick:0.115, side:0.008, range:175, fall:[140,0.92], weight:0.62, price:900,
           snd:150, tone:'boom', color:'#f6a9c3', accent:'#ffcf4d',
           /* com a luneta no olho: angulo fechado, mira firme e mao mais lenta */
           scope:{fov:0.40, spread:0.0028, move:0.140, sens:0.34, speed:0.52}},
- /* 3 */ {name:'CHOCOLATE EAGLE', role:'PISTOLA', desc:'Pistola pesadissima. Poucos tiros, muito estrago e recuo bravo.',
+ /* 3 */ {name:'CHOCOLATE EAGLE', role:'PISTOLA', get desc(){return SugarI18n.t('WEAPON_DESC_3');},
           dmg:58, rate:0.32, mag:7, res:35, maxRes:35, spread:0.016, move:0.078, pellets:1, auto:false,
           reload:2.10, kick:0.095, side:0.028, range:85, fall:[45,0.70], weight:0.14, price:320,
           snd:200, tone:'boom', color:'#6d3a2a', accent:'#c98f5e'},
- /* 4 */ {name:'GOMA-18', role:'PISTOLA', desc:'Rapida e leve. Dano baixo, mas nunca custa nada.',
+ /* 4 */ {name:'GOMA-18', role:'PISTOLA', get desc(){return SugarI18n.t('WEAPON_DESC_4');},
           dmg:17, rate:0.130, mag:20, res:80, maxRes:80, spread:0.019, move:0.044, pellets:1, auto:true,
           reload:1.65, kick:0.022, side:0.010, range:62, fall:[26,0.55], weight:0.06, price:0,
           snd:620, tone:'pop', color:'#f6a9c3', accent:'#fdf7ec'},
- /* 5 */ {name:'BAUNILHA SILENCIOSA', role:'PISTOLA', desc:'Precisa e silenciosa. Carregador curto exige pontaria.',
+ /* 5 */ {name:'BAUNILHA SILENCIOSA', role:'PISTOLA', get desc(){return SugarI18n.t('WEAPON_DESC_5');},
           dmg:26, rate:0.19, mag:12, res:48, maxRes:48, spread:0.009, move:0.030, pellets:1, auto:false,
           reload:1.90, kick:0.028, side:0.008, range:72, fall:[40,0.62], weight:0.09, price:180,
           snd:520, tone:'hush', silent:true, color:'#fdf7ec', accent:'#e8dcc2'},
- /* 6 */ {name:'DOCE-RAJADA', role:'RAJADA', desc:'Cadencia altissima e carregador enorme. Espalha muito longe.',
+ /* 6 */ {name:'DOCE-RAJADA', role:'RAJADA', get desc(){return SugarI18n.t('WEAPON_DESC_6');},
           dmg:15, rate:0.066, mag:50, res:100, maxRes:100, spread:0.028, move:0.038, pellets:1, auto:true,
           reload:2.90, kick:0.024, side:0.015, range:55, fall:[22,0.42], weight:0.20, price:340,
           snd:760, tone:'pop', color:'#ffcf4d', accent:'#e8615a'},
- /* 7 */ {name:'MENTA-SD', role:'RAJADA', desc:'Silenciosa e agil. Manda muito bem de perto.',
+ /* 7 */ {name:'MENTA-SD', role:'RAJADA', get desc(){return SugarI18n.t('WEAPON_DESC_7');},
           dmg:19, rate:0.080, mag:30, res:90, maxRes:90, spread:0.019, move:0.034, pellets:1, auto:true,
           reload:2.50, kick:0.026, side:0.010, range:62, fall:[26,0.50], weight:0.18, price:300,
           snd:560, tone:'hush', silent:true, color:'#7ec96b', accent:'#8fd9c8'},
- /* 8 */ {name:'BISCOITO BOOM', role:'ESCOPETA', desc:'Nove farelos por tiro. Devastadora colada, inutil longe.',
+ /* 8 */ {name:'BISCOITO BOOM', role:'ESCOPETA', get desc(){return SugarI18n.t('WEAPON_DESC_8');},
           dmg:12, rate:0.85, mag:8, res:32, maxRes:32, spread:0.052, move:0.024, pellets:9, auto:false,
           reload:2.80, kick:0.085, side:0.022, range:40, fall:[10,0.18], weight:0.35, price:380,
           snd:170, tone:'boom', color:'#c98f5e', accent:'#f3e0a2'},
- /* 9 */ {name:'ALGODAO PESADO', role:'METRALHADORA', desc:'Cem tiros sem parar. Pesada, imprecisa e lenta para recarregar.',
+ /* 9 */ {name:'ALGODAO PESADO', role:'METRALHADORA', get desc(){return SugarI18n.t('WEAPON_DESC_9');},
           dmg:22, rate:0.066, mag:100, res:100, maxRes:100, spread:0.042, move:0.105, pellets:1, auto:true,
           reload:5.40, kick:0.045, side:0.032, range:78, fall:[50,0.65], weight:0.75, price:820,
           snd:260, tone:'crack', color:'#f6a9c3', accent:'#c9b4ec'},
  /* 10 */{name:'FACA DE ACUCAR', role:'ACESSORIO', acc:true, melee:true,
-          desc:'A primeira facada derruba de uma vez. Depois de acertar, precisa carregar de novo.',
+          get desc(){return SugarI18n.t('WEAPON_DESC_10');},
           dmg:55, rate:0.45, mag:0, res:0, maxRes:0, spread:0.010, move:0, pellets:1, auto:false,
           reload:0, kick:0, side:0, range:2.6, weight:0, price:0,
           /* golpe carregado: mata de primeira e so volta depois de recarregar */
           first:100, firstDelay:1.6,
           snd:900, tone:'swish', color:'#e8dcc2', accent:'#f6a9c3'},
  /* 11 */{name:'GRANADA DE GOMA', role:'ACESSORIO', acc:true, thrown:true,
-          desc:'Estoura numa bola de goma. Duas por vida, recarrega ao renascer.',
+          get desc(){return SugarI18n.t('WEAPON_DESC_11');},
           dmg:70, rate:1.10, mag:2, res:0, maxRes:0, spread:0.030, move:0.040, pellets:1, auto:false,
           reload:0, kick:0.030, side:0.010, range:34, explosive:4.6, weight:0.05, price:260,
           snd:210, tone:'boom', color:'#e8615a', accent:'#ffcf4d'},
  /* 12 */{name:'PAU DE CANELA', role:'ACESSORIO', acc:true, melee:true,
-          desc:'Pancada pesada que deixa o rival tonto e lento.',
+          get desc(){return SugarI18n.t('WEAPON_DESC_12');},
           dmg:68, rate:0.72, mag:0, res:0, maxRes:0, spread:0.012, move:0, pellets:1, auto:false,
           reload:0, kick:0, side:0, range:2.9, slow:1.6, weight:0.08, price:220,
           snd:180, tone:'thud', color:'#a5643c', accent:'#c98f5e'},
  /* 13 */{name:'VASSOURA DE ALGODAO', role:'ACESSORIO', acc:true, melee:true,
-          desc:'Alcance bem maior que a faca, em troca de menos dano.',
+          get desc(){return SugarI18n.t('WEAPON_DESC_13');},
           dmg:34, rate:0.28, mag:0, res:0, maxRes:0, spread:0.014, move:0, pellets:1, auto:true,
           reload:0, kick:0, side:0, range:3.4, weight:0.04, price:200,
           snd:1100, tone:'swish', color:'#f6a9c3', accent:'#f3e0a2'},
  /* 14 */{name:'BOMBINHA DE CONFETE', role:'ACESSORIO', acc:true, thrown:true,
-          desc:'Explosao larga que gruda confete e mela a corrida do inimigo.',
+          get desc(){return SugarI18n.t('WEAPON_DESC_14');},
           dmg:38, rate:0.95, mag:3, res:0, maxRes:0, spread:0.034, move:0.045, pellets:1, auto:false,
           reload:0, kick:0.022, side:0.008, range:30, explosive:5.2, slow:2.6, weight:0.04, price:240,
           snd:340, tone:'pop', color:'#c9b4ec', accent:'#8fd9c8'}
@@ -728,6 +730,12 @@ const WEAPONS=[
 /* indices das dez principais e dos cinco acessorios */
 const PRIMARIES=[0,1,2,3,4,5,6,7,8,9];
 const ACCESSORIES=[10,11,12,13,14];
+/* Kit de renascimento: quem morre volta so com a pistola de graca e duas
+   granadas. Quem matou fica com a arma principal do outro ate o fim da
+   partida. Nada disso abre a loja: o jogador so vai la se quiser.        */
+const BASE_PRIMARY=4;          // GOMA-18, a pistola sem preco
+const BASE_ACCESSORY=11;       // GRANADA DE GOMA
+const BASE_GRENADES=2;
 /* armas que os bots podem sortear (so principais) */
 const BOT_WEAPONS=[0,1,3,4,5,6,7,8];
 /* o que o jogador leva: [arma principal, acessorio]. A loja troca isso. */
@@ -801,7 +809,11 @@ const SKINS=[
   {b:'#7ec96b',h:'#ffd6ab',p:'#e0a13c'},
   {b:'#e8615a',h:'#f4c69b',p:'#ffcf4d'},
   {b:'#5b5f8f',h:'#ffd9a8',p:'#8fd9c8'},
-  {b:'#d65fa0',h:'#f7cfa4',p:'#9ec9f2'}
+  {b:'#d65fa0',h:'#f7cfa4',p:'#9ec9f2'},
+  /* As duas ultimas sao as fardas que o modo Equipes usa. Compradas na loja,
+     valem em qualquer modo; dentro do modo Equipes o uniforme do time manda. */
+  {b:'#596b3b',h:'#f4c69b',p:'#8a8056',uniform:'army'},
+  {b:'#171c22',h:'#f4c69b',p:'#080b0f',uniform:'swat'}
 ];
 let TARGET=25;
 const BOT_DMG=0.38;        // bots causam menos dano que o jogador
@@ -810,7 +822,8 @@ let ents=[], player=null, particles=[], feed=[], matchOver=false;
 
 function newEnt(name,bot){
   return {name:name,bot:bot,x:0,y:0,z:0,yaw:0,vy:0,hp:100,dead:false,score:0,deaths:0,
-    skin:pick(SKINS),walk:0,speed:0,fireT:0,think:0,target:null,see:false,goal:null,
+    /* bots sorteiam so as roupas civis: farda e coisa de quem comprou */
+    skin:pick(SKINS.filter(s=>!s.uniform)),walk:0,speed:0,fireT:0,think:0,target:null,see:false,goal:null,
     wep:0,accessory:10,mag:0,res:0,reloadT:0,reloadDuration:0,reloadWep:-1,reloadStage:0,blocked:false,lastHitBy:null,hurt:0,ground:0,respawnT:0,
     aim:0,burst:0,prot:0,regen:0,strafe:1,team:0,shield:0,slow:0,
     shots:0,hits:0,headshots:0,streak:0,bestStreak:0,
@@ -828,12 +841,60 @@ function spawnPoint(){
   }
   return best||{x:0,z:0};
 }
+/* Qual e a arma principal de alguem: o jogador guarda a dele no LOADOUT,
+   os bots carregam a principal em wep mesmo.                              */
+function primaryOf(e){
+  const index=e===player?(LOADOUT[0]|0):(e.wep|0);
+  return PRIMARIES.indexOf(index)>=0?index:-1;
+}
+/* Matou, levou: a principal do morto passa para a mao de quem matou, e vale
+   ate o fim da partida. O morto renasce com o kit base (ver respawn).     */
+function lootArsenal(killer,victim){
+  const loot=primaryOf(victim);
+  victim.stripped=true;
+  if(loot<0||killer.dead) return;
+  if(killer===player){
+    if(window.SugarEnhance&&SugarEnhance.grantWeapon) SugarEnhance.grantWeapon(loot);
+    LOADOUT[0]=loot;
+    killer.mags[loot]=WEAPONS[loot].mag;
+    killer.ress[loot]=WEAPONS[loot].maxRes;
+    setWeapon(loot);
+    showLootFeed(WEAPONS[loot].name);
+  }else{
+    killer.wep=loot;
+    killer.mag=killer.mags[loot]=WEAPONS[loot].mag;
+    killer.res=killer.ress[loot]=WEAPONS[loot].maxRes;
+  }
+}
+function showLootFeed(name){
+  if(window.SugarEnhance&&SugarEnhance.toast) SugarEnhance.toast(name+' SAQUEADA');
+  updateHUD();
+}
+
 function respawn(e){
   const p=spawnPoint();
   e.x=p.x; e.z=p.z; e.y=0; e.vy=0; e.hp=100; e.dead=false; e.hurt=0;
   /* bots sorteiam uma principal; so o jogador local volta com o que equipou.
      Jogadores remotos mantem a arma que eles proprios escolheram. */
-  if(e.bot) e.wep=pick(BOT_WEAPONS);
+  /* Morreu na partida: perde o que estava carregando e volta com o kit base.
+     No comeco da partida ninguem esta marcado, entao o loadout comprado vale
+     normalmente na primeira vida. */
+  const rebuilt=!!e.stripped;
+  if(rebuilt){
+    e.stripped=false;
+    if(e===player){
+      LOADOUT[0]=BASE_PRIMARY; LOADOUT[1]=BASE_ACCESSORY;
+      /* o kit base nunca fica trancado, mesmo sem ter comprado a granada */
+      if(window.SugarEnhance&&SugarEnhance.grantWeapon){
+        /* as armas achadas no chao ficam para tras junto com o resto */
+        if(SugarEnhance.clearFieldWeapons) SugarEnhance.clearFieldWeapons();
+        SugarEnhance.grantWeapon(BASE_PRIMARY);
+        SugarEnhance.grantWeapon(BASE_ACCESSORY);
+      }
+    }
+    e.wep=BASE_PRIMARY;
+  }
+  else if(e.bot) e.wep=pick(BOT_WEAPONS);
   else if(e===player&&LOADOUT.indexOf(e.wep)<0) e.wep=LOADOUT[0];
   for(let i=0;i<WEAPONS.length;i++){ e.mags[i]=WEAPONS[i].mag; e.ress[i]=WEAPONS[i].maxRes; }
   const w=WEAPONS[e.wep];
@@ -849,13 +910,24 @@ function respawn(e){
       e.res=e.ress[e.wep];
     }
     e.shield=gearMod('shield',0);
+    /* Primeira vida da partida: leva o estoque comprado. Depois de morrer,
+       volta so com as duas do kit base — o estoque guardado nao se perde,
+       ele espera a proxima partida. */
+    const stock=(window.SugarEnhance&&SugarEnhance.grenadeCapacity)?SugarEnhance.grenadeCapacity():0;
+    const carried=rebuilt?BASE_GRENADES:stock;
+    if(carried){
+      for(let i=0;i<WEAPONS.length;i++) if(WEAPONS[i].thrown) e.mags[i]=carried;
+      if(WEAPONS[e.wep].thrown) e.mag=carried;
+      e.freeNades=rebuilt?BASE_GRENADES:(SugarEnhance.grenadeBase|0);
+    }
+    if(window.SugarEnhance&&SugarEnhance.refreshSlots) SugarEnhance.refreshSlots();
   }
   if(e===player){ camShake=0; dmgDir=0; dmgFlash=0; dmgEl.style.opacity=0; }
 }
 
 function initMatch(){
   ents=[]; particles=[]; feed=[]; matchOver=false;
-  player=newEnt('VOCE',false);
+  player=newEnt(SugarI18n.t('YOU'),false);
   player.wep=LOADOUT[0];
   ents.push(player);
   const pool=NAMES.slice();
@@ -898,6 +970,7 @@ function damage(e,amount,by,head){
       by.ress[by.wep]=Math.min(bw.maxRes,by.ress[by.wep]+Math.ceil(bw.mag*0.8));
       by.res=by.ress[by.wep];
       by.hp=Math.min(100,by.hp+18);
+      lootArsenal(by,e);
     }
     else addFeed(e.name,'--',false);
     snd.death();
@@ -946,6 +1019,7 @@ function traceShot(ox,oy,oz,dx,dy,dz,shooter,w,scale){
   }else if(bestT<range){
     burst(hx,hy,hz,'#e8dcc2',3);
   }
+  if(!w.melee) addTracer(ox,oy,oz,dx,dy,dz,bestT,w,shooter);
   return registered;          /* quem chamou precisa saber se acertou */
 }
 function shoot(e){
@@ -1004,6 +1078,13 @@ function shoot(e){
     snd.shotSpatial(w.snd,e.x-player.x,e.z-player.z);
     if(!w.melee) muzzles.push({x:ex,y:ey,z:ez,t:0.06});
   }
+  /* granada nao e tiro: sai voando e explode depois da contagem */
+  if(w.thrown){
+    throwGrenade(e,w,bx,by,bz,scale);
+    /* gasta primeiro as de fabrica; depois come do estoque comprado */
+    if(e===player&&window.SugarEnhance&&SugarEnhance.consumeGrenade) SugarEnhance.consumeGrenade();
+    return;
+  }
   let acertou=false;
   for(let i=0;i<w.pellets;i++){
     let dx=bx,dy=by,dz=bz;
@@ -1045,16 +1126,16 @@ function tickReload(e,dt){
   const duration=Math.max(0.001,e.reloadDuration||WEAPONS[e.wep].reload||1);
   const progress=clamp(1-e.reloadT/duration,0,1);
   if(e===player&&e.reloadStage<1&&progress>=0.30){
-    e.reloadStage=1; tone(250,180,0.07,0.035,'triangle');
+    e.reloadStage=1; snd.tone(250,180,0.07,0.035,'triangle');
   }
   if(e===player&&e.reloadStage<2&&progress>=0.66){
-    e.reloadStage=2; tone(360,520,0.075,0.045,'triangle');
+    e.reloadStage=2; snd.tone(360,520,0.075,0.045,'triangle');
   }
   if(e===player&&e.reloadStage<3&&progress>=0.88){
     e.reloadStage=3;
     const role=WEAPONS[e.wep].role;
     if(role==='FUZIL'||role==='PRECISAO'||role==='RAJADA'||role==='METRALHADORA')
-      tone(620,390,0.065,0.035,'square');
+      snd.tone(620,390,0.065,0.035,'square');
   }
   if(e.reloadT<=0) finishReload(e);
 }
@@ -1097,6 +1178,154 @@ function drawParticles(){
     ctx.fillRect(-s,-s,s*2,s*2);
     if(s>3) ctx.strokeRect(-s,-s,s*2,s*2);
     ctx.restore();
+  }
+  ctx.restore();
+  ctx.globalAlpha=1;
+}
+
+/* ------------------------------------------------- rastro neon dos tiros
+   O tiro continua sendo instantaneo: o rastro e so a marca luminosa do
+   caminho que a bala fez, e some em menos de um decimo de segundo.        */
+const tracers=[];
+function addTracer(ox,oy,oz,dx,dy,dz,dist,w,shooter){
+  if(tracers.length>60) tracers.shift();
+  /* a bala sai da ponta do cano, nao do meio da tela: para o jogador o
+     inicio do rastro anda um pouco para a direita e para baixo, onde a
+     arma aparece na tela. */
+  const start=shooter===player?0.9:0.35;
+  const d=Math.max(dist,0.6);
+  let sx=0, sy=0, sz=0;
+  if(shooter===player){
+    sx=Math.cos(cam.yaw)*0.20; sz=-Math.sin(cam.yaw)*0.20; sy=-0.16;
+  }
+  tracers.push({x0:ox+dx*start+sx, y0:oy+dy*start+sy,  z0:oz+dz*start+sz,
+    x1:ox+dx*d, y1:oy+dy*d, z1:oz+dz*d,
+    c:w.accent||'#8fd9c8', t:0.085, max:0.085, thick:w.explosive?2.4:1});
+}
+function updateTracers(dt){
+  for(let i=tracers.length-1;i>=0;i--){ tracers[i].t-=dt; if(tracers[i].t<=0) tracers.splice(i,1); }
+}
+function drawTracers(){
+  if(!tracers.length) return;
+  ctx.save();
+  ctx.globalCompositeOperation='lighter';
+  ctx.lineCap='round';
+  for(const tr of tracers){
+    const a=project(tr.x0,tr.y0,tr.z0), b=project(tr.x1,tr.y1,tr.z1);
+    if(!a||!b) continue;
+    const fade=clamp(tr.t/tr.max,0,1);
+    /* tres passadas: brilho largo, corpo colorido e o nucleo branco */
+    const width=clamp(a.s*0.010,1.2,7)*tr.thick;
+    ctx.strokeStyle=tr.c;
+    ctx.globalAlpha=0.20*fade; ctx.lineWidth=width*3.4;
+    ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+    ctx.globalAlpha=0.55*fade; ctx.lineWidth=width*1.7;
+    ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+    ctx.strokeStyle='#fffdf7';
+    ctx.globalAlpha=0.85*fade; ctx.lineWidth=width*0.7;
+    ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+  }
+  ctx.restore();
+  ctx.globalAlpha=1;
+}
+
+/* --------------------------------------------------------------- granadas
+   A granada deixou de ser tiro instantaneo: ela voa, quica, mostra a
+   contagem no ar e so entao explode. O dano vai por faixa de distancia. */
+const grenades=[];
+const GRENADE_FUSE=2.6;
+/* Faixas pedidas: ate 3m tira a vida inteira, ate 5m metade, ate 15m um
+   quinto. E porcentagem da VIDA, nao do dano da arma.                    */
+function grenadeFactor(dist){
+  if(dist<=3) return 1;
+  if(dist<=5) return 0.5;
+  if(dist<=15) return 0.2;
+  return 0;
+}
+/* visual=true: a granada so aparece e faz barulho. Quem manda no dano e o
+   host da sala; sem isso o mesmo estouro contaria duas vezes.             */
+function throwGrenade(e,w,dx,dy,dz,scale,visual){
+  const ex=e.x, ey=e.y+(e===player?1.5:1.4), ez=e.z;
+  grenades.push({
+    x:ex+dx*0.6, y:ey+dy*0.6, z:ez+dz*0.6,
+    vx:dx*17, vy:dy*17+3.4, vz:dz*17,
+    fuse:GRENADE_FUSE, rot:0, vr:rnd(6,11), owner:e, w:w, scale:scale||1, visual:!!visual
+  });
+  if(e===player) snd.shotSpatial(w.snd,0,0);
+}
+function explodeGrenade(g){
+  const w=g.w;
+  if(!g.visual) for(const target of ents){
+    if(target===g.owner||target.dead) continue;
+    const dist=Math.hypot(target.x-g.x,(target.y+1)-g.y,target.z-g.z);
+    const factor=grenadeFactor(dist);
+    if(factor<=0) continue;
+    const hit=damage(target,100*factor*g.scale,g.owner,false);
+    /* a bombinha de confete continua atrapalhando quem sobrevive */
+    if(hit&&w.slow) target.slow=Math.max(target.slow||0,w.slow);
+    if(hit&&window.SugarEnhance) SugarEnhance.onHit(g.owner,target,false);
+  }
+  burst(g.x,g.y,g.z,w.accent||'#ffcf4d',34);
+  burst(g.x,g.y+0.4,g.z,'#fffdf7',16);
+  muzzles.push({x:g.x,y:g.y,z:g.z,t:0.14});
+  const near=Math.hypot(player.x-g.x,player.z-g.z);
+  if(near<18){
+    camShake=Math.max(camShake,clamp(1.6-near*0.08,0.2,1.6));
+    snd.shotSpatial(150,g.x-player.x,g.z-player.z);
+  }
+}
+/* Movimento por eixo: se o passo em X bate na parede, so X inverte. Sem
+   normal de colisao isso e o suficiente para o quique parecer certo.     */
+function slideAxis(g,axis,step){
+  const dx=axis===0?Math.sign(step):0, dy=axis===1?Math.sign(step):0, dz=axis===2?Math.sign(step):0;
+  const dist=Math.abs(step);
+  if(dist<1e-5) return true;
+  const t=rayWorld(g.x,g.y,g.z,dx,dy,dz,dist+0.12);
+  if(t<dist+0.12) return false;
+  g.x+=dx*dist; g.y+=dy*dist; g.z+=dz*dist;
+  return true;
+}
+function updateGrenades(dt){
+  for(let i=grenades.length-1;i>=0;i--){
+    const g=grenades[i];
+    g.fuse-=dt;
+    g.vy-=20*dt;
+    g.rot+=g.vr*dt;
+    if(!slideAxis(g,0,g.vx*dt)){ g.vx*=-0.34; g.vz*=0.82; }
+    if(!slideAxis(g,2,g.vz*dt)){ g.vz*=-0.34; g.vx*=0.82; }
+    if(!slideAxis(g,1,g.vy*dt)){ g.vy*=-0.30; g.vx*=0.75; g.vz*=0.75; }
+    if(g.y<0.14){ g.y=0.14; g.vy=Math.abs(g.vy)*0.32; g.vx*=0.68; g.vz*=0.68; g.vr*=0.6; }
+    if(g.fuse<=0){ explodeGrenade(g); grenades.splice(i,1); }
+  }
+}
+function drawGrenades(){
+  for(const g of grenades){
+    const w=g.w;
+    const m=mMul(mT(g.x,g.y,g.z),mMul(mRY(g.rot),mRX(g.rot*0.7)));
+    boxM(m,0.075,0.075,0.075,w.color||'#e8615a',Qw);
+    boxM(mMul(m,mT(0,0.085,0)),0.032,0.026,0.032,w.accent||'#ffcf4d',Qw);
+  }
+}
+/* A contagem fica no overlay 2D, junto com os nomes dos bots. */
+function drawGrenadeTimers(){
+  if(!grenades.length) return;
+  ctx.save();
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  for(const g of grenades){
+    const p=project(g.x,g.y+0.45,g.z);
+    if(!p||p.d>60) continue;
+    const size=clamp(p.s*0.09,9,30);
+    const left=Math.max(0,g.fuse);
+    /* pisca cada vez mais rapido conforme o tempo acaba */
+    const blink=Math.sin(left*(left<1?34:16))>-0.35;
+    ctx.font='900 '+size.toFixed(1)+'px '+FONT;
+    ctx.lineWidth=Math.max(2,size*0.22);
+    ctx.strokeStyle='#3f342e';
+    ctx.fillStyle=left<1?(blink?'#ffffff':'#e8615a'):'#ffcf4d';
+    ctx.globalAlpha=blink?1:0.75;
+    const text=(Math.ceil(left*10)/10).toFixed(1);
+    ctx.strokeText(text,p.x,p.y);
+    ctx.fillText(text,p.x,p.y);
   }
   ctx.restore();
   ctx.globalAlpha=1;
@@ -1184,8 +1413,8 @@ function drawEnt(e){
   /* No modo Equipes, a roupa escolhida na loja cede lugar ao uniforme oficial.
      Fora desse modo, a skin pessoal continua aparecendo normalmente. */
   const officialTeamMode=window.SugarEnhance&&SugarEnhance.game&&SugarEnhance.game.mode==='team';
-  const army=officialTeamMode&&e.team===1;
-  const swat=officialTeamMode&&e.team===2;
+  const army=officialTeamMode?e.team===1:sk.uniform==='army';
+  const swat=officialTeamMode?e.team===2:sk.uniform==='swat';
   const B=hurt?'#ffffff':(army?'#596b3b':(swat?'#171c22':sk.b));
   const HD=hurt?'#ffffff':sk.h;
   const P=hurt?'#ffffff':(army?'#8a8056':(swat?'#080b0f':sk.p));
@@ -1446,6 +1675,8 @@ const snd=(function(){
   }
   return {
     resume(){ const a=ac(); if(a&&a.state==='suspended') a.resume(); },
+    /* os estagios da recarga tocam notas soltas; sem isto o frame quebrava */
+    tone:tone,
     shot(f){ tone(f,f*0.35,0.09,0.055); noise(0.09,0.06,2200); },
     /* cada familia de arma tem um timbre proprio */
     fire(w){
@@ -1511,8 +1742,11 @@ addEventListener('keydown',e=>{
   if(e.code==='Tab'){e.preventDefault(); showBoard(true);}
   keys[e.code]=true;
   if(e.code==='KeyR') reload(player);
-  if(e.code==='Digit1') setWeapon(LOADOUT[0]);   /* arma principal */
-  if(e.code==='Digit2') setWeapon(LOADOUT[1]);   /* acessorio */
+  /* 1 e a principal, 2 o acessorio, 3 a 5 as armas achadas na fase */
+  if(e.code&&/^Digit[1-5]$/.test(e.code)){
+    const seat=(+e.code.slice(5))-1;
+    if(seat<LOADOUT.length) setWeapon(LOADOUT[seat]);
+  }
   if(e.code==='Escape') togglePause(true);
 });
 addEventListener('keyup',e=>{
@@ -1610,11 +1844,7 @@ function enableTouchUI(){
   stick.style.display='block';
   ['bFire','bJump','bReload'].forEach(id=>document.getElementById(id).style.display='flex');
   const h=document.getElementById('hint'); if(h) h.classList.add('hide');
-  document.getElementById('ptxt').innerHTML=
-    'Deathmatch numa cidade de doces. Elimine os rivais at&eacute; bater a meta.<br><br>'+
-    'Joystick <b>esquerdo</b> para andar &middot; <b>arraste</b> na tela para mirar &middot; bot&atilde;o <b>ATIRAR</b> para disparar.<br>'+
-    'Voc&ecirc; leva <b>uma arma</b> e <b>um acess&oacute;rio</b>: o <b>1</b> e o <b>2</b> trocam entre eles.<br>'+
-    'Com a Pirulito Sniper na m&atilde;o aparece o bot&atilde;o <b>MIRA</b>, que abre a luneta.';
+  document.getElementById('ptxt').innerHTML=SugarI18n.t('INSTRUCTIONS_TOUCH_HTML');
 }
 if(isTouch) enableTouchUI();
 function tpos(t){ return {x:t.clientX,y:t.clientY}; }
@@ -1712,7 +1942,7 @@ function updateHUD(){
   scoreV.textContent=player.score;
   let lead=ents[0];
   for(const e of ents) if(e.score>lead.score) lead=e;
-  leaderV.textContent=lead.score===0?'-':(lead===player?'VOCE':lead.name.substr(0,7));
+  leaderV.textContent=lead.score===0?'-':(lead===player?SugarI18n.t('YOU'):lead.name.substr(0,7));
   document.querySelectorAll('.slot').forEach(s=>s.classList.toggle('on',+s.dataset.w===player.wep));
 }
 function renderFeed(){
@@ -1720,7 +1950,7 @@ function renderFeed(){
   for(const f of feed){
     const d=document.createElement('div');
     d.className='pill feedItem';
-    d.innerHTML='<span style="color:'+(f.a==='VOCE'?'#e8615a':'#4a3b33')+'">'+f.a+'</span> '+
+    d.innerHTML='<span style="color:'+(f.a===SugarI18n.t('YOU')?'#e8615a':'#4a3b33')+'">'+f.a+'</span> '+
                 (f.head?'&#9733;':'&#128165;')+' <span style="opacity:.7">'+f.b+'</span>';
     feedEl.appendChild(d);
   }
@@ -1754,7 +1984,7 @@ function togglePause(on){
     el('bPlay').classList.add('hide');
     el('bMainMenu').classList.add('hide');
     el('bResume').classList.remove('hide');
-    panelEl.querySelector('h1').textContent='PAUSA';
+    panelEl.querySelector('h1').textContent=SugarI18n.t('PAUSED_TITLE');
     el('ptxt').style.display='none';
     el('sensWrap').style.display='block';
   }
@@ -1791,14 +2021,14 @@ function endMatch(winner){
     html+='<div class="row'+(e===player?' me':'')+'"><span>'+(i+1)+'. '+e.name+'</span><span>'+e.score+'</span></div>';
   });
   html+='</div>';
-  panelEl.querySelector('h1').textContent = winner===player?'VOCE VENCEU!':'FIM DE JOGO';
-  panelEl.querySelector('h2').textContent = winner===player?'DOCE VITORIA':(winner.name+' VENCEU A PARTIDA');
+  panelEl.querySelector('h1').textContent = winner===player?SugarI18n.t('WIN_TITLE'):SugarI18n.t('LOSE_TITLE');
+  panelEl.querySelector('h2').textContent = winner===player?SugarI18n.t('WIN_SUBTITLE'):(winner.name+SugarI18n.t('WON_MATCH_SUFFIX'));
   el('ptxt').style.display='block';
   el('ptxt').innerHTML=html;
   el('sensWrap').style.display='none';
   el('bResume').classList.add('hide');
   el('bPlay').classList.remove('hide');
-  el('bPlay').textContent='JOGAR DE NOVO';
+  el('bPlay').textContent=SugarI18n.t('BTN_PLAY_AGAIN');
   const networkRound=!!(window.SugarNet&&SugarNet.inMatch);
   el('bMainMenu').classList.toggle('hide',networkRound);
   panelEl.classList.remove('pause-panel');
@@ -1818,13 +2048,13 @@ function showMainMenu(){
   panelEl.classList.remove('pause-panel','match-ended');
   panelEl.scrollTop=0;
   panelEl.querySelector('h1').textContent='SUGAR STRIKE';
-  panelEl.querySelector('h2').textContent='DOCE GUERRA NA VILA CONFEITO';
+  panelEl.querySelector('h2').textContent=SugarI18n.t('SUBTITLE');
   el('ptxt').innerHTML=menuHelpHtml;
   el('ptxt').style.display='block';
   el('ptxt').scrollTop=0;
   el('sensWrap').style.display='block';
   el('bPlay').classList.remove('hide');
-  el('bPlay').textContent='JOGAR';
+  el('bPlay').textContent=SugarI18n.t('BTN_PLAY');
   el('bMainMenu').classList.add('hide');
   el('bResume').classList.add('hide');
   overlay.style.display='flex';
@@ -1905,8 +2135,12 @@ function recoilDelta(){ const d=recoil-lastRecoil; lastRecoil=recoil; return d; 
 function recoilSideDelta(){ const d=recoilSide-lastRecoilSide; lastRecoilSide=recoilSide; return d; }
 
 /* ------------------------------------------------------------- ceu */
+/* Tres camadas: as de tras sao maiores e mais altas, as da frente menores.
+   O ceu fica povoado sem que uma nuvem tape a outra o tempo todo.        */
 const clouds=[];
-for(let i=0;i<16;i++) clouds.push({a:rnd(0,6.28),h:rnd(22,46),d:rnd(70,120),s:rnd(6,16)});
+for(let i=0;i<22;i++) clouds.push({a:rnd(0,6.28),h:rnd(20,34),d:rnd(58,90),s:rnd(5,11)});
+for(let i=0;i<20;i++) clouds.push({a:rnd(0,6.28),h:rnd(32,52),d:rnd(90,140),s:rnd(9,18)});
+for(let i=0;i<14;i++) clouds.push({a:rnd(0,6.28),h:rnd(48,74),d:rnd(140,200),s:rnd(14,26)});
 function drawSky(){
   const palette=(window.SugarEnhance&&SugarEnhance.skyPalette)
     ? SugarEnhance.skyPalette()
@@ -2073,11 +2307,11 @@ function drawDeadOverlay(){
   ctx.fillRect(0,0,W,H);
   ctx.fillStyle='#fffdf7'; ctx.textAlign='center';
   ctx.font='900 '+(38*RS).toFixed(0)+'px '+FONT;
-  ctx.fillText('ELIMINADO',HW,HH-10*RS);
+  ctx.fillText(SugarI18n.t('ELIMINATED'),HW,HH-10*RS);
   ctx.font='800 '+(18*RS).toFixed(0)+'px '+FONT;
   const by=player.lastHitBy?player.lastHitBy.name:'?';
-  ctx.fillText('por '+by,HW,HH+22*RS);
-  ctx.fillText('renascendo em '+Math.max(0,player.respawnT).toFixed(1)+'s',HW,HH+50*RS);
+  ctx.fillText(SugarI18n.t('KILLED_BY_PREFIX')+by,HW,HH+22*RS);
+  ctx.fillText(SugarI18n.t('RESPAWN_IN',{s:Math.max(0,player.respawnT).toFixed(1)}),HW,HH+50*RS);
 }
 function drawDamageDir(){
   if(dmgFlash<=0) return;
@@ -2123,6 +2357,8 @@ function frame(t){
     if(window.SugarEnhance) SugarEnhance.update(dt);
     if(player.hurt>0) player.hurt-=dt;
     updateParticles(dt);
+    updateTracers(dt);
+    updateGrenades(dt);
     for(let i=feed.length-1;i>=0;i--){ feed[i].t-=dt; if(feed[i].t<=0){feed.splice(i,1);renderFeed();} }
     for(let i=muzzles.length-1;i>=0;i--){ muzzles[i].t-=dt; if(muzzles[i].t<=0) muzzles.splice(i,1); }
     flash-=dt; hitMark-=dt; camShake=lerp(camShake,0,dt*10);
@@ -2158,9 +2394,12 @@ function frame(t){
   }
   flush(Qg,true);            /* chao sem contorno: evita a "grade" dos ladrilhos */
   for(const e of ents){ if(!e.dead&&e!==player) drawEnt(e); }
+  drawGrenades();
   flush(Qw);
 
   drawParticles();
+  drawTracers();
+  drawGrenadeTimers();
   drawLabels();
   if(window.SugarEnhance) SugarEnhance.draw();
 
@@ -2207,8 +2446,8 @@ paused=true;
 requestAnimationFrame(frame);
 setTimeout(()=>{const l=document.getElementById('loading');if(l){l.classList.add('out');setTimeout(()=>l.remove(),420);}},450);
 </script>
-<script src="multiplayer.js?v=1.7.1"></script>
-<script src="enhancements.js?v=1.7.1"></script>
+<script src="multiplayer.js?v=1.8.1"></script>
+<script src="enhancements.js?v=1.8.1"></script>
 <!-- Faixas de anuncio: o proprio arquivo se desliga dentro do app Android. -->
 <script src="anuncios.js"></script>
 </body>
