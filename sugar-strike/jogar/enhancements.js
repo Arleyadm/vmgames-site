@@ -1395,6 +1395,183 @@
     if (restoreBtn) restoreBtn.addEventListener("click", function () { SugarAndroid.restorePurchases(); });
   }
 
+  /* ------------------------------------------------------- codigo de progresso
+     Um "save" portatil: o proprio codigo carrega o progresso dentro dele, entao
+     nao ha servidor, conta, nem dado saindo do aparelho sem o jogador mandar.
+     Colou o codigo no outro aparelho, o progresso esta la.
+
+     Para caber em algo que da para digitar, as listas viram mascaras de bits
+     (uma arma por bit) e os numeros viram tamanho variavel. Um perfil comum
+     fica em torno de 20 caracteres.
+
+     O alfabeto e o do Crockford: 32 simbolos, sem I, L, O e U. Os tres
+     primeiros somem porque se confundem com 1 e 0 ao copiar da tela, e o U
+     sai para nao formar palavrao sem querer. Tem que ser 32 mesmo: cada
+     simbolo carrega 5 bits, e um alfabeto de 31 faria dois valores caírem no
+     mesmo caractere.                                                        */
+  const CODE_ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+  const CODE_VERSION = 1;
+
+  function bitsOf(list, size) {
+    let mask = 0;
+    (list || []).forEach(function (index) {
+      index = index | 0;
+      if (index >= 0 && index < size) mask |= (1 << index);
+    });
+    return mask;
+  }
+  function listOf(mask, size) {
+    const out = [];
+    for (let i = 0; i < size; i++) if (mask & (1 << i)) out.push(i);
+    return out;
+  }
+  // Numero em bytes de 7 bits, o oitavo diz "tem mais".
+  function pushVar(bytes, value) {
+    value = Math.max(0, Math.floor(value));
+    do {
+      const part = value & 0x7f;
+      value = Math.floor(value / 128);
+      bytes.push(value > 0 ? (part | 0x80) : part);
+    } while (value > 0);
+  }
+  function readVar(bytes, cursor) {
+    let value = 0, shift = 1, byte;
+    do {
+      byte = bytes[cursor.at++];
+      if (byte === undefined) throw new Error("codigo incompleto");
+      value += (byte & 0x7f) * shift;
+      shift *= 128;
+    } while (byte & 0x80);
+    return value;
+  }
+
+  function progressBytes() {
+    const bytes = [CODE_VERSION];
+    pushVar(bytes, profile.candies);
+    pushVar(bytes, profile.xp);
+    pushVar(bytes, profile.level);
+    pushVar(bytes, bitsOf(profile.ownedWeapons, WEAPONS.length));
+    pushVar(bytes, bitsOf(profile.unlockedSkins, OUTFITS.length));
+    pushVar(bytes, bitsOf(profile.unlockedWeaponSkins, WEAPON_SKINS.length));
+    pushVar(bytes, bitsOf(profile.unlockedGear, GEAR.length));
+    pushVar(bytes, bitsOf(profile.gearSet, GEAR.length));
+    pushVar(bytes, profile.primary);
+    pushVar(bytes, profile.accessory);
+    pushVar(bytes, profile.skin);
+    pushVar(bytes, profile.weaponSkin);
+    pushVar(bytes, grenadeStock());
+    pushVar(bytes, profile.wins);
+    pushVar(bytes, profile.kills);
+    // Soma de verificacao: pega erro de digitacao antes de estragar o perfil.
+    let sum = 0;
+    bytes.forEach(function (b) { sum = (sum * 31 + b) % 251; });
+    bytes.push(sum);
+    return bytes;
+  }
+  /* Base32: cada simbolo carrega 5 bits. O buffer nunca passa de 12 bits,
+     entao as contas cabem folgadas em numero comum.                        */
+  function bytesToCode(bytes) {
+    let text = "";
+    let buffer = 0, bits = 0;
+    bytes.forEach(function (byte) {
+      buffer = (buffer << 8) | (byte & 0xff);
+      bits += 8;
+      while (bits >= 5) {
+        bits -= 5;
+        text += CODE_ALPHABET[(buffer >> bits) & 31];
+      }
+      buffer &= (1 << bits) - 1;
+    });
+    // sobra de bits vira o ultimo simbolo, completada com zeros
+    if (bits > 0) text += CODE_ALPHABET[(buffer << (5 - bits)) & 31];
+    return text.replace(/(.{5})(?=.)/g, "$1-");
+  }
+  function codeToBytes(text) {
+    const clean = String(text || "").toUpperCase().replace(/[^0-9A-Z]/g, "")
+      // o que o olho troca ao copiar da tela
+      .replace(/O/g, "0").replace(/[IL]/g, "1").replace(/U/g, "V");
+    const bytes = [];
+    let buffer = 0, bits = 0;
+    for (let i = 0; i < clean.length; i++) {
+      const value = CODE_ALPHABET.indexOf(clean[i]);
+      if (value < 0) throw new Error("caractere invalido");
+      buffer = (buffer << 5) | value;
+      bits += 5;
+      if (bits >= 8) {
+        bits -= 8;
+        bytes.push((buffer >> bits) & 0xff);
+        buffer &= (1 << bits) - 1;
+      }
+    }
+    return bytes;
+  }
+  function exportProgress() {
+    return bytesToCode(progressBytes());
+  }
+  function importProgress(text) {
+    const bytes = codeToBytes(text);
+    if (bytes.length < 8) throw new Error("codigo curto demais");
+    const given = bytes.pop();
+    let sum = 0;
+    bytes.forEach(function (b) { sum = (sum * 31 + b) % 251; });
+    if (sum !== given) throw new Error("soma de verificacao errada");
+    const cursor = {at: 0};
+    const version = bytes[cursor.at++];
+    if (version !== CODE_VERSION) throw new Error("codigo de outra versao");
+    const read = {
+      candies: readVar(bytes, cursor),
+      xp: readVar(bytes, cursor),
+      level: readVar(bytes, cursor),
+      weapons: readVar(bytes, cursor),
+      skins: readVar(bytes, cursor),
+      weaponSkins: readVar(bytes, cursor),
+      gear: readVar(bytes, cursor),
+      gearSet: readVar(bytes, cursor),
+      primary: readVar(bytes, cursor),
+      accessory: readVar(bytes, cursor),
+      skin: readVar(bytes, cursor),
+      weaponSkin: readVar(bytes, cursor),
+      grenades: readVar(bytes, cursor),
+      wins: readVar(bytes, cursor),
+      kills: readVar(bytes, cursor)
+    };
+    profile.candies = read.candies;
+    profile.xp = read.xp;
+    profile.level = Math.max(1, read.level);
+    profile.ownedWeapons = listOf(read.weapons, WEAPONS.length);
+    profile.unlockedSkins = listOf(read.skins, OUTFITS.length);
+    profile.unlockedWeaponSkins = listOf(read.weaponSkins, WEAPON_SKINS.length);
+    profile.unlockedGear = listOf(read.gear, GEAR.length);
+    profile.gearSet = listOf(read.gearSet, GEAR.length).filter(function (i) { return i > 0; });
+    profile.primary = read.primary;
+    profile.accessory = read.accessory;
+    profile.skin = read.skin;
+    profile.weaponSkin = read.weaponSkin;
+    profile.grenadeStock = read.grenades;
+    profile.wins = read.wins;
+    profile.kills = read.kills;
+    // As mesmas amarras do carregamento normal, para um codigo torto nao
+    // deixar o perfil num estado que o jogo nao sabe desenhar.
+    if (profile.ownedWeapons.indexOf(4) < 0) profile.ownedWeapons.push(4);
+    if (profile.ownedWeapons.indexOf(10) < 0) profile.ownedWeapons.push(10);
+    if (profile.unlockedSkins.indexOf(0) < 0) profile.unlockedSkins.push(0);
+    if (profile.unlockedWeaponSkins.indexOf(0) < 0) profile.unlockedWeaponSkins.push(0);
+    if (profile.unlockedGear.indexOf(0) < 0) profile.unlockedGear.push(0);
+    if (PRIMARIES.indexOf(profile.primary) < 0 ||
+        profile.ownedWeapons.indexOf(profile.primary) < 0) profile.primary = 4;
+    if (ACCESSORIES.indexOf(profile.accessory) < 0 ||
+        profile.ownedWeapons.indexOf(profile.accessory) < 0) profile.accessory = 10;
+    profile.skin = profile.unlockedSkins.indexOf(profile.skin) >= 0 ? profile.skin : 0;
+    profile.weaponSkin = profile.unlockedWeaponSkins.indexOf(profile.weaponSkin) >= 0 ? profile.weaponSkin : 0;
+    profile.gearSet = profile.gearSet.filter(function (i) { return profile.unlockedGear.indexOf(i) >= 0; });
+    profile.gear = profile.gearSet.length ? profile.gearSet[0] : 0;
+    profile.grenadeStock = clamp(profile.grenadeStock, 0, GRENADE_STOCK_MAX);
+    syncLoadout();
+    saveProfile();
+    updateWeaponSlots();
+    updateCandyHud();
+  }
+
   function openProfile() {
     const next = Math.pow(profile.level, 2) * 220;
     const history = profile.history.length
@@ -1428,6 +1605,16 @@
       (profile.daily.claimed ? SugarI18n.t("DAILY_DONE") : SugarI18n.t("DAILY_REWARD")) + '</p>' +
       '<h3>' + SugarI18n.t("SECTION_ACHIEVEMENTS", {n: profile.achievements.length}) + '</h3>' +
       '<p>' + (profile.achievements.map(function (id) { return escapeHtml(achievementLabel(id)); }).join(" · ") || escapeHtml(SugarI18n.t("NO_ACHIEVEMENTS"))) + '</p>' +
+      '<h3>' + escapeHtml(SugarI18n.t("SECTION_PROGRESS")) + '</h3>' +
+      '<p class="progressHint">' + escapeHtml(SugarI18n.t("PROGRESS_HINT")) + '</p>' +
+      '<div class="progressBox">' +
+        '<input id="progressCode" class="progressField" readonly value="' + escapeHtml(exportProgress()) + '">' +
+        '<button id="progressCopy" class="big-btn sub-btn">' + escapeHtml(SugarI18n.t("PROGRESS_COPY")) + '</button>' +
+      '</div>' +
+      '<div class="progressBox">' +
+        '<input id="progressPaste" class="progressField" maxlength="80" placeholder="' + escapeHtml(SugarI18n.t("PROGRESS_PASTE")) + '">' +
+        '<button id="progressRestore" class="big-btn sub-btn">' + escapeHtml(SugarI18n.t("PROGRESS_RESTORE")) + '</button>' +
+      '</div>' +
       '<h3>' + escapeHtml(SugarI18n.t("SECTION_HISTORY")) + '</h3><div class="historyList">' + history + '</div>');
     document.getElementById("profileName").addEventListener("change", function (event) {
       profile.name = event.target.value.replace(/[<>]/g, "").trim().slice(0, 14) || SugarI18n.t("DEFAULT_PLAYER_NAME");
@@ -1449,6 +1636,37 @@
         document.querySelectorAll(".weaponSkinPick").forEach(function (b) { b.classList.remove("on"); });
         button.classList.add("on");
       });
+    });
+    document.getElementById("progressCopy").addEventListener("click", function () {
+      const field = document.getElementById("progressCode");
+      field.select();
+      field.setSelectionRange(0, 99);
+      let copied = false;
+      /* execCommand e o unico que funciona no WebView de file://: la a area de
+         transferencia moderna exige origem segura, que file:// nao e. */
+      try { copied = document.execCommand("copy"); } catch (error) {}
+      if (!copied && navigator.clipboard) {
+        navigator.clipboard.writeText(field.value).then(function () {
+          showToast(SugarI18n.t("PROGRESS_COPIED"));
+        }, function () {
+          showToast(SugarI18n.t("PROGRESS_COPY_MANUAL"));
+        });
+        return;
+      }
+      showToast(SugarI18n.t(copied ? "PROGRESS_COPIED" : "PROGRESS_COPY_MANUAL"));
+    });
+    document.getElementById("progressRestore").addEventListener("click", function () {
+      const text = document.getElementById("progressPaste").value.trim();
+      if (!text) { showToast(SugarI18n.t("PROGRESS_PASTE")); return; }
+      try {
+        importProgress(text);
+        showToast(SugarI18n.t("PROGRESS_RESTORED"));
+        vibrate("20,30,40");
+        openProfile();
+      } catch (error) {
+        showToast(SugarI18n.t("PROGRESS_INVALID"));
+        vibrate(45);
+      }
     });
     paintPortraits();
   }
@@ -2296,6 +2514,10 @@
       ".shopTabs{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}.shopTab{flex:1 1 auto;border:3px solid #4a3b33;border-radius:11px;background:#fffdf7;color:#4a3b33;font:900 9px ui-rounded,'Trebuchet MS',sans-serif;letter-spacing:.5px;padding:8px 5px}.shopTab.on{background:#ffcf4d}" +
       ".loadoutNow{background:#8fd9c8;border:3px solid #4a3b33;border-radius:12px;padding:7px;font-size:10px;font-weight:900;letter-spacing:.4px}" +
       ".gearSummary{grid-column:1/-1;margin-bottom:2px;text-align:left;line-height:1.45}" +
+      ".progressHint{font-size:10px;line-height:1.4;opacity:.75;margin:4px 0 6px;text-align:left}" +
+      ".progressBox{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;margin-bottom:6px}" +
+      ".progressField{height:40px;border:2px solid #4a3b33;border-radius:10px;padding:5px 8px;background:#f7efe5;color:#4a3b33;font:900 13px ui-rounded,'Trebuchet MS',monospace;letter-spacing:1px;text-align:center;width:100%}" +
+      ".progressBox .big-btn{margin:0;font-size:10px;padding:11px 10px;white-space:nowrap}" +
       ".statList{display:grid;gap:3px;margin-top:2px}.statRow{display:grid;grid-template-columns:52px 1fr 30px;align-items:center;gap:5px;font-size:8px;font-weight:900}.statRow em{font-style:normal;opacity:.68}.statRow u{text-decoration:none;text-align:right;opacity:.68}.statBar{display:block;height:7px;border:2px solid #4a3b33;border-radius:5px;background:#fffdf7;overflow:hidden}.statBar b{display:block;height:100%;background:#e8615a}" +
       ".swatch{display:flex;gap:4px}.swatch i{flex:1;height:22px;border:2px solid #4a3b33;border-radius:7px}" +
       ".outfitArt{height:132px;border:2px solid #4a3b33;border-radius:11px;background:radial-gradient(circle at 50% 38%,#fffdf7,#e6d9c6 78%);overflow:hidden}" +
