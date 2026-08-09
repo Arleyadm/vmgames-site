@@ -8,6 +8,7 @@
   const HISTORY_LIMIT = 10;
   const originalBuildTown = buildTown;
   const originalInitMatch = initMatch;
+  const originalSpawnPoint = spawnPoint;
   const originalEndMatch = endMatch;
   const originalResize = resize;
   const originalSetWeapon = setWeapon;
@@ -49,7 +50,7 @@
     unlockedGear: [0],
     grenadeStock: 0,
     achievements: [],
-    daily: {day: "", kills: 0, matches: 0, claimed: false},
+    daily: {day: "", tasks: []},
     history: []
   };
 
@@ -233,13 +234,10 @@
   function today() {
     return new Date().toISOString().slice(0, 10);
   }
-  function refreshDaily() {
-    if (!profile.daily || profile.daily.day !== today()) {
-      profile.daily = {day: today(), kills: 0, matches: 0, claimed: false};
-      saveProfile();
-    }
-  }
-  refreshDaily();
+  /* O sorteio das tarefas do dia mora mais abaixo (ensureDaily), junto com o
+     resto do sistema de desafios. Aqui so garantimos que profile.daily existe
+     antes de qualquer coisa ler ele. */
+  if (!profile.daily || typeof profile.daily !== "object") profile.daily = {day: "", tasks: []};
 
   function vibrate(pattern) {
     if (!settings.haptics) return;
@@ -296,7 +294,15 @@
       village: {top: "#7fc9ea", middle: "#bfe7f5", bottom: "#e6f5fb", cloud: "#fffdf7"},
       factory: {top: "#8d5a57", middle: "#d9936f", bottom: "#f3c991", cloud: "#ead7c5"},
       park: {top: "#58d7e8", middle: "#9cebdc", bottom: "#ffe1ef", cloud: "#fff8fc"},
-      castle: {top: "#7769bd", middle: "#c9b4ec", bottom: "#ffe3ad", cloud: "#fff5de"}
+      castle: {top: "#7769bd", middle: "#c9b4ec", bottom: "#ffe3ad", cloud: "#fff5de"},
+      // fim de tarde no parque, para a roda-gigante recortar o ceu
+      funfair: {top: "#4b3f8f", middle: "#c96fa8", bottom: "#ffc27a", cloud: "#ffe9d2"},
+      overpass: {top: "#6f9fd0", middle: "#a8cbe8", bottom: "#e6d7bd", cloud: "#fffdf7"},
+      // madrugada nos telhados
+      rooftops: {top: "#20264a", middle: "#4a4f86", bottom: "#9a7fb0", cloud: "#cfc3e8"},
+      station: {top: "#8a7fb8", middle: "#d3b9d8", bottom: "#ffe0c2", cloud: "#fff6ea"},
+      harbor: {top: "#2f7fa8", middle: "#7fc4dd", bottom: "#dff0f5", cloud: "#fffdf7"},
+      range: {top: "#9fb8cf", middle: "#cfe0ec", bottom: "#efe6d6", cloud: "#fffdf7"}
     };
     return palettes[game.map] || palettes.village;
   }
@@ -420,6 +426,7 @@
     if (head) attacker.headshots = (attacker.headshots || 0) + 1;
     if (attacker === player) vibrate(head ? "18,25,30" : 22);
     if (victim === player) vibrate("35,25,55");
+    if (attacker === player && head) bumpDaily("headshots", 1);
   }
   function playerSpeed() {
     const boost = performance.now() < game.speedUntil ? 1.38 : 1;
@@ -458,6 +465,7 @@
     game.teamScore = [0, 0, 0];
     game.captureScore = [0, 0, 0];
     game.flag = {x: 0, z: 0, carrier: null, home: 0};
+    resetBomb();
     game.tempWeapons = profile.ownedWeapons.slice();
     spawnPickups();
     syncConfigUi();
@@ -559,10 +567,406 @@
     signs.push({x: 0, y: 14.5, z: 21.2, t: "CASTELO DE BOLO"});
   }
 
+  /* ------------------------------------------------- pecas das fases novas
+     O jogo anda em x de -44 a 44 e z de -70 a 70 (o clamp do moveXZ), entao
+     tudo o que precisa ser pisado mora dentro dessa area. Fora dela so entra
+     enfeite, que o jogador ve mas nao alcanca.                              */
+  const STAIR_RISE = 0.5;    // combina com o STEP_UP do index.html
+
+  /* Escada de verdade: cada degrau e um bloco solido, e o passo de subida do
+     jogo faz o resto. dirX/dirZ dizem para que lado ela sobe.               */
+  function stairs(x, z, dirX, dirZ, width, baseY, topY, color) {
+    const run = 1.0;
+    const steps = Math.max(1, Math.round((topY - baseY) / STAIR_RISE));
+    const half = width / 2;
+    for (let i = 0; i < steps; i++) {
+      const y = baseY + (i + 1) * STAIR_RISE;
+      const ax = x + dirX * run * i, az = z + dirZ * run * i;
+      const bx = ax + dirX * run, bz = az + dirZ * run;
+      const x0 = dirX ? Math.min(ax, bx) : ax - half;
+      const x1 = dirX ? Math.max(ax, bx) : ax + half;
+      const z0 = dirZ ? Math.min(az, bz) : az - half;
+      const z1 = dirZ ? Math.max(az, bz) : az + half;
+      boxS(x0, baseY, z0, x1, y, z1, color, 4, true);
+    }
+  }
+  /* Plataforma com piso e uma faixa de guarda: da para andar em cima e ela
+     serve de parapeito para quem atira de la.                              */
+  function deck(x0, z0, x1, z1, y, thickness, floor, rail) {
+    boxS(x0, y - thickness, z0, x1, y, z1, floor, 6, true);
+    if (!rail) return;
+    boxS(x0, y, z0, x1, y + 0.55, z0 + 0.4, rail, 4, false);
+    boxS(x0, y, z1 - 0.4, x1, y + 0.55, z1, rail, 4, false);
+  }
+  /* Tunel: duas paredes e um teto. O vao no meio e o que da a passagem. */
+  function tunnel(x0, z0, x1, z1, height, wall, roof) {
+    const thickness = 1.6;
+    boxS(x0, 0, z0, x0 + thickness, height, z1, wall, 6, true);
+    boxS(x1 - thickness, 0, z0, x1, height, z1, wall, 6, true);
+    boxS(x0, height, z0, x1, height + 1.2, z1, roof, 7, true);
+  }
+  function pillar(x, z, height, width, color) {
+    boxS(x - width, 0, z - width, x + width, height, z + width, color, 5, true);
+  }
+
+  /* ------------------------------------------------------ 1. PARQUE DOS DOCES
+     Roda-gigante ao fundo, carrossel no meio (elevado, com escada dos dois
+     lados) e barracas de tiro em volta. O centro alto e o ponto disputado. */
+  function buildFunfair() {
+    ground("#c9b4ec", "#d6c4f0");
+    const festa = ["#e8615a", "#ffcf4d", "#8fd9c8", "#f6a9c3", "#7ec96b"];
+    // passeio central em cruz
+    boxS(-9, 0, -66, 9, 0.22, 66, "#f3e0a2", 8, false);
+    boxS(-42, 0, -9, 42, 0.22, 9, "#f3e0a2", 8, false);
+
+    // carrossel: piso a 3,5 com cobertura listrada e escada nos dois lados
+    deck(-11, -11, 11, 11, 3.5, 0.6, "#fdf7ec", "#e8615a");
+    for (let i = 0; i < 8; i++) {
+      const angle = i / 8 * Math.PI * 2;
+      const px = Math.cos(angle) * 8.4, pz = Math.sin(angle) * 8.4;
+      pillar(px, pz, 7.4, 0.34, festa[i % festa.length]);
+    }
+    boxS(-12, 7.4, -12, 12, 8.6, 12, "#e8615a", 8, false);
+    boxS(-3.2, 8.6, -3.2, 3.2, 11.5, 3.2, "#ffcf4d", 6, false);
+    stairs(0, -18, 0, 1, 6, 0, 3.5, "#c98f5e");
+    stairs(0, 18, 0, -1, 6, 0, 3.5, "#c98f5e");
+
+    // roda-gigante: so enfeite, fica atras da area jogavel
+    for (let i = 0; i < 16; i++) {
+      const angle = i / 16 * Math.PI * 2;
+      const rx = Math.cos(angle) * 17, ry = 20 + Math.sin(angle) * 17;
+      if (ry < 1.5) continue;
+      boxS(rx - 1.5, ry - 1.5, -62, rx + 1.5, ry + 1.5, -59,
+        festa[i % festa.length], 4, false);
+    }
+    boxS(-1.4, 0, -62.5, 1.4, 20, -58.5, "#8b6f5e", 6, true);
+    boxS(-14, 0, -63, -11, 21, -58, "#8b6f5e", 6, true);
+    boxS(11, 0, -63, 14, 21, -58, "#8b6f5e", 6, true);
+
+    // barracas: telhado de cada uma da para pisar e serve de mirante baixo
+    const barracas = [[-30, -34], [30, -34], [-30, 34], [30, 34], [-34, 0], [34, 0]];
+    barracas.forEach(function (spot, index) {
+      const x = spot[0], z = spot[1], cor = festa[index % festa.length];
+      boxS(x - 6, 0, z - 5, x + 6, 3.2, z + 5, "#fdf7ec", 6, true);
+      boxS(x - 7, 3.2, z - 6, x + 7, 4.1, z + 6, cor, 6, true);
+      stairs(x - 9.5, z, 1, 0, 4, 0, 4.1, "#c98f5e");
+    });
+
+    // barreiras espalhadas, para o meio do mapa nao virar campo aberto
+    [[-20, -50], [20, -50], [-20, 50], [20, 50], [0, -40], [0, 40]].forEach(function (spot, i) {
+      boxS(spot[0] - 4, 0, spot[1] - 1.4, spot[0] + 4, 2.4, spot[1] + 1.4,
+        festa[(i + 2) % festa.length], 5, true);
+    });
+    signs.push({x: 0, y: 12.6, z: 3.4, t: "PARQUE DOS DOCES"});
+  }
+
+  /* --------------------------------------------------- 2. VIADUTO DE CHOCOLATE
+     Dois andares de verdade: a rua embaixo, com dois tuneis, e o viaduto em
+     cima atravessando o mapa inteiro. Quem sobe manda na rua, mas fica a
+     descoberto para quem estiver no outro lado.                            */
+  function buildOverpass() {
+    ground("#8b7566", "#9c8474");
+    const asfalto = "#6d5a4e", concreto = "#b9a892", doce = "#6d3a2a";
+    // pista central
+    boxS(-13, 0, -68, 13, 0.2, 68, asfalto, 8, false);
+    for (let z = -62; z <= 62; z += 9) {
+      boxS(-0.7, 0.2, z - 2.2, 0.7, 0.3, z + 2.2, "#f3e0a2", 4, false);
+    }
+    // o viaduto: tabuleiro a 7 de altura, cruzando de leste a oeste
+    deck(-44, -7, 44, 7, 7, 1, doce, "#c98f5e");
+    for (const x of [-34, -20, 20, 34]) {
+      pillar(x, -5, 6, 1.5, concreto);
+      pillar(x, 5, 6, 1.5, concreto);
+    }
+    /* As rampas terminam exatamente na borda do tabuleiro (z -7 e 7). Se
+       sobrarem degraus depois disso, o jogador sobe e bate na lateral do
+       viaduto no meio do caminho. */
+    stairs(-40, -21, 0, 1, 7, 0, 7, concreto);
+    stairs(40, 21, 0, -1, 7, 0, 7, concreto);
+    // e uma escada no meio, mais exposta, como atalho
+    stairs(10, -21, 0, 1, 4, 0, 7, "#c98f5e");
+
+    // tuneis por baixo da pista, ligando os lados
+    tunnel(-40, -46, -14, -34, 4.5, concreto, doce);
+    tunnel(14, 34, 40, 46, 4.5, concreto, doce);
+
+    // predios baixos com telhado pisavel
+    const quarteirao = [[-32, -60], [32, -60], [-32, 60], [32, 60], [-36, 24], [36, -24]];
+    quarteirao.forEach(function (spot, i) {
+      const x = spot[0], z = spot[1];
+      boxS(x - 7, 0, z - 7, x + 7, 5.5 + (i % 2) * 2, z + 7, i % 2 ? "#a85c43" : "#8fd9c8", 7, true);
+      stairs(x + 9.5, z, -1, 0, 4, 0, 5.5 + (i % 2) * 2, concreto);
+    });
+    // carros de doce servindo de cobertura na rua
+    [[-6, -30], [7, -12], [-7, 14], [6, 36], [0, 52]].forEach(function (spot, i) {
+      boxS(spot[0] - 2.4, 0, spot[1] - 4.6, spot[0] + 2.4, 2.3, spot[1] + 4.6,
+        ["#e8615a", "#ffcf4d", "#8fd9c8"][i % 3], 5, true);
+      boxS(spot[0] - 2, 2.3, spot[1] - 2.4, spot[0] + 2, 3.4, spot[1] + 2.2, "#fdf7ec", 4, true);
+    });
+    signs.push({x: 0, y: 9.6, z: 7.6, t: "VIADUTO DE CHOCOLATE"});
+  }
+
+  /* ------------------------------------------------- 3. TELHADOS DE MERENGUE
+     Tres alturas de telhado ligadas por passarelas estreitas. Quase toda a
+     luta acontece em cima; quem cai tem que dar a volta pela escada.        */
+  function buildRooftops() {
+    ground("#5b5f8f", "#6a6e9c");
+    const parede = "#f0e6da", telha = "#e8615a", passarela = "#c98f5e";
+    const blocos = [
+      [-32, -52, 12, 6], [0, -52, 12, 9], [32, -52, 12, 6],
+      [-34, -18, 12, 11], [0, -20, 14, 8], [34, -18, 12, 11],
+      [-32, 16, 12, 6], [2, 18, 14, 12], [34, 16, 12, 6],
+      [-30, 52, 12, 9], [30, 52, 12, 9]
+    ];
+    blocos.forEach(function (b, i) {
+      const x = b[0], z = b[1], largura = b[2] / 2, altura = b[3];
+      boxS(x - largura, 0, z - largura, x + largura, altura, z + largura, parede, 8, true);
+      boxS(x - largura - 0.8, altura, z - largura - 0.8,
+        x + largura + 0.8, altura + 0.7, z + largura + 0.8, telha, 6, true);
+      // parapeito, para dar de onde atirar sem cair
+      boxS(x - largura - 0.8, altura + 0.7, z - largura - 0.8,
+        x + largura + 0.8, altura + 1.5, z - largura + 0.1, "#fdf7ec", 4, false);
+      /* A escada nasce longe o bastante para chegar ao telhado bem na borda:
+         um degrau a mais e ela entraria dentro do predio. */
+      if (i % 3 === 0) {
+        const alto = altura + 0.7;
+        stairs(x + largura + Math.round(alto / STAIR_RISE), z, -1, 0, 4, 0, alto, passarela);
+      }
+    });
+    // passarelas ligando telhados da mesma altura
+    deck(-26, -3, -8, 3, 8.7, 0.5, passarela, "#a5643c");
+    deck(8, -3, 26, 3, 8.7, 0.5, passarela, "#a5643c");
+    deck(-7, -46, 7, -26, 9.7, 0.5, passarela, "#a5643c");
+    deck(-7, 26, 7, 46, 12.7, 0.5, passarela, "#a5643c");
+    // caixas d'agua, cobertura em cima dos telhados
+    [[-34, -18], [34, -18], [2, 18]].forEach(function (spot) {
+      boxS(spot[0] - 2, 11.7, spot[1] - 2, spot[0] + 2, 14.2, spot[1] + 2, "#8fd9c8", 5, true);
+    });
+    signs.push({x: 0, y: 10.4, z: -13, t: "TELHADOS DE MERENGUE"});
+  }
+
+  /* ---------------------------------------------------- 4. ESTACAO CARAMELO
+     Duas plataformas altas, os trilhos no meio e uma passarela cruzando por
+     cima. Os vagoes sao cobertura e degrau ao mesmo tempo.                 */
+  function buildStation() {
+    ground("#7a6a5c", "#8a786a");
+    const plataforma = "#e8dcc2", vagao = "#a85c43", ferro = "#5d4338";
+    // trilhos
+    boxS(-4.5, 0, -68, 4.5, 0.18, 68, "#4a3b33", 8, false);
+    for (let z = -66; z <= 66; z += 4) {
+      boxS(-5.5, 0.18, z - 0.5, 5.5, 0.42, z + 0.5, "#6b4a3a", 4, false);
+    }
+    for (const x of [-3.2, 3.2]) boxS(x - 0.25, 0.42, -68, x + 0.25, 0.72, 68, "#9ea3ad", 5, false);
+    // as duas plataformas, com escada nas pontas
+    deck(-24, -60, -7, 60, 1.4, 1.4, plataforma, null);
+    deck(7, -60, 24, 60, 1.4, 1.4, plataforma, null);
+    stairs(-15, -63, 0, 1, 7, 0, 1.4, plataforma);
+    stairs(15, 63, 0, -1, 7, 0, 1.4, plataforma);
+    // cobertura das plataformas, apoiada em colunas
+    for (const lado of [-1, 1]) {
+      for (let z = -52; z <= 52; z += 13) pillar(lado * 15.5, z, 6, 0.4, ferro);
+      boxS(lado * 24, 6, -58, lado * 6.5, 6.9, 58, lado < 0 ? "#8fd9c8" : "#f6a9c3", 8, true);
+    }
+    // vagoes parados: sobe-se neles pela plataforma e atira de cima
+    [[-30], [6], [40]].forEach(function (spot, i) {
+      const z = spot[0];
+      boxS(-4.6, 0.7, z - 11, 4.6, 3.9, z + 11, i % 2 ? "#6d3a2a" : vagao, 8, true);
+      boxS(-5, 3.9, z - 11.4, 5, 4.5, z + 11.4, ferro, 6, true);
+    });
+    // passarela cruzando por cima de tudo
+    deck(-26, -4, 26, 4, 9.5, 0.6, "#c98f5e", "#8b6f5e");
+    stairs(-25, -8, 0, 1, 5, 6.9, 9.5, "#c98f5e");
+    stairs(25, 8, 0, -1, 5, 6.9, 9.5, "#c98f5e");
+    /* Saguao ao fundo: paredes, nao um bloco macico. Um bloco de ponta a
+       ponta engoliria a escada da plataforma e prenderia quem nascesse ali. */
+    boxS(-20, 0, -67, -7, 9, -64, "#f0e6da", 8, true);
+    boxS(7, 0, -67, 20, 9, -64, "#f0e6da", 8, true);
+    boxS(-20, 9, -67, 20, 10.2, -64, "#e8615a", 7, true);
+    boxS(-7, 5.5, -67, 7, 9, -64, "#f0e6da", 6, true);   // verga sobre a porta
+    signs.push({x: 0, y: 10.4, z: -61, t: "ESTACAO CARAMELO"});
+  }
+
+  /* -------------------------------------------------------- 5. PORTO DE MEL
+     Conteineres empilhados formando corredores e terracos. E o mapa mais
+     vertical: quase todo bloco da para escalar em dois ou tres saltos.     */
+  function buildHarbor() {
+    ground("#6f8fa8", "#7d9cb4");
+    const agua = "#4a7f9e";
+    // doca: a agua fica nas bordas, so de enfeite
+    boxS(-44, 0, -70, -36, 0.4, 70, agua, 8, false);
+    boxS(36, 0, -70, 44, 0.4, 70, agua, 8, false);
+    const cores = ["#e8615a", "#ffcf4d", "#8fd9c8", "#c9b4ec", "#7ec96b", "#f79a5e"];
+    /* Uma pilha de conteineres: cada andar recua um pouco, o que cria o
+       degrau para subir sem precisar de escada em toda pilha.              */
+    function pilha(x, z, andares, giro) {
+      for (let i = 0; i < andares; i++) {
+        const encolhe = i * 0.9;
+        const largura = giro ? 6.5 - encolhe : 3.2 - encolhe * 0.4;
+        const fundo = giro ? 3.2 - encolhe * 0.4 : 6.5 - encolhe;
+        const y = i * 3.1;
+        boxS(x - largura, y, z - fundo, x + largura, y + 3, z + fundo,
+          cores[(i + x + z) % cores.length], 6, true);
+        boxS(x - largura, y + 3, z - fundo, x + largura, y + 3.15, z + fundo, "#4a3b33", 5, false);
+      }
+    }
+    pilha(-28, -48, 3, false); pilha(-14, -40, 2, true);  pilha(-28, -20, 2, false);
+    pilha(-16, -6, 3, true);   pilha(-30, 8, 2, false);   pilha(-14, 26, 3, true);
+    pilha(-28, 44, 2, false);
+    pilha(28, -44, 2, false);  pilha(14, -30, 3, true);   pilha(28, -14, 3, false);
+    pilha(15, 2, 2, true);     pilha(29, 18, 2, false);   pilha(14, 34, 3, true);
+    pilha(28, 52, 2, false);
+    // escadas para os terracos altos
+    stairs(-22, -48, 1, 0, 4, 0, 6.2, "#8b6f5e");
+    stairs(22, 34, -1, 0, 4, 0, 6.2, "#8b6f5e");
+    // guindaste: enfeite alto que fecha o horizonte
+    boxS(-3, 0, -66, 3, 22, -60, "#e8615a", 8, true);
+    boxS(-2, 22, -66, 2, 24, -34, "#ffcf4d", 7, false);
+    boxS(-0.5, 12, -36, 0.5, 24, -34, "#4a3b33", 5, false);
+    // passarela ligando os dois lados por cima do corredor central
+    deck(-32, -3, 32, 3, 9.4, 0.6, "#c98f5e", "#8b6f5e");
+    stairs(-6, -10, 0, 1, 5, 6.2, 9.4, "#c98f5e");
+    stairs(6, 10, 0, -1, 5, 6.2, 9.4, "#c98f5e");
+    signs.push({x: 0, y: 11, z: 3.6, t: "PORTO DE MEL"});
+  }
+
+  /* O sorteio de origem do jogo nasceu para a vila: um corredor de x -9 a 9.
+     Nas fases largas isso joga todo mundo no mesmo aperto, entao cada uma diz
+     onde da para nascer. Continua valendo a regra de sempre: longe de quem ja
+     esta vivo e nunca dentro de um solido.                                  */
+  const SPAWN_AREAS = {
+    funfair:  [[-38, 38], [-60, 60]],
+    overpass: [[-38, 38], [-64, 64]],
+    rooftops: [[-40, 40], [-62, 62]],
+    station:  [[-22, 22], [-58, 58]],
+    harbor:   [[-33, 33], [-60, 60]]
+  };
+  spawnPoint = function () {
+    const area = SPAWN_AREAS[game.map];
+    if (!area) return originalSpawnPoint();
+    let best = null, bestDistance = -1;
+    for (let i = 0; i < 40; i++) {
+      const point = {
+        x: rnd(area[0][0], area[0][1]),
+        z: rnd(area[1][0], area[1][1])
+      };
+      if (solidAt(point.x, point.z, 0.2, 1.6, 0.6)) continue;
+      let distance = 1e9;
+      for (const entity of ents) {
+        if (entity.dead) continue;
+        distance = Math.min(distance,
+          (entity.x - point.x) * (entity.x - point.x) + (entity.z - point.z) * (entity.z - point.z));
+      }
+      if (distance > bestDistance) { bestDistance = distance; best = point; }
+    }
+    return best || originalSpawnPoint();
+  };
+
+  /* ---------------------------------------------------- 6. CAMPO DE TIRO
+     Fase de treino: sem bots, so alvos que aparecem e somem. E onde o desafio
+     diario de pontaria se cumpre, e serve para experimentar arma nova sem
+     levar tiro.                                                            */
+  const TARGET_ROWS = [
+    {z: -18, y: 1.6, size: 1.5, points: 1},
+    {z: -34, y: 2.0, size: 1.2, points: 2},
+    {z: -52, y: 2.4, size: 0.95, points: 3}
+  ];
+  function buildRange() {
+    ground("#c8b79c", "#d4c4aa");
+    const parede = "#8b6f5e", piso = "#e8dcc2";
+    // baia do atirador
+    boxS(-14, 0, 8, 14, 0.4, 30, piso, 8, true);
+    boxS(-14, 0.4, 8, 14, 1.15, 9.2, parede, 6, true);
+    for (const x of [-14, -4.7, 4.7, 14]) boxS(x - 0.4, 0.4, 8, x + 0.4, 2.6, 12, parede, 5, true);
+    boxS(-14, 2.6, 8, 14, 3.4, 13, "#a85c43", 7, true);
+    // paredes laterais do campo
+    boxS(-20, 0, -62, -16, 6, 8, parede, 8, true);
+    boxS(16, 0, -62, 20, 6, 8, parede, 8, true);
+    boxS(-20, 0, -66, 20, 9, -62, "#6d5a4e", 8, true);
+    // marcas de distancia no chao
+    TARGET_ROWS.forEach(function (row, index) {
+      boxS(-16, 0, row.z - 0.4, 16, 0.12, row.z + 0.4,
+        ["#e8615a", "#ffcf4d", "#8fd9c8"][index], 6, false);
+    });
+    signs.push({x: 0, y: 4.4, z: 12.8, t: "CAMPO DE TIRO"});
+  }
+
+  /* Os alvos nao sao paredes: sao discos que o tiro atravessa e que somem ao
+     serem acertados. Por isso ficam fora de solids e tem teste proprio.    */
+  function spawnTargets() {
+    game.targets = [];
+    TARGET_ROWS.forEach(function (row, rowIndex) {
+      for (let i = 0; i < 4; i++) {
+        game.targets.push({
+          x: -12 + i * 8, y: row.y, z: row.z,
+          size: row.size, points: row.points,
+          alive: true, timer: 0, row: rowIndex
+        });
+      }
+    });
+    game.rangeScore = 0;
+    game.rangeHits = 0;
+  }
+  function updateTargets(dt) {
+    if (game.map !== "range" || !game.targets) return;
+    game.targets.forEach(function (target) {
+      if (target.alive) return;
+      target.timer -= dt;
+      if (target.timer <= 0) target.alive = true;
+    });
+  }
+  /* Chamado pelo tiro do jogo. Devolve true quando algum alvo foi acertado. */
+  function hitTargets(ox, oy, oz, dx, dy, dz, maxT) {
+    if (game.map !== "range" || !game.targets) return false;
+    let best = null, bestT = maxT;
+    game.targets.forEach(function (target) {
+      if (!target.alive) return;
+      const half = target.size;
+      const t = rayAABB(ox, oy, oz, dx, dy, dz,
+        target.x - half, target.y - half, target.z - 0.25,
+        target.x + half, target.y + half, target.z + 0.25, bestT);
+      if (t > 0 && t < bestT) { bestT = t; best = target; }
+    });
+    if (!best) return false;
+    best.alive = false;
+    best.timer = 1.6 + best.row * 0.5;
+    game.rangeScore += best.points;
+    game.rangeHits++;
+    burst(best.x, best.y, best.z, "#ffcf4d", 10);
+    hitMark = 0.35;
+    snd.hit(best.row === 2);
+    bumpDaily("targets", 1);
+    return true;
+  }
+  function drawTargets() {
+    if (game.map !== "range" || !game.targets) return;
+    game.targets.forEach(function (target) {
+      if (!target.alive) {
+        // enquanto espera, fica deitado: da para ver que vai voltar
+        const base = mMul(mT(target.x, 0.25, target.z), mRX(1.35));
+        boxM(base, target.size, target.size * 0.18, 0.12, "#8b6f5e", Qw);
+        return;
+      }
+      const origin = mT(target.x, target.y, target.z);
+      /* Os aneis ficam na face voltada para a baia (z maior): o atirador
+         chega pelo +z, e do outro lado ele so veria o fundo branco. */
+      boxM(origin, target.size, target.size, 0.12, "#fffdf7", Qw);
+      boxM(mMul(origin, mT(0, 0, 0.13)), target.size * 0.66, target.size * 0.66, 0.06, "#e8615a", Qw);
+      boxM(mMul(origin, mT(0, 0, 0.2)), target.size * 0.3, target.size * 0.3, 0.06, "#fffdf7", Qw);
+      boxM(mMul(mT(target.x, target.y - target.size - 0.6, target.z), mS(1)),
+        0.16, 0.6, 0.16, "#8b6f5e", Qw);
+    });
+  }
+
   buildTown = function () {
-    if (game.map === "factory") buildFactory();
+    if (game.map === "range") buildRange();
+    else if (game.map === "factory") buildFactory();
     else if (game.map === "park") buildPark();
     else if (game.map === "castle") buildCastle();
+    else if (game.map === "funfair") buildFunfair();
+    else if (game.map === "overpass") buildOverpass();
+    else if (game.map === "rooftops") buildRooftops();
+    else if (game.map === "station") buildStation();
+    else if (game.map === "harbor") buildHarbor();
     else originalBuildTown();
   };
 
@@ -576,7 +980,13 @@
       village: {faces: 180, solids: 18},
       factory: {faces: 180, solids: 10},
       park: {faces: 300, solids: 25},
-      castle: {faces: 180, solids: 12}
+      castle: {faces: 180, solids: 12},
+      funfair: {faces: 300, solids: 40},
+      overpass: {faces: 260, solids: 40},
+      rooftops: {faces: 300, solids: 30},
+      station: {faces: 260, solids: 30},
+      harbor: {faces: 300, solids: 40},
+      range: {faces: 150, solids: 10}
     };
     const minimum = minimums[game.map] || minimums.village;
     return statics.length >= minimum.faces && solids.length >= minimum.solids;
@@ -605,6 +1015,7 @@
         throw new Error("cenario incompleto: " + statics.length + "/" + solids.length);
       }
       game.mapRepairAt = performance.now() + 2500;
+      buildMapPlan();          // a planta do minimapa acompanha o cenario
       return true;
     } catch (error) {
       restoreArray(statics, oldStatics);
@@ -630,7 +1041,15 @@
       village: [[-8,-40],[8,-18],[-7,6],[8,30],[-28,-6],[28,8],[-38,38],[38,-38],[0,52],[0,-58]],
       factory: [[0,-40],[-10,-20],[10,2],[14,30],[-14,-28],[14,28],[-8,48],[8,-52],[-14,8],[14,-8]],
       park: [[-22,-42],[22,-24],[-16,0],[16,22],[-38,8],[38,-8],[0,42],[0,-52],[-28,34],[28,-38]],
-      castle: [[0,-44],[-22,-20],[22,-20],[0,24],[-30,22],[30,22],[-12,44],[12,44],[-42,0],[42,0]]
+      castle: [[0,-44],[-22,-20],[22,-20],[0,24],[-30,22],[30,22],[-12,44],[12,44],[-42,0],[42,0]],
+      // as fases novas espalham coleta tambem no alto, para premiar quem sobe
+      funfair: [[0,-24],[0,24],[-30,-34],[30,-34],[-30,34],[30,34],[0,-54],[0,54],[-34,0],[34,0]],
+      overpass: [[0,-30],[0,30],[-32,-60],[32,-60],[-27,-40],[27,40],[0,0],[10,-20],[-36,24],[36,-24]],
+      rooftops: [[0,-20],[2,18],[-34,-18],[34,-18],[-32,-52],[32,-52],[0,-52],[-30,52],[30,52],[0,0]],
+      station: [[-15,-30],[15,30],[-15,20],[15,-20],[0,-50],[0,50],[-20,0],[20,0],[0,6],[0,-30]],
+      harbor: [[-28,-48],[28,-44],[-16,-6],[15,2],[-14,26],[14,34],[0,-20],[0,20],[-30,8],[29,18]],
+      // no campo de tiro so ha municao, e perto da baia
+      range: [[-10,20],[10,20],[-10,26],[10,26],[0,23],[-6,16],[6,16],[0,16],[-12,24],[12,24]]
     };
     const points = layouts[game.map] || layouts.village;
     const types = ["ammo", "candy", "heal", "weapon", "shield", "candy", "ammo", "weapon", "speed", "candy"];
@@ -664,6 +1083,23 @@
       }
       for (const entity of ents) respawn(entity);
     }
+    /* Campo de tiro e treino: ninguem atirando de volta, alvos no lugar dos
+       rivais e o jogador sempre na baia, olhando para o fundo. */
+    if (game.map === "range") {
+      ents = [player];
+      spawnTargets();
+      player.x = 0; player.z = 20; player.y = 0.4; player.vy = 0;
+      // a frente da camera e -z (forward = -sin, -cos): yaw 0 olha para os alvos
+      cam.yaw = 0; cam.pitch = 0;
+    }
+    /* O jogo original planta o jogador em (0, 22), que e rua limpa na vila mas
+       cai dentro de um predio nas fases novas. Nelas, vale o mesmo sorteio de
+       origem de todo mundo. */
+    else if (SPAWN_AREAS[game.map]) {
+      const start = spawnPoint();
+      player.x = start.x; player.z = start.z; player.y = 0; player.vy = 0;
+      cam.yaw = Math.atan2(-player.x, -player.z);   // olhando para o meio da fase
+    }
     player.name = (profile.name || SugarI18n.t("YOU")).toUpperCase().slice(0, 14);
     player.skin = selectedSkin();
     game.tempWeapons = profile.ownedWeapons.slice();
@@ -685,6 +1121,7 @@
     game.captureScore = [0, 0, 0];
     game.wave = 1;
     game.flag = {x: 0, z: 0, carrier: null, home: 0};
+    resetBomb();
     spawnPickups();
     updateWeaponSlots();
     updateCandyHud();
@@ -697,6 +1134,306 @@
   function endByTimer() {
     if (!matchOver) endMatch(topEntity());
   }
+  /* =========================================================== A BOMBA
+     No modo Equipes agora existe um segundo caminho para vencer: plantar a
+     bomba num dos dois pontos e segurar ate ela estourar. Quem plantou vence
+     na hora do estouro, mesmo perdendo no placar.
+
+     Nao ha botao novo: quem fica dentro do circulo planta, e quem fica em
+     cima da bomba plantada desarma. Botao a mais atrapalharia no celular,
+     onde a tela ja esta cheia.                                            */
+  const BOMB_SITES = {
+    village:  [[-24, -34], [24, 30]],
+    factory:  [[-30, -30], [30, 28]],
+    park:     [[-32, -34], [32, 30]],
+    castle:   [[-30, -30], [30, 30]],
+    funfair:  [[-30, -34], [30, 34]],
+    overpass: [[-32, -60], [32, 60]],
+    rooftops: [[-32, -52], [2, 18]],
+    station:  [[-15, -30], [15, 30]],
+    harbor:   [[-28, -48], [28, 52]]
+  };
+  const BOMB_RADIUS = 4.2;      // ate onde o corpo conta como "no ponto"
+  const BOMB_PLANT = 4;         // segundos para plantar
+  const BOMB_DEFUSE = 7;        // segundos para desarmar
+  const BOMB_FUSE = 35;         // segundos ate estourar
+
+  function bombSites() {
+    return (BOMB_SITES[game.map] || BOMB_SITES.village).map(function (point, index) {
+      return {x: point[0], z: point[1], label: index === 0 ? "A" : "B"};
+    });
+  }
+  function resetBomb() {
+    game.bomb = {
+      sites: bombSites(),
+      state: "loose",     // loose (ninguem plantou) | planted | defused | blown
+      site: null,
+      planting: 0,
+      defusing: 0,
+      fuse: 0,
+      team: 0
+    };
+  }
+  function bombAlive(entity) { return entity && !entity.dead && !entity.spectator; }
+  /* Quem esta em cima de um ponto, por time. Serve tanto para plantar quanto
+     para saber se ha inimigo por perto atrapalhando o desarme.            */
+  function countAt(x, z, radius) {
+    const byTeam = {1: 0, 2: 0};
+    ents.forEach(function (entity) {
+      if (!bombAlive(entity) || !entity.team) return;
+      if (Math.hypot(entity.x - x, entity.z - z) > radius) return;
+      byTeam[entity.team]++;
+    });
+    return byTeam;
+  }
+  function updateBomb(dt) {
+    if (game.mode !== "team") return;
+    if (!game.bomb || !game.bomb.sites) resetBomb();
+    const bomb = game.bomb;
+    if (bomb.state === "defused" || bomb.state === "blown") return;
+
+    if (bomb.state === "loose") {
+      let plantingSite = null, plantingTeam = 0;
+      bomb.sites.forEach(function (site) {
+        const here = countAt(site.x, site.z, BOMB_RADIUS);
+        // so planta quem esta sozinho no ponto: com os dois times ali, ninguem planta
+        if (here[1] > 0 && here[2] === 0) { plantingSite = site; plantingTeam = 1; }
+        else if (here[2] > 0 && here[1] === 0) { plantingSite = site; plantingTeam = 2; }
+      });
+      if (!plantingSite) {
+        bomb.planting = Math.max(0, bomb.planting - dt * 1.6);
+        bomb.site = null;
+        return;
+      }
+      if (bomb.site !== plantingSite) { bomb.site = plantingSite; bomb.planting = 0; }
+      bomb.team = plantingTeam;
+      bomb.planting += dt;
+      if (bomb.planting >= BOMB_PLANT) {
+        bomb.state = "planted";
+        bomb.fuse = BOMB_FUSE;
+        bomb.defusing = 0;
+        showToast(SugarI18n.t("BOMB_PLANTED", {site: plantingSite.label}));
+        vibrate("30,40,60");
+        snd.reload();
+      }
+      return;
+    }
+
+    // plantada: corre o pavio e o outro time pode desarmar
+    bomb.fuse -= dt;
+    const here = countAt(bomb.site.x, bomb.site.z, BOMB_RADIUS);
+    const enemy = bomb.team === 1 ? 2 : 1;
+    if (here[enemy] > 0 && here[bomb.team] === 0) bomb.defusing += dt;
+    else bomb.defusing = Math.max(0, bomb.defusing - dt * 1.6);
+
+    if (bomb.defusing >= BOMB_DEFUSE) {
+      bomb.state = "defused";
+      showToast(SugarI18n.t("BOMB_DEFUSED"));
+      vibrate("20,30,40");
+      return;
+    }
+    if (bomb.fuse <= 0) {
+      bomb.state = "blown";
+      // estouro de verdade: dano em quem estiver perto e camera sacudindo
+      burst(bomb.site.x, 1.2, bomb.site.z, "#ffcf4d", 40);
+      const distance = Math.hypot(player.x - bomb.site.x, player.z - bomb.site.z);
+      if (distance < 26) camShake = Math.max(camShake, clamp(2.2 - distance * 0.07, 0.3, 2.2));
+      /* O estouro leva quem estiver por perto. O credito vai para alguem do
+         time que plantou: com "by" nulo, a regra de fogo amigo do jogo
+         descarta o dano e a bomba nao machucaria ninguem.                 */
+      const winner = ents.find(function (entity) { return entity.team === bomb.team; });
+      ents.forEach(function (entity) {
+        if (!bombAlive(entity)) return;
+        const d = Math.hypot(entity.x - bomb.site.x, entity.z - bomb.site.z);
+        if (d <= 9) damage(entity, 100, winner || entity.lastHitBy || null, false);
+      });
+      showToast(SugarI18n.t("BOMB_EXPLODED", {team: SugarI18n.teamLabel(bomb.team)}));
+      endMatch(winner || topEntity());
+    }
+  }
+
+  /* Desenho: os dois pontos no mundo, a bomba plantada e a barra de progresso.
+     Fica em drawObjectives, junto com a bandeira e o rei do pote.          */
+  function drawBomb() {
+    if (game.mode !== "team" || !game.bomb || !game.bomb.sites) return;
+    const bomb = game.bomb;
+    if (bomb.state === "blown" || bomb.state === "defused") return;
+    if (bomb.state === "loose") {
+      bomb.sites.forEach(function (site) {
+        const point = project(site.x, 0.4, site.z);
+        if (!point) return;
+        ctx.strokeStyle = "#ffcf4d";
+        ctx.lineWidth = 3 * RS;
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, clamp(point.s * BOMB_RADIUS * 0.5, 8, 220), 0, Math.PI * 2);
+        ctx.stroke();
+        const label = project(site.x, 2.6, site.z);
+        if (!label) return;
+        const size = clamp(label.s * 0.5, 12, 60);
+        ctx.font = "900 " + size.toFixed(1) + "px " + FONT;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.lineWidth = Math.max(2, size * 0.2);
+        ctx.strokeStyle = "#3f342e";
+        ctx.fillStyle = "#ffcf4d";
+        ctx.strokeText(site.label, label.x, label.y);
+        ctx.fillText(site.label, label.x, label.y);
+      });
+      return;
+    }
+    // plantada: pisca cada vez mais rapido conforme o pavio acaba
+    const site = bomb.site;
+    const point = project(site.x, 0.8, site.z);
+    if (!point) return;
+    const hurry = clamp(1 - bomb.fuse / BOMB_FUSE, 0, 1);
+    const blink = Math.sin(performance.now() / (260 - hurry * 200)) > -0.2;
+    const size = clamp(point.s * 0.55, 10, 90);
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, clamp(point.s * 0.9, 5, 70), 0, Math.PI * 2);
+    ctx.fillStyle = blink ? "#e8615a" : "#4a3b33";
+    ctx.fill();
+    ctx.lineWidth = 3 * RS;
+    ctx.strokeStyle = "#fffdf7";
+    ctx.stroke();
+    ctx.font = "900 " + size.toFixed(1) + "px " + FONT;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.lineWidth = Math.max(2, size * 0.2);
+    ctx.strokeStyle = "#3f342e";
+    ctx.fillStyle = blink ? "#ffffff" : "#ffcf4d";
+    const text = Math.ceil(Math.max(0, bomb.fuse));
+    ctx.strokeText(text, point.x, point.y - size * 1.3);
+    ctx.fillText(text, point.x, point.y - size * 1.3);
+  }
+  /* A barra fica no meio da tela, onde o jogador esta olhando enquanto espera. */
+  function drawBombBar() {
+    if (game.mode !== "team" || !game.bomb) return;
+    const bomb = game.bomb;
+    let ratio = 0, label = "";
+    if (bomb.state === "loose" && bomb.planting > 0.05) {
+      ratio = bomb.planting / BOMB_PLANT;
+      label = SugarI18n.t("BOMB_PLANTING");
+    } else if (bomb.state === "planted" && bomb.defusing > 0.05) {
+      ratio = bomb.defusing / BOMB_DEFUSE;
+      label = SugarI18n.t("BOMB_DEFUSING");
+    } else return;
+    const width = Math.min(W * 0.5, 320), height = 16 * RS;
+    const x = (W - width) / 2, y = H * 0.66;
+    ctx.fillStyle = "rgba(39,31,27,.72)";
+    ctx.fillRect(x, y, width, height);
+    ctx.fillStyle = "#ffcf4d";
+    ctx.fillRect(x, y, width * clamp(ratio, 0, 1), height);
+    ctx.strokeStyle = "#fffdf7";
+    ctx.lineWidth = 2 * RS;
+    ctx.strokeRect(x, y, width, height);
+    ctx.font = "900 " + (12 * RS).toFixed(1) + "px " + FONT;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillStyle = "#fffdf7";
+    ctx.fillText(label, W / 2, y - 5 * RS);
+  }
+
+  /* ==================================================== DESAFIOS DIARIOS
+     Tres tarefas por dia, sorteadas do mesmo jeito para o dia inteiro (a
+     semente e a data), cada uma com sua recompensa. A terceira paga uma arma
+     que o jogador ainda nao tem — quando nao sobra nenhuma, vira dinheiro.
+
+     O progresso e contado enquanto se joga, e nao no fim da partida: quem sai
+     no meio nao perde o que ja fez.                                        */
+  const DAILY_TYPES = [
+    {id: "kills",     need: [8, 14],  candies: 160},
+    {id: "candies",   need: [12, 20], candies: 140},
+    {id: "grenade",   need: [1, 3],   candies: 200},
+    {id: "headshots", need: [3, 6],   candies: 220},
+    {id: "wins",      need: [1, 2],   candies: 260},
+    {id: "targets",   need: [15, 25], candies: 180}
+  ];
+  function daySeed() {
+    const day = today();
+    let seed = 7;
+    for (let i = 0; i < day.length; i++) seed = (Math.imul(seed, 31) + day.charCodeAt(i)) >>> 0;
+    return seed;
+  }
+  function rollDaily() {
+    let seed = daySeed();
+    const next = function () {
+      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+      return seed / 4294967296;
+    };
+    const pool = DAILY_TYPES.slice();
+    const tasks = [];
+    for (let i = 0; i < 3 && pool.length; i++) {
+      const type = pool.splice((next() * pool.length) | 0, 1)[0];
+      const need = type.need[0] + Math.floor(next() * (type.need[1] - type.need[0] + 1));
+      tasks.push({id: type.id, need: need, have: 0, done: false, claimed: false});
+    }
+    // a ultima do dia paga arma; as outras pagam doces
+    tasks.forEach(function (task, index) {
+      const type = DAILY_TYPES.find(function (t) { return t.id === task.id; });
+      task.candies = type.candies;
+      task.weapon = index === tasks.length - 1;
+    });
+    return tasks;
+  }
+  function ensureDaily() {
+    if (!profile.daily || profile.daily.day !== today() || !Array.isArray(profile.daily.tasks)) {
+      profile.daily = {day: today(), tasks: rollDaily()};
+      saveProfile();
+    }
+    return profile.daily;
+  }
+  function dailyLabel(task) {
+    return SugarI18n.t("DAILY_" + task.id.toUpperCase(), {n: task.need});
+  }
+  /* Uma arma que o jogador ainda nao tem, de preferencia principal. */
+  function unownedWeapon() {
+    const missing = PRIMARIES.concat(ACCESSORIES).filter(function (index) {
+      return !ownsWeapon(index);
+    });
+    if (!missing.length) return -1;
+    return missing[(Math.random() * missing.length) | 0];
+  }
+  function claimDaily(task) {
+    if (!task.done || task.claimed) return;
+    task.claimed = true;
+    let text = "";
+    if (task.weapon) {
+      const prize = unownedWeapon();
+      if (prize >= 0) {
+        profile.ownedWeapons.push(prize);
+        text = WEAPONS[prize].name;
+      } else {
+        profile.candies += task.candies * 2;
+        text = (task.candies * 2) + SugarI18n.t("PRICE_CANDIES_SUFFIX");
+      }
+    } else {
+      profile.candies += task.candies;
+      text = task.candies + SugarI18n.t("PRICE_CANDIES_SUFFIX");
+    }
+    profile.xp += 90;
+    saveProfile();
+    updateCandyHud();
+    updateWeaponSlots();
+    showToast(SugarI18n.t("DAILY_CLAIMED", {prize: text}));
+    vibrate("20,30,40");
+  }
+  /* Chamado pelos eventos do jogo. Nao paga sozinho: o jogador resgata no
+     Perfil, para o premio nao passar despercebido no meio do tiroteio.    */
+  function bumpDaily(id, amount) {
+    const daily = ensureDaily();
+    let changed = false;
+    daily.tasks.forEach(function (task) {
+      if (task.id !== id || task.done) return;
+      task.have = Math.min(task.need, task.have + (amount || 1));
+      if (task.have >= task.need) {
+        task.done = true;
+        showToast(SugarI18n.t("DAILY_DONE_TASK", {task: dailyLabel(task)}));
+      }
+      changed = true;
+    });
+    if (changed) saveProfile();
+  }
+
   function updateTeams() {
     game.teamScore[1] = 0;
     game.teamScore[2] = 0;
@@ -740,6 +1477,7 @@
         game.captureScore[carrier.team]++;
         carrier.score += 3;
         game.flag = {x: 0, z: 0, carrier: null, home: 0};
+    resetBomb();
         if (game.captureScore[carrier.team] >= game.target) endMatch(carrier);
       }
     }
@@ -768,6 +1506,7 @@
         if (collector === player) {
           profile.candies += pickup.value || 5;
           saveProfile();
+          bumpDaily("candies", 1);
           showToast("+" + (pickup.value || 5) + " DOCES");
         }
       } else if (pickup.type === "weapon") {
@@ -797,6 +1536,12 @@
       if (rebuildSelectedMap()) showToast(SugarI18n.t("TOAST_SCENARIO_RESTORED"));
     }
     checkFieldAmmo();
+    updateTargets(dt);
+    /* Abates contados aqui, e nao no fim da partida: quem sai no meio leva o
+       que ja fez. O placar do jogador so sobe quando ele mata. */
+    const score = player.score | 0;
+    if (score > (game.lastScore | 0)) bumpDaily("kills", score - (game.lastScore | 0));
+    game.lastScore = score;
     game.elapsed += dt;
     game.remaining = Math.max(0, game.remaining - dt);
     if (game.remaining <= 0) {
@@ -808,6 +1553,7 @@
     });
     updatePickups(dt);
     if (game.mode === "team" || game.mode === "capture") updateTeams();
+    if (game.mode === "team") updateBomb(dt);
     if (game.mode === "capture") updateCapture();
     if (game.mode === "king") updateKing(dt);
     if (game.mode === "survival") {
@@ -887,6 +1633,36 @@
 
   let minimapCanvas = null;
   let minimapCtx = null;
+
+  /* ------------------------------------------------------------- minimapa
+     A planta da fase e desenhada UMA vez, quando o cenario e montado, num
+     canvas guardado a parte. Depois e so girar essa imagem junto com a
+     camera — desenhar 150 blocos a cada quadro custaria caro no celular.
+
+     O tom de cada bloco vem da altura dele: chao escuro, muro medio, coisas
+     altas quase brancas. Nas fases de dois andares isso e o que deixa ler o
+     viaduto por cima da rua.                                              */
+  const PLAN_HALF = 82;          // metade do mundo desenhado, em unidades
+  const PLAN_PIXELS = 380;
+  function buildMapPlan() {
+    const canvas = document.createElement("canvas");
+    canvas.width = PLAN_PIXELS;
+    canvas.height = PLAN_PIXELS;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+    const scale = PLAN_PIXELS / (PLAN_HALF * 2);
+    // do mais baixo para o mais alto: o que esta em cima tapa o que esta embaixo
+    const blocks = solids.slice().sort(function (a, b) { return a.y1 - b.y1; });
+    blocks.forEach(function (b) {
+      const height = clamp(b.y1 / 14, 0, 1);
+      const tone = Math.round(90 + height * 130);
+      context.fillStyle = "rgba(" + tone + "," + Math.round(tone * 0.93) + "," + Math.round(tone * 0.86) + ",.92)";
+      context.fillRect((b.x0 + PLAN_HALF) * scale, (b.z0 + PLAN_HALF) * scale,
+        Math.max(1.5, (b.x1 - b.x0) * scale), Math.max(1.5, (b.z1 - b.z0) * scale));
+    });
+    game.mapPlan = canvas;
+  }
+
   function drawMinimap() {
     if (!minimapCanvas || !minimapCtx) return;
     const visible = player && !paused && !matchOver;
@@ -898,7 +1674,9 @@
     const centerX = width / 2;
     const centerY = 99;
     const radius = 68;
-    const range = 58;
+    /* Alcance maior do que o radar antigo (era 58): nas fases novas, que sao
+       grandes e de dois andares, 58 mal saia da esquina. */
+    const range = 82;
     context.clearRect(0, 0, width, minimapCanvas.height);
 
     context.save();
@@ -907,6 +1685,23 @@
     context.clip();
     context.fillStyle = "rgba(39,31,27,.82)";
     context.fillRect(centerX - radius, centerY - radius, radius * 2, radius * 2);
+
+    const viewer = viewerEntity() || player;
+
+    /* A planta gira junto com a camera: o que esta na frente aparece para
+       cima, igual aos pontos dos inimigos. */
+    if (game.mapPlan) {
+      context.save();
+      context.translate(centerX, centerY);
+      context.rotate(cam.yaw);
+      const zoom = radius / range;
+      context.scale(zoom, zoom);
+      context.translate(-viewer.x, -viewer.z);
+      context.globalAlpha = 0.85;
+      context.drawImage(game.mapPlan, -PLAN_HALF, -PLAN_HALF, PLAN_HALF * 2, PLAN_HALF * 2);
+      context.restore();
+      context.globalAlpha = 1;
+    }
 
     context.strokeStyle = "rgba(255,255,255,.18)";
     context.lineWidth = 2;
@@ -927,7 +1722,6 @@
     const rightX = Math.cos(cam.yaw);
     const rightZ = -Math.sin(cam.yaw);
     let enemyCount = 0;
-    const viewer = viewerEntity() || player;
     ents.forEach(function (entity) {
       if (entity === viewer || entity.dead) return;
       const info = labelInfo(entity);
@@ -985,7 +1779,7 @@
     context.textAlign = "center";
     context.textBaseline = "middle";
     context.font = "900 14px sans-serif";
-    context.fillText("RADAR · " + enemyCount, centerX, 16);
+    context.fillText(SugarI18n.mapLabel(game.map).slice(0, 16) + " · " + enemyCount, centerX, 16);
   }
 
   function drawObjectives() {
@@ -1008,6 +1802,9 @@
         ctx.fillText(SugarI18n.t("OBJECTIVE_CANDY"), p.x, p.y);
       }
     }
+    drawBomb();
+    drawBombBar();
+    drawTargets();
   }
 
   function draw() {
@@ -1055,8 +1852,7 @@
     profile.hits += player.hits || 0;
     profile.xp += xp;
     profile.candies += candies;
-    profile.daily.kills += player.score || 0;
-    profile.daily.matches++;
+    if (won) bumpDaily("wins", 1);
     profile.history.unshift({
       at: new Date().toISOString(),
       map: game.map,
@@ -1071,11 +1867,6 @@
     if ((player.headshots || 0) >= 5) completeAchievement("heads");
     if (profile.wins >= 10) completeAchievement("wins10");
     if ((player.bestStreak || 0) >= 5) completeAchievement("streak5");
-    if (!profile.daily.claimed && profile.daily.kills >= 10) {
-      profile.daily.claimed = true;
-      profile.xp += 150;
-      showToast(SugarI18n.t("TOAST_DAILY_DONE"));
-    }
     calculateLevel();
     saveProfile();
     return {won: won, xp: xp, candies: candies, accuracy: accuracy};
@@ -1572,6 +2363,23 @@
     updateCandyHud();
   }
 
+  function dailyMarkup() {
+    const daily = ensureDaily();
+    return '<div class="dailyList">' + daily.tasks.map(function (task, index) {
+      const ratio = clamp(task.have / task.need, 0, 1) * 100;
+      const prize = task.weapon ? SugarI18n.t("DAILY_PRIZE_WEAPON")
+        : task.candies + SugarI18n.t("PRICE_CANDIES_SUFFIX");
+      const action = task.claimed ? SugarI18n.t("DAILY_TAKEN")
+        : (task.done ? SugarI18n.t("DAILY_CLAIM") : task.have + "/" + task.need);
+      return '<div class="dailyRow ' + (task.done ? "done" : "") + '">' +
+        '<div class="dailyText"><b>' + escapeHtml(dailyLabel(task)) + '</b>' +
+        '<small>' + escapeHtml(prize) + '</small>' +
+        '<i class="dailyBar"><b style="width:' + ratio.toFixed(0) + '%"></b></i></div>' +
+        '<button class="dailyClaim big-btn sub-btn" data-task="' + index + '" ' +
+        (task.done && !task.claimed ? "" : "disabled") + '>' + escapeHtml(action) + '</button></div>';
+    }).join("") + '</div>';
+  }
+
   function openProfile() {
     const next = Math.pow(profile.level, 2) * 220;
     const history = profile.history.length
@@ -1601,8 +2409,7 @@
       profile.wins + escapeHtml(SugarI18n.t("WINS_SUFFIX")) + ' · ' + profile.kills + escapeHtml(SugarI18n.t("KILLS_SUFFIX")) + '</p>' +
       '<h3>' + escapeHtml(SugarI18n.t("SECTION_OUTFITS")) + '</h3><div class="skinList">' + skins + '</div>' +
       '<h3>' + escapeHtml(SugarI18n.t("SECTION_WEAPON_SKINS")) + '</h3><div class="skinList">' + weaponSkins + '</div>' +
-      '<h3>' + escapeHtml(SugarI18n.t("SECTION_DAILY")) + '</h3><p>' + SugarI18n.t("DAILY_PROGRESS", {n: Math.min(10, profile.daily.kills)}) +
-      (profile.daily.claimed ? SugarI18n.t("DAILY_DONE") : SugarI18n.t("DAILY_REWARD")) + '</p>' +
+      '<h3>' + escapeHtml(SugarI18n.t("SECTION_DAILY")) + '</h3>' + dailyMarkup() +
       '<h3>' + SugarI18n.t("SECTION_ACHIEVEMENTS", {n: profile.achievements.length}) + '</h3>' +
       '<p>' + (profile.achievements.map(function (id) { return escapeHtml(achievementLabel(id)); }).join(" · ") || escapeHtml(SugarI18n.t("NO_ACHIEVEMENTS"))) + '</p>' +
       '<h3>' + escapeHtml(SugarI18n.t("SECTION_PROGRESS")) + '</h3>' +
@@ -1635,6 +2442,13 @@
         saveProfile();
         document.querySelectorAll(".weaponSkinPick").forEach(function (b) { b.classList.remove("on"); });
         button.classList.add("on");
+      });
+    });
+    document.querySelectorAll(".dailyClaim").forEach(function (button) {
+      button.addEventListener("click", function () {
+        const daily = ensureDaily();
+        claimDaily(daily.tasks[parseInt(button.dataset.task, 10)]);
+        openProfile();
       });
     });
     document.getElementById("progressCopy").addEventListener("click", function () {
@@ -2311,7 +3125,7 @@
     }).join("");
   }
   function mapOptionsHtml() {
-    return ["village", "factory", "park", "castle"].map(function (id) {
+    return MAP_IDS.map(function (id) {
       return '<option value="' + id + '">' + escapeHtml(SugarI18n.mapLabel(id)) + '</option>';
     }).join("");
   }
@@ -2492,7 +3306,7 @@
       "#panel.pause-panel h2{display:none}#panel.pause-panel #sensWrap{margin-top:2px}" +
       "#modeHud{position:absolute;left:50%;top:76px;transform:translateX(-50%);font-size:10px;letter-spacing:1px;white-space:nowrap}" +
       "#candyHud{position:absolute;right:12px;top:76px;font-size:10px;letter-spacing:1px;background:#ffcf4d}" +
-      "#minimap{position:absolute;z-index:9;right:170px;top:48px;width:84px;height:84px;pointer-events:none;opacity:0;transform:scale(.9);transition:opacity .18s,transform .18s;filter:drop-shadow(0 4px 0 rgba(0,0,0,.24))}" +
+      "#minimap{position:absolute;z-index:9;right:170px;top:44px;width:106px;height:106px;pointer-events:none;opacity:0;transform:scale(.9);transition:opacity .18s,transform .18s;filter:drop-shadow(0 4px 0 rgba(0,0,0,.24))}" +
       "#minimap.visible{opacity:1;transform:scale(1)}" +
       "#sugarModal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;background:rgba(30,22,18,.78);padding:14px}" +
       "#sugarModal.open{display:flex}.sugarCard{width:min(560px,100%);max-height:92vh;overflow:auto;touch-action:pan-y;overscroll-behavior:contain;background:#fffdf7;border:5px solid #4a3b33;border-radius:24px;padding:18px;color:#4a3b33;text-align:center}" +
@@ -2514,6 +3328,14 @@
       ".shopTabs{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}.shopTab{flex:1 1 auto;border:3px solid #4a3b33;border-radius:11px;background:#fffdf7;color:#4a3b33;font:900 9px ui-rounded,'Trebuchet MS',sans-serif;letter-spacing:.5px;padding:8px 5px}.shopTab.on{background:#ffcf4d}" +
       ".loadoutNow{background:#8fd9c8;border:3px solid #4a3b33;border-radius:12px;padding:7px;font-size:10px;font-weight:900;letter-spacing:.4px}" +
       ".gearSummary{grid-column:1/-1;margin-bottom:2px;text-align:left;line-height:1.45}" +
+      ".dailyList{display:grid;gap:6px}" +
+      ".dailyRow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:#f0e6da;border:2px solid #4a3b33;border-radius:12px;padding:8px;text-align:left}" +
+      ".dailyRow.done{background:#dff3e4}" +
+      ".dailyText b{display:block;font-size:10px;letter-spacing:.3px;line-height:1.25}" +
+      ".dailyText small{display:block;font-size:9px;opacity:.7;margin:1px 0 4px}" +
+      ".dailyBar{display:block;height:8px;border:2px solid #4a3b33;border-radius:6px;background:#fffdf7;overflow:hidden}" +
+      ".dailyBar b{display:block;height:100%;background:#8fd9c8}" +
+      ".dailyClaim{margin:0;font-size:9px;padding:9px 8px;min-width:74px}" +
       ".progressHint{font-size:10px;line-height:1.4;opacity:.75;margin:4px 0 6px;text-align:left}" +
       ".progressBox{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;margin-bottom:6px}" +
       ".progressField{height:40px;border:2px solid #4a3b33;border-radius:10px;padding:5px 8px;background:#f7efe5;color:#4a3b33;font:900 13px ui-rounded,'Trebuchet MS',monospace;letter-spacing:1px;text-align:center;width:100%}" +
@@ -2547,7 +3369,7 @@
       "#adRewardOverlay,#giftRewardOverlay{position:fixed;inset:0;z-index:130;display:none;align-items:center;justify-content:center;background:rgba(30,22,18,.84);padding:16px}" +
       "#adRewardOverlay.open,#giftRewardOverlay.open{display:flex}.adRewardCard{width:min(430px,100%);background:#fffdf7;border:5px solid #4a3b33;border-radius:24px;padding:20px;color:#4a3b33;text-align:center;filter:drop-shadow(0 9px 0 rgba(0,0,0,.24))}" +
       ".adRewardGift{font-size:42px;line-height:1}.adRewardCard h2{margin:5px 0;color:#e8615a}.adRewardCard strong{color:#ba4c99}.adRewardCard p{font-size:12px;font-weight:800}.adRewardActions{display:grid;grid-template-columns:1.3fr .8fr;gap:8px;margin-top:12px}.adRewardActions .big-btn{margin:0}.adRewardStatus{min-height:18px;margin-top:8px!important;font-size:9px!important;letter-spacing:.6px}" +
-      "@media(max-width:560px){#menuExtras{grid-template-columns:repeat(2,1fr)}.settingGrid,.shopGrid{grid-template-columns:1fr}.arsenal{grid-template-columns:62px 1fr;padding:6px;gap:6px}.arsFilter{font-size:7px;padding:8px 3px}.arsGrid{grid-template-columns:1fr}.arsArt{height:70px}.resultGrid{grid-template-columns:1fr 1fr}#modeHud{top:55px;font-size:7px;max-width:62%;overflow:hidden;text-overflow:ellipsis}#candyHud{top:54px;font-size:8px}#minimap{right:142px;top:42px;width:76px;height:76px}#slots{gap:3px}.slot{width:32px}}" ;
+      "@media(max-width:560px){#menuExtras{grid-template-columns:repeat(2,1fr)}.settingGrid,.shopGrid{grid-template-columns:1fr}.arsenal{grid-template-columns:62px 1fr;padding:6px;gap:6px}.arsFilter{font-size:7px;padding:8px 3px}.arsGrid{grid-template-columns:1fr}.arsArt{height:70px}.resultGrid{grid-template-columns:1fr 1fr}#modeHud{top:55px;font-size:7px;max-width:62%;overflow:hidden;text-overflow:ellipsis}#candyHud{top:54px;font-size:8px}#minimap{right:140px;top:40px;width:92px;height:92px}#slots{gap:3px}.slot{width:32px}}" ;
     document.head.appendChild(style);
 
     const extras = document.createElement("div");
@@ -2677,6 +3499,8 @@
     grenadeBase: GRENADE_BASE,
     consumeGrenade: consumeGrenade,
     toast: showToast,
+    bumpDaily: bumpDaily,
+    hitTargets: hitTargets,
     refreshSlots: updateWeaponSlots,
     clearFieldWeapons: clearFieldWeapons,
     takeFieldWeapon: takeFieldWeapon,

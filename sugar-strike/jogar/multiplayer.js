@@ -375,7 +375,7 @@
     const modeOpts = ["deathmatch", "team", "capture", "king", "survival"].map(function (id, i) {
       return '<option value="' + id + '"' + (i === 0 ? " selected" : "") + '>' + escapeHtml(SugarI18n.modeLabel(id)) + '</option>';
     }).join("");
-    const mapOpts = ["village", "factory", "park", "castle"].map(function (id, i) {
+    const mapOpts = MAP_IDS.map(function (id, i) {
       return '<option value="' + id + '"' + (i === 0 ? " selected" : "") + '>' + escapeHtml(SugarI18n.mapLabel(id)) + '</option>';
     }).join("");
     // Tamanhos de sala, de dois em dois ate o teto do servidor.
