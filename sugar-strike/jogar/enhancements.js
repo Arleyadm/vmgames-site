@@ -1156,7 +1156,11 @@
   const BOMB_RADIUS = 4.2;      // ate onde o corpo conta como "no ponto"
   const BOMB_PLANT = 4;         // segundos para plantar
   const BOMB_DEFUSE = 7;        // segundos para desarmar
-  const BOMB_FUSE = 35;         // segundos ate estourar
+  /* O pavio precisa dar tempo de o outro time atravessar o mapa e tentar o
+     desarme. Com pouco tempo a rodada virava sorteio. Por isso tambem so se
+     arma enquanto ainda restar mais que o pavio inteiro no relogio da
+     partida: bomba que nao chega a estourar nao decide nada.              */
+  const BOMB_FUSE = 90;         // segundos ate estourar
 
   function bombSites() {
     return (BOMB_SITES[game.map] || BOMB_SITES.village).map(function (point, index) {
@@ -1193,6 +1197,13 @@
     if (bomb.state === "defused" || bomb.state === "blown") return;
 
     if (bomb.state === "loose") {
+      // Sem tempo para o pavio inteiro, o ponto fica fechado para armar.
+      bomb.locked = game.remaining <= BOMB_FUSE;
+      if (bomb.locked) {
+        bomb.planting = 0;
+        bomb.site = null;
+        return;
+      }
       let plantingSite = null, plantingTeam = 0;
       bomb.sites.forEach(function (site) {
         const here = countAt(site.x, site.z, BOMB_RADIUS);
@@ -1310,6 +1321,20 @@
     if (game.mode !== "team" || !game.bomb) return;
     const bomb = game.bomb;
     let ratio = 0, label = "";
+    /* Ponto fechado por falta de tempo: em vez de a barra simplesmente nao
+       encher (e parecer bug), o jogo diz o motivo a quem esta em cima. */
+    if (bomb.state === "loose" && bomb.locked) {
+      const onSite = (bomb.sites || []).some(function (site) {
+        return Math.hypot(player.x - site.x, player.z - site.z) <= BOMB_RADIUS;
+      });
+      if (!onSite || player.dead) return;
+      ctx.font = "900 " + (12 * RS).toFixed(1) + "px " + FONT;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "bottom";
+      ctx.fillStyle = "#ffcf4d";
+      ctx.fillText(SugarI18n.t("BOMB_NO_TIME"), W / 2, H * 0.66);
+      return;
+    }
     if (bomb.state === "loose" && bomb.planting > 0.05) {
       ratio = bomb.planting / BOMB_PLANT;
       label = SugarI18n.t("BOMB_PLANTING");

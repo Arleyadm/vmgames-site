@@ -18,7 +18,7 @@
 
   const nativeAvailable = typeof SugarAndroid !== "undefined";
   // Os indices das armas mudaram nesta versao: cliente antigo nao pode entrar.
-  const APP_VERSION = "1.7.1";
+  const APP_VERSION = "1.9.0";
   /* Tamanho da sala. O teto tem que bater com MAX_ROOM_SIZE do servidor:
      pedir mais do que ele aceita so faz a sala nascer menor do que o
      escolhido, sem aviso nenhum para quem criou.                          */
@@ -1967,19 +1967,51 @@
     if (weapon.thrown) throwGrenade(entity, weapon, dx, dy, dz, 1, true);
     snd.fire(weapon);
     if (window.SugarEnhance && SugarEnhance.onShot) SugarEnhance.onShot(entity);
+    // O rastro do proprio tiro e so visual: quem confere o acerto e o dono da
+    // sala. Sem isto o cliente atira e nao ve nada saindo do cano.
+    if (!weapon.melee && !weapon.thrown) {
+      netTracer(entity, weapon, entity.x, entity.y + 1.55, entity.z, dx, dy, dz);
+    }
     updateHUD();
     Net.send({
       t: "shoot",
       w: entity.wep,
+      // Municao conferida pelo dono da sala. Sem estes dois campos o tiro do
+      // cliente era descartado no host e a arma nao causava dano nenhum.
+      serverMag: entity.mag | 0,
+      serverRes: entity.res | 0,
       d: [round3(dx), round3(dy), round3(dz)]
     });
   }
 
+  /* Rastro de bala para tiro que nao passou pelo traceShot local (o proprio
+     tiro do cliente e o tiro dos outros jogadores). So desenha: o alcance
+     para na primeira parede, e o dano continua sendo assunto do host.     */
+  function netTracer(entity, weapon, ox, oy, oz, dx, dy, dz) {
+    if (typeof addTracer !== "function" || weapon.melee || weapon.thrown) return;
+    let distance = weapon.range;
+    if (typeof rayWorld === "function") {
+      const wall = rayWorld(ox, oy, oz, dx, dy, dz, weapon.range);
+      if (wall > 0) distance = wall;
+    }
+    addTracer(ox, oy, oz, dx, dy, dz, distance, weapon, entity);
+  }
+
   function hostRemoteShoot(id, message) {
     const entity = findEntity(id);
-    if (!entity || !entity.remote || entity.dead || entity.fireT > 0 || entity.reloadT > 0) return;
+    if (!entity || !entity.remote || entity.dead || entity.reloadT > 0) return;
     const weaponIndex = clamp(message.w | 0, 0, WEAPONS.length - 1);
-    if (weaponIndex !== entity.wep) return;
+    /* A troca de arma do cliente chega um ciclo depois do tiro. Recusar por
+       isso fazia a primeira bala da arma nova nao machucar ninguem. */
+    if (weaponIndex !== entity.wep) {
+      entity.wep = weaponIndex;
+      entity.mag = entity.mags[weaponIndex] | 0;
+      entity.res = entity.ress[weaponIndex] | 0;
+    }
+    /* Cadencia: o relogio do cliente e o do host nunca batem certo. Uma folga
+       de um terço do intervalo absorve o atraso da rede sem abrir espaco para
+       quem tentar atirar mais rapido do que a arma permite. */
+    if (entity.fireT > WEAPONS[entity.wep].rate * 0.34) return;
     const direction = Array.isArray(message.d) ? message.d : [];
     let dx = finite(direction[0], 0);
     let dy = finite(direction[1], 0);
@@ -2013,24 +2045,39 @@
       return;
     }
     let registered = false;
+    /* Folga de alvo enquanto o host confere o tiro de quem esta longe: o
+       pacote demora a chegar e nesse tempo o alvo andou. */
+    const oldPad = netHitPad;
+    netHitPad = 0.16;
     for (let i = 0; i < weapon.pellets; i++) {
-      let sx = dx + rnd(-weapon.spread, weapon.spread);
-      let sy = dy + rnd(-weapon.spread, weapon.spread);
-      let sz = dz + rnd(-weapon.spread, weapon.spread);
-      const spreadLength = Math.hypot(sx, sy, sz);
-      sx /= spreadLength;
-      sy /= spreadLength;
-      sz /= spreadLength;
+      let sx = dx, sy = dy, sz = dz;
+      /* O primeiro projetil vai exatamente na direcao que o cliente mirou.
+         Sortear um desvio aqui, alem do que o cliente ja sorteou na tela
+         dele, era o motivo de tiro no meio do peito nao tirar vida. Os
+         chumbos seguintes (escopeta) continuam se espalhando. */
+      if (i > 0) {
+        sx += rnd(-weapon.spread, weapon.spread);
+        sy += rnd(-weapon.spread, weapon.spread);
+        sz += rnd(-weapon.spread, weapon.spread);
+        const spreadLength = Math.hypot(sx, sy, sz) || 1;
+        sx /= spreadLength;
+        sy /= spreadLength;
+        sz /= spreadLength;
+      }
       if (traceShot(ex, ey, ez, sx, sy, sz, entity, weapon, damageScale)) {
         registered = true;
       }
     }
+    netHitPad = oldPad;
     if (charged && registered) {
       entity.meleeT = weapon.firstDelay || 1.5;
       Net.send({t: "melee_cooldown", to: id, time: entity.meleeT});
     }
     if (!weapon.melee) muzzles.push({x: ex, y: ey, z: ez, t: 0.06});
-    Net.send({t: "fx_shot", id: entity.netId, x: ex, y: ey, z: ez, w: entity.wep});
+    // A direcao vai junto para os outros verem o rastro da bala, e nao so o
+    // claraozinho do cano.
+    Net.send({t: "fx_shot", id: entity.netId, x: ex, y: ey, z: ez, w: entity.wep,
+      dx: round3(dx), dy: round3(dy), dz: round3(dz)});
   }
 
   function hostRemoteReloadStart(id, message) {
@@ -2086,12 +2133,14 @@
       throwGrenade(entity, weapon, message.dx, message.dy, message.dz, 1, true);
     }
     if (!weapon.melee) {
-      muzzles.push({
-        x: finite(message.x, entity.x),
-        y: finite(message.y, entity.y + 1.45),
-        z: finite(message.z, entity.z),
-        t: 0.06
-      });
+      const mx = finite(message.x, entity.x);
+      const my = finite(message.y, entity.y + 1.45);
+      const mz = finite(message.z, entity.z);
+      muzzles.push({x: mx, y: my, z: mz, t: 0.06});
+      const dx = finite(message.dx, null);
+      if (dx !== null && !weapon.thrown) {
+        netTracer(entity, weapon, mx, my, mz, dx, finite(message.dy, 0), finite(message.dz, 0));
+      }
     }
     if (snd.shotSpatial) snd.shotSpatial(weapon.snd, entity.x, entity.z);
     else snd.shotFar(weapon.snd, Math.hypot(entity.x - player.x, entity.z - player.z));
@@ -2205,6 +2254,15 @@
           shot.dy = round3(thrown.vy / length);
           shot.dz = round3(thrown.vz / length);
         }
+      } else if (!weapon.melee && typeof tracers !== "undefined" && tracers.length) {
+        // Mesma ideia para bala: sem direcao o cliente so via o clarao do
+        // cano, nunca o rastro do tiro. O ultimo rastro criado e o deste tiro.
+        const last = tracers[tracers.length - 1];
+        const ax = last.x1 - last.x0, ay = last.y1 - last.y0, az = last.z1 - last.z0;
+        const length = Math.hypot(ax, ay, az) || 1;
+        shot.dx = round3(ax / length);
+        shot.dy = round3(ay / length);
+        shot.dz = round3(az / length);
       }
       Net.send(shot);
     }

@@ -991,14 +991,20 @@ function damage(e,amount,by,head){
   }
   return true;
 }
+/* Folga do alvo em partida online. O tiro de quem joga como cliente e
+   conferido pelo dono da sala, e ate o pacote chegar o alvo ja andou um
+   pouco: sem essa folga o jogador ve o tiro no meio do peito e o dano nao
+   sai. Fora da rede vale zero, entao o jogo sozinho nao muda em nada.     */
+let netHitPad=0;
 function traceShot(ox,oy,oz,dx,dy,dz,shooter,w,scale){
   const range=w.range;
   scale=scale||1;
+  const pad=(shooter&&shooter.remote)?netHitPad:0;
   let tw=rayWorld(ox,oy,oz,dx,dy,dz,range);
   let bestT=tw, victim=null, head=false;
   for(const e of ents){
     if(e===shooter||e.dead) continue;
-    let t=rayAABB(ox,oy,oz,dx,dy,dz,e.x-0.42,e.y+0.05,e.z-0.42,e.x+0.42,e.y+1.42,e.z+0.42,bestT);
+    let t=rayAABB(ox,oy,oz,dx,dy,dz,e.x-0.42-pad,e.y+0.05,e.z-0.42-pad,e.x+0.42+pad,e.y+1.42+pad,e.z+0.42+pad,bestT);
     let hh=false;
     const th=rayAABB(ox,oy,oz,dx,dy,dz,e.x-0.28,e.y+1.42,e.z-0.28,e.x+0.28,e.y+1.92,e.z+0.28,bestT);
     if(th>0&&(t<0||th<t)){t=th;hh=true;}
