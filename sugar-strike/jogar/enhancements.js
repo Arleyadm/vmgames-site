@@ -2501,6 +2501,152 @@
     updateCandyHud();
   }
 
+  /* ------------------------------------------------- desenho dos desafios
+     Um simbolo por tipo, para bater o olho e entender sem ler. Os que sao
+     arma reaproveitam o desenho da loja; o resto e forma chapada com
+     contorno, do mesmo jeito que o resto do jogo.
+     O pote de doce e copia fiel do que gira no mapa (quadrado rosa com D),
+     senao o desafio pede uma coisa que o jogador nao reconhece na fase.   */
+  /* A granada fica de fora: o desenho dela, reduzido a 38px, vira uma caixa
+     marrom que ninguem reconhece. Ela ganha silhueta propria mais abaixo,
+     nas cores da arma (#ffcf4d e #e8615a).                                */
+  const DAILY_ART = {kills: 4, melee: 10};
+  function dailyIcon(canvas, id) {
+    if (DAILY_ART[id] !== undefined) { drawWeaponPortrait(canvas, DAILY_ART[id]); return; }
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    const w = canvas.clientWidth || 34, h = canvas.clientHeight || 34;
+    canvas.width = Math.round(w * ratio);
+    canvas.height = Math.round(h * ratio);
+    const c = canvas.getContext("2d");
+    if (!c) return;
+    c.setTransform(ratio, 0, 0, ratio, 0, 0);
+    c.clearRect(0, 0, w, h);
+    const cx = w / 2, cy = h / 2, r = Math.min(w, h) * 0.34;
+    c.lineWidth = Math.max(1.6, r * 0.16);
+    c.strokeStyle = "#4a3b33";
+    c.lineJoin = "round";
+    c.textAlign = "center";
+    c.textBaseline = "middle";
+    const disc = function (color, radius) {
+      c.fillStyle = color;
+      c.beginPath(); c.arc(cx, cy, radius, 0, Math.PI * 2); c.fill(); c.stroke();
+    };
+    if (id === "candies") {
+      // o pote como ele aparece na fase: quadrado rosa levemente girado, com D
+      c.save(); c.translate(cx, cy); c.rotate(-0.22);
+      c.fillStyle = "#f4a6c0";
+      c.beginPath();
+      if (c.roundRect) c.roundRect(-r, -r, r * 2, r * 2, r * 0.35);
+      else c.rect(-r, -r, r * 2, r * 2);
+      c.fill(); c.stroke();
+      c.rotate(0.22);
+      c.fillStyle = "#4a3b33";
+      c.font = "900 " + (r * 1.15).toFixed(0) + "px sans-serif";
+      c.fillText("D", 0, 1);
+      c.restore();
+    } else if (id === "grenade") {
+      // corpo redondo, tampa e alavanca: silhueta que se le de relance
+      c.fillStyle = "#e8615a";
+      c.beginPath(); c.arc(cx, cy + r * 0.28, r * 0.82, 0, Math.PI * 2); c.fill(); c.stroke();
+      c.fillStyle = "#ffcf4d";
+      c.beginPath();
+      if (c.roundRect) c.roundRect(cx - r * 0.3, cy - r * 0.95, r * 0.6, r * 0.42, r * 0.12);
+      else c.rect(cx - r * 0.3, cy - r * 0.95, r * 0.6, r * 0.42);
+      c.fill(); c.stroke();
+      c.beginPath();
+      c.moveTo(cx + r * 0.24, cy - r * 0.88);
+      c.lineTo(cx + r * 0.72, cy - r * 0.72);
+      c.lineTo(cx + r * 0.6, cy - r * 0.1);
+      c.stroke();
+      // a argola do pino, do outro lado
+      c.beginPath(); c.arc(cx - r * 0.62, cy - r * 0.86, r * 0.24, 0, Math.PI * 2); c.stroke();
+    } else if (id === "targets" || id === "accuracy") {
+      // alvo do campo de tiro; a pontaria ganha a cruz da mira por cima
+      disc("#fffdf7", r);
+      c.fillStyle = "#e8615a";
+      c.beginPath(); c.arc(cx, cy, r * 0.56, 0, Math.PI * 2); c.fill(); c.stroke();
+      c.beginPath(); c.arc(cx, cy, r * 0.18, 0, Math.PI * 2); c.fillStyle = "#fffdf7"; c.fill();
+      if (id === "accuracy") {
+        c.beginPath();
+        c.moveTo(cx - r * 1.28, cy); c.lineTo(cx - r * 0.72, cy);
+        c.moveTo(cx + r * 0.72, cy); c.lineTo(cx + r * 1.28, cy);
+        c.moveTo(cx, cy - r * 1.28); c.lineTo(cx, cy - r * 0.72);
+        c.moveTo(cx, cy + r * 0.72); c.lineTo(cx, cy + r * 1.28);
+        c.stroke();
+      }
+    } else if (id === "headshots") {
+      // cabeca de lado com o ponto vermelho da mira
+      c.fillStyle = "#f0c9a0";
+      c.beginPath();
+      if (c.roundRect) c.roundRect(cx - r * 0.85, cy - r * 0.95, r * 1.7, r * 1.9, r * 0.3);
+      else c.rect(cx - r * 0.85, cy - r * 0.95, r * 1.7, r * 1.9);
+      c.fill(); c.stroke();
+      c.fillStyle = "#4a3b33";
+      c.beginPath(); c.arc(cx + r * 0.3, cy - r * 0.2, r * 0.16, 0, Math.PI * 2); c.fill();
+      c.fillStyle = "#e8615a";
+      c.beginPath(); c.arc(cx - r * 0.25, cy - r * 0.45, r * 0.3, 0, Math.PI * 2); c.fill(); c.stroke();
+    } else if (id === "wins") {
+      // tacinha
+      c.fillStyle = "#ffcf4d";
+      c.beginPath();
+      c.moveTo(cx - r * 0.8, cy - r);
+      c.lineTo(cx + r * 0.8, cy - r);
+      c.lineTo(cx + r * 0.42, cy + r * 0.15);
+      c.lineTo(cx - r * 0.42, cy + r * 0.15);
+      c.closePath(); c.fill(); c.stroke();
+      c.beginPath();
+      c.moveTo(cx, cy + r * 0.15); c.lineTo(cx, cy + r * 0.62);
+      c.moveTo(cx - r * 0.6, cy + r * 0.95); c.lineTo(cx + r * 0.6, cy + r * 0.95);
+      c.stroke();
+    } else if (id === "streak") {
+      // chama: sequencia sem morrer
+      c.fillStyle = "#f79a5e";
+      c.beginPath();
+      c.moveTo(cx, cy - r * 1.15);
+      c.quadraticCurveTo(cx + r * 1.05, cy - r * 0.1, cx + r * 0.55, cy + r * 0.72);
+      c.quadraticCurveTo(cx, cy + r * 1.2, cx - r * 0.55, cy + r * 0.72);
+      c.quadraticCurveTo(cx - r * 1.05, cy - r * 0.1, cx, cy - r * 1.15);
+      c.closePath(); c.fill(); c.stroke();
+      c.fillStyle = "#ffcf4d";
+      c.beginPath();
+      c.moveTo(cx, cy - r * 0.25);
+      c.quadraticCurveTo(cx + r * 0.5, cy + r * 0.25, cx, cy + r * 0.85);
+      c.quadraticCurveTo(cx - r * 0.5, cy + r * 0.25, cx, cy - r * 0.25);
+      c.fill();
+    } else if (id === "nodeath") {
+      // coracao cheio: terminar a partida sem morrer
+      c.fillStyle = "#63c86a";
+      c.beginPath();
+      c.moveTo(cx, cy + r);
+      c.quadraticCurveTo(cx - r * 1.35, cy - r * 0.15, cx - r * 0.5, cy - r * 0.78);
+      c.quadraticCurveTo(cx, cy - r * 1.05, cx, cy - r * 0.35);
+      c.quadraticCurveTo(cx, cy - r * 1.05, cx + r * 0.5, cy - r * 0.78);
+      c.quadraticCurveTo(cx + r * 1.35, cy - r * 0.15, cx, cy + r);
+      c.closePath(); c.fill(); c.stroke();
+    } else if (id === "online") {
+      // globo: partida online
+      disc("#8fd9c8", r);
+      c.beginPath();
+      c.moveTo(cx - r, cy); c.lineTo(cx + r, cy);
+      c.stroke();
+      c.beginPath(); c.ellipse(cx, cy, r * 0.45, r, 0, 0, Math.PI * 2); c.stroke();
+    } else {
+      // matches e qualquer tipo novo: o triangulo de jogar
+      disc("#ffcf4d", r);
+      c.fillStyle = "#4a3b33";
+      c.beginPath();
+      c.moveTo(cx - r * 0.32, cy - r * 0.5);
+      c.lineTo(cx + r * 0.55, cy);
+      c.lineTo(cx - r * 0.32, cy + r * 0.5);
+      c.closePath(); c.fill();
+    }
+  }
+  function paintDailyIcons() {
+    document.querySelectorAll(".dailyIcon").forEach(function (canvas) {
+      dailyIcon(canvas, canvas.dataset.kind || "");
+    });
+  }
+
   function dailyMarkup() {
     const daily = ensureDaily();
     return '<div class="dailyList">' + daily.tasks.map(function (task, index) {
@@ -2513,6 +2659,7 @@
         : (task.done ? SugarI18n.t("DAILY_CLAIM")
                      : task.have + "/" + task.need + " · " + SugarI18n.t("DAILY_GO"));
       return '<div class="dailyRow ' + (task.done ? "done" : "") + '">' +
+        '<canvas class="dailyIcon" data-kind="' + escapeHtml(task.id) + '"></canvas>' +
         '<div class="dailyText"><b>' + escapeHtml(dailyLabel(task)) + '</b>' +
         '<small>' + escapeHtml(prize) + '</small>' +
         '<i class="dailyBar"><b style="width:' + ratio.toFixed(0) + '%"></b></i></div>' +
@@ -2567,6 +2714,7 @@
     const daily = ensureDaily();
     modal(SugarI18n.t("SECTION_DAILY"),
       '<p class="dailyHint">' + escapeHtml(SugarI18n.t("DAILY_HINT")) + '</p>' + dailyMarkup());
+    paintDailyIcons();
     bindDailyClaims(openDaily);
     // Viu a lista: a bolinha de novidade zera.
     let changed = false;
@@ -3086,6 +3234,7 @@
     document.querySelectorAll(".gearCanvas").forEach(function (canvas) {
       drawGearPortrait(canvas, parseInt(canvas.dataset.gear, 10) || 0);
     });
+    paintDailyIcons();
   }
 
   /* ------------------------------------------------------------- granadas
@@ -3596,7 +3745,9 @@
         "border:2px solid #4a3b33;border-radius:11px;background:#e8615a;color:#fffdf7;font-size:11px;font-weight:900}" +
       ".dailyHint{font-size:11px;font-weight:800;opacity:.75;margin:0 0 8px}" +
       ".dailyList{display:grid;gap:6px}" +
-      ".dailyRow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:#f0e6da;border:2px solid #4a3b33;border-radius:12px;padding:8px;text-align:left}" +
+      ".dailyRow{display:grid;grid-template-columns:38px 1fr auto;gap:8px;align-items:center;background:#f0e6da;border:2px solid #4a3b33;border-radius:12px;padding:8px;text-align:left}" +
+      ".dailyIcon{width:38px;height:38px;display:block;background:#fffdf7;border:2px solid #4a3b33;border-radius:9px}" +
+      ".dailyRow.done .dailyIcon{background:#eafaef}" +
       ".dailyRow.done{background:#dff3e4}" +
       ".dailyText b{display:block;font-size:10px;letter-spacing:.3px;line-height:1.25}" +
       ".dailyText small{display:block;font-size:9px;opacity:.7;margin:1px 0 4px}" +
