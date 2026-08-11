@@ -231,8 +231,16 @@
     try { localStorage.setItem(PROFILE_KEY, JSON.stringify(profile)); } catch (error) {}
     updateCandyHud();
   }
+  /* Data no horario do aparelho, e nao em UTC. Com toISOString() o dia virava
+     as 21:00 no Brasil: os desafios trocavam no meio da sessao e quem estava
+     num 9/13 perdia o progresso tres horas antes da meia-noite. Assim cada
+     jogador vira a meia-noite dele, em qualquer pais.                      */
   function today() {
-    return new Date().toISOString().slice(0, 10);
+    const now = new Date();
+    const month = now.getMonth() + 1, day = now.getDate();
+    return now.getFullYear() + "-" +
+      (month < 10 ? "0" : "") + month + "-" +
+      (day < 10 ? "0" : "") + day;
   }
   /* O sorteio das tarefas do dia mora mais abaixo (ensureDaily), junto com o
      resto do sistema de desafios. Aqui so garantimos que profile.daily existe
