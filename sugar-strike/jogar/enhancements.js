@@ -427,6 +427,13 @@
     if (attacker === player) vibrate(head ? "18,25,30" : 22);
     if (victim === player) vibrate("35,25,55");
     if (attacker === player && head) bumpDaily("headshots", 1);
+    /* O traceShot avisa depois de aplicar o dano, entao aqui ja da para saber
+       se o golpe matou — e com qual arma. Serve para o desafio da faca e para
+       a sequencia de abates sem morrer. */
+    if (attacker === player && victim && victim.dead) {
+      if (WEAPONS[player.wep] && WEAPONS[player.wep].melee) bumpDaily("melee", 1);
+      peakDaily("streak", player.streak || 0);
+    }
   }
   function playerSpeed() {
     const boost = performance.now() < game.speedUntil ? 1.38 : 1;
@@ -1103,6 +1110,7 @@
     player.name = (profile.name || SugarI18n.t("YOU")).toUpperCase().slice(0, 14);
     player.skin = selectedSkin();
     game.tempWeapons = profile.ownedWeapons.slice();
+    stopSprint();
     // O jogador entra com a arma principal na mao e o acessorio no bolso.
     syncLoadout();
     LOADOUT[0] = startingWeapon();
@@ -1365,13 +1373,24 @@
 
      O progresso e contado enquanto se joga, e nao no fim da partida: quem sai
      no meio nao perde o que ja fez.                                        */
+  /* Doze tipos para tres vagas por dia. Com seis, metade do baralho caia
+     todo dia e a tela parecia sempre a mesma — era essa a queixa. O sorteio
+     ainda descarta as tarefas de ontem (ver rollDaily), entao dois dias
+     seguidos nunca pedem a mesma coisa.                                    */
   const DAILY_TYPES = [
     {id: "kills",     need: [8, 14],  candies: 160},
     {id: "candies",   need: [12, 20], candies: 140},
     {id: "grenade",   need: [1, 3],   candies: 200},
     {id: "headshots", need: [3, 6],   candies: 220},
     {id: "wins",      need: [1, 2],   candies: 260},
-    {id: "targets",   need: [15, 25], candies: 180}
+    {id: "targets",   need: [15, 25], candies: 180},
+    {id: "streak",    need: [3, 5],   candies: 240},
+    {id: "melee",     need: [2, 4],   candies: 250},
+    {id: "nodeath",   need: [1, 1],   candies: 280},
+    {id: "accuracy",  need: [30, 45], candies: 230},
+    {id: "matches",   need: [2, 4],   candies: 150},
+    // uma so: o texto e no singular em todos os idiomas
+    {id: "online",    need: [1, 1],   candies: 300}
   ];
   function daySeed() {
     const day = today();
@@ -1379,13 +1398,18 @@
     for (let i = 0; i < day.length; i++) seed = (Math.imul(seed, 31) + day.charCodeAt(i)) >>> 0;
     return seed;
   }
-  function rollDaily() {
+  function rollDaily(avoid) {
     let seed = daySeed();
     const next = function () {
       seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
       return seed / 4294967296;
     };
-    const pool = DAILY_TYPES.slice();
+    let pool = DAILY_TYPES.slice();
+    // Fora o que caiu ontem: sobram nove tipos, de sobra para as tres vagas.
+    if (Array.isArray(avoid) && avoid.length) {
+      const filtered = pool.filter(function (type) { return avoid.indexOf(type.id) < 0; });
+      if (filtered.length >= 3) pool = filtered;
+    }
     const tasks = [];
     for (let i = 0; i < 3 && pool.length; i++) {
       const type = pool.splice((next() * pool.length) | 0, 1)[0];
@@ -1402,10 +1426,26 @@
   }
   function ensureDaily() {
     if (!profile.daily || profile.daily.day !== today() || !Array.isArray(profile.daily.tasks)) {
-      profile.daily = {day: today(), tasks: rollDaily()};
+      const yesterday = (profile.daily && Array.isArray(profile.daily.tasks))
+        ? profile.daily.tasks.map(function (task) { return task.id; })
+        : [];
+      profile.daily = {day: today(), tasks: rollDaily(yesterday)};
       saveProfile();
     }
     return profile.daily;
+  }
+  /* Desafio de recorde (sequencia de abates, pontaria): vale o melhor do dia,
+     e nao a soma. Por isso nao passa pelo bumpDaily, que so acumula.       */
+  function peakDaily(id, value) {
+    const daily = ensureDaily();
+    let changed = false;
+    daily.tasks.forEach(function (task) {
+      if (task.id !== id || task.done || value <= task.have) return;
+      task.have = Math.min(task.need, Math.floor(value));
+      if (task.have >= task.need) finishTask(task);
+      changed = true;
+    });
+    if (changed) { saveProfile(); refreshDailyBadge(); }
   }
   function dailyLabel(task) {
     return SugarI18n.t("DAILY_" + task.id.toUpperCase(), {n: task.need});
@@ -1418,45 +1458,112 @@
     if (!missing.length) return -1;
     return missing[(Math.random() * missing.length) | 0];
   }
+  /* Paga na hora em que o desafio e cumprido e devolve o que foi pago, para
+     o cartao poder mostrar a arma ou a quantia. Antes o premio ficava preso
+     atras de um botao no fim da tela de perfil, e o jogador nunca via.     */
   function claimDaily(task) {
-    if (!task.done || task.claimed) return;
+    if (!task.done || task.claimed) return null;
     task.claimed = true;
-    let text = "";
+    const prize = {kind: "candies", amount: 0, weapon: -1, text: ""};
     if (task.weapon) {
-      const prize = unownedWeapon();
-      if (prize >= 0) {
-        profile.ownedWeapons.push(prize);
-        text = WEAPONS[prize].name;
+      const won = unownedWeapon();
+      if (won >= 0) {
+        profile.ownedWeapons.push(won);
+        prize.kind = "weapon";
+        prize.weapon = won;
+        prize.text = WEAPONS[won].name;
       } else {
-        profile.candies += task.candies * 2;
-        text = (task.candies * 2) + SugarI18n.t("PRICE_CANDIES_SUFFIX");
+        // sem arma nova para dar, o premio vira o dobro em doces
+        prize.amount = task.candies * 2;
+        profile.candies += prize.amount;
+        prize.text = prize.amount + SugarI18n.t("PRICE_CANDIES_SUFFIX");
       }
     } else {
-      profile.candies += task.candies;
-      text = task.candies + SugarI18n.t("PRICE_CANDIES_SUFFIX");
+      prize.amount = task.candies;
+      profile.candies += prize.amount;
+      prize.text = prize.amount + SugarI18n.t("PRICE_CANDIES_SUFFIX");
     }
     profile.xp += 90;
     saveProfile();
     updateCandyHud();
     updateWeaponSlots();
-    showToast(SugarI18n.t("DAILY_CLAIMED", {prize: text}));
     vibrate("20,30,40");
+    return prize;
   }
-  /* Chamado pelos eventos do jogo. Nao paga sozinho: o jogador resgata no
-     Perfil, para o premio nao passar despercebido no meio do tiroteio.    */
+  /* ------------------------------------------------ cartao do premio
+     Aparece por cima da partida, sem pausar nada: diz qual desafio caiu,
+     mostra a arma ganha (o mesmo desenho da loja) ou a pilha de doces, e
+     avisa que ja esta na conta — nao ha nada para resgatar depois.
+     Se cair mais de um ao mesmo tempo, entram um de cada vez pela fila.   */
+  const prizeQueue = [];
+  let prizeShowing = false;
+  function ensurePrizeCard() {
+    let card = document.getElementById("prizeCard");
+    if (card) return card;
+    card = document.createElement("div");
+    card.id = "prizeCard";
+    card.innerHTML =
+      '<b id="prizeTitle"></b>' +
+      '<span id="prizeTask"></span>' +
+      '<div id="prizeArt"><canvas id="prizeCanvas"></canvas><em id="prizeCoins"></em></div>' +
+      '<strong id="prizeName"></strong>' +
+      '<small id="prizeWhere"></small>';
+    document.body.appendChild(card);
+    return card;
+  }
+  function showPrizeCard(taskText, prize) {
+    if (!prize) return;
+    prizeQueue.push({task: taskText, prize: prize});
+    runPrizeQueue();
+  }
+  function runPrizeQueue() {
+    if (prizeShowing || !prizeQueue.length) return;
+    const item = prizeQueue.shift();
+    const prize = item.prize;
+    const card = ensurePrizeCard();
+    prizeShowing = true;
+    document.getElementById("prizeTitle").textContent = SugarI18n.t("PRIZE_TITLE");
+    document.getElementById("prizeTask").textContent = item.task;
+    document.getElementById("prizeName").textContent = prize.text;
+    const canvas = document.getElementById("prizeCanvas");
+    const coins = document.getElementById("prizeCoins");
+    if (prize.kind === "weapon") {
+      canvas.style.display = "block";
+      coins.style.display = "none";
+      drawWeaponPortrait(canvas, prize.weapon);
+      document.getElementById("prizeWhere").textContent = SugarI18n.t("PRIZE_IN_ARSENAL");
+    } else {
+      canvas.style.display = "none";
+      coins.style.display = "flex";
+      // numero grande em cima da pilha de doces
+      coins.textContent = "+" + prize.amount;
+      document.getElementById("prizeWhere").textContent = SugarI18n.t("PRIZE_IN_ACCOUNT");
+    }
+    card.classList.add("open");
+    setTimeout(function () {
+      card.classList.remove("open");
+      prizeShowing = false;
+      setTimeout(runPrizeQueue, 320);
+    }, 4200);
+  }
+
+  /* Cumpriu: paga sozinho e mostra o cartao com o que entrou. */
+  function finishTask(task) {
+    task.done = true;
+    const prize = claimDaily(task);
+    showPrizeCard(dailyLabel(task), prize);
+  }
+  /* Chamado pelos eventos do jogo. */
   function bumpDaily(id, amount) {
     const daily = ensureDaily();
     let changed = false;
     daily.tasks.forEach(function (task) {
       if (task.id !== id || task.done) return;
       task.have = Math.min(task.need, task.have + (amount || 1));
-      if (task.have >= task.need) {
-        task.done = true;
-        showToast(SugarI18n.t("DAILY_DONE_TASK", {task: dailyLabel(task)}));
-      }
+      if (task.have >= task.need) finishTask(task);
       changed = true;
     });
-    if (changed) saveProfile();
+    if (changed) { saveProfile(); refreshDailyBadge(); }
   }
 
   function updateTeams() {
@@ -1878,6 +1985,12 @@
     profile.xp += xp;
     profile.candies += candies;
     if (won) bumpDaily("wins", 1);
+    bumpDaily("matches", 1);
+    if ((player.deaths || 0) === 0) bumpDaily("nodeath", 1);
+    peakDaily("accuracy", accuracy);
+    peakDaily("streak", player.bestStreak || 0);
+    // Partida online conta separado: e o que enche as salas.
+    if (window.SugarNet && SugarNet.inMatch) bumpDaily("online", 1);
     profile.history.unshift({
       at: new Date().toISOString(),
       map: game.map,
@@ -2394,15 +2507,74 @@
       const ratio = clamp(task.have / task.need, 0, 1) * 100;
       const prize = task.weapon ? SugarI18n.t("DAILY_PRIZE_WEAPON")
         : task.candies + SugarI18n.t("PRICE_CANDIES_SUFFIX");
+      /* Nao cumprido: o botao vira atalho para a partida, mostrando o quanto
+         falta. Ler "2/13" e nao ter para onde ir era o fim da linha. */
       const action = task.claimed ? SugarI18n.t("DAILY_TAKEN")
-        : (task.done ? SugarI18n.t("DAILY_CLAIM") : task.have + "/" + task.need);
+        : (task.done ? SugarI18n.t("DAILY_CLAIM")
+                     : task.have + "/" + task.need + " · " + SugarI18n.t("DAILY_GO"));
       return '<div class="dailyRow ' + (task.done ? "done" : "") + '">' +
         '<div class="dailyText"><b>' + escapeHtml(dailyLabel(task)) + '</b>' +
         '<small>' + escapeHtml(prize) + '</small>' +
         '<i class="dailyBar"><b style="width:' + ratio.toFixed(0) + '%"></b></i></div>' +
-        '<button class="dailyClaim big-btn sub-btn" data-task="' + index + '" ' +
-        (task.done && !task.claimed ? "" : "disabled") + '>' + escapeHtml(action) + '</button></div>';
+        '<button class="dailyClaim big-btn sub-btn' + (task.done ? "" : " dailyGo") + '" data-task="' + index + '" ' +
+        (task.claimed ? "disabled" : "") + '>' + escapeHtml(action) + '</button></div>';
     }).join("") + '</div>';
+  }
+  /* Quantos premios estao esperando resgate. E o numero da bolinha vermelha
+     no botao do menu — sem ela, o jogador cumpria o desafio e nunca ficava
+     sabendo, porque a lista morava no fim da tela de perfil.               */
+  /* O premio ja foi pago sozinho, entao a bolinha conta o que o jogador ainda
+     nao viu na tela do desafio — e um aviso de novidade, nao de pendencia. */
+  function dailyReady() {
+    return ensureDaily().tasks.filter(function (task) {
+      return task.done && !task.seen;
+    }).length;
+  }
+  function refreshDailyBadge() {
+    const badge = document.getElementById("dailyBadge");
+    if (!badge) return;
+    const ready = dailyReady();
+    badge.textContent = ready;
+    badge.style.display = ready ? "block" : "none";
+  }
+  function bindDailyClaims(after) {
+    document.querySelectorAll(".dailyClaim").forEach(function (button) {
+      button.addEventListener("click", function () {
+        const daily = ensureDaily();
+        const task = daily.tasks[parseInt(button.dataset.task, 10)];
+        if (!task) return;
+        // Ainda nao cumprido: fecha a tela e cai direto na partida.
+        if (!task.done) { goPlay(task); return; }
+        claimDaily(task);
+        refreshDailyBadge();
+        after();
+      });
+    });
+  }
+  /* Leva para onde o desafio pode ser cumprido: o de partida online abre a
+     sala online, o resto cai no jogo normal.                              */
+  function goPlay(task) {
+    const root = document.getElementById("sugarModal");
+    if (root) root.classList.remove("open");
+    const online = task && task.id === "online";
+    const button = document.getElementById(online ? "bOnline" : "bPlay");
+    if (button) button.click();
+    else if (!online) showToast(SugarI18n.t("DAILY_HINT"));
+  }
+  /* Tela propria, aberta pelo botao do menu. A mesma lista tambem continua
+     dentro do perfil, para quem ja conhecia o caminho.                     */
+  function openDaily() {
+    const daily = ensureDaily();
+    modal(SugarI18n.t("SECTION_DAILY"),
+      '<p class="dailyHint">' + escapeHtml(SugarI18n.t("DAILY_HINT")) + '</p>' + dailyMarkup());
+    bindDailyClaims(openDaily);
+    // Viu a lista: a bolinha de novidade zera.
+    let changed = false;
+    daily.tasks.forEach(function (task) {
+      if (task.done && !task.seen) { task.seen = true; changed = true; }
+    });
+    if (changed) saveProfile();
+    refreshDailyBadge();
   }
 
   function openProfile() {
@@ -2469,13 +2641,7 @@
         button.classList.add("on");
       });
     });
-    document.querySelectorAll(".dailyClaim").forEach(function (button) {
-      button.addEventListener("click", function () {
-        const daily = ensureDaily();
-        claimDaily(daily.tasks[parseInt(button.dataset.task, 10)]);
-        openProfile();
-      });
-    });
+    bindDailyClaims(openProfile);
     document.getElementById("progressCopy").addEventListener("click", function () {
       const field = document.getElementById("progressCode");
       field.select();
@@ -2582,6 +2748,47 @@
     showToast(weapon.name + " · " + SugarI18n.t("FIELD_WEAPON_HINT"));
     updateWeaponSlots();
   }
+  /* ------------------------------------------------------ saque do abate
+     A arma de quem voce matou entra num espaco proprio da barra, com pente e
+     reserva cheios, e a arma que estava na sua mao continua na sua mao. Para
+     usar o saque e so tocar no numero do espaco. O aviso vai em numeros —
+     quantas balas vieram e em qual espaco — porque no meio do tiroteio nome
+     de arma sozinho nao diz o que fazer.                                   */
+  function lootWeapon(index) {
+    index = clamp(index | 0, 0, WEAPONS.length - 1);
+    if (!player || player.dead) return;
+    const weapon = WEAPONS[index];
+    if (game.tempWeapons.indexOf(index) < 0) game.tempWeapons.push(index);
+    const equipped = LOADOUT.indexOf(index) >= 0;
+    if (!equipped) {
+      if (fieldWeapons.length >= FIELD_SLOTS) dropFieldWeapon(fieldWeapons[0], true);
+      fieldWeapons.push(index);
+      rebuildFieldSlots();
+    }
+    let gained;
+    if (weapon.thrown) {
+      gained = weapon.mag;
+      player.mags[index] = Math.min(GRENADE_MAX, (player.mags[index] | 0) + gained);
+      addFieldGrenades(gained);
+    } else {
+      // saque de abate vem inteiro: pente cheio mais a reserva
+      gained = weapon.mag + weapon.maxRes;
+      player.mags[index] = weapon.mag;
+      player.ress[index] = weapon.maxRes;
+      // se ja estava na mao, o numero do HUD tem que acompanhar
+      if ((player.wep | 0) === index) { player.mag = player.mags[index]; player.res = player.ress[index]; }
+    }
+    updateWeaponSlots();
+    updateHUD();
+    const seat = LOADOUT.indexOf(index);
+    showToast(SugarI18n.t("LOOT_TAKEN", {
+      weapon: weapon.name,
+      ammo: gained,
+      slot: (seat < 0 ? 1 : seat + 1)
+    }));
+    vibrate("15,20,25");
+  }
+
   function dropFieldWeapon(index, silent) {
     const at = fieldWeapons.indexOf(index);
     if (at < 0) return;
@@ -3252,6 +3459,7 @@
   }
 
   let sprintHeld = false;
+  let stopSprint = function () {};
   function installControls() {
     const sprint = document.createElement("div");
     sprint.id = "bSprint";
@@ -3259,12 +3467,23 @@
     sprint.textContent = SugarI18n.t("BTN_SPRINT");
     document.getElementById("hud").appendChild(sprint);
     if (isTouch) sprint.style.display = "flex";
-    sprint.addEventListener("pointerdown", function (event) {
-      event.preventDefault(); sprintHeld = true; keys.ShiftLeft = true;
+    /* Liga e desliga no toque, em vez de exigir o dedo em cima o tempo todo:
+       segurar aqui ocupava um dedo que fazia falta na mira. Aceso e amarelo
+       cheio; apagado fica so um fantasma amarelo, para nao sumir da tela.  */
+    function setSprint(on) {
+      sprintHeld = !!on;
+      keys.ShiftLeft = sprintHeld;
+      sprint.classList.toggle("on", sprintHeld);
+    }
+    sprint.addEventListener("click", function (event) {
+      event.preventDefault();
+      // no modo de arrastar os controles, o toque so muda o botao de lugar
+      if (document.body.classList.contains("control-edit")) return;
+      setSprint(!sprintHeld);
     });
-    ["pointerup", "pointercancel", "pointerleave"].forEach(function (name) {
-      sprint.addEventListener(name, function () { sprintHeld = false; keys.ShiftLeft = false; });
-    });
+    sprint.addEventListener("pointerdown", function (event) { event.preventDefault(); });
+    // volta desligado a cada partida nova, para ninguem nascer correndo sem querer
+    stopSprint = function () { setSprint(false); };
     const save = document.createElement("button");
     save.id = "controlSave";
     save.textContent = SugarI18n.t("BTN_SAVE_POSITIONS");
@@ -3322,7 +3541,12 @@
     const style = document.createElement("style");
     style.textContent =
       ":root{--control-scale:1}" +
-      "#bSprint{right:142px;bottom:126px;width:70px;height:70px;background:rgba(255,207,77,.62)}" +
+      // apagado: fantasma amarelo · aceso: amarelo cheio, com o contorno firme
+      /* sem transicao de proposito: e liga/desliga, tem que responder no
+         mesmo quadro do toque */
+      "#bSprint{right:142px;bottom:126px;width:70px;height:70px;background:rgba(255,207,77,.34);" +
+        "border-color:rgba(74,59,51,.4);opacity:.72}" +
+      "#bSprint.on{background:rgba(255,207,77,1);border-color:rgba(74,59,51,.9);opacity:1}" +
       ".android-app #bSprint{right:calc(142px + env(safe-area-inset-right));bottom:calc(126px + env(safe-area-inset-bottom))}" +
       ".android-app #stick,.android-app .tbtn,.android-app #slots{scale:var(--control-scale)}" +
       "#menuExtras{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:9px}" +
@@ -3353,6 +3577,24 @@
       ".shopTabs{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}.shopTab{flex:1 1 auto;border:3px solid #4a3b33;border-radius:11px;background:#fffdf7;color:#4a3b33;font:900 9px ui-rounded,'Trebuchet MS',sans-serif;letter-spacing:.5px;padding:8px 5px}.shopTab.on{background:#ffcf4d}" +
       ".loadoutNow{background:#8fd9c8;border:3px solid #4a3b33;border-radius:12px;padding:7px;font-size:10px;font-weight:900;letter-spacing:.4px}" +
       ".gearSummary{grid-column:1/-1;margin-bottom:2px;text-align:left;line-height:1.45}" +
+      /* O botao do desafio ocupa a linha inteira, acima dos outros: e a
+         primeira coisa do menu, e nao mais um item perdido na grade. */
+      "#prizeCard{position:fixed;left:50%;top:14%;transform:translate(-50%,-14px);z-index:125;width:min(300px,74vw);" +
+        "display:none;text-align:center;background:#fffdf7;border:5px solid #4a3b33;border-radius:20px;padding:12px 14px;" +
+        "color:#4a3b33;filter:drop-shadow(0 8px 0 rgba(0,0,0,.22));opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}" +
+      "#prizeCard.open{display:block;opacity:1;transform:translate(-50%,0)}" +
+      "#prizeCard b{display:block;font-size:12px;letter-spacing:1px;color:#e8615a}" +
+      "#prizeCard span{display:block;font-size:9px;font-weight:800;opacity:.7;margin:2px 0 6px}" +
+      "#prizeArt{height:64px;border-radius:12px;background:radial-gradient(circle at 50% 42%,#5a4740,#2a201c 78%);overflow:hidden}" +
+      "#prizeCanvas{width:100%;height:100%;display:block}" +
+      "#prizeCoins{display:none;height:100%;align-items:center;justify-content:center;font-style:normal;" +
+        "font-size:26px;font-weight:900;color:#ffcf4d;letter-spacing:1px}" +
+      "#prizeCard strong{display:block;font-size:12px;margin-top:6px}" +
+      "#prizeCard small{display:block;font-size:9px;font-weight:800;color:#3f8f6a;margin-top:2px}" +
+      ".dailyBtn{grid-column:1/-1;position:relative;background:#8fd9c8}" +
+      "#dailyBadge{display:none;position:absolute;top:-7px;right:-7px;min-width:22px;height:22px;line-height:19px;" +
+        "border:2px solid #4a3b33;border-radius:11px;background:#e8615a;color:#fffdf7;font-size:11px;font-weight:900}" +
+      ".dailyHint{font-size:11px;font-weight:800;opacity:.75;margin:0 0 8px}" +
       ".dailyList{display:grid;gap:6px}" +
       ".dailyRow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:#f0e6da;border:2px solid #4a3b33;border-radius:12px;padding:8px;text-align:left}" +
       ".dailyRow.done{background:#dff3e4}" +
@@ -3361,6 +3603,7 @@
       ".dailyBar{display:block;height:8px;border:2px solid #4a3b33;border-radius:6px;background:#fffdf7;overflow:hidden}" +
       ".dailyBar b{display:block;height:100%;background:#8fd9c8}" +
       ".dailyClaim{margin:0;font-size:9px;padding:9px 8px;min-width:74px}" +
+      ".dailyClaim.dailyGo{background:#ffcf4d}" +
       ".progressHint{font-size:10px;line-height:1.4;opacity:.75;margin:4px 0 6px;text-align:left}" +
       ".progressBox{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;margin-bottom:6px}" +
       ".progressField{height:40px;border:2px solid #4a3b33;border-radius:10px;padding:5px 8px;background:#f7efe5;color:#4a3b33;font:900 13px ui-rounded,'Trebuchet MS',monospace;letter-spacing:1px;text-align:center;width:100%}" +
@@ -3401,6 +3644,8 @@
     extras.id = "menuExtras";
     const t = SugarI18n.t.bind(SugarI18n);
     extras.innerHTML =
+      '<button id="bDaily" class="big-btn dailyBtn">' + escapeHtml(t("SECTION_DAILY")) +
+        '<i id="dailyBadge">0</i></button>' +
       '<button id="bSoloConfig" class="big-btn sub-btn">' + escapeHtml(t("BTN_MATCH_CONFIG")) + '</button>' +
       '<button id="bSettings" class="big-btn sub-btn">' + escapeHtml(t("BTN_SETTINGS")) + '</button>' +
       '<button id="bProfile" class="big-btn sub-btn">' + escapeHtml(t("BTN_PROFILE")) + '</button>' +
@@ -3410,7 +3655,9 @@
     document.getElementById("sensWrap").insertAdjacentElement("afterend", extras);
     document.getElementById("bSoloConfig").addEventListener("click", openMatchConfig);
     document.getElementById("bSettings").addEventListener("click", openSettings);
+    document.getElementById("bDaily").addEventListener("click", openDaily);
     document.getElementById("bProfile").addEventListener("click", openProfile);
+    refreshDailyBadge();
     document.getElementById("bShop").addEventListener("click", function () { openShop(); });
     document.getElementById("bExitGame").addEventListener("click", confirmExitGame);
     document.getElementById("bTutorial").addEventListener("click", function () {
@@ -3525,10 +3772,12 @@
     consumeGrenade: consumeGrenade,
     toast: showToast,
     bumpDaily: bumpDaily,
+    peakDaily: peakDaily,
     hitTargets: hitTargets,
     refreshSlots: updateWeaponSlots,
     clearFieldWeapons: clearFieldWeapons,
     takeFieldWeapon: takeFieldWeapon,
+    lootWeapon: lootWeapon,
     // Arma saqueada de quem voce matou: vale so ate o fim desta partida.
     grantWeapon: function (index) {
       index = clamp(index | 0, 0, WEAPONS.length - 1);

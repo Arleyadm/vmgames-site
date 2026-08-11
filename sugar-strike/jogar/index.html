@@ -865,12 +865,17 @@ function lootArsenal(killer,victim){
   victim.stripped=true;
   if(loot<0||killer.dead) return;
   if(killer===player){
-    if(window.SugarEnhance&&SugarEnhance.grantWeapon) SugarEnhance.grantWeapon(loot);
-    LOADOUT[0]=loot;
-    killer.mags[loot]=WEAPONS[loot].mag;
-    killer.ress[loot]=WEAPONS[loot].maxRes;
-    setWeapon(loot);
-    showLootFeed(WEAPONS[loot].name);
+    /* O saque vai para um espaco proprio da barra de armas e a arma da mao
+       continua onde estava. Antes ele tomava o lugar da principal e ainda
+       trocava sozinho, no meio do tiroteio — quem estava com a arma certa na
+       mao perdia o tiro seguinte por causa disso.                          */
+    if(window.SugarEnhance&&SugarEnhance.lootWeapon) SugarEnhance.lootWeapon(loot);
+    else{
+      LOADOUT[0]=loot;
+      killer.mags[loot]=WEAPONS[loot].mag;
+      killer.ress[loot]=WEAPONS[loot].maxRes;
+      showLootFeed(WEAPONS[loot].name);
+    }
   }else{
     killer.wep=loot;
     killer.mag=killer.mags[loot]=WEAPONS[loot].mag;
