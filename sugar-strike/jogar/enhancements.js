@@ -195,6 +195,9 @@
     bots: 7,
     target: 25,
     duration: 5,
+    // Regra da partida, escolhida em CONFIGURAR PARTIDA. Vale so no jogo
+    // sozinho: em sala online quem confere a municao e o servidor.
+    infiniteAmmo: false,
     remaining: 300,
     elapsed: 0,
     speedUntil: 0,
@@ -221,6 +224,7 @@
     game.bots = Number.isFinite(savedMatch.bots) ? clamp(savedMatch.bots, 0, 12) : game.bots;
     game.target = Number.isFinite(savedMatch.target) ? clamp(savedMatch.target, 5, 100) : game.target;
     game.duration = Number.isFinite(savedMatch.duration) ? clamp(savedMatch.duration, 1, 30) : game.duration;
+    game.infiniteAmmo = !!savedMatch.infiniteAmmo;
   } catch (error) {}
 
   function saveSettings() {
@@ -1067,7 +1071,10 @@
       range: [[-10,20],[10,20],[-10,26],[10,26],[0,23],[-6,16],[6,16],[0,16],[-12,24],[12,24]]
     };
     const points = layouts[game.map] || layouts.village;
-    const types = ["ammo", "candy", "heal", "weapon", "shield", "candy", "ammo", "weapon", "speed", "candy"];
+    /* Uma das tres caixas de doce virou caixa de municao. Os dez pontos do
+       mapa sao fixos, entao mais municao sai de algum outro item — o doce foi
+       o escolhido por ser o que menos muda a partida. */
+    const types = ["ammo", "candy", "heal", "weapon", "ammo", "shield", "ammo", "weapon", "speed", "candy"];
     points.forEach(function (point, index) {
       const pickup = {
         x: point[0], y: 0.75, z: point[1],
@@ -1638,8 +1645,9 @@
       else if (pickup.type === "speed" && collector === player) game.speedUntil = performance.now() + 8000;
       else if (pickup.type === "shield") collector.shield = 65;
       else if (pickup.type === "ammo") {
+        // Tres carregadores por caixa (eram dois).
         for (let i = 0; i < WEAPONS.length; i++) {
-          collector.ress[i] = Math.min(WEAPONS[i].maxRes, collector.ress[i] + WEAPONS[i].mag * 2);
+          collector.ress[i] = Math.min(WEAPONS[i].maxRes, collector.ress[i] + WEAPONS[i].mag * 3);
         }
         collector.res = collector.ress[collector.wep];
       } else if (pickup.type === "candy") {
@@ -1660,12 +1668,35 @@
         }
       }
       pickup.active = false;
-      pickup.respawn = pickup.type === "weapon" ? 32 : (pickup.type === "candy" ? 15 : 18);
+      // A caixa de municao volta bem mais rapido que os outros itens.
+      pickup.respawn = pickup.type === "weapon" ? 32
+        : (pickup.type === "ammo" ? 8 : (pickup.type === "candy" ? 15 : 18));
       if (collector === player) {
         vibrate("20,20,20");
         updateHUD();
       }
     });
+  }
+
+  /* Munição infinita: a reserva do jogador nunca baixa, então a arma continua
+     recarregando para sempre. Fica de fora da sala online de propósito — lá
+     quem confere a munição é o servidor, e isso seria vantagem em cima dos
+     outros jogadores. Faca e granada não têm reserva: a granada ganha o pente
+     de volta e a faca não precisa de nada. */
+  function refillInfiniteAmmo() {
+    if (!game.infiniteAmmo) return;
+    if (window.SugarNet && SugarNet.inMatch) return;
+    const weapon = WEAPONS[player.wep];
+    if (!weapon || weapon.melee) return;
+    if (weapon.thrown) {
+      if (player.mag < weapon.mag) player.mag = weapon.mag;
+      return;
+    }
+    // O cinto de municao aumenta a reserva em 40%: o teto de quem esta com ele
+    // e maior, e ignorar isso deixava a reserva presa no numero da tabela.
+    const cheia = Math.max(weapon.mag, Math.round(weapon.maxRes * gearMod("ammo", 1)));
+    if (player.res < cheia && player.reloadT <= 0) player.res = cheia;
+    player.ress[player.wep] = Math.max(player.ress[player.wep] | 0, cheia);
   }
 
   function update(dt) {
@@ -1675,6 +1706,7 @@
       game.mapRepairAt = performance.now() + 3000;
       if (rebuildSelectedMap()) showToast(SugarI18n.t("TOAST_SCENARIO_RESTORED"));
     }
+    refillInfiniteAmmo();
     checkFieldAmmo();
     updateTargets(dt);
     /* Abates contados aqui, e nao no fim da partida: quem sai no meio leva o
@@ -3526,20 +3558,29 @@
       '<label>' + escapeHtml(SugarI18n.t("LABEL_BOTS")) + '<input id="soloBots" type="number" min="0" max="12" value="' + game.bots + '"></label>' +
       '<label>' + escapeHtml(SugarI18n.t("LABEL_TARGET")) + '<input id="soloTarget" type="number" min="5" max="100" value="' + game.target + '"></label>' +
       '<label>' + escapeHtml(SugarI18n.t("LABEL_DURATION")) + '<select id="soloDuration"><option value="3">3' + escapeHtml(SugarI18n.t("MIN_SUFFIX")) + '</option><option value="5">5' + escapeHtml(SugarI18n.t("MIN_SUFFIX")) + '</option><option value="8">8' + escapeHtml(SugarI18n.t("MIN_SUFFIX")) + '</option><option value="12">12' + escapeHtml(SugarI18n.t("MIN_SUFFIX")) + '</option></select></label>' +
-      '</div><button id="soloApply" class="big-btn">' + escapeHtml(SugarI18n.t("BTN_APPLY")) + '</button>');
+      '<label>' + escapeHtml(SugarI18n.t("LABEL_INFINITE_AMMO")) +
+        '<select id="soloInfiniteAmmo">' +
+        '<option value="0">' + escapeHtml(SugarI18n.t("OPT_INFINITE_AMMO_OFF")) + '</option>' +
+        '<option value="1">' + escapeHtml(SugarI18n.t("OPT_INFINITE_AMMO_ON")) + '</option>' +
+        '</select></label>' +
+      '</div><div class="loadoutNow">' + escapeHtml(SugarI18n.t("HINT_INFINITE_AMMO")) + '</div>' +
+      '<button id="soloApply" class="big-btn">' + escapeHtml(SugarI18n.t("BTN_APPLY")) + '</button>');
     document.getElementById("soloMode").value = game.mode;
     document.getElementById("soloMap").value = game.map;
     document.getElementById("soloDuration").value = String(game.duration);
+    document.getElementById("soloInfiniteAmmo").value = game.infiniteAmmo ? "1" : "0";
     document.getElementById("soloApply").addEventListener("click", function () {
       game.mode = document.getElementById("soloMode").value;
       game.map = document.getElementById("soloMap").value;
       game.bots = clamp(parseInt(document.getElementById("soloBots").value, 10) || 0, 0, 12);
       game.target = clamp(parseInt(document.getElementById("soloTarget").value, 10) || 25, 5, 100);
       game.duration = parseInt(document.getElementById("soloDuration").value, 10) || 5;
+      game.infiniteAmmo = document.getElementById("soloInfiniteAmmo").value === "1";
       try {
         localStorage.setItem("sugarstrike.match.v11", JSON.stringify({
           map: game.map, mode: game.mode, bots: game.bots,
-          target: game.target, duration: game.duration
+          target: game.target, duration: game.duration,
+          infiniteAmmo: game.infiniteAmmo
         }));
       } catch (error) {}
       TARGET = game.target;

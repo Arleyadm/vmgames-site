@@ -1915,8 +1915,19 @@
     entity.mags[entity.wep] = entity.mag;
     entity.ress[entity.wep] = entity.res;
     entity.accessory = safeAccessory(data.accessory);
-    entity.reloadT = Math.max(0, finite(data.reload, entity.reloadT || 0));
-    entity.reloadDuration = Math.max(entity.reloadT, finite(data.reloadDuration, entity.reloadDuration || 0));
+    /* A recarga do proprio jogador e contada na tela dele. O dono da sala
+       segura a recarga de quem e cliente ate a confirmacao voltar, e esse
+       numero chegava aqui de volta: a arma travava com "--" no lugar da
+       municao por um pedaco de rede a cada recarga, sem poder atirar. */
+    if (keepOwnWeapon) {
+      if (entity.dead) {
+        entity.reloadT = 0;
+        entity.reloadDuration = 0;
+      }
+    } else {
+      entity.reloadT = Math.max(0, finite(data.reload, entity.reloadT || 0));
+      entity.reloadDuration = Math.max(entity.reloadT, finite(data.reloadDuration, entity.reloadDuration || 0));
+    }
     entity.shield = Math.max(0, finite(data.shield, entity.shield || 0));
     entity.shots = data.shots | 0;
     entity.hits = data.hits | 0;
@@ -2026,7 +2037,11 @@
     if (!weapon.melee && finite(message.serverMag, -1) < 0) return;
     if (!weapon.melee) {
       entity.mag = Math.max(0, message.serverMag | 0);
-      entity.res = Math.max(0, message.serverRes | 0);
+      /* A reserva NAO vem do servidor. Ele nao simula caixa de municao,
+         recompensa de abate nem renascimento, entao o numero dele so desce —
+         e adotar esse numero apagava a municao que o jogo tinha acabado de dar
+         ao jogador, deixando a arma dele muda de vez. Aqui a reserva e do dono
+         da sala, que e quem simula essas coisas. */
       entity.mags[entity.wep] = entity.mag;
       entity.ress[entity.wep] = entity.res;
     }
@@ -2089,21 +2104,50 @@
     entity.reloadT = entity.reloadDuration;
     entity.reloadWep = weapon;
     entity.reloadStage = 0;
+    entity.reloadWait = 0;
     Net.send({t: "fx_reload", id: id, w: weapon, duration: entity.reloadDuration});
+  }
+
+  /* Recarga de jogador remoto concluída sem a confirmação: enche o carregador
+     com o que o dono da sala sabe da reserva daquele jogador. Melhor um número
+     aproximado do que a arma parar de valer pelo resto da partida. */
+  function hostFinishRemoteReload(entity) {
+    const weapon = WEAPONS[entity.wep];
+    const need = Math.max(0, (weapon.mag | 0) - (entity.mag | 0));
+    const take = Math.max(0, Math.min(need, entity.res | 0));
+    entity.mag = (entity.mag | 0) + take;
+    entity.res = (entity.res | 0) - take;
+    entity.mags[entity.wep] = entity.mag;
+    entity.ress[entity.wep] = entity.res;
+    entity.reloadT = 0;
+    entity.reloadDuration = 0;
+    entity.reloadStage = 0;
+    entity.reloadWait = 0;
   }
 
   function hostRemoteReloadCommit(id, message) {
     const entity = findEntity(id);
     if (!entity || !entity.remote) return;
     const weapon = clamp(message.w | 0, 0, WEAPONS.length - 1);
-    if (weapon !== entity.wep) return;
-    entity.mag = Math.max(0, message.mag | 0);
-    entity.res = Math.max(0, message.res | 0);
+    /* A troca de arma chega um ciclo depois. Recusar a confirmação por isso
+       deixava a recarga pendente para sempre, e todo tiro seguinte daquele
+       jogador era descartado aqui. */
+    if (weapon !== entity.wep) {
+      entity.wep = weapon;
+      entity.mag = entity.mags[weapon] | 0;
+      entity.res = entity.ress[weapon] | 0;
+    }
+    /* O carregador e conferido pelo servidor; a reserva e do dono da sala, que
+       e quem sabe da municao achada no chao e do kit do renascimento. */
+    const antes = entity.mag | 0;
+    entity.mag = Math.max(0, finite(message.mag, WEAPONS[weapon].mag) | 0);
+    entity.res = Math.max(0, (entity.res | 0) - Math.max(0, entity.mag - antes));
     entity.mags[weapon] = entity.mag;
     entity.ress[weapon] = entity.res;
     entity.reloadT = 0;
     entity.reloadDuration = 0;
     entity.reloadStage = 0;
+    entity.reloadWait = 0;
   }
 
   function hostRemoteReloadCancel(id) {
@@ -2112,6 +2156,7 @@
     entity.reloadT = 0;
     entity.reloadDuration = 0;
     entity.reloadStage = 0;
+    entity.reloadWait = 0;
   }
 
   function showRemoteReload(message) {
@@ -2277,7 +2322,10 @@
       entity.reloadWep = entity.wep;
       entity.reloadStage = 0;
       if (Net.inMatch && Net.role === "client" && entity === player) {
-        Net.send({t: "reload_start", w: entity.wep, duration: entity.reloadDuration});
+        // A reserva vai junto: o servidor não simula caixa de munição, saque
+        // nem cinto, e sem este número ele recusava a recarga para sempre.
+        Net.send({t: "reload_start", w: entity.wep, duration: entity.reloadDuration,
+          res: Math.max(0, entity.res | 0)});
       } else if (Net.inMatch && Net.role === "host" && entity === player) {
         Net.send({t: "fx_reload", id: entity.netId, w: entity.wep, duration: entity.reloadDuration});
       }
@@ -2286,7 +2334,14 @@
 
   finishReload = function (entity) {
     if (Net.inMatch && Net.role === "host" && entity && entity.remote) {
-      // A munição remota só muda quando o servidor aceitar reload_commit.
+      // A munição remota só muda quando o servidor aceitar reload_commit. Mas a
+      // confirmação pode se perder, e aí a arma daquele jogador ficava muda
+      // para sempre: passado meio segundo de espera, a recarga vale por aqui.
+      entity.reloadWait = (entity.reloadWait || 0) + 1;
+      if (entity.reloadWait > 30) {
+        hostFinishRemoteReload(entity);
+        return;
+      }
       entity.reloadT = 0.001;
       return;
     }
@@ -2298,7 +2353,10 @@
       entity.reloadStage = 0;
     }
     if (Net.inMatch && Net.role === "client" && entity === player) {
-      Net.send({t: "reload_commit", w: weapon});
+      // Sem servidor no meio (Wi-Fi Direct) estes dois campos são o que o dono
+      // da sala tem; faltando eles, ele zerava a munição de quem recarregou.
+      Net.send({t: "reload_commit", w: weapon,
+        mag: Math.max(0, entity.mag | 0), res: Math.max(0, entity.res | 0)});
     }
   };
 
