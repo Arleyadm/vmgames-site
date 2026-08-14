@@ -19,9 +19,9 @@
   "use strict";
 
   /* ----------------------------------------------------- o que voce preenche */
-  var CLIENTE  = "";   // ex.: "ca-pub-8110755806771816"
-  var SLOT_ESQ = "";   // id do bloco da esquerda
-  var SLOT_DIR = "";   // id do bloco da direita
+  var CLIENTE  = "ca-pub-8110755806771816";
+  var SLOT_ESQ = "2688993034";   // bloco "sugar-strike-esquerda", display 300x600
+  var SLOT_DIR = "7493959127";   // bloco "sugar-strike-direita", display 300x600
   /* -------------------------------------------------------------------------- */
 
   var LARGURA_MINIMA = 1240;   // abaixo disso a lateral nao cabe
