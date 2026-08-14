@@ -474,6 +474,8 @@
     game.target = clamp(config.target | 0, 5, 100);
     game.duration = clamp(config.duration | 0, 1, 30);
     game.friendlyFire = !!config.friendlyFire;
+    // Em sala online a regra e do dono da sala, e nao a escolha solo de cada um.
+    game.infiniteAmmo = !!config.infiniteAmmo;
     TARGET = game.target;
     targetV.textContent = TARGET;
     game.remaining = game.duration * 60;
@@ -1683,20 +1685,32 @@
      quem confere a munição é o servidor, e isso seria vantagem em cima dos
      outros jogadores. Faca e granada não têm reserva: a granada ganha o pente
      de volta e a faca não precisa de nada. */
-  function refillInfiniteAmmo() {
-    if (!game.infiniteAmmo) return;
-    if (window.SugarNet && SugarNet.inMatch) return;
-    const weapon = WEAPONS[player.wep];
+  function encherReserva(alvo) {
+    if (!alvo || alvo.dead) return;
+    const weapon = WEAPONS[alvo.wep];
     if (!weapon || weapon.melee) return;
     if (weapon.thrown) {
-      if (player.mag < weapon.mag) player.mag = weapon.mag;
+      if (alvo.mag < weapon.mag) alvo.mag = weapon.mag;
       return;
     }
-    // O cinto de municao aumenta a reserva em 40%: o teto de quem esta com ele
-    // e maior, e ignorar isso deixava a reserva presa no numero da tabela.
-    const cheia = Math.max(weapon.mag, Math.round(weapon.maxRes * gearMod("ammo", 1)));
-    if (player.res < cheia && player.reloadT <= 0) player.res = cheia;
-    player.ress[player.wep] = Math.max(player.ress[player.wep] | 0, cheia);
+    /* O teto e o mesmo que o servidor aceita (reserva da tabela + 40% do cinto
+       de municao). Usar um numero menor faria os dois lados brigarem pelo valor
+       a cada recarga. */
+    const cheia = Math.max(weapon.mag, Math.round(weapon.maxRes * 1.4));
+    if (alvo.res < cheia && (alvo.reloadT || 0) <= 0) alvo.res = cheia;
+    alvo.ress[alvo.wep] = Math.max(alvo.ress[alvo.wep] | 0, cheia);
+  }
+
+  function refillInfiniteAmmo() {
+    if (!game.infiniteAmmo) return;
+    encherReserva(player);
+    /* Na sala online quem manda na reserva dos outros e o dono da sala: sem
+       encher a deles aqui, a regra valeria so para quem hospeda. */
+    if (window.SugarNet && SugarNet.inMatch && SugarNet.role === "host") {
+      for (const entity of ents) {
+        if (entity !== player && entity.remote) encherReserva(entity);
+      }
+    }
   }
 
   function update(dt) {

@@ -159,7 +159,9 @@
       map: "village",
       mode: "deathmatch",
       allowSpectators: true,
-      friendlyFire: false
+      friendlyFire: false,
+      // Regra da sala: quando ligada, ninguem fica sem reserva de municao.
+      infiniteAmmo: false
     },
 
     onNativeEvent: function (event) {
@@ -442,6 +444,7 @@
             '<input id="netTarget" class="net-field" type="number" min="5" max="100" value="25" aria-label="Target">' +
             '<select id="netSpectators" class="net-field"><option value="1">' + escapeHtml(t("NET_SPECTATORS_YES")) + '</option><option value="0">' + escapeHtml(t("NET_SPECTATORS_NO")) + '</option></select>' +
             '<select id="netFriendly" class="net-field"><option value="0">' + escapeHtml(t("NET_FRIENDLY_FIRE_NO")) + '</option><option value="1">' + escapeHtml(t("NET_FRIENDLY_FIRE_YES")) + '</option></select>' +
+            '<select id="netInfinite" class="net-field"><option value="0">' + escapeHtml(t("NET_INFINITE_AMMO_NO")) + '</option><option value="1">' + escapeHtml(t("NET_INFINITE_AMMO_YES")) + '</option></select>' +
           '</div>' +
           '<button id="netReady" class="net-btn">' + escapeHtml(t("NET_READY")) + '</button>' +
           '<button id="netStart" class="net-btn" disabled>' + escapeHtml(t("NET_START_MATCH")) + '</button>' +
@@ -508,7 +511,7 @@
     el("netLeave").addEventListener("click", leaveRoom);
     ui.start.addEventListener("click", startHostMatch);
     ui.ready.addEventListener("click", toggleReady);
-    ["netMode", "netMap", "netDuration", "netBots", "netTarget", "netSpectators", "netFriendly"].forEach(function (id) {
+    ["netMode", "netMap", "netDuration", "netBots", "netTarget", "netSpectators", "netFriendly", "netInfinite"].forEach(function (id) {
       el(id).addEventListener("change", updateLobbyConfig);
     });
     ui.continueButton.addEventListener("click", hideNetworkOverlay);
@@ -720,6 +723,7 @@
       if (modeSelect && room.mode) modeSelect.value = room.mode;
       if (el("netSpectators")) el("netSpectators").value = Net.config.allowSpectators ? "1" : "0";
       if (el("netFriendly")) el("netFriendly").value = Net.config.friendlyFire ? "1" : "0";
+      if (el("netInfinite")) el("netInfinite").value = Net.config.infiniteAmmo ? "1" : "0";
     }
     updateLobbyTitle();
   }
@@ -1212,6 +1216,7 @@
     Net.config.target = clamp(parseInt(el("netTarget").value, 10) || 25, 5, 100);
     Net.config.allowSpectators = el("netSpectators").value !== "0";
     Net.config.friendlyFire = el("netFriendly").value === "1";
+    Net.config.infiniteAmmo = el("netInfinite").value === "1";
     if (Net.role === "host" && Net.connected) {
       broadcastRoster();
       publishRoomConfig();   // mapa e modo novos aparecem na lista pública
