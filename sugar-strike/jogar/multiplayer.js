@@ -161,7 +161,11 @@
       allowSpectators: true,
       friendlyFire: false,
       // Regra da sala: quando ligada, ninguem fica sem reserva de municao.
-      infiniteAmmo: false
+      infiniteAmmo: false,
+      /* Torneio: a partida nao acaba no primeiro colocado. Quem bate a meta
+         classifica e sai; os outros seguem disputando as vagas que faltam. */
+      tournament: false,
+      qualifiers: 3
     },
 
     onNativeEvent: function (event) {
@@ -445,6 +449,8 @@
             '<select id="netSpectators" class="net-field"><option value="1">' + escapeHtml(t("NET_SPECTATORS_YES")) + '</option><option value="0">' + escapeHtml(t("NET_SPECTATORS_NO")) + '</option></select>' +
             '<select id="netFriendly" class="net-field"><option value="0">' + escapeHtml(t("NET_FRIENDLY_FIRE_NO")) + '</option><option value="1">' + escapeHtml(t("NET_FRIENDLY_FIRE_YES")) + '</option></select>' +
             '<select id="netInfinite" class="net-field"><option value="0">' + escapeHtml(t("NET_INFINITE_AMMO_NO")) + '</option><option value="1">' + escapeHtml(t("NET_INFINITE_AMMO_YES")) + '</option></select>' +
+            '<select id="netTournament" class="net-field"><option value="0">' + escapeHtml(t("NET_TOURNAMENT_NO")) + '</option><option value="1">' + escapeHtml(t("NET_TOURNAMENT_YES")) + '</option></select>' +
+            '<input id="netQualifiers" class="net-field" type="number" min="1" max="12" value="3" aria-label="Classificam">' +
           '</div>' +
           '<button id="netReady" class="net-btn">' + escapeHtml(t("NET_READY")) + '</button>' +
           '<button id="netStart" class="net-btn" disabled>' + escapeHtml(t("NET_START_MATCH")) + '</button>' +
@@ -511,7 +517,7 @@
     el("netLeave").addEventListener("click", leaveRoom);
     ui.start.addEventListener("click", startHostMatch);
     ui.ready.addEventListener("click", toggleReady);
-    ["netMode", "netMap", "netDuration", "netBots", "netTarget", "netSpectators", "netFriendly", "netInfinite"].forEach(function (id) {
+    ["netMode", "netMap", "netDuration", "netBots", "netTarget", "netSpectators", "netFriendly", "netInfinite", "netTournament", "netQualifiers"].forEach(function (id) {
       el(id).addEventListener("change", updateLobbyConfig);
     });
     ui.continueButton.addEventListener("click", hideNetworkOverlay);
@@ -724,6 +730,8 @@
       if (el("netSpectators")) el("netSpectators").value = Net.config.allowSpectators ? "1" : "0";
       if (el("netFriendly")) el("netFriendly").value = Net.config.friendlyFire ? "1" : "0";
       if (el("netInfinite")) el("netInfinite").value = Net.config.infiniteAmmo ? "1" : "0";
+      if (el("netTournament")) el("netTournament").value = Net.config.tournament ? "1" : "0";
+      if (el("netQualifiers")) el("netQualifiers").value = Net.config.qualifiers || 3;
     }
     updateLobbyTitle();
   }
@@ -1217,6 +1225,8 @@
     Net.config.allowSpectators = el("netSpectators").value !== "0";
     Net.config.friendlyFire = el("netFriendly").value === "1";
     Net.config.infiniteAmmo = el("netInfinite").value === "1";
+    Net.config.tournament = el("netTournament").value === "1";
+    Net.config.qualifiers = clamp(parseInt(el("netQualifiers").value, 10) || 3, 1, 12);
     if (Net.role === "host" && Net.connected) {
       broadcastRoster();
       publishRoomConfig();   // mapa e modo novos aparecem na lista pública
@@ -1462,6 +1472,17 @@
     }
     if (message.t === "feed" && Net.role === "client") {
       original.addFeed(message.a, message.b, !!message.head);
+      return;
+    }
+    if (message.t === "qualified" && Net.role === "client" && Net.inMatch) {
+      /* Quem classificou sai da partida e vira espectador. O dono da sala ja
+         mandou o corpo como morto no pacote do mundo; isto aqui e o aviso e a
+         troca de camera de quem levou a vaga. */
+      const eu = String(message.id || "") === String(Net.myId || "");
+      if (eu) Net.spectator = true;
+      showToast(SugarI18n.t(eu ? "TOURNEY_YOU_QUALIFIED" : "TOURNEY_QUALIFIED", {
+        name: String(message.name || ""), position: message.position | 0, total: message.total | 0
+      }));
       return;
     }
     if (message.t === "hit" && Net.role === "client") {

@@ -212,6 +212,14 @@
     mapRepairAt: 0,
     mapRepairing: false,
     lastPickupSeed: 0,
+    /* Torneio: a partida nao acaba no primeiro colocado. Quem bate a meta
+       classifica, sai da partida e os outros continuam disputando as vagas
+       que sobraram. Se o tempo acabar antes, classifica quem estiver na
+       frente no placar — sem isso uma sala com jogador parado travaria a
+       chave inteira. */
+    tournament: false,
+    qualifiers: 3,
+    qualified: [],
     finished: false,
     resultSaved: false,
     // Presente do anuncio de derrota seguida: {kind, index, name}, vale so para a proxima partida.
@@ -225,6 +233,8 @@
     game.target = Number.isFinite(savedMatch.target) ? clamp(savedMatch.target, 5, 100) : game.target;
     game.duration = Number.isFinite(savedMatch.duration) ? clamp(savedMatch.duration, 1, 30) : game.duration;
     game.infiniteAmmo = !!savedMatch.infiniteAmmo;
+    game.tournament = !!savedMatch.tournament;
+    game.qualifiers = Number.isFinite(savedMatch.qualifiers) ? clamp(savedMatch.qualifiers, 1, 12) : game.qualifiers;
   } catch (error) {}
 
   function saveSettings() {
@@ -476,6 +486,9 @@
     game.friendlyFire = !!config.friendlyFire;
     // Em sala online a regra e do dono da sala, e nao a escolha solo de cada um.
     game.infiniteAmmo = !!config.infiniteAmmo;
+    game.tournament = !!config.tournament;
+    game.qualifiers = clamp(config.qualifiers | 0 || 3, 1, 12);
+    resetTournament();
     TARGET = game.target;
     targetV.textContent = TARGET;
     game.remaining = game.duration * 60;
@@ -1096,6 +1109,7 @@
   initMatch = function () {
     TARGET = game.target;
     targetV.textContent = TARGET;
+    resetTournament();
     rebuildSelectedMap();
     originalInitMatch();
     if (game.bots !== 7) {
@@ -1156,8 +1170,71 @@
   function topEntity() {
     return ents.slice().sort(function (a, b) { return b.score - a.score; })[0] || player;
   }
+
+  /* ------------------------------------------------------------- torneio */
+  function resetTournament() {
+    game.qualified = [];
+    if (typeof ents !== "undefined" && Array.isArray(ents)) {
+      ents.forEach(function (entity) { entity.qualified = false; entity.qualifiedAt = 0; });
+    }
+    if (typeof player !== "undefined" && player) { player.qualified = false; player.qualifiedAt = 0; }
+  }
+  function tournamentOn() {
+    return !!game.tournament && (game.qualifiers | 0) >= 1;
+  }
+  function qualifierSlots() {
+    return Math.max(1, Math.min(12, game.qualifiers | 0));
+  }
+  function slotsLeft() {
+    return qualifierSlots() - game.qualified.length;
+  }
+  function stillPlaying() {
+    return ents.filter(function (entity) { return !entity.qualified; });
+  }
+  /* Tira o classificado da partida sem encerra-la. Ele morre e nao renasce
+     mais: para quem joga em rede isso ja vira camera de espectador sozinho,
+     porque o jogo trata cliente morto assim. */
+  function qualifyEntity(entity) {
+    if (!entity || entity.qualified) return false;
+    entity.qualified = true;
+    const position = game.qualified.length + 1;
+    entity.qualifiedAt = position;
+    game.qualified.push({
+      name: entity.name, score: entity.score | 0,
+      position: position, id: entity.netId || null
+    });
+    entity.dead = true;
+    entity.hp = 0;
+    entity.respawnT = 1e9;
+    const total = qualifierSlots();
+    if (entity === player && window.SugarNet && SugarNet.inMatch) SugarNet.spectator = true;
+    showToast(SugarI18n.t(entity === player ? "TOURNEY_YOU_QUALIFIED" : "TOURNEY_QUALIFIED",
+      {name: entity.name, position: position, total: total}));
+    if (window.SugarNet && SugarNet.inMatch && SugarNet.role === "host" && SugarNet.send) {
+      SugarNet.send({t: "qualified", id: entity.netId || "", name: entity.name,
+        position: position, total: total, score: entity.score | 0});
+    }
+    return true;
+  }
+  /* O tempo acabou com vagas em aberto: quem estiver na frente no placar leva
+     as que sobraram. E a regra que impede a chave de travar. */
+  function fillRemainingByScore() {
+    const restantes = stillPlaying().sort(function (a, b) { return b.score - a.score; });
+    for (let i = 0; i < restantes.length && slotsLeft() > 0; i++) qualifyEntity(restantes[i]);
+  }
+  function tournamentIntercept(winner) {
+    if (!tournamentOn() || matchOver) return false;
+    if (winner && !winner.qualified) qualifyEntity(winner);
+    // Sem gente suficiente para brigar pelo que falta, encerra e distribui.
+    if (slotsLeft() > 0 && stillPlaying().length > 1) return true;
+    fillRemainingByScore();
+    return false;
+  }
+
   function endByTimer() {
-    if (!matchOver) endMatch(topEntity());
+    if (matchOver) return;
+    if (tournamentOn()) fillRemainingByScore();
+    endMatch(topEntity());
   }
   /* =========================================================== A BOMBA
      No modo Equipes agora existe um segundo caminho para vencer: plantar a
@@ -2237,10 +2314,32 @@
 
   endMatch = function (winner) {
     if (matchOver) return;
+    /* Em torneio, bater a meta classifica em vez de encerrar: o jogador sai e
+       os outros continuam disputando as vagas que sobraram. So quando a
+       ultima vaga fecha e que a partida termina de verdade. */
+    if (tournamentIntercept(winner)) return;
     // O presente, se tinha um, ja foi usado na partida que acabou agora.
     game.giftItem = null;
     const result = recordResult(winner);
     originalEndMatch(winner);
+    /* Em torneio o que interessa na tela final e quem passou de chave, e nao
+       o placar cru: vai por cima de tudo. */
+    if (tournamentOn() && game.qualified.length) {
+      const ptxtTorneio = document.getElementById("ptxt");
+      const linhas = game.qualified.map(function (q) {
+        const meu = player && q.name === player.name && q.id === (player.netId || null);
+        return '<div class="row' + (meu ? " me" : "") + '"><span>' + q.position + 'º ' +
+          escapeHtml(q.name) + '</span><span>' + q.score + '</span></div>';
+      }).join("");
+      ptxtTorneio.style.display = "block";
+      ptxtTorneio.innerHTML =
+        '<div class="resultSummary"><b>' + escapeHtml(SugarI18n.t("TOURNEY_RESULT_TITLE")) + '</b>' +
+        '<div style="margin:6px 0 2px">' + linhas + '</div></div>' + ptxtTorneio.innerHTML;
+      panelEl.querySelector("h1").textContent = (player && player.qualified)
+        ? SugarI18n.t("TOURNEY_YOU_ADVANCE") : SugarI18n.t("TOURNEY_YOU_OUT");
+      panelEl.querySelector("h2").textContent = SugarI18n.t("TOURNEY_SUBTITLE",
+        {total: qualifierSlots()});
+    }
     if (!result) return;
     const ptxt = document.getElementById("ptxt");
     const existing = ptxt.innerHTML;
@@ -2295,6 +2394,10 @@
       extra = king ? " · " + king.name.slice(0, 7) + " " + Math.floor(king.kingTime || 0) : "";
     }
     if (game.mode === "survival") extra = " · ONDA " + game.wave;
+    // Em torneio o que importa no alto da tela e quantas vagas ainda estao em jogo.
+    if (tournamentOn()) {
+      extra += " · " + SugarI18n.t("TOURNEY_SLOTS_LEFT", {left: Math.max(0, slotsLeft()), total: qualifierSlots()});
+    }
     label.textContent = SugarI18n.mapLabel(game.map) + " · " + SugarI18n.modeLabel(game.mode) + extra + " · " + min + ":" + sec;
   }
 
@@ -3571,18 +3674,29 @@
       '<label>' + escapeHtml(SugarI18n.t("LABEL_MAP")) + '<select id="soloMap">' + mapOptionsHtml() + '</select></label>' +
       '<label>' + escapeHtml(SugarI18n.t("LABEL_BOTS")) + '<input id="soloBots" type="number" min="0" max="12" value="' + game.bots + '"></label>' +
       '<label>' + escapeHtml(SugarI18n.t("LABEL_TARGET")) + '<input id="soloTarget" type="number" min="5" max="100" value="' + game.target + '"></label>' +
-      '<label>' + escapeHtml(SugarI18n.t("LABEL_DURATION")) + '<select id="soloDuration"><option value="3">3' + escapeHtml(SugarI18n.t("MIN_SUFFIX")) + '</option><option value="5">5' + escapeHtml(SugarI18n.t("MIN_SUFFIX")) + '</option><option value="8">8' + escapeHtml(SugarI18n.t("MIN_SUFFIX")) + '</option><option value="12">12' + escapeHtml(SugarI18n.t("MIN_SUFFIX")) + '</option></select></label>' +
+      '<label>' + escapeHtml(SugarI18n.t("LABEL_DURATION")) + '<select id="soloDuration">' + [3, 5, 8, 12, 15, 24].map(function (min) {
+          return '<option value="' + min + '">' + min + escapeHtml(SugarI18n.t("MIN_SUFFIX")) + '</option>';
+        }).join("") + '</select></label>' +
       '<label>' + escapeHtml(SugarI18n.t("LABEL_INFINITE_AMMO")) +
         '<select id="soloInfiniteAmmo">' +
         '<option value="0">' + escapeHtml(SugarI18n.t("OPT_INFINITE_AMMO_OFF")) + '</option>' +
         '<option value="1">' + escapeHtml(SugarI18n.t("OPT_INFINITE_AMMO_ON")) + '</option>' +
         '</select></label>' +
+      '<label>' + escapeHtml(SugarI18n.t("LABEL_TOURNAMENT")) +
+        '<select id="soloTournament">' +
+        '<option value="0">' + escapeHtml(SugarI18n.t("OPT_TOURNAMENT_OFF")) + '</option>' +
+        '<option value="1">' + escapeHtml(SugarI18n.t("OPT_TOURNAMENT_ON")) + '</option>' +
+        '</select></label>' +
+      '<label>' + escapeHtml(SugarI18n.t("LABEL_QUALIFIERS")) +
+        '<input id="soloQualifiers" type="number" min="1" max="12" value="' + qualifierSlots() + '"></label>' +
       '</div><div class="loadoutNow">' + escapeHtml(SugarI18n.t("HINT_INFINITE_AMMO")) + '</div>' +
+      '<div class="loadoutNow">' + escapeHtml(SugarI18n.t("HINT_TOURNAMENT")) + '</div>' +
       '<button id="soloApply" class="big-btn">' + escapeHtml(SugarI18n.t("BTN_APPLY")) + '</button>');
     document.getElementById("soloMode").value = game.mode;
     document.getElementById("soloMap").value = game.map;
     document.getElementById("soloDuration").value = String(game.duration);
     document.getElementById("soloInfiniteAmmo").value = game.infiniteAmmo ? "1" : "0";
+    document.getElementById("soloTournament").value = game.tournament ? "1" : "0";
     document.getElementById("soloApply").addEventListener("click", function () {
       game.mode = document.getElementById("soloMode").value;
       game.map = document.getElementById("soloMap").value;
@@ -3590,11 +3704,14 @@
       game.target = clamp(parseInt(document.getElementById("soloTarget").value, 10) || 25, 5, 100);
       game.duration = parseInt(document.getElementById("soloDuration").value, 10) || 5;
       game.infiniteAmmo = document.getElementById("soloInfiniteAmmo").value === "1";
+      game.tournament = document.getElementById("soloTournament").value === "1";
+      game.qualifiers = clamp(parseInt(document.getElementById("soloQualifiers").value, 10) || 3, 1, 12);
       try {
         localStorage.setItem("sugarstrike.match.v11", JSON.stringify({
           map: game.map, mode: game.mode, bots: game.bots,
           target: game.target, duration: game.duration,
-          infiniteAmmo: game.infiniteAmmo
+          infiniteAmmo: game.infiniteAmmo,
+          tournament: game.tournament, qualifiers: game.qualifiers
         }));
       } catch (error) {}
       TARGET = game.target;
