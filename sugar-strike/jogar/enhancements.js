@@ -218,7 +218,8 @@
        frente no placar — sem isso uma sala com jogador parado travaria a
        chave inteira. */
     tournament: false,
-    qualifiers: 3,
+    qualifiers: 0,          // 0 = metade da sala, arredondada para cima ate par
+    qualifiersResolved: 0,  // o numero fechado no comeco da partida
     qualified: [],
     finished: false,
     resultSaved: false,
@@ -234,7 +235,7 @@
     game.duration = Number.isFinite(savedMatch.duration) ? clamp(savedMatch.duration, 1, 30) : game.duration;
     game.infiniteAmmo = !!savedMatch.infiniteAmmo;
     game.tournament = !!savedMatch.tournament;
-    game.qualifiers = Number.isFinite(savedMatch.qualifiers) ? clamp(savedMatch.qualifiers, 1, 12) : game.qualifiers;
+    game.qualifiers = Number.isFinite(savedMatch.qualifiers) ? clamp(savedMatch.qualifiers, 0, 12) : game.qualifiers;
   } catch (error) {}
 
   function saveSettings() {
@@ -487,7 +488,7 @@
     // Em sala online a regra e do dono da sala, e nao a escolha solo de cada um.
     game.infiniteAmmo = !!config.infiniteAmmo;
     game.tournament = !!config.tournament;
-    game.qualifiers = clamp(config.qualifiers | 0 || 3, 1, 12);
+    game.qualifiers = clamp(config.qualifiers | 0, 0, 12);
     resetTournament();
     TARGET = game.target;
     targetV.textContent = TARGET;
@@ -1174,16 +1175,37 @@
   /* ------------------------------------------------------------- torneio */
   function resetTournament() {
     game.qualified = [];
+    game.qualifiersResolved = 0;
     if (typeof ents !== "undefined" && Array.isArray(ents)) {
       ents.forEach(function (entity) { entity.qualified = false; entity.qualifiedAt = 0; });
     }
     if (typeof player !== "undefined" && player) { player.qualified = false; player.qualifiedAt = 0; }
   }
   function tournamentOn() {
-    return !!game.tournament && (game.qualifiers | 0) >= 1;
+    return !!game.tournament;
+  }
+  function playersInMatch() {
+    if (typeof ents === "undefined" || !Array.isArray(ents)) return 0;
+    return ents.filter(function (entity) { return !entity.spectator; }).length;
+  }
+  /* Quantos passam de chave. Com "metade" (o padrao), o numero sai do tamanho
+     da sala: metade dos jogadores, arredondada para cima ate um numero PAR.
+     Da a chave 24 > 12 > 6 > 4 > 2 > 1 — cinco vitorias ate o campeao.
+     A conta e feita UMA vez, no comeco da partida: se fosse recalculada a cada
+     classificado, o alvo encolheria junto e a chave nunca fecharia. */
+  function halfSlots(total) {
+    if (total < 2) return 1;
+    return Math.min(total - 1, 2 * Math.ceil(total / 4));
   }
   function qualifierSlots() {
-    return Math.max(1, Math.min(12, game.qualifiers | 0));
+    const manual = game.qualifiers | 0;
+    if (manual > 0) return Math.max(1, Math.min(12, manual));
+    if (!game.qualifiersResolved) {
+      const total = playersInMatch();
+      if (total < 2) return 1;
+      game.qualifiersResolved = halfSlots(total);
+    }
+    return game.qualifiersResolved;
   }
   function slotsLeft() {
     return qualifierSlots() - game.qualified.length;
@@ -3688,7 +3710,10 @@
         '<option value="1">' + escapeHtml(SugarI18n.t("OPT_TOURNAMENT_ON")) + '</option>' +
         '</select></label>' +
       '<label>' + escapeHtml(SugarI18n.t("LABEL_QUALIFIERS")) +
-        '<input id="soloQualifiers" type="number" min="1" max="12" value="' + qualifierSlots() + '"></label>' +
+        '<select id="soloQualifiers"><option value="0">' + escapeHtml(SugarI18n.t("OPT_QUALIFIERS_HALF")) + '</option>' +
+        [1,2,3,4,5,6,7,8,9,10,11,12].map(function (n) {
+          return '<option value="' + n + '">' + n + '</option>';
+        }).join("") + '</select></label>' +
       '</div><div class="loadoutNow">' + escapeHtml(SugarI18n.t("HINT_INFINITE_AMMO")) + '</div>' +
       '<div class="loadoutNow">' + escapeHtml(SugarI18n.t("HINT_TOURNAMENT")) + '</div>' +
       '<button id="soloApply" class="big-btn">' + escapeHtml(SugarI18n.t("BTN_APPLY")) + '</button>');
@@ -3697,6 +3722,7 @@
     document.getElementById("soloDuration").value = String(game.duration);
     document.getElementById("soloInfiniteAmmo").value = game.infiniteAmmo ? "1" : "0";
     document.getElementById("soloTournament").value = game.tournament ? "1" : "0";
+    document.getElementById("soloQualifiers").value = String(game.qualifiers | 0);
     document.getElementById("soloApply").addEventListener("click", function () {
       game.mode = document.getElementById("soloMode").value;
       game.map = document.getElementById("soloMap").value;
@@ -3705,7 +3731,7 @@
       game.duration = parseInt(document.getElementById("soloDuration").value, 10) || 5;
       game.infiniteAmmo = document.getElementById("soloInfiniteAmmo").value === "1";
       game.tournament = document.getElementById("soloTournament").value === "1";
-      game.qualifiers = clamp(parseInt(document.getElementById("soloQualifiers").value, 10) || 3, 1, 12);
+      game.qualifiers = clamp(parseInt(document.getElementById("soloQualifiers").value, 10) || 0, 0, 12);
       try {
         localStorage.setItem("sugarstrike.match.v11", JSON.stringify({
           map: game.map, mode: game.mode, bots: game.bots,

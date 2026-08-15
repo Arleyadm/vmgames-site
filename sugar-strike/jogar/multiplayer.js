@@ -165,7 +165,7 @@
       /* Torneio: a partida nao acaba no primeiro colocado. Quem bate a meta
          classifica e sai; os outros seguem disputando as vagas que faltam. */
       tournament: false,
-      qualifiers: 3
+      qualifiers: 0
     },
 
     onNativeEvent: function (event) {
@@ -450,7 +450,10 @@
             '<select id="netFriendly" class="net-field"><option value="0">' + escapeHtml(t("NET_FRIENDLY_FIRE_NO")) + '</option><option value="1">' + escapeHtml(t("NET_FRIENDLY_FIRE_YES")) + '</option></select>' +
             '<select id="netInfinite" class="net-field"><option value="0">' + escapeHtml(t("NET_INFINITE_AMMO_NO")) + '</option><option value="1">' + escapeHtml(t("NET_INFINITE_AMMO_YES")) + '</option></select>' +
             '<select id="netTournament" class="net-field"><option value="0">' + escapeHtml(t("NET_TOURNAMENT_NO")) + '</option><option value="1">' + escapeHtml(t("NET_TOURNAMENT_YES")) + '</option></select>' +
-            '<input id="netQualifiers" class="net-field" type="number" min="1" max="12" value="3" aria-label="Classificam">' +
+            '<select id="netQualifiers" class="net-field"><option value="0">' + escapeHtml(t("NET_QUALIFIERS_HALF")) + '</option>' +
+              [1,2,3,4,5,6,7,8,9,10,11,12].map(function (n) {
+                return '<option value="' + n + '">' + escapeHtml(t("NET_QUALIFIERS_N", {n: n})) + '</option>';
+              }).join("") + '</select>' +
           '</div>' +
           '<button id="netReady" class="net-btn">' + escapeHtml(t("NET_READY")) + '</button>' +
           '<button id="netStart" class="net-btn" disabled>' + escapeHtml(t("NET_START_MATCH")) + '</button>' +
@@ -731,7 +734,7 @@
       if (el("netFriendly")) el("netFriendly").value = Net.config.friendlyFire ? "1" : "0";
       if (el("netInfinite")) el("netInfinite").value = Net.config.infiniteAmmo ? "1" : "0";
       if (el("netTournament")) el("netTournament").value = Net.config.tournament ? "1" : "0";
-      if (el("netQualifiers")) el("netQualifiers").value = Net.config.qualifiers || 3;
+      if (el("netQualifiers")) el("netQualifiers").value = String(Net.config.qualifiers | 0);
     }
     updateLobbyTitle();
   }
@@ -1226,7 +1229,7 @@
     Net.config.friendlyFire = el("netFriendly").value === "1";
     Net.config.infiniteAmmo = el("netInfinite").value === "1";
     Net.config.tournament = el("netTournament").value === "1";
-    Net.config.qualifiers = clamp(parseInt(el("netQualifiers").value, 10) || 3, 1, 12);
+    Net.config.qualifiers = clamp(parseInt(el("netQualifiers").value, 10) || 0, 0, 12);
     if (Net.role === "host" && Net.connected) {
       broadcastRoster();
       publishRoomConfig();   // mapa e modo novos aparecem na lista pública
