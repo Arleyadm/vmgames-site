@@ -197,6 +197,21 @@ img { max-width: 100%; display: block; }
 }
 .botao:hover { border-color: var(--ciano); }
 
+/* Aviso de loja ainda nao publicada. Nao e link de proposito: apontar para uma
+   ficha que nao existe manda o visitante para uma pagina de erro do Google. */
+.embreve {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: 1px dashed var(--borda);
+  color: var(--texto-fraco);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.embreve b { color: var(--ambar); font-weight: 800; }
+
 /* ---------- páginas de texto ---------- */
 
 .capa-pagina {

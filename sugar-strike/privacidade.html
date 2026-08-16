@@ -26,17 +26,17 @@
   <p>
     Aplicativo <strong>Sugar Strike</strong> (<code>com.sugarstrike.game</code>) e a versão
     jogável neste site, publicados por Arley Vieira.
-    Última atualização: <strong>2 de agosto de 2026</strong>.
+    Última atualização: <strong>15 de agosto de 2026</strong>.
   </p>
 
   <div class="caixa">
     <p>
-      <strong>Resumo:</strong> nem o <strong>aplicativo</strong> nem a
-      <strong>versão do site</strong> pedem cadastro, e-mail ou localização, e nenhum dos
-      dois usa ferramenta de análise de uso. Os dois exibem anúncio do Google — o aplicativo
-      pelo AdMob, só na tela de fim de partida; o site pelo AdSense, só nas telas de menu — e
-      nunca durante a partida em si. A única informação que sai do aparelho é o que a partida
-      online precisa para funcionar, e ela não fica guardada.
+      <strong>Resumo:</strong> o jogo não pede cadastro, e-mail, telefone nem localização, e
+      não existe conta de usuário. O apelido é livre e escolhido por você. O que a partida
+      online envia existe só enquanto ela acontece e não é gravado em lugar nenhum. O
+      <strong>aplicativo</strong> Android exibe anúncios do Google AdMob e usa o Google
+      Analytics para Firebase; a <strong>versão do site</strong> exibe anúncios do Google
+      AdSense nas telas de menu. Durante a partida, nenhum dos dois mostra anúncio.
     </p>
   </div>
 
@@ -70,10 +70,18 @@
   <h2>O que fica só no seu aparelho</h2>
   <ul>
     <li>O apelido escolhido</li>
-    <li>Preferências de som e de controle</li>
+    <li>Preferências de som, idioma e controle</li>
+    <li>Seu progresso: doces acumulados, itens comprados na loja e desafios concluídos</li>
   </ul>
+  <p>
+    No aplicativo isso fica no armazenamento do próprio aplicativo; no site, no armazenamento
+    local do navegador. Nos dois casos não sai do aparelho, a não ser pelo backup do Android,
+    se você tiver essa opção ligada no seu celular.
+  </p>
 
-  <h2>Anúncios e análise de uso no aplicativo</h2>
+  <h2>Aplicativo Android: anúncios, análise de uso e notificações</h2>
+
+  <h3>Anúncios (Google AdMob)</h3>
   <p>
     O aplicativo Sugar Strike da Google Play usa o <strong>Google AdMob</strong> na tela de fim
     de partida, nunca durante o jogo em si. Dois são premiados e opcionais — o jogador escolhe
@@ -83,19 +91,47 @@
     jogadas — como qualquer anúncio comum de aplicativo, sem dar nem exigir nada em troca.
   </p>
   <p>
-    O AdMob pode usar um identificador de publicidade do aparelho para escolher o anúncio.
-    Você pode limitar isso nas configurações de anúncios do Android
-    (Configurações &gt; Google &gt; Anúncios). O aplicativo não tem Google Analytics, não tem
-    Firebase e não envia notificações. Fora o pedido de anúncio e a conexão da partida
-    online, nada mais é carregado da internet: o jogo inteiro vem dentro do próprio
-    aplicativo.
+    O AdMob pode usar o <strong>identificador de publicidade</strong> do aparelho para escolher
+    o anúncio. Você pode limitar isso nas configurações de anúncios do Android
+    (Configurações &gt; Google &gt; Anúncios).
+  </p>
+
+  <h3>Análise de uso (Google Analytics para Firebase)</h3>
+  <p>
+    O aplicativo usa o <strong>Google Analytics para Firebase</strong> para entender como o
+    jogo é usado — quantas partidas começam, quais telas são abertas, quando o jogo trava. São
+    números de comportamento no jogo, associados a um identificador de instalação gerado pelo
+    Firebase, e não à sua identidade. O jogo não envia para o Analytics seu apelido, seu e-mail
+    nem qualquer dado que identifique você pessoalmente.
+  </p>
+
+  <h3>Notificações (Firebase Cloud Messaging)</h3>
+  <p>
+    O aplicativo pode enviar notificações — por exemplo, avisando de novidade ou de evento no
+    jogo. Para isso ele registra um <strong>token de notificação</strong> junto ao Firebase,
+    que identifica a instalação do aplicativo naquele aparelho, e não você. Você pode desligar
+    as notificações do Sugar Strike a qualquer momento nas configurações do Android, e o jogo
+    continua funcionando igual.
+  </p>
+
+  <h3>Compra dentro do aplicativo</h3>
+  <p>
+    Se o aplicativo oferecer a compra opcional de remoção de anúncios, ela é processada
+    inteiramente pelo <strong>Google Play</strong>. O jogo não vê, não recebe e não guarda
+    número de cartão nem qualquer dado de pagamento — recebe do Google apenas a confirmação de
+    que a compra existe.
+  </p>
+  <p>
+    Fora os pedidos de anúncio, o envio de estatísticas, as notificações e a conexão da partida
+    online, nada mais é carregado da internet: o jogo inteiro vem dentro do próprio aplicativo.
   </p>
 
   <h2>Versão jogável neste site</h2>
   <p>
     A versão que roda no navegador é o mesmo jogo, servido como uma página comum. Ela não
-    pede cadastro e guarda suas preferências e seu progresso apenas no armazenamento local
-    do seu navegador, que nunca sai do seu aparelho.
+    pede cadastro, <strong>não tem Firebase, não tem AdMob e não envia notificações</strong>, e
+    guarda suas preferências e seu progresso apenas no armazenamento local do seu navegador,
+    que nunca sai do seu aparelho.
   </p>
   <p>
     Essa versão <strong>exibe anúncios do Google AdSense</strong> nas laterais, e apenas
@@ -143,7 +179,9 @@
     Se o jogo passar a coletar ou exibir algo diferente, esta página é atualizada e a data
     no topo muda junto. Foi o que aconteceu em 1 de agosto de 2026: primeiro quando a versão
     do site passou a exibir anúncios do AdSense, e depois quando o aplicativo passou a
-    integrar o AdMob.
+    integrar o AdMob. Em 15 de agosto de 2026 o texto foi corrigido: o aplicativo passou a usar
+    o Google Analytics para Firebase e as notificações do Firebase Cloud Messaging, e esta
+    página ainda dizia o contrário.
   </p>
 
   <h2>Contato</h2>
