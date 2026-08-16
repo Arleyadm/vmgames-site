@@ -251,6 +251,9 @@ td { color: var(--texto-fraco); }
 
 .voltar { display: inline-block; margin-top: 26px; font-size: 15px; }
 
+.selo { margin: 0 0 26px; }
+.selo img { display: block; max-width: 100%; height: auto; }
+
 /* ---------- rodapé ---------- */
 
 footer.rodape {
