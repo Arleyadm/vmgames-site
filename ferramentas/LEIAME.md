@@ -1,5 +1,8 @@
 # Blog da VM Games — como funciona
 
+> Chegou agora neste projeto? Comece pelo [ESTADO.md](ESTADO.md): o que já está
+> pronto, as decisões tomadas, as armadilhas conhecidas e o que falta fazer.
+
 O blog é gerado como HTML estático e publicado pelo mesmo GitHub Pages do resto do site.
 Não há servidor, banco de dados nem build no navegador: `conteudo/` é a fonte da verdade,
 `blog/` é saída descartável, e `git push` publica.
