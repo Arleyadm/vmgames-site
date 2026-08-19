@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% import "parciais/pecas.html" as p %}
+
+{% block conteudo %}
+<div class="envolucro largo">
+
+  {{ p.migalhas(migalhas) }}
+
+  <header class="cabeca-secao" style="margin-top:10px">
+    <h2>{{ titulo_pagina }}</h2>
+    {%- if subtitulo_pagina %}<span class="apoio">{{ subtitulo_pagina }}</span>{% endif %}
+    {%- if rss %}<a class="mais" href="{{ rss }}">Feed RSS →</a>{% endif %}
+  </header>
+
+  {%- if ficha_autor %}
+  <div class="ficha-autor" style="margin-top:0">
+    <img src="{{ ficha_autor.foto }}" alt="Retrato de {{ ficha_autor.nome }}" width="62" height="62" loading="lazy">
+    <div>
+      <h2>{{ ficha_autor.nome }}</h2>
+      <p class="cargo">{{ ficha_autor.cargo }}</p>
+      <p>{{ ficha_autor.bio }}</p>
+    </div>
+  </div>
+  {%- endif %}
+
+  <div class="layout-blog">
+    <div>
+      {%- if artigos %}
+      <div class="grade-noticias">
+        {%- for a in artigos %}
+        {{ p.cartao(a, loop.index0 == 0 and pag.atual == 1) }}
+        {%- endfor %}
+      </div>
+
+      {{ p.anuncio(anuncios, 'entre-cards', anuncios.entre_cards, dev, 'entre-cards') }}
+
+      {{ p.paginacao(pag) }}
+      {%- else %}
+      {{ p.estado_vazio('🔍', 'Nada por aqui ainda',
+          'Nenhuma matéria foi publicada nesta seção até agora. Assim que a primeira sair, ela aparece aqui.',
+          '/blog/', 'Ver as últimas notícias') }}
+      {%- endif %}
+    </div>
+
+    {{ p.lateral(lateral, anuncios, dev) }}
+  </div>
+
+</div>
+{% endblock %}

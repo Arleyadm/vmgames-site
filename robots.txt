@@ -1,0 +1,10 @@
+# VM Games — https://vmgames.com.br
+User-agent: *
+Allow: /
+Disallow: /conteudo/
+Disallow: /ferramentas/
+Disallow: /blog/busca/
+
+Sitemap: https://vmgames.com.br/sitemap.xml
+Sitemap: https://vmgames.com.br/blog/sitemap.xml
+Sitemap: https://vmgames.com.br/blog/sitemap-noticias.xml

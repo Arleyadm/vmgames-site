@@ -1,0 +1,164 @@
+{#
+  Peças reaproveitadas por todas as telas do blog.
+  Nada aqui gera HTML sem que a página chame — é só biblioteca de macros.
+#}
+
+{% macro etiqueta(a) -%}
+<a class="etiqueta-cat" href="/blog/categoria/{{ a.categoria.slug }}/" style="--acento:{{ a.categoria.cor }}">{{ a.categoria.nome }}</a>
+{%- endmacro %}
+
+{% macro selos(a) -%}
+{%- if a.patrocinado %}<span class="marca-tipo patrocinado">Patrocinado</span>{% endif %}
+{%- if a.confiabilidade == 'rumor' %}<span class="marca-tipo rumor">Rumor</span>{% endif %}
+{%- if a.confiabilidade == 'analise' %}<span class="marca-tipo analise">Análise</span>{% endif %}
+{%- if a.exemplo %}<span class="marca-tipo exemplo">Exemplo</span>{% endif %}
+{%- endmacro %}
+
+{% macro cartao(a, prioridade=false) -%}
+<article>
+  <a class="cartao-noticia" href="{{ a.url }}" style="--acento:{{ a.categoria.cor }}">
+    <div class="capa">
+      <img src="{{ a.capa.url }}" alt="{{ a.capa.alt }}" width="640" height="360"
+           {% if prioridade %}fetchpriority="high"{% else %}loading="lazy" decoding="async"{% endif %}>
+    </div>
+    <div class="corpo">
+      <span class="etiqueta-cat">{{ a.categoria.nome }}</span>
+      <h3>{{ a.titulo }}</h3>
+      <p>{{ a.resumo }}</p>
+      <div class="meta-linha">
+        {{ selos(a) }}
+        <time datetime="{{ a.data_iso }}">{{ a.data_legivel }}</time>
+        <span class="ponto">·</span>
+        <span>{{ a.tempo_leitura }} min de leitura</span>
+      </div>
+    </div>
+  </a>
+</article>
+{%- endmacro %}
+
+{% macro cartao_lista(a) -%}
+<a class="cartao-lista" href="{{ a.url }}" style="--acento:{{ a.categoria.cor }}">
+  <div class="capa"><img src="{{ a.capa.url }}" alt="{{ a.capa.alt }}" width="240" height="180" loading="lazy" decoding="async"></div>
+  <div>
+    <span class="etiqueta-cat">{{ a.categoria.nome }}</span>
+    <h3>{{ a.titulo }}</h3>
+    <div class="meta-linha"><time datetime="{{ a.data_iso }}">{{ a.data_legivel }}</time></div>
+  </div>
+</a>
+{%- endmacro %}
+
+{% macro manchete(a) -%}
+<a class="manchete" href="{{ a.url }}" style="--acento:{{ a.categoria.cor }}">
+  <img class="arte" src="{{ a.capa.url }}" alt="{{ a.capa.alt }}" width="1200" height="514" fetchpriority="high">
+  <div class="texto">
+    <span class="etiqueta-cat">{{ a.categoria.nome }}</span>
+    <h2>{{ a.titulo }}</h2>
+    <p>{{ a.resumo }}</p>
+    <div class="meta-linha">
+      {{ selos(a) }}
+      <span>{{ a.autor.nome }}</span>
+      <span class="ponto">·</span>
+      <time datetime="{{ a.data_iso }}">{{ a.data_legivel }}</time>
+      <span class="ponto">·</span>
+      <span>{{ a.tempo_leitura }} min de leitura</span>
+    </div>
+  </div>
+</a>
+{%- endmacro %}
+
+{#
+  Publicidade. Sem slot preenchido no config, em produção não sai nada —
+  quadro vazio no ar é pior que nenhum quadro. Na pré-visualização local
+  aparece a reserva de espaço, para conferir o layout.
+#}
+{% macro anuncio(cfg, formato, slot, dev=false, classe='') -%}
+{%- if cfg.ativos and slot %}
+<aside class="publicidade {{ classe }}" role="complementary" aria-label="Publicidade">
+  <div class="caixa">
+    <ins class="adsbygoogle"
+         style="display:block{% if formato == 'lateral' %};width:300px;height:600px{% endif %}"
+         data-ad-client="{{ cfg.cliente }}"
+         data-ad-slot="{{ slot }}"
+         {%- if formato == 'no-texto' %}
+         data-ad-format="fluid"
+         data-ad-layout="in-article"
+         {%- elif formato == 'entre-cards' %}
+         data-ad-format="auto"
+         data-full-width-responsive="true"
+         {%- endif %}></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</aside>
+{%- elif dev %}
+<aside class="publicidade {{ classe }}" aria-label="Publicidade">
+  <div class="caixa"><div class="reserva">espaço de anúncio<br><small>{{ formato }}{% if not slot %} — slot ainda não cadastrado{% endif %}</small></div></div>
+</aside>
+{%- endif %}
+{%- endmacro %}
+
+{% macro migalhas(itens) -%}
+<nav class="migalhas" aria-label="Você está aqui">
+  <ol>
+    {%- for it in itens %}
+    <li>{% if not loop.last %}<a href="{{ it.url }}">{{ it.nome }}</a>{% else %}<span aria-current="page">{{ it.nome }}</span>{% endif %}</li>
+    {%- endfor %}
+  </ol>
+</nav>
+{%- endmacro %}
+
+{% macro paginacao(pag) -%}
+{%- if pag.total > 1 %}
+<nav class="paginacao" aria-label="Paginação">
+  {%- if pag.anterior %}<a href="{{ pag.anterior }}" rel="prev">← Anterior</a>{% endif %}
+  {%- for n in pag.numeros %}
+    {%- if n == 0 %}
+    <span class="reticencias" aria-hidden="true">…</span>
+    {%- elif n == pag.atual %}
+    <span aria-current="page">{{ n }}</span>
+    {%- else %}
+    <a href="{{ pag.url(n) }}" aria-label="Página {{ n }}">{{ n }}</a>
+    {%- endif %}
+  {%- endfor %}
+  {%- if pag.proxima %}<a href="{{ pag.proxima }}" rel="next">Próxima →</a>{% endif %}
+</nav>
+{%- endif %}
+{%- endmacro %}
+
+{% macro lateral(dados, cfg, dev=false) -%}
+<aside class="barra-lateral">
+  {{ anuncio(cfg, 'lateral', cfg.lateral_topo, dev, 'lateral') }}
+
+  {%- if dados.mais_lidas %}
+  <div class="bloco-lateral">
+    <h2>Recomendadas</h2>
+    <ol class="mais-lidas">
+      {%- for a in dados.mais_lidas %}
+      <li><a href="{{ a.url }}">{{ a.titulo }}</a></li>
+      {%- endfor %}
+    </ol>
+  </div>
+  {%- endif %}
+
+  {%- if dados.ultimas %}
+  <div class="bloco-lateral">
+    <h2>Últimas notícias</h2>
+    {%- for a in dados.ultimas %}
+    {{ cartao_lista(a) }}
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  {{ anuncio(cfg, 'lateral', cfg.lateral_baixo, dev, 'lateral') }}
+</aside>
+{%- endmacro %}
+
+{% macro estado_vazio(simbolo, titulo, texto, acao_url='', acao_nome='') -%}
+<div class="estado">
+  <div class="simbolo" aria-hidden="true">{{ simbolo }}</div>
+  <h2>{{ titulo }}</h2>
+  <p>{{ texto }}</p>
+  {%- if acao_url %}
+  <a class="botao" href="{{ acao_url }}">{{ acao_nome }}</a>
+  {%- endif %}
+</div>
+{%- endmacro %}

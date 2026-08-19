@@ -1,0 +1,13 @@
+{
+  "slug": "arley",
+  "nome": "Arley Vieira",
+  "papel": "admin",
+  "cargo": "Editor e desenvolvedor",
+  "bio": "Desenvolvedor de jogos em Catalão, Goiás, e responsável pela VM Games. Escreve sobre games desde a perspectiva de quem também faz jogo: código, decisões de design e o mercado que cerca tudo isso.",
+  "email": "arleyadm@gmail.com",
+  "foto": "/blog/img/autores/arley.webp",
+  "links": [
+    { "nome": "VM Games", "url": "https://vmgames.com.br" },
+    { "nome": "Google Play", "url": "https://play.google.com/store/apps/dev?id=5434874835882587012" }
+  ]
+}

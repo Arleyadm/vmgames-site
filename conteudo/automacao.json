@@ -1,0 +1,8 @@
+{
+  "ativa": true,
+  "auto_publicar": false,
+  "intervalo_minimo_horas": 2,
+  "maximo_por_coleta": 25,
+  "user_agent": "VMGamesBot/1.0 (+https://vmgames.com.br/blog/politica-editorial.html)",
+  "observacao": "auto_publicar em true só vale para fontes com permite_auto_publicar=true em fontes.json. Colocar ativa=false desliga a coleta inteira na hora."
+}

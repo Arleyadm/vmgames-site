@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% import "parciais/pecas.html" as p %}
+
+{% block conteudo %}
+<div class="envolucro largo">
+
+  {{ p.migalhas(migalhas) }}
+
+  <header class="cabeca-secao" style="margin-top:10px">
+    <h2>Buscar no blog</h2>
+    <span class="apoio">{{ total_artigos }} matérias publicadas</span>
+  </header>
+
+  <form class="caixa-busca" role="search" id="forma-busca">
+    <label class="so-leitor" for="campo-busca">Termo de busca</label>
+    <input type="search" id="campo-busca" name="q" placeholder="Ex.: Game Pass, promoção, review…"
+           autocomplete="off" autocapitalize="off" spellcheck="false">
+    <button type="submit">Buscar</button>
+  </form>
+
+  <p class="resumo-busca" id="resumo-busca" role="status" aria-live="polite"></p>
+
+  <div class="layout-blog">
+    <div>
+      <div class="grade-noticias" id="resultados"></div>
+
+      <div id="carregando" class="grade-noticias" hidden>
+        {%- for i in range(6) %}
+        <article class="cartao-noticia esqueleto" aria-hidden="true">
+          <div class="capa"></div>
+          <div class="corpo"><h3></h3><h3></h3><p></p></div>
+        </article>
+        {%- endfor %}
+      </div>
+
+      <div id="mensagem"></div>
+
+      {{ p.anuncio(anuncios, 'entre-cards', anuncios.entre_cards, dev, 'entre-cards') }}
+    </div>
+
+    {{ p.lateral(lateral, anuncios, dev) }}
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  var campo = document.getElementById('campo-busca');
+  var forma = document.getElementById('forma-busca');
+  var alvo = document.getElementById('resultados');
+  var carregando = document.getElementById('carregando');
+  var resumo = document.getElementById('resumo-busca');
+  var mensagem = document.getElementById('mensagem');
+  var indice = null, buscando = false;
+
+  /* Tira acento para que "promoção" ache "promocao" e vice-versa.
+     \p{Diacritic} evita deixar caractere combinante invisível no meio do código. */
+  function sem(texto) {
+    return texto.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+  }
+
+  function estado(simbolo, titulo, texto, acao) {
+    mensagem.innerHTML =
+      '<div class="estado"><div class="simbolo" aria-hidden="true">' + simbolo + '</div>' +
+      '<h2>' + titulo + '</h2><p>' + texto + '</p>' +
+      (acao || '') + '</div>';
+  }
+
+  function cartao(a) {
+    var d = document.createElement('article');
+    d.innerHTML =
+      '<a class="cartao-noticia" href="' + a.url + '" style="--acento:' + a.cor + '">' +
+        '<div class="capa"><img src="' + a.capa + '" alt="" width="640" height="360" loading="lazy" decoding="async"></div>' +
+        '<div class="corpo">' +
+          '<span class="etiqueta-cat">' + a.categoria + '</span>' +
+          '<h3></h3><p></p>' +
+          '<div class="meta-linha"><time datetime="' + a.iso + '">' + a.data + '</time></div>' +
+        '</div>' +
+      '</a>';
+    d.querySelector('h3').textContent = a.titulo;
+    d.querySelector('p').textContent = a.resumo;
+    return d;
+  }
+
+  function pontuar(a, termos) {
+    var t = 0;
+    for (var i = 0; i < termos.length; i++) {
+      var termo = termos[i];
+      if (a._titulo.indexOf(termo) >= 0) t += 10;
+      if (a._tags.indexOf(termo) >= 0) t += 6;
+      if (a._categoria.indexOf(termo) >= 0) t += 4;
+      if (a._texto.indexOf(termo) >= 0) t += 1;
+      else if (a._titulo.indexOf(termo) < 0 && a._tags.indexOf(termo) < 0) return 0;
+    }
+    return t;
+  }
+
+  function mostrar(q) {
+    var termos = sem(q).split(/\s+/).filter(Boolean);
+    alvo.innerHTML = '';
+    mensagem.innerHTML = '';
+    if (!termos.length) {
+      resumo.textContent = '';
+      estado('⌨️', 'Digite o que você procura',
+        'Busque por nome de jogo, plataforma, categoria ou qualquer palavra do texto.');
+      return;
+    }
+    var achados = indice
+      .map(function (a) { return { a: a, n: pontuar(a, termos) }; })
+      .filter(function (x) { return x.n > 0; })
+      .sort(function (x, y) { return y.n - x.n || (y.a.iso < x.a.iso ? -1 : 1); })
+      .slice(0, 40);
+
+    resumo.textContent = achados.length
+      ? achados.length + (achados.length === 1 ? ' matéria encontrada' : ' matérias encontradas') + ' para “' + q + '”'
+      : '';
+
+    if (!achados.length) {
+      estado('🕵️', 'Nenhuma matéria com “' + q + '”',
+        'Tente outra palavra, ou use um termo mais curto. Também dá para navegar pelas categorias na faixa acima.',
+        '<a class="botao" href="/blog/">Ver as últimas notícias</a>');
+      return;
+    }
+    var frag = document.createDocumentFragment();
+    achados.forEach(function (x) { frag.appendChild(cartao(x.a)); });
+    alvo.appendChild(frag);
+  }
+
+  function preparar(dados) {
+    indice = dados.map(function (a) {
+      a._titulo = sem(a.titulo);
+      a._texto = sem(a.titulo + ' ' + a.resumo + ' ' + (a.texto || ''));
+      a._tags = sem((a.tags || []).join(' '));
+      a._categoria = sem(a.categoria);
+      return a;
+    });
+  }
+
+  function buscar(q) {
+    if (indice) { mostrar(q); return; }
+    if (buscando) return;
+    buscando = true;
+    carregando.hidden = false;
+    mensagem.innerHTML = '';
+    fetch('/blog/indice-busca.json', { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (dados) {
+        preparar(dados);
+        carregando.hidden = true;
+        buscando = false;
+        mostrar(q);
+      })
+      .catch(function () {
+        carregando.hidden = true;
+        buscando = false;
+        estado('⚠️', 'Não deu para carregar a busca',
+          'A lista de matérias não chegou. Verifique a conexão e tente de novo.',
+          '<button class="botao" type="button" onclick="location.reload()">Tentar de novo</button>');
+      });
+  }
+
+  forma.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var q = campo.value.trim();
+    history.replaceState(null, '', q ? '?q=' + encodeURIComponent(q) : location.pathname);
+    buscar(q);
+  });
+
+  var espera;
+  campo.addEventListener('input', function () {
+    clearTimeout(espera);
+    espera = setTimeout(function () { buscar(campo.value.trim()); }, 220);
+  });
+
+  var inicial = new URLSearchParams(location.search).get('q');
+  if (inicial) { campo.value = inicial; buscar(inicial); }
+  else { estado('⌨️', 'Digite o que você procura',
+    'Busque por nome de jogo, plataforma, categoria ou qualquer palavra do texto.'); }
+})();
+</script>
+{% endblock %}

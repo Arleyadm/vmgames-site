@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% import "parciais/pecas.html" as p %}
+
+{% block conteudo %}
+<div class="envolucro largo">
+
+  {%- if aviso_dev %}
+  <div class="aviso exemplo" role="status">
+    <p><strong>Pré-visualização de desenvolvimento.</strong> As matérias marcadas como
+    <em>Exemplo</em> são conteúdo fictício, usado só para conferir o layout. Nada disso vai ao ar.</p>
+  </div>
+  {%- endif %}
+
+  {%- if destaque %}
+  {{ p.manchete(destaque) }}
+  {%- endif %}
+
+  {%- if secundarios %}
+  <div class="grade-noticias" style="margin-top:22px">
+    {%- for a in secundarios %}
+    {{ p.cartao(a) }}
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  {{ p.anuncio(anuncios, 'entre-cards', anuncios.entre_cards, dev, 'entre-cards') }}
+
+  <div class="layout-blog">
+    <div>
+
+      {%- if not destaque %}
+      {{ p.estado_vazio('📰', 'Nenhuma matéria publicada ainda',
+          'O blog acabou de nascer. A primeira leva de notícias entra em instantes.',
+          '/', 'Ver os jogos da VM Games') }}
+      {%- elif recentes %}
+      <div class="cabeca-secao">
+        <h2>Últimas notícias</h2>
+        <span class="apoio">o que saiu por último</span>
+        <a class="mais" href="/blog/feed.xml">Assinar o RSS →</a>
+      </div>
+
+      <div class="grade-noticias">
+        {%- for a in recentes %}
+        {{ p.cartao(a) }}
+        {%- endfor %}
+      </div>
+
+      {{ p.paginacao(pag) }}
+      {%- endif %}
+
+      {%- for bloco in por_categoria %}
+      <div class="cabeca-secao" style="--acento:{{ bloco.categoria.cor }}">
+        <h2>{{ bloco.categoria.nome }}</h2>
+        <span class="apoio">{{ bloco.categoria.descricao }}</span>
+        <a class="mais" href="/blog/categoria/{{ bloco.categoria.slug }}/">Ver tudo →</a>
+      </div>
+      <div class="grade-noticias">
+        {%- for a in bloco.artigos %}
+        {{ p.cartao(a) }}
+        {%- endfor %}
+      </div>
+      {%- endfor %}
+
+      <section class="assinar">
+        <h2>Acompanhe o blog</h2>
+        <p>
+          Sem cadastro e sem e-mail: assine o feed RSS e receba cada matéria no seu leitor,
+          na hora em que sai. É o mesmo endereço que funciona no Feedly, no Inoreader e em
+          qualquer app de notícias.
+        </p>
+        <div class="botoes">
+          <a class="botao destaque-cor" href="/blog/feed.xml">Assinar o feed RSS</a>
+          <a class="botao" href="/blog/politica-editorial.html">Como apuramos</a>
+        </div>
+      </section>
+
+    </div>
+
+    {{ p.lateral(lateral, anuncios, dev) }}
+  </div>
+
+</div>
+{% endblock %}

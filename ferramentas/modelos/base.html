@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ titulo_aba }}</title>
+<meta name="description" content="{{ descricao }}">
+<link rel="canonical" href="{{ canonical }}">
+<meta name="theme-color" content="#08060f">
+{%- if nao_indexar %}
+<meta name="robots" content="noindex, nofollow">
+{%- else %}
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+{%- endif %}
+
+<meta property="og:type" content="{{ og_tipo|default('website') }}">
+<meta property="og:site_name" content="VM Games">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="{{ og_titulo|default(titulo_aba) }}">
+<meta property="og:description" content="{{ descricao }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:image" content="{{ og_imagem }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+{%- block og_extra %}{% endblock %}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ og_titulo|default(titulo_aba) }}">
+<meta name="twitter:description" content="{{ descricao }}">
+<meta name="twitter:image" content="{{ og_imagem }}">
+
+<link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="{{ site.url }}/blog/feed.xml">
+<link rel="stylesheet" href="/estilo.css">
+<link rel="stylesheet" href="/blog/blog.css">
+{%- if acento %}
+<style>body.blog{--acento:{{ acento }};--acento-fraco:{{ acento_fraco }};}</style>
+{%- endif %}
+{%- if anuncios_ativos %}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ anuncios.cliente }}" crossorigin="anonymous"></script>
+{%- endif %}
+{#- O JSON-LD já sai de build.py com <, > e & escapados como \u00xx, então
+    nenhum caractere consegue fechar a tag <script>. O |safe é necessário
+    porque o autoescape do Jinja transformaria as aspas em &#34; e o Google
+    receberia um JSON inválido. -#}
+{%- for bloco in dados_estruturados %}
+<script type="application/ld+json">{{ bloco|safe }}</script>
+{%- endfor %}
+</head>
+<body class="blog">
+
+<a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="barra">
+  <div class="envolucro largo">
+    <a class="marca" href="/"><span class="vm">VM</span> <span class="games">GAMES</span></a>
+    <nav aria-label="Navegação principal">
+      <a href="/#jogos">Jogos</a>
+      <a href="/blog/"{% if secao == 'blog' %} aria-current="true"{% endif %}>Blog</a>
+      <a href="/sugar-strike/jogar/">Jogar no navegador</a>
+      <a href="/sobre.html">Sobre</a>
+      <a href="/blog/busca/">Buscar</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="faixa-categorias" aria-label="Categorias do blog">
+  <div class="envolucro largo">
+    <div class="trilho">
+      <a href="/blog/"{% if pagina_atual == 'home' %} aria-current="page"{% endif %}>Todas</a>
+      {%- for c in categorias %}
+      <a href="/blog/categoria/{{ c.slug }}/"{% if categoria_atual == c.slug %} aria-current="page"{% endif %}>{{ c.nome }}</a>
+      {%- endfor %}
+    </div>
+  </div>
+</nav>
+
+<main id="conteudo">
+{% block conteudo %}{% endblock %}
+</main>
+
+<footer class="rodape-blog">
+  <div class="envolucro largo">
+    <div class="colunas">
+      <div>
+        <h2>Blog</h2>
+        <ul>
+          <li><a href="/blog/">Últimas notícias</a></li>
+          <li><a href="/blog/categoria/reviews/">Reviews</a></li>
+          <li><a href="/blog/categoria/guias/">Guias</a></li>
+          <li><a href="/blog/categoria/promocoes/">Promoções</a></li>
+          <li><a href="/blog/busca/">Buscar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Transparência</h2>
+        <ul>
+          <li><a href="/blog/politica-editorial.html">Política editorial</a></li>
+          <li><a href="/blog/correcoes.html">Correções</a></li>
+          <li><a href="/blog/autores.html">Quem escreve</a></li>
+          <li><a href="mailto:{{ site.email }}">Contato e erratas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>VM Games</h2>
+        <ul>
+          <li><a href="/">Página inicial</a></li>
+          <li><a href="/turbo-race/">Turbo Race</a></li>
+          <li><a href="/sky-vanguard/">Sky Vanguard</a></li>
+          <li><a href="/sugar-strike/">Sugar Strike</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Acompanhar</h2>
+        <ul>
+          <li><a href="/blog/feed.xml">Feed RSS</a></li>
+          <li><a href="/privacidade.html">Privacidade</a></li>
+          <li><a href="/termos.html">Termos de uso</a></li>
+          <li><a href="/sobre.html">Sobre o estúdio</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fim">
+      Blog da VM Games — estúdio independente de Arley Vieira, Catalão/GO.
+      As matérias trazem as fontes consultadas no fim do texto.
+    </p>
+  </div>
+</footer>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

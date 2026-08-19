@@ -1,0 +1,14 @@
+[
+  { "slug": "noticias",     "nome": "Notícias",     "cor": "#00f5ff", "descricao": "O que aconteceu no mundo dos games, com fonte e contexto." },
+  { "slug": "lancamentos",  "nome": "Lançamentos",  "cor": "#ff2daa", "descricao": "Datas, trailers e detalhes dos jogos que estão chegando." },
+  { "slug": "reviews",      "nome": "Reviews",      "cor": "#ffd24d", "descricao": "Análises de jogos, com o que funciona e o que não funciona." },
+  { "slug": "guias",        "nome": "Guias",        "cor": "#34e0a1", "descricao": "Passo a passo, dicas e soluções para travar menos e jogar mais." },
+  { "slug": "pc",           "nome": "PC",           "cor": "#4d8cff", "descricao": "Steam, Epic, requisitos, desempenho e o que roda na sua máquina." },
+  { "slug": "playstation",  "nome": "PlayStation",  "cor": "#7aa2ff", "descricao": "PlayStation 5, PS Plus e tudo que sai do lado da Sony." },
+  { "slug": "xbox",         "nome": "Xbox",         "cor": "#6ee06e", "descricao": "Xbox Series, Game Pass e os anúncios da Microsoft." },
+  { "slug": "nintendo",     "nome": "Nintendo",     "cor": "#ff6b6b", "descricao": "Switch, Directs e as franquias da casa do Mario." },
+  { "slug": "mobile",       "nome": "Mobile",       "cor": "#a97bff", "descricao": "Jogos de celular, Android e iOS — inclusive os independentes." },
+  { "slug": "hardware",     "nome": "Hardware",     "cor": "#ff9a3d", "descricao": "Placas, consoles, periféricos e o que vale o dinheiro." },
+  { "slug": "esports",      "nome": "eSports",      "cor": "#c86bff", "descricao": "Campeonatos, times e resultados do cenário competitivo." },
+  { "slug": "promocoes",    "nome": "Promoções",    "cor": "#b6ff3d", "descricao": "Descontos e jogos de graça, com a data em que a oferta acaba." }
+]

@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buscar no blog — VM Games</title>
+<meta name="description" content="Busque por notícias, análises e guias publicados no blog da VM Games.">
+<link rel="canonical" href="https://vmgames.com.br/blog/busca/">
+<meta name="theme-color" content="#08060f">
+<meta name="robots" content="noindex, nofollow">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VM Games">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Buscar no blog — VM Games">
+<meta property="og:description" content="Busque por notícias, análises e guias publicados no blog da VM Games.">
+<meta property="og:url" content="https://vmgames.com.br/blog/busca/">
+<meta property="og:image" content="https://vmgames.com.br/blog/img/og-padrao.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Buscar no blog — VM Games">
+<meta name="twitter:description" content="Busque por notícias, análises e guias publicados no blog da VM Games.">
+<meta name="twitter:image" content="https://vmgames.com.br/blog/img/og-padrao.png">
+
+<link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="https://vmgames.com.br/blog/feed.xml">
+<link rel="stylesheet" href="/estilo.css">
+<link rel="stylesheet" href="/blog/blog.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8110755806771816" crossorigin="anonymous"></script>
+</head>
+<body class="blog">
+
+<a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="barra">
+  <div class="envolucro largo">
+    <a class="marca" href="/"><span class="vm">VM</span> <span class="games">GAMES</span></a>
+    <nav aria-label="Navegação principal">
+      <a href="/#jogos">Jogos</a>
+      <a href="/blog/" aria-current="true">Blog</a>
+      <a href="/sugar-strike/jogar/">Jogar no navegador</a>
+      <a href="/sobre.html">Sobre</a>
+      <a href="/blog/busca/">Buscar</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="faixa-categorias" aria-label="Categorias do blog">
+  <div class="envolucro largo">
+    <div class="trilho">
+      <a href="/blog/">Todas</a>
+      <a href="/blog/categoria/noticias/">Notícias</a>
+      <a href="/blog/categoria/lancamentos/">Lançamentos</a>
+      <a href="/blog/categoria/reviews/">Reviews</a>
+      <a href="/blog/categoria/guias/">Guias</a>
+      <a href="/blog/categoria/pc/">PC</a>
+      <a href="/blog/categoria/playstation/">PlayStation</a>
+      <a href="/blog/categoria/xbox/">Xbox</a>
+      <a href="/blog/categoria/nintendo/">Nintendo</a>
+      <a href="/blog/categoria/mobile/">Mobile</a>
+      <a href="/blog/categoria/hardware/">Hardware</a>
+      <a href="/blog/categoria/esports/">eSports</a>
+      <a href="/blog/categoria/promocoes/">Promoções</a>
+    </div>
+  </div>
+</nav>
+
+<main id="conteudo">
+
+<div class="envolucro largo">
+
+  <nav class="migalhas" aria-label="Você está aqui">
+  <ol>
+    <li><a href="/">Início</a></li>
+    <li><a href="/blog/">Blog</a></li>
+    <li><span aria-current="page">Buscar</span></li>
+  </ol>
+</nav>
+
+  <header class="cabeca-secao" style="margin-top:10px">
+    <h2>Buscar no blog</h2>
+    <span class="apoio">3 matérias publicadas</span>
+  </header>
+
+  <form class="caixa-busca" role="search" id="forma-busca">
+    <label class="so-leitor" for="campo-busca">Termo de busca</label>
+    <input type="search" id="campo-busca" name="q" placeholder="Ex.: Game Pass, promoção, review…"
+           autocomplete="off" autocapitalize="off" spellcheck="false">
+    <button type="submit">Buscar</button>
+  </form>
+
+  <p class="resumo-busca" id="resumo-busca" role="status" aria-live="polite"></p>
+
+  <div class="layout-blog">
+    <div>
+      <div class="grade-noticias" id="resultados"></div>
+
+      <div id="carregando" class="grade-noticias" hidden>
+        <article class="cartao-noticia esqueleto" aria-hidden="true">
+          <div class="capa"></div>
+          <div class="corpo"><h3></h3><h3></h3><p></p></div>
+        </article>
+        <article class="cartao-noticia esqueleto" aria-hidden="true">
+          <div class="capa"></div>
+          <div class="corpo"><h3></h3><h3></h3><p></p></div>
+        </article>
+        <article class="cartao-noticia esqueleto" aria-hidden="true">
+          <div class="capa"></div>
+          <div class="corpo"><h3></h3><h3></h3><p></p></div>
+        </article>
+        <article class="cartao-noticia esqueleto" aria-hidden="true">
+          <div class="capa"></div>
+          <div class="corpo"><h3></h3><h3></h3><p></p></div>
+        </article>
+        <article class="cartao-noticia esqueleto" aria-hidden="true">
+          <div class="capa"></div>
+          <div class="corpo"><h3></h3><h3></h3><p></p></div>
+        </article>
+        <article class="cartao-noticia esqueleto" aria-hidden="true">
+          <div class="capa"></div>
+          <div class="corpo"><h3></h3><h3></h3><p></p></div>
+        </article>
+      </div>
+
+      <div id="mensagem"></div>
+
+      
+    </div>
+
+    <aside class="barra-lateral">
+  
+<aside class="publicidade lateral" role="complementary" aria-label="Publicidade">
+  <div class="caixa">
+    <ins class="adsbygoogle"
+         style="display:block;width:300px;height:600px"
+         data-ad-client="ca-pub-8110755806771816"
+         data-ad-slot="2688993034"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</aside>
+  <div class="bloco-lateral">
+    <h2>Recomendadas</h2>
+    <ol class="mais-lidas">
+      <li><a href="/blog/geforce-now-chega-ao-firefox/">GeForce NOW passa a funcionar no Firefox — mas só no Windows</a></li>
+      <li><a href="/blog/horizon-hunters-gathering-sem-live-service/">Horizon Hunters Gathering estaria abandonando o formato live service, diz Bloomberg</a></li>
+      <li><a href="/blog/xbox-game-pass-segunda-leva-agosto-2026/">Game Pass recebe Resonance: A Plague Tale Legacy e mais nove jogos até 1º de setembro</a></li>
+    </ol>
+  </div>
+  <div class="bloco-lateral">
+    <h2>Últimas notícias</h2>
+    <a class="cartao-lista" href="/blog/geforce-now-chega-ao-firefox/" style="--acento:#4d8cff">
+  <div class="capa"><img src="/blog/img/capas/geforce-now-chega-ao-firefox.webp" alt="Arte abstrata da VM Games em azul, com grade em perspectiva e a etiqueta PC" width="240" height="180" loading="lazy" decoding="async"></div>
+  <div>
+    <span class="etiqueta-cat">PC</span>
+    <h3>GeForce NOW passa a funcionar no Firefox — mas só no Windows</h3>
+    <div class="meta-linha"><time datetime="2026-08-19T21:00:00-03:00">19 de agosto de 2026</time></div>
+  </div>
+</a>
+    <a class="cartao-lista" href="/blog/horizon-hunters-gathering-sem-live-service/" style="--acento:#7aa2ff">
+  <div class="capa"><img src="/blog/img/capas/horizon-hunters-gathering-sem-live-service.webp" alt="Arte abstrata da VM Games em azul, com grade em perspectiva e a etiqueta PlayStation" width="240" height="180" loading="lazy" decoding="async"></div>
+  <div>
+    <span class="etiqueta-cat">PlayStation</span>
+    <h3>Horizon Hunters Gathering estaria abandonando o formato live service, diz Bloomberg</h3>
+    <div class="meta-linha"><time datetime="2026-08-19T20:50:00-03:00">19 de agosto de 2026</time></div>
+  </div>
+</a>
+    <a class="cartao-lista" href="/blog/xbox-game-pass-segunda-leva-agosto-2026/" style="--acento:#6ee06e">
+  <div class="capa"><img src="/blog/img/capas/xbox-game-pass-segunda-leva-agosto-2026.webp" alt="Arte abstrata da VM Games em tons de verde, com grade em perspectiva e a etiqueta Xbox" width="240" height="180" loading="lazy" decoding="async"></div>
+  <div>
+    <span class="etiqueta-cat">Xbox</span>
+    <h3>Game Pass recebe Resonance: A Plague Tale Legacy e mais nove jogos até 1º de setembro</h3>
+    <div class="meta-linha"><time datetime="2026-08-19T20:40:00-03:00">19 de agosto de 2026</time></div>
+  </div>
+</a>
+  </div>
+
+  
+<aside class="publicidade lateral" role="complementary" aria-label="Publicidade">
+  <div class="caixa">
+    <ins class="adsbygoogle"
+         style="display:block;width:300px;height:600px"
+         data-ad-client="ca-pub-8110755806771816"
+         data-ad-slot="7493959127"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</aside>
+</aside>
+  </div>
+
+</div>
+
+</main>
+
+<footer class="rodape-blog">
+  <div class="envolucro largo">
+    <div class="colunas">
+      <div>
+        <h2>Blog</h2>
+        <ul>
+          <li><a href="/blog/">Últimas notícias</a></li>
+          <li><a href="/blog/categoria/reviews/">Reviews</a></li>
+          <li><a href="/blog/categoria/guias/">Guias</a></li>
+          <li><a href="/blog/categoria/promocoes/">Promoções</a></li>
+          <li><a href="/blog/busca/">Buscar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Transparência</h2>
+        <ul>
+          <li><a href="/blog/politica-editorial.html">Política editorial</a></li>
+          <li><a href="/blog/correcoes.html">Correções</a></li>
+          <li><a href="/blog/autores.html">Quem escreve</a></li>
+          <li><a href="mailto:arleyadm@gmail.com">Contato e erratas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>VM Games</h2>
+        <ul>
+          <li><a href="/">Página inicial</a></li>
+          <li><a href="/turbo-race/">Turbo Race</a></li>
+          <li><a href="/sky-vanguard/">Sky Vanguard</a></li>
+          <li><a href="/sugar-strike/">Sugar Strike</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Acompanhar</h2>
+        <ul>
+          <li><a href="/blog/feed.xml">Feed RSS</a></li>
+          <li><a href="/privacidade.html">Privacidade</a></li>
+          <li><a href="/termos.html">Termos de uso</a></li>
+          <li><a href="/sobre.html">Sobre o estúdio</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fim">
+      Blog da VM Games — estúdio independente de Arley Vieira, Catalão/GO.
+      As matérias trazem as fontes consultadas no fim do texto.
+    </p>
+  </div>
+</footer>
+
+
+<script>
+(function () {
+  var campo = document.getElementById('campo-busca');
+  var forma = document.getElementById('forma-busca');
+  var alvo = document.getElementById('resultados');
+  var carregando = document.getElementById('carregando');
+  var resumo = document.getElementById('resumo-busca');
+  var mensagem = document.getElementById('mensagem');
+  var indice = null, buscando = false;
+
+  /* Tira acento para que "promoção" ache "promocao" e vice-versa.
+     \p{Diacritic} evita deixar caractere combinante invisível no meio do código. */
+  function sem(texto) {
+    return texto.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+  }
+
+  function estado(simbolo, titulo, texto, acao) {
+    mensagem.innerHTML =
+      '<div class="estado"><div class="simbolo" aria-hidden="true">' + simbolo + '</div>' +
+      '<h2>' + titulo + '</h2><p>' + texto + '</p>' +
+      (acao || '') + '</div>';
+  }
+
+  function cartao(a) {
+    var d = document.createElement('article');
+    d.innerHTML =
+      '<a class="cartao-noticia" href="' + a.url + '" style="--acento:' + a.cor + '">' +
+        '<div class="capa"><img src="' + a.capa + '" alt="" width="640" height="360" loading="lazy" decoding="async"></div>' +
+        '<div class="corpo">' +
+          '<span class="etiqueta-cat">' + a.categoria + '</span>' +
+          '<h3></h3><p></p>' +
+          '<div class="meta-linha"><time datetime="' + a.iso + '">' + a.data + '</time></div>' +
+        '</div>' +
+      '</a>';
+    d.querySelector('h3').textContent = a.titulo;
+    d.querySelector('p').textContent = a.resumo;
+    return d;
+  }
+
+  function pontuar(a, termos) {
+    var t = 0;
+    for (var i = 0; i < termos.length; i++) {
+      var termo = termos[i];
+      if (a._titulo.indexOf(termo) >= 0) t += 10;
+      if (a._tags.indexOf(termo) >= 0) t += 6;
+      if (a._categoria.indexOf(termo) >= 0) t += 4;
+      if (a._texto.indexOf(termo) >= 0) t += 1;
+      else if (a._titulo.indexOf(termo) < 0 && a._tags.indexOf(termo) < 0) return 0;
+    }
+    return t;
+  }
+
+  function mostrar(q) {
+    var termos = sem(q).split(/\s+/).filter(Boolean);
+    alvo.innerHTML = '';
+    mensagem.innerHTML = '';
+    if (!termos.length) {
+      resumo.textContent = '';
+      estado('⌨️', 'Digite o que você procura',
+        'Busque por nome de jogo, plataforma, categoria ou qualquer palavra do texto.');
+      return;
+    }
+    var achados = indice
+      .map(function (a) { return { a: a, n: pontuar(a, termos) }; })
+      .filter(function (x) { return x.n > 0; })
+      .sort(function (x, y) { return y.n - x.n || (y.a.iso < x.a.iso ? -1 : 1); })
+      .slice(0, 40);
+
+    resumo.textContent = achados.length
+      ? achados.length + (achados.length === 1 ? ' matéria encontrada' : ' matérias encontradas') + ' para “' + q + '”'
+      : '';
+
+    if (!achados.length) {
+      estado('🕵️', 'Nenhuma matéria com “' + q + '”',
+        'Tente outra palavra, ou use um termo mais curto. Também dá para navegar pelas categorias na faixa acima.',
+        '<a class="botao" href="/blog/">Ver as últimas notícias</a>');
+      return;
+    }
+    var frag = document.createDocumentFragment();
+    achados.forEach(function (x) { frag.appendChild(cartao(x.a)); });
+    alvo.appendChild(frag);
+  }
+
+  function preparar(dados) {
+    indice = dados.map(function (a) {
+      a._titulo = sem(a.titulo);
+      a._texto = sem(a.titulo + ' ' + a.resumo + ' ' + (a.texto || ''));
+      a._tags = sem((a.tags || []).join(' '));
+      a._categoria = sem(a.categoria);
+      return a;
+    });
+  }
+
+  function buscar(q) {
+    if (indice) { mostrar(q); return; }
+    if (buscando) return;
+    buscando = true;
+    carregando.hidden = false;
+    mensagem.innerHTML = '';
+    fetch('/blog/indice-busca.json', { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (dados) {
+        preparar(dados);
+        carregando.hidden = true;
+        buscando = false;
+        mostrar(q);
+      })
+      .catch(function () {
+        carregando.hidden = true;
+        buscando = false;
+        estado('⚠️', 'Não deu para carregar a busca',
+          'A lista de matérias não chegou. Verifique a conexão e tente de novo.',
+          '<button class="botao" type="button" onclick="location.reload()">Tentar de novo</button>');
+      });
+  }
+
+  forma.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var q = campo.value.trim();
+    history.replaceState(null, '', q ? '?q=' + encodeURIComponent(q) : location.pathname);
+    buscar(q);
+  });
+
+  var espera;
+  campo.addEventListener('input', function () {
+    clearTimeout(espera);
+    espera = setTimeout(function () { buscar(campo.value.trim()); }, 220);
+  });
+
+  var inicial = new URLSearchParams(location.search).get('q');
+  if (inicial) { campo.value = inicial; buscar(inicial); }
+  else { estado('⌨️', 'Digite o que você procura',
+    'Busque por nome de jogo, plataforma, categoria ou qualquer palavra do texto.'); }
+})();
+</script>
+
+</body>
+</html>

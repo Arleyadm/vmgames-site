@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% import "parciais/pecas.html" as p %}
+
+{% block og_extra %}
+<meta property="article:published_time" content="{{ a.data_iso }}">
+{%- if a.atualizado_iso %}
+<meta property="article:modified_time" content="{{ a.atualizado_iso }}">
+{%- endif %}
+<meta property="article:author" content="{{ a.autor.nome }}">
+<meta property="article:section" content="{{ a.categoria.nome }}">
+{%- for t in a.tags %}
+<meta property="article:tag" content="{{ t.nome }}">
+{%- endfor %}
+{% endblock %}
+
+{% block conteudo %}
+<div class="envolucro largo">
+
+  {{ p.migalhas(migalhas) }}
+
+  <div class="grade-artigo">
+
+    <div class="trilho-esquerdo">
+      {%- if a.sumario %}
+      <nav class="sumario" aria-label="Sumário da matéria">
+        <h2>Nesta matéria</h2>
+        <ol>
+          {%- for s in a.sumario %}
+          <li class="nivel-{{ s.nivel }}"><a href="#{{ s.id }}">{{ s.texto }}</a></li>
+          {%- endfor %}
+        </ol>
+      </nav>
+      {%- endif %}
+
+      <div class="compartilhar">
+        <h2>Compartilhar</h2>
+        <div class="botoes-compartilhar">
+          <a href="https://api.whatsapp.com/send?text={{ compartilhar.whatsapp }}" target="_blank" rel="noopener nofollow">WhatsApp</a>
+          <a href="https://twitter.com/intent/tweet?text={{ compartilhar.titulo }}&url={{ compartilhar.url }}" target="_blank" rel="noopener nofollow">X</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ compartilhar.url }}" target="_blank" rel="noopener nofollow">Facebook</a>
+          <a href="https://t.me/share/url?url={{ compartilhar.url }}&text={{ compartilhar.titulo }}" target="_blank" rel="noopener nofollow">Telegram</a>
+          <button type="button" data-copiar="{{ canonical }}">Copiar link</button>
+        </div>
+      </div>
+    </div>
+
+    <article class="artigo" itemscope itemtype="https://schema.org/NewsArticle">
+
+      <header>
+        <span class="etiqueta-cat" style="--acento:{{ a.categoria.cor }}">{{ a.categoria.nome }}</span>
+        <h1 itemprop="headline">{{ a.titulo }}</h1>
+        {%- if a.subtitulo %}
+        <p class="olho">{{ a.subtitulo }}</p>
+        {%- endif %}
+
+        {%- if a.exemplo %}
+        <div class="aviso exemplo">
+          <p><strong>Matéria de exemplo.</strong> Conteúdo fictício, criado apenas para testar o
+          layout do blog durante o desenvolvimento. Não é notícia e não corresponde a nenhum fato.</p>
+        </div>
+        {%- endif %}
+
+        {%- if a.patrocinado %}
+        <div class="aviso patrocinado">
+          <p><strong>Conteúdo patrocinado.</strong>
+          {%- if a.patrocinador %} Publicado em parceria com {{ a.patrocinador }}.{% endif %}
+          A VM Games manteve o controle editorial do texto; o anunciante não aprovou o conteúdo antes da publicação.</p>
+        </div>
+        {%- endif %}
+
+        {%- if a.confiabilidade == 'rumor' %}
+        <div class="aviso rumor">
+          <p><strong>Ainda não é oficial.</strong> Esta matéria trata de informação não confirmada
+          pelas empresas envolvidas. Está aqui identificada como rumor e será atualizada se houver
+          confirmação ou desmentido.</p>
+        </div>
+        {%- endif %}
+
+        <div class="assinatura">
+          <img src="{{ a.autor.foto }}" alt="" width="42" height="42" loading="lazy">
+          <div>
+            <div class="quem">Por <a href="/blog/autor/{{ a.autor.slug }}/" itemprop="author">{{ a.autor.nome }}</a></div>
+            <div class="quando">
+              <time datetime="{{ a.data_iso }}" itemprop="datePublished">{{ a.data_completa }}</time>
+              {%- if a.atualizado_iso %} · atualizada em <time datetime="{{ a.atualizado_iso }}" itemprop="dateModified">{{ a.atualizado_completa }}</time>{% endif %}
+              · {{ a.tempo_leitura }} min de leitura
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <figure class="figura-capa">
+        <img src="{{ a.capa.url }}" alt="{{ a.capa.alt }}" width="1200" height="675" fetchpriority="high" itemprop="image">
+        <figcaption>
+          {{ a.capa.legenda }}
+          <span class="credito">
+            {%- if a.capa.fonte_url %}Imagem: <a href="{{ a.capa.fonte_url }}" rel="noopener nofollow" target="_blank">{{ a.capa.credito }}</a>
+            {%- else %}Imagem: {{ a.capa.credito }}{% endif %}
+          </span>
+        </figcaption>
+      </figure>
+
+      {%- if a.correcoes %}
+      <div class="aviso correcao">
+        <p><strong>{{ 'Correções' if a.correcoes|length > 1 else 'Correção' }}</strong></p>
+        {%- for c in a.correcoes %}
+        <p><time datetime="{{ c.iso }}">{{ c.legivel }}</time> — {{ c.texto }}</p>
+        {%- endfor %}
+      </div>
+      {%- endif %}
+
+      {#- |safe é seguro aqui: build.py passa o corpo por bleach.clean() antes,
+          com lista fechada de tags e atributos. Sem o |safe o texto sairia com
+          as tags visíveis na tela. -#}
+      <div class="corpo-artigo" itemprop="articleBody">
+        {{ a.corpo_html|safe }}
+      </div>
+
+      {{ p.anuncio(anuncios, 'no-texto', anuncios.no_texto, dev, 'no-texto') }}
+
+      {%- if a.fontes %}
+      <section class="fontes" aria-labelledby="titulo-fontes">
+        <h2 id="titulo-fontes">Fontes consultadas</h2>
+        <p class="explica">
+          Toda matéria do blog lista de onde a informação veio. Os horários de consulta estão no
+          fuso de Brasília.
+        </p>
+        <ol>
+          {%- for f in a.fontes %}
+          <li>
+            <a href="{{ f.url }}" rel="noopener nofollow" target="_blank">{{ f.veiculo }}</a>
+            {%- if f.titulo %} — “{{ f.titulo }}”{% endif %}
+            {%- if f.autor %}, por {{ f.autor }}{% endif %}
+            {%- if f.tipo == 'primaria' %} <span class="marca-tipo" style="color:var(--ciano);border-color:rgba(0,245,255,.4)">Fonte primária</span>{% endif %}
+            <span class="quando">
+              {%- if f.data_legivel %}Publicado em {{ f.data_legivel }}. {% endif %}
+              Consultado em {{ f.consultado_legivel }}.
+            </span>
+          </li>
+          {%- endfor %}
+        </ol>
+      </section>
+      {%- endif %}
+
+      {%- if a.tags %}
+      <div class="tags">
+        {%- for t in a.tags %}
+        <a href="/blog/tag/{{ t.slug }}/">#{{ t.nome }}</a>
+        {%- endfor %}
+      </div>
+      {%- endif %}
+
+      <div class="ficha-autor">
+        <img src="{{ a.autor.foto }}" alt="Retrato de {{ a.autor.nome }}" width="62" height="62" loading="lazy">
+        <div>
+          <h2><a href="/blog/autor/{{ a.autor.slug }}/" style="color:inherit;text-decoration:none">{{ a.autor.nome }}</a></h2>
+          <p class="cargo">{{ a.autor.cargo }}</p>
+          <p>{{ a.autor.bio }}</p>
+        </div>
+      </div>
+
+    </article>
+
+    <div class="trilho-direito">
+      {{ p.anuncio(anuncios, 'lateral', anuncios.lateral_topo, dev, 'lateral') }}
+
+      {%- if lateral.mais_lidas %}
+      <div class="bloco-lateral">
+        <h2>Recomendadas</h2>
+        <ol class="mais-lidas">
+          {%- for x in lateral.mais_lidas %}
+          <li><a href="{{ x.url }}">{{ x.titulo }}</a></li>
+          {%- endfor %}
+        </ol>
+      </div>
+      {%- endif %}
+
+      {{ p.anuncio(anuncios, 'lateral', anuncios.lateral_baixo, dev, 'lateral') }}
+    </div>
+
+  </div>
+
+  {%- if relacionados %}
+  <div class="cabeca-secao">
+    <h2>Leia também</h2>
+    <span class="apoio">matérias ligadas a esta</span>
+  </div>
+  <div class="grade-noticias">
+    {%- for x in relacionados %}
+    {{ p.cartao(x) }}
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+/* Copiar link: só isso de JavaScript na página de matéria. */
+document.addEventListener('click', function (e) {
+  var b = e.target.closest('[data-copiar]');
+  if (!b) return;
+  navigator.clipboard.writeText(b.dataset.copiar).then(function () {
+    var antes = b.textContent;
+    b.textContent = 'Link copiado';
+    setTimeout(function () { b.textContent = antes; }, 1800);
+  });
+});
+</script>
+{% endblock %}

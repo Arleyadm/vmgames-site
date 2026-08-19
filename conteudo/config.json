@@ -1,0 +1,38 @@
+{
+  "site": {
+    "nome": "VM Games",
+    "url": "https://vmgames.com.br",
+    "base": "/blog/",
+    "titulo": "Blog VM Games",
+    "subtitulo": "Notícias, análises e guias de games",
+    "descricao": "Notícias de games, lançamentos, análises, guias e promoções em português. Publicado pela VM Games, estúdio independente de Catalão, Goiás.",
+    "idioma": "pt-BR",
+    "fuso": "America/Sao_Paulo",
+    "email": "arleyadm@gmail.com",
+    "twitter": "",
+    "logo": "/blog/img/vmgames-logo.png",
+    "og_padrao": "/blog/img/og-padrao.png"
+  },
+  "paginacao": {
+    "home": 12,
+    "listagem": 12
+  },
+  "blocos": {
+    "destaques_secundarios": 4,
+    "mais_lidas": 5,
+    "ultimas": 6,
+    "relacionados": 4
+  },
+  "anuncios": {
+    "ativos": true,
+    "cliente": "ca-pub-8110755806771816",
+    "lateral_topo": "2688993034",
+    "lateral_baixo": "7493959127",
+    "no_texto": "",
+    "entre_cards": ""
+  },
+  "editorial": {
+    "tempo_leitura_ppm": 200,
+    "aviso_dev": true
+  }
+}

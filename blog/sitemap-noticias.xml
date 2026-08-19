@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  <url>
+    <loc>https://vmgames.com.br/blog/geforce-now-chega-ao-firefox/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-19T21:00:00-03:00</news:publication_date>
+      <news:title>GeForce NOW passa a funcionar no Firefox — mas só no Windows</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/horizon-hunters-gathering-sem-live-service/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-19T20:50:00-03:00</news:publication_date>
+      <news:title>Horizon Hunters Gathering estaria abandonando o formato live service, diz Bloomberg</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/xbox-game-pass-segunda-leva-agosto-2026/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-19T20:40:00-03:00</news:publication_date>
+      <news:title>Game Pass recebe Resonance: A Plague Tale Legacy e mais nove jogos até 1º de setembro</news:title>
+    </news:news>
+  </url>
+</urlset>
