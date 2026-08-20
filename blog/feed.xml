@@ -6,8 +6,38 @@
     <atom:link href="https://vmgames.com.br/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Notícias de games, lançamentos, análises, guias e promoções em português. Publicado pela VM Games, estúdio independente de Catalão, Goiás.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Wed, 19 Aug 2026 21:01:04 -0300</lastBuildDate>
+    <lastBuildDate>Wed, 19 Aug 2026 21:16:09 -0300</lastBuildDate>
     <ttl>60</ttl>
+    <item>
+      <title>Steins;Gate Re:Boot estreia no PC em 20 de agosto com rota inédita</title>
+      <link>https://vmgames.com.br/blog/steins-gate-reboot-pc-lancamento/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/steins-gate-reboot-pc-lancamento/</guid>
+      <pubDate>Wed, 19 Aug 2026 21:30:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>PC</category>
+      <description>Steins;Gate Re:Boot chega ao Steam em 20 de agosto com gráficos refeitos, texto ampliado, novas gravações e uma rota narrativa inédita.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/steins-gate-reboot-pc-lancamento.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Bob retorna em Tekken 8 nesta quinta; acesso geral começa dia 25</title>
+      <link>https://vmgames.com.br/blog/bob-tekken-8-acesso-antecipado/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/bob-tekken-8-acesso-antecipado/</guid>
+      <pubDate>Wed, 19 Aug 2026 21:25:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Lançamentos</category>
+      <description>Bob chega a Tekken 8 em 20 de agosto para quem possui o Passe de Personagens da Temporada 3; a venda separada começa no dia 25.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/bob-tekken-8-acesso-antecipado.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>No Case Should Remain Unsolved chega ao PS5 com mistério montado por memórias</title>
+      <link>https://vmgames.com.br/blog/no-case-should-remain-unsolved-ps5/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/no-case-should-remain-unsolved-ps5/</guid>
+      <pubDate>Wed, 19 Aug 2026 21:20:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>PlayStation</category>
+      <description>No Case Should Remain Unsolved foi lançado para PS5 nesta quarta-feira, 19 de agosto, após versões para PC e Nintendo Switch.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/no-case-should-remain-unsolved-ps5.webp" type="image/webp" length="0"/>
+    </item>
     <item>
       <title>Caravan SandWitch está grátis na Epic, mas oferta termina nesta quinta</title>
       <link>https://vmgames.com.br/blog/caravan-sandwitch-gratis-epic/</link>

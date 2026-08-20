@@ -2,6 +2,39 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://vmgames.com.br/blog/steins-gate-reboot-pc-lancamento/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-19T21:30:00-03:00</news:publication_date>
+      <news:title>Steins;Gate Re:Boot estreia no PC em 20 de agosto com rota inédita</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/bob-tekken-8-acesso-antecipado/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-19T21:25:00-03:00</news:publication_date>
+      <news:title>Bob retorna em Tekken 8 nesta quinta; acesso geral começa dia 25</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/no-case-should-remain-unsolved-ps5/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-19T21:20:00-03:00</news:publication_date>
+      <news:title>No Case Should Remain Unsolved chega ao PS5 com mistério montado por memórias</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://vmgames.com.br/blog/caravan-sandwitch-gratis-epic/</loc>
     <news:news>
       <news:publication>
