@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/fortnite-override-sonic.webp
-  alt: "Arte abstrata da VM Games em tons de roxo, com grade em perspectiva e a etiqueta Mobile"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "Sonic atravessa um anel dourado e entra correndo em uma ilha de batalha"
+  legenda: "Imagem autoral da VM Games representa a chegada de Sonic à temporada Override."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://www.videogameschronicle.com/news/fortnite-confirms-that-sonic-is-coming-to-its-next-season-override/
     veiculo: VGC
@@ -58,4 +58,3 @@ iOS nas regiões suportadas, além de consoles e PC.
 
 Os itens cosméticos, preços em V-Bucks e duração da temporada devem ser conferidos após a
 abertura oficial, porque a Epic pode alterar a loja e o cronograma.
-

@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/gamescom-2026-guia-evento.webp
-  alt: "Arte abstrata da VM Games em tons de ciano, com grade em perspectiva e a etiqueta Notícias"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "Pavilhão de feira de games lotado, com palco central, estandes e equipes de transmissão"
+  legenda: "Imagem autoral da VM Games representa a abertura da gamescom 2026 em um centro de convenções lotado."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://latam.gamescom.global/en/gamescom-reaches-new-milestone-all-available-areas-for-2026-booked-up/
     veiculo: gamescom
@@ -56,4 +56,3 @@ ampliada do Awesome Indies, área de comunidade, cosplay e a estreia da gamescom
 A programação completa varia entre estandes e transmissões. Quem acompanha de casa deve
 consultar os canais oficiais de cada empresa, porque nem toda demonstração presencial é
 exibida pela internet.
-

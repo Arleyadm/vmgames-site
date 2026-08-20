@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/xbox-retrocompatibilidade-pc.webp
-  alt: "Arte abstrata da VM Games em tons de verde, com grade em perspectiva e a etiqueta Xbox"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "PC e portátil exibem quatro jogos clássicos ao lado de um console antigo"
+  legenda: "Imagem autoral da VM Games representa os quatro clássicos levados ao PC e aos portáteis."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://news.xbox.com/en-us/2026/07/22/xbox-backward-compatibility-on-pc/
     veiculo: Xbox Wire
@@ -52,4 +52,3 @@ iniciativa maior. A empresa não publicou um calendário completo para os próxi
 
 Os requisitos mínimos incluem Windows 11, processador com quatro núcleos e oito threads,
 8 GB de RAM e placa como GTX 950, Radeon RX 550 ou Intel Arc A310.
-

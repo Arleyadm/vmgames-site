@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/mortal-shell-2-lancamento.webp
-  alt: "Arte abstrata da VM Games em tons de rosa, com grade em perspectiva e a etiqueta Lançamentos"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "Viajante espectral diante de oito armaduras vazias em um reino medieval interligado"
+  legenda: "Imagem autoral da VM Games representa os oito Shells e os caminhos interligados de Mortal Shell 2."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://mortalshell.com/
     veiculo: Cold Symmetry
@@ -53,4 +53,3 @@ personagens.
 
 Quem pretende comprar deve conferir a página da plataforma escolhida, pois preço,
 disponibilidade física e horário de liberação variam por região.
-

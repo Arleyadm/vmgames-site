@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/stalker-2-cost-of-hope.webp
-  alt: "Arte abstrata da VM Games em tons de azul, com grade em perspectiva e a etiqueta PC"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "Explorador com PDA observa a Floresta de Ferro e a usina de Chornobyl sob uma tempestade"
+  legenda: "Imagem autoral da VM Games representa as novas regiões e o sinal de PDA de Cost of Hope."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://www.stalker2.com/uk/news/coh-date-reveal
     veiculo: GSC Game World
@@ -60,4 +60,3 @@ jogabilidade e uma atualização tecnológica do projeto.
 
 É importante separar os dois pacotes: a atualização 2.0 é gratuita; as novas regiões e a
 história de *Cost of Hope* pertencem à expansão paga.
-

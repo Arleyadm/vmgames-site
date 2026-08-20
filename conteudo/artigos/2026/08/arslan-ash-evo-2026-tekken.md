@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/arslan-ash-evo-2026-tekken.webp
-  alt: "Arte abstrata da VM Games em tons de roxo, com grade em perspectiva e a etiqueta eSports"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "Jogador paquistanês ergue troféu diante de uma arena lotada de campeonato de luta"
+  legenda: "Imagem autoral da VM Games representa a conquista de Arslan Ash na EVO 2026."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://en.bandainamcoent.eu/tekken/news/tekken-8-upcoming-addition-bob-showcased-during-evo-2026
     veiculo: Bandai Namco Entertainment Europe
@@ -52,4 +52,3 @@ Kazuya, Alisa e Kuma.
 Resultados de eSports precisam ser separados dos anúncios comerciais feitos no mesmo
 palco: o campeonato terminou com Arslan Ash como vencedor, enquanto Bob e a animação são
 novidades do calendário de conteúdo do jogo.
-

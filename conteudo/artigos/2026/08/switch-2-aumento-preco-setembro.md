@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/switch-2-aumento-preco-setembro.webp
-  alt: "Arte abstrata da VM Games em tons de vermelho, com grade em perspectiva e a etiqueta Nintendo"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "Console híbrido em loja com preços de 499,99 dólares e euros e valor latino-americano em branco"
+  legenda: "Imagem autoral da VM Games representa o reajuste nos EUA e Europa e o preço ainda indefinido na América Latina."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://www.nintendo.com/us/whatsnew/price-revision-for-nintendo-switch-2-system/
     veiculo: Nintendo of America
@@ -58,4 +58,3 @@ No Japão, a revisão de parte da linha começou antes, em 25 de maio.
 
 Quem pensa em comprar deve comparar o preço efetivamente praticado no Brasil, sem tratar
 o reajuste internacional como garantia de aumento idêntico no varejo nacional.
-

@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/cardpocalypse-gratis-epic.webp
-  alt: "Arte abstrata da VM Games em tons de verde-limão, com grade em perspectiva e a etiqueta Promoções"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "Adolescente em cadeira de rodas invoca monstro de papel durante batalha de cartas na escola"
+  legenda: "Imagem autoral da VM Games representa as batalhas de cartas e o clima escolar de Cardpocalypse."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://store.epicgames.com/p/cardpocalypse?lang=en-US
     veiculo: Epic Games Store
@@ -60,4 +60,3 @@ Para garantir o jogo, é necessário concluir a compra por valor zero durante a 
 Depois disso, ele permanece na biblioteca, mesmo que não seja instalado imediatamente.
 Como a troca ocorre em horário definido pela loja, confirme que o preço aparece zerado
 antes de finalizar.
-
