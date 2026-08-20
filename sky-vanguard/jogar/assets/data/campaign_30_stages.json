@@ -1,0 +1,274 @@
+{
+  "countries": [
+    {
+      "name": "Brasil",
+      "difficultyScale": 1.0,
+      "stages": [
+        {
+          "globalIndex": 0,
+          "phase": 1,
+          "name": "Costa do Rio",
+          "subBoss": "Caça Jaguar",
+          "boss": "Porta-aviões Trovão",
+          "difficultyScale": 1.0
+        },
+        {
+          "globalIndex": 1,
+          "phase": 2,
+          "name": "Amazônia Oculta",
+          "subBoss": "Drone Harpia",
+          "boss": "Plataforma Curupira",
+          "difficultyScale": 1.085
+        },
+        {
+          "globalIndex": 2,
+          "phase": 3,
+          "name": "Cerrado de Aço",
+          "subBoss": "Tanque Lobo-Guará",
+          "boss": "Fortaleza Anhanguera",
+          "difficultyScale": 1.17
+        },
+        {
+          "globalIndex": 3,
+          "phase": 4,
+          "name": "São Paulo Neon",
+          "subBoss": "Esquadrão Falcão",
+          "boss": "Torre Bandeirante",
+          "difficultyScale": 1.255
+        },
+        {
+          "globalIndex": 4,
+          "phase": 5,
+          "name": "Atlântico em Guerra",
+          "subBoss": "Submarino Abissal",
+          "boss": "Cruzador Iara",
+          "difficultyScale": 1.34
+        },
+        {
+          "globalIndex": 5,
+          "phase": 6,
+          "name": "Pantanal Ômega",
+          "subBoss": "Colosso Jacaré",
+          "boss": "Guardião Tupã",
+          "difficultyScale": 1.425
+        }
+      ]
+    },
+    {
+      "name": "Estados Unidos",
+      "difficultyScale": 1.25,
+      "stages": [
+        {
+          "globalIndex": 6,
+          "phase": 1,
+          "name": "Deserto de Nevada",
+          "subBoss": "Interceptador Raptor",
+          "boss": "Trem Blindado Liberty",
+          "difficultyScale": 1.25
+        },
+        {
+          "globalIndex": 7,
+          "phase": 2,
+          "name": "Costa da Califórnia",
+          "subBoss": "Drone Seeker",
+          "boss": "Cruzador Pacific",
+          "difficultyScale": 1.356
+        },
+        {
+          "globalIndex": 8,
+          "phase": 3,
+          "name": "Chicago de Ferro",
+          "subBoss": "Torre Sentinel",
+          "boss": "Aranha Mecânica Union",
+          "difficultyScale": 1.462
+        },
+        {
+          "globalIndex": 9,
+          "phase": 4,
+          "name": "Montanhas Rochosas",
+          "subBoss": "Tanque Grizzly",
+          "boss": "Fortaleza Eagle",
+          "difficultyScale": 1.569
+        },
+        {
+          "globalIndex": 10,
+          "phase": 5,
+          "name": "Nova York Sitiada",
+          "subBoss": "Esquadrão Phantom",
+          "boss": "Colosso Manhattan",
+          "difficultyScale": 1.675
+        },
+        {
+          "globalIndex": 11,
+          "phase": 6,
+          "name": "Pentágono ORION",
+          "subBoss": "Guardião Patriot",
+          "boss": "Núcleo Liberty Prime",
+          "difficultyScale": 1.781
+        }
+      ]
+    },
+    {
+      "name": "Japão",
+      "difficultyScale": 1.52,
+      "stages": [
+        {
+          "globalIndex": 12,
+          "phase": 1,
+          "name": "Tóquio Neon",
+          "subBoss": "Caça Kitsune",
+          "boss": "Mecha Shogun",
+          "difficultyScale": 1.52
+        },
+        {
+          "globalIndex": 13,
+          "phase": 2,
+          "name": "Baía de Osaka",
+          "subBoss": "Submarino Kappa",
+          "boss": "Cruzador Yamabiko",
+          "difficultyScale": 1.649
+        },
+        {
+          "globalIndex": 14,
+          "phase": 3,
+          "name": "Monte Fuji",
+          "subBoss": "Drone Tengu",
+          "boss": "Fortaleza Oni",
+          "difficultyScale": 1.778
+        },
+        {
+          "globalIndex": 15,
+          "phase": 4,
+          "name": "Kyoto Cibernética",
+          "subBoss": "Torre Ronin",
+          "boss": "Dragão Mecânico",
+          "difficultyScale": 1.908
+        },
+        {
+          "globalIndex": 16,
+          "phase": 5,
+          "name": "Hokkaido Glacial",
+          "subBoss": "Tanque Yuki",
+          "boss": "Colosso Susanoo",
+          "difficultyScale": 2.037
+        },
+        {
+          "globalIndex": 17,
+          "phase": 6,
+          "name": "Elevador Orbital",
+          "subBoss": "Guardião Amaterasu",
+          "boss": "Raijin Omega",
+          "difficultyScale": 2.166
+        }
+      ]
+    },
+    {
+      "name": "Rússia",
+      "difficultyScale": 1.82,
+      "stages": [
+        {
+          "globalIndex": 18,
+          "phase": 1,
+          "name": "Sibéria Congelada",
+          "subBoss": "Tanque Volk",
+          "boss": "Fortaleza Boreal",
+          "difficultyScale": 1.82
+        },
+        {
+          "globalIndex": 19,
+          "phase": 2,
+          "name": "Mar de Barents",
+          "subBoss": "Submarino Moroz",
+          "boss": "Leviatã Ártico",
+          "difficultyScale": 1.975
+        },
+        {
+          "globalIndex": 20,
+          "phase": 3,
+          "name": "Moscou Escarlate",
+          "subBoss": "Torre Kremlin",
+          "boss": "Titã Moscóvia",
+          "difficultyScale": 2.129
+        },
+        {
+          "globalIndex": 21,
+          "phase": 4,
+          "name": "Urais Industriais",
+          "subBoss": "Colosso Ural",
+          "boss": "Forja Perun",
+          "difficultyScale": 2.284
+        },
+        {
+          "globalIndex": 22,
+          "phase": 5,
+          "name": "Cosmódromo Baikonur",
+          "subBoss": "Interceptor Sputnik",
+          "boss": "Cidadela Vostok",
+          "difficultyScale": 2.439
+        },
+        {
+          "globalIndex": 23,
+          "phase": 6,
+          "name": "Órbita Soviética",
+          "subBoss": "Guardião Zarya",
+          "boss": "Coração de Kosmos",
+          "difficultyScale": 2.594
+        }
+      ]
+    },
+    {
+      "name": "Itália",
+      "difficultyScale": 2.18,
+      "stages": [
+        {
+          "globalIndex": 24,
+          "phase": 1,
+          "name": "Costa de Roma",
+          "subBoss": "Caça Lupo",
+          "boss": "Cruzador Roma",
+          "difficultyScale": 2.18
+        },
+        {
+          "globalIndex": 25,
+          "phase": 2,
+          "name": "Veneza Submersa",
+          "subBoss": "Submarino Gondola",
+          "boss": "Leviatã Adriático",
+          "difficultyScale": 2.365
+        },
+        {
+          "globalIndex": 26,
+          "phase": 3,
+          "name": "Alpes de Titânio",
+          "subBoss": "Tanque Alpino",
+          "boss": "Colosso Dolomita",
+          "difficultyScale": 2.551
+        },
+        {
+          "globalIndex": 27,
+          "phase": 4,
+          "name": "Milão Mecânica",
+          "subBoss": "Torre Duomo",
+          "boss": "Arquiteto Nero",
+          "difficultyScale": 2.736
+        },
+        {
+          "globalIndex": 28,
+          "phase": 5,
+          "name": "Vesúvio em Chamas",
+          "subBoss": "Drone Vulcano",
+          "boss": "Imperador Magma",
+          "difficultyScale": 2.921
+        },
+        {
+          "globalIndex": 29,
+          "phase": 6,
+          "name": "Fortaleza Mediterrânea",
+          "subBoss": "Guardião Centurião",
+          "boss": "ORION Imperator",
+          "difficultyScale": 3.107
+        }
+      ]
+    }
+  ]
+}

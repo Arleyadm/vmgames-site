@@ -1,0 +1,7 @@
+{
+  "bossesPerStage": 1,
+  "subBossesPerStage": 1,
+  "totalBosses": 30,
+  "totalSubBosses": 30,
+  "dataFile": "campaign_30_stages.json"
+}

@@ -1,0 +1,24 @@
+{
+  "frontFacingOnly": true,
+  "sprites": [
+    "fighter_red",
+    "bomber_gray",
+    "drone_blue",
+    "tank_front",
+    "tank_top",
+    "tank_missile",
+    "turret_top",
+    "turret_green",
+    "ship_top",
+    "sub_front",
+    "sub_top"
+  ],
+  "types": [
+    "SCOUT",
+    "STRIKER",
+    "BOMBER",
+    "DRONE",
+    "TANK",
+    "MINIBOSS"
+  ]
+}

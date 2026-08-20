@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <title>Sky Vanguard: Global Assault</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: #05070f;
+            overflow: hidden;
+            /* Sem realce azul de toque nem seleção acidental no celular. */
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* O jogo é retrato (1080x1920). A caixa mantém a proporção 9:16 e
+           encolhe pelo lado que faltar — no celular vira tela cheia, no
+           computador fica uma faixa retrato centralizada. */
+        #frame {
+            position: relative;
+            aspect-ratio: 9 / 16;
+            height: 100vh;
+            height: 100dvh;
+            max-width: 100vw;
+        }
+        /* Link de volta para o site, na tarja preta ao lado do jogo. So
+           aparece quando sobra margem (tela larga); no celular o jogo ocupa
+           tudo e o link sumiria por cima da imagem. */
+        #voltar {
+            position: fixed;
+            top: 14px;
+            left: 16px;
+            z-index: 2;
+            display: none;
+            color: #7b8aa6;
+            font: 600 14px/1 system-ui, "Segoe UI", Roboto, sans-serif;
+            letter-spacing: .04em;
+            text-decoration: none;
+        }
+        #voltar:hover { color: #cfe2ff; }
+        @media (min-aspect-ratio: 3/4) {
+            #voltar { display: block; }
+        }
+        #canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            /* Impede o navegador de rolar/dar zoom quando o dedo arrasta. */
+            touch-action: none;
+        }
+    </style>
+</head>
+<body oncontextmenu="return false">
+    <a id="voltar" href="/sky-vanguard/">&larr; VM GAMES</a>
+    <div id="frame">
+        <canvas id="canvas"></canvas>
+    </div>
+    <script>
+        window.addEventListener("load", function () { main(); });
+    </script>
+    <script type="text/javascript" charset="utf-8" src="app.js"></script>
+</body>
+</html>

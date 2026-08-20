@@ -1,0 +1,6 @@
+[
+  {"id":"recruit","bulletSpeed":0.76,"enemyHp":0.82},
+  {"id":"pilot","bulletSpeed":1.0,"enemyHp":1.0},
+  {"id":"ace","bulletSpeed":1.18,"enemyHp":1.16},
+  {"id":"legend","bulletSpeed":1.34,"enemyHp":1.30}
+]

@@ -1,0 +1,28 @@
+{
+  "pilots": [
+    {
+      "id": "arley_vargas",
+      "name": "Arley Vargas",
+      "country": "Brasil",
+      "aircraft": "Aurora BR-01"
+    },
+    {
+      "id": "irina_volkov",
+      "name": "Irina Volkov",
+      "country": "Rússia",
+      "aircraft": "Buran RX-7"
+    },
+    {
+      "id": "mason_cole",
+      "name": "Mason Cole",
+      "country": "Estados Unidos",
+      "aircraft": "Eagle AX-9"
+    },
+    {
+      "id": "aiko_tanaka",
+      "name": "Aiko Tanaka",
+      "country": "Japão",
+      "aircraft": "Raijin JX-4"
+    }
+  ]
+}

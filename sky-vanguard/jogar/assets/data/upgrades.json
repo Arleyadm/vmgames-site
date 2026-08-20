@@ -1,0 +1,38 @@
+{
+  "persistent": true,
+  "unlimitedStacks": true,
+  "hordeMultiplier": 1000,
+  "types": [
+    "ENERGY",
+    "FIRE_RATE",
+    "SPREAD",
+    "MISSILE",
+    "LASER",
+    "SHIELD",
+    "SPECIAL",
+    "MULTIPLIER",
+    "DRONE",
+    "MAGNET",
+    "CRITICAL",
+    "CHAIN",
+    "ARMOR",
+    "REGEN",
+    "PHOENIX",
+    "ORBITAL",
+    "TIME_CORE",
+    "BLACK_HOLE",
+    "BERSERK",
+    "REFLECTOR",
+    "CLONE"
+  ],
+  "superPowers": {
+    "PHOENIX": "Automatic revival with shield and temporary invulnerability",
+    "ORBITAL": "Orbiting cannons automatically target enemies",
+    "TIME_CORE": "Slows enemies and hostile projectiles",
+    "BLACK_HOLE": "Destroys projectiles and damages the whole screen",
+    "BERSERK": "Temporary major damage boost",
+    "REFLECTOR": "Can convert enemy projectiles into player fire",
+    "CLONE": "Creates additional firing copies of the aircraft"
+  },
+  "note": "Every collected stack is saved locally and remains active together in later stages. Enemy waves schedule 1000 times the base unit count, while an active-entity cap protects mobile performance."
+}

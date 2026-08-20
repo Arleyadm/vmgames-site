@@ -1,0 +1,44 @@
+{
+  "aircraft": [
+    {
+      "id": 0,
+      "country": "Brasil",
+      "pilot": "Arley Vargas",
+      "aircraft": "Aurora BR-01",
+      "weapon": "Canhões duplos de íons",
+      "special": "Tempestade do Cruzeiro",
+      "passive": "Combo aumenta o dano",
+      "style": "RAPID"
+    },
+    {
+      "id": 1,
+      "country": "Rússia",
+      "pilot": "Irina Volkov",
+      "aircraft": "Buran RX-7",
+      "weapon": "Canhão de plasma pesado",
+      "special": "Pulso Glacial",
+      "passive": "Blindagem absorve impacto",
+      "style": "HEAVY"
+    },
+    {
+      "id": 2,
+      "country": "Estados Unidos",
+      "pilot": "Mason Cole",
+      "aircraft": "Eagle AX-9",
+      "weapon": "Gatling com munição traçante",
+      "special": "Ataque Águia",
+      "passive": "Mísseis procuram alvos",
+      "style": "GATLING"
+    },
+    {
+      "id": 3,
+      "country": "Japão",
+      "pilot": "Aiko Tanaka",
+      "aircraft": "Raijin JX-4",
+      "weapon": "Lasers gêmeos de precisão",
+      "special": "Corte do Trovão",
+      "passive": "Drones energizam o feixe",
+      "style": "LASER"
+    }
+  ]
+}
