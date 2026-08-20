@@ -2,6 +2,39 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://vmgames.com.br/blog/caravan-sandwitch-gratis-epic/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-19T21:15:00-03:00</news:publication_date>
+      <news:title>Caravan SandWitch está grátis na Epic, mas oferta termina nesta quinta</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/xbox-gamescom-2026-programacao/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-19T21:10:00-03:00</news:publication_date>
+      <news:title>Xbox terá 25 jogos e duas transmissões na gamescom 2026</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/nioh-3-hell-rising-lancamento/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-19T21:05:00-03:00</news:publication_date>
+      <news:title>Nioh 3 recebe Hell Rising, primeira expansão com nova era e dificuldade</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://vmgames.com.br/blog/geforce-now-chega-ao-firefox/</loc>
     <news:news>
       <news:publication>

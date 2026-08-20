@@ -6,8 +6,38 @@
     <atom:link href="https://vmgames.com.br/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Notícias de games, lançamentos, análises, guias e promoções em português. Publicado pela VM Games, estúdio independente de Catalão, Goiás.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Wed, 19 Aug 2026 20:53:36 -0300</lastBuildDate>
+    <lastBuildDate>Wed, 19 Aug 2026 21:01:04 -0300</lastBuildDate>
     <ttl>60</ttl>
+    <item>
+      <title>Caravan SandWitch está grátis na Epic, mas oferta termina nesta quinta</title>
+      <link>https://vmgames.com.br/blog/caravan-sandwitch-gratis-epic/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/caravan-sandwitch-gratis-epic/</guid>
+      <pubDate>Wed, 19 Aug 2026 21:15:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Promoções</category>
+      <description>Caravan SandWitch pode ser resgatado gratuitamente na Epic Games Store até esta quinta-feira, 20 de agosto, ao meio-dia no horário de Brasília.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/caravan-sandwitch-gratis-epic.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Xbox terá 25 jogos e duas transmissões na gamescom 2026</title>
+      <link>https://vmgames.com.br/blog/xbox-gamescom-2026-programacao/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/xbox-gamescom-2026-programacao/</guid>
+      <pubDate>Wed, 19 Aug 2026 21:10:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Xbox</category>
+      <description>A Microsoft detalhou sua participação na gamescom 2026: serão 25 jogos, 140 estações e duas transmissões ao vivo nos dias 26 e 27 de agosto.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/xbox-gamescom-2026-programacao.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Nioh 3 recebe Hell Rising, primeira expansão com nova era e dificuldade</title>
+      <link>https://vmgames.com.br/blog/nioh-3-hell-rising-lancamento/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/nioh-3-hell-rising-lancamento/</guid>
+      <pubDate>Wed, 19 Aug 2026 21:05:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Lançamentos</category>
+      <description>Hell Rising, primeira expansão de Nioh 3, chegou em 19 de agosto ao PS5 e ao PC com uma nova região na era Keian, armas, habilidades e uma dificuldade adicional.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/nioh-3-hell-rising-lancamento.webp" type="image/webp" length="0"/>
+    </item>
     <item>
       <title>GeForce NOW passa a funcionar no Firefox — mas só no Windows</title>
       <link>https://vmgames.com.br/blog/geforce-now-chega-ao-firefox/</link>
