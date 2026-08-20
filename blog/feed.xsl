@@ -24,12 +24,13 @@
         <header class="topo"><div class="envolucro"><a class="marca" href="/">VM <span>GAMES</span></a><a href="/blog/">Voltar ao blog</a></div></header>
         <main class="envolucro">
           <h1>Feed RSS da VM Games</h1>
-          <p class="intro">Este endereço entrega automaticamente as novas matérias da VM Games. Para assinar, copie o link abaixo e cole em um leitor de RSS como Feedly, Inoreader, NewsBlur ou Thunderbird.</p>
+          <p class="intro">Este endereço entrega automaticamente as novas matérias da VM Games. Para assinar, copie o link abaixo, abra seu leitor de RSS e cole o endereço no campo de adicionar fontes.</p>
           <section class="caixa">
             <strong>Endereço do feed</strong>
             <code class="endereco">https://vmgames.com.br/blog/feed.xml</code>
+            <p>O Feedly não aceita mais de forma confiável a assinatura por link direto. Abra a página de fontes e cole nela o endereço acima.</p>
             <div class="acoes">
-              <a class="botao" href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fvmgames.com.br%2Fblog%2Ffeed.xml" rel="noopener noreferrer">Assinar no Feedly</a>
+              <a class="botao" href="https://feedly.com/i/discover" rel="noopener noreferrer">Abrir o Feedly</a>
               <a class="botao sec" href="/blog/">Ler no site</a>
             </div>
           </section>
