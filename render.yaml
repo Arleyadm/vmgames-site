@@ -3,6 +3,7 @@ services:
     name: vmgames-interacoes
     runtime: node
     plan: free
+    region: oregon
     rootDir: interacoes-api
     buildCommand: pnpm install --frozen-lockfile
     startCommand: node server.js
