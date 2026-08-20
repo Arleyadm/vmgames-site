@@ -23,8 +23,13 @@
         /* O jogo é retrato (1080x1920). A caixa mantém a proporção 9:16 e
            encolhe pelo lado que faltar — no celular vira tela cheia, no
            computador fica uma faixa retrato centralizada. */
+        /* ⚠️ NÃO colocar position/transform aqui. O gdx-teavm descobre onde o
+           canvas começa na página subindo pelos offsetParent, e um elemento
+           posicionado vira o offsetParent do canvas, zerando o offsetLeft —
+           aí o jogo recebe o X da janela em vez do X dentro do canvas e
+           nenhum clique acerta os botões no computador (no celular passa
+           batido, porque lá o canvas começa em zero). */
         #frame {
-            position: relative;
             aspect-ratio: 9 / 16;
             height: 100vh;
             height: 100dvh;
