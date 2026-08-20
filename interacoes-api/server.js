@@ -40,6 +40,7 @@ async function initialize() {
 }
 
 app.get("/health", async (_req, res) => { await pool.query("SELECT 1"); res.json({ ok: true }); });
+app.get("/", (_req, res) => res.json({ servico: "VM Games Comunidade", status: "online" }));
 app.get("/v1/interactions", async (req, res) => {
   const key = pageKey(req.query.page); if (!key) return res.status(400).json({ erro: "Página inválida" });
   const [likes, comments] = await Promise.all([pool.query("SELECT count(*)::int AS total FROM likes WHERE page_key=$1", [key]), pool.query("SELECT id, name, body, created_at FROM comments WHERE page_key=$1 AND status='approved' ORDER BY created_at DESC LIMIT 50", [key])]);
