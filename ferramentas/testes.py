@@ -189,6 +189,7 @@ paginas = sorted(SAIDA.rglob("*.html"))
 checar(len(paginas) > 0, "o build escreveu páginas", "nenhuma página gerada")
 checar((SAIDA / "index.html").exists(), "a home do blog existe")
 checar((SAIDA / "feed.xml").exists(), "o feed RSS existe")
+checar((SAIDA / "feed.xsl").exists(), "o feed RSS tem apresentação para navegadores")
 checar((SAIDA / "sitemap.xml").exists(), "o sitemap do blog existe")
 checar((SAIDA / "sitemap-noticias.xml").exists(), "o sitemap de notícias existe")
 checar((RAIZ / "robots.txt").exists(), "o robots.txt da raiz existe")
@@ -312,6 +313,8 @@ for arq in ("feed.xml", "sitemap.xml", "sitemap-noticias.xml"):
         checar(False, f"{arq} é XML válido", str(e))
 
 feed = (SAIDA / "feed.xml").read_text(encoding="utf-8")
+checar('xml-stylesheet type="text/xsl" href="/blog/feed.xsl"' in feed,
+       "o feed aponta para sua apresentação visual")
 checar(feed.count("<item>") == min(30, len(c.publicados)),
        "o feed traz todas as matérias publicadas",
        f"{feed.count('<item>')} itens para {len(c.publicados)} matérias")

@@ -779,6 +779,7 @@ class Construtor:
     </item>""")
         agora = datetime.now(BRASILIA)
         self.escrever("feed.xml", f"""<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/blog/feed.xsl"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog VM Games</title>
@@ -919,6 +920,7 @@ Sitemap: {self.base_url}/blog/sitemap-noticias.xml
 
     def copiar_estaticos(self):
         shutil.copy2(ESTATICO / "blog.css", SAIDA / "blog.css")
+        shutil.copy2(ESTATICO / "feed.xsl", SAIDA / "feed.xsl")
         origem = CONTEUDO / "midia"
         if origem.exists():
             shutil.copytree(origem, SAIDA / "img", dirs_exist_ok=True)
