@@ -190,6 +190,7 @@ checar(len(paginas) > 0, "o build escreveu páginas", "nenhuma página gerada")
 checar((SAIDA / "index.html").exists(), "a home do blog existe")
 checar((SAIDA / "feed.xml").exists(), "o feed RSS existe")
 checar((SAIDA / "feed.xsl").exists(), "o feed RSS tem apresentação para navegadores")
+checar((SAIDA / "interacoes.js").exists(), "o JavaScript de interações foi copiado")
 checar((SAIDA / "sitemap.xml").exists(), "o sitemap do blog existe")
 checar((SAIDA / "sitemap-noticias.xml").exists(), "o sitemap de notícias existe")
 checar((RAIZ / "robots.txt").exists(), "o robots.txt da raiz existe")
@@ -257,6 +258,10 @@ checar(not noindex_nofollow, "páginas fora do índice ainda permitem seguir lin
 print("\n5. Matérias publicadas")
 # ---------------------------------------------------------------------------
 
+home_blog = (SAIDA / "index.html").read_text(encoding="utf-8")
+checar('data-interacoes="blog"' in home_blog, "a home do blog tem curtidas e comentários")
+checar('data-compartilhar-nativo' in home_blog, "a home do blog tem compartilhamento")
+
 for a in c.publicados:
     pagina = SAIDA / a["slug"] / "index.html"
     checar(pagina.exists(), f"a página de “{a['slug']}” foi gerada")
@@ -264,6 +269,9 @@ for a in c.publicados:
     checar("Fontes consultadas" in t, f"“{a['slug']}” lista as fontes no fim")
     checar(a["capa"]["credito"] in t, f"“{a['slug']}” mostra o crédito da imagem")
     checar('class="migalhas"' in t, f"“{a['slug']}” tem breadcrumbs")
+    checar(f'data-interacoes="noticia:{a["slug"]}"' in t,
+           f"“{a['slug']}” tem curtidas e comentários")
+    checar('data-compartilhar-nativo' in t, f"“{a['slug']}” tem compartilhamento")
     if a["confiabilidade"] == "rumor":
         checar("aviso rumor" in t, f"“{a['slug']}” avisa que é rumor")
 

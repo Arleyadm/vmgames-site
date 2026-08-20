@@ -921,6 +921,7 @@ Sitemap: {self.base_url}/blog/sitemap-noticias.xml
     def copiar_estaticos(self):
         shutil.copy2(ESTATICO / "blog.css", SAIDA / "blog.css")
         shutil.copy2(ESTATICO / "feed.xsl", SAIDA / "feed.xsl")
+        shutil.copy2(ESTATICO / "interacoes.js", SAIDA / "interacoes.js")
         origem = CONTEUDO / "midia"
         if origem.exists():
             shutil.copytree(origem, SAIDA / "img", dirs_exist_ok=True)

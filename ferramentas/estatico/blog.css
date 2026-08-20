@@ -538,6 +538,30 @@ body.blog :focus-visible {
 }
 .compartilhar a:hover, .compartilhar button:hover { border-color: var(--acento); color: var(--acento); }
 
+/* curtidas, compartilhamento e comentários */
+.interacoes { margin: 42px 0 12px; padding: clamp(20px,4vw,32px); border: 1px solid var(--borda); border-radius: 18px; background: var(--painel); }
+.interacoes h2 { margin: 0; font-size: 1.35rem; }
+.interacoes-acoes { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding-bottom: 24px; border-bottom: 1px solid var(--borda); }
+.interacoes-acoes h2 { margin-right: auto; }
+.acao-social { min-height: 42px; padding: 9px 15px; border: 1px solid var(--borda); border-radius: 999px; background: var(--fundo); color: var(--texto); font: inherit; font-weight: 750; cursor: pointer; }
+.acao-social:hover, .acao-social:focus-visible, .acao-social.curtido { border-color: var(--acento); color: var(--acento); }
+.acao-social.curtir span { color: #ff4d7d; font-size: 1.15em; }
+.acao-social:disabled { opacity: .65; cursor: wait; }
+.comentarios-bloco { padding-top: 26px; }
+.comentario-form { display: grid; gap: 14px; margin: 18px 0 8px; }
+.comentario-form label { display: grid; gap: 6px; color: var(--texto-fraco); font-weight: 700; }
+.comentario-form input, .comentario-form textarea { width: 100%; border: 1px solid var(--borda); border-radius: 10px; background: var(--fundo); color: var(--texto); padding: 11px 13px; font: inherit; resize: vertical; }
+.comentario-form input:focus, .comentario-form textarea:focus { border-color: var(--acento); outline: 2px solid color-mix(in srgb,var(--acento) 25%,transparent); }
+.comentario-envio { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.comentario-envio small, .comentario-status, .sem-comentarios { color: var(--texto-fraco); }
+.comentario-status { min-height: 1.5em; }
+.campo-isca { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; overflow: hidden; }
+.comentarios-lista { display: grid; gap: 12px; margin-top: 20px; }
+.comentario { padding: 16px; border: 1px solid var(--borda); border-radius: 12px; background: var(--fundo); }
+.comentario header { display: flex; justify-content: space-between; gap: 12px; }
+.comentario time { color: var(--texto-fraco); font-size: .85rem; }
+.comentario p { margin: 9px 0 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+
 /* fontes consultadas */
 .fontes {
   margin: 40px 0 0;
@@ -739,7 +763,7 @@ body.blog :focus-visible {
 }
 
 @media print {
-  .barra, .faixa-categorias, .trilho-esquerdo, .trilho-direito, .publicidade, .rodape-blog, .compartilhar { display: none !important; }
+  .barra, .faixa-categorias, .trilho-esquerdo, .trilho-direito, .publicidade, .rodape-blog, .compartilhar, .interacoes { display: none !important; }
   body.blog { background: #fff; color: #000; }
   .corpo-artigo p, .corpo-artigo li { color: #000; }
   .artigo h1 { color: #000; }

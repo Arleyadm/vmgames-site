@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% import "parciais/pecas.html" as p %}
+{% import "parciais/interacoes.html" as social %}
 
 {% block conteudo %}
 <div class="envolucro largo">
@@ -74,6 +75,8 @@
         </div>
       </section>
 
+      {{ social.painel('blog') }}
+
     </div>
 
     {{ p.lateral(lateral, anuncios, dev) }}
@@ -81,3 +84,5 @@
 
 </div>
 {% endblock %}
+
+{% block scripts %}<script src="/blog/interacoes.js" defer></script>{% endblock %}
