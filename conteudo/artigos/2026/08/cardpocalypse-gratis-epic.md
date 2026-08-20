@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/cardpocalypse-gratis-epic.webp
-  alt: "Adolescente em cadeira de rodas invoca monstro de papel durante batalha de cartas na escola"
-  legenda: "Imagem autoral da VM Games representa as batalhas de cartas e o clima escolar de Cardpocalypse."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Personagens e monstros ilustrados ao redor do logotipo de Cardpocalypse"
+  legenda: "Arte oficial de Cardpocalypse usada na página do jogo na Epic Games Store."
+  credito: "Gambrinous / Epic Games Store"
+  licenca: uso-editorial
 fontes:
   - url: https://store.epicgames.com/p/cardpocalypse?lang=en-US
     veiculo: Epic Games Store

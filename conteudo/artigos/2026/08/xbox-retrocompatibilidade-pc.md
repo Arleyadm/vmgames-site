@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/xbox-retrocompatibilidade-pc.webp
-  alt: "PC e portátil exibem quatro jogos clássicos ao lado de um console antigo"
-  legenda: "Imagem autoral da VM Games representa os quatro clássicos levados ao PC e aos portáteis."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Capas de Blinx, Fuzion Frenzy, Crimson Skies e Conker sob o título Xbox Backward Compatibility on PC"
+  legenda: "Imagem oficial dos quatro jogos retrocompatíveis anunciados para PC."
+  credito: "Xbox Wire / Microsoft"
+  licenca: uso-editorial
 fontes:
   - url: https://news.xbox.com/en-us/2026/07/22/xbox-backward-compatibility-on-pc/
     veiculo: Xbox Wire

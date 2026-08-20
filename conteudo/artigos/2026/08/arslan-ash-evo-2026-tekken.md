@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/arslan-ash-evo-2026-tekken.webp
-  alt: "Jogador paquistanês ergue troféu diante de uma arena lotada de campeonato de luta"
-  legenda: "Imagem autoral da VM Games representa a conquista de Arslan Ash na EVO 2026."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Arslan Ash ergue o troféu da EVO 2026 no palco do torneio"
+  legenda: "Arslan Ash comemora o quarto título consecutivo de Tekken na EVO."
+  credito: "EVO"
+  licenca: uso-editorial
 fontes:
   - url: https://en.bandainamcoent.eu/tekken/news/tekken-8-upcoming-addition-bob-showcased-during-evo-2026
     veiculo: Bandai Namco Entertainment Europe

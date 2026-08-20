@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/no-case-should-remain-unsolved-ps5.webp
-  alt: "Policial coreana aposentada reorganiza depoimentos ao lado de jovem em apartamento chuvoso"
-  legenda: "Imagem autoral da VM Games representa a reconstrução das memórias do caso em No Case Should Remain Unsolved."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Retratos dos personagens e título de No Case Should Remain Unsolved para PlayStation 5"
+  legenda: "Arte oficial do lançamento de No Case Should Remain Unsolved no PlayStation 5."
+  credito: "Somi / Playism"
+  licenca: uso-editorial
 fontes:
   - url: https://playism.com/en/news/2026/0709/1704/
     veiculo: Playism

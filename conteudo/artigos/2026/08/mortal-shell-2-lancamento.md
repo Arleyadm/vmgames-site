@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/mortal-shell-2-lancamento.webp
-  alt: "Viajante espectral diante de oito armaduras vazias em um reino medieval interligado"
-  legenda: "Imagem autoral da VM Games representa os oito Shells e os caminhos interligados de Mortal Shell 2."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Guerreiro encapuzado de Mortal Shell 2 segura armas diante de uma criatura sombria"
+  legenda: "Arte oficial de Mortal Shell 2 divulgada pela Cold Symmetry."
+  credito: "Cold Symmetry"
+  licenca: uso-editorial
 fontes:
   - url: https://mortalshell.com/
     veiculo: Cold Symmetry

@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/switch-2-aumento-preco-setembro.webp
-  alt: "Console híbrido em loja com preços de 499,99 dólares e euros e valor latino-americano em branco"
-  legenda: "Imagem autoral da VM Games representa o reajuste nos EUA e Europa e o preço ainda indefinido na América Latina."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Nintendo Switch 2 em modo portátil nas mãos de uma pessoa"
+  legenda: "Foto oficial do Nintendo Switch 2, produto afetado pelo reajuste anunciado."
+  credito: "Nintendo"
+  licenca: uso-editorial
 fontes:
   - url: https://www.nintendo.com/us/whatsnew/price-revision-for-nintendo-switch-2-system/
     veiculo: Nintendo of America

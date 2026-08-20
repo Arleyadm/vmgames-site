@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/stalker-2-cost-of-hope.webp
-  alt: "Explorador com PDA observa a Floresta de Ferro e a usina de Chornobyl sob uma tempestade"
-  legenda: "Imagem autoral da VM Games representa as novas regiões e o sinal de PDA de Cost of Hope."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Binóculos observam a paisagem industrial de Chornobyl na arte de Cost of Hope"
+  legenda: "Imagem oficial de S.T.A.L.K.E.R. 2: Cost of Hope divulgada pela GSC Game World."
+  credito: "GSC Game World"
+  licenca: uso-editorial
 fontes:
   - url: https://www.stalker2.com/uk/news/coh-date-reveal
     veiculo: GSC Game World

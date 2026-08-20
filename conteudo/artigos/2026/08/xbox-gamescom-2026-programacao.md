@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/xbox-gamescom-2026-programacao.webp
-  alt: "Grande estande de feira reúne dezenas de estações jogáveis, palco e duas mesas de transmissão"
-  legenda: "Imagem autoral da VM Games representa os 25 jogos, 140 estações e transmissões do Xbox na gamescom 2026."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Símbolo verde do Xbox sobre o horizonte de Colônia na arte Xbox at gamescom"
+  legenda: "Imagem oficial da participação do Xbox na gamescom 2026."
+  credito: "Xbox Wire / Microsoft"
+  licenca: uso-editorial
 fontes:
   - url: https://news.xbox.com/en-us/2026/07/28/xbox-gamescom-2026/
     veiculo: Xbox Wire

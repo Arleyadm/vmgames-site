@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/precos-geforce-rtx-50-agosto-2026.webp
-  alt: "Placas de vídeo em loja com etiquetas mostrando aumentos de 27%, 36% e 39%"
-  legenda: "Imagem autoral da VM Games representa as altas observadas no varejo americano de placas de vídeo."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Duas placas de vídeo GeForce RTX Série 50 sobre fundo preto e verde"
+  legenda: "Imagem oficial da linha GeForce RTX Série 50, cujos preços foram analisados na matéria."
+  credito: "NVIDIA"
+  licenca: uso-editorial
 fontes:
   - url: https://www.tomshardware.com/pc-components/gpus/geforce-rtx-50-series-gpu-prices-spike-as-much-as-39-percent-as-blackwell-price-hikes-hit-the-us-rtx-5070-gets-a-36-percent-hike-rtx-5060-up-27-percent-at-the-median-of-newegg-listings
     veiculo: Tom's Hardware

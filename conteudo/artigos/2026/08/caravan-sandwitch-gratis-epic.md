@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/caravan-sandwitch-gratis-epic.webp
-  alt: "Jovem e robô observam comunidade e ruínas alienígenas ao lado de uma van de exploração"
-  legenda: "Imagem autoral da VM Games representa a viagem pacífica por Cigalo em Caravan SandWitch."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Personagens viajam sobre uma van amarela pela paisagem de Cigalo em Caravan SandWitch"
+  legenda: "Arte oficial de Caravan SandWitch divulgada no material de imprensa do jogo."
+  credito: "Studio Plane Toast / Dear Villagers"
+  licenca: uso-editorial
 fontes:
   - url: https://store.epicgames.com/en-US/p/caravan-sandwitch-05ff58
     veiculo: Epic Games Store

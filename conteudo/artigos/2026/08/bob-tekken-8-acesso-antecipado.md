@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/bob-tekken-8-acesso-antecipado.webp
-  alt: "Lutador loiro de porte pesado executa chute acrobático contra robô em distrito de restaurantes"
-  legenda: "Imagem autoral da VM Games representa a combinação de força, velocidade e acrobacia de Bob em Tekken 8."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Bob posa com jaqueta vermelha na arte oficial de Tekken 8"
+  legenda: "Imagem oficial da revelação de gameplay de Bob em Tekken 8."
+  credito: "Bandai Namco Entertainment"
+  licenca: uso-editorial
 fontes:
   - url: https://en.bandainamcoent.eu/tekken/news/tekken-8-upcoming-addition-bob-showcased-during-evo-2026
     veiculo: Bandai Namco Entertainment Europe

@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/ps-plus-catalogo-agosto-2026.webp
-  alt: "Jogador escolhe entre oito experiências diferentes em um catálogo exibido na televisão"
-  legenda: "Imagem autoral da VM Games representa a variedade do catálogo do PS Plus de agosto."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Arte do catálogo PlayStation Plus de agosto com três dos jogos anunciados"
+  legenda: "Imagem oficial do catálogo de jogos do PlayStation Plus de agosto de 2026."
+  credito: "PlayStation"
+  licenca: uso-editorial
 fontes:
   - url: https://blog.latam.playstation.com/2026/08/12/catalogo-de-juegos-de-playstation-plus-para-agosto-helldivers-2-kingdom-come-deliverance-2-vampire-survivors-hell-is-us-y-mas/
     veiculo: PlayStation Blog LATAM

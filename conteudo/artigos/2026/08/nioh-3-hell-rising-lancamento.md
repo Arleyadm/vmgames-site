@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/nioh-3-hell-rising-lancamento.webp
-  alt: "Guerreiro atravessa portal em chamas para uma Edo de 1651 tomada por yokai"
-  legenda: "Imagem autoral da VM Games representa a era Keian, o Crucible e os novos desafios de Nioh 3: Hell Rising."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Guerreiro enfrenta um yokai gigantesco na arte de Nioh 3: Hell Rising"
+  legenda: "Imagem oficial de Nioh 3: Hell Rising divulgada pela Koei Tecmo."
+  credito: "Koei Tecmo / Team Ninja"
+  licenca: uso-editorial
 fontes:
   - url: https://www.koeitecmoeurope.com/news/travel-to-the-keian-era-with-hell-rising-the-first-dlc-for-nioh-3-coming-19th-august/
     veiculo: Koei Tecmo Europe

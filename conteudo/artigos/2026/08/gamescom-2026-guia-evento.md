@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/gamescom-2026-guia-evento.webp
-  alt: "Pavilhão de feira de games lotado, com palco central, estandes e equipes de transmissão"
-  legenda: "Imagem autoral da VM Games representa a abertura da gamescom 2026 em um centro de convenções lotado."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Público acompanha a Opening Night Live da gamescom em uma arena lotada"
+  legenda: "Imagem oficial da Opening Night Live divulgada pela organização da gamescom."
+  credito: "gamescom"
+  licenca: uso-editorial
 fontes:
   - url: https://latam.gamescom.global/en/gamescom-reaches-new-milestone-all-available-areas-for-2026-booked-up/
     veiculo: gamescom

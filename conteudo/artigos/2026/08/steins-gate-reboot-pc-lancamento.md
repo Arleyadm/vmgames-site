@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/steins-gate-reboot-pc-lancamento.webp
-  alt: "Cientista em laboratório de Akihabara é dividido entre uma linha do tempo acolhedora e outra hostil"
-  legenda: "Imagem autoral da VM Games representa a reconstrução visual e a nova Linha do Mundo Gamma de Steins;Gate Re:Boot."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Personagens de Steins;Gate Re:Boot aparecem ao lado do logotipo oficial"
+  legenda: "Arte oficial de Steins;Gate Re:Boot divulgada no site do jogo."
+  credito: "MAGES. / Spike Chunsoft"
+  licenca: uso-editorial
 fontes:
   - url: https://steinsgate.jp/reboot/en-us/
     veiculo: MAGES
