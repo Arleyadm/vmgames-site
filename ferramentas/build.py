@@ -555,6 +555,7 @@ class Construtor:
                 subtitulo_pagina=subtitulo if n == 1 else f"página {n} de {total}",
                 artigos=fatia, migalhas=migalhas, ficha_autor=ficha_autor if n == 1 else None,
                 rss=rss, acento=acento, categoria_atual=categoria_atual,
+                nao_indexar=(not artigos or (base.startswith("/blog/tag/") and len(artigos) < 2)),
                 pag=Paginacao(n, total, base),
                 dados_estruturados=[json_para_script(self.migalhas_ld(migalhas))],
             )
@@ -666,6 +667,7 @@ class Construtor:
                 canonical=a["seo"].get("canonical") or url,
                 og_tipo="article",
                 og_imagem=self.base_url + a["capa"]["url"],
+                og_imagem_alt=a["capa"]["alt"],
                 acento=a["categoria"]["cor"],
                 categoria_atual=a["categoria"]["slug"],
                 nao_indexar=not a["no_ar"],
@@ -799,19 +801,27 @@ class Construtor:
         for a in self.publicados:
             urls.append((self.base_url + a["url"], a["atualizado"] or a["publicado"], "weekly", "0.8"))
         for c in self.lista_categorias:
-            urls.append((f"{self.base_url}/blog/categoria/{c['slug']}/", agora, "daily", "0.6"))
+            if any(a["categoria"]["slug"] == c["slug"] for a in self.publicados):
+                urls.append((f"{self.base_url}/blog/categoria/{c['slug']}/", agora, "daily", "0.6"))
         for slug in self.autores:
             urls.append((f"{self.base_url}/blog/autor/{slug}/", agora, "weekly", "0.4"))
         for nome in ("politica-editorial", "correcoes", "autores"):
             urls.append((f"{self.base_url}/blog/{nome}.html", agora, "monthly", "0.3"))
 
+        imagens = {self.base_url + a["url"]: a for a in self.publicados}
         corpo = "\n".join(
             f"  <url><loc>{u}</loc><lastmod>{d:%Y-%m-%d}</lastmod>"
-            f"<changefreq>{f}</changefreq><priority>{p}</priority></url>"
+            f"<changefreq>{f}</changefreq><priority>{p}</priority>"
+            + (f"<image:image><image:loc>{self.base_url + imagens[u]['capa']['url']}</image:loc>"
+               f"<image:title>{xml_escape(imagens[u]['titulo'])}</image:title>"
+               f"<image:caption>{xml_escape(imagens[u]['capa']['legenda'])}</image:caption>"
+               f"</image:image>" if u in imagens else "")
+            + "</url>"
             for u, d, f, p in urls)
         self.escrever("sitemap.xml",
                       '<?xml version="1.0" encoding="UTF-8"?>\n'
-                      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
+                      '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'
                       f"{corpo}\n</urlset>\n")
 
         recentes = [a for a in self.publicados if a["publicado"] >= limite]

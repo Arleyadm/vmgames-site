@@ -2,6 +2,116 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://vmgames.com.br/blog/fire-emblem-fortunes-weave-switch-2/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-20T12:18:00-03:00</news:publication_date>
+      <news:title>Fire Emblem: Fortune's Weave chega ao Switch 2 em setembro; veja o que muda</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/oblivion-remastered-switch-2/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-20T12:17:00-03:00</news:publication_date>
+      <news:title>Oblivion Remastered já está disponível no Switch 2; veja conteúdo e melhorias</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/elden-ring-tarnished-edition-switch-2/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-20T12:16:00-03:00</news:publication_date>
+      <news:title>Elden Ring: Tarnished Edition chega ao Switch 2 em 28 de agosto</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/minecraft-switch-2-data-upgrade/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-20T12:15:00-03:00</news:publication_date>
+      <news:title>Minecraft chega ao Switch 2 em outubro com Vibrant Visuals e caminho de upgrade</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/pokemon-pokopia-expansion-pass-bubbly-basin/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-20T12:14:00-03:00</news:publication_date>
+      <news:title>Pokémon Pokopia recebe área submarina; veja como acessar Bubbly Basin</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/xbox-free-play-days-20-agosto-2026/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-20T12:13:00-03:00</news:publication_date>
+      <news:title>Xbox libera três jogos no Free Play Days até domingo</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/the-sinking-city-2-survival-horror/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-20T12:12:00-03:00</news:publication_date>
+      <news:title>The Sinking City 2 troca mundo aberto por survival horror focado</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/modern-warfare-4-guia-lancamento/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-20T12:11:00-03:00</news:publication_date>
+      <news:title>Modern Warfare 4: data, plataformas, campanha, DMZ e multiplayer</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/star-wars-zero-company-data-gameplay/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-20T12:10:00-03:00</news:publication_date>
+      <news:title>Star Wars Zero Company chega em 27 de agosto; veja como funciona o RPG tático</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/apex-legends-marked-mudancas/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-20T12:09:00-03:00</news:publication_date>
+      <news:title>Apex Legends Marked: veja as principais mudanças da temporada</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://vmgames.com.br/blog/cardpocalypse-gratis-epic/</loc>
     <news:news>
       <news:publication>

@@ -195,6 +195,16 @@ checar((RAIZ / "robots.txt").exists(), "o robots.txt da raiz existe")
 checar((RAIZ / "sitemap.xml").exists(), "o sitemap da raiz existe")
 checar((SAIDA / "blog.css").exists(), "o CSS do blog foi copiado")
 
+for relativo in ("index.html", "sobre.html", "turbo-race/index.html",
+                 "sky-vanguard/index.html", "sugar-strike/index.html"):
+    pagina_principal = (RAIZ / relativo).read_text(encoding="utf-8")
+    checar('rel="canonical"' in pagina_principal,
+           f"{relativo} tem endereço canonical")
+    checar('type="application/ld+json"' in pagina_principal,
+           f"{relativo} tem dados estruturados")
+    checar('property="og:image"' in pagina_principal,
+           f"{relativo} tem imagem social")
+
 textos = {p: p.read_text(encoding="utf-8") for p in paginas}
 
 escapadas = [p.relative_to(RAIZ).as_posix() for p, t in textos.items() if "&lt;p&gt;" in t]
@@ -237,6 +247,10 @@ for p, t in textos.items():
         if "alt=" not in tag:
             sem_alt.append(f"{p.name}: {tag[:60]}")
 checar(not sem_alt, "toda imagem tem atributo alt", str(sem_alt[:3]))
+
+noindex_nofollow = [p.name for p, t in textos.items() if 'content="noindex, nofollow"' in t]
+checar(not noindex_nofollow, "páginas fora do índice ainda permitem seguir links",
+       str(noindex_nofollow[:3]))
 
 # ---------------------------------------------------------------------------
 print("\n5. Matérias publicadas")
@@ -303,6 +317,10 @@ checar(feed.count("<item>") == min(30, len(c.publicados)),
        f"{feed.count('<item>')} itens para {len(c.publicados)} matérias")
 
 noticias = (SAIDA / "sitemap-noticias.xml").read_text(encoding="utf-8")
+sitemap = (SAIDA / "sitemap.xml").read_text(encoding="utf-8")
+checar(sitemap.count("<image:image>") == len(c.publicados),
+       "o sitemap descreve a capa de toda matéria",
+       f"{sitemap.count('<image:image>')} imagens para {len(c.publicados)} matérias")
 limite = datetime.now(BRASILIA) - timedelta(hours=48)
 esperadas = sum(1 for a in c.publicados if a["publicado"] >= limite)
 checar(noticias.count("<url>") == esperadas,

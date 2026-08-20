@@ -8,9 +8,10 @@
 <link rel="canonical" href="{{ canonical }}">
 <meta name="theme-color" content="#08060f">
 {%- if nao_indexar %}
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="noindex, follow">
 {%- else %}
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="googlebot-news" content="index, follow, max-image-preview:large, max-snippet:-1">
 {%- endif %}
 
 <meta property="og:type" content="{{ og_tipo|default('website') }}">
@@ -21,13 +22,15 @@
 <meta property="og:url" content="{{ canonical }}">
 <meta property="og:image" content="{{ og_imagem }}">
 <meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image:height" content="675">
+<meta property="og:image:alt" content="{{ og_imagem_alt|default(og_titulo)|default(titulo_aba) }}">
 {%- block og_extra %}{% endblock %}
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ og_titulo|default(titulo_aba) }}">
 <meta name="twitter:description" content="{{ descricao }}">
 <meta name="twitter:image" content="{{ og_imagem }}">
+<meta name="twitter:image:alt" content="{{ og_imagem_alt|default(og_titulo)|default(titulo_aba) }}">
 
 <link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="{{ site.url }}/blog/feed.xml">
 <link rel="stylesheet" href="/estilo.css">
