@@ -35,6 +35,11 @@ seo:
   titulo: "Steins;Gate Re:Boot chega ao Steam em 20 de agosto"
   descricao: "Releitura de Steins;Gate estreia no PC com gráficos refeitos, vozes regravadas e a nova rota Gamma Worldline."
 origem: manual
+video:
+  youtube_id: 5lEMw3ZrAok
+  titulo: "STEINS;GATE RE:BOOT — gameplay e teaser trailer"
+  canal: "Spike Chunsoft"
+  publicado_em: 2025-11-21T00:00:00-08:00
 ---
 
 *Steins;Gate Re:Boot* chega ao **PC via Steam em 20 de agosto**, trazendo uma reconstrução

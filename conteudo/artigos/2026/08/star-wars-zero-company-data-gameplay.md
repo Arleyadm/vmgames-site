@@ -36,6 +36,11 @@ seo:
   titulo: "Star Wars Zero Company: data, plataformas e gameplay"
   descricao: "Zero Company chega em 27 de agosto para PC, PS5 e Xbox Series. Entenda combate por turnos, operadores e base de operações."
 origem: manual
+video:
+  youtube_id: rcxnRaZ6slU
+  titulo: "Star Wars Zero Company — trailer oficial de anúncio"
+  canal: "EA Star Wars"
+  publicado_em: 2025-04-19T00:00:00-07:00
 ---
 
 *Star Wars Zero Company* será lançado em **27 de agosto de 2026** para PC, PlayStation 5 e Xbox Series X|S. Desenvolvido pela Bit Reactor em colaboração com Electronic Arts e Lucasfilm Games, o título é uma campanha para um jogador com combate tático por turnos.

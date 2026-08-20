@@ -379,6 +379,25 @@ body.blog :focus-visible {
 .publicidade.lateral .reserva { min-height: 600px; }
 .publicidade.no-texto .reserva { width: 100%; max-width: 728px; min-height: 280px; }
 
+/* ---------- vídeo oficial dentro da matéria ---------- */
+.video-noticia { margin: 34px 0; }
+.cabeca-video { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 12px; }
+.cabeca-video h2 { margin: 0; font-size: clamp(20px, 3vw, 28px); }
+.cabeca-video span { color: var(--texto-fraco); font-size: 12px; text-align: right; }
+.video-ativar, .video-noticia iframe {
+  width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: var(--raio);
+  overflow: hidden; background: #05070d; display: block;
+}
+.video-ativar { position: relative; padding: 0; cursor: pointer; color: #fff; }
+.video-ativar img { width: 100%; height: 100%; object-fit: cover; opacity: .62; transition: opacity .2s, transform .2s; }
+.video-ativar:hover img, .video-ativar:focus-visible img { opacity: .78; transform: scale(1.015); }
+.video-play {
+  position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%);
+  width: 74px; height: 54px; border-radius: 14px; display: grid; place-items: center;
+  padding-left: 4px; font-size: 27px; background: #ff0033; box-shadow: 0 8px 30px rgba(0,0,0,.4);
+}
+.video-legenda { position: absolute; left: 18px; right: 18px; bottom: 16px; font-weight: 800; text-shadow: 0 2px 8px #000; }
+
 /* ---------- migalhas ---------- */
 
 .migalhas { margin: 20px 0 4px; font-size: 13px; color: var(--texto-fraco); }

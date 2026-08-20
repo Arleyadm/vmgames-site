@@ -37,11 +37,12 @@
 
 <link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="https://vmgames.com.br/blog/feed.xml">
 <link rel="stylesheet" href="/estilo.css">
-<link rel="stylesheet" href="/blog/blog.css?v=20260820-2">
+<link rel="stylesheet" href="/blog/blog.css?v=20260820-3">
 <style>body.blog{--acento:#ff6b6b;--acento-fraco:rgba(255, 107, 107, 0.13);}</style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8110755806771816" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"Elden Ring: Tarnished Edition chega ao Switch 2 em 28 de agosto","description":"Elden Ring: Tarnished Edition será lançado em 28 de agosto para Nintendo Switch 2 por US$ 79,99, com campanha, multiplayer e criação de personagem.","image":["https://vmgames.com.br/blog/img/capas/elden-ring-tarnished-edition-switch-2.webp"],"datePublished":"2026-08-20T12:16:00-03:00","dateModified":"2026-08-20T12:16:00-03:00","inLanguage":"pt-BR","mainEntityOfPage":{"@type":"WebPage","@id":"https://vmgames.com.br/blog/elden-ring-tarnished-edition-switch-2/"},"author":{"@type":"Person","name":"Arley Vieira","url":"https://vmgames.com.br/blog/autor/arley/"},"publisher":{"@type":"Organization","@id":"https://vmgames.com.br/#organizacao","name":"VM Games","url":"https://vmgames.com.br/","logo":{"@type":"ImageObject","url":"https://vmgames.com.br/blog/img/vmgames-logo.png"},"email":"arleyadm@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Catalão","addressRegion":"GO","addressCountry":"BR"}},"articleSection":"Nintendo","keywords":"Elden Ring, Tarnished Edition, Nintendo Switch 2, FromSoftware","isAccessibleForFree":true}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://vmgames.com.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://vmgames.com.br/blog/"},{"@type":"ListItem","position":3,"name":"Nintendo","item":"https://vmgames.com.br/blog/categoria/nintendo/"},{"@type":"ListItem","position":4,"name":"Elden Ring: Tarnished Edition chega ao Switch 2 em 28 de agosto","item":"https://vmgames.com.br/blog/elden-ring-tarnished-edition-switch-2/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"ELDEN RING Tarnished Edition — trailer de anúncio","description":"Elden Ring: Tarnished Edition será lançado em 28 de agosto para Nintendo Switch 2 por US$ 79,99, com campanha, multiplayer e criação de personagem.","thumbnailUrl":["https://i.ytimg.com/vi/kX30PHC0klw/maxresdefault.jpg"],"embedUrl":"https://www.youtube-nocookie.com/embed/kX30PHC0klw","contentUrl":"https://www.youtube.com/watch?v=kX30PHC0klw","publisher":{"@type":"Organization","name":"FromSoftware"},"uploadDate":"2025-04-01T12:00:00-03:00"}</script>
 </head>
 <body class="blog">
 
@@ -159,6 +160,20 @@
 <p>A página oficial confirma data, preço e recursos de jogo, mas não informa resolução nem taxa de quadros. Como desempenho é especialmente importante em <em>Elden Ring</em>, vale aguardar testes da versão final antes de escolher a plataforma com base apenas na portabilidade.</p>
 <p>Para quem já decidiu jogar no console da Nintendo, a data é 28 de agosto. A principal vantagem é levar a campanha completa e o multiplayer das Terras Intermédias para um sistema híbrido.</p>
       </div>
+      <section class="video-noticia" aria-labelledby="titulo-video">
+        <div class="cabeca-video">
+          <h2 id="titulo-video">Assista ao vídeo oficial</h2>
+          <span>Publicado por FromSoftware</span>
+        </div>
+        <button class="video-ativar" type="button" data-youtube-id="kX30PHC0klw"
+                data-youtube-titulo="ELDEN RING Tarnished Edition — trailer de anúncio"
+                aria-label="Assistir ELDEN RING Tarnished Edition — trailer de anúncio dentro desta matéria">
+          <img src="/blog/img/capas/elden-ring-tarnished-edition-switch-2.webp" alt="" width="1200" height="675" loading="lazy">
+          <span class="video-play" aria-hidden="true">▶</span>
+          <span class="video-legenda">ELDEN RING Tarnished Edition — trailer de anúncio</span>
+        </button>
+        <noscript><p><a href="https://www.youtube.com/watch?v=kX30PHC0klw" rel="noopener" target="_blank">Assistir no YouTube</a></p></noscript>
+      </section>
 
       
 <aside class="publicidade no-texto" role="complementary" aria-label="Publicidade">
@@ -385,6 +400,17 @@
 <script>
 /* Copiar link: só isso de JavaScript na página de matéria. */
 document.addEventListener('click', function (e) {
+  var video = e.target.closest('[data-youtube-id]');
+  if (video) {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(video.dataset.youtubeId) + '?autoplay=1&rel=0';
+    iframe.title = video.dataset.youtubeTitulo;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    video.replaceWith(iframe);
+    return;
+  }
   var b = e.target.closest('[data-copiar]');
   if (!b) return;
   navigator.clipboard.writeText(b.dataset.copiar).then(function () {

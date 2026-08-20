@@ -369,6 +369,15 @@ css_blog = (SAIDA / "blog.css").read_text(encoding="utf-8")
 checar(".publicidade:not(.lateral) .adsbygoogle" in css_blog and "width: 100%" in css_blog,
        "anúncios responsivos nunca ficam com largura zero")
 
+com_video = [a for a in c.publicados if a.get("video")]
+checar(bool(com_video), "há matérias com vídeo oficial incorporado")
+for a in com_video:
+    pagina_video = (SAIDA / a["slug"] / "index.html").read_text(encoding="utf-8")
+    checar(f'data-youtube-id="{a["video"]["youtube_id"]}"' in pagina_video,
+           f'“{a["slug"]}” oferece reprodução do vídeo na própria página')
+    checar("youtube-nocookie.com/embed/" in pagina_video and '"@type":"VideoObject"' in pagina_video,
+           f'“{a["slug"]}” usa player privativo e dados estruturados de vídeo')
+
 # ---------------------------------------------------------------------------
 print("\n9. Endereços antigos")
 # ---------------------------------------------------------------------------

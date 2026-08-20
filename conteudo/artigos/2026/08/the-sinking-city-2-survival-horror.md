@@ -32,6 +32,11 @@ seo:
   titulo: "The Sinking City 2: o que mudou no survival horror"
   descricao: "The Sinking City 2 abandona o mundo aberto, mantém investigações opcionais e aposta em recursos escassos e exploração de Arkham."
 origem: manual
+video:
+  youtube_id: VvfH3zJYvzg
+  titulo: "The Sinking City 2 — revelação oficial de gameplay"
+  canal: "Frogwares"
+  publicado_em: 2026-05-07T00:00:00Z
 ---
 
 *The Sinking City 2* já está disponível no Xbox Series X|S. A sequência da Frogwares deixa o mundo aberto do primeiro jogo e reorganiza a experiência como um **survival horror em áreas cuidadosamente construídas**, com munição limitada, atalhos, quebra-cabeças e retorno a locais anteriores.

@@ -38,7 +38,7 @@
 
 <link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="https://vmgames.com.br/blog/feed.xml">
 <link rel="stylesheet" href="/estilo.css">
-<link rel="stylesheet" href="/blog/blog.css?v=20260820-2">
+<link rel="stylesheet" href="/blog/blog.css?v=20260820-3">
 <style>body.blog{--acento:#4d8cff;--acento-fraco:rgba(77, 140, 255, 0.13);}</style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8110755806771816" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"GeForce NOW passa a funcionar no Firefox — mas só no Windows","description":"O Firefox entrou para a lista de navegadores com suporte oficial ao GeForce NOW. O anúncio é da Mozilla e vale para o Firefox no Windows, com até 1440p e 120 quadros por segundo no plano Ultimate.","image":["https://vmgames.com.br/blog/img/capas/geforce-now-chega-ao-firefox.webp"],"datePublished":"2026-08-19T21:00:00-03:00","dateModified":"2026-08-19T21:00:00-03:00","inLanguage":"pt-BR","mainEntityOfPage":{"@type":"WebPage","@id":"https://vmgames.com.br/blog/geforce-now-chega-ao-firefox/"},"author":{"@type":"Person","name":"Arley Vieira","url":"https://vmgames.com.br/blog/autor/arley/"},"publisher":{"@type":"Organization","@id":"https://vmgames.com.br/#organizacao","name":"VM Games","url":"https://vmgames.com.br/","logo":{"@type":"ImageObject","url":"https://vmgames.com.br/blog/img/vmgames-logo.png"},"email":"arleyadm@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Catalão","addressRegion":"GO","addressCountry":"BR"}},"articleSection":"PC","keywords":"PC, NVIDIA, GeForce NOW, Firefox, nuvem","isAccessibleForFree":true}</script>
@@ -412,6 +412,17 @@ jogar na nuvem significava abrir um segundo navegador só para isso.</p>
 <script>
 /* Copiar link: só isso de JavaScript na página de matéria. */
 document.addEventListener('click', function (e) {
+  var video = e.target.closest('[data-youtube-id]');
+  if (video) {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(video.dataset.youtubeId) + '?autoplay=1&rel=0';
+    iframe.title = video.dataset.youtubeTitulo;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    video.replaceWith(iframe);
+    return;
+  }
   var b = e.target.closest('[data-copiar]');
   if (!b) return;
   navigator.clipboard.writeText(b.dataset.copiar).then(function () {

@@ -38,7 +38,7 @@
 
 <link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="https://vmgames.com.br/blog/feed.xml">
 <link rel="stylesheet" href="/estilo.css">
-<link rel="stylesheet" href="/blog/blog.css?v=20260820-2">
+<link rel="stylesheet" href="/blog/blog.css?v=20260820-3">
 <style>body.blog{--acento:#7aa2ff;--acento-fraco:rgba(122, 162, 255, 0.13);}</style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8110755806771816" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"Horizon Hunters Gathering estaria abandonando o formato live service, diz Bloomberg","description":"Reportagem de Jason Schreier na Bloomberg afirma que o multiplayer de Horizon perdeu os elementos de live service após reação negativa em testes fechados. A Sony não confirmou, e o estúdio teria até dezembro para mostrar resultado.","image":["https://vmgames.com.br/blog/img/capas/horizon-hunters-gathering-sem-live-service.webp"],"datePublished":"2026-08-19T20:50:00-03:00","dateModified":"2026-08-19T20:50:00-03:00","inLanguage":"pt-BR","mainEntityOfPage":{"@type":"WebPage","@id":"https://vmgames.com.br/blog/horizon-hunters-gathering-sem-live-service/"},"author":{"@type":"Person","name":"Arley Vieira","url":"https://vmgames.com.br/blog/autor/arley/"},"publisher":{"@type":"Organization","@id":"https://vmgames.com.br/#organizacao","name":"VM Games","url":"https://vmgames.com.br/","logo":{"@type":"ImageObject","url":"https://vmgames.com.br/blog/img/vmgames-logo.png"},"email":"arleyadm@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Catalão","addressRegion":"GO","addressCountry":"BR"}},"articleSection":"PlayStation","keywords":"PlayStation, Horizon, Guerrilla Games, live service, Sony","isAccessibleForFree":true}</script>
@@ -397,6 +397,17 @@ a Guerrilla se pronunciarem, esta matéria será atualizada com a resposta.</p>
 <script>
 /* Copiar link: só isso de JavaScript na página de matéria. */
 document.addEventListener('click', function (e) {
+  var video = e.target.closest('[data-youtube-id]');
+  if (video) {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(video.dataset.youtubeId) + '?autoplay=1&rel=0';
+    iframe.title = video.dataset.youtubeTitulo;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    video.replaceWith(iframe);
+    return;
+  }
   var b = e.target.closest('[data-copiar]');
   if (!b) return;
   navigator.clipboard.writeText(b.dataset.copiar).then(function () {

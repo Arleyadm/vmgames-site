@@ -38,7 +38,7 @@
 
 <link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="https://vmgames.com.br/blog/feed.xml">
 <link rel="stylesheet" href="/estilo.css">
-<link rel="stylesheet" href="/blog/blog.css?v=20260820-2">
+<link rel="stylesheet" href="/blog/blog.css?v=20260820-3">
 <style>body.blog{--acento:#34e0a1;--acento-fraco:rgba(52, 224, 161, 0.13);}</style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8110755806771816" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Apex Legends Marked: veja as principais mudanças da temporada","description":"A temporada Marked de Apex Legends reformula Bloodhound, traz acessórios corrompidos, mudanças nas armas de energia e novo calendário ranqueado.","image":["https://vmgames.com.br/blog/img/capas/apex-legends-marked-mudancas.webp"],"datePublished":"2026-08-20T12:09:00-03:00","dateModified":"2026-08-20T12:09:00-03:00","inLanguage":"pt-BR","mainEntityOfPage":{"@type":"WebPage","@id":"https://vmgames.com.br/blog/apex-legends-marked-mudancas/"},"author":{"@type":"Person","name":"Arley Vieira","url":"https://vmgames.com.br/blog/autor/arley/"},"publisher":{"@type":"Organization","@id":"https://vmgames.com.br/#organizacao","name":"VM Games","url":"https://vmgames.com.br/","logo":{"@type":"ImageObject","url":"https://vmgames.com.br/blog/img/vmgames-logo.png"},"email":"arleyadm@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Catalão","addressRegion":"GO","addressCountry":"BR"}},"articleSection":"Guias","keywords":"Apex Legends, Marked, Bloodhound, battle royale, patch notes","isAccessibleForFree":true}</script>
@@ -316,6 +316,17 @@
 <script>
 /* Copiar link: só isso de JavaScript na página de matéria. */
 document.addEventListener('click', function (e) {
+  var video = e.target.closest('[data-youtube-id]');
+  if (video) {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(video.dataset.youtubeId) + '?autoplay=1&rel=0';
+    iframe.title = video.dataset.youtubeTitulo;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    video.replaceWith(iframe);
+    return;
+  }
   var b = e.target.closest('[data-copiar]');
   if (!b) return;
   navigator.clipboard.writeText(b.dataset.copiar).then(function () {

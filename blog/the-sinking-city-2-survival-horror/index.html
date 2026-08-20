@@ -37,11 +37,12 @@
 
 <link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="https://vmgames.com.br/blog/feed.xml">
 <link rel="stylesheet" href="/estilo.css">
-<link rel="stylesheet" href="/blog/blog.css?v=20260820-2">
+<link rel="stylesheet" href="/blog/blog.css?v=20260820-3">
 <style>body.blog{--acento:#ff2daa;--acento-fraco:rgba(255, 45, 170, 0.13);}</style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8110755806771816" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"The Sinking City 2 troca mundo aberto por survival horror focado","description":"The Sinking City 2 já está disponível no Xbox Series X|S com estrutura de survival horror, recursos escassos e investigações opcionais.","image":["https://vmgames.com.br/blog/img/capas/the-sinking-city-2-survival-horror.webp"],"datePublished":"2026-08-20T12:12:00-03:00","dateModified":"2026-08-20T12:12:00-03:00","inLanguage":"pt-BR","mainEntityOfPage":{"@type":"WebPage","@id":"https://vmgames.com.br/blog/the-sinking-city-2-survival-horror/"},"author":{"@type":"Person","name":"Arley Vieira","url":"https://vmgames.com.br/blog/autor/arley/"},"publisher":{"@type":"Organization","@id":"https://vmgames.com.br/#organizacao","name":"VM Games","url":"https://vmgames.com.br/","logo":{"@type":"ImageObject","url":"https://vmgames.com.br/blog/img/vmgames-logo.png"},"email":"arleyadm@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Catalão","addressRegion":"GO","addressCountry":"BR"}},"articleSection":"Lançamentos","keywords":"The Sinking City 2, Frogwares, survival horror, Xbox Series","isAccessibleForFree":true}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://vmgames.com.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://vmgames.com.br/blog/"},{"@type":"ListItem","position":3,"name":"Lançamentos","item":"https://vmgames.com.br/blog/categoria/lancamentos/"},{"@type":"ListItem","position":4,"name":"The Sinking City 2 troca mundo aberto por survival horror focado","item":"https://vmgames.com.br/blog/the-sinking-city-2-survival-horror/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"The Sinking City 2 — revelação oficial de gameplay","description":"The Sinking City 2 já está disponível no Xbox Series X|S com estrutura de survival horror, recursos escassos e investigações opcionais.","thumbnailUrl":["https://i.ytimg.com/vi/VvfH3zJYvzg/maxresdefault.jpg"],"embedUrl":"https://www.youtube-nocookie.com/embed/VvfH3zJYvzg","contentUrl":"https://www.youtube.com/watch?v=VvfH3zJYvzg","publisher":{"@type":"Organization","name":"Frogwares"},"uploadDate":"2026-05-06T21:00:00-03:00"}</script>
 </head>
 <body class="blog">
 
@@ -160,6 +161,20 @@
 <p>Essa informação é útil para quem se interessou apenas pela mudança de gênero: é possível começar pelo segundo jogo sem pesquisar toda a campanha de 2019.</p>
 <p>No momento, a disponibilidade confirmada pela publicação é Xbox Series X|S. A página oficial deve ser consultada para preços regionais e outras plataformas.</p>
       </div>
+      <section class="video-noticia" aria-labelledby="titulo-video">
+        <div class="cabeca-video">
+          <h2 id="titulo-video">Assista ao vídeo oficial</h2>
+          <span>Publicado por Frogwares</span>
+        </div>
+        <button class="video-ativar" type="button" data-youtube-id="VvfH3zJYvzg"
+                data-youtube-titulo="The Sinking City 2 — revelação oficial de gameplay"
+                aria-label="Assistir The Sinking City 2 — revelação oficial de gameplay dentro desta matéria">
+          <img src="/blog/img/capas/the-sinking-city-2-survival-horror.webp" alt="" width="1200" height="675" loading="lazy">
+          <span class="video-play" aria-hidden="true">▶</span>
+          <span class="video-legenda">The Sinking City 2 — revelação oficial de gameplay</span>
+        </button>
+        <noscript><p><a href="https://www.youtube.com/watch?v=VvfH3zJYvzg" rel="noopener" target="_blank">Assistir no YouTube</a></p></noscript>
+      </section>
 
       
 <aside class="publicidade no-texto" role="complementary" aria-label="Publicidade">
@@ -386,6 +401,17 @@
 <script>
 /* Copiar link: só isso de JavaScript na página de matéria. */
 document.addEventListener('click', function (e) {
+  var video = e.target.closest('[data-youtube-id]');
+  if (video) {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(video.dataset.youtubeId) + '?autoplay=1&rel=0';
+    iframe.title = video.dataset.youtubeTitulo;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    video.replaceWith(iframe);
+    return;
+  }
   var b = e.target.closest('[data-copiar]');
   if (!b) return;
   navigator.clipboard.writeText(b.dataset.copiar).then(function () {

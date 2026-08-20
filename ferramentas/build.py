@@ -251,6 +251,26 @@ def carregar_artigos(categorias, autores, incluir_rascunhos: bool):
             raise ErroDeConteudo(f"{nome}: falta 'capa.licenca' (propria, press-kit, api, "
                                  f"licenca-cc ou arte-padrao).")
 
+        # --- vídeo oficial opcional -----------------------------------------
+        video = None
+        video_meta = meta.get("video") or {}
+        if video_meta:
+            video_id = str(video_meta.get("youtube_id") or "").strip()
+            if not re.fullmatch(r"[A-Za-z0-9_-]{11}", video_id):
+                raise ErroDeConteudo(f"{nome}: video.youtube_id não é um ID válido do YouTube.")
+            if not video_meta.get("titulo") or not video_meta.get("canal"):
+                raise ErroDeConteudo(f"{nome}: vídeo precisa de 'titulo' e 'canal'.")
+            video_data = como_data(video_meta.get("publicado_em"), nome, "video.publicado_em")
+            video = {
+                "youtube_id": video_id,
+                "titulo": str(video_meta["titulo"]).strip(),
+                "canal": str(video_meta["canal"]).strip(),
+                "descricao": str(video_meta.get("descricao") or meta["resumo"]).strip(),
+                "url": f"https://www.youtube.com/watch?v={video_id}",
+                "thumbnail": f"https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg",
+                "publicado_iso": video_data.isoformat() if video_data else None,
+            }
+
         # --- fontes ----------------------------------------------------------
         fontes = []
         for f in (meta.get("fontes") or []):
@@ -334,6 +354,7 @@ def carregar_artigos(categorias, autores, incluir_rascunhos: bool):
                 "fonte_url": capa.get("fonte_url"),
                 "licenca": capa["licenca"],
             },
+            "video": video,
             "fontes": fontes,
             "correcoes": correcoes,
             "sumario": sumario,
@@ -659,6 +680,21 @@ class Construtor:
             if a["correcoes"]:
                 artigo_ld["correction"] = [c["texto"] for c in a["correcoes"]]
 
+            dados_ld = [json_para_script(artigo_ld),
+                        json_para_script(self.migalhas_ld(migalhas))]
+            if a["video"]:
+                video_ld = {
+                    "@context": "https://schema.org", "@type": "VideoObject",
+                    "name": a["video"]["titulo"], "description": a["video"]["descricao"],
+                    "thumbnailUrl": [a["video"]["thumbnail"]],
+                    "embedUrl": f"https://www.youtube-nocookie.com/embed/{a['video']['youtube_id']}",
+                    "contentUrl": a["video"]["url"],
+                    "publisher": {"@type": "Organization", "name": a["video"]["canal"]},
+                }
+                if a["video"]["publicado_iso"]:
+                    video_ld["uploadDate"] = a["video"]["publicado_iso"]
+                dados_ld.append(json_para_script(video_ld))
+
             self.render(
                 "artigo.html", f"{a['slug']}/index.html",
                 titulo_aba=(a["seo"].get("titulo") or a["titulo"]) + " — VM Games",
@@ -677,8 +713,7 @@ class Construtor:
                     "titulo": a["titulo"].replace("&", "e"),
                     "whatsapp": f"{a['titulo']} {url}".replace(" ", "%20").replace("&", "e"),
                 },
-                dados_estruturados=[json_para_script(artigo_ld),
-                                    json_para_script(self.migalhas_ld(migalhas))],
+                dados_estruturados=dados_ld,
             )
 
             # endereços antigos continuam funcionando

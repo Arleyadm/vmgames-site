@@ -31,6 +31,11 @@ seo:
   titulo: "Elden Ring no Switch 2: data, preço e multiplayer"
   descricao: "Tarnished Edition chega ao Switch 2 em 28 de agosto por US$ 79,99. Veja como funcionam campanha, cooperativo, invasões e duelos."
 origem: manual
+video:
+  youtube_id: kX30PHC0klw
+  titulo: "ELDEN RING Tarnished Edition — trailer de anúncio"
+  canal: "FromSoftware"
+  publicado_em: 2025-04-02T00:00:00+09:00
 ---
 
 *Elden Ring: Tarnished Edition* será lançado em **28 de agosto de 2026** para Nintendo Switch 2. A edição aparece por US$ 79,99 na loja americana e leva ao portátil o mundo aberto da FromSoftware com seus sistemas de cooperação e confronto online.

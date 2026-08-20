@@ -39,11 +39,12 @@
 
 <link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="https://vmgames.com.br/blog/feed.xml">
 <link rel="stylesheet" href="/estilo.css">
-<link rel="stylesheet" href="/blog/blog.css?v=20260820-2">
+<link rel="stylesheet" href="/blog/blog.css?v=20260820-3">
 <style>body.blog{--acento:#ff2daa;--acento-fraco:rgba(255, 45, 170, 0.13);}</style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8110755806771816" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"Star Wars Zero Company chega em 27 de agosto; veja como funciona o RPG tático","description":"Star Wars Zero Company será lançado em 27 de agosto para PC, PS5 e Xbox Series com combate tático por turnos, base operacional e equipe personalizável.","image":["https://vmgames.com.br/blog/img/capas/star-wars-zero-company-data-gameplay.webp"],"datePublished":"2026-08-20T12:10:00-03:00","dateModified":"2026-08-20T12:10:00-03:00","inLanguage":"pt-BR","mainEntityOfPage":{"@type":"WebPage","@id":"https://vmgames.com.br/blog/star-wars-zero-company-data-gameplay/"},"author":{"@type":"Person","name":"Arley Vieira","url":"https://vmgames.com.br/blog/autor/arley/"},"publisher":{"@type":"Organization","@id":"https://vmgames.com.br/#organizacao","name":"VM Games","url":"https://vmgames.com.br/","logo":{"@type":"ImageObject","url":"https://vmgames.com.br/blog/img/vmgames-logo.png"},"email":"arleyadm@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Catalão","addressRegion":"GO","addressCountry":"BR"}},"articleSection":"Lançamentos","keywords":"Star Wars Zero Company, Star Wars, RPG tático, PC, PS5, Xbox Series","isAccessibleForFree":true}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://vmgames.com.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://vmgames.com.br/blog/"},{"@type":"ListItem","position":3,"name":"Lançamentos","item":"https://vmgames.com.br/blog/categoria/lancamentos/"},{"@type":"ListItem","position":4,"name":"Star Wars Zero Company chega em 27 de agosto; veja como funciona o RPG tático","item":"https://vmgames.com.br/blog/star-wars-zero-company-data-gameplay/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Star Wars Zero Company — trailer oficial de anúncio","description":"Star Wars Zero Company será lançado em 27 de agosto para PC, PS5 e Xbox Series com combate tático por turnos, base operacional e equipe personalizável.","thumbnailUrl":["https://i.ytimg.com/vi/rcxnRaZ6slU/maxresdefault.jpg"],"embedUrl":"https://www.youtube-nocookie.com/embed/rcxnRaZ6slU","contentUrl":"https://www.youtube.com/watch?v=rcxnRaZ6slU","publisher":{"@type":"Organization","name":"EA Star Wars"},"uploadDate":"2025-04-19T04:00:00-03:00"}</script>
 </head>
 <body class="blog">
 
@@ -162,6 +163,20 @@
 <p>O jogo começa em US$ 49,99 no aplicativo da EA. As plataformas de PC incluem EA app, Steam e Epic Games Store. A edição de pré-venda oferece apenas itens cosméticos para droides; o conteúdo não é apresentado como vantagem de combate.</p>
 <p>Não há versão para PS4, Xbox One ou Switch 2 anunciada. Para quem procura um sucessor espiritual de estratégias táticas com uma campanha fechada, a informação central é: lançamento em 27 de agosto, apenas para PC e consoles da geração atual.</p>
       </div>
+      <section class="video-noticia" aria-labelledby="titulo-video">
+        <div class="cabeca-video">
+          <h2 id="titulo-video">Assista ao vídeo oficial</h2>
+          <span>Publicado por EA Star Wars</span>
+        </div>
+        <button class="video-ativar" type="button" data-youtube-id="rcxnRaZ6slU"
+                data-youtube-titulo="Star Wars Zero Company — trailer oficial de anúncio"
+                aria-label="Assistir Star Wars Zero Company — trailer oficial de anúncio dentro desta matéria">
+          <img src="/blog/img/capas/star-wars-zero-company-data-gameplay.webp" alt="" width="1200" height="675" loading="lazy">
+          <span class="video-play" aria-hidden="true">▶</span>
+          <span class="video-legenda">Star Wars Zero Company — trailer oficial de anúncio</span>
+        </button>
+        <noscript><p><a href="https://www.youtube.com/watch?v=rcxnRaZ6slU" rel="noopener" target="_blank">Assistir no YouTube</a></p></noscript>
+      </section>
 
       
 <aside class="publicidade no-texto" role="complementary" aria-label="Publicidade">
@@ -396,6 +411,17 @@
 <script>
 /* Copiar link: só isso de JavaScript na página de matéria. */
 document.addEventListener('click', function (e) {
+  var video = e.target.closest('[data-youtube-id]');
+  if (video) {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(video.dataset.youtubeId) + '?autoplay=1&rel=0';
+    iframe.title = video.dataset.youtubeTitulo;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    video.replaceWith(iframe);
+    return;
+  }
   var b = e.target.closest('[data-copiar]');
   if (!b) return;
   navigator.clipboard.writeText(b.dataset.copiar).then(function () {

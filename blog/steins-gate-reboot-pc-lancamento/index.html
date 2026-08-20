@@ -37,11 +37,12 @@
 
 <link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="https://vmgames.com.br/blog/feed.xml">
 <link rel="stylesheet" href="/estilo.css">
-<link rel="stylesheet" href="/blog/blog.css?v=20260820-2">
+<link rel="stylesheet" href="/blog/blog.css?v=20260820-3">
 <style>body.blog{--acento:#4d8cff;--acento-fraco:rgba(77, 140, 255, 0.13);}</style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8110755806771816" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"Steins;Gate Re:Boot estreia no PC em 20 de agosto com rota inédita","description":"Steins;Gate Re:Boot chega ao Steam em 20 de agosto com gráficos refeitos, texto ampliado, novas gravações e uma rota narrativa inédita.","image":["https://vmgames.com.br/blog/img/capas/steins-gate-reboot-pc-lancamento.webp"],"datePublished":"2026-08-19T21:30:00-03:00","dateModified":"2026-08-19T21:30:00-03:00","inLanguage":"pt-BR","mainEntityOfPage":{"@type":"WebPage","@id":"https://vmgames.com.br/blog/steins-gate-reboot-pc-lancamento/"},"author":{"@type":"Person","name":"Arley Vieira","url":"https://vmgames.com.br/blog/autor/arley/"},"publisher":{"@type":"Organization","@id":"https://vmgames.com.br/#organizacao","name":"VM Games","url":"https://vmgames.com.br/","logo":{"@type":"ImageObject","url":"https://vmgames.com.br/blog/img/vmgames-logo.png"},"email":"arleyadm@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Catalão","addressRegion":"GO","addressCountry":"BR"}},"articleSection":"PC","keywords":"Steins Gate, Steam, visual novel, Spike Chunsoft","isAccessibleForFree":true}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://vmgames.com.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://vmgames.com.br/blog/"},{"@type":"ListItem","position":3,"name":"PC","item":"https://vmgames.com.br/blog/categoria/pc/"},{"@type":"ListItem","position":4,"name":"Steins;Gate Re:Boot estreia no PC em 20 de agosto com rota inédita","item":"https://vmgames.com.br/blog/steins-gate-reboot-pc-lancamento/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"STEINS;GATE RE:BOOT — gameplay e teaser trailer","description":"Steins;Gate Re:Boot chega ao Steam em 20 de agosto com gráficos refeitos, texto ampliado, novas gravações e uma rota narrativa inédita.","thumbnailUrl":["https://i.ytimg.com/vi/5lEMw3ZrAok/maxresdefault.jpg"],"embedUrl":"https://www.youtube-nocookie.com/embed/5lEMw3ZrAok","contentUrl":"https://www.youtube.com/watch?v=5lEMw3ZrAok","publisher":{"@type":"Organization","name":"Spike Chunsoft"},"uploadDate":"2025-11-21T05:00:00-03:00"}</script>
 </head>
 <body class="blog">
 
@@ -181,6 +182,20 @@ e simplificado, mas <strong>não há português listado</strong>.</p>
 agosto. Nintendo Switch 2, Nintendo Switch, PS5 e Xbox Series X|S recebem o jogo em 29 de
 outubro.</p>
       </div>
+      <section class="video-noticia" aria-labelledby="titulo-video">
+        <div class="cabeca-video">
+          <h2 id="titulo-video">Assista ao vídeo oficial</h2>
+          <span>Publicado por Spike Chunsoft</span>
+        </div>
+        <button class="video-ativar" type="button" data-youtube-id="5lEMw3ZrAok"
+                data-youtube-titulo="STEINS;GATE RE:BOOT — gameplay e teaser trailer"
+                aria-label="Assistir STEINS;GATE RE:BOOT — gameplay e teaser trailer dentro desta matéria">
+          <img src="/blog/img/capas/steins-gate-reboot-pc-lancamento.webp" alt="" width="1200" height="675" loading="lazy">
+          <span class="video-play" aria-hidden="true">▶</span>
+          <span class="video-legenda">STEINS;GATE RE:BOOT — gameplay e teaser trailer</span>
+        </button>
+        <noscript><p><a href="https://www.youtube.com/watch?v=5lEMw3ZrAok" rel="noopener" target="_blank">Assistir no YouTube</a></p></noscript>
+      </section>
 
       
 <aside class="publicidade no-texto" role="complementary" aria-label="Publicidade">
@@ -375,6 +390,17 @@ outubro.</p>
 <script>
 /* Copiar link: só isso de JavaScript na página de matéria. */
 document.addEventListener('click', function (e) {
+  var video = e.target.closest('[data-youtube-id]');
+  if (video) {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(video.dataset.youtubeId) + '?autoplay=1&rel=0';
+    iframe.title = video.dataset.youtubeTitulo;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    video.replaceWith(iframe);
+    return;
+  }
   var b = e.target.closest('[data-copiar]');
   if (!b) return;
   navigator.clipboard.writeText(b.dataset.copiar).then(function () {

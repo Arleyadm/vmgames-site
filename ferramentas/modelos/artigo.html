@@ -117,6 +117,23 @@
         {{ a.corpo_html|safe }}
       </div>
 
+      {%- if a.video %}
+      <section class="video-noticia" aria-labelledby="titulo-video">
+        <div class="cabeca-video">
+          <h2 id="titulo-video">Assista ao vídeo oficial</h2>
+          <span>Publicado por {{ a.video.canal }}</span>
+        </div>
+        <button class="video-ativar" type="button" data-youtube-id="{{ a.video.youtube_id }}"
+                data-youtube-titulo="{{ a.video.titulo }}"
+                aria-label="Assistir {{ a.video.titulo }} dentro desta matéria">
+          <img src="{{ a.capa.url }}" alt="" width="1200" height="675" loading="lazy">
+          <span class="video-play" aria-hidden="true">▶</span>
+          <span class="video-legenda">{{ a.video.titulo }}</span>
+        </button>
+        <noscript><p><a href="{{ a.video.url }}" rel="noopener" target="_blank">Assistir no YouTube</a></p></noscript>
+      </section>
+      {%- endif %}
+
       {{ p.anuncio(anuncios, 'no-texto', anuncios.no_texto, dev, 'no-texto') }}
 
       {%- if a.fontes %}
@@ -203,6 +220,17 @@
 <script>
 /* Copiar link: só isso de JavaScript na página de matéria. */
 document.addEventListener('click', function (e) {
+  var video = e.target.closest('[data-youtube-id]');
+  if (video) {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(video.dataset.youtubeId) + '?autoplay=1&rel=0';
+    iframe.title = video.dataset.youtubeTitulo;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    video.replaceWith(iframe);
+    return;
+  }
   var b = e.target.closest('[data-copiar]');
   if (!b) return;
   navigator.clipboard.writeText(b.dataset.copiar).then(function () {
