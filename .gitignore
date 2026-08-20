@@ -1,3 +1,6 @@
 # Cache do Python das ferramentas do blog
 __pycache__/
 *.pyc
+
+# Dependências locais da API
+node_modules/
