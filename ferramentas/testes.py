@@ -315,6 +315,9 @@ for arq in ("feed.xml", "sitemap.xml", "sitemap-noticias.xml"):
 feed = (SAIDA / "feed.xml").read_text(encoding="utf-8")
 checar('xml-stylesheet type="text/xsl" href="/blog/feed.xsl"' in feed,
        "o feed aponta para sua apresentação visual")
+apresentacao_feed = (SAIDA / "feed.xsl").read_text(encoding="utf-8")
+checar("feed%2Fhttps%3A%2F%2Fvmgames.com.br%2Fblog%2Ffeed.xml" in apresentacao_feed,
+       "o botão do Feedly envia o endereço correto do feed")
 checar(feed.count("<item>") == min(30, len(c.publicados)),
        "o feed traz todas as matérias publicadas",
        f"{feed.count('<item>')} itens para {len(c.publicados)} matérias")

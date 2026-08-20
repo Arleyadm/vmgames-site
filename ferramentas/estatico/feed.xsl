@@ -29,7 +29,7 @@
             <strong>Endereço do feed</strong>
             <code class="endereco">https://vmgames.com.br/blog/feed.xml</code>
             <div class="acoes">
-              <a class="botao" href="https://feedly.com/i/subscription/feed/https://vmgames.com.br/blog/feed.xml" rel="noopener noreferrer">Assinar no Feedly</a>
+              <a class="botao" href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fvmgames.com.br%2Fblog%2Ffeed.xml" rel="noopener noreferrer">Assinar no Feedly</a>
               <a class="botao sec" href="/blog/">Ler no site</a>
             </div>
           </section>
