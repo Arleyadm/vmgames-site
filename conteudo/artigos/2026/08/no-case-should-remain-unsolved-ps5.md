@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/no-case-should-remain-unsolved-ps5.webp
-  alt: "Arte abstrata da VM Games em tons de azul, com grade em perspectiva e a etiqueta PlayStation"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "Policial coreana aposentada reorganiza depoimentos ao lado de jovem em apartamento chuvoso"
+  legenda: "Imagem autoral da VM Games representa a reconstrução das memórias do caso em No Case Should Remain Unsolved."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://playism.com/en/news/2026/0709/1704/
     veiculo: Playism
@@ -71,4 +71,3 @@ A editora também lançou produtos oficiais do jogo no mesmo dia da versão de P
 disponibilidade e o envio dependem da loja e da região. Para quem quer apenas conhecer a
 obra, o ponto principal é que a experiência completa agora está disponível no console da
 Sony.
-

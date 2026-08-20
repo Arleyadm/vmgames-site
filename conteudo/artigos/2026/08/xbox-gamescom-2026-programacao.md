@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/xbox-gamescom-2026-programacao.webp
-  alt: "Arte abstrata da VM Games em tons de verde, com grade em perspectiva e a etiqueta Xbox"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "Grande estande de feira reúne dezenas de estações jogáveis, palco e duas mesas de transmissão"
+  legenda: "Imagem autoral da VM Games representa os 25 jogos, 140 estações e transmissões do Xbox na gamescom 2026."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://news.xbox.com/en-us/2026/07/28/xbox-gamescom-2026/
     veiculo: Xbox Wire
@@ -88,4 +88,3 @@ evento.
 Como a Microsoft ainda pode distribuir jogos e convidados entre os dois dias, vale
 consultar os canais oficiais perto do evento para saber em qual transmissão aparecerá
 cada demonstração.
-

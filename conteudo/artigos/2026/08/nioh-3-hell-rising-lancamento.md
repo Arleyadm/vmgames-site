@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/nioh-3-hell-rising-lancamento.webp
-  alt: "Arte abstrata da VM Games em tons de rosa, com grade em perspectiva e a etiqueta Lançamentos"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "Guerreiro atravessa portal em chamas para uma Edo de 1651 tomada por yokai"
+  legenda: "Imagem autoral da VM Games representa a era Keian, o Crucible e os novos desafios de Nioh 3: Hell Rising."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://www.koeitecmoeurope.com/news/travel-to-the-keian-era-with-hell-rising-the-first-dlc-for-nioh-3-coming-19th-august/
     veiculo: Koei Tecmo Europe
@@ -80,4 +80,3 @@ Koei Tecmo informa que o jogo tem vozes em japonês e inglês, mas não lista po
 entre os idiomas de texto. Há uma demonstração gratuita nas duas plataformas, com
 transferência do progresso para o jogo completo; o modo online da demo aceita até três
 jogadores, sem cross-play.
-

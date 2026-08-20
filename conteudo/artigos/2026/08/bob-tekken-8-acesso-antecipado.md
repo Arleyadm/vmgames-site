@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/bob-tekken-8-acesso-antecipado.webp
-  alt: "Arte abstrata da VM Games em tons de rosa, com grade em perspectiva e a etiqueta Lançamentos"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "Lutador loiro de porte pesado executa chute acrobático contra robô em distrito de restaurantes"
+  legenda: "Imagem autoral da VM Games representa a combinação de força, velocidade e acrobacia de Bob em Tekken 8."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://en.bandainamcoent.eu/tekken/news/tekken-8-upcoming-addition-bob-showcased-during-evo-2026
     veiculo: Bandai Namco Entertainment Europe
@@ -72,4 +72,3 @@ inclui o futuro cenário Subsea Lockdown e um conjunto de roupas.
 
 *Tekken 8* está disponível para **PS5, Xbox Series X|S e PC via Steam**. Bob chega às
 mesmas três plataformas.
-

@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/steins-gate-reboot-pc-lancamento.webp
-  alt: "Arte abstrata da VM Games em tons de azul, com grade em perspectiva e a etiqueta PC"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "Cientista em laboratório de Akihabara é dividido entre uma linha do tempo acolhedora e outra hostil"
+  legenda: "Imagem autoral da VM Games representa a reconstrução visual e a nova Linha do Mundo Gamma de Steins;Gate Re:Boot."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://steinsgate.jp/reboot/en-us/
     veiculo: MAGES
@@ -83,4 +83,3 @@ e simplificado, mas **não há português listado**.
 No calendário informado atualmente pelo site oficial, a versão de Steam sai em 20 de
 agosto. Nintendo Switch 2, Nintendo Switch, PS5 e Xbox Series X|S recebem o jogo em 29 de
 outubro.
-

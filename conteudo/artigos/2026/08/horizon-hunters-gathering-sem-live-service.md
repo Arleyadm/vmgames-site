@@ -14,10 +14,10 @@ recomendada: true
 confiabilidade: rumor
 capa:
   arquivo: capas/horizon-hunters-gathering-sem-live-service.webp
-  alt: "Arte abstrata da VM Games em azul, com grade em perspectiva e a etiqueta PlayStation"
-  legenda: "Arte da VM Games para a matéria."
+  alt: "Três caçadores planejam missão cooperativa enquanto uma grade de serviço se desfaz sobre o mapa"
+  legenda: "Imagem autoral da VM Games representa a reformulação relatada de Hunters Gathering para uma experiência cooperativa tradicional."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://www.eurogamer.net/horizon-hunters-gathering-reboot-away-live-service
     veiculo: Eurogamer

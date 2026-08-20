@@ -14,10 +14,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/geforce-now-chega-ao-firefox.webp
-  alt: "Arte abstrata da VM Games em azul, com grade em perspectiva e a etiqueta PC"
-  legenda: "Arte da VM Games para a matéria."
+  alt: "Computador modesto transmite jogo pelo navegador a 1440p e 120 quadros por segundo"
+  legenda: "Imagem autoral da VM Games representa o GeForce NOW funcionando no Firefox para Windows."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://blog.mozilla.org/en/firefox/firefox-nvidia-geforce-now-partnership/
     veiculo: Blog da Mozilla

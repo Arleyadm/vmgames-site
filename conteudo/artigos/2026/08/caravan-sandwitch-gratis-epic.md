@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/caravan-sandwitch-gratis-epic.webp
-  alt: "Arte abstrata da VM Games em tons de verde-limão, com grade em perspectiva e a etiqueta Promoções"
-  legenda: "Arte ilustrativa da VM Games para a matéria."
+  alt: "Jovem e robô observam comunidade e ruínas alienígenas ao lado de uma van de exploração"
+  legenda: "Imagem autoral da VM Games representa a viagem pacífica por Cigalo em Caravan SandWitch."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://store.epicgames.com/en-US/p/caravan-sandwitch-05ff58
     veiculo: Epic Games Store
@@ -75,4 +75,3 @@ Sim, se a proposta interessar. O resgate gratuito não exige que o download seja
 durante a promoção, então é possível decidir quando jogar depois. O ponto importante é
 conferir o preço zero na etapa final: promoções de loja podem mudar, e a oferta só está
 garantida enquanto aparecer como gratuita na página oficial.
-

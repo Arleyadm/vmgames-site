@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/xbox-game-pass-segunda-leva-agosto-2026.webp
-  alt: "Arte abstrata da VM Games em tons de verde, com grade em perspectiva e a etiqueta Xbox"
-  legenda: "Arte da VM Games para a matéria."
+  alt: "Catálogo de jogos em uma televisão destaca quatro estreias e uma fileira de títulos que sairão"
+  legenda: "Imagem autoral da VM Games representa as entradas e saídas da segunda leva de agosto do Game Pass."
   credito: "VM Games"
-  licenca: arte-padrao
+  licenca: arte-autoral
 fontes:
   - url: https://news.xbox.com/pt-br/2026/08/18/xbox-game-pass-agosto-wave-2/
     veiculo: Xbox Wire Brasil
