@@ -34,6 +34,10 @@
   let onlineReconnectWanted = false;
   let onlineReconnectTimer = 0;
   let onlineEverConnected = false;
+  // Mantém o pedido original enquanto um servidor gratuito está acordando.
+  // Sem isto, a segunda tentativa esquecia que deveria criar a sala e abria
+  // apenas uma conexão vazia, deixando o jogador preso em "Conectando".
+  let onlinePendingSpec = null;
   // Saguão de salas online: lista pública, sala atual e o relógio que atualiza a lista.
   let onlineRooms = [];
   let onlineRoomId = "";
@@ -869,8 +873,10 @@
       // Entrada nova: a sessão antiga não vale para outra sala.
       onlineSession = "";
       onlineRoomId = spec && spec.room ? String(spec.room) : "";
+      onlinePendingSpec = spec || null;
       saveOnlineSession(onlineServerAddress, "");
     }
+    const requestedSpec = spec || onlinePendingSpec;
     const baseAddress = normalizeOnlineAddress(ui.server.value || onlineServerAddress);
     if (!baseAddress) {
       setStatus(SugarI18n.t("NET_TYPE_SERVER_SHOWN"));
@@ -893,14 +899,14 @@
     // Monta o pedido: criar uma sala, entrar numa existente ou retomar a sessão.
     const query = [];
     if (onlineSession) query.push("session=" + encodeURIComponent(onlineSession));
-    if (!reconnecting && spec && spec.create) {
+    if (!onlineSession && !onlineRoomId && requestedSpec && requestedSpec.create) {
       query.push("create=1");
-      query.push("name=" + encodeURIComponent(spec.create.name));
-      query.push("map=" + encodeURIComponent(spec.create.map));
-      query.push("mode=" + encodeURIComponent(spec.create.mode));
-      query.push("max=" + encodeURIComponent(String(spec.create.max)));
-      query.push("spectators=" + (spec.create.allowSpectators ? "1" : "0"));
-      query.push("friendlyFire=" + (spec.create.friendlyFire ? "1" : "0"));
+      query.push("name=" + encodeURIComponent(requestedSpec.create.name));
+      query.push("map=" + encodeURIComponent(requestedSpec.create.map));
+      query.push("mode=" + encodeURIComponent(requestedSpec.create.mode));
+      query.push("max=" + encodeURIComponent(String(requestedSpec.create.max)));
+      query.push("spectators=" + (requestedSpec.create.allowSpectators ? "1" : "0"));
+      query.push("friendlyFire=" + (requestedSpec.create.friendlyFire ? "1" : "0"));
       if (Net.roomPassword) query.push("locked=1");
     } else if (onlineRoomId) {
       // Numa reconexão isto garante que a sala criada não vire uma segunda sala.
@@ -928,6 +934,7 @@
       }
       if (message.net === "connected") {
         onlineEverConnected = true;
+        onlinePendingSpec = null;
         onlineSession = cleanName(message.session, "", 80);
         saveOnlineSession(onlineServerAddress, onlineSession);
         if (message.room) {
@@ -1061,6 +1068,7 @@
         try { socket.close(1000, "leave"); } catch (error) {}
       }
       onlineSession = "";
+      onlinePendingSpec = null;
       saveOnlineSession(onlineServerAddress, "");
       return;
     }
