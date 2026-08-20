@@ -34,7 +34,7 @@
 
 <link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="{{ site.url }}/blog/feed.xml">
 <link rel="stylesheet" href="/estilo.css">
-<link rel="stylesheet" href="/blog/blog.css?v=20260820-3">
+<link rel="stylesheet" href="/blog/blog.css?v=20260820-4">
 {%- if acento %}
 <style>body.blog{--acento:{{ acento }};--acento-fraco:{{ acento_fraco }};}</style>
 {%- endif %}
@@ -61,8 +61,17 @@
       <a href="/blog/"{% if secao == 'blog' %} aria-current="true"{% endif %}>Blog</a>
       <a href="/sugar-strike/jogar/">Jogar no navegador</a>
       <a href="/sobre.html">Sobre</a>
-      <a href="/blog/busca/">Buscar</a>
     </nav>
+    <form class="busca-cabecalho" role="search" action="/blog/busca/" method="get">
+      <label class="so-leitor" for="busca-cabecalho">Buscar no blog</label>
+      <input id="busca-cabecalho" type="search" name="q" placeholder="Buscar notícias" autocomplete="off">
+      <button type="submit" aria-label="Buscar no blog">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="19" height="19" focusable="false">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m16.2 16.2 4.3 4.3"></path>
+        </svg>
+      </button>
+    </form>
   </div>
 </header>
 

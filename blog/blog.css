@@ -661,6 +661,45 @@ body.blog :focus-visible {
 
 /* ---------- busca ---------- */
 
+.busca-cabecalho {
+  display: flex;
+  margin-left: 16px;
+  min-width: 250px;
+  height: 38px;
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--superficie);
+}
+.busca-cabecalho:focus-within {
+  border-color: var(--acento);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--acento) 20%, transparent);
+}
+.busca-cabecalho input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  padding: 8px 11px;
+  background: transparent;
+  color: var(--texto);
+  font: inherit;
+}
+.busca-cabecalho input::placeholder { color: var(--texto-fraco); opacity: .85; }
+.busca-cabecalho button {
+  border: 0;
+  width: 44px;
+  padding: 0;
+  background: linear-gradient(135deg, var(--magenta), var(--roxo));
+  color: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.busca-cabecalho button:hover { filter: brightness(1.1); }
+.busca-cabecalho button:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+.busca-cabecalho button svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
 .caixa-busca { display: flex; gap: 10px; margin: 22px 0 8px; max-width: 620px; }
 .caixa-busca input {
   flex: 1;
@@ -765,6 +804,7 @@ body.blog :focus-visible {
   .barra-lateral, .trilho-direito { position: static; flex-direction: column; }
   .publicidade.lateral .caixa, .publicidade.lateral .reserva { min-height: 260px; }
   .corpo-artigo { max-width: none; }
+  .busca-cabecalho { order: 3; width: 100%; margin: 12px 0 0; }
 }
 
 @media (max-width: 620px) {
@@ -777,6 +817,7 @@ body.blog :focus-visible {
   .grade-noticias { gap: 18px; }
   .ficha-autor { grid-template-columns: 1fr; }
   .ficha-autor img { width: 54px; height: 54px; }
+  .busca-cabecalho { min-width: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

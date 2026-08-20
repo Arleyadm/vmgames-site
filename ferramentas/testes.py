@@ -350,6 +350,11 @@ checar(len(indice) == len(c.publicados), "o índice de busca tem todas as matér
        f"{len(indice)} para {len(c.publicados)}")
 checar(all(u["url"].startswith("/blog/") for u in indice),
        "todo item do índice de busca aponta para o blog")
+pagina_inicial = (SAIDA / "index.html").read_text(encoding="utf-8")
+checar('class="busca-cabecalho"' in pagina_inicial and
+       'action="/blog/busca/"' in pagina_inicial and
+       'name="q"' in pagina_inicial,
+       "o cabeçalho oferece busca acessível em todas as páginas")
 
 # ---------------------------------------------------------------------------
 print("\n8. Anúncios")

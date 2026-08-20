@@ -28,7 +28,7 @@
 
 <link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="https://vmgames.com.br/blog/feed.xml">
 <link rel="stylesheet" href="/estilo.css">
-<link rel="stylesheet" href="/blog/blog.css?v=20260820-3">
+<link rel="stylesheet" href="/blog/blog.css?v=20260820-4">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8110755806771816" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://vmgames.com.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://vmgames.com.br/blog/"},{"@type":"ListItem","position":3,"name":"#live service","item":"https://vmgames.com.br/blog/tag/live-service/"}]}</script>
 </head>
@@ -44,8 +44,17 @@
       <a href="/blog/" aria-current="true">Blog</a>
       <a href="/sugar-strike/jogar/">Jogar no navegador</a>
       <a href="/sobre.html">Sobre</a>
-      <a href="/blog/busca/">Buscar</a>
     </nav>
+    <form class="busca-cabecalho" role="search" action="/blog/busca/" method="get">
+      <label class="so-leitor" for="busca-cabecalho">Buscar no blog</label>
+      <input id="busca-cabecalho" type="search" name="q" placeholder="Buscar notícias" autocomplete="off">
+      <button type="submit" aria-label="Buscar no blog">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="19" height="19" focusable="false">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m16.2 16.2 4.3 4.3"></path>
+        </svg>
+      </button>
+    </form>
   </div>
 </header>
 
