@@ -350,6 +350,13 @@ body.blog :focus-visible {
   padding: 0;
   margin: 0;
 }
+/* Blocos responsivos precisam ocupar a largura disponível. Sem esta regra o
+   <ins> vira um item flexível com largura zero antes de o AdSense calcular o
+   anúncio, portanto os formatos no texto e entre cartões nunca aparecem. */
+.publicidade:not(.lateral) .adsbygoogle {
+  width: 100%;
+  min-width: 0;
+}
 .publicidade.lateral { margin: 0; }
 .publicidade.lateral .caixa { min-height: 600px; }
 .publicidade.no-texto .caixa { min-height: 280px; }

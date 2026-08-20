@@ -365,6 +365,9 @@ if cfg["ativos"] and cfg["lateral_topo"]:
            f"{home.count('adsbygoogle.js')} vezes")
 vazios = [p.name for p, t in textos.items() if 'data-ad-slot=""' in t]
 checar(not vazios, "nenhum bloco de anúncio sai com slot vazio", str(vazios[:3]))
+css_blog = (SAIDA / "blog.css").read_text(encoding="utf-8")
+checar(".publicidade:not(.lateral) .adsbygoogle" in css_blog and "width: 100%" in css_blog,
+       "anúncios responsivos nunca ficam com largura zero")
 
 # ---------------------------------------------------------------------------
 print("\n9. Endereços antigos")
