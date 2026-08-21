@@ -14,7 +14,7 @@ destaque: false
 recomendada: true
 confiabilidade: confirmado
 capa:
-  arquivo: capas/vender-assets-games-fab-como-comecar.webp
+  arquivo: capas/vender-assets-games-fab-como-comecar-real.webp
   alt: "Imagem oficial da documentação para publicadores do Fab"
   legenda: "Imagem oficial da documentação para publicadores do Fab."
   credito: "Epic Games — Fab"

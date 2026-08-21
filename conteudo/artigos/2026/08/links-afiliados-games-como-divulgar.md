@@ -14,7 +14,7 @@ destaque: false
 recomendada: true
 confiabilidade: confirmado
 capa:
-  arquivo: capas/links-afiliados-games-como-divulgar.webp
+  arquivo: capas/links-afiliados-games-como-divulgar-real.webp
   alt: "Controle de videogame conectado a um computador"
   legenda: "Controle de videogame conectado a um computador."
   credito: "marxjohnson00 / Wikimedia Commons"

@@ -14,7 +14,7 @@ destaque: false
 recomendada: true
 confiabilidade: confirmado
 capa:
-  arquivo: capas/publicar-jogo-steam-custos-steam-direct.webp
+  arquivo: capas/publicar-jogo-steam-custos-steam-direct-real.webp
   alt: "Computador gamer montado e pronto para executar projetos e jogos de PC"
   legenda: "Computador gamer montado e pronto para executar projetos e jogos de PC."
   credito: "Brian Wong / Wikimedia Commons"

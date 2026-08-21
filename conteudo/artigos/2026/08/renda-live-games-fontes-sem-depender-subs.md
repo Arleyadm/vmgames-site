@@ -14,7 +14,7 @@ destaque: false
 recomendada: true
 confiabilidade: confirmado
 capa:
-  arquivo: capas/renda-live-games-fontes-sem-depender-subs.webp
+  arquivo: capas/renda-live-games-fontes-sem-depender-subs-real.webp
   alt: "Criadores participando de apresentação ao vivo durante a TwitchCon"
   legenda: "Criadores participando de apresentação ao vivo durante a TwitchCon."
   credito: "LeahBeahReah / Wikimedia Commons"

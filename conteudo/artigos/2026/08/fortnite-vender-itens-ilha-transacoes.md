@@ -14,7 +14,7 @@ destaque: false
 recomendada: true
 confiabilidade: confirmado
 capa:
-  arquivo: capas/fortnite-vender-itens-ilha-transacoes.webp
+  arquivo: capas/fortnite-vender-itens-ilha-transacoes-real.webp
   alt: "Imagem oficial da documentação de monetização de ilhas do Fortnite"
   legenda: "Imagem oficial da documentação de monetização de ilhas do Fortnite."
   credito: "Epic Games"

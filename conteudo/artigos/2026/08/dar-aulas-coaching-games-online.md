@@ -14,7 +14,7 @@ destaque: false
 recomendada: true
 confiabilidade: confirmado
 capa:
-  arquivo: capas/dar-aulas-coaching-games-online.webp
+  arquivo: capas/dar-aulas-coaching-games-online-real.webp
   alt: "Equipe profissional reunida durante campeonato de esporte eletrônico"
   legenda: "Equipe profissional reunida durante campeonato de esporte eletrônico."
   credito: "Esports Kingdom / Wikimedia Commons"

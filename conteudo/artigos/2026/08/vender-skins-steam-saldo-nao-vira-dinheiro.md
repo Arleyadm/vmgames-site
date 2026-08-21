@@ -14,7 +14,7 @@ destaque: false
 recomendada: true
 confiabilidade: confirmado
 capa:
-  arquivo: capas/vender-skins-steam-saldo-nao-vira-dinheiro.webp
+  arquivo: capas/vender-skins-steam-saldo-nao-vira-dinheiro-real.webp
   alt: "Computador gamer iluminado usado para jogos e acesso a mercados digitais"
   legenda: "Computador gamer iluminado usado para jogos e acesso a mercados digitais."
   credito: "PantheraLeo1359531 / Wikimedia Commons"

@@ -14,7 +14,7 @@ destaque: false
 recomendada: true
 confiabilidade: confirmado
 capa:
-  arquivo: capas/trabalhar-testando-jogos-vagas-golpes.webp
+  arquivo: capas/trabalhar-testando-jogos-vagas-golpes-real.webp
   alt: "Profissional trabalhando diante de um terminal de computador"
   legenda: "Profissional trabalhando diante de um terminal de computador."
   credito: "Jonathan Schilling / Wikimedia Commons"

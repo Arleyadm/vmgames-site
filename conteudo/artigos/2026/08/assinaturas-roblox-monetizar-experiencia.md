@@ -14,7 +14,7 @@ destaque: false
 recomendada: true
 confiabilidade: confirmado
 capa:
-  arquivo: capas/assinaturas-roblox-monetizar-experiencia.webp
+  arquivo: capas/assinaturas-roblox-monetizar-experiencia-real.webp
   alt: "Imagem oficial do Roblox Creator Hub sobre desenvolvimento e monetização"
   legenda: "Imagem oficial do Roblox Creator Hub sobre desenvolvimento e monetização."
   credito: "Roblox Creator Hub"

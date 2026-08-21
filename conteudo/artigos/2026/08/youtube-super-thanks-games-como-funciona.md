@@ -14,7 +14,7 @@ destaque: false
 recomendada: true
 confiabilidade: confirmado
 capa:
-  arquivo: capas/youtube-super-thanks-games-como-funciona.webp
+  arquivo: capas/youtube-super-thanks-games-como-funciona-real.webp
   alt: "Criador em estúdio de gravação com microfone e equipamentos de produção"
   legenda: "Criador em estúdio de gravação com microfone e equipamentos de produção."
   credito: "Radio Studio Delta / Wikimedia Commons"
