@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/vender-assets-games-fab-como-comecar.webp
-  alt: "Ilustração editorial autoral sobre como vender assets de games no fab: comissão, pagamento e portfólio"
-  legenda: "Guia VM Games com foco em práticas legítimas, regras oficiais e expectativa realista."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Imagem oficial da documentação para publicadores do Fab"
+  legenda: "Imagem oficial da documentação para publicadores do Fab."
+  credito: "Epic Games — Fab"
+  licenca: material oficial/editorial
 fontes:
   - url: https://dev.epicgames.com/documentation/fab/publisher-get-started-in-fab
     veiculo: Epic Games

@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/links-afiliados-games-como-divulgar.webp
-  alt: "Ilustração editorial autoral sobre links de afiliados em conteúdo gamer: como recomendar sem perder confiança"
-  legenda: "Guia VM Games com foco em práticas legítimas, regras oficiais e expectativa realista."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Controle de videogame conectado a um computador"
+  legenda: "Controle de videogame conectado a um computador."
+  credito: "marxjohnson00 / Wikimedia Commons"
+  licenca: CC BY 2.0
 fontes:
   - url: https://www.conar.org.br/pdf/guia-influenciadores.pdf
     veiculo: CONAR

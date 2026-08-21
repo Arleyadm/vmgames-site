@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/renda-live-games-fontes-sem-depender-subs.webp
-  alt: "Ilustração editorial autoral sobre renda em lives de games: como não depender apenas de inscrições"
-  legenda: "Guia VM Games com foco em práticas legítimas, regras oficiais e expectativa realista."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Criadores participando de apresentação ao vivo durante a TwitchCon"
+  legenda: "Criadores participando de apresentação ao vivo durante a TwitchCon."
+  credito: "LeahBeahReah / Wikimedia Commons"
+  licenca: CC BY-SA 4.0
 fontes:
   - url: https://www.twitch.tv/creatorcamp/en/paths/monetize-your-content/
     veiculo: Twitch Creator Camp

@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/vender-skins-steam-saldo-nao-vira-dinheiro.webp
-  alt: "Ilustração editorial autoral sobre vender skins na steam dá dinheiro? entenda o limite da carteira steam"
-  legenda: "Guia VM Games com foco em práticas legítimas, regras oficiais e expectativa realista."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Computador gamer iluminado usado para jogos e acesso a mercados digitais"
+  legenda: "Computador gamer iluminado usado para jogos e acesso a mercados digitais."
+  credito: "PantheraLeo1359531 / Wikimedia Commons"
+  licenca: CC BY 4.0
 fontes:
   - url: https://help.steampowered.com/pt/faqs/view/61F0-72B7-9A18-C70B
     veiculo: Suporte Steam

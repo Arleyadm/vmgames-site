@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/dar-aulas-coaching-games-online.webp
-  alt: "Ilustração editorial autoral sobre como dar aulas de jogos online sem prometer vitória ou ranking"
-  legenda: "Guia VM Games com foco em práticas legítimas, regras oficiais e expectativa realista."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Equipe profissional reunida durante campeonato de esporte eletrônico"
+  legenda: "Equipe profissional reunida durante campeonato de esporte eletrônico."
+  credito: "Esports Kingdom / Wikimedia Commons"
+  licenca: CC BY 2.0
 fontes:
   - url: https://discord.com/safety
     veiculo: Discord Safety

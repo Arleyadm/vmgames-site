@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/youtube-super-thanks-games-como-funciona.webp
-  alt: "Ilustração editorial autoral sobre super thanks no youtube: como gamers podem receber apoio nos vídeos"
-  legenda: "Guia VM Games com foco em práticas legítimas, regras oficiais e expectativa realista."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Criador em estúdio de gravação com microfone e equipamentos de produção"
+  legenda: "Criador em estúdio de gravação com microfone e equipamentos de produção."
+  credito: "Radio Studio Delta / Wikimedia Commons"
+  licenca: CC BY 4.0
 fontes:
   - url: https://support.google.com/youtube/answer/10879035?hl=pt-BR
     veiculo: Ajuda do YouTube

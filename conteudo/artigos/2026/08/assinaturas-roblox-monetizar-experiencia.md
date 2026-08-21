@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/assinaturas-roblox-monetizar-experiencia.webp
-  alt: "Ilustração editorial autoral sobre assinaturas no roblox: como monetizar uma experiência sem vender vantagem injusta"
-  legenda: "Guia VM Games com foco em práticas legítimas, regras oficiais e expectativa realista."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Imagem oficial do Roblox Creator Hub sobre desenvolvimento e monetização"
+  legenda: "Imagem oficial do Roblox Creator Hub sobre desenvolvimento e monetização."
+  credito: "Roblox Creator Hub"
+  licenca: material oficial/editorial
 fontes:
   - url: https://create.roblox.com/docs/production/monetization/subscriptions
     veiculo: Roblox Creator Hub

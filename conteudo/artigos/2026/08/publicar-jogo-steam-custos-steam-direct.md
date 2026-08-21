@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/publicar-jogo-steam-custos-steam-direct.webp
-  alt: "Ilustração editorial autoral sobre quanto custa publicar um jogo na steam e quando a taxa pode voltar"
-  legenda: "Guia VM Games com foco em práticas legítimas, regras oficiais e expectativa realista."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Computador gamer montado e pronto para executar projetos e jogos de PC"
+  legenda: "Computador gamer montado e pronto para executar projetos e jogos de PC."
+  credito: "Brian Wong / Wikimedia Commons"
+  licenca: CC BY-SA 2.0
 fontes:
   - url: https://partner.steamgames.com/doc/gettingstarted/appfee?l=portuguese
     veiculo: Steamworks

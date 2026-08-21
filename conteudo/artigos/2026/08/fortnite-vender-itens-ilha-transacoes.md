@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/fortnite-vender-itens-ilha-transacoes.webp
-  alt: "Ilustração editorial autoral sobre fortnite permite vender itens em ilhas: entenda as transações e os pagamentos"
-  legenda: "Guia VM Games com foco em práticas legítimas, regras oficiais e expectativa realista."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Imagem oficial da documentação de monetização de ilhas do Fortnite"
+  legenda: "Imagem oficial da documentação de monetização de ilhas do Fortnite."
+  credito: "Epic Games"
+  licenca: material oficial/editorial
 fontes:
   - url: https://dev.epicgames.com/documentation/fortnite/account-level-monetization-in-fortnite
     veiculo: Epic Games

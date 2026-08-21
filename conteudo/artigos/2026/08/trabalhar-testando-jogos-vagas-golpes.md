@@ -15,10 +15,10 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/trabalhar-testando-jogos-vagas-golpes.webp
-  alt: "Ilustração editorial autoral sobre trabalhar testando jogos: o que um qa faz e como evitar vagas falsas"
-  legenda: "Guia VM Games com foco em práticas legítimas, regras oficiais e expectativa realista."
-  credito: "VM Games"
-  licenca: arte-autoral
+  alt: "Profissional trabalhando diante de um terminal de computador"
+  legenda: "Profissional trabalhando diante de um terminal de computador."
+  credito: "Jonathan Schilling / Wikimedia Commons"
+  licenca: CC BY-SA 4.0
 fontes:
   - url: https://consumer.ftc.gov/articles/job-scams
     veiculo: Federal Trade Commission
