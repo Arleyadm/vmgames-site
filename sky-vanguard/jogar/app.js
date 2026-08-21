@@ -47357,27 +47357,30 @@ cvsw_WebLauncherKt_access$decodificaBase64 = $texto => {
     return var$8;
 },
 cvsw_WebLauncherKt_mostrarAnuncioPremiadoJs$js_body$_2 = (var$1, var$2) => {
-    if (typeof window.adBreak !== 'function') {
-        var$2.recebeu(false);
-        return;
-    }
-    var assistiu = false;
-    var terminou = false;
-    var concluir = function(ganhou) {
-        if (terminou) return;
-        terminou = true;
-        clearTimeout(limite);
+    var respondido = false;
+    var responde = function(ganhou) {
+        if (respondido) {
+            return;
+        }
+        respondido = true;
         var$2.recebeu(ganhou);
     };
-    var limite = setTimeout(function() {
-        window.__h5Frustradas = (window.__h5Frustradas || 0) + 1;
-        if (window.__h5Frustradas >= 2) {
+    if (typeof window.adBreak !== 'function' || window.__h5SemAnuncio) {
+        responde(false);
+        return;
+    }
+    var comecou = false;
+    var assistiu = false;
+    setTimeout(function() {
+        if (!respondido && !comecou) {
             window.__h5SemAnuncio = true;
+            responde(false);
         }
-        concluir(true);
-    }, 8000);
-    window.adBreak({ type : 'reward', name : var$1, beforeReward : function(mostrarAnuncio) {
-        clearTimeout(limite);
+    }, 4000);
+    window.adBreak({ type : 'reward', name : var$1, beforeAd : function() {
+        comecou = true;
+    }, beforeReward : function(mostrarAnuncio) {
+        comecou = true;
         mostrarAnuncio();
     }, adViewed : function() {
         assistiu = true;
@@ -47394,7 +47397,7 @@ cvsw_WebLauncherKt_mostrarAnuncioPremiadoJs$js_body$_2 = (var$1, var$2) => {
                 window.__h5SemAnuncio = true;
             }
         }
-        concluir(status === 'viewed' || status === 'dismissed' ? assistiu : true);
+        responde(assistiu);
     } });
 },
 cvsw_WebLauncherKt_abrirSeletorDeFoto$js_body$_4 = var$1 => {
@@ -58253,7 +58256,9 @@ function ju_TemplateCollections$SingleElementSet() {
 }
 let ju_TemplateCollections$SingleElementSet_contains = ($this, $o) => {
     return ju_Objects_equals($o, $this.$element);
-};
+},
+cbgct_WebMapping = $rt_classWithoutFields(cbgc_ControllerMapping),
+cbgct_WebMapping_instance = null;
 function ju_AbstractList$TListIteratorImpl() {
     let a = this; jl_Object.call(a);
     a.$i = 0;
@@ -58283,9 +58288,7 @@ ju_AbstractList$TListIteratorImpl_previous = $this => {
     var$2 = new ju_NoSuchElementException;
     jl_Exception__init_(var$2);
     $rt_throw(var$2);
-},
-cbgct_WebMapping = $rt_classWithoutFields(cbgc_ControllerMapping),
-cbgct_WebMapping_instance = null;
+};
 function cgxgtbw_WebInput$1() {
     let a = this; jl_Object.call(a);
     a.$val$document = null;
@@ -60698,8 +60701,8 @@ cvs_GameplayScreenKt, 0, jl_Object, [], 17, 0, 0, 0,
 kc_SetsKt__SetsJVMKt, 0, jl_Object, [], 0, 0, 0, 0,
 kc_SetsKt__SetsKt, 0, kc_SetsKt__SetsJVMKt, [], 0, 0, 0, 0,
 ju_TemplateCollections$SingleElementSet, 0, ju_TemplateCollections$AbstractImmutableSet, [], 0, 0, 0, ["$contains0", $rt_wrapFunction1(ju_TemplateCollections$SingleElementSet_contains)],
-ju_AbstractList$TListIteratorImpl, 0, jl_Object, [ju_ListIterator], 0, 0, 0, ["$hasPrevious", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_hasPrevious), "$previous", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_previous)]]);
-$rt_metadata([cbgct_WebMapping, 0, cbgc_ControllerMapping, [], 1, 0, 0, 0,
+cbgct_WebMapping, 0, cbgc_ControllerMapping, [], 1, 0, 0, 0]);
+$rt_metadata([ju_AbstractList$TListIteratorImpl, 0, jl_Object, [ju_ListIterator], 0, 0, 0, ["$hasPrevious", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_hasPrevious), "$previous", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_previous)],
 cgxgtbw_WebInput$1, 0, jl_Object, [jl_Runnable], 0, 0, 0, 0,
 cgxgtbw_WebInput$getTextInput$lambda$_69_0, "WebInput$getTextInput$lambda$_69_0", 6, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
 cgxgtbw_WebInput$getTextInput$lambda$_69_1, "WebInput$getTextInput$lambda$_69_1", 6, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
