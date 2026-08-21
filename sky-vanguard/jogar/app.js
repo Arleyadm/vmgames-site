@@ -16201,8 +16201,8 @@ cgxgtbwa_AssetDownloadImpl_loadScript = ($this, $async, $url, $listener) => {
     var$8.$val$listener0 = $listener;
     $current.addEventListener("load", otji_JS_function(otji_JSWrapper_unwrap(var$8), "handleEvent"));
     var$9 = new cgxgtbwa_AssetDownloadImpl$loadScript$lambda$_2_0;
-    var$9.$_033 = $this;
-    var$9.$_113 = $url;
+    var$9.$_032 = $this;
+    var$9.$_112 = $url;
     var$9.$_24 = $listener;
     $current.addEventListener("error", otji_JS_function(otji_JSWrapper_unwrap(var$9), "handleEvent"));
     $listener = $rt_ustr($url);
@@ -16240,8 +16240,8 @@ cgxgtbwa_AssetDownloadImpl_loadBinary = ($this, $async, $url, $listener, $count)
         jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(258)), $url), $rt_s(255)), $count);
         jl_AbstractStringBuilder_toString(var$5);
         var$5 = new cgxgtbwa_AssetDownloadImpl$loadBinary$lambda$_3_0;
-        var$5.$_037 = $this;
-        var$5.$_115 = $url;
+        var$5.$_036 = $this;
+        var$5.$_114 = $url;
         var$5.$_26 = $listener;
         var$5.$_34 = $count;
         setTimeout(otji_JS_function(otji_JSWrapper_unwrap(var$5), "onTimer"), 0);
@@ -16281,16 +16281,16 @@ cgxgtbwa_AssetDownloadImpl_loadBinaryInternally = ($this, $async, $url, $listene
     $t.$_53 = $listener;
     otjde_EventTarget_onEvent$static($request, $rt_s(262), otji_JSWrapper_unwrap($t));
     $t = new cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_3;
-    $t.$_040 = $this;
-    $t.$_117 = $url;
+    $t.$_039 = $this;
+    $t.$_116 = $url;
     $t.$_27 = $request;
     $t.$_35 = $count;
     $t.$_42 = $settled;
     $t.$_52 = $async;
     $t.$_60 = $listener;
     var$8 = new otja_XMLHttpRequest$onComplete$lambda$_23_0;
-    var$8.$_044 = $request;
-    var$8.$_119 = $t;
+    var$8.$_043 = $request;
+    var$8.$_118 = $t;
     otjde_EventTarget_onEvent$static($request, $rt_s(263), otji_JSWrapper_unwrap(var$8));
     $t = new cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_4;
     $t.$_029 = $this;
@@ -17506,11 +17506,11 @@ let cgxgtbw_WebFiles__init_0 = ($this, $config, $teaApplication) => {
         var$7 = var$5.$localStoragePrefix;
         var$8 = var$6.open($rt_ustr(var$7), 1);
         var$3 = new cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_0;
-        var$3.$_045 = var$8;
+        var$3.$_044 = var$8;
         var$8.onupgradeneeded = otji_JS_function(otji_JSWrapper_unwrap(var$3), "handleEvent");
         var$3 = new cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_1;
-        var$3.$_041 = var$4;
-        var$3.$_118 = var$8;
+        var$3.$_040 = var$4;
+        var$3.$_117 = var$8;
         var$3.$_28 = $teaApplication;
         var$8.onsuccess = otji_JS_function(otji_JSWrapper_unwrap(var$3), "handleEvent");
         var$3 = new cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_2;
@@ -17619,7 +17619,7 @@ let cgxgtbw_WebClipboard__init_0 = $this => {
     var$1.addEventListener("cut", otji_JS_function(otji_JSWrapper_unwrap(var$2), "handleEvent"));
     var$1 = cgxgtbwdi_WebWindow_getDocument(cgxgtbwdi_WebWindow_get());
     var$2 = new cgxgtbw_WebClipboard$_init_$lambda$_0_2;
-    var$2.$_042 = $this;
+    var$2.$_041 = $this;
     var$1.addEventListener("paste", otji_JS_function(otji_JSWrapper_unwrap(var$2), "handleEvent"));
 },
 cgxgtbw_WebClipboard__init_ = () => {
@@ -19982,11 +19982,11 @@ let cgxgtbw_WebClipboard$_init_$lambda$_0_1_handleEvent$exported$0 = (var$1, var
 };
 function cgxgtbw_WebClipboard$_init_$lambda$_0_2() {
     jl_Object.call(this);
-    this.$_042 = null;
+    this.$_041 = null;
 }
 let cgxgtbw_WebClipboard$_init_$lambda$_0_2_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3;
-    var$1 = var$1.$_042;
+    var$1 = var$1.$_041;
     var$3 = var$2.clipboardData;
     if (var$3 !== null)
         var$1.$content = $rt_str(var$3.getData("text/plain"));
@@ -20196,26 +20196,26 @@ function otji_IDBFactory__init_($this) {
 }
 function cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_0() {
     jl_Object.call(this);
-    this.$_045 = null;
+    this.$_044 = null;
 }
 let cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_0_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3;
-    var$2 = var$1.$_045.result;
+    var$2 = var$1.$_044.result;
     var$3 = otji_IDBObjectStoreParameters_create$js_body$_1();
     var$2.createObjectStore("FILE_DATA", var$3);
 },
 otji_EventHandler = $rt_classWithoutFields(0);
 function cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_1() {
     let a = this; jl_Object.call(a);
-    a.$_041 = null;
-    a.$_118 = null;
+    a.$_040 = null;
+    a.$_117 = null;
     a.$_28 = null;
 }
 let cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_1_handleEvent$exported$0 = var$1 => {
     let var$2, var$3, var$4, var$5;
     var$1 = var$1;
-    var$2 = var$1.$_041;
-    var$3 = var$1.$_118;
+    var$2 = var$1.$_040;
+    var$3 = var$1.$_117;
     var$1 = var$1.$_28;
     var$3 = var$3.result;
     var$2.$dataBase = var$3;
@@ -34055,15 +34055,15 @@ let cgxgtbwa_AssetDownloadImpl$2_handleEvent$exported$0 = (var$1, var$2) => {
 };
 function cgxgtbwa_AssetDownloadImpl$loadScript$lambda$_2_0() {
     let a = this; jl_Object.call(a);
-    a.$_033 = null;
-    a.$_113 = null;
+    a.$_032 = null;
+    a.$_112 = null;
     a.$_24 = null;
 }
 let cgxgtbwa_AssetDownloadImpl$loadScript$lambda$_2_0_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4;
     var$1 = var$1;
-    var$2 = var$1.$_033;
-    var$3 = var$1.$_113;
+    var$2 = var$1.$_032;
+    var$3 = var$1.$_112;
     var$1 = var$1.$_24;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
@@ -45170,7 +45170,7 @@ let cvs_SettingsScreen__init_0 = ($this, $game) => {
     var$4 = new cvs_SettingsScreen$Toggle;
     var$5 = cbgm_Rectangle__init_(170.0, 1104.0, 740.0, 100.0);
     var$6 = new cvs_SettingsScreen$_init_$lambda$_0_4;
-    var$6.$_039 = $game;
+    var$6.$_038 = $game;
     var$7 = new cvs_SettingsScreen$_init_$lambda$_0_5;
     var$7.$_013 = $game;
     cvs_SettingsScreen$Toggle__init_(var$4, $rt_s(742), var$5, var$6, var$7);
@@ -45911,10 +45911,10 @@ let cvs_SettingsScreen$_init_$lambda$_0_3_invoke = (var$0, var$1) => {
 };
 function cvs_SettingsScreen$_init_$lambda$_0_4() {
     jl_Object.call(this);
-    this.$_039 = null;
+    this.$_038 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_4_invoke = var$0 => {
-    return jl_Boolean_valueOf(cvs_SaveManager_getVibration(cvs_SkyVanguardGame_getSaveManager(var$0.$_039)));
+    return jl_Boolean_valueOf(cvs_SaveManager_getVibration(cvs_SkyVanguardGame_getSaveManager(var$0.$_038)));
 };
 function cvs_SettingsScreen$_init_$lambda$_0_5() {
     jl_Object.call(this);
@@ -46466,7 +46466,7 @@ cbgct_TeavmControllers$InstanceHolder__clinit_ = () => {
     if (!(!!!navigator.getGamepads ? 1 : 0)) {
         var$3 = window;
         var$4 = new cbgct_TeavmControllers$nativeInit$lambda$_9_0;
-        var$4.$_047 = var$1;
+        var$4.$_046 = var$1;
         var$3.addEventListener("gamepadconnected", otji_JS_function(otji_JSWrapper_unwrap(var$4), "handleEvent"));
         var$4 = new cbgct_TeavmControllers$nativeInit$lambda$_9_1;
         var$4.$_05 = var$1;
@@ -47602,7 +47602,7 @@ let cvs_SettingsScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $b
             $p.$statusTimer = 3.0;
             $element$iv = $p.$game.$platform;
             $$this$firstOrNull$iv = new cvs_SettingsScreen$pickPhoto$lambda$_2_0;
-            $$this$firstOrNull$iv.$_034 = $p;
+            $$this$firstOrNull$iv.$_033 = $p;
             $p = $element$iv;
             kji_Intrinsics_checkNotNullParameter($$this$firstOrNull$iv, $rt_s(838));
             $element$iv = new cvsw_WebPlatformServices$pickPilotPhoto$lambda$_7_0;
@@ -47818,10 +47818,10 @@ jnci_UTF8Encoder_arrayEncode = ($this, $inArray, $inPos, $inSize, $outArray, $ou
 };
 function cbgct_TeavmControllers$nativeInit$lambda$_9_0() {
     jl_Object.call(this);
-    this.$_047 = null;
+    this.$_046 = null;
 }
 let cbgct_TeavmControllers$nativeInit$lambda$_9_0_handleEvent$exported$0 = (var$1, var$2) => {
-    cbgct_TeavmControllers_handleGamepadConnect(var$1.$_047, var$2.gamepad);
+    cbgct_TeavmControllers_handleGamepadConnect(var$1.$_046, var$2.gamepad);
 };
 function cbgct_TeavmControllers$nativeInit$lambda$_9_1() {
     jl_Object.call(this);
@@ -49490,14 +49490,14 @@ cvs_ShopScreen_drawOffer = ($this, $rect, $offer) => {
 otjb_TimerHandler = $rt_classWithoutFields(0);
 function cgxgtbwa_AssetDownloadImpl$loadBinary$lambda$_3_0() {
     let a = this; jl_Object.call(a);
-    a.$_037 = null;
-    a.$_115 = null;
+    a.$_036 = null;
+    a.$_114 = null;
     a.$_26 = null;
     a.$_34 = 0;
 }
 let cgxgtbwa_AssetDownloadImpl$loadBinary$lambda$_3_0_onTimer$exported$0 = var$1 => {
     var$1 = var$1;
-    cgxgtbwa_AssetDownloadImpl_loadBinaryInternally(var$1.$_037, 1, var$1.$_115, var$1.$_26, var$1.$_34);
+    cgxgtbwa_AssetDownloadImpl_loadBinaryInternally(var$1.$_036, 1, var$1.$_114, var$1.$_26, var$1.$_34);
 };
 function cvs_GameplayScreen() {
     let a = this; cvs_BaseScreen.call(a);
@@ -49929,8 +49929,12 @@ cvs_GameplayScreen_render = ($this, $delta) => {
     if (!$this.$paused && !$this.$adOfferActive)
         cvs_GameplayScreen_update($this, $dt);
     else {
-        if ($this.$adOfferBusy)
-            $this.$adOfferCountdown = jl_Math_max(0.0, $this.$adOfferCountdown - $dt);
+        if ($this.$adOfferBusy) {
+            $delta = jl_Math_max(0.0, $this.$adOfferCountdown - $dt);
+            $this.$adOfferCountdown = $delta;
+            if ($delta <= 0.0)
+                cvs_GameplayScreen_finishAdOffer($this, 1);
+        }
         $this.$flashTimer = jl_Math_max(0.0, $this.$flashTimer - $dt);
         $this.$shakeTimer = jl_Math_max(0.0, $this.$shakeTimer - $dt);
         $this.$playerDamageFlash = jl_Math_max(0.0, $this.$playerDamageFlash - $dt);
@@ -53917,11 +53921,30 @@ cvs_GameplayScreen_acceptAdOffer = $this => {
     $this.$adOfferCountdown = 8.0;
     cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.0, 0.0, 6, null);
     var$1 = new cvs_GameplayScreen$acceptAdOffer$lambda$_120_0;
-    var$1.$_035 = $this;
+    var$1.$_034 = $this;
     kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(838));
     var$2 = new cvsw_WebPlatformServices$showRewardedAd$lambda$_2_0;
     var$2.$_07 = var$1;
     cvsw_WebLauncherKt_access$mostrarAnuncioPremiado($rt_s(2863), var$2);
+},
+cvs_GameplayScreen_finishAdOffer = ($this, $rewarded) => {
+    if (!$this.$adOfferBusy)
+        return;
+    $this.$adOfferBusy = 0;
+    $this.$adOfferActive = 0;
+    $this.$paused = 0;
+    $this.$pauseMessage = $rt_s(66);
+    $this.$flashTimer = 0.0;
+    $this.$shakeTimer = 0.0;
+    $this.$playerDamageFlash = 0.0;
+    if ($rewarded) {
+        $this.$lives = $this.$lives + 1 | 0;
+        $this.$specials = kr_RangesKt___RangesKt_coerceAtMost($this.$specials + 2 | 0, 10);
+        cvs_SaveManager_setRunBombs(cvs_SkyVanguardGame_getSaveManager($this.$game), $this.$specials);
+        $this.$invincibleTimer = jl_Math_max($this.$invincibleTimer, 3.0);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(765), 1.0, 1.1200000047683716);
+    } else if ($this.$adOfferIsLastChance)
+        cvs_GameplayScreen_endMission($this, 0);
 },
 cvs_GameplayScreen_declineAdOffer = $this => {
     if ($this.$adOfferBusy)
@@ -55716,7 +55739,7 @@ function cvs_SettingsScreen$editPilotName$1() {
 }
 function cvs_SettingsScreen$pickPhoto$lambda$_2_0() {
     jl_Object.call(this);
-    this.$_034 = null;
+    this.$_033 = null;
 }
 function cvs_MainMenuScreen$show$lambda$0$lambda$_29_0() {
     jl_Object.call(this);
@@ -55821,8 +55844,8 @@ let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_2_handleEvent$expo
 };
 function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_3() {
     let a = this; jl_Object.call(a);
-    a.$_040 = null;
-    a.$_117 = null;
+    a.$_039 = null;
+    a.$_116 = null;
     a.$_27 = null;
     a.$_35 = 0;
     a.$_42 = null;
@@ -56175,10 +56198,10 @@ k_LazyKt__LazyJVMKt_lazy = $initializer => {
 };
 function cvs_GameplayScreen$_init_$lambda$_0_1() {
     jl_Object.call(this);
-    this.$_046 = null;
+    this.$_045 = null;
 }
 let cvs_GameplayScreen$_init_$lambda$_0_1__init_0 = (var$0, var$1) => {
-    var$0.$_046 = var$1;
+    var$0.$_045 = var$1;
 },
 cvs_GameplayScreen$_init_$lambda$_0_1__init_ = var_0 => {
     let var_1 = new cvs_GameplayScreen$_init_$lambda$_0_1();
@@ -56187,23 +56210,23 @@ cvs_GameplayScreen$_init_$lambda$_0_1__init_ = var_0 => {
 },
 cvs_GameplayScreen$_init_$lambda$_0_1_invoke = var$0 => {
     let var$1;
-    var$1 = var$0.$_046;
+    var$1 = var$0.$_045;
     return cbggg_TextureRegion__init_(cvs_SkyVanguardGame_getSuperMissileTexture(var$1));
 };
 function otja_XMLHttpRequest$onComplete$lambda$_23_0() {
     let a = this; jl_Object.call(a);
-    a.$_044 = null;
-    a.$_119 = null;
+    a.$_043 = null;
+    a.$_118 = null;
 }
 let otja_XMLHttpRequest$onComplete$lambda$_23_0_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7, var$8, var$9, var$10;
     var$1 = var$1;
-    var$2 = var$1.$_044;
-    var$1 = var$1.$_119;
+    var$2 = var$1.$_043;
+    var$1 = var$1.$_118;
     if (var$2.readyState == 4) {
         var$1 = var$1;
-        var$2 = var$1.$_040;
-        var$3 = var$1.$_117;
+        var$2 = var$1.$_039;
+        var$3 = var$1.$_116;
         var$4 = var$1.$_27;
         var$5 = var$1.$_35;
         var$6 = var$1.$_42;
@@ -57148,7 +57171,7 @@ let cvsw_WebPlatformServices$pickPilotPhoto$lambda$_7_0_recebeu$exported$0 = (va
     var$2 = jl_Boolean_valueOf(var$4);
     var$1 = var$1;
     var$2 = var$2;
-    var$1 = var$1.$_034;
+    var$1 = var$1.$_033;
     var$4 = var$2.$value0;
     var$2 = cbg_Gdx_app;
     var$5 = new cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0;
@@ -58121,7 +58144,7 @@ cbgu_Justify$1__clinit_ = () => {
 };
 function cvs_GameplayScreen$acceptAdOffer$lambda$_120_0() {
     jl_Object.call(this);
-    this.$_035 = null;
+    this.$_034 = null;
 }
 function cvs_GameplayScreen$ReinforcementOrder() {
     let a = this; jl_Object.call(a);
@@ -58302,13 +58325,13 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_0_handleEvent$exported$0 = (var$1, var$
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_1() {
     let a = this; jl_Object.call(a);
-    a.$_036 = null;
-    a.$_114 = null;
+    a.$_035 = null;
+    a.$_113 = null;
     a.$_25 = null;
 }
 let cgxgtbw_WebInput$getTextInput$lambda$_69_1__init_ = (var$0, var$1, var$2, var$3) => {
-    var$0.$_036 = var$1;
-    var$0.$_114 = var$2;
+    var$0.$_035 = var$1;
+    var$0.$_113 = var$2;
     var$0.$_25 = var$3;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_1__init_0 = (var_0, var_1, var_2) => {
@@ -58319,8 +58342,8 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_1__init_0 = (var_0, var_1, var_2) => {
 cgxgtbw_WebInput$getTextInput$lambda$_69_1_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4;
     var$1 = var$1;
-    var$3 = var$1.$_036;
-    var$4 = var$1.$_114;
+    var$3 = var$1.$_035;
+    var$4 = var$1.$_113;
     var$1 = var$1.$_25;
     if (var$2.target === var$3)
         cgxgtbw_WebInput$1_run(var$1);
@@ -58350,10 +58373,10 @@ cgxgtbw_WebInput$2__clinit_ = () => {
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_2() {
     jl_Object.call(this);
-    this.$_043 = null;
+    this.$_042 = null;
 }
 let cgxgtbw_WebInput$getTextInput$lambda$_69_2__init_0 = (var$0, var$1) => {
-    var$0.$_043 = var$1;
+    var$0.$_042 = var$1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_2__init_ = var_0 => {
     let var_1 = new cgxgtbw_WebInput$getTextInput$lambda$_69_2();
@@ -58361,7 +58384,7 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_2__init_ = var_0 => {
     return var_1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_2_handleEvent$exported$0 = (var$1, var$2) => {
-    var$1 = var$1.$_043;
+    var$1 = var$1.$_042;
     var$2 = "";
     var$1.value = var$2;
     var$1.focus();
@@ -58592,12 +58615,12 @@ let cvsw_WebPlatformServices$showRewardedAd$lambda$_2_0_invoke = (var$0, var$1) 
     var$1 = jl_Boolean_valueOf(var$1.$value0);
     var$2 = var$2;
     var$1 = var$1;
-    var$2 = var$2.$_035;
+    var$2 = var$2.$_034;
     var$3 = var$1.$value0;
     var$1 = cbg_Gdx_app;
-    var$4 = new cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0;
-    var$4.$_032 = var$2;
-    var$4.$_112 = var$3;
+    var$4 = new cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_170_0;
+    var$4.$_047 = var$2;
+    var$4.$_119 = var$3;
     cgxgtbw_WebApplication_postRunnable(var$1, var$4);
     k_Unit_$callClinit();
     return k_Unit_INSTANCE;
@@ -59280,8 +59303,8 @@ let cvsw_WebPlatformServices$showInterstitialAd$lambda$_3_0_invoke = (var$0, var
     var$3 = var$1.$value0;
     var$1 = cbg_Gdx_app;
     var$4 = new cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0;
-    var$4.$_038 = var$3;
-    var$4.$_116 = var$2;
+    var$4.$_037 = var$3;
+    var$4.$_115 = var$2;
     cgxgtbw_WebApplication_postRunnable(var$1, var$4);
     k_Unit_$callClinit();
     return k_Unit_INSTANCE;
@@ -59303,30 +59326,13 @@ let cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0_onTimer$exported$0 = var
     var$1.style.removeProperty("border-color");
     var$1.style.removeProperty("animation");
 };
-function cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0() {
+function cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_170_0() {
     let a = this; jl_Object.call(a);
-    a.$_032 = null;
-    a.$_112 = 0;
+    a.$_047 = null;
+    a.$_119 = 0;
 }
-let cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0_run = var$0 => {
-    let var$1, var$2;
-    var$1 = var$0.$_032;
-    var$2 = var$0.$_112;
-    var$1.$adOfferBusy = 0;
-    var$1.$adOfferActive = 0;
-    var$1.$paused = 0;
-    var$1.$pauseMessage = $rt_s(66);
-    var$1.$flashTimer = 0.0;
-    var$1.$shakeTimer = 0.0;
-    var$1.$playerDamageFlash = 0.0;
-    if (var$2) {
-        var$1.$lives = var$1.$lives + 1 | 0;
-        var$1.$specials = kr_RangesKt___RangesKt_coerceAtMost(var$1.$specials + 2 | 0, 10);
-        cvs_SaveManager_setRunBombs(cvs_SkyVanguardGame_getSaveManager(var$1.$game), var$1.$specials);
-        var$1.$invincibleTimer = jl_Math_max(var$1.$invincibleTimer, 3.0);
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$1.$game), $rt_s(765), 1.0, 1.1200000047683716);
-    } else if (var$1.$adOfferIsLastChance)
-        cvs_GameplayScreen_endMission(var$1, 0);
+let cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_170_0_run = var$0 => {
+    cvs_GameplayScreen_finishAdOffer(var$0.$_047, var$0.$_119);
 };
 function cgxgtbwf_FileDB$1() {
     let a = this; ji_OutputStream.call(a);
@@ -59355,13 +59361,13 @@ cgxgtbwf_FileDB$1_close = $this => {
 };
 function cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0() {
     let a = this; jl_Object.call(a);
-    a.$_038 = 0;
-    a.$_116 = null;
+    a.$_037 = 0;
+    a.$_115 = null;
 }
 let cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run = var$0 => {
     let var$1, var$2, var$3, var$4, var$5, var$6, var$7, var$8, var$9, var$10, var$11;
-    var$1 = var$0.$_038;
-    var$2 = var$0.$_116;
+    var$1 = var$0.$_037;
+    var$2 = var$0.$_115;
     if (var$1) {
         cvs_SaveManager_addCoins(cvs_SkyVanguardGame_getSaveManager(var$2.$game), 500);
         var$3 = $rt_createArray(cvs_PowerType, 6);
@@ -60739,7 +60745,7 @@ jl_Byte, 0, jl_Number, [jl_Comparable], 1, 0, () => jl_Byte_$callClinit(), 0,
 cvsw_WebPlatformServices$showInterstitialAd$lambda$_3_0, 0, jl_Object, [kjf_Function1], 1, 0, 0, ["$invoke", $rt_wrapFunction1(cvsw_WebPlatformServices$showInterstitialAd$lambda$_3_0_invoke)],
 cbggg_PixmapPacker$Page$1, "PixmapPacker$Page$1", 27, cbgg_Texture, [], 0, 0, 0, ["$dispose", $rt_wrapFunction0(cbggg_PixmapPacker$Page$1_dispose)],
 cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0, "WebInput$lambda$getTextInput$4$lambda$_82_0", 6, jl_Object, [otjb_TimerHandler], 1, 0, 0, 0,
-cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0, "GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0_run)],
+cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_170_0, "GameplayScreen$acceptAdOffer$lambda$0$lambda$_170_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_170_0_run)],
 cgxgtbwf_FileDB$1, 0, ji_OutputStream, [], 0, 0, 0, ["$close", $rt_wrapFunction0(cgxgtbwf_FileDB$1_close)],
 cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0, "ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run)],
 cgxgtbw_WebPreloadApplicationListener$2, 0, jl_Object, [cgxgtbwa_AssetLoaderListener], 0, 0, 0, ["$onFailure", $rt_wrapFunction1(cgxgtbwa_AssetLoaderListener_onFailure)]]);
