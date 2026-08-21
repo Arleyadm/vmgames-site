@@ -2,6 +2,39 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://vmgames.com.br/blog/sugar-strike-fps-online-navegador-como-funciona/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-20T22:22:00-03:00</news:publication_date>
+      <news:title>Sugar Strike leva FPS online a uma cidade de doces direto no navegador</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/sky-vanguard-jogar-gratis-navegador-android/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-20T22:21:00-03:00</news:publication_date>
+      <news:title>Sky Vanguard pode ser jogado grátis no navegador e no Android</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/turbo-race-28-fases-multiplayer-android/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-20T22:20:00-03:00</news:publication_date>
+      <news:title>Turbo Race reúne 28 fases, garagem e multiplayer local no Android</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://vmgames.com.br/blog/fire-emblem-fortunes-weave-switch-2/</loc>
     <news:news>
       <news:publication>

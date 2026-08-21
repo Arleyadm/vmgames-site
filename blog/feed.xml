@@ -7,8 +7,38 @@
     <atom:link href="https://vmgames.com.br/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Notícias de games, lançamentos, análises, guias e promoções em português. Publicado pela VM Games, estúdio independente de Catalão, Goiás.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Thu, 20 Aug 2026 19:57:23 -0300</lastBuildDate>
+    <lastBuildDate>Thu, 20 Aug 2026 22:19:37 -0300</lastBuildDate>
     <ttl>60</ttl>
+    <item>
+      <title>Sugar Strike leva FPS online a uma cidade de doces direto no navegador</title>
+      <link>https://vmgames.com.br/blog/sugar-strike-fps-online-navegador-como-funciona/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/sugar-strike-fps-online-navegador-como-funciona/</guid>
+      <pubDate>Thu, 20 Aug 2026 22:22:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Notícias</category>
+      <description>Entenda Sugar Strike, FPS multiplayer gratuito com salas online, dez armas, equipamentos e tecnologia 3D própria que roda no navegador.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/sugar-strike-fps-online-navegador-como-funciona.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Sky Vanguard pode ser jogado grátis no navegador e no Android</title>
+      <link>https://vmgames.com.br/blog/sky-vanguard-jogar-gratis-navegador-android/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/sky-vanguard-jogar-gratis-navegador-android/</guid>
+      <pubDate>Thu, 20 Aug 2026 22:21:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>PC</category>
+      <description>Sky Vanguard leva a ação dos fliperamas ao navegador e ao Android com 30 fases, chefes, evolução de nave e controles para PC e celular.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/sky-vanguard-jogar-gratis-navegador-android.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Turbo Race reúne 28 fases, garagem e multiplayer local no Android</title>
+      <link>https://vmgames.com.br/blog/turbo-race-28-fases-multiplayer-android/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/turbo-race-28-fases-multiplayer-android/</guid>
+      <pubDate>Thu, 20 Aug 2026 22:20:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Mobile</category>
+      <description>Conheça Turbo Race, jogo gratuito para Android com 28 fases, melhorias de carro, três formas de controle e multiplayer local sem internet.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/turbo-race-28-fases-multiplayer-android.webp" type="image/webp" length="0"/>
+    </item>
     <item>
       <title>Fire Emblem: Fortune's Weave chega ao Switch 2 em setembro; veja o que muda</title>
       <link>https://vmgames.com.br/blog/fire-emblem-fortunes-weave-switch-2/</link>
@@ -278,26 +308,6 @@
       <category>PC</category>
       <description>O Firefox entrou para a lista de navegadores com suporte oficial ao GeForce NOW. O anúncio é da Mozilla e vale para o Firefox no Windows, com até 1440p e 120 quadros por segundo no plano Ultimate.</description>
       <enclosure url="https://vmgames.com.br/blog/img/capas/geforce-now-chega-ao-firefox.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Horizon Hunters Gathering estaria abandonando o formato live service, diz Bloomberg</title>
-      <link>https://vmgames.com.br/blog/horizon-hunters-gathering-sem-live-service/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/horizon-hunters-gathering-sem-live-service/</guid>
-      <pubDate>Wed, 19 Aug 2026 20:50:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>PlayStation</category>
-      <description>Reportagem de Jason Schreier na Bloomberg afirma que o multiplayer de Horizon perdeu os elementos de live service após reação negativa em testes fechados. A Sony não confirmou, e o estúdio teria até dezembro para mostrar resultado.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/horizon-hunters-gathering-sem-live-service.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Game Pass recebe Resonance: A Plague Tale Legacy e mais nove jogos até 1º de setembro</title>
-      <link>https://vmgames.com.br/blog/xbox-game-pass-segunda-leva-agosto-2026/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/xbox-game-pass-segunda-leva-agosto-2026/</guid>
-      <pubDate>Wed, 19 Aug 2026 20:40:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Xbox</category>
-      <description>A Microsoft confirmou a segunda leva de agosto do Game Pass: dez jogos entrando até 1º de setembro, quatro deles no dia do lançamento, e seis saindo do catálogo entre 31 de agosto e 6 de setembro.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/xbox-game-pass-segunda-leva-agosto-2026.webp" type="image/webp" length="0"/>
     </item>
   </channel>
 </rss>
