@@ -750,8 +750,8 @@ jl_Object_monitorEnterWait = ($o, $count, $callback) => {
     }
     $monitor = $monitor.$enteringThreads;
     var$6 = new jl_Object$monitorEnterWait$lambda$_6_0;
-    var$6.$_07 = $thread_0;
-    var$6.$_11 = $o;
+    var$6.$_06 = $thread_0;
+    var$6.$_12 = $o;
     var$6.$_20 = $count;
     var$6.$_30 = $callback;
     $o = $monitor;
@@ -816,7 +816,7 @@ jl_Object_monitorExit = $o => {
             var$2 = var$2.$enteringThreads;
             if (var$2 !== null && !ju_ArrayDeque_isEmpty(var$2)) {
                 var$2 = new jl_Object$monitorExit$lambda$_8_1;
-                var$2.$_027 = $o;
+                var$2.$_026 = $o;
                 otp_Platform_schedule(var$2, 0);
             } else
                 jl_Object_isEmptyMonitor($o);
@@ -956,7 +956,7 @@ cbgggf_FreeTypeFontGenerator$1__clinit_ = () => {
 };
 function cbggg_BitmapFont$BitmapFontData() {
     let a = this; jl_Object.call(a);
-    a.$name8 = null;
+    a.$name5 = null;
     a.$imagePaths = null;
     a.$fontFile = null;
     a.$flipped = 0;
@@ -1019,7 +1019,7 @@ cbggg_BitmapFont$BitmapFontData_load = ($this, $fontFile, $flip) => {
     if ($this.$imagePaths !== null)
         $rt_throw(jl_IllegalStateException__init_($rt_s(1)));
     $tokens = $fontFile;
-    $this.$name8 = cgxgtbw_WebFileHandle_nameWithoutExtension($tokens);
+    $this.$name5 = cgxgtbw_WebFileHandle_nameWithoutExtension($tokens);
     $reader = ji_BufferedReader__init_(ji_InputStreamReader__init_0(cgxgtbw_WebFileHandle_read($tokens)), 512);
     a: {
         b: {
@@ -1980,7 +1980,7 @@ cbgggf_FreeTypeFontGenerator_setPixelSizes = ($this, $pixelWidth, $pixelHeight) 
 cbgggf_FreeTypeFontGenerator_generateData = ($this, $parameter, $data) => {
     let $characters, $charactersLength, $incremental, $flags, $fontMetrics, var$8, $baseLine, $c, var$11, $heights, $ownsAtlas, $i, var$15, $packer, $size, $packStrategy, $maxGlyphHeight, $stroker, $i_0, $missingGlyph, $heightsCount, $best, $maxHeight, $height, $glyph, $tmpChar, $firstChar, $first, $firstIndex, $ii, $secondChar, $second, $secondIndex, $kerning, $spaceGlyph;
     a: {
-        $data.$name8 = jl_StringBuilder_toString(jl_StringBuilder_append0(jl_StringBuilder_append4(jl_StringBuilder_append4(jl_StringBuilder__init_(), $this.$name9), $rt_s(36)), $parameter.$size9));
+        $data.$name5 = jl_StringBuilder_toString(jl_StringBuilder_append0(jl_StringBuilder_append4(jl_StringBuilder_append4(jl_StringBuilder__init_(), $this.$name9), $rt_s(36)), $parameter.$size9));
         $characters = (jl_String_toCharArray($parameter.$characters)).data;
         $charactersLength = $characters.length;
         $incremental = $parameter.$incremental;
@@ -2953,7 +2953,7 @@ function cbgss_Actor() {
     a.$listeners0 = null;
     a.$captureListeners = null;
     a.$actions0 = null;
-    a.$name6 = null;
+    a.$name7 = null;
     a.$touchable = null;
     a.$visible = 0;
     a.$debug2 = 0;
@@ -3445,7 +3445,7 @@ cbgss_Actor_getDebug = $this => {
 },
 cbgss_Actor_toString = $this => {
     let $name, $dotIndex;
-    $name = $this.$name6;
+    $name = $this.$name7;
     if ($name === null) {
         $name = jl_Class_getName(jl_Object_getClass($this));
         $dotIndex = jl_String_lastIndexOf($name, 46);
@@ -3762,7 +3762,7 @@ cbgssu_Image_getPrefHeight = $this => {
 },
 cbgssu_Image_toString = $this => {
     let $name, $className, $dotIndex;
-    $name = $this.$name6;
+    $name = $this.$name7;
     if ($name !== null)
         return $name;
     $className = jl_Class_getName(jl_Object_getClass($this));
@@ -9219,7 +9219,7 @@ function jl_Class() {
     let a = this; jl_Object.call(a);
     a.$flags1 = 0;
     a.$classInfo = null;
-    a.$name5 = null;
+    a.$name6 = null;
     a.$simpleName = null;
 }
 let jl_Class_createClass = $classInfo => {
@@ -9264,9 +9264,9 @@ jl_Class_getName = $this => {
                 }
             }
         }
-        $this.$name5 = $result;
+        $this.$name6 = $result;
     }
-    return $this.$name5;
+    return $this.$name6;
 },
 jl_Class_getSimpleName = $this => {
     let $lastDot, $metadataName, $result, $lastDollar;
@@ -10498,7 +10498,7 @@ otp_Platform_clone = var$1 => {
 },
 otp_Platform_launchThread = var$1 => {
     let var$2, var$3, var$4, var$5;
-    var$1 = var$1.$_027;
+    var$1 = var$1.$_026;
     if (!jl_Object_isEmptyMonitor(var$1)) {
         var$2 = var$1.$monitor;
         if (var$2.$owner === null) {
@@ -10523,8 +10523,8 @@ otp_Platform_launchThread = var$1 => {
                 var$4 = var$4;
                 var$2.$enteringThreads = null;
                 var$1 = var$4;
-                var$2 = var$1.$_07;
-                var$4 = var$1.$_11;
+                var$2 = var$1.$_06;
+                var$4 = var$1.$_12;
                 var$3 = var$1.$_20;
                 var$1 = var$1.$_30;
                 jl_Thread_setCurrentThread(var$2);
@@ -10695,7 +10695,7 @@ cbgm_Vector2__clinit_ = () => {
 };
 function cbggg_BitmapFont() {
     let a = this; jl_Object.call(a);
-    a.$data3 = null;
+    a.$data2 = null;
     a.$regions = null;
     a.$cache = null;
     a.$flipped0 = 0;
@@ -10727,7 +10727,7 @@ cbggg_BitmapFont__init_ = () => {
 cbggg_BitmapFont__init_0 = ($this, $data, $pageRegions, $integer) => {
     let var$4, $n, $i, var$7, $file, var$9, var$10, var$11;
     $this.$flipped0 = $data.$flipped;
-    $this.$data3 = $data;
+    $this.$data2 = $data;
     $this.$integer0 = $integer;
     if ($pageRegions !== null && $pageRegions.$size0) {
         $this.$regions = $pageRegions;
@@ -10854,7 +10854,7 @@ cbggg_BitmapFont_draw = ($this, $batch, $str, $x, $y) => {
     var$6 = var$12;
     cbggg_GlyphLayout_setText0(var$6, var$10.$font, $str, 0, var$11, var$10.$color8, 0.0, 8, 0, var$5);
     $str = var$10.$font;
-    $y = $y + $str.$data3.$ascent;
+    $y = $y + $str.$data2.$ascent;
     var$13 = var$6.$runs.$size0;
     if (var$13) {
         var$14 = var$10.$pageVertices;
@@ -10938,7 +10938,7 @@ cbggg_BitmapFont_draw = ($this, $batch, $str, $x, $y) => {
                     var$8 = var$11 + 1 | 0;
                     var$19 = cbgu_NumberUtils_intToFloatColor(cbgu_IntArray_get(var$5, var$8));
                     var$11 = var$8 + 1 | 0;
-                    var$18 = var$11 >= var$5.$size1 ? (-1) : cbgu_IntArray_get(var$5, var$11);
+                    var$18 = var$11 >= var$5.$size2 ? (-1) : cbgu_IntArray_get(var$5, var$11);
                 }
                 var$9 = var$17.data;
                 var$14 = var$16.data;
@@ -10987,6 +10987,13 @@ cbggg_BitmapFont_dispose = $this => {
             }
         }
     }
+},
+cbggg_BitmapFont_toString = $this => {
+    let var$1;
+    var$1 = $this.$data2.$name5;
+    if (var$1 === null)
+        var$1 = jl_Object_toString($this);
+    return var$1;
 };
 function cbgg_Color() {
     let a = this; jl_Object.call(a);
@@ -11251,7 +11258,7 @@ cbggg_GlyphLayout_setText0 = ($this, $font, $str, $start, $end, $color, $targetW
 cbggg_GlyphLayout_setText1 = ($this, $font, $str, $start, $end, $color, $targetWidth, $halign, $wrap, $justify, $truncate) => {
     let $fontData, $wrapOrTruncate, $currentColor, var$14, var$15, $markupEnabled, $isLastRun, $y, $down, $lineRun, $lastGlyph, var$22, $runStart, $newline, $runEnd, $length, $run, $i, $runWidth, $wrapIndex;
     cbggg_GlyphLayout_reset($this);
-    $fontData = $font.$data3;
+    $fontData = $font.$data2;
     if ($start == $end) {
         $this.$height4 = $fontData.$capHeight;
         return;
@@ -11263,14 +11270,14 @@ cbggg_GlyphLayout_setText1 = ($this, $font, $str, $start, $end, $color, $targetW
     $font = $this.$colors;
     var$14 = $font.$items1;
     var$15 = var$14.data;
-    $wrap = $font.$size1;
+    $wrap = $font.$size2;
     if (($wrap + 1 | 0) >= var$15.length)
         var$14 = cbgu_IntArray_resize($font, jl_Math_max0(8, $wrap * 1.75 | 0));
     var$15 = var$14.data;
-    $wrap = $font.$size1;
+    $wrap = $font.$size2;
     var$15[$wrap] = 0;
     var$15[$wrap + 1 | 0] = $currentColor;
-    $font.$size1 = $wrap + 2 | 0;
+    $font.$size2 = $wrap + 2 | 0;
     $markupEnabled = $fontData.$markupEnabled;
     if ($markupEnabled)
         cbgu_IntArray_add(cbggg_GlyphLayout_colorStack, $currentColor);
@@ -11335,14 +11342,14 @@ cbggg_GlyphLayout_setText1 = ($this, $font, $str, $start, $end, $color, $targetW
             $this.$glyphCount = $this.$glyphCount + $run.$glyphs.$size0 | 0;
             if ($currentColor != var$22) {
                 $font = $this.$colors;
-                $wrap = cbgu_IntArray_get($font, $font.$size1 - 2 | 0);
+                $wrap = cbgu_IntArray_get($font, $font.$size2 - 2 | 0);
                 $i = $this.$glyphCount;
                 if ($wrap != $i) {
                     cbgu_IntArray_add($this.$colors, $i);
                     cbgu_IntArray_add($this.$colors, $currentColor);
                 } else {
                     $font = $this.$colors;
-                    cbgu_IntArray_set($font, $font.$size1 - 1 | 0, $currentColor);
+                    cbgu_IntArray_set($font, $font.$size2 - 1 | 0, $currentColor);
                 }
                 var$22 = $currentColor;
             }
@@ -11560,13 +11567,13 @@ cbggg_GlyphLayout_truncate = ($this, $fontData, $run, $targetWidth, $truncate) =
             if ($fontData.$markupEnabled)
                 while (true) {
                     $fontData = $this.$colors;
-                    $droppedGlyphCount = $fontData.$size1;
+                    $droppedGlyphCount = $fontData.$size2;
                     if ($droppedGlyphCount <= 2)
                         break b;
                     if (cbgu_IntArray_get($fontData, $droppedGlyphCount - 2 | 0) < $this.$glyphCount)
                         break b;
                     $fontData = $this.$colors;
-                    $fontData.$size1 = $fontData.$size1 - 2 | 0;
+                    $fontData.$size2 = $fontData.$size2 - 2 | 0;
                 }
         }
     }
@@ -11610,21 +11617,21 @@ cbggg_GlyphLayout_wrap = ($this, $fontData, $first, $secondStart) => {
             $this.$glyphCount = $this.$glyphCount - $droppedGlyphCount | 0;
             if ($fontData.$markupEnabled) {
                 $glyphs1 = $this.$colors;
-                if (cbgu_IntArray_get($glyphs1, $glyphs1.$size1 - 2 | 0) > $this.$glyphCount) {
+                if (cbgu_IntArray_get($glyphs1, $glyphs1.$size2 - 2 | 0) > $this.$glyphCount) {
                     $lastColor = cbgu_IntArray_peek($this.$colors);
                     while (true) {
                         $glyphs1 = $this.$colors;
-                        $secondStart = cbgu_IntArray_get($glyphs1, $glyphs1.$size1 - 2 | 0);
+                        $secondStart = cbgu_IntArray_get($glyphs1, $glyphs1.$size2 - 2 | 0);
                         $firstGlyphCount = $this.$glyphCount;
                         if ($secondStart <= $firstGlyphCount)
                             break;
                         $glyphs1 = $this.$colors;
-                        $glyphs1.$size1 = $glyphs1.$size1 - 2 | 0;
+                        $glyphs1.$size2 = $glyphs1.$size2 - 2 | 0;
                     }
                     $glyphs1 = $this.$colors;
-                    cbgu_IntArray_set($glyphs1, $glyphs1.$size1 - 2 | 0, $firstGlyphCount);
+                    cbgu_IntArray_set($glyphs1, $glyphs1.$size2 - 2 | 0, $firstGlyphCount);
                     $glyphs1 = $this.$colors;
-                    cbgu_IntArray_set($glyphs1, $glyphs1.$size1 - 1 | 0, $lastColor);
+                    cbgu_IntArray_set($glyphs1, $glyphs1.$size2 - 1 | 0, $lastColor);
                 }
             }
         }
@@ -11703,7 +11710,7 @@ cbggg_GlyphLayout_wrap = ($this, $fontData, $first, $secondStart) => {
             $this.$glyphCount = $secondStart;
             if ($fontData.$markupEnabled && $droppedGlyphCount > 0) {
                 $reductionThreshold = $secondStart - $secondGlyphCount | 0;
-                $i = $this.$colors.$size1 - 2 | 0;
+                $i = $this.$colors.$size2 - 2 | 0;
                 while (true) {
                     if ($i < 2)
                         break c;
@@ -11784,7 +11791,7 @@ cbggg_GlyphLayout_parseColorMarkup = ($this, $str, $start, $end) => {
         case 93:
             cbggg_GlyphLayout_$callClinit();
             $str = cbggg_GlyphLayout_colorStack;
-            if ($str.$size1 > 1)
+            if ($str.$size2 > 1)
                 cbgu_IntArray_pop($str);
             return 0;
         default:
@@ -12799,7 +12806,7 @@ cgxgtbw_WebApplication_printErrorStack = $obj => {
         ju_ArrayList_add0($throwables, 0, jl_AbstractStringBuilder_toString($jsException));
         $root = jl_Throwable_getCause($root);
     }
-    $i = $errors.$size2;
+    $i = $errors.$size1;
     $errorsJS = $rt_createArray(jl_Object, $i);
     var$9 = $errorsJS.data;
     $exceptions = $rt_createArray(jl_String, $i);
@@ -13301,7 +13308,7 @@ cvs_SkyVanguardGame_createFonts = $this => {
             $t = cbgggf_FreeTypeFontGenerator_generateFont($medium, cvs_SkyVanguardGame_createFonts$lambda$1$params($rt_s(208), $langChars, 26));
             cbgggf_FreeTypeFontGenerator_dispose($bold);
             cbgggf_FreeTypeFontGenerator_dispose($medium);
-            $extraChars = k_Result_constructor_impl(k_Triple__init_0($f, $s, $t));
+            $extraChars = k_Result_constructor_impl(k_Triple__init_($f, $s, $t));
             break d;
         } catch ($$e) {
             $$je = $rt_wrapException($$e);
@@ -13318,7 +13325,7 @@ cvs_SkyVanguardGame_createFonts = $this => {
         $extraChars = null;
     $generated = $extraChars;
     if ($generated !== null) {
-        $f = $generated.$first6;
+        $f = $generated.$first5;
         kji_Intrinsics_checkNotNullExpressionValue($f, $rt_s(209));
         $this.$font0 = $f;
         $f = $generated.$second0;
@@ -13329,20 +13336,20 @@ cvs_SkyVanguardGame_createFonts = $this => {
         $this.$tinyFont = $f;
     } else {
         $extraChars = cbggg_BitmapFont__init_();
-        cbggg_BitmapFont$BitmapFontData_setScale($extraChars.$data3, 2.1500000953674316, 2.1500000953674316);
+        cbggg_BitmapFont$BitmapFontData_setScale($extraChars.$data2, 2.1500000953674316, 2.1500000953674316);
         $boldFile = (cbggg_BitmapFont_getRegion($extraChars)).$texture;
         cbgg_Texture$TextureFilter_$callClinit();
         $f = cbgg_Texture$TextureFilter_Linear;
         cbgg_GLTexture_setFilter($boldFile, $f, $f);
         $this.$font0 = $extraChars;
         $extraChars = cbggg_BitmapFont__init_();
-        cbggg_BitmapFont$BitmapFontData_setScale($extraChars.$data3, 1.350000023841858, 1.350000023841858);
+        cbggg_BitmapFont$BitmapFontData_setScale($extraChars.$data2, 1.350000023841858, 1.350000023841858);
         $boldFile = (cbggg_BitmapFont_getRegion($extraChars)).$texture;
         $f = cbgg_Texture$TextureFilter_Linear;
         cbgg_GLTexture_setFilter($boldFile, $f, $f);
         $this.$smallFont = $extraChars;
         $extraChars = cbggg_BitmapFont__init_();
-        cbggg_BitmapFont$BitmapFontData_setScale($extraChars.$data3, 1.0499999523162842, 1.0499999523162842);
+        cbggg_BitmapFont$BitmapFontData_setScale($extraChars.$data2, 1.0499999523162842, 1.0499999523162842);
         $boldFile = (cbggg_BitmapFont_getRegion($extraChars)).$texture;
         $f = cbgg_Texture$TextureFilter_Linear;
         cbgg_GLTexture_setFilter($boldFile, $f, $f);
@@ -13363,7 +13370,7 @@ cvs_SkyVanguardGame_openCampaign = $this => {
     cvs_CampaignCatalog_$callClinit();
     var$1.$countryIndex0 = kr_RangesKt___RangesKt_coerceIn0(var$2, 0, kc_CollectionsKt__CollectionsKt_getLastIndex(cvs_CampaignCatalog_getCountries(cvs_CampaignCatalog_INSTANCE)));
     var$1.$previous1 = cbgm_Rectangle__init_(70.0, 1570.0, 150.0, 110.0);
-    var$1.$next6 = cbgm_Rectangle__init_(860.0, 1570.0, 150.0, 110.0);
+    var$1.$next5 = cbgm_Rectangle__init_(860.0, 1570.0, 150.0, 110.0);
     var$1.$back2 = cbgm_Rectangle__init_(190.0, 110.0, 700.0, 110.0);
     var$3 = ju_ArrayList__init_0(6);
     var$4 = 0;
@@ -13396,7 +13403,7 @@ cvs_SkyVanguardGame_openHangar = $this => {
     cvs_BaseScreen__init_(var$1, $this);
     var$1.$back3 = cbgm_Rectangle__init_(240.0, 84.0, 600.0, 94.0);
     var$1.$previous2 = cbgm_Rectangle__init_(70.0, 1608.0, 140.0, 104.0);
-    var$1.$next5 = cbgm_Rectangle__init_(870.0, 1608.0, 140.0, 104.0);
+    var$1.$next4 = cbgm_Rectangle__init_(870.0, 1608.0, 140.0, 104.0);
     var$1.$select = cbgm_Rectangle__init_(240.0, 310.0, 600.0, 105.0);
     var$1.$shop = cbgm_Rectangle__init_(240.0, 196.0, 600.0, 95.0);
     var$1.$hangarMessage = $rt_s(66);
@@ -13408,6 +13415,20 @@ cvs_SkyVanguardGame_openHangar = $this => {
     }
     var$1.$aircraftTiles = var$2;
     var$1.$aircraftIndex = cvs_SaveManager_getSelectedAircraft(cvs_SkyVanguardGame_getSaveManager($this));
+    var$1 = var$1;
+    cbg_Game_setScreen($this, var$1);
+},
+cvs_SkyVanguardGame_openSettings = $this => {
+    let var$1;
+    var$1 = cvs_SettingsScreen__init_($this);
+    cbg_Game_setScreen($this, var$1);
+},
+cvs_SkyVanguardGame_openCredits = $this => {
+    let var$1;
+    var$1 = new cvs_CreditsScreen;
+    kji_Intrinsics_checkNotNullParameter($this, $rt_s(212));
+    cvs_BaseScreen__init_(var$1, $this);
+    var$1.$back0 = cbgm_Rectangle__init_(190.0, 130.0, 700.0, 120.0);
     var$1 = var$1;
     cbg_Game_setScreen($this, var$1);
 },
@@ -13501,6 +13522,9 @@ cvs_PlatformServices = $rt_classWithoutFields(0),
 cvsw_WebPlatformServices = $rt_classWithoutFields(),
 cvsw_WebPlatformServices_getRewardedAdAvailable = $this => {
     return typeof window.adBreak === 'function' && !window.__h5SemAnuncio ? 1 : 0;
+},
+cvsw_WebPlatformServices_exitGame = $this => {
+    window.location.href = '/';
 },
 cvsw_WebPlatformServices_openUrl = ($this, $url) => {
     let $$je;
@@ -13919,7 +13943,7 @@ jl_Character_obtainClasses$$create = () => {
 function cbgu_IntArray() {
     let a = this; jl_Object.call(a);
     a.$items1 = null;
-    a.$size1 = 0;
+    a.$size2 = 0;
     a.$ordered0 = 0;
 }
 let cbgu_IntArray__init_2 = $this => {
@@ -13951,17 +13975,17 @@ cbgu_IntArray_add = ($this, $value) => {
     let $items, var$3, var$4, var$5;
     $items = $this.$items1;
     var$3 = $items.data;
-    var$4 = $this.$size1;
+    var$4 = $this.$size2;
     if (var$4 == var$3.length)
         $items = cbgu_IntArray_resize($this, jl_Math_max0(8, var$4 * 1.75 | 0));
     $items = $items.data;
-    var$5 = $this.$size1;
-    $this.$size1 = var$5 + 1 | 0;
+    var$5 = $this.$size2;
+    $this.$size2 = var$5 + 1 | 0;
     $items[var$5] = $value;
 },
 cbgu_IntArray_get = ($this, $index) => {
     let var$2, var$3;
-    if ($index < $this.$size1)
+    if ($index < $this.$size2)
         return $this.$items1.data[$index];
     var$2 = new jl_IndexOutOfBoundsException;
     var$3 = new jl_StringBuilder;
@@ -13969,12 +13993,12 @@ cbgu_IntArray_get = ($this, $index) => {
     jl_AbstractStringBuilder_append(var$3, $rt_s(98));
     var$3 = jl_StringBuilder_append0(var$3, $index);
     jl_AbstractStringBuilder_append(var$3, $rt_s(99));
-    jl_RuntimeException__init_(var$2, jl_AbstractStringBuilder_toString(jl_StringBuilder_append0(var$3, $this.$size1)));
+    jl_RuntimeException__init_(var$2, jl_AbstractStringBuilder_toString(jl_StringBuilder_append0(var$3, $this.$size2)));
     $rt_throw(var$2);
 },
 cbgu_IntArray_set = ($this, $index, $value) => {
     let var$3, var$4;
-    if ($index < $this.$size1) {
+    if ($index < $this.$size2) {
         $this.$items1.data[$index] = $value;
         return;
     }
@@ -13984,27 +14008,27 @@ cbgu_IntArray_set = ($this, $index, $value) => {
     jl_AbstractStringBuilder_append(var$4, $rt_s(98));
     var$4 = jl_StringBuilder_append0(var$4, $index);
     jl_AbstractStringBuilder_append(var$4, $rt_s(99));
-    jl_RuntimeException__init_(var$3, jl_AbstractStringBuilder_toString(jl_StringBuilder_append0(var$4, $this.$size1)));
+    jl_RuntimeException__init_(var$3, jl_AbstractStringBuilder_toString(jl_StringBuilder_append0(var$4, $this.$size2)));
     $rt_throw(var$3);
 },
 cbgu_IntArray_pop = $this => {
     let var$1, var$2;
     var$1 = $this.$items1.data;
-    var$2 = $this.$size1 - 1 | 0;
-    $this.$size1 = var$2;
+    var$2 = $this.$size2 - 1 | 0;
+    $this.$size2 = var$2;
     return var$1[var$2];
 },
 cbgu_IntArray_peek = $this => {
-    return $this.$items1.data[$this.$size1 - 1 | 0];
+    return $this.$items1.data[$this.$size2 - 1 | 0];
 },
 cbgu_IntArray_clear = $this => {
-    $this.$size1 = 0;
+    $this.$size2 = 0;
 },
 cbgu_IntArray_resize = ($this, $newSize) => {
     let $newItems, var$3;
     $newItems = $rt_createIntArray($newSize);
     var$3 = $newItems.data;
-    jl_System_fastArraycopy($this.$items1, 0, $newItems, 0, jl_Math_min($this.$size1, var$3.length));
+    jl_System_fastArraycopy($this.$items1, 0, $newItems, 0, jl_Math_min($this.$size2, var$3.length));
     $this.$items1 = $newItems;
     return $newItems;
 },
@@ -14015,7 +14039,7 @@ cbgu_IntArray_hashCode = $this => {
     $items = $this.$items1;
     $h = 1;
     $i = 0;
-    $n = $this.$size1;
+    $n = $this.$size2;
     while ($i < $n) {
         var$5 = $items.data;
         $h = ($h * 31 | 0) + var$5[$i] | 0;
@@ -14034,8 +14058,8 @@ cbgu_IntArray_equals = ($this, $object) => {
     $array = $object;
     if (!$array.$ordered0)
         return 0;
-    $n = $this.$size1;
-    if ($n != $array.$size1)
+    $n = $this.$size2;
+    if ($n != $array.$size2)
         return 0;
     $items1 = $this.$items1;
     $items2 = $array.$items1;
@@ -14050,7 +14074,7 @@ cbgu_IntArray_equals = ($this, $object) => {
 },
 cbgu_IntArray_toString = $this => {
     let $items, $buffer, $i;
-    if (!$this.$size1)
+    if (!$this.$size2)
         return $rt_s(102);
     $items = $this.$items1.data;
     $buffer = new jl_StringBuilder;
@@ -14058,7 +14082,7 @@ cbgu_IntArray_toString = $this => {
     jl_AbstractStringBuilder_append0($buffer, 91);
     jl_StringBuilder_append0($buffer, $items[0]);
     $i = 1;
-    while ($i < $this.$size1) {
+    while ($i < $this.$size2) {
         jl_AbstractStringBuilder_append($buffer, $rt_s(80));
         jl_StringBuilder_append0($buffer, $items[$i]);
         $i = $i + 1 | 0;
@@ -16178,7 +16202,7 @@ cgxgtbwa_AssetDownloadImpl_loadScript = ($this, $async, $url, $listener) => {
     $current.addEventListener("load", otji_JS_function(otji_JSWrapper_unwrap(var$8), "handleEvent"));
     var$9 = new cgxgtbwa_AssetDownloadImpl$loadScript$lambda$_2_0;
     var$9.$_033 = $this;
-    var$9.$_112 = $url;
+    var$9.$_113 = $url;
     var$9.$_24 = $listener;
     $current.addEventListener("error", otji_JS_function(otji_JSWrapper_unwrap(var$9), "handleEvent"));
     $listener = $rt_ustr($url);
@@ -16217,7 +16241,7 @@ cgxgtbwa_AssetDownloadImpl_loadBinary = ($this, $async, $url, $listener, $count)
         jl_AbstractStringBuilder_toString(var$5);
         var$5 = new cgxgtbwa_AssetDownloadImpl$loadBinary$lambda$_3_0;
         var$5.$_037 = $this;
-        var$5.$_114 = $url;
+        var$5.$_115 = $url;
         var$5.$_26 = $listener;
         var$5.$_34 = $count;
         setTimeout(otji_JS_function(otji_JSWrapper_unwrap(var$5), "onTimer"), 0);
@@ -16233,8 +16257,8 @@ cgxgtbwa_AssetDownloadImpl_loadBinaryInternally = ($this, $async, $url, $listene
     $settled = $rt_createBooleanArray(1);
     $settled.data[0] = 0;
     $t = new cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_0;
-    $t.$_016 = $this;
-    $t.$_13 = $url;
+    $t.$_014 = $this;
+    $t.$_14 = $url;
     $t.$_22 = $count;
     $t.$_32 = $settled;
     $t.$_40 = $async;
@@ -16242,14 +16266,14 @@ cgxgtbwa_AssetDownloadImpl_loadBinaryInternally = ($this, $async, $url, $listene
     otjde_EventTarget_onEvent$static($request, $rt_s(260), otji_JSWrapper_unwrap($t));
     $t = new cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_1;
     $t.$_02 = $this;
-    $t.$_1 = $url;
+    $t.$_10 = $url;
     $t.$_2 = $count;
     $t.$_3 = $settled;
     $t.$_4 = $async;
     $t.$_5 = $listener;
     otjde_EventTarget_onEvent$static($request, $rt_s(261), otji_JSWrapper_unwrap($t));
     $t = new cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_2;
-    $t.$_053 = $this;
+    $t.$_052 = $this;
     $t.$_122 = $url;
     $t.$_211 = $count;
     $t.$_37 = $settled;
@@ -16258,7 +16282,7 @@ cgxgtbwa_AssetDownloadImpl_loadBinaryInternally = ($this, $async, $url, $listene
     otjde_EventTarget_onEvent$static($request, $rt_s(262), otji_JSWrapper_unwrap($t));
     $t = new cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_3;
     $t.$_040 = $this;
-    $t.$_116 = $url;
+    $t.$_117 = $url;
     $t.$_27 = $request;
     $t.$_35 = $count;
     $t.$_42 = $settled;
@@ -16266,11 +16290,11 @@ cgxgtbwa_AssetDownloadImpl_loadBinaryInternally = ($this, $async, $url, $listene
     $t.$_60 = $listener;
     var$8 = new otja_XMLHttpRequest$onComplete$lambda$_23_0;
     var$8.$_044 = $request;
-    var$8.$_118 = $t;
+    var$8.$_119 = $t;
     otjde_EventTarget_onEvent$static($request, $rt_s(263), otji_JSWrapper_unwrap(var$8));
     $t = new cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_4;
     $t.$_029 = $this;
-    $t.$_19 = $url;
+    $t.$_110 = $url;
     $t.$_23 = $request;
     $t.$_33 = $count;
     $t.$_41 = $settled;
@@ -16389,7 +16413,7 @@ cgxgtbwa_AssetDownloadImpl_retryOrFail = ($this, $async, $url, $listener, $count
     jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$7, $rt_s(283)), $url), $rt_s(255)), $newCount);
     jl_AbstractStringBuilder_toString(var$7);
     var$7 = new cgxgtbwa_AssetDownloadImpl$retryOrFail$lambda$_6_0;
-    var$7.$_052 = $this;
+    var$7.$_051 = $this;
     var$7.$_121 = $async;
     var$7.$_210 = $url;
     var$7.$_36 = $listener;
@@ -17486,12 +17510,12 @@ let cgxgtbw_WebFiles__init_0 = ($this, $config, $teaApplication) => {
         var$8.onupgradeneeded = otji_JS_function(otji_JSWrapper_unwrap(var$3), "handleEvent");
         var$3 = new cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_1;
         var$3.$_041 = var$4;
-        var$3.$_117 = var$8;
+        var$3.$_118 = var$8;
         var$3.$_28 = $teaApplication;
         var$8.onsuccess = otji_JS_function(otji_JSWrapper_unwrap(var$3), "handleEvent");
         var$3 = new cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_2;
-        var$3.$_022 = var$7;
-        var$3.$_17 = $teaApplication;
+        var$3.$_021 = var$7;
+        var$3.$_18 = $teaApplication;
         var$8.onerror = otji_JS_function(otji_JSWrapper_unwrap(var$3), "handleEvent");
     }
     $this.$localStorage = var$4;
@@ -17591,7 +17615,7 @@ let cgxgtbw_WebClipboard__init_0 = $this => {
     var$1.addEventListener("copy", otji_JS_function(otji_JSWrapper_unwrap(var$2), "handleEvent"));
     var$1 = cgxgtbwdi_WebWindow_getDocument(cgxgtbwdi_WebWindow_get());
     var$2 = new cgxgtbw_WebClipboard$_init_$lambda$_0_1;
-    var$2.$_054 = $this;
+    var$2.$_053 = $this;
     var$1.addEventListener("cut", otji_JS_function(otji_JSWrapper_unwrap(var$2), "handleEvent"));
     var$1 = cgxgtbwdi_WebWindow_getDocument(cgxgtbwdi_WebWindow_get());
     var$2 = new cgxgtbw_WebClipboard$_init_$lambda$_0_2;
@@ -18373,7 +18397,7 @@ ju_AbstractCollection_contains = ($this, $o) => {
 ju_AbstractCollection_toArray = ($this, $a) => {
     let var$2, $i, $i_0, var$5, var$6;
     var$2 = $a.data;
-    $i = $this.$size2;
+    $i = $this.$size1;
     $i_0 = var$2.length;
     if ($i_0 < $i)
         $a = jlr_Array_newInstance(jl_Class_getComponentType(jl_Object_getClass($a)), $i);
@@ -19892,7 +19916,7 @@ let cgxgtbwft_LocalDBStorage_putFile = ($this, $key, $fileData) => {
     $type = $rt_ustr($key);
     $request = $objectStore.put($dbFileData, $type);
     $fileData = new cgxgtbwft_LocalDBStorage$putFile$lambda$_2_0;
-    $fileData.$_019 = $key;
+    $fileData.$_017 = $key;
     $key = otji_JS_function(otji_JSWrapper_unwrap($fileData), "handleEvent");
     $request.onerror = $key;
 },
@@ -19910,7 +19934,7 @@ cgxgtbwft_LocalDBStorage_removeFile = ($this, $key) => {
     $transaction = $rt_ustr($key);
     $request = $objectStore.delete($transaction);
     $objectStore = new cgxgtbwft_LocalDBStorage$removeFile$lambda$_3_0;
-    $objectStore.$_023 = $key;
+    $objectStore.$_022 = $key;
     $key = otji_JS_function(otji_JSWrapper_unwrap($objectStore), "handleEvent");
     $request.onerror = $key;
 },
@@ -19946,11 +19970,11 @@ let cgxgtbw_WebClipboard$_init_$lambda$_0_0_handleEvent$exported$0 = (var$1, var
 };
 function cgxgtbw_WebClipboard$_init_$lambda$_0_1() {
     jl_Object.call(this);
-    this.$_054 = null;
+    this.$_053 = null;
 }
 let cgxgtbw_WebClipboard$_init_$lambda$_0_1_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3;
-    var$1 = var$1.$_054;
+    var$1 = var$1.$_053;
     var$3 = var$2.clipboardData;
     if (var$3 !== null)
         var$3.setData("text/plain", $rt_ustr(var$1.$content));
@@ -20184,22 +20208,22 @@ otji_EventHandler = $rt_classWithoutFields(0);
 function cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_1() {
     let a = this; jl_Object.call(a);
     a.$_041 = null;
-    a.$_117 = null;
+    a.$_118 = null;
     a.$_28 = null;
 }
 let cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_1_handleEvent$exported$0 = var$1 => {
     let var$2, var$3, var$4, var$5;
     var$1 = var$1;
     var$2 = var$1.$_041;
-    var$3 = var$1.$_117;
+    var$3 = var$1.$_118;
     var$1 = var$1.$_28;
     var$3 = var$3.result;
     var$2.$dataBase = var$3;
     var$4 = var$3.transaction("FILE_DATA", "readonly");
     var$5 = var$4.objectStore("FILE_DATA").openCursor();
     var$3 = new cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_0;
-    var$3.$_017 = var$2;
-    var$3.$_14 = var$5;
+    var$3.$_015 = var$2;
+    var$3.$_15 = var$5;
     var$2 = otji_JS_function(otji_JSWrapper_unwrap(var$3), "handleEvent");
     var$5.onsuccess = var$2;
     var$2 = new cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_1;
@@ -20207,20 +20231,20 @@ let cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_1_handleEvent$exported$0 =
     var$3 = otji_JS_function(otji_JSWrapper_unwrap(var$2), "handleEvent");
     var$4.oncomplete = var$3;
     var$2 = new cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_2;
-    var$2.$_011 = var$1;
+    var$2.$_010 = var$1;
     var$1 = otji_JS_function(otji_JSWrapper_unwrap(var$2), "handleEvent");
     var$5.onerror = var$1;
 };
 function cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_2() {
     let a = this; jl_Object.call(a);
-    a.$_022 = null;
-    a.$_17 = null;
+    a.$_021 = null;
+    a.$_18 = null;
 }
 let cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_2_handleEvent$exported$0 = var$1 => {
     let var$2, var$3, var$4;
     var$1 = var$1;
-    var$2 = var$1.$_022;
-    var$1 = var$1.$_17;
+    var$2 = var$1.$_021;
+    var$1 = var$1.$_18;
     var$3 = jl_System_err();
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
@@ -20534,7 +20558,7 @@ let cgxgtbwa_AssetLoadImpl$3_handleEvent$exported$0 = (var$1, var$2) => {
                 jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(471)), var$8);
                 jl_AbstractStringBuilder_toString(var$9);
                 var$9 = new cgxgtbwa_AssetLoadImpl$getFile$lambda$_2_0;
-                var$9.$_050 = var$2;
+                var$9.$_049 = var$2;
                 var$9.$_120 = var$7;
                 var$9.$_29 = var$8;
                 var$5.push(new Promise(otji_JS_function(otji_JSWrapper_unwrap(var$9), "onExecute")));
@@ -20543,13 +20567,13 @@ let cgxgtbwa_AssetLoadImpl$3_handleEvent$exported$0 = (var$1, var$2) => {
         }
         var$3 = Promise.all(var$5);
         var$5 = new cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_0;
-        var$5.$_062 = var$2;
-        var$5.$_110 = var$1;
+        var$5.$_061 = var$2;
+        var$5.$_111 = var$1;
         var$1 = new cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_1;
         var$1.$_060 = var$2;
         var$5 = var$3.then(otji_JS_function(otji_JSWrapper_unwrap(var$5), "apply"), otji_JS_function(otji_JSWrapper_unwrap(var$1), "apply"));
         var$1 = new cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_2;
-        var$1.$_058 = var$2;
+        var$1.$_059 = var$2;
         var$5.finally(otji_JS_function(otji_JSWrapper_unwrap(var$1), "get"));
     }
 },
@@ -21512,7 +21536,7 @@ cgxgtbw_WebGL20Debug_glVertexAttribPointer = ($this, $indx, $size, $type, $norma
 otp_PlatformRunnable = $rt_classWithoutFields(0);
 function jl_Object$monitorExit$lambda$_8_1() {
     jl_Object.call(this);
-    this.$_027 = null;
+    this.$_026 = null;
 }
 let otji_IDBObjectStoreParameters = $rt_classWithoutFields();
 function otji_IDBObjectStoreParameters__init_($this) {
@@ -21523,14 +21547,14 @@ let otji_IDBObjectStoreParameters_create$js_body$_1 = () => {
 };
 function cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_0() {
     let a = this; jl_Object.call(a);
-    a.$_017 = null;
-    a.$_14 = null;
+    a.$_015 = null;
+    a.$_15 = null;
 }
 let cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_0_handleEvent$exported$0 = var$1 => {
     let var$2, var$3, var$4;
     var$1 = var$1;
-    var$2 = var$1.$_017;
-    var$3 = var$1.$_14.result;
+    var$2 = var$1.$_015;
+    var$3 = var$1.$_15.result;
     if (var$3 !== null) {
         var$1 = cgxgtbwf_MemoryFileStorage_fixPath(var$2, $rt_str(var$3.key));
         var$4 = var$3.value;
@@ -21550,10 +21574,10 @@ let cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_1_handleEvent$exported$
 };
 function cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_2() {
     jl_Object.call(this);
-    this.$_011 = null;
+    this.$_010 = null;
 }
 let cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_2_handleEvent$exported$0 = var$1 => {
-    var$1 = var$1.$_011;
+    var$1 = var$1.$_010;
     otcic_JsConsolePrintStream_println(jl_System_err(), $rt_s(485));
     cgxgtbw_WebApplication_subtractInitQueue(var$1);
 },
@@ -21861,7 +21885,7 @@ jur_Pattern_processExpression = ($this, $ch, $newFlags, $last) => {
             jur_JointSet__init_($last, $children, $fSet);
             return $last;
         default:
-            switch ($children.$size2) {
+            switch ($children.$size1) {
                 case 0:
                     break;
                 case 1:
@@ -22670,7 +22694,7 @@ jur_Matcher_processReplacement = ($this, $replacement) => {
         $i = 0;
         while (true) {
             $replacement = $this.$replacementParts;
-            if ($i >= $replacement.$size2)
+            if ($i >= $replacement.$size1)
                 break;
             jl_StringBuilder_append($sb, ju_ArrayList_get($replacement, $i));
             $i = $i + 1 | 0;
@@ -22997,8 +23021,8 @@ otpp_AsyncCallbackWrapper_error = ($this, $e) => {
 };
 function jl_Object$monitorEnterWait$lambda$_6_0() {
     let a = this; jl_Object.call(a);
-    a.$_07 = null;
-    a.$_11 = null;
+    a.$_06 = null;
+    a.$_12 = null;
     a.$_20 = 0;
     a.$_30 = null;
 }
@@ -24093,7 +24117,7 @@ ju_RandomAccess = $rt_classWithoutFields(0);
 function ju_ArrayList() {
     let a = this; ju_AbstractList.call(a);
     a.$array1 = null;
-    a.$size2 = 0;
+    a.$size1 = 0;
 }
 let ju_ArrayList__init_2 = $this => {
     ju_ArrayList__init_1($this, 10);
@@ -24131,14 +24155,14 @@ ju_ArrayList_get = ($this, $index) => {
     return $this.$array1.data[$index];
 },
 ju_ArrayList_size = $this => {
-    return $this.$size2;
+    return $this.$size1;
 },
 ju_ArrayList_add = ($this, $element) => {
     let var$2, var$3;
-    ju_ArrayList_ensureCapacity($this, $this.$size2 + 1 | 0);
+    ju_ArrayList_ensureCapacity($this, $this.$size1 + 1 | 0);
     var$2 = $this.$array1.data;
-    var$3 = $this.$size2;
-    $this.$size2 = var$3 + 1 | 0;
+    var$3 = $this.$size1;
+    $this.$size1 = var$3 + 1 | 0;
     var$2[var$3] = $element;
     $this.$modCount0 = $this.$modCount0 + 1 | 0;
     return 1;
@@ -24146,10 +24170,10 @@ ju_ArrayList_add = ($this, $element) => {
 ju_ArrayList_add0 = ($this, $index, $element) => {
     let var$3, var$4, $i, var$6;
     if ($index >= 0) {
-        var$3 = $this.$size2;
+        var$3 = $this.$size1;
         if ($index <= var$3) {
             ju_ArrayList_ensureCapacity($this, var$3 + 1 | 0);
-            var$4 = $this.$size2;
+            var$4 = $this.$size1;
             $i = var$4;
             while ($i > $index) {
                 var$6 = $this.$array1.data;
@@ -24157,7 +24181,7 @@ ju_ArrayList_add0 = ($this, $index, $element) => {
                 $i = $i + (-1) | 0;
             }
             $this.$array1.data[$index] = $element;
-            $this.$size2 = var$4 + 1 | 0;
+            $this.$size1 = var$4 + 1 | 0;
             $this.$modCount0 = $this.$modCount0 + 1 | 0;
             return;
         }
@@ -24171,8 +24195,8 @@ ju_ArrayList_remove = ($this, $i) => {
     ju_ArrayList_checkIndex($this, $i);
     var$2 = $this.$array1.data;
     $old = var$2[$i];
-    var$4 = $this.$size2 - 1 | 0;
-    $this.$size2 = var$4;
+    var$4 = $this.$size1 - 1 | 0;
+    $this.$size1 = var$4;
     while ($i < var$4) {
         $i_0 = $i + 1 | 0;
         var$2[$i] = var$2[$i_0];
@@ -24183,13 +24207,13 @@ ju_ArrayList_remove = ($this, $i) => {
     return $old;
 },
 ju_ArrayList_clear = $this => {
-    ju_Arrays_fill1($this.$array1, 0, $this.$size2, null);
-    $this.$size2 = 0;
+    ju_Arrays_fill1($this.$array1, 0, $this.$size1, null);
+    $this.$size1 = 0;
     $this.$modCount0 = $this.$modCount0 + 1 | 0;
 },
 ju_ArrayList_checkIndex = ($this, $index) => {
     let var$2;
-    if ($index >= 0 && $index < $this.$size2)
+    if ($index >= 0 && $index < $this.$size1)
         return;
     var$2 = new jl_IndexOutOfBoundsException;
     jl_Exception__init_(var$2);
@@ -24197,7 +24221,7 @@ ju_ArrayList_checkIndex = ($this, $index) => {
 },
 ju_ArrayList_toString = $this => {
     let $i, $length, $buffer, var$4;
-    $i = $this.$size2;
+    $i = $this.$size1;
     if (!$i)
         return $rt_s(102);
     $length = $i - 1 | 0;
@@ -24219,7 +24243,7 @@ ju_ArrayList_hashCode = $this => {
     let $result, $i;
     $result = 1;
     $i = 0;
-    while ($i < $this.$size2) {
+    while ($i < $this.$size1) {
         $result = (31 * $result | 0) + ju_Objects_hashCode($this.$array1.data[$i]) | 0;
         $i = $i + 1 | 0;
     }
@@ -24392,7 +24416,7 @@ jur_JointSet_matches = ($this, $stringIndex, $testString, $matchResult) => {
         return (-1);
     $start = jur_MatchResultImpl_getStart($matchResult, $this.$groupIndex);
     jur_MatchResultImpl_setStart($matchResult, $this.$groupIndex, $stringIndex);
-    $size = $this.$children.$size2;
+    $size = $this.$children.$size1;
     $i = 0;
     while (true) {
         if ($i >= $size) {
@@ -24442,7 +24466,7 @@ jur_JointSet_processSecondPass = $this => {
     a: {
         $child = $this.$children;
         if ($child !== null) {
-            $childrenSize = $child.$size2;
+            $childrenSize = $child.$size1;
             $i = 0;
             while (true) {
                 if ($i >= $childrenSize)
@@ -24470,7 +24494,7 @@ jur_NonCapJointSet_matches = ($this, $stringIndex, $testString, $matchResult) =>
     let $start, $size, $i, $shift;
     $start = jur_MatchResultImpl_getConsumed($matchResult, $this.$groupIndex);
     jur_MatchResultImpl_setConsumed($matchResult, $this.$groupIndex, $stringIndex);
-    $size = $this.$children.$size2;
+    $size = $this.$children.$size1;
     $i = 0;
     while (true) {
         if ($i >= $size) {
@@ -24495,7 +24519,7 @@ jur_AtomicJointSet_matches = ($this, $stringIndex, $testString, $matchResult) =>
     let $start, $size, $i;
     $start = jur_MatchResultImpl_getConsumed($matchResult, $this.$groupIndex);
     jur_MatchResultImpl_setConsumed($matchResult, $this.$groupIndex, $stringIndex);
-    $size = $this.$children.$size2;
+    $size = $this.$children.$size1;
     $i = 0;
     while ($i < $size) {
         if ((ju_ArrayList_get($this.$children, $i)).$matches($stringIndex, $testString, $matchResult) >= 0)
@@ -24514,7 +24538,7 @@ jur_AtomicJointSet_getName = $this => {
 jur_PositiveLookAhead = $rt_classWithoutFields(jur_AtomicJointSet),
 jur_PositiveLookAhead_matches = ($this, $stringIndex, $testString, $matchResult) => {
     let $size, $i;
-    $size = $this.$children.$size2;
+    $size = $this.$children.$size1;
     $i = 0;
     while ($i < $size) {
         if ((ju_ArrayList_get($this.$children, $i)).$matches($stringIndex, $testString, $matchResult) >= 0)
@@ -24532,7 +24556,7 @@ jur_PositiveLookAhead_getName = $this => {
 jur_NegativeLookAhead = $rt_classWithoutFields(jur_AtomicJointSet),
 jur_NegativeLookAhead_matches = ($this, $stringIndex, $testString, $matchResult) => {
     let $size, $i;
-    $size = $this.$children.$size2;
+    $size = $this.$children.$size1;
     $i = 0;
     while (true) {
         if ($i >= $size)
@@ -24552,7 +24576,7 @@ jur_NegativeLookAhead_getName = $this => {
 jur_PositiveLookBehind = $rt_classWithoutFields(jur_AtomicJointSet),
 jur_PositiveLookBehind_matches = ($this, $stringIndex, $testString, $matchResult) => {
     let $size, $leftBound, $shift, $i;
-    $size = $this.$children.$size2;
+    $size = $this.$children.$size1;
     $leftBound = $matchResult.$transparentBounds ? 0 : $matchResult.$leftBound;
     a: {
         $shift = $this.$next1.$matches($stringIndex, $testString, $matchResult);
@@ -24581,7 +24605,7 @@ jur_PositiveLookBehind_getName = $this => {
 jur_NegativeLookBehind = $rt_classWithoutFields(jur_AtomicJointSet),
 jur_NegativeLookBehind_matches = ($this, $stringIndex, $testString, $matchResult) => {
     let $size, $i;
-    $size = $this.$children.$size2;
+    $size = $this.$children.$size1;
     jur_MatchResultImpl_setConsumed($matchResult, $this.$groupIndex, $stringIndex);
     $i = 0;
     while (true) {
@@ -30202,15 +30226,15 @@ cbgg_Texture__clinit_ = () => {
 otjf_JSMapping = $rt_classWithoutFields(0);
 function cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_0() {
     let a = this; jl_Object.call(a);
-    a.$_062 = null;
-    a.$_110 = null;
+    a.$_061 = null;
+    a.$_111 = null;
 }
 let cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_0_apply$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7;
     var$2 = otji_JSWrapper_jsToJava(var$2);
     var$1 = var$1;
     var$2 = otji_JSWrapper_unwrap(var$2);
-    var$1 = var$1.$_110;
+    var$1 = var$1.$_111;
     var$3 = var$2.length;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
@@ -30244,7 +30268,7 @@ let cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_1_apply$exported$0 = (v
 otjf_JSSupplier = $rt_classWithoutFields(0);
 function cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_2() {
     jl_Object.call(this);
-    this.$_058 = null;
+    this.$_059 = null;
 }
 let cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_2_get$exported$0 = var$1 => {
     var$1;
@@ -30304,7 +30328,7 @@ cgxgtbw_WebWindowListener = $rt_classWithoutFields(0),
 otjc_JSPromise$Executor = $rt_classWithoutFields(0);
 function cgxgtbwa_AssetLoadImpl$getFile$lambda$_2_0() {
     let a = this; jl_Object.call(a);
-    a.$_050 = null;
+    a.$_049 = null;
     a.$_120 = null;
     a.$_29 = null;
 }
@@ -30313,7 +30337,7 @@ let cgxgtbwa_AssetLoadImpl$getFile$lambda$_2_0_onExecute$exported$0 = (var$1, va
     var$2 = otji_JS_functionAsObject(var$2, "accept");
     otji_JS_functionAsObject(var$3, "accept");
     var$1 = var$1;
-    var$3 = var$1.$_050;
+    var$3 = var$1.$_049;
     var$4 = var$1.$_120;
     var$1 = var$1.$_29;
     var$5 = new FileReader();
@@ -32654,12 +32678,12 @@ cvs_BaseScreen_drawTracked = ($this, $text, $centerX, $y, $font, $color, $tracki
     while ($index$iv_0 < $text.$nativeString.length) {
         $item$iv = jl_String_charAt($text, $index$iv_0);
         var$13 = $index$iv + 1 | 0;
-        $glyph = $font.$data3.$getGlyph($item$iv);
+        $glyph = $font.$data2.$getGlyph($item$iv);
         if ($glyph === null) {
-            $color = $font.$data3;
+            $color = $font.$data2;
             var$15 = $color.$spaceXadvance * $color.$scaleX;
         } else
-            var$15 = $glyph.$xadvance * $font.$data3.$scaleX;
+            var$15 = $glyph.$xadvance * $font.$data2.$scaleX;
         $advances[$index$iv] = var$15;
         $total = $total + $advances[$index$iv] + $tracking;
         $index$iv_0 = $index$iv_0 + 1 | 0;
@@ -32739,42 +32763,72 @@ function cvs_MainMenuScreen() {
     a.$removeAdsMessageTimer = 0.0;
 }
 let cvs_MainMenuScreen__init_0 = ($this, $game) => {
-    let var$2, var$3, var$4, var$5, var$6, var$7, var$8, var$9, var$10;
+    let $itens, $destination$iv$iv, $titulo, $sub, $descida, $$this$mapIndexed$iv, $index$iv$iv, var$9, $item$iv$iv, var$11, $id, var$13, var$14, var$15;
     kji_Intrinsics_checkNotNullParameter($game, $rt_s(212));
     cvs_BaseScreen__init_($this, $game);
-    var$2 = $rt_createArray(cvs_MainMenuScreen$NeonButton, 6);
-    var$3 = var$2.data;
-    var$3[0] = cvs_MainMenuScreen$NeonButton__init_1(0, cbgm_Rectangle__init_(222.0, 1074.0, 636.0, 130.0), $rt_s(825), $rt_s(826), 1);
-    var$3[1] = cvs_MainMenuScreen$NeonButton__init_(1, cbgm_Rectangle__init_(222.0, 922.0, 636.0, 130.0), $rt_s(827), $rt_s(828), 0, 16, null);
-    var$3[2] = cvs_MainMenuScreen$NeonButton__init_(2, cbgm_Rectangle__init_(222.0, 770.0, 636.0, 130.0), $rt_s(829), $rt_s(830), 0, 16, null);
-    var$3[3] = cvs_MainMenuScreen$NeonButton__init_(3, cbgm_Rectangle__init_(222.0, 618.0, 636.0, 130.0), $rt_s(831), $rt_s(832), 0, 16, null);
-    var$3[4] = cvs_MainMenuScreen$NeonButton__init_(4, cbgm_Rectangle__init_(222.0, 466.0, 636.0, 130.0), $rt_s(833), $rt_s(834), 0, 16, null);
-    var$3[5] = cvs_MainMenuScreen$NeonButton__init_(5, cbgm_Rectangle__init_(222.0, 314.0, 636.0, 130.0), $rt_s(835), $rt_s(836), 0, 16, null);
-    $this.$buttons = kc_CollectionsKt__CollectionsKt_listOf(var$2);
+    $itens = ju_ArrayList__init_();
+    $destination$iv$iv = $itens;
+    $titulo = k_Triple__init_(jl_Integer_valueOf(0), $rt_s(825), $rt_s(826));
+    $sub = $destination$iv$iv;
+    ju_ArrayList_add($sub, $titulo);
+    ju_ArrayList_add($sub, k_Triple__init_(jl_Integer_valueOf(1), $rt_s(827), $rt_s(828)));
+    ju_ArrayList_add($sub, k_Triple__init_(jl_Integer_valueOf(2), $rt_s(829), $rt_s(830)));
+    ju_ArrayList_add($sub, k_Triple__init_(jl_Integer_valueOf(4), $rt_s(831), $rt_s(832)));
+    ju_ArrayList_add($sub, k_Triple__init_(jl_Integer_valueOf(5), $rt_s(833), $rt_s(834)));
+    $descida = (6 - $itens.$size1 | 0) * 152.0 / 2.0;
+    $$this$mapIndexed$iv = $itens;
+    $destination$iv$iv = ju_ArrayList__init_0(kc_CollectionsKt__IterablesKt_collectionSizeOrDefault($$this$mapIndexed$iv, 10));
+    $index$iv$iv = 0;
+    $itens = ju_AbstractList_iterator($$this$mapIndexed$iv);
+    var$9 = 1074.0 - $descida;
+    while (ju_AbstractList$1_hasNext($itens)) {
+        $item$iv$iv = ju_AbstractList$1_next($itens);
+        var$11 = $index$iv$iv + 1 | 0;
+        if ($index$iv$iv < 0)
+            kc_CollectionsKt__CollectionsKt_throwIndexOverflow();
+        $$this$mapIndexed$iv = $item$iv$iv;
+        $id = $$this$mapIndexed$iv.$first5.$value;
+        $titulo = $$this$mapIndexed$iv.$second0;
+        $sub = $$this$mapIndexed$iv.$third;
+        $game = new cvs_MainMenuScreen$NeonButton;
+        $$this$mapIndexed$iv = cbgm_Rectangle__init_(222.0, var$9 - $index$iv$iv * 152.0, 636.0, 130.0);
+        $index$iv$iv = $id ? 0 : 1;
+        kji_Intrinsics_checkNotNullParameter($$this$mapIndexed$iv, $rt_s(823));
+        kji_Intrinsics_checkNotNullParameter($titulo, $rt_s(835));
+        kji_Intrinsics_checkNotNullParameter($sub, $rt_s(836));
+        $game.$id0 = $id;
+        $game.$rect1 = $$this$mapIndexed$iv;
+        $game.$title = $titulo;
+        $game.$subtitle0 = $sub;
+        $game.$magenta = $index$iv$iv;
+        ju_ArrayList_add($destination$iv$iv, $game);
+        $index$iv$iv = var$11;
+    }
+    $this.$buttons = $destination$iv$iv;
     $this.$titlePanel = cbgm_Rectangle__init_(90.0, 1373.0, 558.0, 232.0);
     $this.$shipPanel = cbgm_Rectangle__init_(648.0, 1290.0, 336.0, 408.0);
     $this.$pressedId = (-1);
     $this.$releasedId = (-1);
     $this.$pendingAction = (-1);
-    $this.$pressDepth = $rt_createFloatArray($this.$buttons.$size());
-    $this.$pressVelocity = $rt_createFloatArray($this.$buttons.$size());
+    $this.$pressDepth = $rt_createFloatArray(6);
+    $this.$pressVelocity = $rt_createFloatArray(6);
     $this.$clickSparks = ju_ArrayList__init_();
     $game = ju_ArrayList__init_0(120);
-    var$4 = 0;
-    while (var$4 < 120) {
-        var$5 = new cvs_MainMenuScreen$Streak;
-        var$6 = cbgm_MathUtils_random(0.0, 6.2831854820251465);
-        var$7 = cbgm_MathUtils_random(0.5, 1.25);
-        var$8 = cbgm_MathUtils_random(0.0, 1.0);
-        var$9 = cbgm_MathUtils_random(2.5999999046325684, 6.5);
-        var$10 = cbgm_MathUtils_random(0.0, 0.25);
-        var$5.$angle = var$6;
-        var$5.$speed1 = var$7;
-        var$5.$phase0 = var$8;
-        var$5.$thickness0 = var$9;
-        var$5.$blueShift = var$10;
-        ju_ArrayList_add($game, var$5);
-        var$4 = var$4 + 1 | 0;
+    $index$iv$iv = 0;
+    while ($index$iv$iv < 120) {
+        $$this$mapIndexed$iv = new cvs_MainMenuScreen$Streak;
+        var$9 = cbgm_MathUtils_random(0.0, 6.2831854820251465);
+        var$13 = cbgm_MathUtils_random(0.5, 1.25);
+        var$14 = cbgm_MathUtils_random(0.0, 1.0);
+        var$15 = cbgm_MathUtils_random(2.5999999046325684, 6.5);
+        $descida = cbgm_MathUtils_random(0.0, 0.25);
+        $$this$mapIndexed$iv.$angle = var$9;
+        $$this$mapIndexed$iv.$speed1 = var$13;
+        $$this$mapIndexed$iv.$phase0 = var$14;
+        $$this$mapIndexed$iv.$thickness0 = var$15;
+        $$this$mapIndexed$iv.$blueShift = $descida;
+        ju_ArrayList_add($game, $$this$mapIndexed$iv);
+        $index$iv$iv = $index$iv$iv + 1 | 0;
     }
     $this.$streaks = $game;
     $this.$warpTime = (-1.0);
@@ -32787,21 +32841,39 @@ cvs_MainMenuScreen__init_ = var_0 => {
     cvs_MainMenuScreen__init_0(var_1, var_0);
     return var_1;
 },
+cvs_MainMenuScreen_botao = ($this, $id) => {
+    let $$this$firstOrNull$iv, $element$iv;
+    $$this$firstOrNull$iv = ju_AbstractList_iterator($this.$buttons);
+    a: {
+        while (true) {
+            if (!ju_AbstractList$1_hasNext($$this$firstOrNull$iv)) {
+                $element$iv = null;
+                break a;
+            }
+            $element$iv = ju_AbstractList$1_next($$this$firstOrNull$iv);
+            if (!($element$iv.$id0 != $id ? 0 : 1))
+                continue;
+            else
+                break;
+        }
+    }
+    return $element$iv;
+},
 cvs_MainMenuScreen_show = $this => {
     let var$1, var$2, var$3;
     cvs_AudioManager_playMusic(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(837));
     if (!cvs_SaveManager_getAdsRemoved(cvs_SkyVanguardGame_getSaveManager($this.$game))) {
-        var$1 = new cvs_MainMenuScreen$show$lambda$_1_0;
-        var$1.$_06 = $this;
+        var$1 = new cvs_MainMenuScreen$show$lambda$_2_0;
+        var$1.$_028 = $this;
         kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(838));
         var$2 = jl_Boolean_valueOf(0);
         var$1 = var$1;
         var$2 = var$2;
-        var$1 = var$1.$_06;
+        var$1 = var$1.$_028;
         if (var$2.$value0) {
             var$2 = cbg_Gdx_app;
-            var$3 = new cvs_MainMenuScreen$show$lambda$0$lambda$_27_0;
-            var$3.$_013 = var$1;
+            var$3 = new cvs_MainMenuScreen$show$lambda$0$lambda$_29_0;
+            var$3.$_055 = var$1;
             cgxgtbw_WebApplication_postRunnable(var$2, var$3);
         }
         k_Unit_$callClinit();
@@ -32813,128 +32885,119 @@ cvs_MainMenuScreen_show = $this => {
     var$1.$processor = var$2;
 },
 cvs_MainMenuScreen_render = ($this, $delta) => {
-    let $$this$forEach$iv, $element$iv, var$4, var$5, var$6, $it, var$8, var$9, var$10, var$11, var$12, var$13;
+    let $element$iv, var$3, var$4, var$5, var$6, var$7, $$this$forEach$iv, var$9, var$10, var$11;
     $this.$time = $this.$time + $delta;
     if ($this.$warpTime >= 0.0) {
         cvs_MainMenuScreen_renderWarp($this, $delta);
         return;
     }
-    $$this$forEach$iv = $this.$buttons;
-    kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(839));
-    $$this$forEach$iv = kr_IntRange__init_(0, $$this$forEach$iv.$size() - 1 | 0);
-    $element$iv = new kr_IntProgressionIterator;
-    var$4 = $$this$forEach$iv.$first5;
-    var$5 = $$this$forEach$iv.$last;
-    var$6 = $$this$forEach$iv.$step0;
-    $element$iv.$step1 = var$6;
-    $element$iv.$finalElement = var$5;
-    var$6 = var$6 <= 0 ? (var$4 < var$5 ? 0 : 1) : var$4 > var$5 ? 0 : 1;
-    $element$iv.$hasNext3 = var$6;
-    if (var$6)
-        var$5 = var$4;
-    $element$iv.$next4 = var$5;
-    $it = $element$iv;
-    $element$iv = $it;
-    while (true) {
-        if (!$element$iv.$hasNext3) {
-            $element$iv = ju_AbstractList_iterator($this.$clickSparks);
-            while (ju_AbstractList$1_hasNext($element$iv)) {
-                $$this$forEach$iv = ju_AbstractList$1_next($element$iv);
-                var$8 = $$this$forEach$iv.$life - $delta;
-                $$this$forEach$iv.$life = var$8;
-                if (var$8 <= 0.0) {
-                    ju_AbstractList$1_remove($element$iv);
-                    continue;
-                }
-                var$9 = $$this$forEach$iv.$x11;
-                var$10 = $$this$forEach$iv.$vx1;
-                $$this$forEach$iv.$x11 = var$9 + var$10 * $delta;
-                var$11 = $$this$forEach$iv.$y10;
-                var$9 = $$this$forEach$iv.$vy1;
-                $$this$forEach$iv.$y10 = var$11 + var$9 * $delta;
-                $$this$forEach$iv.$vx1 = var$10 * 0.9399999976158142;
-                $$this$forEach$iv.$vy1 = var$9 * 0.9399999976158142;
-            }
-            cvs_MainMenuScreen_updateGamepad($this);
-            var$8 = $this.$removeAdsMessageTimer;
-            if (var$8 > 0.0)
-                $this.$removeAdsMessageTimer = var$8 - $delta;
-            var$8 = $this.$releaseAnimation;
-            if (var$8 > 0.0)
-                $this.$releaseAnimation = var$8 - $delta;
-            var$8 = $this.$transitionTimer;
-            if (var$8 > 0.0) {
-                $delta = var$8 - $delta;
-                $this.$transitionTimer = $delta;
-                if ($delta <= 0.0) {
-                    var$4 = $this.$pendingAction;
-                    if (var$4 >= 0)
-                        a: {
-                            $this.$pendingAction = (-1);
-                            switch (var$4) {
-                                case 0:
-                                    $this.$warpTime = 0.0;
-                                    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(766), 0.8999999761581421, 1.0499999523162842);
-                                    if (cvs_SaveManager_getVibration(cvs_SkyVanguardGame_getSaveManager($this.$game)))
-                                        cgxgtbw_WebInput_vibrate(cbg_Gdx_input, 60);
-                                    break a;
-                                case 1:
-                                    cvs_SkyVanguardGame_openHangar($this.$game);
-                                    break a;
-                                case 2:
-                                    $element$iv = $this.$game;
-                                    $$this$forEach$iv = cvs_SettingsScreen__init_($element$iv);
-                                    cbg_Game_setScreen($element$iv, $$this$forEach$iv);
-                                    break a;
-                                case 3:
-                                    break;
-                                case 4:
-                                    $element$iv = $this.$game;
-                                    $$this$forEach$iv = cvs_CreditsScreen__init_($element$iv);
-                                    cbg_Game_setScreen($element$iv, $$this$forEach$iv);
-                                    break a;
-                                case 5:
-                                    break a;
-                                default:
-                                    break a;
-                            }
-                            cvs_MainMenuScreen_requestRemoveAds($this);
-                        }
-                }
-            }
-            cvs_BaseScreen_clear($this, 0.004000000189989805, 0.009999999776482582, 0.026000000536441803);
-            cvs_MenuScreensKt_drawVideoBackdrop$default($this, $this.$time, null, null, 6, null);
-            cvs_MainMenuScreen_drawStreakField($this, 0.11999999731779099, 0.1599999964237213, 540.0, 960.0);
-            cvs_MainMenuScreen_drawHeader($this);
-            $$this$forEach$iv = $this.$buttons.$iterator0();
-            while ($$this$forEach$iv.$hasNext()) {
-                cvs_MainMenuScreen_drawNeonButton($this, $$this$forEach$iv.$next());
-            }
-            cvs_MainMenuScreen_drawClickSparks($this);
-            cvs_MainMenuScreen_drawFooter($this);
-            cvs_MainMenuScreen_drawTransitionFlash($this);
-            return;
-        }
-        $$this$forEach$iv = $it;
-        var$5 = $$this$forEach$iv.$next4;
-        if (var$5 != $$this$forEach$iv.$finalElement)
-            $$this$forEach$iv.$next4 = var$5 + $$this$forEach$iv.$step1 | 0;
-        else {
-            if (!$$this$forEach$iv.$hasNext3)
-                break;
-            $$this$forEach$iv.$hasNext3 = 0;
-        }
-        var$8 = $this.$pressedId != var$5 ? 0.0 : 12.0;
-        var$12 = $this.$pressDepth.data;
-        var$8 = (var$8 - var$12[var$5]) * 95.0;
-        var$13 = $this.$pressVelocity.data;
-        var$9 = var$13[var$5] * 16.0;
-        var$13[var$5] = var$13[var$5] + (var$8 - var$9) * $delta;
-        var$12[var$5] = kr_RangesKt___RangesKt_coerceIn(var$12[var$5] + var$13[var$5] * $delta, (-7.0), 18.0);
+    $element$iv = ju_AbstractList_iterator($this.$buttons);
+    while (ju_AbstractList$1_hasNext($element$iv)) {
+        var$3 = (ju_AbstractList$1_next($element$iv)).$id0;
+        var$4 = $this.$pressedId != var$3 ? 0.0 : 12.0;
+        var$5 = $this.$pressDepth.data;
+        var$4 = (var$4 - var$5[var$3]) * 95.0;
+        var$6 = $this.$pressVelocity.data;
+        var$7 = var$6[var$3] * 16.0;
+        var$6[var$3] = var$6[var$3] + (var$4 - var$7) * $delta;
+        var$5[var$3] = kr_RangesKt___RangesKt_coerceIn(var$5[var$3] + var$6[var$3] * $delta, (-7.0), 18.0);
     }
-    $$this$forEach$iv = new ju_NoSuchElementException;
-    jl_Exception__init_($$this$forEach$iv);
-    $rt_throw($$this$forEach$iv);
+    $element$iv = ju_AbstractList_iterator($this.$clickSparks);
+    while (ju_AbstractList$1_hasNext($element$iv)) {
+        $$this$forEach$iv = ju_AbstractList$1_next($element$iv);
+        var$4 = $$this$forEach$iv.$life - $delta;
+        $$this$forEach$iv.$life = var$4;
+        if (var$4 <= 0.0) {
+            ju_AbstractList$1_remove($element$iv);
+            continue;
+        }
+        var$7 = $$this$forEach$iv.$x11;
+        var$9 = $$this$forEach$iv.$vx1;
+        $$this$forEach$iv.$x11 = var$7 + var$9 * $delta;
+        var$10 = $$this$forEach$iv.$y10;
+        var$7 = $$this$forEach$iv.$vy1;
+        $$this$forEach$iv.$y10 = var$10 + var$7 * $delta;
+        $$this$forEach$iv.$vx1 = var$9 * 0.9399999976158142;
+        $$this$forEach$iv.$vy1 = var$7 * 0.9399999976158142;
+    }
+    cvs_GamepadInput_poll($this.$game.$gamepad);
+    if (cvs_GamepadInput_getController($this.$game.$gamepad) === null)
+        $this.$focusedId = (-1);
+    else {
+        if (cvs_GamepadInput_getJustDown($this.$game.$gamepad)) {
+            $this.$focusedId = cvs_MainMenuScreen_vizinho($this, 1);
+            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.4000000059604645, 1.2000000476837158);
+        }
+        if (cvs_GamepadInput_getJustUp($this.$game.$gamepad)) {
+            $this.$focusedId = cvs_MainMenuScreen_vizinho($this, (-1));
+            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.4000000059604645, 1.2000000476837158);
+        }
+        if (cvs_GamepadInput_getJustA($this.$game.$gamepad)) {
+            var$11 = $this.$focusedId;
+            if (var$11 >= 0 && $this.$pendingAction < 0) {
+                $this.$releasedId = var$11;
+                $this.$releaseAnimation = 0.1599999964237213;
+                $this.$pendingAction = var$11;
+                $this.$transitionTimer = 0.12999999523162842;
+                $this.$pressVelocity.data[var$11] = 245.0;
+                $$this$forEach$iv = cvs_MainMenuScreen_botao($this, var$11);
+                if ($$this$forEach$iv !== null)
+                    cvs_MainMenuScreen_spawnClickSparks($this, $$this$forEach$iv);
+                cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.800000011920929, 0.9200000166893005);
+            }
+        }
+    }
+    var$4 = $this.$removeAdsMessageTimer;
+    if (var$4 > 0.0)
+        $this.$removeAdsMessageTimer = var$4 - $delta;
+    var$4 = $this.$releaseAnimation;
+    if (var$4 > 0.0)
+        $this.$releaseAnimation = var$4 - $delta;
+    var$4 = $this.$transitionTimer;
+    if (var$4 > 0.0) {
+        $delta = var$4 - $delta;
+        $this.$transitionTimer = $delta;
+        if ($delta <= 0.0) {
+            var$11 = $this.$pendingAction;
+            if (var$11 >= 0)
+                a: {
+                    $this.$pendingAction = (-1);
+                    switch (var$11) {
+                        case 0:
+                            break;
+                        case 1:
+                            cvs_SkyVanguardGame_openHangar($this.$game);
+                            break a;
+                        case 2:
+                            cvs_SkyVanguardGame_openSettings($this.$game);
+                            break a;
+                        case 3:
+                            cvs_MainMenuScreen_requestRemoveAds($this);
+                            break a;
+                        case 4:
+                            cvs_SkyVanguardGame_openCredits($this.$game);
+                            break a;
+                        case 5:
+                            cvsw_WebPlatformServices_exitGame(cvs_SkyVanguardGame_getPlatform(cvs_BaseScreen_getGame($this)));
+                            break a;
+                        default:
+                            break a;
+                    }
+                    cvs_MainMenuScreen_startWarp($this);
+                }
+        }
+    }
+    cvs_BaseScreen_clear($this, 0.004000000189989805, 0.009999999776482582, 0.026000000536441803);
+    cvs_MenuScreensKt_drawVideoBackdrop$default($this, $this.$time, null, null, 6, null);
+    cvs_MainMenuScreen_drawStreakField($this, 0.11999999731779099, 0.1599999964237213, 540.0, 960.0);
+    cvs_MainMenuScreen_drawHeader($this);
+    $$this$forEach$iv = ju_AbstractList_iterator($this.$buttons);
+    while (ju_AbstractList$1_hasNext($$this$forEach$iv)) {
+        cvs_MainMenuScreen_drawNeonButton($this, ju_AbstractList$1_next($$this$forEach$iv));
+    }
+    cvs_MainMenuScreen_drawClickSparks($this);
+    cvs_MainMenuScreen_drawFooter($this);
+    cvs_MainMenuScreen_drawTransitionFlash($this);
 },
 cvs_MainMenuScreen_spawnClickSparks = ($this, $button) => {
     let var$2, $centerX, $centerY, var$5, $angle, $speed, var$8, var$9, var$10, var$11, var$12, var$13;
@@ -32980,46 +33043,42 @@ cvs_MainMenuScreen_drawClickSparks = $this => {
 },
 cvs_MainMenuScreen_requestRemoveAds = $this => {
     if (cvs_SaveManager_getAdsRemoved(cvs_SkyVanguardGame_getSaveManager($this.$game))) {
-        cvs_MainMenuScreen_setRemoveAdsMessage($this, $rt_s(840));
+        cvs_MainMenuScreen_setRemoveAdsMessage($this, $rt_s(839));
         return;
     }
     if ($this.$removeAdsBusy)
         return;
-    cvs_MainMenuScreen_setRemoveAdsMessage($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(841)));
+    cvs_MainMenuScreen_setRemoveAdsMessage($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(840)));
 },
 cvs_MainMenuScreen_setRemoveAdsMessage = ($this, $text) => {
     $this.$removeAdsMessage = $text;
     $this.$removeAdsMessageTimer = 3.5;
 },
-cvs_MainMenuScreen_updateGamepad = $this => {
-    let var$1;
-    cvs_GamepadInput_poll($this.$game.$gamepad);
-    if (cvs_GamepadInput_getController($this.$game.$gamepad) === null) {
-        $this.$focusedId = (-1);
-        return;
-    }
-    if (cvs_GamepadInput_getJustDown($this.$game.$gamepad)) {
-        var$1 = $this.$focusedId;
-        $this.$focusedId = var$1 < 0 ? 0 : (var$1 + 1 | 0) % $this.$buttons.$size() | 0;
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.4000000059604645, 1.2000000476837158);
-    }
-    if (cvs_GamepadInput_getJustUp($this.$game.$gamepad)) {
-        var$1 = $this.$focusedId;
-        $this.$focusedId = var$1 < 0 ? 0 : ((var$1 - 1 | 0) + $this.$buttons.$size() | 0) % $this.$buttons.$size() | 0;
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.4000000059604645, 1.2000000476837158);
-    }
-    if (cvs_GamepadInput_getJustA($this.$game.$gamepad)) {
-        var$1 = $this.$focusedId;
-        if (var$1 >= 0 && $this.$pendingAction < 0) {
-            $this.$releasedId = var$1;
-            $this.$releaseAnimation = 0.1599999964237213;
-            $this.$pendingAction = var$1;
-            $this.$transitionTimer = 0.12999999523162842;
-            $this.$pressVelocity.data[var$1] = 245.0;
-            cvs_MainMenuScreen_spawnClickSparks($this, $this.$buttons.$get(var$1));
-            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.800000011920929, 0.9200000166893005);
+cvs_MainMenuScreen_vizinho = ($this, $passo) => {
+    let $$this$indexOfFirst$iv, $atual;
+    if (ju_AbstractCollection_isEmpty($this.$buttons))
+        return (-1);
+    $$this$indexOfFirst$iv = $this.$buttons;
+    $atual = 0;
+    $$this$indexOfFirst$iv = ju_AbstractList_iterator($$this$indexOfFirst$iv);
+    a: {
+        while (true) {
+            if (!ju_AbstractList$1_hasNext($$this$indexOfFirst$iv)) {
+                $atual = (-1);
+                break a;
+            }
+            if ((ju_AbstractList$1_next($$this$indexOfFirst$iv)).$id0 != $this.$focusedId ? 0 : 1)
+                break;
+            $atual = $atual + 1 | 0;
         }
     }
+    if ($atual < 0)
+        return (kc_CollectionsKt___CollectionsKt_first($this.$buttons)).$id0;
+    $$this$indexOfFirst$iv = $this.$buttons;
+    $passo = $atual + $passo | 0;
+    $$this$indexOfFirst$iv = $$this$indexOfFirst$iv;
+    $atual = $$this$indexOfFirst$iv.$size1;
+    return (ju_ArrayList_get($$this$indexOfFirst$iv, ($passo + $atual | 0) % $atual | 0)).$id0;
 },
 cvs_MainMenuScreen_drawHeader = $this => {
     let $selected, var$2, var$3, $dx, $dy, var$6, $cx, $cy, var$9, var$10, var$11;
@@ -33034,9 +33093,9 @@ cvs_MainMenuScreen_drawHeader = $this => {
     cbgg_Color_$callClinit();
     var$6 = cbgg_Color_WHITE;
     kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(822));
-    cvs_BaseScreen_drawTracked($this, $rt_s(842), $dx, $dy, var$3, var$6, 9.0);
+    cvs_BaseScreen_drawTracked($this, $rt_s(841), $dx, $dy, var$3, var$6, 9.0);
     var$3 = $this.$titlePanel;
-    cvs_BaseScreen_drawTracked($this, $rt_s(843), var$3.$x + var$3.$width0 / 2.0, var$3.$y + 82.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.3400000035762787, 0.8500000238418579, 1.0), 4.0);
+    cvs_BaseScreen_drawTracked($this, $rt_s(842), var$3.$x + var$3.$width0 / 2.0, var$3.$y + 82.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.3400000035762787, 0.8500000238418579, 1.0), 4.0);
     cvs_BaseScreenKt_beginBlended$default(cvs_SkyVanguardGame_getShapes($this.$game), null, 1, null);
     var$3 = $this.$titlePanel;
     $dx = var$3.$x + 18.0;
@@ -33165,13 +33224,13 @@ cvs_MainMenuScreen_drawNeonButton = ($this, $button) => {
             case 0:
                 break;
             case 1:
-                $titleKey = $rt_s(844);
+                $titleKey = $rt_s(843);
                 break a;
             case 2:
-                $titleKey = $rt_s(845);
+                $titleKey = $rt_s(844);
                 break a;
             case 3:
-                $titleKey = $rt_s(846);
+                $titleKey = $rt_s(845);
                 break a;
             case 4:
                 $titleKey = $rt_s(194);
@@ -33180,11 +33239,11 @@ cvs_MainMenuScreen_drawNeonButton = ($this, $button) => {
                 $titleKey = $rt_s(56);
                 break a;
         }
-        $titleKey = $rt_s(847);
+        $titleKey = $rt_s(846);
     }
-    $title = !$purchased ? cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $titleKey) : cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(848));
+    $title = !$purchased ? cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $titleKey) : cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(847));
     if ($purchased)
-        $subtitle = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(849));
+        $subtitle = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(848));
     else if (cvs_MainMenuScreen$NeonButton_getId($button) == 3 && $this.$removeAdsMessageTimer > 0.0)
         $subtitle = $this.$removeAdsMessage;
     else {
@@ -33194,22 +33253,22 @@ cvs_MainMenuScreen_drawNeonButton = ($this, $button) => {
                 case 0:
                     break;
                 case 1:
-                    $button = $rt_s(850);
+                    $button = $rt_s(849);
                     break b;
                 case 2:
-                    $button = $rt_s(851);
+                    $button = $rt_s(850);
                     break b;
                 case 3:
-                    $button = $rt_s(852);
+                    $button = $rt_s(851);
                     break b;
                 case 4:
-                    $button = $rt_s(853);
+                    $button = $rt_s(852);
                     break b;
                 default:
-                    $button = $rt_s(854);
+                    $button = $rt_s(853);
                     break b;
             }
-            $button = $rt_s(855);
+            $button = $rt_s(854);
         }
         $subtitle = cvs_LocalizationManager_get($accent, $button);
     }
@@ -33360,11 +33419,11 @@ cvs_MainMenuScreen_drawFooter = $this => {
     ju_Locale_$callClinit();
     $pilotLabel = jl_String_toUpperCase($pilotLabel, ju_Locale_ROOT);
     kji_Intrinsics_checkNotNullExpressionValue($pilotLabel, $rt_s(811));
-    cvs_BaseScreen_drawLabel($this, $rt_s(856), $left.$x + 96.0, $left.$y + 88.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.3499999940395355, 0.9200000166893005, 1.0, 1.0));
-    cvs_BaseScreen_drawLabel($this, $rt_s(857), $left.$x + 96.0, $left.$y + 48.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.2800000011920929, 0.699999988079071, 0.8999999761581421, 1.0));
-    cvs_BaseScreen_drawLabel($this, $rt_s(858), $right.$x + 112.0, $right.$y + 88.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.3499999940395355, 0.9200000166893005, 1.0, 1.0));
+    cvs_BaseScreen_drawLabel($this, $rt_s(855), $left.$x + 96.0, $left.$y + 88.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.3499999940395355, 0.9200000166893005, 1.0, 1.0));
+    cvs_BaseScreen_drawLabel($this, $rt_s(856), $left.$x + 96.0, $left.$y + 48.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.2800000011920929, 0.699999988079071, 0.8999999761581421, 1.0));
+    cvs_BaseScreen_drawLabel($this, $rt_s(857), $right.$x + 112.0, $right.$y + 88.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.3499999940395355, 0.9200000166893005, 1.0, 1.0));
     cvs_BaseScreen_drawLabel($this, $pilotLabel, $right.$x + 112.0, $right.$y + 48.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.4000000059604645, 0.8700000047683716, 1.0));
-    cvs_BaseScreen_drawCentered($this, $rt_s(859), 76.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.20000000298023224, 0.41999998688697815, 0.6200000047683716, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(858), 76.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.20000000298023224, 0.41999998688697815, 0.6200000047683716, 1.0));
 },
 cvs_MainMenuScreen_shortPilotName = ($this, $full) => {
     let var$2, var$3, var$4, $parts, var$6, var$7, var$8, var$9, var$10;
@@ -33373,7 +33432,7 @@ cvs_MainMenuScreen_shortPilotName = ($this, $full) => {
         var$3 = $rt_createArray(jl_String, 1);
         var$4 = var$3.data;
         var$4[0] = $rt_s(7);
-        kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(839));
+        kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(859));
         kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(860));
         if (var$4.length == 1) {
             $parts = var$4[0];
@@ -33404,7 +33463,7 @@ cvs_MainMenuScreen_shortPilotName = ($this, $full) => {
         var$8 = new kt_DelimitedRangesSequence;
         var$9 = new kt_StringsKt__StringsKt$rangesDelimitedBy$StringsKt__StringsKt$lambda$_144_0;
         var$9.$_04 = $parts;
-        var$9.$_10 = 0;
+        var$9.$_11 = 0;
         kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(861));
         kji_Intrinsics_checkNotNullParameter(var$9, $rt_s(862));
         var$8.$input = var$2;
@@ -33412,7 +33471,7 @@ cvs_MainMenuScreen_shortPilotName = ($this, $full) => {
         var$8.$limit1 = 0;
         var$8.$getNextMatch = var$9;
         var$8 = var$8;
-        kji_Intrinsics_checkNotNullParameter(var$8, $rt_s(839));
+        kji_Intrinsics_checkNotNullParameter(var$8, $rt_s(859));
         $parts = new ks_SequencesKt___SequencesKt$asIterable$$inlined$Iterable$1;
         $parts.$$this_asIterable$inlined = var$8;
         var$8 = $parts;
@@ -33442,9 +33501,9 @@ cvs_MainMenuScreen_shortPilotName = ($this, $full) => {
             var$9.$nextItem = null;
             var$9.$nextState = (-1);
             var$8 = var$10;
-            kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(839));
+            kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(859));
             kji_Intrinsics_checkNotNullParameter(var$8, $rt_s(864));
-            var$7 = (jl_Integer_valueOf(var$8.$first5)).$value;
+            var$7 = (jl_Integer_valueOf(var$8.$first6)).$value;
             var$6 = (jl_Integer_valueOf(var$8.$last)).$value + 1 | 0;
             var$10 = jl_String_substring(var$2, var$7, var$6);
             ju_ArrayList_add($parts, var$10);
@@ -33508,6 +33567,12 @@ cvs_MainMenuScreen_drawStreakField = ($this, $intensity, $timeScale, $centerX, $
         $index$iv = var$10;
     }
     cbggg_ShapeRenderer_end($shapes);
+},
+cvs_MainMenuScreen_startWarp = $this => {
+    $this.$warpTime = 0.0;
+    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(766), 0.8999999761581421, 1.0499999523162842);
+    if (cvs_SaveManager_getVibration(cvs_SkyVanguardGame_getSaveManager($this.$game)))
+        cgxgtbw_WebInput_vibrate(cbg_Gdx_input, 60);
 },
 cvs_MainMenuScreen_renderWarp = ($this, $delta) => {
     let $t, $intensity, var$4, $k, $ease, var$7, $startX, $startY, $shipX, $shipY, $scale, $flash;
@@ -33991,14 +34056,14 @@ let cgxgtbwa_AssetDownloadImpl$2_handleEvent$exported$0 = (var$1, var$2) => {
 function cgxgtbwa_AssetDownloadImpl$loadScript$lambda$_2_0() {
     let a = this; jl_Object.call(a);
     a.$_033 = null;
-    a.$_112 = null;
+    a.$_113 = null;
     a.$_24 = null;
 }
 let cgxgtbwa_AssetDownloadImpl$loadScript$lambda$_2_0_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4;
     var$1 = var$1;
     var$2 = var$1.$_033;
-    var$3 = var$1.$_112;
+    var$3 = var$1.$_113;
     var$1 = var$1.$_24;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
@@ -34024,11 +34089,11 @@ let cgxgtbwfi_IndexedDBFileData_create$js_body$_5 = (var$1, var$2) => {
 };
 function cgxgtbwft_LocalDBStorage$putFile$lambda$_2_0() {
     jl_Object.call(this);
-    this.$_019 = null;
+    this.$_017 = null;
 }
 let cgxgtbwft_LocalDBStorage$putFile$lambda$_2_0_handleEvent$exported$0 = var$1 => {
     let var$2, var$3;
-    var$1 = var$1.$_019;
+    var$1 = var$1.$_017;
     var$2 = jl_System_err();
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
@@ -34132,19 +34197,55 @@ k_Result__clinit_ = () => {
 };
 function k_Triple() {
     let a = this; jl_Object.call(a);
-    a.$first6 = null;
+    a.$first5 = null;
     a.$second0 = null;
     a.$third = null;
 }
-let k_Triple__init_ = ($this, $first, $second, $third) => {
-    $this.$first6 = $first;
+let k_Triple__init_0 = ($this, $first, $second, $third) => {
+    $this.$first5 = $first;
     $this.$second0 = $second;
     $this.$third = $third;
 },
-k_Triple__init_0 = (var_0, var_1, var_2) => {
+k_Triple__init_ = (var_0, var_1, var_2) => {
     let var_3 = new k_Triple();
-    k_Triple__init_(var_3, var_0, var_1, var_2);
+    k_Triple__init_0(var_3, var_0, var_1, var_2);
     return var_3;
+},
+k_Triple_toString = $this => {
+    let var$1;
+    var$1 = new jl_StringBuilder;
+    jl_AbstractStringBuilder__init_(var$1);
+    jl_AbstractStringBuilder_append0(var$1, 40);
+    var$1 = jl_StringBuilder_append(var$1, $this.$first5);
+    jl_AbstractStringBuilder_append(var$1, $rt_s(80));
+    var$1 = jl_StringBuilder_append(var$1, $this.$second0);
+    jl_AbstractStringBuilder_append(var$1, $rt_s(80));
+    var$1 = jl_StringBuilder_append(var$1, $this.$third);
+    jl_AbstractStringBuilder_append0(var$1, 41);
+    return jl_AbstractStringBuilder_toString(var$1);
+},
+k_Triple_hashCode = $this => {
+    let var$1, var$2;
+    var$1 = $this.$first5;
+    var$2 = (var$1 !== null ? var$1.$hashCode() : 0) * 31 | 0;
+    var$1 = $this.$second0;
+    var$2 = (var$2 + (var$1 !== null ? var$1.$hashCode() : 0) | 0) * 31 | 0;
+    var$1 = $this.$third;
+    return var$2 + (var$1 !== null ? var$1.$hashCode() : 0) | 0;
+},
+k_Triple_equals = ($this, $other) => {
+    if ($this === $other)
+        return 1;
+    if (!($other instanceof k_Triple))
+        return 0;
+    $other = $other;
+    if (!kji_Intrinsics_areEqual($this.$first5, $other.$first5))
+        return 0;
+    if (!kji_Intrinsics_areEqual($this.$second0, $other.$second0))
+        return 0;
+    if (kji_Intrinsics_areEqual($this.$third, $other.$third))
+        return 1;
+    return 0;
 },
 cvs_Langs = $rt_classWithoutFields(),
 cvs_Langs_INSTANCE = null,
@@ -34225,7 +34326,7 @@ cvs_Langs_charsFor = ($this, $index) => {
     $$this$forEach$iv_0 = $rt_s(66);
     $n = $rt_s(871);
     $element$iv = null;
-    kji_Intrinsics_checkNotNullParameter($set, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($set, $rt_s(859));
     kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(872));
     kji_Intrinsics_checkNotNullParameter($v, $rt_s(873));
     kji_Intrinsics_checkNotNullParameter($$this$forEach$iv_0, $rt_s(874));
@@ -34233,7 +34334,7 @@ cvs_Langs_charsFor = ($this, $index) => {
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
     var$4 = var$4;
-    kji_Intrinsics_checkNotNullParameter($set, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($set, $rt_s(859));
     kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(876));
     kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(872));
     kji_Intrinsics_checkNotNullParameter($v, $rt_s(873));
@@ -34248,7 +34349,7 @@ cvs_Langs_charsFor = ($this, $index) => {
         $index = $index + 1 | 0;
         if ($index > 1)
             jl_AbstractStringBuilder_append1($n, $$this$forEach$iv);
-        kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(839));
+        kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(859));
         if ($element$iv !== null)
             jl_AbstractStringBuilder_append1($n, $element$iv.$invoke(var$9));
         else if (var$9 !== null ? $rt_isInstance(var$9, jl_CharSequence) : 1)
@@ -34269,11 +34370,11 @@ cvs_Langs__clinit_ = () => {
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(898));
-    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(825));
-    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
-    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(829));
-    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(833));
-    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(835));
+    var$2[1] = k_TuplesKt_to($rt_s(846), $rt_s(825));
+    var$2[2] = k_TuplesKt_to($rt_s(843), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(844), $rt_s(829));
+    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(831));
+    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(833));
     var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(900));
     var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(902));
     var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(904));
@@ -34313,1408 +34414,1408 @@ cvs_Langs__clinit_ = () => {
     var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(965));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(967));
     var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(969));
-    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(831));
-    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(970));
-    var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(972));
-    var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(974));
-    var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(976));
-    var$2[50] = k_TuplesKt_to($rt_s(977), $rt_s(978));
-    var$2[51] = k_TuplesKt_to($rt_s(979), $rt_s(980));
-    var$2[52] = k_TuplesKt_to($rt_s(981), $rt_s(982));
-    var$2[53] = k_TuplesKt_to($rt_s(983), $rt_s(984));
-    var$2[54] = k_TuplesKt_to($rt_s(985), $rt_s(986));
-    var$2[55] = k_TuplesKt_to($rt_s(987), $rt_s(988));
-    var$2[56] = k_TuplesKt_to($rt_s(989), $rt_s(990));
-    var$2[57] = k_TuplesKt_to($rt_s(991), $rt_s(992));
-    var$2[58] = k_TuplesKt_to($rt_s(993), $rt_s(994));
-    var$2[59] = k_TuplesKt_to($rt_s(995), $rt_s(996));
-    var$2[60] = k_TuplesKt_to($rt_s(997), $rt_s(998));
-    var$2[61] = k_TuplesKt_to($rt_s(999), $rt_s(1000));
-    var$2[62] = k_TuplesKt_to($rt_s(1001), $rt_s(1002));
-    var$2[63] = k_TuplesKt_to($rt_s(1003), $rt_s(1004));
-    var$2[64] = k_TuplesKt_to($rt_s(1005), $rt_s(1006));
-    var$2[65] = k_TuplesKt_to($rt_s(1007), $rt_s(1008));
-    var$2[66] = k_TuplesKt_to($rt_s(1009), $rt_s(1010));
-    var$2[67] = k_TuplesKt_to($rt_s(1011), $rt_s(1012));
-    var$2[68] = k_TuplesKt_to($rt_s(1013), $rt_s(1014));
-    var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1016));
-    var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1018));
-    var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1020));
-    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1021));
-    var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1023));
-    var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1025));
+    var$2[45] = k_TuplesKt_to($rt_s(845), $rt_s(970));
+    var$2[46] = k_TuplesKt_to($rt_s(847), $rt_s(971));
+    var$2[47] = k_TuplesKt_to($rt_s(972), $rt_s(973));
+    var$2[48] = k_TuplesKt_to($rt_s(974), $rt_s(975));
+    var$2[49] = k_TuplesKt_to($rt_s(976), $rt_s(977));
+    var$2[50] = k_TuplesKt_to($rt_s(978), $rt_s(979));
+    var$2[51] = k_TuplesKt_to($rt_s(980), $rt_s(981));
+    var$2[52] = k_TuplesKt_to($rt_s(982), $rt_s(983));
+    var$2[53] = k_TuplesKt_to($rt_s(984), $rt_s(985));
+    var$2[54] = k_TuplesKt_to($rt_s(986), $rt_s(987));
+    var$2[55] = k_TuplesKt_to($rt_s(988), $rt_s(989));
+    var$2[56] = k_TuplesKt_to($rt_s(990), $rt_s(991));
+    var$2[57] = k_TuplesKt_to($rt_s(992), $rt_s(993));
+    var$2[58] = k_TuplesKt_to($rt_s(994), $rt_s(995));
+    var$2[59] = k_TuplesKt_to($rt_s(996), $rt_s(997));
+    var$2[60] = k_TuplesKt_to($rt_s(998), $rt_s(999));
+    var$2[61] = k_TuplesKt_to($rt_s(1000), $rt_s(1001));
+    var$2[62] = k_TuplesKt_to($rt_s(1002), $rt_s(1003));
+    var$2[63] = k_TuplesKt_to($rt_s(1004), $rt_s(1005));
+    var$2[64] = k_TuplesKt_to($rt_s(1006), $rt_s(1007));
+    var$2[65] = k_TuplesKt_to($rt_s(1008), $rt_s(1009));
+    var$2[66] = k_TuplesKt_to($rt_s(1010), $rt_s(1011));
+    var$2[67] = k_TuplesKt_to($rt_s(1012), $rt_s(1013));
+    var$2[68] = k_TuplesKt_to($rt_s(1014), $rt_s(1015));
+    var$2[69] = k_TuplesKt_to($rt_s(1016), $rt_s(1017));
+    var$2[70] = k_TuplesKt_to($rt_s(1018), $rt_s(1019));
+    var$2[71] = k_TuplesKt_to($rt_s(1020), $rt_s(1021));
+    var$2[72] = k_TuplesKt_to($rt_s(848), $rt_s(1022));
+    var$2[73] = k_TuplesKt_to($rt_s(1023), $rt_s(1024));
+    var$2[74] = k_TuplesKt_to($rt_s(1025), $rt_s(1026));
     cvs_Langs_pt = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1026));
-    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1027));
-    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
-    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1028));
-    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1029));
-    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1030));
-    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1031));
-    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1032));
-    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1033));
-    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1034));
-    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1035));
-    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1036));
-    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1037));
-    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1038));
-    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1039));
+    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1027));
+    var$2[1] = k_TuplesKt_to($rt_s(846), $rt_s(1028));
+    var$2[2] = k_TuplesKt_to($rt_s(843), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(844), $rt_s(1029));
+    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1030));
+    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1031));
+    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1032));
+    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1033));
+    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1034));
+    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1035));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1036));
+    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1037));
+    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1038));
+    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1039));
+    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1040));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(917));
-    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1040));
-    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1041));
-    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1042));
-    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1043));
-    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1031));
-    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1044));
-    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1045));
-    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1046));
-    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1047));
-    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1048));
-    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1049));
-    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1050));
-    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1051));
-    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1052));
-    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1053));
-    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1054));
-    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1055));
-    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1056));
-    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1057));
-    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1058));
-    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1059));
-    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1060));
-    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1061));
-    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1062));
-    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1063));
-    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1064));
-    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1065));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1041));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1042));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1043));
+    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1044));
+    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1032));
+    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1045));
+    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1046));
+    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1047));
+    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1048));
+    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1049));
+    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1050));
+    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1051));
+    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1052));
+    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1053));
+    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1054));
+    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1055));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1056));
+    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1057));
+    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1058));
+    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1059));
+    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1060));
+    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1061));
+    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1062));
+    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1063));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1064));
+    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1065));
+    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1066));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(967));
-    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1066));
-    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1067));
-    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1068));
-    var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1069));
-    var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1070));
-    var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1071));
-    var$2[50] = k_TuplesKt_to($rt_s(977), $rt_s(1072));
-    var$2[51] = k_TuplesKt_to($rt_s(979), $rt_s(1073));
-    var$2[52] = k_TuplesKt_to($rt_s(981), $rt_s(1074));
-    var$2[53] = k_TuplesKt_to($rt_s(983), $rt_s(1075));
-    var$2[54] = k_TuplesKt_to($rt_s(985), $rt_s(1076));
-    var$2[55] = k_TuplesKt_to($rt_s(987), $rt_s(1077));
-    var$2[56] = k_TuplesKt_to($rt_s(989), $rt_s(1078));
-    var$2[57] = k_TuplesKt_to($rt_s(991), $rt_s(1079));
-    var$2[58] = k_TuplesKt_to($rt_s(993), $rt_s(1080));
-    var$2[59] = k_TuplesKt_to($rt_s(995), $rt_s(1081));
-    var$2[60] = k_TuplesKt_to($rt_s(997), $rt_s(1082));
-    var$2[61] = k_TuplesKt_to($rt_s(999), $rt_s(1083));
-    var$2[62] = k_TuplesKt_to($rt_s(1001), $rt_s(1084));
-    var$2[63] = k_TuplesKt_to($rt_s(1003), $rt_s(1085));
-    var$2[64] = k_TuplesKt_to($rt_s(1005), $rt_s(1086));
-    var$2[65] = k_TuplesKt_to($rt_s(1007), $rt_s(1087));
-    var$2[66] = k_TuplesKt_to($rt_s(1009), $rt_s(1088));
-    var$2[67] = k_TuplesKt_to($rt_s(1011), $rt_s(1089));
-    var$2[68] = k_TuplesKt_to($rt_s(1013), $rt_s(1090));
-    var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1091));
-    var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1092));
-    var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1093));
-    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1094));
-    var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1095));
-    var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1096));
+    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1067));
+    var$2[45] = k_TuplesKt_to($rt_s(845), $rt_s(1068));
+    var$2[46] = k_TuplesKt_to($rt_s(847), $rt_s(1069));
+    var$2[47] = k_TuplesKt_to($rt_s(972), $rt_s(1070));
+    var$2[48] = k_TuplesKt_to($rt_s(974), $rt_s(1071));
+    var$2[49] = k_TuplesKt_to($rt_s(976), $rt_s(1072));
+    var$2[50] = k_TuplesKt_to($rt_s(978), $rt_s(1073));
+    var$2[51] = k_TuplesKt_to($rt_s(980), $rt_s(1074));
+    var$2[52] = k_TuplesKt_to($rt_s(982), $rt_s(1075));
+    var$2[53] = k_TuplesKt_to($rt_s(984), $rt_s(1076));
+    var$2[54] = k_TuplesKt_to($rt_s(986), $rt_s(1077));
+    var$2[55] = k_TuplesKt_to($rt_s(988), $rt_s(1078));
+    var$2[56] = k_TuplesKt_to($rt_s(990), $rt_s(1079));
+    var$2[57] = k_TuplesKt_to($rt_s(992), $rt_s(1080));
+    var$2[58] = k_TuplesKt_to($rt_s(994), $rt_s(1081));
+    var$2[59] = k_TuplesKt_to($rt_s(996), $rt_s(1082));
+    var$2[60] = k_TuplesKt_to($rt_s(998), $rt_s(1083));
+    var$2[61] = k_TuplesKt_to($rt_s(1000), $rt_s(1084));
+    var$2[62] = k_TuplesKt_to($rt_s(1002), $rt_s(1085));
+    var$2[63] = k_TuplesKt_to($rt_s(1004), $rt_s(1086));
+    var$2[64] = k_TuplesKt_to($rt_s(1006), $rt_s(1087));
+    var$2[65] = k_TuplesKt_to($rt_s(1008), $rt_s(1088));
+    var$2[66] = k_TuplesKt_to($rt_s(1010), $rt_s(1089));
+    var$2[67] = k_TuplesKt_to($rt_s(1012), $rt_s(1090));
+    var$2[68] = k_TuplesKt_to($rt_s(1014), $rt_s(1091));
+    var$2[69] = k_TuplesKt_to($rt_s(1016), $rt_s(1092));
+    var$2[70] = k_TuplesKt_to($rt_s(1018), $rt_s(1093));
+    var$2[71] = k_TuplesKt_to($rt_s(1020), $rt_s(1094));
+    var$2[72] = k_TuplesKt_to($rt_s(848), $rt_s(1095));
+    var$2[73] = k_TuplesKt_to($rt_s(1023), $rt_s(1096));
+    var$2[74] = k_TuplesKt_to($rt_s(1025), $rt_s(1097));
     cvs_Langs_en = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1097));
-    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1098));
-    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
-    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1099));
-    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(833));
-    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1100));
+    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1098));
+    var$2[1] = k_TuplesKt_to($rt_s(846), $rt_s(1099));
+    var$2[2] = k_TuplesKt_to($rt_s(843), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(844), $rt_s(1100));
+    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(831));
+    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1101));
     var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(900));
-    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1101));
+    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1102));
     var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(904));
     var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(906));
-    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1102));
-    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1103));
-    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1104));
-    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1105));
-    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1106));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1103));
+    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1104));
+    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1105));
+    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1106));
+    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1107));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(917));
     var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(918));
     var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(919));
-    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1107));
-    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1108));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1108));
+    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1109));
     var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(900));
-    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1109));
-    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1110));
-    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1111));
-    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1112));
-    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1113));
-    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1114));
-    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1115));
-    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1116));
-    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1117));
+    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1110));
+    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1111));
+    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1112));
+    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1113));
+    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1114));
+    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1115));
+    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1116));
+    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1117));
+    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1118));
     var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(943));
-    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1118));
-    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1119));
-    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1120));
-    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1121));
-    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1122));
-    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1123));
-    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1124));
+    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1119));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1120));
+    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1121));
+    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1122));
+    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1123));
+    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1124));
+    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1125));
     var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(958));
-    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1125));
+    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1126));
     var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(961));
-    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1126));
-    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1127));
-    var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1128));
-    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1129));
-    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1130));
-    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1131));
-    var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(972));
-    var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1132));
-    var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1133));
-    var$2[50] = k_TuplesKt_to($rt_s(977), $rt_s(1134));
-    var$2[51] = k_TuplesKt_to($rt_s(979), $rt_s(1135));
-    var$2[52] = k_TuplesKt_to($rt_s(981), $rt_s(1136));
-    var$2[53] = k_TuplesKt_to($rt_s(983), $rt_s(1137));
-    var$2[54] = k_TuplesKt_to($rt_s(985), $rt_s(986));
-    var$2[55] = k_TuplesKt_to($rt_s(987), $rt_s(1138));
-    var$2[56] = k_TuplesKt_to($rt_s(989), $rt_s(990));
-    var$2[57] = k_TuplesKt_to($rt_s(991), $rt_s(1139));
-    var$2[58] = k_TuplesKt_to($rt_s(993), $rt_s(1140));
-    var$2[59] = k_TuplesKt_to($rt_s(995), $rt_s(1141));
-    var$2[60] = k_TuplesKt_to($rt_s(997), $rt_s(998));
-    var$2[61] = k_TuplesKt_to($rt_s(999), $rt_s(1142));
-    var$2[62] = k_TuplesKt_to($rt_s(1001), $rt_s(1143));
-    var$2[63] = k_TuplesKt_to($rt_s(1003), $rt_s(1144));
-    var$2[64] = k_TuplesKt_to($rt_s(1005), $rt_s(1145));
-    var$2[65] = k_TuplesKt_to($rt_s(1007), $rt_s(1146));
-    var$2[66] = k_TuplesKt_to($rt_s(1009), $rt_s(1147));
-    var$2[67] = k_TuplesKt_to($rt_s(1011), $rt_s(1148));
-    var$2[68] = k_TuplesKt_to($rt_s(1013), $rt_s(1149));
-    var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1150));
-    var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1151));
-    var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1152));
-    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1021));
-    var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1153));
-    var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1154));
+    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1127));
+    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1128));
+    var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1129));
+    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1130));
+    var$2[45] = k_TuplesKt_to($rt_s(845), $rt_s(1131));
+    var$2[46] = k_TuplesKt_to($rt_s(847), $rt_s(1132));
+    var$2[47] = k_TuplesKt_to($rt_s(972), $rt_s(973));
+    var$2[48] = k_TuplesKt_to($rt_s(974), $rt_s(1133));
+    var$2[49] = k_TuplesKt_to($rt_s(976), $rt_s(1134));
+    var$2[50] = k_TuplesKt_to($rt_s(978), $rt_s(1135));
+    var$2[51] = k_TuplesKt_to($rt_s(980), $rt_s(1136));
+    var$2[52] = k_TuplesKt_to($rt_s(982), $rt_s(1137));
+    var$2[53] = k_TuplesKt_to($rt_s(984), $rt_s(1138));
+    var$2[54] = k_TuplesKt_to($rt_s(986), $rt_s(987));
+    var$2[55] = k_TuplesKt_to($rt_s(988), $rt_s(1139));
+    var$2[56] = k_TuplesKt_to($rt_s(990), $rt_s(991));
+    var$2[57] = k_TuplesKt_to($rt_s(992), $rt_s(1140));
+    var$2[58] = k_TuplesKt_to($rt_s(994), $rt_s(1141));
+    var$2[59] = k_TuplesKt_to($rt_s(996), $rt_s(1142));
+    var$2[60] = k_TuplesKt_to($rt_s(998), $rt_s(999));
+    var$2[61] = k_TuplesKt_to($rt_s(1000), $rt_s(1143));
+    var$2[62] = k_TuplesKt_to($rt_s(1002), $rt_s(1144));
+    var$2[63] = k_TuplesKt_to($rt_s(1004), $rt_s(1145));
+    var$2[64] = k_TuplesKt_to($rt_s(1006), $rt_s(1146));
+    var$2[65] = k_TuplesKt_to($rt_s(1008), $rt_s(1147));
+    var$2[66] = k_TuplesKt_to($rt_s(1010), $rt_s(1148));
+    var$2[67] = k_TuplesKt_to($rt_s(1012), $rt_s(1149));
+    var$2[68] = k_TuplesKt_to($rt_s(1014), $rt_s(1150));
+    var$2[69] = k_TuplesKt_to($rt_s(1016), $rt_s(1151));
+    var$2[70] = k_TuplesKt_to($rt_s(1018), $rt_s(1152));
+    var$2[71] = k_TuplesKt_to($rt_s(1020), $rt_s(1153));
+    var$2[72] = k_TuplesKt_to($rt_s(848), $rt_s(1022));
+    var$2[73] = k_TuplesKt_to($rt_s(1023), $rt_s(1154));
+    var$2[74] = k_TuplesKt_to($rt_s(1025), $rt_s(1155));
     cvs_Langs_es = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1155));
-    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1156));
-    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
-    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1157));
-    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1029));
-    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1158));
-    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1031));
-    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1159));
-    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1160));
-    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1161));
-    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1162));
-    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1163));
-    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1164));
-    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1165));
-    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1166));
+    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1156));
+    var$2[1] = k_TuplesKt_to($rt_s(846), $rt_s(1157));
+    var$2[2] = k_TuplesKt_to($rt_s(843), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(844), $rt_s(1158));
+    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1030));
+    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1159));
+    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1032));
+    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1160));
+    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1161));
+    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1162));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1163));
+    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1164));
+    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1165));
+    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1166));
+    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1167));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(917));
-    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1167));
-    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1168));
-    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1169));
-    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1170));
-    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1031));
-    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1171));
-    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1172));
-    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1173));
-    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1174));
-    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1175));
-    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1176));
-    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1177));
-    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1178));
-    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1179));
-    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1180));
-    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1181));
-    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1055));
-    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1182));
-    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1183));
-    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1184));
-    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1185));
-    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1186));
-    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1187));
-    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1188));
-    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1189));
-    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1190));
-    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1191));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1168));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1169));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1170));
+    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1171));
+    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1032));
+    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1172));
+    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1173));
+    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1174));
+    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1175));
+    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1176));
+    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1177));
+    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1178));
+    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1179));
+    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1180));
+    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1181));
+    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1182));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1056));
+    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1183));
+    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1184));
+    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1185));
+    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1186));
+    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1187));
+    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1188));
+    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1189));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1190));
+    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1191));
+    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1192));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(967));
-    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1192));
-    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1193));
-    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1194));
-    var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1195));
-    var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1196));
-    var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1197));
-    var$2[50] = k_TuplesKt_to($rt_s(977), $rt_s(1198));
-    var$2[51] = k_TuplesKt_to($rt_s(979), $rt_s(1199));
-    var$2[52] = k_TuplesKt_to($rt_s(981), $rt_s(1200));
-    var$2[53] = k_TuplesKt_to($rt_s(983), $rt_s(1201));
-    var$2[54] = k_TuplesKt_to($rt_s(985), $rt_s(1202));
-    var$2[55] = k_TuplesKt_to($rt_s(987), $rt_s(1203));
-    var$2[56] = k_TuplesKt_to($rt_s(989), $rt_s(1204));
-    var$2[57] = k_TuplesKt_to($rt_s(991), $rt_s(1205));
-    var$2[58] = k_TuplesKt_to($rt_s(993), $rt_s(1206));
-    var$2[59] = k_TuplesKt_to($rt_s(995), $rt_s(1207));
-    var$2[60] = k_TuplesKt_to($rt_s(997), $rt_s(1200));
-    var$2[61] = k_TuplesKt_to($rt_s(999), $rt_s(1208));
-    var$2[62] = k_TuplesKt_to($rt_s(1001), $rt_s(1209));
-    var$2[63] = k_TuplesKt_to($rt_s(1003), $rt_s(1210));
-    var$2[64] = k_TuplesKt_to($rt_s(1005), $rt_s(1211));
-    var$2[65] = k_TuplesKt_to($rt_s(1007), $rt_s(1212));
-    var$2[66] = k_TuplesKt_to($rt_s(1009), $rt_s(1213));
-    var$2[67] = k_TuplesKt_to($rt_s(1011), $rt_s(1214));
-    var$2[68] = k_TuplesKt_to($rt_s(1013), $rt_s(1215));
-    var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1216));
-    var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1217));
-    var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1218));
-    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1219));
-    var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1220));
-    var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1221));
+    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1193));
+    var$2[45] = k_TuplesKt_to($rt_s(845), $rt_s(1194));
+    var$2[46] = k_TuplesKt_to($rt_s(847), $rt_s(1195));
+    var$2[47] = k_TuplesKt_to($rt_s(972), $rt_s(1196));
+    var$2[48] = k_TuplesKt_to($rt_s(974), $rt_s(1197));
+    var$2[49] = k_TuplesKt_to($rt_s(976), $rt_s(1198));
+    var$2[50] = k_TuplesKt_to($rt_s(978), $rt_s(1199));
+    var$2[51] = k_TuplesKt_to($rt_s(980), $rt_s(1200));
+    var$2[52] = k_TuplesKt_to($rt_s(982), $rt_s(1201));
+    var$2[53] = k_TuplesKt_to($rt_s(984), $rt_s(1202));
+    var$2[54] = k_TuplesKt_to($rt_s(986), $rt_s(1203));
+    var$2[55] = k_TuplesKt_to($rt_s(988), $rt_s(1204));
+    var$2[56] = k_TuplesKt_to($rt_s(990), $rt_s(1205));
+    var$2[57] = k_TuplesKt_to($rt_s(992), $rt_s(1206));
+    var$2[58] = k_TuplesKt_to($rt_s(994), $rt_s(1207));
+    var$2[59] = k_TuplesKt_to($rt_s(996), $rt_s(1208));
+    var$2[60] = k_TuplesKt_to($rt_s(998), $rt_s(1201));
+    var$2[61] = k_TuplesKt_to($rt_s(1000), $rt_s(1209));
+    var$2[62] = k_TuplesKt_to($rt_s(1002), $rt_s(1210));
+    var$2[63] = k_TuplesKt_to($rt_s(1004), $rt_s(1211));
+    var$2[64] = k_TuplesKt_to($rt_s(1006), $rt_s(1212));
+    var$2[65] = k_TuplesKt_to($rt_s(1008), $rt_s(1213));
+    var$2[66] = k_TuplesKt_to($rt_s(1010), $rt_s(1214));
+    var$2[67] = k_TuplesKt_to($rt_s(1012), $rt_s(1215));
+    var$2[68] = k_TuplesKt_to($rt_s(1014), $rt_s(1216));
+    var$2[69] = k_TuplesKt_to($rt_s(1016), $rt_s(1217));
+    var$2[70] = k_TuplesKt_to($rt_s(1018), $rt_s(1218));
+    var$2[71] = k_TuplesKt_to($rt_s(1020), $rt_s(1219));
+    var$2[72] = k_TuplesKt_to($rt_s(848), $rt_s(1220));
+    var$2[73] = k_TuplesKt_to($rt_s(1023), $rt_s(1221));
+    var$2[74] = k_TuplesKt_to($rt_s(1025), $rt_s(1222));
     cvs_Langs_de = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1222));
-    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1223));
-    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
-    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1224));
-    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1225));
-    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1226));
-    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1227));
-    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1159));
-    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1228));
-    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1229));
+    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1223));
+    var$2[1] = k_TuplesKt_to($rt_s(846), $rt_s(1224));
+    var$2[2] = k_TuplesKt_to($rt_s(843), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(844), $rt_s(1225));
+    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1226));
+    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1227));
+    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1228));
+    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1160));
+    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1229));
+    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1230));
     var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(907));
-    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1230));
-    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1231));
-    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1038));
-    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1232));
+    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1231));
+    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1232));
+    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1039));
+    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1233));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(917));
-    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1233));
-    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1234));
-    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1235));
-    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1236));
-    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1227));
-    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1109));
-    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1237));
-    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1238));
-    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1239));
-    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1240));
-    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1241));
-    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1242));
-    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1243));
-    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1244));
-    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1245));
-    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1246));
-    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1055));
-    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1247));
-    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1248));
-    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1249));
-    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1250));
-    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1251));
-    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1252));
-    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1253));
-    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1254));
-    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1255));
-    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1256));
-    var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1257));
-    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1258));
-    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1259));
-    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1260));
-    var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1261));
-    var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1262));
-    var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1263));
-    var$2[50] = k_TuplesKt_to($rt_s(977), $rt_s(1264));
-    var$2[51] = k_TuplesKt_to($rt_s(979), $rt_s(1265));
-    var$2[52] = k_TuplesKt_to($rt_s(981), $rt_s(1266));
-    var$2[53] = k_TuplesKt_to($rt_s(983), $rt_s(1267));
-    var$2[54] = k_TuplesKt_to($rt_s(985), $rt_s(1268));
-    var$2[55] = k_TuplesKt_to($rt_s(987), $rt_s(1269));
-    var$2[56] = k_TuplesKt_to($rt_s(989), $rt_s(1270));
-    var$2[57] = k_TuplesKt_to($rt_s(991), $rt_s(1271));
-    var$2[58] = k_TuplesKt_to($rt_s(993), $rt_s(1272));
-    var$2[59] = k_TuplesKt_to($rt_s(995), $rt_s(1273));
-    var$2[60] = k_TuplesKt_to($rt_s(997), $rt_s(1266));
-    var$2[61] = k_TuplesKt_to($rt_s(999), $rt_s(1274));
-    var$2[62] = k_TuplesKt_to($rt_s(1001), $rt_s(1084));
-    var$2[63] = k_TuplesKt_to($rt_s(1003), $rt_s(1275));
-    var$2[64] = k_TuplesKt_to($rt_s(1005), $rt_s(1252));
-    var$2[65] = k_TuplesKt_to($rt_s(1007), $rt_s(1276));
-    var$2[66] = k_TuplesKt_to($rt_s(1009), $rt_s(1277));
-    var$2[67] = k_TuplesKt_to($rt_s(1011), $rt_s(1278));
-    var$2[68] = k_TuplesKt_to($rt_s(1013), $rt_s(1279));
-    var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1280));
-    var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1281));
-    var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1282));
-    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1283));
-    var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1284));
-    var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1285));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1234));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1235));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1236));
+    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1237));
+    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1228));
+    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1110));
+    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1238));
+    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1239));
+    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1240));
+    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1241));
+    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1242));
+    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1243));
+    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1244));
+    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1245));
+    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1246));
+    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1247));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1056));
+    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1248));
+    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1249));
+    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1250));
+    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1251));
+    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1252));
+    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1253));
+    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1254));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1255));
+    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1256));
+    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1257));
+    var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1258));
+    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1259));
+    var$2[45] = k_TuplesKt_to($rt_s(845), $rt_s(1260));
+    var$2[46] = k_TuplesKt_to($rt_s(847), $rt_s(1261));
+    var$2[47] = k_TuplesKt_to($rt_s(972), $rt_s(1262));
+    var$2[48] = k_TuplesKt_to($rt_s(974), $rt_s(1263));
+    var$2[49] = k_TuplesKt_to($rt_s(976), $rt_s(1264));
+    var$2[50] = k_TuplesKt_to($rt_s(978), $rt_s(1265));
+    var$2[51] = k_TuplesKt_to($rt_s(980), $rt_s(1266));
+    var$2[52] = k_TuplesKt_to($rt_s(982), $rt_s(1267));
+    var$2[53] = k_TuplesKt_to($rt_s(984), $rt_s(1268));
+    var$2[54] = k_TuplesKt_to($rt_s(986), $rt_s(1269));
+    var$2[55] = k_TuplesKt_to($rt_s(988), $rt_s(1270));
+    var$2[56] = k_TuplesKt_to($rt_s(990), $rt_s(1271));
+    var$2[57] = k_TuplesKt_to($rt_s(992), $rt_s(1272));
+    var$2[58] = k_TuplesKt_to($rt_s(994), $rt_s(1273));
+    var$2[59] = k_TuplesKt_to($rt_s(996), $rt_s(1274));
+    var$2[60] = k_TuplesKt_to($rt_s(998), $rt_s(1267));
+    var$2[61] = k_TuplesKt_to($rt_s(1000), $rt_s(1275));
+    var$2[62] = k_TuplesKt_to($rt_s(1002), $rt_s(1085));
+    var$2[63] = k_TuplesKt_to($rt_s(1004), $rt_s(1276));
+    var$2[64] = k_TuplesKt_to($rt_s(1006), $rt_s(1253));
+    var$2[65] = k_TuplesKt_to($rt_s(1008), $rt_s(1277));
+    var$2[66] = k_TuplesKt_to($rt_s(1010), $rt_s(1278));
+    var$2[67] = k_TuplesKt_to($rt_s(1012), $rt_s(1279));
+    var$2[68] = k_TuplesKt_to($rt_s(1014), $rt_s(1280));
+    var$2[69] = k_TuplesKt_to($rt_s(1016), $rt_s(1281));
+    var$2[70] = k_TuplesKt_to($rt_s(1018), $rt_s(1282));
+    var$2[71] = k_TuplesKt_to($rt_s(1020), $rt_s(1283));
+    var$2[72] = k_TuplesKt_to($rt_s(848), $rt_s(1284));
+    var$2[73] = k_TuplesKt_to($rt_s(1023), $rt_s(1285));
+    var$2[74] = k_TuplesKt_to($rt_s(1025), $rt_s(1286));
     cvs_Langs_fr = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1286));
-    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1287));
-    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
-    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1288));
-    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1289));
-    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1290));
-    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1291));
-    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1101));
-    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1292));
-    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1293));
-    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1294));
-    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1295));
-    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1296));
-    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1297));
-    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1232));
+    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1287));
+    var$2[1] = k_TuplesKt_to($rt_s(846), $rt_s(1288));
+    var$2[2] = k_TuplesKt_to($rt_s(843), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(844), $rt_s(1289));
+    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1290));
+    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1291));
+    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1292));
+    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1102));
+    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1293));
+    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1294));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1295));
+    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1296));
+    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1297));
+    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1298));
+    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1233));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(917));
-    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1298));
-    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1299));
-    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1300));
-    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1108));
-    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1291));
-    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1301));
-    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1302));
-    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1303));
-    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1304));
-    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1305));
-    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1306));
-    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1307));
-    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1308));
-    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1309));
-    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1310));
-    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1311));
-    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1312));
-    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1313));
-    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1314));
-    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1315));
-    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1316));
-    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1317));
-    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1318));
-    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1319));
-    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1320));
-    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1321));
-    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1322));
-    var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1323));
-    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1324));
-    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1325));
-    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1326));
-    var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1327));
-    var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1328));
-    var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1329));
-    var$2[50] = k_TuplesKt_to($rt_s(977), $rt_s(1330));
-    var$2[51] = k_TuplesKt_to($rt_s(979), $rt_s(1331));
-    var$2[52] = k_TuplesKt_to($rt_s(981), $rt_s(1332));
-    var$2[53] = k_TuplesKt_to($rt_s(983), $rt_s(1333));
-    var$2[54] = k_TuplesKt_to($rt_s(985), $rt_s(1334));
-    var$2[55] = k_TuplesKt_to($rt_s(987), $rt_s(1335));
-    var$2[56] = k_TuplesKt_to($rt_s(989), $rt_s(1336));
-    var$2[57] = k_TuplesKt_to($rt_s(991), $rt_s(992));
-    var$2[58] = k_TuplesKt_to($rt_s(993), $rt_s(1337));
-    var$2[59] = k_TuplesKt_to($rt_s(995), $rt_s(1338));
-    var$2[60] = k_TuplesKt_to($rt_s(997), $rt_s(1332));
-    var$2[61] = k_TuplesKt_to($rt_s(999), $rt_s(1339));
-    var$2[62] = k_TuplesKt_to($rt_s(1001), $rt_s(1084));
-    var$2[63] = k_TuplesKt_to($rt_s(1003), $rt_s(1004));
-    var$2[64] = k_TuplesKt_to($rt_s(1005), $rt_s(1340));
-    var$2[65] = k_TuplesKt_to($rt_s(1007), $rt_s(1341));
-    var$2[66] = k_TuplesKt_to($rt_s(1009), $rt_s(1342));
-    var$2[67] = k_TuplesKt_to($rt_s(1011), $rt_s(1343));
-    var$2[68] = k_TuplesKt_to($rt_s(1013), $rt_s(1344));
-    var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1345));
-    var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1346));
-    var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1347));
-    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1348));
-    var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1349));
-    var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1350));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1299));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1300));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1301));
+    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1109));
+    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1292));
+    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1302));
+    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1303));
+    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1304));
+    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1305));
+    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1306));
+    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1307));
+    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1308));
+    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1309));
+    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1310));
+    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1311));
+    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1312));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1313));
+    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1314));
+    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1315));
+    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1316));
+    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1317));
+    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1318));
+    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1319));
+    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1320));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1321));
+    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1322));
+    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1323));
+    var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1324));
+    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1325));
+    var$2[45] = k_TuplesKt_to($rt_s(845), $rt_s(1326));
+    var$2[46] = k_TuplesKt_to($rt_s(847), $rt_s(1327));
+    var$2[47] = k_TuplesKt_to($rt_s(972), $rt_s(1328));
+    var$2[48] = k_TuplesKt_to($rt_s(974), $rt_s(1329));
+    var$2[49] = k_TuplesKt_to($rt_s(976), $rt_s(1330));
+    var$2[50] = k_TuplesKt_to($rt_s(978), $rt_s(1331));
+    var$2[51] = k_TuplesKt_to($rt_s(980), $rt_s(1332));
+    var$2[52] = k_TuplesKt_to($rt_s(982), $rt_s(1333));
+    var$2[53] = k_TuplesKt_to($rt_s(984), $rt_s(1334));
+    var$2[54] = k_TuplesKt_to($rt_s(986), $rt_s(1335));
+    var$2[55] = k_TuplesKt_to($rt_s(988), $rt_s(1336));
+    var$2[56] = k_TuplesKt_to($rt_s(990), $rt_s(1337));
+    var$2[57] = k_TuplesKt_to($rt_s(992), $rt_s(993));
+    var$2[58] = k_TuplesKt_to($rt_s(994), $rt_s(1338));
+    var$2[59] = k_TuplesKt_to($rt_s(996), $rt_s(1339));
+    var$2[60] = k_TuplesKt_to($rt_s(998), $rt_s(1333));
+    var$2[61] = k_TuplesKt_to($rt_s(1000), $rt_s(1340));
+    var$2[62] = k_TuplesKt_to($rt_s(1002), $rt_s(1085));
+    var$2[63] = k_TuplesKt_to($rt_s(1004), $rt_s(1005));
+    var$2[64] = k_TuplesKt_to($rt_s(1006), $rt_s(1341));
+    var$2[65] = k_TuplesKt_to($rt_s(1008), $rt_s(1342));
+    var$2[66] = k_TuplesKt_to($rt_s(1010), $rt_s(1343));
+    var$2[67] = k_TuplesKt_to($rt_s(1012), $rt_s(1344));
+    var$2[68] = k_TuplesKt_to($rt_s(1014), $rt_s(1345));
+    var$2[69] = k_TuplesKt_to($rt_s(1016), $rt_s(1346));
+    var$2[70] = k_TuplesKt_to($rt_s(1018), $rt_s(1347));
+    var$2[71] = k_TuplesKt_to($rt_s(1020), $rt_s(1348));
+    var$2[72] = k_TuplesKt_to($rt_s(848), $rt_s(1349));
+    var$2[73] = k_TuplesKt_to($rt_s(1023), $rt_s(1350));
+    var$2[74] = k_TuplesKt_to($rt_s(1025), $rt_s(1351));
     cvs_Langs_it = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1351));
-    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1352));
-    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
-    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1353));
-    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1354));
-    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1355));
-    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1031));
-    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1356));
-    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1357));
-    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1358));
-    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1359));
-    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1360));
-    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1361));
-    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1362));
-    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1363));
-    var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(1364));
-    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1365));
-    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1366));
-    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1367));
-    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1170));
-    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1031));
-    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1044));
-    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1368));
-    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1369));
-    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1370));
-    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1371));
-    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1372));
-    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1373));
-    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1374));
-    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1375));
-    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1180));
-    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1376));
-    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1377));
-    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1378));
-    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1379));
-    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1380));
-    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1381));
-    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1382));
-    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1383));
-    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1384));
-    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1385));
-    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1386));
-    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1387));
+    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1352));
+    var$2[1] = k_TuplesKt_to($rt_s(846), $rt_s(1353));
+    var$2[2] = k_TuplesKt_to($rt_s(843), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(844), $rt_s(1354));
+    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1355));
+    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1356));
+    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1032));
+    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1357));
+    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1358));
+    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1359));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1360));
+    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1361));
+    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1362));
+    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1363));
+    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1364));
+    var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(1365));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1366));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1367));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1368));
+    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1171));
+    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1032));
+    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1045));
+    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1369));
+    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1370));
+    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1371));
+    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1372));
+    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1373));
+    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1374));
+    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1375));
+    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1376));
+    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1181));
+    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1377));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1378));
+    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1379));
+    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1380));
+    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1381));
+    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1382));
+    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1383));
+    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1384));
+    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1385));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1386));
+    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1387));
+    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1388));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(967));
-    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1388));
-    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1389));
-    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1390));
-    var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1391));
-    var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1392));
-    var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1393));
-    var$2[50] = k_TuplesKt_to($rt_s(977), $rt_s(1394));
-    var$2[51] = k_TuplesKt_to($rt_s(979), $rt_s(1395));
-    var$2[52] = k_TuplesKt_to($rt_s(981), $rt_s(1074));
-    var$2[53] = k_TuplesKt_to($rt_s(983), $rt_s(1396));
-    var$2[54] = k_TuplesKt_to($rt_s(985), $rt_s(1397));
-    var$2[55] = k_TuplesKt_to($rt_s(987), $rt_s(1398));
-    var$2[56] = k_TuplesKt_to($rt_s(989), $rt_s(1399));
-    var$2[57] = k_TuplesKt_to($rt_s(991), $rt_s(1400));
-    var$2[58] = k_TuplesKt_to($rt_s(993), $rt_s(1401));
-    var$2[59] = k_TuplesKt_to($rt_s(995), $rt_s(1402));
-    var$2[60] = k_TuplesKt_to($rt_s(997), $rt_s(1403));
-    var$2[61] = k_TuplesKt_to($rt_s(999), $rt_s(1404));
-    var$2[62] = k_TuplesKt_to($rt_s(1001), $rt_s(1405));
-    var$2[63] = k_TuplesKt_to($rt_s(1003), $rt_s(1406));
-    var$2[64] = k_TuplesKt_to($rt_s(1005), $rt_s(1383));
-    var$2[65] = k_TuplesKt_to($rt_s(1007), $rt_s(1407));
-    var$2[66] = k_TuplesKt_to($rt_s(1009), $rt_s(1408));
-    var$2[67] = k_TuplesKt_to($rt_s(1011), $rt_s(1409));
-    var$2[68] = k_TuplesKt_to($rt_s(1013), $rt_s(1410));
-    var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1411));
-    var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1412));
-    var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1413));
-    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1414));
-    var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1415));
-    var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1416));
+    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1389));
+    var$2[45] = k_TuplesKt_to($rt_s(845), $rt_s(1390));
+    var$2[46] = k_TuplesKt_to($rt_s(847), $rt_s(1391));
+    var$2[47] = k_TuplesKt_to($rt_s(972), $rt_s(1392));
+    var$2[48] = k_TuplesKt_to($rt_s(974), $rt_s(1393));
+    var$2[49] = k_TuplesKt_to($rt_s(976), $rt_s(1394));
+    var$2[50] = k_TuplesKt_to($rt_s(978), $rt_s(1395));
+    var$2[51] = k_TuplesKt_to($rt_s(980), $rt_s(1396));
+    var$2[52] = k_TuplesKt_to($rt_s(982), $rt_s(1075));
+    var$2[53] = k_TuplesKt_to($rt_s(984), $rt_s(1397));
+    var$2[54] = k_TuplesKt_to($rt_s(986), $rt_s(1398));
+    var$2[55] = k_TuplesKt_to($rt_s(988), $rt_s(1399));
+    var$2[56] = k_TuplesKt_to($rt_s(990), $rt_s(1400));
+    var$2[57] = k_TuplesKt_to($rt_s(992), $rt_s(1401));
+    var$2[58] = k_TuplesKt_to($rt_s(994), $rt_s(1402));
+    var$2[59] = k_TuplesKt_to($rt_s(996), $rt_s(1403));
+    var$2[60] = k_TuplesKt_to($rt_s(998), $rt_s(1404));
+    var$2[61] = k_TuplesKt_to($rt_s(1000), $rt_s(1405));
+    var$2[62] = k_TuplesKt_to($rt_s(1002), $rt_s(1406));
+    var$2[63] = k_TuplesKt_to($rt_s(1004), $rt_s(1407));
+    var$2[64] = k_TuplesKt_to($rt_s(1006), $rt_s(1384));
+    var$2[65] = k_TuplesKt_to($rt_s(1008), $rt_s(1408));
+    var$2[66] = k_TuplesKt_to($rt_s(1010), $rt_s(1409));
+    var$2[67] = k_TuplesKt_to($rt_s(1012), $rt_s(1410));
+    var$2[68] = k_TuplesKt_to($rt_s(1014), $rt_s(1411));
+    var$2[69] = k_TuplesKt_to($rt_s(1016), $rt_s(1412));
+    var$2[70] = k_TuplesKt_to($rt_s(1018), $rt_s(1413));
+    var$2[71] = k_TuplesKt_to($rt_s(1020), $rt_s(1414));
+    var$2[72] = k_TuplesKt_to($rt_s(848), $rt_s(1415));
+    var$2[73] = k_TuplesKt_to($rt_s(1023), $rt_s(1416));
+    var$2[74] = k_TuplesKt_to($rt_s(1025), $rt_s(1417));
     cvs_Langs_id = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1417));
-    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1418));
-    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
-    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1419));
-    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1420));
-    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1421));
-    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1422));
-    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1423));
-    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1424));
-    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1425));
-    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1426));
-    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1427));
-    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1428));
-    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1429));
-    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1363));
-    var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(1364));
-    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1430));
-    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1431));
-    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1432));
-    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1433));
-    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1422));
-    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1109));
-    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1434));
-    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1435));
-    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1436));
-    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1437));
-    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1438));
-    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1439));
-    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1440));
-    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1441));
-    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1442));
-    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1443));
-    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1444));
-    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1445));
-    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1446));
-    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1447));
-    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1448));
-    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1449));
-    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1450));
-    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1451));
-    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1452));
-    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1386));
-    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1453));
-    var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1454));
-    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1455));
-    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1456));
-    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1457));
-    var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1458));
-    var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1459));
-    var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1460));
-    var$2[50] = k_TuplesKt_to($rt_s(977), $rt_s(1461));
-    var$2[51] = k_TuplesKt_to($rt_s(979), $rt_s(1462));
-    var$2[52] = k_TuplesKt_to($rt_s(981), $rt_s(1463));
-    var$2[53] = k_TuplesKt_to($rt_s(983), $rt_s(1464));
-    var$2[54] = k_TuplesKt_to($rt_s(985), $rt_s(1465));
-    var$2[55] = k_TuplesKt_to($rt_s(987), $rt_s(1466));
-    var$2[56] = k_TuplesKt_to($rt_s(989), $rt_s(1467));
-    var$2[57] = k_TuplesKt_to($rt_s(991), $rt_s(1468));
-    var$2[58] = k_TuplesKt_to($rt_s(993), $rt_s(1469));
-    var$2[59] = k_TuplesKt_to($rt_s(995), $rt_s(1470));
-    var$2[60] = k_TuplesKt_to($rt_s(997), $rt_s(1471));
-    var$2[61] = k_TuplesKt_to($rt_s(999), $rt_s(1472));
-    var$2[62] = k_TuplesKt_to($rt_s(1001), $rt_s(1473));
-    var$2[63] = k_TuplesKt_to($rt_s(1003), $rt_s(1474));
-    var$2[64] = k_TuplesKt_to($rt_s(1005), $rt_s(1475));
-    var$2[65] = k_TuplesKt_to($rt_s(1007), $rt_s(1476));
-    var$2[66] = k_TuplesKt_to($rt_s(1009), $rt_s(1477));
-    var$2[67] = k_TuplesKt_to($rt_s(1011), $rt_s(1478));
-    var$2[68] = k_TuplesKt_to($rt_s(1013), $rt_s(1479));
-    var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1480));
-    var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1481));
-    var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1482));
-    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1483));
-    var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1484));
-    var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1485));
+    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1418));
+    var$2[1] = k_TuplesKt_to($rt_s(846), $rt_s(1419));
+    var$2[2] = k_TuplesKt_to($rt_s(843), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(844), $rt_s(1420));
+    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1421));
+    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1422));
+    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1423));
+    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1424));
+    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1425));
+    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1426));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1427));
+    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1428));
+    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1429));
+    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1430));
+    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1364));
+    var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(1365));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1431));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1432));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1433));
+    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1434));
+    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1423));
+    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1110));
+    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1435));
+    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1436));
+    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1437));
+    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1438));
+    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1439));
+    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1440));
+    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1441));
+    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1442));
+    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1443));
+    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1444));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1445));
+    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1446));
+    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1447));
+    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1448));
+    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1449));
+    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1450));
+    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1451));
+    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1452));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1453));
+    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1387));
+    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1454));
+    var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1455));
+    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1456));
+    var$2[45] = k_TuplesKt_to($rt_s(845), $rt_s(1457));
+    var$2[46] = k_TuplesKt_to($rt_s(847), $rt_s(1458));
+    var$2[47] = k_TuplesKt_to($rt_s(972), $rt_s(1459));
+    var$2[48] = k_TuplesKt_to($rt_s(974), $rt_s(1460));
+    var$2[49] = k_TuplesKt_to($rt_s(976), $rt_s(1461));
+    var$2[50] = k_TuplesKt_to($rt_s(978), $rt_s(1462));
+    var$2[51] = k_TuplesKt_to($rt_s(980), $rt_s(1463));
+    var$2[52] = k_TuplesKt_to($rt_s(982), $rt_s(1464));
+    var$2[53] = k_TuplesKt_to($rt_s(984), $rt_s(1465));
+    var$2[54] = k_TuplesKt_to($rt_s(986), $rt_s(1466));
+    var$2[55] = k_TuplesKt_to($rt_s(988), $rt_s(1467));
+    var$2[56] = k_TuplesKt_to($rt_s(990), $rt_s(1468));
+    var$2[57] = k_TuplesKt_to($rt_s(992), $rt_s(1469));
+    var$2[58] = k_TuplesKt_to($rt_s(994), $rt_s(1470));
+    var$2[59] = k_TuplesKt_to($rt_s(996), $rt_s(1471));
+    var$2[60] = k_TuplesKt_to($rt_s(998), $rt_s(1472));
+    var$2[61] = k_TuplesKt_to($rt_s(1000), $rt_s(1473));
+    var$2[62] = k_TuplesKt_to($rt_s(1002), $rt_s(1474));
+    var$2[63] = k_TuplesKt_to($rt_s(1004), $rt_s(1475));
+    var$2[64] = k_TuplesKt_to($rt_s(1006), $rt_s(1476));
+    var$2[65] = k_TuplesKt_to($rt_s(1008), $rt_s(1477));
+    var$2[66] = k_TuplesKt_to($rt_s(1010), $rt_s(1478));
+    var$2[67] = k_TuplesKt_to($rt_s(1012), $rt_s(1479));
+    var$2[68] = k_TuplesKt_to($rt_s(1014), $rt_s(1480));
+    var$2[69] = k_TuplesKt_to($rt_s(1016), $rt_s(1481));
+    var$2[70] = k_TuplesKt_to($rt_s(1018), $rt_s(1482));
+    var$2[71] = k_TuplesKt_to($rt_s(1020), $rt_s(1483));
+    var$2[72] = k_TuplesKt_to($rt_s(848), $rt_s(1484));
+    var$2[73] = k_TuplesKt_to($rt_s(1023), $rt_s(1485));
+    var$2[74] = k_TuplesKt_to($rt_s(1025), $rt_s(1486));
     cvs_Langs_tr = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1486));
-    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1487));
-    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(1488));
-    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1489));
-    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1490));
-    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1491));
-    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1492));
-    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1493));
-    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1494));
-    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1495));
-    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1496));
-    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1497));
-    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1498));
-    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1499));
-    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1500));
-    var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(1501));
-    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1502));
-    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1503));
-    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1504));
-    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1505));
-    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1492));
-    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1506));
-    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1507));
-    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1508));
-    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1509));
-    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1510));
-    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1511));
-    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1512));
-    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1513));
-    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1514));
-    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1515));
-    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1516));
-    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1517));
-    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1518));
-    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1519));
-    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1520));
-    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1521));
-    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1522));
-    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1523));
-    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1524));
-    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1525));
-    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1526));
-    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1527));
-    var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1528));
-    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1529));
-    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1530));
-    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1531));
-    var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1532));
-    var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1533));
-    var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1534));
-    var$2[50] = k_TuplesKt_to($rt_s(977), $rt_s(1535));
-    var$2[51] = k_TuplesKt_to($rt_s(979), $rt_s(1536));
-    var$2[52] = k_TuplesKt_to($rt_s(981), $rt_s(1537));
-    var$2[53] = k_TuplesKt_to($rt_s(983), $rt_s(1538));
-    var$2[54] = k_TuplesKt_to($rt_s(985), $rt_s(1539));
-    var$2[55] = k_TuplesKt_to($rt_s(987), $rt_s(1540));
-    var$2[56] = k_TuplesKt_to($rt_s(989), $rt_s(1541));
-    var$2[57] = k_TuplesKt_to($rt_s(991), $rt_s(1542));
-    var$2[58] = k_TuplesKt_to($rt_s(993), $rt_s(1543));
-    var$2[59] = k_TuplesKt_to($rt_s(995), $rt_s(1544));
-    var$2[60] = k_TuplesKt_to($rt_s(997), $rt_s(1537));
-    var$2[61] = k_TuplesKt_to($rt_s(999), $rt_s(1545));
-    var$2[62] = k_TuplesKt_to($rt_s(1001), $rt_s(1546));
-    var$2[63] = k_TuplesKt_to($rt_s(1003), $rt_s(1547));
-    var$2[64] = k_TuplesKt_to($rt_s(1005), $rt_s(1548));
-    var$2[65] = k_TuplesKt_to($rt_s(1007), $rt_s(1549));
-    var$2[66] = k_TuplesKt_to($rt_s(1009), $rt_s(1550));
-    var$2[67] = k_TuplesKt_to($rt_s(1011), $rt_s(1551));
-    var$2[68] = k_TuplesKt_to($rt_s(1013), $rt_s(1552));
-    var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1553));
-    var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1554));
-    var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1555));
-    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1556));
-    var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1557));
-    var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1558));
+    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1487));
+    var$2[1] = k_TuplesKt_to($rt_s(846), $rt_s(1488));
+    var$2[2] = k_TuplesKt_to($rt_s(843), $rt_s(1489));
+    var$2[3] = k_TuplesKt_to($rt_s(844), $rt_s(1490));
+    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1491));
+    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1492));
+    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1493));
+    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1494));
+    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1495));
+    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1496));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1497));
+    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1498));
+    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1499));
+    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1500));
+    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1501));
+    var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(1502));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1503));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1504));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1505));
+    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1506));
+    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1493));
+    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1507));
+    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1508));
+    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1509));
+    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1510));
+    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1511));
+    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1512));
+    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1513));
+    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1514));
+    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1515));
+    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1516));
+    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1517));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1518));
+    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1519));
+    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1520));
+    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1521));
+    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1522));
+    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1523));
+    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1524));
+    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1525));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1526));
+    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1527));
+    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1528));
+    var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1529));
+    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1530));
+    var$2[45] = k_TuplesKt_to($rt_s(845), $rt_s(1531));
+    var$2[46] = k_TuplesKt_to($rt_s(847), $rt_s(1532));
+    var$2[47] = k_TuplesKt_to($rt_s(972), $rt_s(1533));
+    var$2[48] = k_TuplesKt_to($rt_s(974), $rt_s(1534));
+    var$2[49] = k_TuplesKt_to($rt_s(976), $rt_s(1535));
+    var$2[50] = k_TuplesKt_to($rt_s(978), $rt_s(1536));
+    var$2[51] = k_TuplesKt_to($rt_s(980), $rt_s(1537));
+    var$2[52] = k_TuplesKt_to($rt_s(982), $rt_s(1538));
+    var$2[53] = k_TuplesKt_to($rt_s(984), $rt_s(1539));
+    var$2[54] = k_TuplesKt_to($rt_s(986), $rt_s(1540));
+    var$2[55] = k_TuplesKt_to($rt_s(988), $rt_s(1541));
+    var$2[56] = k_TuplesKt_to($rt_s(990), $rt_s(1542));
+    var$2[57] = k_TuplesKt_to($rt_s(992), $rt_s(1543));
+    var$2[58] = k_TuplesKt_to($rt_s(994), $rt_s(1544));
+    var$2[59] = k_TuplesKt_to($rt_s(996), $rt_s(1545));
+    var$2[60] = k_TuplesKt_to($rt_s(998), $rt_s(1538));
+    var$2[61] = k_TuplesKt_to($rt_s(1000), $rt_s(1546));
+    var$2[62] = k_TuplesKt_to($rt_s(1002), $rt_s(1547));
+    var$2[63] = k_TuplesKt_to($rt_s(1004), $rt_s(1548));
+    var$2[64] = k_TuplesKt_to($rt_s(1006), $rt_s(1549));
+    var$2[65] = k_TuplesKt_to($rt_s(1008), $rt_s(1550));
+    var$2[66] = k_TuplesKt_to($rt_s(1010), $rt_s(1551));
+    var$2[67] = k_TuplesKt_to($rt_s(1012), $rt_s(1552));
+    var$2[68] = k_TuplesKt_to($rt_s(1014), $rt_s(1553));
+    var$2[69] = k_TuplesKt_to($rt_s(1016), $rt_s(1554));
+    var$2[70] = k_TuplesKt_to($rt_s(1018), $rt_s(1555));
+    var$2[71] = k_TuplesKt_to($rt_s(1020), $rt_s(1556));
+    var$2[72] = k_TuplesKt_to($rt_s(848), $rt_s(1557));
+    var$2[73] = k_TuplesKt_to($rt_s(1023), $rt_s(1558));
+    var$2[74] = k_TuplesKt_to($rt_s(1025), $rt_s(1559));
     cvs_Langs_ru = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1559));
-    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1560));
-    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(1561));
-    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1562));
-    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1563));
-    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1564));
-    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1565));
-    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1566));
-    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1567));
-    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1568));
-    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1569));
-    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1570));
-    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1571));
-    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1572));
-    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1573));
-    var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(1574));
-    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1575));
-    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1576));
-    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1577));
-    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1578));
-    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1565));
-    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1579));
-    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1580));
-    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1581));
-    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1582));
-    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1583));
-    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1584));
-    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1585));
-    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1586));
-    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1587));
-    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1588));
-    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1589));
-    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1590));
-    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1591));
-    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1592));
-    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1593));
-    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1594));
-    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1595));
-    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1596));
-    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1597));
-    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1598));
-    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1599));
-    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1600));
-    var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1601));
-    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1602));
-    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1603));
-    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1604));
-    var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1605));
-    var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1606));
-    var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1607));
-    var$2[50] = k_TuplesKt_to($rt_s(977), $rt_s(1608));
-    var$2[51] = k_TuplesKt_to($rt_s(979), $rt_s(1609));
-    var$2[52] = k_TuplesKt_to($rt_s(981), $rt_s(1610));
-    var$2[53] = k_TuplesKt_to($rt_s(983), $rt_s(1611));
-    var$2[54] = k_TuplesKt_to($rt_s(985), $rt_s(1612));
-    var$2[55] = k_TuplesKt_to($rt_s(987), $rt_s(1613));
-    var$2[56] = k_TuplesKt_to($rt_s(989), $rt_s(1614));
-    var$2[57] = k_TuplesKt_to($rt_s(991), $rt_s(1615));
-    var$2[58] = k_TuplesKt_to($rt_s(993), $rt_s(1616));
-    var$2[59] = k_TuplesKt_to($rt_s(995), $rt_s(1617));
-    var$2[60] = k_TuplesKt_to($rt_s(997), $rt_s(1618));
-    var$2[61] = k_TuplesKt_to($rt_s(999), $rt_s(1619));
-    var$2[62] = k_TuplesKt_to($rt_s(1001), $rt_s(1620));
-    var$2[63] = k_TuplesKt_to($rt_s(1003), $rt_s(1621));
-    var$2[64] = k_TuplesKt_to($rt_s(1005), $rt_s(1596));
-    var$2[65] = k_TuplesKt_to($rt_s(1007), $rt_s(1622));
-    var$2[66] = k_TuplesKt_to($rt_s(1009), $rt_s(1623));
-    var$2[67] = k_TuplesKt_to($rt_s(1011), $rt_s(1624));
-    var$2[68] = k_TuplesKt_to($rt_s(1013), $rt_s(1625));
-    var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1626));
-    var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1627));
-    var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1628));
-    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1629));
-    var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1630));
-    var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1631));
+    var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1560));
+    var$2[1] = k_TuplesKt_to($rt_s(846), $rt_s(1561));
+    var$2[2] = k_TuplesKt_to($rt_s(843), $rt_s(1562));
+    var$2[3] = k_TuplesKt_to($rt_s(844), $rt_s(1563));
+    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1564));
+    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1565));
+    var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1566));
+    var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1567));
+    var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1568));
+    var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1569));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1570));
+    var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1571));
+    var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1572));
+    var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1573));
+    var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1574));
+    var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(1575));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1576));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1577));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1578));
+    var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1579));
+    var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1566));
+    var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1580));
+    var$2[22] = k_TuplesKt_to($rt_s(926), $rt_s(1581));
+    var$2[23] = k_TuplesKt_to($rt_s(928), $rt_s(1582));
+    var$2[24] = k_TuplesKt_to($rt_s(930), $rt_s(1583));
+    var$2[25] = k_TuplesKt_to($rt_s(932), $rt_s(1584));
+    var$2[26] = k_TuplesKt_to($rt_s(934), $rt_s(1585));
+    var$2[27] = k_TuplesKt_to($rt_s(936), $rt_s(1586));
+    var$2[28] = k_TuplesKt_to($rt_s(938), $rt_s(1587));
+    var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1588));
+    var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1589));
+    var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1590));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1591));
+    var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1592));
+    var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1593));
+    var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1594));
+    var$2[36] = k_TuplesKt_to($rt_s(953), $rt_s(1595));
+    var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1596));
+    var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1597));
+    var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1598));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1599));
+    var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1600));
+    var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1601));
+    var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1602));
+    var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1603));
+    var$2[45] = k_TuplesKt_to($rt_s(845), $rt_s(1604));
+    var$2[46] = k_TuplesKt_to($rt_s(847), $rt_s(1605));
+    var$2[47] = k_TuplesKt_to($rt_s(972), $rt_s(1606));
+    var$2[48] = k_TuplesKt_to($rt_s(974), $rt_s(1607));
+    var$2[49] = k_TuplesKt_to($rt_s(976), $rt_s(1608));
+    var$2[50] = k_TuplesKt_to($rt_s(978), $rt_s(1609));
+    var$2[51] = k_TuplesKt_to($rt_s(980), $rt_s(1610));
+    var$2[52] = k_TuplesKt_to($rt_s(982), $rt_s(1611));
+    var$2[53] = k_TuplesKt_to($rt_s(984), $rt_s(1612));
+    var$2[54] = k_TuplesKt_to($rt_s(986), $rt_s(1613));
+    var$2[55] = k_TuplesKt_to($rt_s(988), $rt_s(1614));
+    var$2[56] = k_TuplesKt_to($rt_s(990), $rt_s(1615));
+    var$2[57] = k_TuplesKt_to($rt_s(992), $rt_s(1616));
+    var$2[58] = k_TuplesKt_to($rt_s(994), $rt_s(1617));
+    var$2[59] = k_TuplesKt_to($rt_s(996), $rt_s(1618));
+    var$2[60] = k_TuplesKt_to($rt_s(998), $rt_s(1619));
+    var$2[61] = k_TuplesKt_to($rt_s(1000), $rt_s(1620));
+    var$2[62] = k_TuplesKt_to($rt_s(1002), $rt_s(1621));
+    var$2[63] = k_TuplesKt_to($rt_s(1004), $rt_s(1622));
+    var$2[64] = k_TuplesKt_to($rt_s(1006), $rt_s(1597));
+    var$2[65] = k_TuplesKt_to($rt_s(1008), $rt_s(1623));
+    var$2[66] = k_TuplesKt_to($rt_s(1010), $rt_s(1624));
+    var$2[67] = k_TuplesKt_to($rt_s(1012), $rt_s(1625));
+    var$2[68] = k_TuplesKt_to($rt_s(1014), $rt_s(1626));
+    var$2[69] = k_TuplesKt_to($rt_s(1016), $rt_s(1627));
+    var$2[70] = k_TuplesKt_to($rt_s(1018), $rt_s(1628));
+    var$2[71] = k_TuplesKt_to($rt_s(1020), $rt_s(1629));
+    var$2[72] = k_TuplesKt_to($rt_s(848), $rt_s(1630));
+    var$2[73] = k_TuplesKt_to($rt_s(1023), $rt_s(1631));
+    var$2[74] = k_TuplesKt_to($rt_s(1025), $rt_s(1632));
     cvs_Langs_ja = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(1633));
-    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(826));
-    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(828));
-    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(830));
-    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(832));
-    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(834));
-    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(836));
-    var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(1635));
-    var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(1637));
-    var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(1639));
-    var$2[10] = k_TuplesKt_to($rt_s(1640), $rt_s(1641));
-    var$2[11] = k_TuplesKt_to($rt_s(1642), $rt_s(1643));
-    var$2[12] = k_TuplesKt_to($rt_s(1644), $rt_s(963));
-    var$2[13] = k_TuplesKt_to($rt_s(1645), $rt_s(1646));
-    var$2[14] = k_TuplesKt_to($rt_s(1647), $rt_s(1648));
-    var$2[15] = k_TuplesKt_to($rt_s(1649), $rt_s(1650));
-    var$2[16] = k_TuplesKt_to($rt_s(1651), $rt_s(1652));
-    var$2[17] = k_TuplesKt_to($rt_s(1653), $rt_s(1654));
-    var$2[18] = k_TuplesKt_to($rt_s(1655), $rt_s(1656));
-    var$2[19] = k_TuplesKt_to($rt_s(1657), $rt_s(1658));
-    var$2[20] = k_TuplesKt_to($rt_s(1659), $rt_s(1660));
-    var$2[21] = k_TuplesKt_to($rt_s(1661), $rt_s(1662));
-    var$2[22] = k_TuplesKt_to($rt_s(1663), $rt_s(1664));
-    var$2[23] = k_TuplesKt_to($rt_s(1665), $rt_s(988));
-    var$2[24] = k_TuplesKt_to($rt_s(1666), $rt_s(1667));
-    var$2[25] = k_TuplesKt_to($rt_s(1668), $rt_s(1669));
-    var$2[26] = k_TuplesKt_to($rt_s(1670), $rt_s(1671));
-    var$2[27] = k_TuplesKt_to($rt_s(1672), $rt_s(1673));
-    var$2[28] = k_TuplesKt_to($rt_s(1674), $rt_s(1675));
-    var$2[29] = k_TuplesKt_to($rt_s(1676), $rt_s(1677));
-    var$2[30] = k_TuplesKt_to($rt_s(1678), $rt_s(1679));
-    var$2[31] = k_TuplesKt_to($rt_s(1680), $rt_s(1681));
-    var$2[32] = k_TuplesKt_to($rt_s(1682), $rt_s(1683));
-    var$2[33] = k_TuplesKt_to($rt_s(1684), $rt_s(1685));
-    var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(1687));
-    var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1689));
-    var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(1691));
-    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1692));
-    var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(1694));
-    var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(1696));
-    var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1698));
-    var$2[41] = k_TuplesKt_to($rt_s(1699), $rt_s(1700));
-    var$2[42] = k_TuplesKt_to($rt_s(1701), $rt_s(1702));
-    var$2[43] = k_TuplesKt_to($rt_s(1703), $rt_s(1704));
-    var$2[44] = k_TuplesKt_to($rt_s(1705), $rt_s(1706));
-    var$2[45] = k_TuplesKt_to($rt_s(1707), $rt_s(1708));
-    var$2[46] = k_TuplesKt_to($rt_s(1709), $rt_s(1710));
-    var$2[47] = k_TuplesKt_to($rt_s(1711), $rt_s(1712));
-    var$2[48] = k_TuplesKt_to($rt_s(1713), $rt_s(1714));
-    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1715));
-    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1716));
-    var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(1718));
-    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(1719));
-    var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(1721));
-    var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(1723));
-    var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(1725));
-    var$2[56] = k_TuplesKt_to($rt_s(1726), $rt_s(1727));
-    var$2[57] = k_TuplesKt_to($rt_s(1728), $rt_s(1729));
-    var$2[58] = k_TuplesKt_to($rt_s(1730), $rt_s(1731));
-    var$2[59] = k_TuplesKt_to($rt_s(1732), $rt_s(1733));
-    var$2[60] = k_TuplesKt_to($rt_s(1734), $rt_s(1735));
-    var$2[61] = k_TuplesKt_to($rt_s(1736), $rt_s(1737));
-    var$2[62] = k_TuplesKt_to($rt_s(1738), $rt_s(1739));
-    var$2[63] = k_TuplesKt_to($rt_s(1740), $rt_s(1741));
+    var$2[0] = k_TuplesKt_to($rt_s(1633), $rt_s(1634));
+    var$2[1] = k_TuplesKt_to($rt_s(854), $rt_s(826));
+    var$2[2] = k_TuplesKt_to($rt_s(849), $rt_s(828));
+    var$2[3] = k_TuplesKt_to($rt_s(850), $rt_s(830));
+    var$2[4] = k_TuplesKt_to($rt_s(851), $rt_s(1635));
+    var$2[5] = k_TuplesKt_to($rt_s(852), $rt_s(832));
+    var$2[6] = k_TuplesKt_to($rt_s(853), $rt_s(834));
+    var$2[7] = k_TuplesKt_to($rt_s(1636), $rt_s(1637));
+    var$2[8] = k_TuplesKt_to($rt_s(1638), $rt_s(1639));
+    var$2[9] = k_TuplesKt_to($rt_s(1640), $rt_s(1641));
+    var$2[10] = k_TuplesKt_to($rt_s(1642), $rt_s(1643));
+    var$2[11] = k_TuplesKt_to($rt_s(1644), $rt_s(1645));
+    var$2[12] = k_TuplesKt_to($rt_s(1646), $rt_s(963));
+    var$2[13] = k_TuplesKt_to($rt_s(1647), $rt_s(1648));
+    var$2[14] = k_TuplesKt_to($rt_s(1649), $rt_s(1650));
+    var$2[15] = k_TuplesKt_to($rt_s(1651), $rt_s(1652));
+    var$2[16] = k_TuplesKt_to($rt_s(1653), $rt_s(1654));
+    var$2[17] = k_TuplesKt_to($rt_s(1655), $rt_s(1656));
+    var$2[18] = k_TuplesKt_to($rt_s(1657), $rt_s(1658));
+    var$2[19] = k_TuplesKt_to($rt_s(1659), $rt_s(1660));
+    var$2[20] = k_TuplesKt_to($rt_s(1661), $rt_s(1662));
+    var$2[21] = k_TuplesKt_to($rt_s(1663), $rt_s(1664));
+    var$2[22] = k_TuplesKt_to($rt_s(1665), $rt_s(1666));
+    var$2[23] = k_TuplesKt_to($rt_s(1667), $rt_s(989));
+    var$2[24] = k_TuplesKt_to($rt_s(1668), $rt_s(1669));
+    var$2[25] = k_TuplesKt_to($rt_s(1670), $rt_s(1671));
+    var$2[26] = k_TuplesKt_to($rt_s(1672), $rt_s(1673));
+    var$2[27] = k_TuplesKt_to($rt_s(1674), $rt_s(1675));
+    var$2[28] = k_TuplesKt_to($rt_s(1676), $rt_s(1677));
+    var$2[29] = k_TuplesKt_to($rt_s(1678), $rt_s(1679));
+    var$2[30] = k_TuplesKt_to($rt_s(1680), $rt_s(1681));
+    var$2[31] = k_TuplesKt_to($rt_s(1682), $rt_s(1683));
+    var$2[32] = k_TuplesKt_to($rt_s(1684), $rt_s(1685));
+    var$2[33] = k_TuplesKt_to($rt_s(1686), $rt_s(1687));
+    var$2[34] = k_TuplesKt_to($rt_s(1688), $rt_s(1689));
+    var$2[35] = k_TuplesKt_to($rt_s(1690), $rt_s(1691));
+    var$2[36] = k_TuplesKt_to($rt_s(1692), $rt_s(1693));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1694));
+    var$2[38] = k_TuplesKt_to($rt_s(1695), $rt_s(1696));
+    var$2[39] = k_TuplesKt_to($rt_s(1697), $rt_s(1698));
+    var$2[40] = k_TuplesKt_to($rt_s(1699), $rt_s(1700));
+    var$2[41] = k_TuplesKt_to($rt_s(1701), $rt_s(1702));
+    var$2[42] = k_TuplesKt_to($rt_s(1703), $rt_s(1704));
+    var$2[43] = k_TuplesKt_to($rt_s(1705), $rt_s(1706));
+    var$2[44] = k_TuplesKt_to($rt_s(1707), $rt_s(1708));
+    var$2[45] = k_TuplesKt_to($rt_s(1709), $rt_s(1710));
+    var$2[46] = k_TuplesKt_to($rt_s(1711), $rt_s(1712));
+    var$2[47] = k_TuplesKt_to($rt_s(1713), $rt_s(1714));
+    var$2[48] = k_TuplesKt_to($rt_s(1715), $rt_s(1716));
+    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1717));
+    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1718));
+    var$2[51] = k_TuplesKt_to($rt_s(1719), $rt_s(1720));
+    var$2[52] = k_TuplesKt_to($rt_s(840), $rt_s(1721));
+    var$2[53] = k_TuplesKt_to($rt_s(1722), $rt_s(1723));
+    var$2[54] = k_TuplesKt_to($rt_s(1724), $rt_s(1725));
+    var$2[55] = k_TuplesKt_to($rt_s(1726), $rt_s(1727));
+    var$2[56] = k_TuplesKt_to($rt_s(1728), $rt_s(1729));
+    var$2[57] = k_TuplesKt_to($rt_s(1730), $rt_s(1731));
+    var$2[58] = k_TuplesKt_to($rt_s(1732), $rt_s(1733));
+    var$2[59] = k_TuplesKt_to($rt_s(1734), $rt_s(1735));
+    var$2[60] = k_TuplesKt_to($rt_s(1736), $rt_s(1737));
+    var$2[61] = k_TuplesKt_to($rt_s(1738), $rt_s(1739));
+    var$2[62] = k_TuplesKt_to($rt_s(1740), $rt_s(1741));
+    var$2[63] = k_TuplesKt_to($rt_s(1742), $rt_s(1743));
     cvs_Langs_ptX = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(1742));
-    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(1743));
-    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(1744));
-    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(1745));
-    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(1746));
-    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(1747));
-    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(1748));
-    var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(1749));
-    var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(1750));
-    var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(1751));
-    var$2[10] = k_TuplesKt_to($rt_s(1640), $rt_s(1752));
-    var$2[11] = k_TuplesKt_to($rt_s(1642), $rt_s(1753));
-    var$2[12] = k_TuplesKt_to($rt_s(1644), $rt_s(1754));
-    var$2[13] = k_TuplesKt_to($rt_s(1645), $rt_s(1755));
-    var$2[14] = k_TuplesKt_to($rt_s(1647), $rt_s(1756));
-    var$2[15] = k_TuplesKt_to($rt_s(1649), $rt_s(1757));
-    var$2[16] = k_TuplesKt_to($rt_s(1651), $rt_s(1758));
-    var$2[17] = k_TuplesKt_to($rt_s(1653), $rt_s(1759));
-    var$2[18] = k_TuplesKt_to($rt_s(1655), $rt_s(1760));
-    var$2[19] = k_TuplesKt_to($rt_s(1657), $rt_s(1761));
-    var$2[20] = k_TuplesKt_to($rt_s(1659), $rt_s(1762));
-    var$2[21] = k_TuplesKt_to($rt_s(1661), $rt_s(1662));
-    var$2[22] = k_TuplesKt_to($rt_s(1663), $rt_s(1763));
-    var$2[23] = k_TuplesKt_to($rt_s(1665), $rt_s(1077));
-    var$2[24] = k_TuplesKt_to($rt_s(1666), $rt_s(1764));
-    var$2[25] = k_TuplesKt_to($rt_s(1668), $rt_s(1765));
-    var$2[26] = k_TuplesKt_to($rt_s(1670), $rt_s(1766));
-    var$2[27] = k_TuplesKt_to($rt_s(1672), $rt_s(1767));
-    var$2[28] = k_TuplesKt_to($rt_s(1674), $rt_s(1768));
-    var$2[29] = k_TuplesKt_to($rt_s(1676), $rt_s(1769));
-    var$2[30] = k_TuplesKt_to($rt_s(1678), $rt_s(1770));
-    var$2[31] = k_TuplesKt_to($rt_s(1680), $rt_s(1771));
-    var$2[32] = k_TuplesKt_to($rt_s(1682), $rt_s(1772));
-    var$2[33] = k_TuplesKt_to($rt_s(1684), $rt_s(1773));
-    var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(1774));
-    var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1775));
-    var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(1776));
-    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1777));
-    var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(1778));
-    var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(1779));
-    var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1780));
-    var$2[41] = k_TuplesKt_to($rt_s(1699), $rt_s(1781));
-    var$2[42] = k_TuplesKt_to($rt_s(1701), $rt_s(1782));
-    var$2[43] = k_TuplesKt_to($rt_s(1703), $rt_s(1783));
-    var$2[44] = k_TuplesKt_to($rt_s(1705), $rt_s(1784));
-    var$2[45] = k_TuplesKt_to($rt_s(1707), $rt_s(1785));
-    var$2[46] = k_TuplesKt_to($rt_s(1709), $rt_s(1786));
-    var$2[47] = k_TuplesKt_to($rt_s(1711), $rt_s(1787));
-    var$2[48] = k_TuplesKt_to($rt_s(1713), $rt_s(1714));
-    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1788));
-    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1789));
-    var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(1790));
-    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(1791));
-    var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(1792));
-    var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(1793));
-    var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(1794));
-    var$2[56] = k_TuplesKt_to($rt_s(1726), $rt_s(1795));
-    var$2[57] = k_TuplesKt_to($rt_s(1728), $rt_s(1796));
-    var$2[58] = k_TuplesKt_to($rt_s(1730), $rt_s(1797));
-    var$2[59] = k_TuplesKt_to($rt_s(1732), $rt_s(1798));
-    var$2[60] = k_TuplesKt_to($rt_s(1734), $rt_s(1799));
-    var$2[61] = k_TuplesKt_to($rt_s(1736), $rt_s(1800));
-    var$2[62] = k_TuplesKt_to($rt_s(1738), $rt_s(1801));
-    var$2[63] = k_TuplesKt_to($rt_s(1740), $rt_s(1802));
+    var$2[0] = k_TuplesKt_to($rt_s(1633), $rt_s(1744));
+    var$2[1] = k_TuplesKt_to($rt_s(854), $rt_s(1745));
+    var$2[2] = k_TuplesKt_to($rt_s(849), $rt_s(1746));
+    var$2[3] = k_TuplesKt_to($rt_s(850), $rt_s(1747));
+    var$2[4] = k_TuplesKt_to($rt_s(851), $rt_s(1748));
+    var$2[5] = k_TuplesKt_to($rt_s(852), $rt_s(1749));
+    var$2[6] = k_TuplesKt_to($rt_s(853), $rt_s(1750));
+    var$2[7] = k_TuplesKt_to($rt_s(1636), $rt_s(1751));
+    var$2[8] = k_TuplesKt_to($rt_s(1638), $rt_s(1752));
+    var$2[9] = k_TuplesKt_to($rt_s(1640), $rt_s(1753));
+    var$2[10] = k_TuplesKt_to($rt_s(1642), $rt_s(1754));
+    var$2[11] = k_TuplesKt_to($rt_s(1644), $rt_s(1755));
+    var$2[12] = k_TuplesKt_to($rt_s(1646), $rt_s(1756));
+    var$2[13] = k_TuplesKt_to($rt_s(1647), $rt_s(1757));
+    var$2[14] = k_TuplesKt_to($rt_s(1649), $rt_s(1758));
+    var$2[15] = k_TuplesKt_to($rt_s(1651), $rt_s(1759));
+    var$2[16] = k_TuplesKt_to($rt_s(1653), $rt_s(1760));
+    var$2[17] = k_TuplesKt_to($rt_s(1655), $rt_s(1761));
+    var$2[18] = k_TuplesKt_to($rt_s(1657), $rt_s(1762));
+    var$2[19] = k_TuplesKt_to($rt_s(1659), $rt_s(1763));
+    var$2[20] = k_TuplesKt_to($rt_s(1661), $rt_s(1764));
+    var$2[21] = k_TuplesKt_to($rt_s(1663), $rt_s(1664));
+    var$2[22] = k_TuplesKt_to($rt_s(1665), $rt_s(1765));
+    var$2[23] = k_TuplesKt_to($rt_s(1667), $rt_s(1078));
+    var$2[24] = k_TuplesKt_to($rt_s(1668), $rt_s(1766));
+    var$2[25] = k_TuplesKt_to($rt_s(1670), $rt_s(1767));
+    var$2[26] = k_TuplesKt_to($rt_s(1672), $rt_s(1768));
+    var$2[27] = k_TuplesKt_to($rt_s(1674), $rt_s(1769));
+    var$2[28] = k_TuplesKt_to($rt_s(1676), $rt_s(1770));
+    var$2[29] = k_TuplesKt_to($rt_s(1678), $rt_s(1771));
+    var$2[30] = k_TuplesKt_to($rt_s(1680), $rt_s(1772));
+    var$2[31] = k_TuplesKt_to($rt_s(1682), $rt_s(1773));
+    var$2[32] = k_TuplesKt_to($rt_s(1684), $rt_s(1774));
+    var$2[33] = k_TuplesKt_to($rt_s(1686), $rt_s(1775));
+    var$2[34] = k_TuplesKt_to($rt_s(1688), $rt_s(1776));
+    var$2[35] = k_TuplesKt_to($rt_s(1690), $rt_s(1777));
+    var$2[36] = k_TuplesKt_to($rt_s(1692), $rt_s(1778));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1779));
+    var$2[38] = k_TuplesKt_to($rt_s(1695), $rt_s(1780));
+    var$2[39] = k_TuplesKt_to($rt_s(1697), $rt_s(1781));
+    var$2[40] = k_TuplesKt_to($rt_s(1699), $rt_s(1782));
+    var$2[41] = k_TuplesKt_to($rt_s(1701), $rt_s(1783));
+    var$2[42] = k_TuplesKt_to($rt_s(1703), $rt_s(1784));
+    var$2[43] = k_TuplesKt_to($rt_s(1705), $rt_s(1785));
+    var$2[44] = k_TuplesKt_to($rt_s(1707), $rt_s(1786));
+    var$2[45] = k_TuplesKt_to($rt_s(1709), $rt_s(1787));
+    var$2[46] = k_TuplesKt_to($rt_s(1711), $rt_s(1788));
+    var$2[47] = k_TuplesKt_to($rt_s(1713), $rt_s(1789));
+    var$2[48] = k_TuplesKt_to($rt_s(1715), $rt_s(1716));
+    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1790));
+    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1791));
+    var$2[51] = k_TuplesKt_to($rt_s(1719), $rt_s(1792));
+    var$2[52] = k_TuplesKt_to($rt_s(840), $rt_s(1793));
+    var$2[53] = k_TuplesKt_to($rt_s(1722), $rt_s(1794));
+    var$2[54] = k_TuplesKt_to($rt_s(1724), $rt_s(1795));
+    var$2[55] = k_TuplesKt_to($rt_s(1726), $rt_s(1796));
+    var$2[56] = k_TuplesKt_to($rt_s(1728), $rt_s(1797));
+    var$2[57] = k_TuplesKt_to($rt_s(1730), $rt_s(1798));
+    var$2[58] = k_TuplesKt_to($rt_s(1732), $rt_s(1799));
+    var$2[59] = k_TuplesKt_to($rt_s(1734), $rt_s(1800));
+    var$2[60] = k_TuplesKt_to($rt_s(1736), $rt_s(1801));
+    var$2[61] = k_TuplesKt_to($rt_s(1738), $rt_s(1802));
+    var$2[62] = k_TuplesKt_to($rt_s(1740), $rt_s(1803));
+    var$2[63] = k_TuplesKt_to($rt_s(1742), $rt_s(1804));
     cvs_Langs_enX = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(1803));
-    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(1804));
-    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(1805));
-    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(1806));
-    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(1807));
-    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(1808));
-    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(1809));
-    var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(1810));
-    var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(1811));
-    var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(1812));
-    var$2[10] = k_TuplesKt_to($rt_s(1640), $rt_s(1813));
-    var$2[11] = k_TuplesKt_to($rt_s(1642), $rt_s(1814));
-    var$2[12] = k_TuplesKt_to($rt_s(1644), $rt_s(1815));
-    var$2[13] = k_TuplesKt_to($rt_s(1645), $rt_s(1646));
-    var$2[14] = k_TuplesKt_to($rt_s(1647), $rt_s(1816));
-    var$2[15] = k_TuplesKt_to($rt_s(1649), $rt_s(1817));
-    var$2[16] = k_TuplesKt_to($rt_s(1651), $rt_s(1818));
-    var$2[17] = k_TuplesKt_to($rt_s(1653), $rt_s(1819));
-    var$2[18] = k_TuplesKt_to($rt_s(1655), $rt_s(1820));
-    var$2[19] = k_TuplesKt_to($rt_s(1657), $rt_s(1821));
-    var$2[20] = k_TuplesKt_to($rt_s(1659), $rt_s(1822));
-    var$2[21] = k_TuplesKt_to($rt_s(1661), $rt_s(1823));
-    var$2[22] = k_TuplesKt_to($rt_s(1663), $rt_s(1824));
-    var$2[23] = k_TuplesKt_to($rt_s(1665), $rt_s(1138));
-    var$2[24] = k_TuplesKt_to($rt_s(1666), $rt_s(1825));
-    var$2[25] = k_TuplesKt_to($rt_s(1668), $rt_s(1669));
-    var$2[26] = k_TuplesKt_to($rt_s(1670), $rt_s(1826));
-    var$2[27] = k_TuplesKt_to($rt_s(1672), $rt_s(1827));
-    var$2[28] = k_TuplesKt_to($rt_s(1674), $rt_s(1135));
-    var$2[29] = k_TuplesKt_to($rt_s(1676), $rt_s(1828));
-    var$2[30] = k_TuplesKt_to($rt_s(1678), $rt_s(1829));
-    var$2[31] = k_TuplesKt_to($rt_s(1680), $rt_s(1830));
-    var$2[32] = k_TuplesKt_to($rt_s(1682), $rt_s(1831));
-    var$2[33] = k_TuplesKt_to($rt_s(1684), $rt_s(1832));
-    var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(1833));
-    var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1689));
-    var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(1834));
-    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1835));
-    var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(1836));
-    var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(1696));
-    var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1837));
-    var$2[41] = k_TuplesKt_to($rt_s(1699), $rt_s(1838));
-    var$2[42] = k_TuplesKt_to($rt_s(1701), $rt_s(1839));
-    var$2[43] = k_TuplesKt_to($rt_s(1703), $rt_s(1840));
-    var$2[44] = k_TuplesKt_to($rt_s(1705), $rt_s(1841));
-    var$2[45] = k_TuplesKt_to($rt_s(1707), $rt_s(1398));
-    var$2[46] = k_TuplesKt_to($rt_s(1709), $rt_s(1842));
-    var$2[47] = k_TuplesKt_to($rt_s(1711), $rt_s(1712));
-    var$2[48] = k_TuplesKt_to($rt_s(1713), $rt_s(1714));
-    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1843));
-    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1844));
-    var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(1845));
-    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(1846));
-    var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(1847));
-    var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(1848));
-    var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(1849));
-    var$2[56] = k_TuplesKt_to($rt_s(1726), $rt_s(1850));
-    var$2[57] = k_TuplesKt_to($rt_s(1728), $rt_s(1851));
-    var$2[58] = k_TuplesKt_to($rt_s(1730), $rt_s(1852));
-    var$2[59] = k_TuplesKt_to($rt_s(1732), $rt_s(1853));
-    var$2[60] = k_TuplesKt_to($rt_s(1734), $rt_s(1854));
-    var$2[61] = k_TuplesKt_to($rt_s(1736), $rt_s(1855));
-    var$2[62] = k_TuplesKt_to($rt_s(1738), $rt_s(1856));
-    var$2[63] = k_TuplesKt_to($rt_s(1740), $rt_s(1857));
+    var$2[0] = k_TuplesKt_to($rt_s(1633), $rt_s(1805));
+    var$2[1] = k_TuplesKt_to($rt_s(854), $rt_s(1806));
+    var$2[2] = k_TuplesKt_to($rt_s(849), $rt_s(1807));
+    var$2[3] = k_TuplesKt_to($rt_s(850), $rt_s(1808));
+    var$2[4] = k_TuplesKt_to($rt_s(851), $rt_s(1809));
+    var$2[5] = k_TuplesKt_to($rt_s(852), $rt_s(1810));
+    var$2[6] = k_TuplesKt_to($rt_s(853), $rt_s(1811));
+    var$2[7] = k_TuplesKt_to($rt_s(1636), $rt_s(1812));
+    var$2[8] = k_TuplesKt_to($rt_s(1638), $rt_s(1813));
+    var$2[9] = k_TuplesKt_to($rt_s(1640), $rt_s(1814));
+    var$2[10] = k_TuplesKt_to($rt_s(1642), $rt_s(1815));
+    var$2[11] = k_TuplesKt_to($rt_s(1644), $rt_s(1816));
+    var$2[12] = k_TuplesKt_to($rt_s(1646), $rt_s(1817));
+    var$2[13] = k_TuplesKt_to($rt_s(1647), $rt_s(1648));
+    var$2[14] = k_TuplesKt_to($rt_s(1649), $rt_s(1818));
+    var$2[15] = k_TuplesKt_to($rt_s(1651), $rt_s(1819));
+    var$2[16] = k_TuplesKt_to($rt_s(1653), $rt_s(1820));
+    var$2[17] = k_TuplesKt_to($rt_s(1655), $rt_s(1821));
+    var$2[18] = k_TuplesKt_to($rt_s(1657), $rt_s(1822));
+    var$2[19] = k_TuplesKt_to($rt_s(1659), $rt_s(1823));
+    var$2[20] = k_TuplesKt_to($rt_s(1661), $rt_s(1824));
+    var$2[21] = k_TuplesKt_to($rt_s(1663), $rt_s(1825));
+    var$2[22] = k_TuplesKt_to($rt_s(1665), $rt_s(1826));
+    var$2[23] = k_TuplesKt_to($rt_s(1667), $rt_s(1139));
+    var$2[24] = k_TuplesKt_to($rt_s(1668), $rt_s(1827));
+    var$2[25] = k_TuplesKt_to($rt_s(1670), $rt_s(1671));
+    var$2[26] = k_TuplesKt_to($rt_s(1672), $rt_s(1828));
+    var$2[27] = k_TuplesKt_to($rt_s(1674), $rt_s(1829));
+    var$2[28] = k_TuplesKt_to($rt_s(1676), $rt_s(1136));
+    var$2[29] = k_TuplesKt_to($rt_s(1678), $rt_s(1830));
+    var$2[30] = k_TuplesKt_to($rt_s(1680), $rt_s(1831));
+    var$2[31] = k_TuplesKt_to($rt_s(1682), $rt_s(1832));
+    var$2[32] = k_TuplesKt_to($rt_s(1684), $rt_s(1833));
+    var$2[33] = k_TuplesKt_to($rt_s(1686), $rt_s(1834));
+    var$2[34] = k_TuplesKt_to($rt_s(1688), $rt_s(1835));
+    var$2[35] = k_TuplesKt_to($rt_s(1690), $rt_s(1691));
+    var$2[36] = k_TuplesKt_to($rt_s(1692), $rt_s(1836));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1837));
+    var$2[38] = k_TuplesKt_to($rt_s(1695), $rt_s(1838));
+    var$2[39] = k_TuplesKt_to($rt_s(1697), $rt_s(1698));
+    var$2[40] = k_TuplesKt_to($rt_s(1699), $rt_s(1839));
+    var$2[41] = k_TuplesKt_to($rt_s(1701), $rt_s(1840));
+    var$2[42] = k_TuplesKt_to($rt_s(1703), $rt_s(1841));
+    var$2[43] = k_TuplesKt_to($rt_s(1705), $rt_s(1842));
+    var$2[44] = k_TuplesKt_to($rt_s(1707), $rt_s(1843));
+    var$2[45] = k_TuplesKt_to($rt_s(1709), $rt_s(1399));
+    var$2[46] = k_TuplesKt_to($rt_s(1711), $rt_s(1844));
+    var$2[47] = k_TuplesKt_to($rt_s(1713), $rt_s(1714));
+    var$2[48] = k_TuplesKt_to($rt_s(1715), $rt_s(1716));
+    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1845));
+    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1846));
+    var$2[51] = k_TuplesKt_to($rt_s(1719), $rt_s(1847));
+    var$2[52] = k_TuplesKt_to($rt_s(840), $rt_s(1848));
+    var$2[53] = k_TuplesKt_to($rt_s(1722), $rt_s(1849));
+    var$2[54] = k_TuplesKt_to($rt_s(1724), $rt_s(1850));
+    var$2[55] = k_TuplesKt_to($rt_s(1726), $rt_s(1851));
+    var$2[56] = k_TuplesKt_to($rt_s(1728), $rt_s(1852));
+    var$2[57] = k_TuplesKt_to($rt_s(1730), $rt_s(1853));
+    var$2[58] = k_TuplesKt_to($rt_s(1732), $rt_s(1854));
+    var$2[59] = k_TuplesKt_to($rt_s(1734), $rt_s(1855));
+    var$2[60] = k_TuplesKt_to($rt_s(1736), $rt_s(1856));
+    var$2[61] = k_TuplesKt_to($rt_s(1738), $rt_s(1857));
+    var$2[62] = k_TuplesKt_to($rt_s(1740), $rt_s(1858));
+    var$2[63] = k_TuplesKt_to($rt_s(1742), $rt_s(1859));
     cvs_Langs_esX = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(1858));
-    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(1859));
-    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(1860));
-    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(1861));
-    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(1862));
-    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(1863));
-    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(1864));
-    var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(1865));
-    var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(1866));
-    var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(1867));
-    var$2[10] = k_TuplesKt_to($rt_s(1640), $rt_s(992));
-    var$2[11] = k_TuplesKt_to($rt_s(1642), $rt_s(1868));
-    var$2[12] = k_TuplesKt_to($rt_s(1644), $rt_s(1190));
-    var$2[13] = k_TuplesKt_to($rt_s(1645), $rt_s(1869));
-    var$2[14] = k_TuplesKt_to($rt_s(1647), $rt_s(1870));
-    var$2[15] = k_TuplesKt_to($rt_s(1649), $rt_s(1871));
-    var$2[16] = k_TuplesKt_to($rt_s(1651), $rt_s(1872));
-    var$2[17] = k_TuplesKt_to($rt_s(1653), $rt_s(1873));
-    var$2[18] = k_TuplesKt_to($rt_s(1655), $rt_s(1874));
-    var$2[19] = k_TuplesKt_to($rt_s(1657), $rt_s(1875));
-    var$2[20] = k_TuplesKt_to($rt_s(1659), $rt_s(1876));
-    var$2[21] = k_TuplesKt_to($rt_s(1661), $rt_s(1662));
-    var$2[22] = k_TuplesKt_to($rt_s(1663), $rt_s(1877));
-    var$2[23] = k_TuplesKt_to($rt_s(1665), $rt_s(1203));
-    var$2[24] = k_TuplesKt_to($rt_s(1666), $rt_s(1878));
-    var$2[25] = k_TuplesKt_to($rt_s(1668), $rt_s(1879));
-    var$2[26] = k_TuplesKt_to($rt_s(1670), $rt_s(1880));
-    var$2[27] = k_TuplesKt_to($rt_s(1672), $rt_s(1881));
-    var$2[28] = k_TuplesKt_to($rt_s(1674), $rt_s(1882));
-    var$2[29] = k_TuplesKt_to($rt_s(1676), $rt_s(1883));
-    var$2[30] = k_TuplesKt_to($rt_s(1678), $rt_s(1884));
-    var$2[31] = k_TuplesKt_to($rt_s(1680), $rt_s(1885));
-    var$2[32] = k_TuplesKt_to($rt_s(1682), $rt_s(1886));
-    var$2[33] = k_TuplesKt_to($rt_s(1684), $rt_s(1887));
-    var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(1888));
-    var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1889));
-    var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(1890));
-    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1891));
-    var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(1892));
-    var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(1893));
-    var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1184));
-    var$2[41] = k_TuplesKt_to($rt_s(1699), $rt_s(1894));
-    var$2[42] = k_TuplesKt_to($rt_s(1701), $rt_s(1895));
-    var$2[43] = k_TuplesKt_to($rt_s(1703), $rt_s(1896));
-    var$2[44] = k_TuplesKt_to($rt_s(1705), $rt_s(1897));
-    var$2[45] = k_TuplesKt_to($rt_s(1707), $rt_s(1898));
-    var$2[46] = k_TuplesKt_to($rt_s(1709), $rt_s(1899));
-    var$2[47] = k_TuplesKt_to($rt_s(1711), $rt_s(1900));
-    var$2[48] = k_TuplesKt_to($rt_s(1713), $rt_s(1714));
-    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1901));
-    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1902));
-    var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(1903));
-    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(1904));
-    var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(1905));
-    var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(1906));
-    var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(1907));
-    var$2[56] = k_TuplesKt_to($rt_s(1726), $rt_s(1908));
-    var$2[57] = k_TuplesKt_to($rt_s(1728), $rt_s(1909));
-    var$2[58] = k_TuplesKt_to($rt_s(1730), $rt_s(1910));
-    var$2[59] = k_TuplesKt_to($rt_s(1732), $rt_s(1911));
-    var$2[60] = k_TuplesKt_to($rt_s(1734), $rt_s(1912));
-    var$2[61] = k_TuplesKt_to($rt_s(1736), $rt_s(1913));
-    var$2[62] = k_TuplesKt_to($rt_s(1738), $rt_s(1914));
-    var$2[63] = k_TuplesKt_to($rt_s(1740), $rt_s(1915));
+    var$2[0] = k_TuplesKt_to($rt_s(1633), $rt_s(1860));
+    var$2[1] = k_TuplesKt_to($rt_s(854), $rt_s(1861));
+    var$2[2] = k_TuplesKt_to($rt_s(849), $rt_s(1862));
+    var$2[3] = k_TuplesKt_to($rt_s(850), $rt_s(1863));
+    var$2[4] = k_TuplesKt_to($rt_s(851), $rt_s(1864));
+    var$2[5] = k_TuplesKt_to($rt_s(852), $rt_s(1865));
+    var$2[6] = k_TuplesKt_to($rt_s(853), $rt_s(1866));
+    var$2[7] = k_TuplesKt_to($rt_s(1636), $rt_s(1867));
+    var$2[8] = k_TuplesKt_to($rt_s(1638), $rt_s(1868));
+    var$2[9] = k_TuplesKt_to($rt_s(1640), $rt_s(1869));
+    var$2[10] = k_TuplesKt_to($rt_s(1642), $rt_s(993));
+    var$2[11] = k_TuplesKt_to($rt_s(1644), $rt_s(1870));
+    var$2[12] = k_TuplesKt_to($rt_s(1646), $rt_s(1191));
+    var$2[13] = k_TuplesKt_to($rt_s(1647), $rt_s(1871));
+    var$2[14] = k_TuplesKt_to($rt_s(1649), $rt_s(1872));
+    var$2[15] = k_TuplesKt_to($rt_s(1651), $rt_s(1873));
+    var$2[16] = k_TuplesKt_to($rt_s(1653), $rt_s(1874));
+    var$2[17] = k_TuplesKt_to($rt_s(1655), $rt_s(1875));
+    var$2[18] = k_TuplesKt_to($rt_s(1657), $rt_s(1876));
+    var$2[19] = k_TuplesKt_to($rt_s(1659), $rt_s(1877));
+    var$2[20] = k_TuplesKt_to($rt_s(1661), $rt_s(1878));
+    var$2[21] = k_TuplesKt_to($rt_s(1663), $rt_s(1664));
+    var$2[22] = k_TuplesKt_to($rt_s(1665), $rt_s(1879));
+    var$2[23] = k_TuplesKt_to($rt_s(1667), $rt_s(1204));
+    var$2[24] = k_TuplesKt_to($rt_s(1668), $rt_s(1880));
+    var$2[25] = k_TuplesKt_to($rt_s(1670), $rt_s(1881));
+    var$2[26] = k_TuplesKt_to($rt_s(1672), $rt_s(1882));
+    var$2[27] = k_TuplesKt_to($rt_s(1674), $rt_s(1883));
+    var$2[28] = k_TuplesKt_to($rt_s(1676), $rt_s(1884));
+    var$2[29] = k_TuplesKt_to($rt_s(1678), $rt_s(1885));
+    var$2[30] = k_TuplesKt_to($rt_s(1680), $rt_s(1886));
+    var$2[31] = k_TuplesKt_to($rt_s(1682), $rt_s(1887));
+    var$2[32] = k_TuplesKt_to($rt_s(1684), $rt_s(1888));
+    var$2[33] = k_TuplesKt_to($rt_s(1686), $rt_s(1889));
+    var$2[34] = k_TuplesKt_to($rt_s(1688), $rt_s(1890));
+    var$2[35] = k_TuplesKt_to($rt_s(1690), $rt_s(1891));
+    var$2[36] = k_TuplesKt_to($rt_s(1692), $rt_s(1892));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1893));
+    var$2[38] = k_TuplesKt_to($rt_s(1695), $rt_s(1894));
+    var$2[39] = k_TuplesKt_to($rt_s(1697), $rt_s(1895));
+    var$2[40] = k_TuplesKt_to($rt_s(1699), $rt_s(1185));
+    var$2[41] = k_TuplesKt_to($rt_s(1701), $rt_s(1896));
+    var$2[42] = k_TuplesKt_to($rt_s(1703), $rt_s(1897));
+    var$2[43] = k_TuplesKt_to($rt_s(1705), $rt_s(1898));
+    var$2[44] = k_TuplesKt_to($rt_s(1707), $rt_s(1899));
+    var$2[45] = k_TuplesKt_to($rt_s(1709), $rt_s(1900));
+    var$2[46] = k_TuplesKt_to($rt_s(1711), $rt_s(1901));
+    var$2[47] = k_TuplesKt_to($rt_s(1713), $rt_s(1902));
+    var$2[48] = k_TuplesKt_to($rt_s(1715), $rt_s(1716));
+    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1903));
+    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1904));
+    var$2[51] = k_TuplesKt_to($rt_s(1719), $rt_s(1905));
+    var$2[52] = k_TuplesKt_to($rt_s(840), $rt_s(1906));
+    var$2[53] = k_TuplesKt_to($rt_s(1722), $rt_s(1907));
+    var$2[54] = k_TuplesKt_to($rt_s(1724), $rt_s(1908));
+    var$2[55] = k_TuplesKt_to($rt_s(1726), $rt_s(1909));
+    var$2[56] = k_TuplesKt_to($rt_s(1728), $rt_s(1910));
+    var$2[57] = k_TuplesKt_to($rt_s(1730), $rt_s(1911));
+    var$2[58] = k_TuplesKt_to($rt_s(1732), $rt_s(1912));
+    var$2[59] = k_TuplesKt_to($rt_s(1734), $rt_s(1913));
+    var$2[60] = k_TuplesKt_to($rt_s(1736), $rt_s(1914));
+    var$2[61] = k_TuplesKt_to($rt_s(1738), $rt_s(1915));
+    var$2[62] = k_TuplesKt_to($rt_s(1740), $rt_s(1916));
+    var$2[63] = k_TuplesKt_to($rt_s(1742), $rt_s(1917));
     cvs_Langs_deX = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(1916));
-    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(1917));
-    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(1918));
-    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(1919));
-    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(1920));
-    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(1921));
-    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(1922));
-    var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(1923));
-    var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(1924));
-    var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(1925));
-    var$2[10] = k_TuplesKt_to($rt_s(1640), $rt_s(1926));
-    var$2[11] = k_TuplesKt_to($rt_s(1642), $rt_s(1927));
-    var$2[12] = k_TuplesKt_to($rt_s(1644), $rt_s(1928));
-    var$2[13] = k_TuplesKt_to($rt_s(1645), $rt_s(1929));
-    var$2[14] = k_TuplesKt_to($rt_s(1647), $rt_s(1930));
-    var$2[15] = k_TuplesKt_to($rt_s(1649), $rt_s(1931));
-    var$2[16] = k_TuplesKt_to($rt_s(1651), $rt_s(1932));
-    var$2[17] = k_TuplesKt_to($rt_s(1653), $rt_s(1933));
-    var$2[18] = k_TuplesKt_to($rt_s(1655), $rt_s(1934));
-    var$2[19] = k_TuplesKt_to($rt_s(1657), $rt_s(1761));
-    var$2[20] = k_TuplesKt_to($rt_s(1659), $rt_s(1935));
-    var$2[21] = k_TuplesKt_to($rt_s(1661), $rt_s(1662));
-    var$2[22] = k_TuplesKt_to($rt_s(1663), $rt_s(1936));
-    var$2[23] = k_TuplesKt_to($rt_s(1665), $rt_s(1269));
-    var$2[24] = k_TuplesKt_to($rt_s(1666), $rt_s(1937));
-    var$2[25] = k_TuplesKt_to($rt_s(1668), $rt_s(1938));
-    var$2[26] = k_TuplesKt_to($rt_s(1670), $rt_s(1939));
-    var$2[27] = k_TuplesKt_to($rt_s(1672), $rt_s(1940));
-    var$2[28] = k_TuplesKt_to($rt_s(1674), $rt_s(1941));
-    var$2[29] = k_TuplesKt_to($rt_s(1676), $rt_s(1942));
-    var$2[30] = k_TuplesKt_to($rt_s(1678), $rt_s(1943));
-    var$2[31] = k_TuplesKt_to($rt_s(1680), $rt_s(1944));
-    var$2[32] = k_TuplesKt_to($rt_s(1682), $rt_s(1945));
-    var$2[33] = k_TuplesKt_to($rt_s(1684), $rt_s(1946));
-    var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(1947));
-    var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1889));
-    var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(1948));
-    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1949));
-    var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(1950));
-    var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(1951));
-    var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1249));
-    var$2[41] = k_TuplesKt_to($rt_s(1699), $rt_s(1952));
-    var$2[42] = k_TuplesKt_to($rt_s(1701), $rt_s(1953));
-    var$2[43] = k_TuplesKt_to($rt_s(1703), $rt_s(1954));
-    var$2[44] = k_TuplesKt_to($rt_s(1705), $rt_s(1955));
-    var$2[45] = k_TuplesKt_to($rt_s(1707), $rt_s(1956));
-    var$2[46] = k_TuplesKt_to($rt_s(1709), $rt_s(1957));
-    var$2[47] = k_TuplesKt_to($rt_s(1711), $rt_s(1958));
-    var$2[48] = k_TuplesKt_to($rt_s(1713), $rt_s(1714));
-    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1959));
-    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1960));
-    var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(1961));
-    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(1962));
-    var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(1963));
-    var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(1964));
-    var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(1965));
-    var$2[56] = k_TuplesKt_to($rt_s(1726), $rt_s(1966));
-    var$2[57] = k_TuplesKt_to($rt_s(1728), $rt_s(1967));
-    var$2[58] = k_TuplesKt_to($rt_s(1730), $rt_s(1968));
-    var$2[59] = k_TuplesKt_to($rt_s(1732), $rt_s(1969));
-    var$2[60] = k_TuplesKt_to($rt_s(1734), $rt_s(1970));
-    var$2[61] = k_TuplesKt_to($rt_s(1736), $rt_s(1971));
-    var$2[62] = k_TuplesKt_to($rt_s(1738), $rt_s(1972));
-    var$2[63] = k_TuplesKt_to($rt_s(1740), $rt_s(1973));
+    var$2[0] = k_TuplesKt_to($rt_s(1633), $rt_s(1918));
+    var$2[1] = k_TuplesKt_to($rt_s(854), $rt_s(1919));
+    var$2[2] = k_TuplesKt_to($rt_s(849), $rt_s(1920));
+    var$2[3] = k_TuplesKt_to($rt_s(850), $rt_s(1921));
+    var$2[4] = k_TuplesKt_to($rt_s(851), $rt_s(1922));
+    var$2[5] = k_TuplesKt_to($rt_s(852), $rt_s(1923));
+    var$2[6] = k_TuplesKt_to($rt_s(853), $rt_s(1924));
+    var$2[7] = k_TuplesKt_to($rt_s(1636), $rt_s(1925));
+    var$2[8] = k_TuplesKt_to($rt_s(1638), $rt_s(1926));
+    var$2[9] = k_TuplesKt_to($rt_s(1640), $rt_s(1927));
+    var$2[10] = k_TuplesKt_to($rt_s(1642), $rt_s(1928));
+    var$2[11] = k_TuplesKt_to($rt_s(1644), $rt_s(1929));
+    var$2[12] = k_TuplesKt_to($rt_s(1646), $rt_s(1930));
+    var$2[13] = k_TuplesKt_to($rt_s(1647), $rt_s(1931));
+    var$2[14] = k_TuplesKt_to($rt_s(1649), $rt_s(1932));
+    var$2[15] = k_TuplesKt_to($rt_s(1651), $rt_s(1933));
+    var$2[16] = k_TuplesKt_to($rt_s(1653), $rt_s(1934));
+    var$2[17] = k_TuplesKt_to($rt_s(1655), $rt_s(1935));
+    var$2[18] = k_TuplesKt_to($rt_s(1657), $rt_s(1936));
+    var$2[19] = k_TuplesKt_to($rt_s(1659), $rt_s(1763));
+    var$2[20] = k_TuplesKt_to($rt_s(1661), $rt_s(1937));
+    var$2[21] = k_TuplesKt_to($rt_s(1663), $rt_s(1664));
+    var$2[22] = k_TuplesKt_to($rt_s(1665), $rt_s(1938));
+    var$2[23] = k_TuplesKt_to($rt_s(1667), $rt_s(1270));
+    var$2[24] = k_TuplesKt_to($rt_s(1668), $rt_s(1939));
+    var$2[25] = k_TuplesKt_to($rt_s(1670), $rt_s(1940));
+    var$2[26] = k_TuplesKt_to($rt_s(1672), $rt_s(1941));
+    var$2[27] = k_TuplesKt_to($rt_s(1674), $rt_s(1942));
+    var$2[28] = k_TuplesKt_to($rt_s(1676), $rt_s(1943));
+    var$2[29] = k_TuplesKt_to($rt_s(1678), $rt_s(1944));
+    var$2[30] = k_TuplesKt_to($rt_s(1680), $rt_s(1945));
+    var$2[31] = k_TuplesKt_to($rt_s(1682), $rt_s(1946));
+    var$2[32] = k_TuplesKt_to($rt_s(1684), $rt_s(1947));
+    var$2[33] = k_TuplesKt_to($rt_s(1686), $rt_s(1948));
+    var$2[34] = k_TuplesKt_to($rt_s(1688), $rt_s(1949));
+    var$2[35] = k_TuplesKt_to($rt_s(1690), $rt_s(1891));
+    var$2[36] = k_TuplesKt_to($rt_s(1692), $rt_s(1950));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1951));
+    var$2[38] = k_TuplesKt_to($rt_s(1695), $rt_s(1952));
+    var$2[39] = k_TuplesKt_to($rt_s(1697), $rt_s(1953));
+    var$2[40] = k_TuplesKt_to($rt_s(1699), $rt_s(1250));
+    var$2[41] = k_TuplesKt_to($rt_s(1701), $rt_s(1954));
+    var$2[42] = k_TuplesKt_to($rt_s(1703), $rt_s(1955));
+    var$2[43] = k_TuplesKt_to($rt_s(1705), $rt_s(1956));
+    var$2[44] = k_TuplesKt_to($rt_s(1707), $rt_s(1957));
+    var$2[45] = k_TuplesKt_to($rt_s(1709), $rt_s(1958));
+    var$2[46] = k_TuplesKt_to($rt_s(1711), $rt_s(1959));
+    var$2[47] = k_TuplesKt_to($rt_s(1713), $rt_s(1960));
+    var$2[48] = k_TuplesKt_to($rt_s(1715), $rt_s(1716));
+    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1961));
+    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1962));
+    var$2[51] = k_TuplesKt_to($rt_s(1719), $rt_s(1963));
+    var$2[52] = k_TuplesKt_to($rt_s(840), $rt_s(1964));
+    var$2[53] = k_TuplesKt_to($rt_s(1722), $rt_s(1965));
+    var$2[54] = k_TuplesKt_to($rt_s(1724), $rt_s(1966));
+    var$2[55] = k_TuplesKt_to($rt_s(1726), $rt_s(1967));
+    var$2[56] = k_TuplesKt_to($rt_s(1728), $rt_s(1968));
+    var$2[57] = k_TuplesKt_to($rt_s(1730), $rt_s(1969));
+    var$2[58] = k_TuplesKt_to($rt_s(1732), $rt_s(1970));
+    var$2[59] = k_TuplesKt_to($rt_s(1734), $rt_s(1971));
+    var$2[60] = k_TuplesKt_to($rt_s(1736), $rt_s(1972));
+    var$2[61] = k_TuplesKt_to($rt_s(1738), $rt_s(1973));
+    var$2[62] = k_TuplesKt_to($rt_s(1740), $rt_s(1974));
+    var$2[63] = k_TuplesKt_to($rt_s(1742), $rt_s(1975));
     cvs_Langs_frX = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(1974));
-    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(1975));
-    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(1976));
-    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(1977));
-    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(1978));
-    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(1979));
-    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(1980));
-    var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(1981));
-    var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(1982));
-    var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(1983));
-    var$2[10] = k_TuplesKt_to($rt_s(1640), $rt_s(1984));
-    var$2[11] = k_TuplesKt_to($rt_s(1642), $rt_s(1985));
-    var$2[12] = k_TuplesKt_to($rt_s(1644), $rt_s(1986));
-    var$2[13] = k_TuplesKt_to($rt_s(1645), $rt_s(1646));
-    var$2[14] = k_TuplesKt_to($rt_s(1647), $rt_s(1648));
-    var$2[15] = k_TuplesKt_to($rt_s(1649), $rt_s(1987));
-    var$2[16] = k_TuplesKt_to($rt_s(1651), $rt_s(1988));
-    var$2[17] = k_TuplesKt_to($rt_s(1653), $rt_s(1989));
-    var$2[18] = k_TuplesKt_to($rt_s(1655), $rt_s(1990));
-    var$2[19] = k_TuplesKt_to($rt_s(1657), $rt_s(1991));
-    var$2[20] = k_TuplesKt_to($rt_s(1659), $rt_s(1992));
-    var$2[21] = k_TuplesKt_to($rt_s(1661), $rt_s(1662));
-    var$2[22] = k_TuplesKt_to($rt_s(1663), $rt_s(1993));
-    var$2[23] = k_TuplesKt_to($rt_s(1665), $rt_s(1335));
-    var$2[24] = k_TuplesKt_to($rt_s(1666), $rt_s(1994));
-    var$2[25] = k_TuplesKt_to($rt_s(1668), $rt_s(1995));
-    var$2[26] = k_TuplesKt_to($rt_s(1670), $rt_s(1996));
-    var$2[27] = k_TuplesKt_to($rt_s(1672), $rt_s(1997));
-    var$2[28] = k_TuplesKt_to($rt_s(1674), $rt_s(1998));
-    var$2[29] = k_TuplesKt_to($rt_s(1676), $rt_s(1999));
-    var$2[30] = k_TuplesKt_to($rt_s(1678), $rt_s(2000));
-    var$2[31] = k_TuplesKt_to($rt_s(1680), $rt_s(2001));
-    var$2[32] = k_TuplesKt_to($rt_s(1682), $rt_s(2002));
-    var$2[33] = k_TuplesKt_to($rt_s(1684), $rt_s(2003));
-    var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(2004));
-    var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1689));
-    var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(2005));
-    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2006));
-    var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(2007));
-    var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(2008));
-    var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(2009));
-    var$2[41] = k_TuplesKt_to($rt_s(1699), $rt_s(2010));
-    var$2[42] = k_TuplesKt_to($rt_s(1701), $rt_s(2011));
-    var$2[43] = k_TuplesKt_to($rt_s(1703), $rt_s(2012));
-    var$2[44] = k_TuplesKt_to($rt_s(1705), $rt_s(2013));
-    var$2[45] = k_TuplesKt_to($rt_s(1707), $rt_s(2014));
-    var$2[46] = k_TuplesKt_to($rt_s(1709), $rt_s(1842));
-    var$2[47] = k_TuplesKt_to($rt_s(1711), $rt_s(1712));
-    var$2[48] = k_TuplesKt_to($rt_s(1713), $rt_s(1714));
-    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2015));
-    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2016));
-    var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(2017));
-    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(2018));
-    var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(2019));
-    var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(2020));
-    var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(2021));
-    var$2[56] = k_TuplesKt_to($rt_s(1726), $rt_s(2022));
-    var$2[57] = k_TuplesKt_to($rt_s(1728), $rt_s(2023));
-    var$2[58] = k_TuplesKt_to($rt_s(1730), $rt_s(2024));
-    var$2[59] = k_TuplesKt_to($rt_s(1732), $rt_s(2025));
-    var$2[60] = k_TuplesKt_to($rt_s(1734), $rt_s(2026));
-    var$2[61] = k_TuplesKt_to($rt_s(1736), $rt_s(2027));
-    var$2[62] = k_TuplesKt_to($rt_s(1738), $rt_s(2028));
-    var$2[63] = k_TuplesKt_to($rt_s(1740), $rt_s(2029));
+    var$2[0] = k_TuplesKt_to($rt_s(1633), $rt_s(1976));
+    var$2[1] = k_TuplesKt_to($rt_s(854), $rt_s(1977));
+    var$2[2] = k_TuplesKt_to($rt_s(849), $rt_s(1978));
+    var$2[3] = k_TuplesKt_to($rt_s(850), $rt_s(1979));
+    var$2[4] = k_TuplesKt_to($rt_s(851), $rt_s(1980));
+    var$2[5] = k_TuplesKt_to($rt_s(852), $rt_s(1981));
+    var$2[6] = k_TuplesKt_to($rt_s(853), $rt_s(1982));
+    var$2[7] = k_TuplesKt_to($rt_s(1636), $rt_s(1983));
+    var$2[8] = k_TuplesKt_to($rt_s(1638), $rt_s(1984));
+    var$2[9] = k_TuplesKt_to($rt_s(1640), $rt_s(1985));
+    var$2[10] = k_TuplesKt_to($rt_s(1642), $rt_s(1986));
+    var$2[11] = k_TuplesKt_to($rt_s(1644), $rt_s(1987));
+    var$2[12] = k_TuplesKt_to($rt_s(1646), $rt_s(1988));
+    var$2[13] = k_TuplesKt_to($rt_s(1647), $rt_s(1648));
+    var$2[14] = k_TuplesKt_to($rt_s(1649), $rt_s(1650));
+    var$2[15] = k_TuplesKt_to($rt_s(1651), $rt_s(1989));
+    var$2[16] = k_TuplesKt_to($rt_s(1653), $rt_s(1990));
+    var$2[17] = k_TuplesKt_to($rt_s(1655), $rt_s(1991));
+    var$2[18] = k_TuplesKt_to($rt_s(1657), $rt_s(1992));
+    var$2[19] = k_TuplesKt_to($rt_s(1659), $rt_s(1993));
+    var$2[20] = k_TuplesKt_to($rt_s(1661), $rt_s(1994));
+    var$2[21] = k_TuplesKt_to($rt_s(1663), $rt_s(1664));
+    var$2[22] = k_TuplesKt_to($rt_s(1665), $rt_s(1995));
+    var$2[23] = k_TuplesKt_to($rt_s(1667), $rt_s(1336));
+    var$2[24] = k_TuplesKt_to($rt_s(1668), $rt_s(1996));
+    var$2[25] = k_TuplesKt_to($rt_s(1670), $rt_s(1997));
+    var$2[26] = k_TuplesKt_to($rt_s(1672), $rt_s(1998));
+    var$2[27] = k_TuplesKt_to($rt_s(1674), $rt_s(1999));
+    var$2[28] = k_TuplesKt_to($rt_s(1676), $rt_s(2000));
+    var$2[29] = k_TuplesKt_to($rt_s(1678), $rt_s(2001));
+    var$2[30] = k_TuplesKt_to($rt_s(1680), $rt_s(2002));
+    var$2[31] = k_TuplesKt_to($rt_s(1682), $rt_s(2003));
+    var$2[32] = k_TuplesKt_to($rt_s(1684), $rt_s(2004));
+    var$2[33] = k_TuplesKt_to($rt_s(1686), $rt_s(2005));
+    var$2[34] = k_TuplesKt_to($rt_s(1688), $rt_s(2006));
+    var$2[35] = k_TuplesKt_to($rt_s(1690), $rt_s(1691));
+    var$2[36] = k_TuplesKt_to($rt_s(1692), $rt_s(2007));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2008));
+    var$2[38] = k_TuplesKt_to($rt_s(1695), $rt_s(2009));
+    var$2[39] = k_TuplesKt_to($rt_s(1697), $rt_s(2010));
+    var$2[40] = k_TuplesKt_to($rt_s(1699), $rt_s(2011));
+    var$2[41] = k_TuplesKt_to($rt_s(1701), $rt_s(2012));
+    var$2[42] = k_TuplesKt_to($rt_s(1703), $rt_s(2013));
+    var$2[43] = k_TuplesKt_to($rt_s(1705), $rt_s(2014));
+    var$2[44] = k_TuplesKt_to($rt_s(1707), $rt_s(2015));
+    var$2[45] = k_TuplesKt_to($rt_s(1709), $rt_s(2016));
+    var$2[46] = k_TuplesKt_to($rt_s(1711), $rt_s(1844));
+    var$2[47] = k_TuplesKt_to($rt_s(1713), $rt_s(1714));
+    var$2[48] = k_TuplesKt_to($rt_s(1715), $rt_s(1716));
+    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2017));
+    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2018));
+    var$2[51] = k_TuplesKt_to($rt_s(1719), $rt_s(2019));
+    var$2[52] = k_TuplesKt_to($rt_s(840), $rt_s(2020));
+    var$2[53] = k_TuplesKt_to($rt_s(1722), $rt_s(2021));
+    var$2[54] = k_TuplesKt_to($rt_s(1724), $rt_s(2022));
+    var$2[55] = k_TuplesKt_to($rt_s(1726), $rt_s(2023));
+    var$2[56] = k_TuplesKt_to($rt_s(1728), $rt_s(2024));
+    var$2[57] = k_TuplesKt_to($rt_s(1730), $rt_s(2025));
+    var$2[58] = k_TuplesKt_to($rt_s(1732), $rt_s(2026));
+    var$2[59] = k_TuplesKt_to($rt_s(1734), $rt_s(2027));
+    var$2[60] = k_TuplesKt_to($rt_s(1736), $rt_s(2028));
+    var$2[61] = k_TuplesKt_to($rt_s(1738), $rt_s(2029));
+    var$2[62] = k_TuplesKt_to($rt_s(1740), $rt_s(2030));
+    var$2[63] = k_TuplesKt_to($rt_s(1742), $rt_s(2031));
     cvs_Langs_itX = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(2030));
-    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(2031));
-    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(2032));
-    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(2033));
-    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(2034));
-    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(2035));
-    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(2036));
-    var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(2037));
-    var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(2038));
-    var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(2039));
-    var$2[10] = k_TuplesKt_to($rt_s(1640), $rt_s(2040));
-    var$2[11] = k_TuplesKt_to($rt_s(1642), $rt_s(2041));
-    var$2[12] = k_TuplesKt_to($rt_s(1644), $rt_s(2042));
-    var$2[13] = k_TuplesKt_to($rt_s(1645), $rt_s(2043));
-    var$2[14] = k_TuplesKt_to($rt_s(1647), $rt_s(2044));
-    var$2[15] = k_TuplesKt_to($rt_s(1649), $rt_s(2045));
-    var$2[16] = k_TuplesKt_to($rt_s(1651), $rt_s(2046));
-    var$2[17] = k_TuplesKt_to($rt_s(1653), $rt_s(2047));
-    var$2[18] = k_TuplesKt_to($rt_s(1655), $rt_s(2048));
-    var$2[19] = k_TuplesKt_to($rt_s(1657), $rt_s(1405));
-    var$2[20] = k_TuplesKt_to($rt_s(1659), $rt_s(2049));
-    var$2[21] = k_TuplesKt_to($rt_s(1661), $rt_s(1662));
-    var$2[22] = k_TuplesKt_to($rt_s(1663), $rt_s(2050));
-    var$2[23] = k_TuplesKt_to($rt_s(1665), $rt_s(1398));
-    var$2[24] = k_TuplesKt_to($rt_s(1666), $rt_s(2051));
-    var$2[25] = k_TuplesKt_to($rt_s(1668), $rt_s(2052));
-    var$2[26] = k_TuplesKt_to($rt_s(1670), $rt_s(2053));
-    var$2[27] = k_TuplesKt_to($rt_s(1672), $rt_s(2054));
-    var$2[28] = k_TuplesKt_to($rt_s(1674), $rt_s(2055));
-    var$2[29] = k_TuplesKt_to($rt_s(1676), $rt_s(2056));
-    var$2[30] = k_TuplesKt_to($rt_s(1678), $rt_s(1770));
-    var$2[31] = k_TuplesKt_to($rt_s(1680), $rt_s(2057));
-    var$2[32] = k_TuplesKt_to($rt_s(1682), $rt_s(2058));
-    var$2[33] = k_TuplesKt_to($rt_s(1684), $rt_s(2059));
-    var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(2060));
-    var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(2061));
-    var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(2062));
-    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2063));
-    var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(2064));
-    var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(2065));
-    var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1380));
-    var$2[41] = k_TuplesKt_to($rt_s(1699), $rt_s(2066));
-    var$2[42] = k_TuplesKt_to($rt_s(1701), $rt_s(2067));
-    var$2[43] = k_TuplesKt_to($rt_s(1703), $rt_s(2068));
-    var$2[44] = k_TuplesKt_to($rt_s(1705), $rt_s(2069));
-    var$2[45] = k_TuplesKt_to($rt_s(1707), $rt_s(2070));
-    var$2[46] = k_TuplesKt_to($rt_s(1709), $rt_s(2071));
-    var$2[47] = k_TuplesKt_to($rt_s(1711), $rt_s(2072));
-    var$2[48] = k_TuplesKt_to($rt_s(1713), $rt_s(1714));
-    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2073));
-    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2074));
-    var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(2075));
-    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(2076));
-    var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(2077));
-    var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(2078));
-    var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(2079));
-    var$2[56] = k_TuplesKt_to($rt_s(1726), $rt_s(2080));
-    var$2[57] = k_TuplesKt_to($rt_s(1728), $rt_s(2081));
-    var$2[58] = k_TuplesKt_to($rt_s(1730), $rt_s(2082));
-    var$2[59] = k_TuplesKt_to($rt_s(1732), $rt_s(2083));
-    var$2[60] = k_TuplesKt_to($rt_s(1734), $rt_s(2084));
-    var$2[61] = k_TuplesKt_to($rt_s(1736), $rt_s(2085));
-    var$2[62] = k_TuplesKt_to($rt_s(1738), $rt_s(2086));
-    var$2[63] = k_TuplesKt_to($rt_s(1740), $rt_s(2087));
+    var$2[0] = k_TuplesKt_to($rt_s(1633), $rt_s(2032));
+    var$2[1] = k_TuplesKt_to($rt_s(854), $rt_s(2033));
+    var$2[2] = k_TuplesKt_to($rt_s(849), $rt_s(2034));
+    var$2[3] = k_TuplesKt_to($rt_s(850), $rt_s(2035));
+    var$2[4] = k_TuplesKt_to($rt_s(851), $rt_s(2036));
+    var$2[5] = k_TuplesKt_to($rt_s(852), $rt_s(2037));
+    var$2[6] = k_TuplesKt_to($rt_s(853), $rt_s(2038));
+    var$2[7] = k_TuplesKt_to($rt_s(1636), $rt_s(2039));
+    var$2[8] = k_TuplesKt_to($rt_s(1638), $rt_s(2040));
+    var$2[9] = k_TuplesKt_to($rt_s(1640), $rt_s(2041));
+    var$2[10] = k_TuplesKt_to($rt_s(1642), $rt_s(2042));
+    var$2[11] = k_TuplesKt_to($rt_s(1644), $rt_s(2043));
+    var$2[12] = k_TuplesKt_to($rt_s(1646), $rt_s(2044));
+    var$2[13] = k_TuplesKt_to($rt_s(1647), $rt_s(2045));
+    var$2[14] = k_TuplesKt_to($rt_s(1649), $rt_s(2046));
+    var$2[15] = k_TuplesKt_to($rt_s(1651), $rt_s(2047));
+    var$2[16] = k_TuplesKt_to($rt_s(1653), $rt_s(2048));
+    var$2[17] = k_TuplesKt_to($rt_s(1655), $rt_s(2049));
+    var$2[18] = k_TuplesKt_to($rt_s(1657), $rt_s(2050));
+    var$2[19] = k_TuplesKt_to($rt_s(1659), $rt_s(1406));
+    var$2[20] = k_TuplesKt_to($rt_s(1661), $rt_s(2051));
+    var$2[21] = k_TuplesKt_to($rt_s(1663), $rt_s(1664));
+    var$2[22] = k_TuplesKt_to($rt_s(1665), $rt_s(2052));
+    var$2[23] = k_TuplesKt_to($rt_s(1667), $rt_s(1399));
+    var$2[24] = k_TuplesKt_to($rt_s(1668), $rt_s(2053));
+    var$2[25] = k_TuplesKt_to($rt_s(1670), $rt_s(2054));
+    var$2[26] = k_TuplesKt_to($rt_s(1672), $rt_s(2055));
+    var$2[27] = k_TuplesKt_to($rt_s(1674), $rt_s(2056));
+    var$2[28] = k_TuplesKt_to($rt_s(1676), $rt_s(2057));
+    var$2[29] = k_TuplesKt_to($rt_s(1678), $rt_s(2058));
+    var$2[30] = k_TuplesKt_to($rt_s(1680), $rt_s(1772));
+    var$2[31] = k_TuplesKt_to($rt_s(1682), $rt_s(2059));
+    var$2[32] = k_TuplesKt_to($rt_s(1684), $rt_s(2060));
+    var$2[33] = k_TuplesKt_to($rt_s(1686), $rt_s(2061));
+    var$2[34] = k_TuplesKt_to($rt_s(1688), $rt_s(2062));
+    var$2[35] = k_TuplesKt_to($rt_s(1690), $rt_s(2063));
+    var$2[36] = k_TuplesKt_to($rt_s(1692), $rt_s(2064));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2065));
+    var$2[38] = k_TuplesKt_to($rt_s(1695), $rt_s(2066));
+    var$2[39] = k_TuplesKt_to($rt_s(1697), $rt_s(2067));
+    var$2[40] = k_TuplesKt_to($rt_s(1699), $rt_s(1381));
+    var$2[41] = k_TuplesKt_to($rt_s(1701), $rt_s(2068));
+    var$2[42] = k_TuplesKt_to($rt_s(1703), $rt_s(2069));
+    var$2[43] = k_TuplesKt_to($rt_s(1705), $rt_s(2070));
+    var$2[44] = k_TuplesKt_to($rt_s(1707), $rt_s(2071));
+    var$2[45] = k_TuplesKt_to($rt_s(1709), $rt_s(2072));
+    var$2[46] = k_TuplesKt_to($rt_s(1711), $rt_s(2073));
+    var$2[47] = k_TuplesKt_to($rt_s(1713), $rt_s(2074));
+    var$2[48] = k_TuplesKt_to($rt_s(1715), $rt_s(1716));
+    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2075));
+    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2076));
+    var$2[51] = k_TuplesKt_to($rt_s(1719), $rt_s(2077));
+    var$2[52] = k_TuplesKt_to($rt_s(840), $rt_s(2078));
+    var$2[53] = k_TuplesKt_to($rt_s(1722), $rt_s(2079));
+    var$2[54] = k_TuplesKt_to($rt_s(1724), $rt_s(2080));
+    var$2[55] = k_TuplesKt_to($rt_s(1726), $rt_s(2081));
+    var$2[56] = k_TuplesKt_to($rt_s(1728), $rt_s(2082));
+    var$2[57] = k_TuplesKt_to($rt_s(1730), $rt_s(2083));
+    var$2[58] = k_TuplesKt_to($rt_s(1732), $rt_s(2084));
+    var$2[59] = k_TuplesKt_to($rt_s(1734), $rt_s(2085));
+    var$2[60] = k_TuplesKt_to($rt_s(1736), $rt_s(2086));
+    var$2[61] = k_TuplesKt_to($rt_s(1738), $rt_s(2087));
+    var$2[62] = k_TuplesKt_to($rt_s(1740), $rt_s(2088));
+    var$2[63] = k_TuplesKt_to($rt_s(1742), $rt_s(2089));
     cvs_Langs_idX = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(2088));
-    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(2089));
-    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(2090));
-    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(2091));
-    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(2092));
-    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(2093));
-    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(2094));
-    var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(2095));
-    var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(2096));
-    var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(2097));
-    var$2[10] = k_TuplesKt_to($rt_s(1640), $rt_s(2098));
-    var$2[11] = k_TuplesKt_to($rt_s(1642), $rt_s(2099));
-    var$2[12] = k_TuplesKt_to($rt_s(1644), $rt_s(1386));
-    var$2[13] = k_TuplesKt_to($rt_s(1645), $rt_s(2100));
-    var$2[14] = k_TuplesKt_to($rt_s(1647), $rt_s(2101));
-    var$2[15] = k_TuplesKt_to($rt_s(1649), $rt_s(2102));
-    var$2[16] = k_TuplesKt_to($rt_s(1651), $rt_s(2103));
-    var$2[17] = k_TuplesKt_to($rt_s(1653), $rt_s(2104));
-    var$2[18] = k_TuplesKt_to($rt_s(1655), $rt_s(2105));
-    var$2[19] = k_TuplesKt_to($rt_s(1657), $rt_s(2106));
-    var$2[20] = k_TuplesKt_to($rt_s(1659), $rt_s(2107));
-    var$2[21] = k_TuplesKt_to($rt_s(1661), $rt_s(2108));
-    var$2[22] = k_TuplesKt_to($rt_s(1663), $rt_s(2109));
-    var$2[23] = k_TuplesKt_to($rt_s(1665), $rt_s(1466));
-    var$2[24] = k_TuplesKt_to($rt_s(1666), $rt_s(2110));
-    var$2[25] = k_TuplesKt_to($rt_s(1668), $rt_s(2111));
-    var$2[26] = k_TuplesKt_to($rt_s(1670), $rt_s(2112));
-    var$2[27] = k_TuplesKt_to($rt_s(1672), $rt_s(2113));
-    var$2[28] = k_TuplesKt_to($rt_s(1674), $rt_s(2114));
-    var$2[29] = k_TuplesKt_to($rt_s(1676), $rt_s(2115));
-    var$2[30] = k_TuplesKt_to($rt_s(1678), $rt_s(2116));
-    var$2[31] = k_TuplesKt_to($rt_s(1680), $rt_s(2117));
-    var$2[32] = k_TuplesKt_to($rt_s(1682), $rt_s(2118));
-    var$2[33] = k_TuplesKt_to($rt_s(1684), $rt_s(2119));
-    var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(2120));
-    var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1689));
-    var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(2121));
-    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2122));
-    var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(2123));
-    var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(2124));
-    var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1447));
-    var$2[41] = k_TuplesKt_to($rt_s(1699), $rt_s(2125));
-    var$2[42] = k_TuplesKt_to($rt_s(1701), $rt_s(2126));
-    var$2[43] = k_TuplesKt_to($rt_s(1703), $rt_s(2127));
-    var$2[44] = k_TuplesKt_to($rt_s(1705), $rt_s(2128));
-    var$2[45] = k_TuplesKt_to($rt_s(1707), $rt_s(2129));
-    var$2[46] = k_TuplesKt_to($rt_s(1709), $rt_s(2130));
-    var$2[47] = k_TuplesKt_to($rt_s(1711), $rt_s(2131));
-    var$2[48] = k_TuplesKt_to($rt_s(1713), $rt_s(1714));
-    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2132));
-    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2133));
-    var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(2134));
-    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(2135));
-    var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(2136));
-    var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(2137));
-    var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(2138));
-    var$2[56] = k_TuplesKt_to($rt_s(1726), $rt_s(2139));
-    var$2[57] = k_TuplesKt_to($rt_s(1728), $rt_s(2140));
-    var$2[58] = k_TuplesKt_to($rt_s(1730), $rt_s(2141));
-    var$2[59] = k_TuplesKt_to($rt_s(1732), $rt_s(2142));
-    var$2[60] = k_TuplesKt_to($rt_s(1734), $rt_s(2143));
-    var$2[61] = k_TuplesKt_to($rt_s(1736), $rt_s(2144));
-    var$2[62] = k_TuplesKt_to($rt_s(1738), $rt_s(2145));
-    var$2[63] = k_TuplesKt_to($rt_s(1740), $rt_s(2146));
+    var$2[0] = k_TuplesKt_to($rt_s(1633), $rt_s(2090));
+    var$2[1] = k_TuplesKt_to($rt_s(854), $rt_s(2091));
+    var$2[2] = k_TuplesKt_to($rt_s(849), $rt_s(2092));
+    var$2[3] = k_TuplesKt_to($rt_s(850), $rt_s(2093));
+    var$2[4] = k_TuplesKt_to($rt_s(851), $rt_s(2094));
+    var$2[5] = k_TuplesKt_to($rt_s(852), $rt_s(2095));
+    var$2[6] = k_TuplesKt_to($rt_s(853), $rt_s(2096));
+    var$2[7] = k_TuplesKt_to($rt_s(1636), $rt_s(2097));
+    var$2[8] = k_TuplesKt_to($rt_s(1638), $rt_s(2098));
+    var$2[9] = k_TuplesKt_to($rt_s(1640), $rt_s(2099));
+    var$2[10] = k_TuplesKt_to($rt_s(1642), $rt_s(2100));
+    var$2[11] = k_TuplesKt_to($rt_s(1644), $rt_s(2101));
+    var$2[12] = k_TuplesKt_to($rt_s(1646), $rt_s(1387));
+    var$2[13] = k_TuplesKt_to($rt_s(1647), $rt_s(2102));
+    var$2[14] = k_TuplesKt_to($rt_s(1649), $rt_s(2103));
+    var$2[15] = k_TuplesKt_to($rt_s(1651), $rt_s(2104));
+    var$2[16] = k_TuplesKt_to($rt_s(1653), $rt_s(2105));
+    var$2[17] = k_TuplesKt_to($rt_s(1655), $rt_s(2106));
+    var$2[18] = k_TuplesKt_to($rt_s(1657), $rt_s(2107));
+    var$2[19] = k_TuplesKt_to($rt_s(1659), $rt_s(2108));
+    var$2[20] = k_TuplesKt_to($rt_s(1661), $rt_s(2109));
+    var$2[21] = k_TuplesKt_to($rt_s(1663), $rt_s(2110));
+    var$2[22] = k_TuplesKt_to($rt_s(1665), $rt_s(2111));
+    var$2[23] = k_TuplesKt_to($rt_s(1667), $rt_s(1467));
+    var$2[24] = k_TuplesKt_to($rt_s(1668), $rt_s(2112));
+    var$2[25] = k_TuplesKt_to($rt_s(1670), $rt_s(2113));
+    var$2[26] = k_TuplesKt_to($rt_s(1672), $rt_s(2114));
+    var$2[27] = k_TuplesKt_to($rt_s(1674), $rt_s(2115));
+    var$2[28] = k_TuplesKt_to($rt_s(1676), $rt_s(2116));
+    var$2[29] = k_TuplesKt_to($rt_s(1678), $rt_s(2117));
+    var$2[30] = k_TuplesKt_to($rt_s(1680), $rt_s(2118));
+    var$2[31] = k_TuplesKt_to($rt_s(1682), $rt_s(2119));
+    var$2[32] = k_TuplesKt_to($rt_s(1684), $rt_s(2120));
+    var$2[33] = k_TuplesKt_to($rt_s(1686), $rt_s(2121));
+    var$2[34] = k_TuplesKt_to($rt_s(1688), $rt_s(2122));
+    var$2[35] = k_TuplesKt_to($rt_s(1690), $rt_s(1691));
+    var$2[36] = k_TuplesKt_to($rt_s(1692), $rt_s(2123));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2124));
+    var$2[38] = k_TuplesKt_to($rt_s(1695), $rt_s(2125));
+    var$2[39] = k_TuplesKt_to($rt_s(1697), $rt_s(2126));
+    var$2[40] = k_TuplesKt_to($rt_s(1699), $rt_s(1448));
+    var$2[41] = k_TuplesKt_to($rt_s(1701), $rt_s(2127));
+    var$2[42] = k_TuplesKt_to($rt_s(1703), $rt_s(2128));
+    var$2[43] = k_TuplesKt_to($rt_s(1705), $rt_s(2129));
+    var$2[44] = k_TuplesKt_to($rt_s(1707), $rt_s(2130));
+    var$2[45] = k_TuplesKt_to($rt_s(1709), $rt_s(2131));
+    var$2[46] = k_TuplesKt_to($rt_s(1711), $rt_s(2132));
+    var$2[47] = k_TuplesKt_to($rt_s(1713), $rt_s(2133));
+    var$2[48] = k_TuplesKt_to($rt_s(1715), $rt_s(1716));
+    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2134));
+    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2135));
+    var$2[51] = k_TuplesKt_to($rt_s(1719), $rt_s(2136));
+    var$2[52] = k_TuplesKt_to($rt_s(840), $rt_s(2137));
+    var$2[53] = k_TuplesKt_to($rt_s(1722), $rt_s(2138));
+    var$2[54] = k_TuplesKt_to($rt_s(1724), $rt_s(2139));
+    var$2[55] = k_TuplesKt_to($rt_s(1726), $rt_s(2140));
+    var$2[56] = k_TuplesKt_to($rt_s(1728), $rt_s(2141));
+    var$2[57] = k_TuplesKt_to($rt_s(1730), $rt_s(2142));
+    var$2[58] = k_TuplesKt_to($rt_s(1732), $rt_s(2143));
+    var$2[59] = k_TuplesKt_to($rt_s(1734), $rt_s(2144));
+    var$2[60] = k_TuplesKt_to($rt_s(1736), $rt_s(2145));
+    var$2[61] = k_TuplesKt_to($rt_s(1738), $rt_s(2146));
+    var$2[62] = k_TuplesKt_to($rt_s(1740), $rt_s(2147));
+    var$2[63] = k_TuplesKt_to($rt_s(1742), $rt_s(2148));
     cvs_Langs_trX = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(2147));
-    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(2148));
-    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(2149));
-    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(2150));
-    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(2151));
-    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(2152));
-    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(2153));
-    var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(2154));
-    var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(2155));
-    var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(2156));
-    var$2[10] = k_TuplesKt_to($rt_s(1640), $rt_s(2157));
-    var$2[11] = k_TuplesKt_to($rt_s(1642), $rt_s(2158));
-    var$2[12] = k_TuplesKt_to($rt_s(1644), $rt_s(2159));
-    var$2[13] = k_TuplesKt_to($rt_s(1645), $rt_s(2160));
-    var$2[14] = k_TuplesKt_to($rt_s(1647), $rt_s(2161));
-    var$2[15] = k_TuplesKt_to($rt_s(1649), $rt_s(2162));
-    var$2[16] = k_TuplesKt_to($rt_s(1651), $rt_s(2163));
-    var$2[17] = k_TuplesKt_to($rt_s(1653), $rt_s(2164));
-    var$2[18] = k_TuplesKt_to($rt_s(1655), $rt_s(2165));
-    var$2[19] = k_TuplesKt_to($rt_s(1657), $rt_s(2166));
-    var$2[20] = k_TuplesKt_to($rt_s(1659), $rt_s(2167));
-    var$2[21] = k_TuplesKt_to($rt_s(1661), $rt_s(2168));
-    var$2[22] = k_TuplesKt_to($rt_s(1663), $rt_s(2169));
-    var$2[23] = k_TuplesKt_to($rt_s(1665), $rt_s(1540));
-    var$2[24] = k_TuplesKt_to($rt_s(1666), $rt_s(2170));
-    var$2[25] = k_TuplesKt_to($rt_s(1668), $rt_s(2171));
-    var$2[26] = k_TuplesKt_to($rt_s(1670), $rt_s(2172));
-    var$2[27] = k_TuplesKt_to($rt_s(1672), $rt_s(2173));
-    var$2[28] = k_TuplesKt_to($rt_s(1674), $rt_s(2174));
-    var$2[29] = k_TuplesKt_to($rt_s(1676), $rt_s(2175));
-    var$2[30] = k_TuplesKt_to($rt_s(1678), $rt_s(2176));
-    var$2[31] = k_TuplesKt_to($rt_s(1680), $rt_s(2177));
-    var$2[32] = k_TuplesKt_to($rt_s(1682), $rt_s(2178));
-    var$2[33] = k_TuplesKt_to($rt_s(1684), $rt_s(2179));
-    var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(2180));
-    var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(2181));
-    var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(2182));
-    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2183));
-    var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(2184));
-    var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(2185));
-    var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1520));
-    var$2[41] = k_TuplesKt_to($rt_s(1699), $rt_s(2186));
-    var$2[42] = k_TuplesKt_to($rt_s(1701), $rt_s(2187));
-    var$2[43] = k_TuplesKt_to($rt_s(1703), $rt_s(2188));
-    var$2[44] = k_TuplesKt_to($rt_s(1705), $rt_s(2189));
-    var$2[45] = k_TuplesKt_to($rt_s(1707), $rt_s(2190));
-    var$2[46] = k_TuplesKt_to($rt_s(1709), $rt_s(2191));
-    var$2[47] = k_TuplesKt_to($rt_s(1711), $rt_s(2192));
-    var$2[48] = k_TuplesKt_to($rt_s(1713), $rt_s(2193));
-    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2194));
-    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2195));
-    var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(2196));
-    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(2197));
-    var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(2198));
-    var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(2199));
-    var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(2200));
-    var$2[56] = k_TuplesKt_to($rt_s(1726), $rt_s(2201));
-    var$2[57] = k_TuplesKt_to($rt_s(1728), $rt_s(2202));
-    var$2[58] = k_TuplesKt_to($rt_s(1730), $rt_s(2203));
-    var$2[59] = k_TuplesKt_to($rt_s(1732), $rt_s(2204));
-    var$2[60] = k_TuplesKt_to($rt_s(1734), $rt_s(2205));
-    var$2[61] = k_TuplesKt_to($rt_s(1736), $rt_s(2206));
-    var$2[62] = k_TuplesKt_to($rt_s(1738), $rt_s(2207));
-    var$2[63] = k_TuplesKt_to($rt_s(1740), $rt_s(2208));
+    var$2[0] = k_TuplesKt_to($rt_s(1633), $rt_s(2149));
+    var$2[1] = k_TuplesKt_to($rt_s(854), $rt_s(2150));
+    var$2[2] = k_TuplesKt_to($rt_s(849), $rt_s(2151));
+    var$2[3] = k_TuplesKt_to($rt_s(850), $rt_s(2152));
+    var$2[4] = k_TuplesKt_to($rt_s(851), $rt_s(2153));
+    var$2[5] = k_TuplesKt_to($rt_s(852), $rt_s(2154));
+    var$2[6] = k_TuplesKt_to($rt_s(853), $rt_s(2155));
+    var$2[7] = k_TuplesKt_to($rt_s(1636), $rt_s(2156));
+    var$2[8] = k_TuplesKt_to($rt_s(1638), $rt_s(2157));
+    var$2[9] = k_TuplesKt_to($rt_s(1640), $rt_s(2158));
+    var$2[10] = k_TuplesKt_to($rt_s(1642), $rt_s(2159));
+    var$2[11] = k_TuplesKt_to($rt_s(1644), $rt_s(2160));
+    var$2[12] = k_TuplesKt_to($rt_s(1646), $rt_s(2161));
+    var$2[13] = k_TuplesKt_to($rt_s(1647), $rt_s(2162));
+    var$2[14] = k_TuplesKt_to($rt_s(1649), $rt_s(2163));
+    var$2[15] = k_TuplesKt_to($rt_s(1651), $rt_s(2164));
+    var$2[16] = k_TuplesKt_to($rt_s(1653), $rt_s(2165));
+    var$2[17] = k_TuplesKt_to($rt_s(1655), $rt_s(2166));
+    var$2[18] = k_TuplesKt_to($rt_s(1657), $rt_s(2167));
+    var$2[19] = k_TuplesKt_to($rt_s(1659), $rt_s(2168));
+    var$2[20] = k_TuplesKt_to($rt_s(1661), $rt_s(2169));
+    var$2[21] = k_TuplesKt_to($rt_s(1663), $rt_s(2170));
+    var$2[22] = k_TuplesKt_to($rt_s(1665), $rt_s(2171));
+    var$2[23] = k_TuplesKt_to($rt_s(1667), $rt_s(1541));
+    var$2[24] = k_TuplesKt_to($rt_s(1668), $rt_s(2172));
+    var$2[25] = k_TuplesKt_to($rt_s(1670), $rt_s(2173));
+    var$2[26] = k_TuplesKt_to($rt_s(1672), $rt_s(2174));
+    var$2[27] = k_TuplesKt_to($rt_s(1674), $rt_s(2175));
+    var$2[28] = k_TuplesKt_to($rt_s(1676), $rt_s(2176));
+    var$2[29] = k_TuplesKt_to($rt_s(1678), $rt_s(2177));
+    var$2[30] = k_TuplesKt_to($rt_s(1680), $rt_s(2178));
+    var$2[31] = k_TuplesKt_to($rt_s(1682), $rt_s(2179));
+    var$2[32] = k_TuplesKt_to($rt_s(1684), $rt_s(2180));
+    var$2[33] = k_TuplesKt_to($rt_s(1686), $rt_s(2181));
+    var$2[34] = k_TuplesKt_to($rt_s(1688), $rt_s(2182));
+    var$2[35] = k_TuplesKt_to($rt_s(1690), $rt_s(2183));
+    var$2[36] = k_TuplesKt_to($rt_s(1692), $rt_s(2184));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2185));
+    var$2[38] = k_TuplesKt_to($rt_s(1695), $rt_s(2186));
+    var$2[39] = k_TuplesKt_to($rt_s(1697), $rt_s(2187));
+    var$2[40] = k_TuplesKt_to($rt_s(1699), $rt_s(1521));
+    var$2[41] = k_TuplesKt_to($rt_s(1701), $rt_s(2188));
+    var$2[42] = k_TuplesKt_to($rt_s(1703), $rt_s(2189));
+    var$2[43] = k_TuplesKt_to($rt_s(1705), $rt_s(2190));
+    var$2[44] = k_TuplesKt_to($rt_s(1707), $rt_s(2191));
+    var$2[45] = k_TuplesKt_to($rt_s(1709), $rt_s(2192));
+    var$2[46] = k_TuplesKt_to($rt_s(1711), $rt_s(2193));
+    var$2[47] = k_TuplesKt_to($rt_s(1713), $rt_s(2194));
+    var$2[48] = k_TuplesKt_to($rt_s(1715), $rt_s(2195));
+    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2196));
+    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2197));
+    var$2[51] = k_TuplesKt_to($rt_s(1719), $rt_s(2198));
+    var$2[52] = k_TuplesKt_to($rt_s(840), $rt_s(2199));
+    var$2[53] = k_TuplesKt_to($rt_s(1722), $rt_s(2200));
+    var$2[54] = k_TuplesKt_to($rt_s(1724), $rt_s(2201));
+    var$2[55] = k_TuplesKt_to($rt_s(1726), $rt_s(2202));
+    var$2[56] = k_TuplesKt_to($rt_s(1728), $rt_s(2203));
+    var$2[57] = k_TuplesKt_to($rt_s(1730), $rt_s(2204));
+    var$2[58] = k_TuplesKt_to($rt_s(1732), $rt_s(2205));
+    var$2[59] = k_TuplesKt_to($rt_s(1734), $rt_s(2206));
+    var$2[60] = k_TuplesKt_to($rt_s(1736), $rt_s(2207));
+    var$2[61] = k_TuplesKt_to($rt_s(1738), $rt_s(2208));
+    var$2[62] = k_TuplesKt_to($rt_s(1740), $rt_s(2209));
+    var$2[63] = k_TuplesKt_to($rt_s(1742), $rt_s(2210));
     cvs_Langs_ruX = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(2209));
-    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(2210));
-    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(2211));
-    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(2212));
-    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(2213));
-    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(2214));
-    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(2215));
-    var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(2216));
-    var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(2217));
-    var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(2218));
-    var$2[10] = k_TuplesKt_to($rt_s(1640), $rt_s(2219));
-    var$2[11] = k_TuplesKt_to($rt_s(1642), $rt_s(2220));
-    var$2[12] = k_TuplesKt_to($rt_s(1644), $rt_s(2221));
-    var$2[13] = k_TuplesKt_to($rt_s(1645), $rt_s(2222));
-    var$2[14] = k_TuplesKt_to($rt_s(1647), $rt_s(2223));
-    var$2[15] = k_TuplesKt_to($rt_s(1649), $rt_s(2224));
-    var$2[16] = k_TuplesKt_to($rt_s(1651), $rt_s(2225));
-    var$2[17] = k_TuplesKt_to($rt_s(1653), $rt_s(2226));
-    var$2[18] = k_TuplesKt_to($rt_s(1655), $rt_s(2227));
-    var$2[19] = k_TuplesKt_to($rt_s(1657), $rt_s(1620));
-    var$2[20] = k_TuplesKt_to($rt_s(1659), $rt_s(2228));
-    var$2[21] = k_TuplesKt_to($rt_s(1661), $rt_s(2229));
-    var$2[22] = k_TuplesKt_to($rt_s(1663), $rt_s(2230));
-    var$2[23] = k_TuplesKt_to($rt_s(1665), $rt_s(1613));
-    var$2[24] = k_TuplesKt_to($rt_s(1666), $rt_s(2231));
-    var$2[25] = k_TuplesKt_to($rt_s(1668), $rt_s(2232));
-    var$2[26] = k_TuplesKt_to($rt_s(1670), $rt_s(2233));
-    var$2[27] = k_TuplesKt_to($rt_s(1672), $rt_s(2234));
-    var$2[28] = k_TuplesKt_to($rt_s(1674), $rt_s(2235));
-    var$2[29] = k_TuplesKt_to($rt_s(1676), $rt_s(2236));
-    var$2[30] = k_TuplesKt_to($rt_s(1678), $rt_s(2237));
-    var$2[31] = k_TuplesKt_to($rt_s(1680), $rt_s(2238));
-    var$2[32] = k_TuplesKt_to($rt_s(1682), $rt_s(2239));
-    var$2[33] = k_TuplesKt_to($rt_s(1684), $rt_s(2240));
-    var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(2241));
-    var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(2242));
-    var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(2243));
-    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2244));
-    var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(2245));
-    var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(2246));
-    var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(2247));
-    var$2[41] = k_TuplesKt_to($rt_s(1699), $rt_s(2248));
-    var$2[42] = k_TuplesKt_to($rt_s(1701), $rt_s(2249));
-    var$2[43] = k_TuplesKt_to($rt_s(1703), $rt_s(2250));
-    var$2[44] = k_TuplesKt_to($rt_s(1705), $rt_s(2251));
-    var$2[45] = k_TuplesKt_to($rt_s(1707), $rt_s(2252));
-    var$2[46] = k_TuplesKt_to($rt_s(1709), $rt_s(2253));
-    var$2[47] = k_TuplesKt_to($rt_s(1711), $rt_s(2254));
-    var$2[48] = k_TuplesKt_to($rt_s(1713), $rt_s(2255));
-    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2256));
-    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2257));
-    var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(2258));
-    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(2259));
-    var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(2260));
-    var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(2261));
-    var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(2262));
-    var$2[56] = k_TuplesKt_to($rt_s(1726), $rt_s(2263));
-    var$2[57] = k_TuplesKt_to($rt_s(1728), $rt_s(2264));
-    var$2[58] = k_TuplesKt_to($rt_s(1730), $rt_s(2265));
-    var$2[59] = k_TuplesKt_to($rt_s(1732), $rt_s(2266));
-    var$2[60] = k_TuplesKt_to($rt_s(1734), $rt_s(2267));
-    var$2[61] = k_TuplesKt_to($rt_s(1736), $rt_s(2268));
-    var$2[62] = k_TuplesKt_to($rt_s(1738), $rt_s(2269));
-    var$2[63] = k_TuplesKt_to($rt_s(1740), $rt_s(2270));
+    var$2[0] = k_TuplesKt_to($rt_s(1633), $rt_s(2211));
+    var$2[1] = k_TuplesKt_to($rt_s(854), $rt_s(2212));
+    var$2[2] = k_TuplesKt_to($rt_s(849), $rt_s(2213));
+    var$2[3] = k_TuplesKt_to($rt_s(850), $rt_s(2214));
+    var$2[4] = k_TuplesKt_to($rt_s(851), $rt_s(2215));
+    var$2[5] = k_TuplesKt_to($rt_s(852), $rt_s(2216));
+    var$2[6] = k_TuplesKt_to($rt_s(853), $rt_s(2217));
+    var$2[7] = k_TuplesKt_to($rt_s(1636), $rt_s(2218));
+    var$2[8] = k_TuplesKt_to($rt_s(1638), $rt_s(2219));
+    var$2[9] = k_TuplesKt_to($rt_s(1640), $rt_s(2220));
+    var$2[10] = k_TuplesKt_to($rt_s(1642), $rt_s(2221));
+    var$2[11] = k_TuplesKt_to($rt_s(1644), $rt_s(2222));
+    var$2[12] = k_TuplesKt_to($rt_s(1646), $rt_s(2223));
+    var$2[13] = k_TuplesKt_to($rt_s(1647), $rt_s(2224));
+    var$2[14] = k_TuplesKt_to($rt_s(1649), $rt_s(2225));
+    var$2[15] = k_TuplesKt_to($rt_s(1651), $rt_s(2226));
+    var$2[16] = k_TuplesKt_to($rt_s(1653), $rt_s(2227));
+    var$2[17] = k_TuplesKt_to($rt_s(1655), $rt_s(2228));
+    var$2[18] = k_TuplesKt_to($rt_s(1657), $rt_s(2229));
+    var$2[19] = k_TuplesKt_to($rt_s(1659), $rt_s(1621));
+    var$2[20] = k_TuplesKt_to($rt_s(1661), $rt_s(2230));
+    var$2[21] = k_TuplesKt_to($rt_s(1663), $rt_s(2231));
+    var$2[22] = k_TuplesKt_to($rt_s(1665), $rt_s(2232));
+    var$2[23] = k_TuplesKt_to($rt_s(1667), $rt_s(1614));
+    var$2[24] = k_TuplesKt_to($rt_s(1668), $rt_s(2233));
+    var$2[25] = k_TuplesKt_to($rt_s(1670), $rt_s(2234));
+    var$2[26] = k_TuplesKt_to($rt_s(1672), $rt_s(2235));
+    var$2[27] = k_TuplesKt_to($rt_s(1674), $rt_s(2236));
+    var$2[28] = k_TuplesKt_to($rt_s(1676), $rt_s(2237));
+    var$2[29] = k_TuplesKt_to($rt_s(1678), $rt_s(2238));
+    var$2[30] = k_TuplesKt_to($rt_s(1680), $rt_s(2239));
+    var$2[31] = k_TuplesKt_to($rt_s(1682), $rt_s(2240));
+    var$2[32] = k_TuplesKt_to($rt_s(1684), $rt_s(2241));
+    var$2[33] = k_TuplesKt_to($rt_s(1686), $rt_s(2242));
+    var$2[34] = k_TuplesKt_to($rt_s(1688), $rt_s(2243));
+    var$2[35] = k_TuplesKt_to($rt_s(1690), $rt_s(2244));
+    var$2[36] = k_TuplesKt_to($rt_s(1692), $rt_s(2245));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2246));
+    var$2[38] = k_TuplesKt_to($rt_s(1695), $rt_s(2247));
+    var$2[39] = k_TuplesKt_to($rt_s(1697), $rt_s(2248));
+    var$2[40] = k_TuplesKt_to($rt_s(1699), $rt_s(2249));
+    var$2[41] = k_TuplesKt_to($rt_s(1701), $rt_s(2250));
+    var$2[42] = k_TuplesKt_to($rt_s(1703), $rt_s(2251));
+    var$2[43] = k_TuplesKt_to($rt_s(1705), $rt_s(2252));
+    var$2[44] = k_TuplesKt_to($rt_s(1707), $rt_s(2253));
+    var$2[45] = k_TuplesKt_to($rt_s(1709), $rt_s(2254));
+    var$2[46] = k_TuplesKt_to($rt_s(1711), $rt_s(2255));
+    var$2[47] = k_TuplesKt_to($rt_s(1713), $rt_s(2256));
+    var$2[48] = k_TuplesKt_to($rt_s(1715), $rt_s(2257));
+    var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2258));
+    var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2259));
+    var$2[51] = k_TuplesKt_to($rt_s(1719), $rt_s(2260));
+    var$2[52] = k_TuplesKt_to($rt_s(840), $rt_s(2261));
+    var$2[53] = k_TuplesKt_to($rt_s(1722), $rt_s(2262));
+    var$2[54] = k_TuplesKt_to($rt_s(1724), $rt_s(2263));
+    var$2[55] = k_TuplesKt_to($rt_s(1726), $rt_s(2264));
+    var$2[56] = k_TuplesKt_to($rt_s(1728), $rt_s(2265));
+    var$2[57] = k_TuplesKt_to($rt_s(1730), $rt_s(2266));
+    var$2[58] = k_TuplesKt_to($rt_s(1732), $rt_s(2267));
+    var$2[59] = k_TuplesKt_to($rt_s(1734), $rt_s(2268));
+    var$2[60] = k_TuplesKt_to($rt_s(1736), $rt_s(2269));
+    var$2[61] = k_TuplesKt_to($rt_s(1738), $rt_s(2270));
+    var$2[62] = k_TuplesKt_to($rt_s(1740), $rt_s(2271));
+    var$2[63] = k_TuplesKt_to($rt_s(1742), $rt_s(2272));
     cvs_Langs_jaX = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(ju_Map, 10);
     var$2 = var$1.data;
@@ -35733,9 +35834,9 @@ cvs_Langs__clinit_ = () => {
 k_ResultKt = $rt_classWithoutFields(),
 k_ResultKt_createFailure = $exception => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($exception, $rt_s(2271));
+    kji_Intrinsics_checkNotNullParameter($exception, $rt_s(2273));
     var$2 = new k_Result$Failure;
-    kji_Intrinsics_checkNotNullParameter($exception, $rt_s(2271));
+    kji_Intrinsics_checkNotNullParameter($exception, $rt_s(2273));
     var$2.$exception = $exception;
     return var$2;
 },
@@ -35745,7 +35846,7 @@ kc_CollectionsKt__CollectionsJVMKt_listOf = $element => {
     ju_Collections_$callClinit();
     var$2 = new ju_TemplateCollections$SingleElementList;
     var$2.$value10 = $element;
-    kji_Intrinsics_checkNotNullExpressionValue(var$2, $rt_s(2272));
+    kji_Intrinsics_checkNotNullExpressionValue(var$2, $rt_s(2274));
     return var$2;
 },
 kc_CollectionsKt__CollectionsKt = $rt_classWithoutFields(kc_CollectionsKt__CollectionsJVMKt),
@@ -35756,19 +35857,19 @@ kc_CollectionsKt__CollectionsKt_emptyList = () => {
 kc_CollectionsKt__CollectionsKt_listOf = $elements => {
     let var$2;
     var$2 = $elements.data;
-    kji_Intrinsics_checkNotNullParameter($elements, $rt_s(2273));
+    kji_Intrinsics_checkNotNullParameter($elements, $rt_s(2275));
     return var$2.length <= 0 ? kc_CollectionsKt__CollectionsKt_emptyList() : kc_ArraysKt___ArraysJvmKt_asList($elements);
 },
 kc_CollectionsKt__CollectionsKt_getLastIndex = $$this$lastIndex => {
-    kji_Intrinsics_checkNotNullParameter($$this$lastIndex, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$lastIndex, $rt_s(859));
     return $$this$lastIndex.$size() - 1 | 0;
 },
 kc_CollectionsKt__CollectionsKt_optimizeReadOnlyList = $$this$optimizeReadOnlyList => {
     let var$2;
     a: {
-        kji_Intrinsics_checkNotNullParameter($$this$optimizeReadOnlyList, $rt_s(839));
+        kji_Intrinsics_checkNotNullParameter($$this$optimizeReadOnlyList, $rt_s(859));
         var$2 = $$this$optimizeReadOnlyList;
-        switch (var$2.$size2) {
+        switch (var$2.$size1) {
             case 0:
                 $$this$optimizeReadOnlyList = kc_CollectionsKt__CollectionsKt_emptyList();
                 break a;
@@ -35783,7 +35884,7 @@ kc_CollectionsKt__CollectionsKt_optimizeReadOnlyList = $$this$optimizeReadOnlyLi
 kc_CollectionsKt__CollectionsKt_throwIndexOverflow = () => {
     let var$1;
     var$1 = new jl_ArithmeticException;
-    jl_RuntimeException__init_(var$1, $rt_s(2274));
+    jl_RuntimeException__init_(var$1, $rt_s(2276));
     $rt_throw(var$1);
 },
 k_Unit = $rt_classWithoutFields(),
@@ -35791,48 +35892,30 @@ k_Unit_INSTANCE = null,
 k_Unit_$callClinit = () => {
     k_Unit_$callClinit = $rt_eraseClinit(k_Unit);
     k_Unit__clinit_();
-},
-k_Unit__clinit_ = () => {
+};
+let k_Unit__clinit_ = () => {
     let var$1;
     var$1 = new k_Unit;
     k_Unit_$callClinit();
     k_Unit_INSTANCE = var$1;
+},
+kc_CollectionsKt__IterablesKt = $rt_classWithoutFields(kc_CollectionsKt__CollectionsKt),
+kc_CollectionsKt__IterablesKt_collectionSizeOrDefault = ($$this$collectionSizeOrDefault, $default) => {
+    kji_Intrinsics_checkNotNullParameter($$this$collectionSizeOrDefault, $rt_s(859));
+    if ($rt_isInstance($$this$collectionSizeOrDefault, ju_Collection))
+        $default = $$this$collectionSizeOrDefault.$size();
+    return $default;
 };
 function cvs_MainMenuScreen$NeonButton() {
     let a = this; jl_Object.call(a);
-    a.$id1 = 0;
+    a.$id0 = 0;
     a.$rect1 = null;
     a.$title = null;
     a.$subtitle0 = null;
     a.$magenta = 0;
 }
-let cvs_MainMenuScreen$NeonButton__init_0 = ($this, $id, $rect, $title, $subtitle, $magenta) => {
-    kji_Intrinsics_checkNotNullParameter($rect, $rt_s(823));
-    kji_Intrinsics_checkNotNullParameter($title, $rt_s(2275));
-    kji_Intrinsics_checkNotNullParameter($subtitle, $rt_s(2276));
-    $this.$id1 = $id;
-    $this.$rect1 = $rect;
-    $this.$title = $title;
-    $this.$subtitle0 = $subtitle;
-    $this.$magenta = $magenta;
-},
-cvs_MainMenuScreen$NeonButton__init_1 = (var_0, var_1, var_2, var_3, var_4) => {
-    let var_5 = new cvs_MainMenuScreen$NeonButton();
-    cvs_MainMenuScreen$NeonButton__init_0(var_5, var_0, var_1, var_2, var_3, var_4);
-    return var_5;
-},
-cvs_MainMenuScreen$NeonButton__init_2 = (var$0, var$1, var$2, var$3, var$4, var$5, var$6, var$7) => {
-    if (var$6 & 16)
-        var$5 = 0;
-    cvs_MainMenuScreen$NeonButton__init_0(var$0, var$1, var$2, var$3, var$4, var$5);
-},
-cvs_MainMenuScreen$NeonButton__init_ = (var_0, var_1, var_2, var_3, var_4, var_5, var_6) => {
-    let var_7 = new cvs_MainMenuScreen$NeonButton();
-    cvs_MainMenuScreen$NeonButton__init_2(var_7, var_0, var_1, var_2, var_3, var_4, var_5, var_6);
-    return var_7;
-},
-cvs_MainMenuScreen$NeonButton_getId = $this => {
-    return $this.$id1;
+let cvs_MainMenuScreen$NeonButton_getId = $this => {
+    return $this.$id0;
 },
 cvs_MainMenuScreen$NeonButton_getRect = $this => {
     return $this.$rect1;
@@ -35842,7 +35925,7 @@ cvs_MainMenuScreen$NeonButton_getMagenta = $this => {
 },
 cvs_MainMenuScreen$NeonButton_toString = $this => {
     let var$1, var$2, var$3, var$4, var$5, var$6;
-    var$1 = $this.$id1;
+    var$1 = $this.$id0;
     var$2 = $this.$rect1;
     var$3 = $this.$title;
     var$4 = $this.$subtitle0;
@@ -35854,7 +35937,7 @@ cvs_MainMenuScreen$NeonButton_toString = $this => {
 },
 cvs_MainMenuScreen$NeonButton_hashCode = $this => {
     let $result;
-    $result = $this.$id1;
+    $result = $this.$id0;
     jl_Integer_$callClinit();
     return ((((((($result * 31 | 0) + cbgm_Rectangle_hashCode($this.$rect1) | 0) * 31 | 0) + jl_String_hashCode($this.$title) | 0) * 31 | 0) + jl_String_hashCode($this.$subtitle0) | 0) * 31 | 0) + jl_Boolean_hashCode($this.$magenta) | 0;
 },
@@ -35864,7 +35947,7 @@ cvs_MainMenuScreen$NeonButton_equals = ($this, $other) => {
     if (!($other instanceof cvs_MainMenuScreen$NeonButton))
         return 0;
     $other = $other;
-    if ($this.$id1 != $other.$id1)
+    if ($this.$id0 != $other.$id0)
         return 0;
     if (!kji_Intrinsics_areEqual($this.$rect1, $other.$rect1))
         return 0;
@@ -36471,21 +36554,14 @@ ju_LinkedHashSet__init_ = () => {
     ju_LinkedHashSet__init_0(var_0);
     return var_0;
 },
-kc_CollectionsKt__IterablesKt = $rt_classWithoutFields(kc_CollectionsKt__CollectionsKt),
-kc_CollectionsKt__IterablesKt_collectionSizeOrDefault = ($$this$collectionSizeOrDefault, $default) => {
-    kji_Intrinsics_checkNotNullParameter($$this$collectionSizeOrDefault, $rt_s(839));
-    if ($rt_isInstance($$this$collectionSizeOrDefault, ju_Collection))
-        $default = $$this$collectionSizeOrDefault.$size();
-    return $default;
-},
 kc_CollectionsKt__IteratorsJVMKt = $rt_classWithoutFields(kc_CollectionsKt__IterablesKt),
 kc_CollectionsKt__IteratorsKt = $rt_classWithoutFields(kc_CollectionsKt__IteratorsJVMKt),
 kc_CollectionsKt__MutableCollectionsJVMKt = $rt_classWithoutFields(kc_CollectionsKt__IteratorsKt),
 kc_CollectionsKt__MutableCollectionsKt = $rt_classWithoutFields(kc_CollectionsKt__MutableCollectionsJVMKt),
 kc_CollectionsKt__MutableCollectionsKt_addAll = ($$this$addAll, $elements) => {
     let $result, var$4, $item;
-    kji_Intrinsics_checkNotNullParameter($$this$addAll, $rt_s(839));
-    kji_Intrinsics_checkNotNullParameter($elements, $rt_s(2273));
+    kji_Intrinsics_checkNotNullParameter($$this$addAll, $rt_s(859));
+    kji_Intrinsics_checkNotNullParameter($elements, $rt_s(2275));
     if ($rt_isInstance($elements, ju_Collection)) {
         $elements = $elements;
         return ju_AbstractCollection_addAll($$this$addAll, $elements);
@@ -36505,7 +36581,7 @@ kc_CollectionsKt___CollectionsJvmKt = $rt_classWithoutFields(kc_CollectionsKt__R
 kc_CollectionsKt___CollectionsKt = $rt_classWithoutFields(kc_CollectionsKt___CollectionsJvmKt),
 kc_CollectionsKt___CollectionsKt_first = $$this$first => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($$this$first, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$first, $rt_s(859));
     if (!ju_AbstractCollection_isEmpty($$this$first))
         return ju_ArrayList_get($$this$first, 0);
     var$2 = new ju_NoSuchElementException;
@@ -36513,7 +36589,7 @@ kc_CollectionsKt___CollectionsKt_first = $$this$first => {
     $rt_throw(var$2);
 },
 kc_CollectionsKt___CollectionsKt_firstOrNull = $$this$firstOrNull => {
-    kji_Intrinsics_checkNotNullParameter($$this$firstOrNull, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$firstOrNull, $rt_s(859));
     if ($rt_isInstance($$this$firstOrNull, ju_List)) {
         $$this$firstOrNull = $$this$firstOrNull;
         if ($$this$firstOrNull.$isEmpty())
@@ -36526,17 +36602,17 @@ kc_CollectionsKt___CollectionsKt_firstOrNull = $$this$firstOrNull => {
     return null;
 },
 kc_CollectionsKt___CollectionsKt_lastOrNull = $$this$lastOrNull => {
-    kji_Intrinsics_checkNotNullParameter($$this$lastOrNull, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$lastOrNull, $rt_s(859));
     if (ju_AbstractCollection_isEmpty($$this$lastOrNull))
         $$this$lastOrNull = null;
     else {
         $$this$lastOrNull = $$this$lastOrNull;
-        $$this$lastOrNull = ju_ArrayList_get($$this$lastOrNull, $$this$lastOrNull.$size2 - 1 | 0);
+        $$this$lastOrNull = ju_ArrayList_get($$this$lastOrNull, $$this$lastOrNull.$size1 - 1 | 0);
     }
     return $$this$lastOrNull;
 },
 kc_CollectionsKt___CollectionsKt_toCollection = ($$this$toCollection, $destination) => {
-    kji_Intrinsics_checkNotNullParameter($$this$toCollection, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$toCollection, $rt_s(859));
     kji_Intrinsics_checkNotNullParameter($destination, $rt_s(2309));
     $$this$toCollection = $$this$toCollection.$iterator0();
     while ($$this$toCollection.$hasNext()) {
@@ -36546,10 +36622,10 @@ kc_CollectionsKt___CollectionsKt_toCollection = ($$this$toCollection, $destinati
 },
 kc_CollectionsKt___CollectionsKt_toList = $$this$toList => {
     let var$2, var$3;
-    kji_Intrinsics_checkNotNullParameter($$this$toList, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$toList, $rt_s(859));
     var$2 = $rt_isInstance($$this$toList, ju_Collection);
     if (!var$2) {
-        kji_Intrinsics_checkNotNullParameter($$this$toList, $rt_s(839));
+        kji_Intrinsics_checkNotNullParameter($$this$toList, $rt_s(859));
         return kc_CollectionsKt__CollectionsKt_optimizeReadOnlyList(var$2 ? kc_CollectionsKt___CollectionsKt_toMutableList($$this$toList) : kc_CollectionsKt___CollectionsKt_toCollection($$this$toList, ju_ArrayList__init_()));
     }
     a: {
@@ -36570,7 +36646,7 @@ kc_CollectionsKt___CollectionsKt_toList = $$this$toList => {
 },
 kc_CollectionsKt___CollectionsKt_toMutableList = $$this$toMutableList => {
     let var$2, var$3, var$4, var$5;
-    kji_Intrinsics_checkNotNullParameter($$this$toMutableList, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$toMutableList, $rt_s(859));
     var$2 = ju_ArrayList__init_0($$this$toMutableList.$size());
     $$this$toMutableList = $$this$toMutableList.$iterator0();
     var$3 = 0;
@@ -36582,7 +36658,7 @@ kc_CollectionsKt___CollectionsKt_toMutableList = $$this$toMutableList => {
         var$4[var$3] = $$this$toMutableList.$next();
         var$3 = var$3 + 1 | 0;
     }
-    var$2.$size2 = var$5;
+    var$2.$size1 = var$5;
     return var$2;
 },
 cbgg_TextureData$Factory = $rt_classWithoutFields(),
@@ -36591,7 +36667,7 @@ kc_ArraysKt__ArraysKt = $rt_classWithoutFields(kc_ArraysKt__ArraysJVMKt),
 kc_ArraysKt___ArraysJvmKt = $rt_classWithoutFields(kc_ArraysKt__ArraysKt),
 kc_ArraysKt___ArraysJvmKt_asList = $$this$asList => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($$this$asList, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$asList, $rt_s(859));
     ju_Objects_requireNonNull($$this$asList);
     var$2 = new ju_Arrays$ArrayAsList;
     var$2.$array5 = $$this$asList;
@@ -36928,6 +37004,7 @@ cbguv_ScalingViewport_update = ($this, $screenWidth, $screenHeight, $centerCamer
     cbguv_Viewport_apply(var$5, $centerCamera);
 },
 cbguv_StretchViewport = $rt_classWithoutFields(cbguv_ScalingViewport),
+jl_ArithmeticException = $rt_classWithoutFields(jl_RuntimeException),
 jur_IntArrHash = $rt_classWithoutFields(),
 k_UninitializedPropertyAccessException = $rt_classWithoutFields(jl_RuntimeException);
 function cbgg_VertexAttributes() {
@@ -37509,9 +37586,9 @@ kc_MapsKt__MapsKt_mapOf = $pairs => {
         var$4 = var$4;
     } else {
         var$4 = ju_LinkedHashMap__init_0(kc_MapsKt__MapsJVMKt_mapCapacity(var$3));
-        kji_Intrinsics_checkNotNullParameter($pairs, $rt_s(839));
+        kji_Intrinsics_checkNotNullParameter($pairs, $rt_s(859));
         kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(2309));
-        kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(839));
+        kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(859));
         kji_Intrinsics_checkNotNullParameter($pairs, $rt_s(2332));
         var$5 = 0;
         while (var$5 < var$3) {
@@ -37526,7 +37603,7 @@ kc_MapsKt__MapsKt_mapOf = $pairs => {
 },
 kc_MapsKt__MapsKt_plus = ($$this$plus, $map) => {
     let var$3, var$4;
-    kji_Intrinsics_checkNotNullParameter($$this$plus, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$plus, $rt_s(859));
     kji_Intrinsics_checkNotNullParameter($map, $rt_s(2334));
     var$3 = new ju_LinkedHashMap;
     ju_HashMap__init_1(var$3);
@@ -38652,7 +38729,7 @@ cbggg_VertexBufferObjectWithVAO_bind = ($this, $shader, $locations) => {
     let $gl, var$4, var$5, var$6, var$7, var$8, var$9, var$10;
     $gl = cbg_Gdx_gl30;
     $gl.$glBindVertexArray($this.$vaoHandle);
-    var$4 = !$this.$cachedLocations.$size1 ? 0 : 1;
+    var$4 = !$this.$cachedLocations.$size2 ? 0 : 1;
     a: {
         var$5 = cbgg_VertexAttributes_size($this.$attributes1);
         if (var$4) {
@@ -38664,7 +38741,7 @@ cbggg_VertexBufferObjectWithVAO_bind = ($this, $shader, $locations) => {
                 }
             } else {
                 var$7 = $locations.data;
-                var$4 = var$7.length != $this.$cachedLocations.$size1 ? 0 : 1;
+                var$4 = var$7.length != $this.$cachedLocations.$size2 ? 0 : 1;
                 var$6 = 0;
                 while (var$4) {
                     if (var$6 >= var$5)
@@ -38678,7 +38755,7 @@ cbggg_VertexBufferObjectWithVAO_bind = ($this, $shader, $locations) => {
     b: {
         if (!var$4) {
             cbg_Gdx_gl.$glBindBuffer(34962, $this.$bufferHandle);
-            if ($this.$cachedLocations.$size1) {
+            if ($this.$cachedLocations.$size2) {
                 var$6 = cbgg_VertexAttributes_size($this.$attributes1);
                 var$8 = 0;
                 while (var$8 < var$6) {
@@ -40297,7 +40374,7 @@ jn_ByteBufferJsImpl_asFloatBuffer = $this => {
     var$5 = $this.$order0 !== jn_ByteOrder_LITTLE_ENDIAN ? 0 : 1;
     jn_FloatBufferImpl__init_(var$3, 0, $sz);
     var$3.$readOnly9 = var$4;
-    var$3.$data2 = $slice;
+    var$3.$data3 = $slice;
     var$3.$littleEndian = var$5;
     return var$3;
 },
@@ -40745,18 +40822,18 @@ jl_Void = $rt_classWithoutFields();
 function jn_FloatBufferOverDataView() {
     let a = this; jn_FloatBufferImpl.call(a);
     a.$readOnly9 = 0;
-    a.$data2 = null;
+    a.$data3 = null;
     a.$littleEndian = 0;
 }
 let jn_FloatBufferOverDataView_readOnly = $this => {
     return $this.$readOnly9;
 },
 jn_FloatBufferOverDataView_getElement = ($this, $index) => {
-    return $this.$data2.getFloat32($index * 4 | 0, !!$this.$littleEndian);
+    return $this.$data3.getFloat32($index * 4 | 0, !!$this.$littleEndian);
 },
 jn_FloatBufferOverDataView_putElement = ($this, $index, $value) => {
     let var$3, var$4;
-    var$3 = $this.$data2;
+    var$3 = $this.$data3;
     $index = $index * 4 | 0;
     var$4 = $this.$littleEndian;
     var$3.setFloat32($index, $value, !!var$4);
@@ -40770,7 +40847,7 @@ jn_FloatBufferOverDataView_putImpl = ($this, $index, $src, $offset, $length) => 
                 var$6 = $length + (-1) | 0;
                 if ($length <= 0)
                     break a;
-                $srcImpl = $this.$data2;
+                $srcImpl = $this.$data3;
                 $index = $offset + 1 | 0;
                 $srcImpl.setFloat32(var$5, jn_FloatBufferImpl_get($src, $offset), !!$this.$littleEndian);
                 var$5 = var$5 + 4 | 0;
@@ -40780,10 +40857,10 @@ jn_FloatBufferOverDataView_putImpl = ($this, $index, $src, $offset, $length) => 
         }
         var$5 = $length * 4 | 0;
         $srcImpl = $src;
-        $src = $srcImpl.$data2.buffer;
-        $offset = $srcImpl.$data2.byteOffset + ($offset * 4 | 0) | 0;
+        $src = $srcImpl.$data3.buffer;
+        $offset = $srcImpl.$data3.byteOffset + ($offset * 4 | 0) | 0;
         $srcArray = new Int8Array($src, $offset, var$5);
-        (new Int8Array($this.$data2.buffer, $this.$data2.byteOffset + ($index * 4 | 0) | 0, var$5)).set($srcArray, 0);
+        (new Int8Array($this.$data3.buffer, $this.$data3.byteOffset + ($index * 4 | 0) | 0, var$5)).set($srcArray, 0);
     }
 },
 jn_FloatBufferOverDataView_putImpl0 = ($this, $index, $src, $offset, $length) => {
@@ -40794,7 +40871,7 @@ jn_FloatBufferOverDataView_putImpl0 = ($this, $index, $src, $offset, $length) =>
         if ($length <= 0)
             break;
         var$6 = $src.data;
-        var$7 = $this.$data2;
+        var$7 = $this.$data3;
         var$8 = $offset + 1 | 0;
         var$9 = var$6[$offset];
         $offset = $this.$littleEndian;
@@ -40805,10 +40882,10 @@ jn_FloatBufferOverDataView_putImpl0 = ($this, $index, $src, $offset, $length) =>
     }
 },
 jn_FloatBufferOverDataView_capacityImpl = $this => {
-    return $this.$data2.byteLength / 4 | 0;
+    return $this.$data3.byteLength / 4 | 0;
 },
 jn_FloatBufferOverDataView_getArrayBufferView = $this => {
-    return $this.$data2;
+    return $this.$data3;
 };
 function jn_ShortBufferOverDataView() {
     let a = this; jn_ShortBufferImpl.call(a);
@@ -41753,7 +41830,7 @@ cbggg_BitmapFontCache_requirePageGlyphs = ($this, $page, $glyphCount) => {
         var$3 = var$3.data;
         if ($glyphCount > var$3[$page].$items1.data.length) {
             var$4 = var$3[$page];
-            $vertexCount = $glyphCount - var$3[$page].$size1 | 0;
+            $vertexCount = $glyphCount - var$3[$page].$size2 | 0;
             if ($vertexCount < 0) {
                 var$4 = new jl_IllegalArgumentException;
                 var$6 = new jl_StringBuilder;
@@ -41762,9 +41839,9 @@ cbggg_BitmapFontCache_requirePageGlyphs = ($this, $page, $glyphCount) => {
                 jl_RuntimeException__init_(var$4, jl_AbstractStringBuilder_toString(jl_StringBuilder_append0(var$6, $vertexCount)));
                 $rt_throw(var$4);
             }
-            var$7 = var$4.$size1 + $vertexCount | 0;
+            var$7 = var$4.$size2 + $vertexCount | 0;
             if (var$7 > var$4.$items1.data.length)
-                cbgu_IntArray_resize(var$4, jl_Math_max0(jl_Math_max0(8, var$7), var$4.$size1 * 1.75 | 0));
+                cbgu_IntArray_resize(var$4, jl_Math_max0(jl_Math_max0(8, var$7), var$4.$size2 * 1.75 | 0));
         }
     }
     var$3 = $this.$idx0.data;
@@ -41781,7 +41858,7 @@ cbggg_BitmapFontCache_requirePageGlyphs = ($this, $page, $glyphCount) => {
 },
 cbggg_BitmapFontCache_addGlyph = ($this, $glyph, $x, $y, $color) => {
     let var$5, $scaleX, $scaleY, $width, $height, $u, $u2, $v, $v2, $x2, $y2, $page, $vertices, $idx, var$19, var$20;
-    var$5 = $this.$font.$data3;
+    var$5 = $this.$font.$data2;
     $scaleX = var$5.$scaleX;
     $scaleY = var$5.$scaleY;
     $x = $x + $glyph.$xoffset * $scaleX;
@@ -42997,14 +43074,14 @@ let cvs_MainMenuScreen$show$2_touchDown = ($this, $screenX, $screenY, $pointer, 
         return 1;
     $p = cvs_BaseScreen_world($p, $screenX, $screenY);
     var$6 = $this.$this$02;
-    $$this$firstOrNull$iv = var$6.$buttons.$iterator0();
+    $$this$firstOrNull$iv = ju_AbstractList_iterator(var$6.$buttons);
     a: {
         while (true) {
-            if (!$$this$firstOrNull$iv.$hasNext()) {
+            if (!ju_AbstractList$1_hasNext($$this$firstOrNull$iv)) {
                 $element$iv = null;
                 break a;
             }
-            $element$iv = $$this$firstOrNull$iv.$next();
+            $element$iv = ju_AbstractList$1_next($$this$firstOrNull$iv);
             if (!cbgm_Rectangle_contains($element$iv.$rect1, $p.$x0, $p.$y0))
                 continue;
             else
@@ -43012,7 +43089,7 @@ let cvs_MainMenuScreen$show$2_touchDown = ($this, $screenX, $screenY, $pointer, 
         }
     }
     $p = $element$iv;
-    var$6.$pressedId = $p === null ? (-1) : $p.$id1;
+    var$6.$pressedId = $p === null ? (-1) : $p.$id0;
     $p = $this.$this$02;
     $screenX = $p.$pressedId;
     if ($screenX >= 0) {
@@ -43028,14 +43105,29 @@ cvs_MainMenuScreen$show$2_touchDragged = ($this, $screenX, $screenY, $pointer) =
     $p = $this.$this$02;
     if ($p.$pressedId < 0)
         return 0;
-    $p = cvs_BaseScreen_world($p, $screenX, $screenY);
-    var$5 = $this.$this$02;
-    if (!cbgm_Rectangle_contains((var$5.$buttons.$get(var$5.$pressedId)).$rect1, $p.$x0, $p.$y0))
+    a: {
+        $p = cvs_BaseScreen_world($p, $screenX, $screenY);
+        var$5 = $this.$this$02;
+        var$5 = cvs_MainMenuScreen_botao(var$5, var$5.$pressedId);
+        if (var$5 !== null) {
+            var$5 = var$5.$rect1;
+            if (var$5 !== null) {
+                if (cbgm_Rectangle_contains(var$5, $p.$x0, $p.$y0) != 1) {
+                    $screenX = 0;
+                    break a;
+                }
+                $screenX = 1;
+                break a;
+            }
+        }
+        $screenX = 0;
+    }
+    if (!$screenX)
         $this.$this$02.$pressedId = (-1);
     return 1;
 },
 cvs_MainMenuScreen$show$2_touchUp = ($this, $screenX, $screenY, $pointer, $button) => {
-    let $p, var$6, $id;
+    let $p, var$6, $id, $alvo;
     $p = $this.$this$02;
     if ($p.$warpTime >= 0.0)
         return 1;
@@ -43043,14 +43135,15 @@ cvs_MainMenuScreen$show$2_touchUp = ($this, $screenX, $screenY, $pointer, $butto
     var$6 = $this.$this$02;
     $id = var$6.$pressedId;
     var$6.$pressedId = (-1);
-    if ($id >= 0 && cbgm_Rectangle_contains((var$6.$buttons.$get($id)).$rect1, $p.$x0, $p.$y0)) {
+    $alvo = cvs_MainMenuScreen_botao(var$6, $id);
+    if ($alvo !== null && cbgm_Rectangle_contains($alvo.$rect1, $p.$x0, $p.$y0)) {
         $p = $this.$this$02;
         $p.$releasedId = $id;
         $p.$releaseAnimation = 0.1599999964237213;
         $p.$pendingAction = $id;
         $p.$transitionTimer = 0.12999999523162842;
         $p.$pressVelocity.data[$id] = 245.0;
-        cvs_MainMenuScreen_spawnClickSparks($p, $p.$buttons.$get($id));
+        cvs_MainMenuScreen_spawnClickSparks($p, $alvo);
         cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$this$02.$game), $rt_s(768), 0.800000011920929, 0.9200000166893005);
         if (cvs_SaveManager_getVibration(cvs_SkyVanguardGame_getSaveManager($this.$this$02.$game)))
             cgxgtbw_WebInput_vibrate(cbg_Gdx_input, 45);
@@ -43060,9 +43153,9 @@ cvs_MainMenuScreen$show$2_touchUp = ($this, $screenX, $screenY, $pointer, $butto
 },
 k_Function = $rt_classWithoutFields(0),
 kjf_Function1 = $rt_classWithoutFields(0);
-function cvs_MainMenuScreen$show$lambda$_1_0() {
+function cvs_MainMenuScreen$show$lambda$_2_0() {
     jl_Object.call(this);
-    this.$_06 = null;
+    this.$_028 = null;
 }
 function cgxgtbwa_AssetType() {
     jl_Enum.call(this);
@@ -43110,7 +43203,7 @@ cvs_MenuScreensKt_$callClinit = () => {
 cvs_MenuScreensKt_drawVideoBackdrop = ($$this$drawVideoBackdrop, $time, $accent, $accent2) => {
     let $shapes, $i, $blink, $y, $k, $bx, $gx, $gy, var$13, $magenta, $speed, $px, $py, $pulse, $c, $r, $scanY;
     cvs_MenuScreensKt_$callClinit();
-    kji_Intrinsics_checkNotNullParameter($$this$drawVideoBackdrop, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$drawVideoBackdrop, $rt_s(859));
     kji_Intrinsics_checkNotNullParameter($accent, $rt_s(2413));
     kji_Intrinsics_checkNotNullParameter($accent2, $rt_s(2414));
     $shapes = cvs_SkyVanguardGame_getShapes(cvs_BaseScreen_getGame($$this$drawVideoBackdrop));
@@ -43210,7 +43303,7 @@ cvs_MenuScreensKt_drawVideoBackdrop$default = (var$1, var$2, var$3, var$4, var$5
 cvs_MenuScreensKt_drawPilotAircraft = ($$this$drawPilotAircraft, $x, $y, $scale, $aircraft, $damageFlash, $recoil) => {
     let $t, $shiftedY, $size, $tint, $shapes, var$13, $nozzleOffset, $flameTop, var$16, var$17, var$18, var$19, var$20, $nx, $flicker, $len;
     cvs_MenuScreensKt_$callClinit();
-    kji_Intrinsics_checkNotNullParameter($$this$drawPilotAircraft, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$drawPilotAircraft, $rt_s(859));
     kji_Intrinsics_checkNotNullParameter($aircraft, $rt_s(2415));
     $t = cvs_MenuScreensKt_shipFlamePhase + cbg_Gdx_graphics.$deltaTime;
     cvs_MenuScreensKt_shipFlamePhase = $t;
@@ -43225,7 +43318,7 @@ cvs_MenuScreensKt_drawPilotAircraft = ($$this$drawPilotAircraft, $x, $y, $scale,
     cbggg_SpriteBatch_setColor(cvs_SkyVanguardGame_getBatch($$this$drawPilotAircraft.$game), $tint);
     $shapes = cvs_SkyVanguardGame_getBatch($$this$drawPilotAircraft.$game);
     $tint = $$this$drawPilotAircraft.$game;
-    var$13 = $aircraft.$id0;
+    var$13 = $aircraft.$id1;
     $aircraft = (cvs_SkyVanguardGame_getShipTextures($tint)).data[kr_RangesKt___RangesKt_coerceIn0(var$13, 0, kc_ArraysKt___ArraysKt_getLastIndex(cvs_SkyVanguardGame_getShipTextures($tint)))];
     $y = $size / 2.0;
     cbggg_SpriteBatch_draw($shapes, $aircraft, $x - $y, $shiftedY - $y, $size, $size);
@@ -43343,11 +43436,7 @@ cgxgtbw_WebPreloadApplicationListener$BorderDrawable_getTopHeight = $this => {
 cgxgtbw_WebPreloadApplicationListener$BorderDrawable_getBottomHeight = $this => {
     return $this.$thickness + $this.$padding;
 },
-cbga_Music = $rt_classWithoutFields(0),
-kc_IntIterator = $rt_classWithoutFields();
-function kc_IntIterator__init_($this) {
-    return;
-}
+cbga_Music = $rt_classWithoutFields(0);
 function cvs_MainMenuScreen$ClickSpark() {
     let a = this; jl_Object.call(a);
     a.$x11 = 0.0;
@@ -43449,7 +43538,7 @@ cvs_BaseScreenKt_getPANEL_FILL_MAGENTA = () => {
 },
 cvs_BaseScreenKt_beginBlended = ($$this$beginBlended, $type) => {
     cvs_BaseScreenKt_$callClinit();
-    kji_Intrinsics_checkNotNullParameter($$this$beginBlended, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$beginBlended, $rt_s(859));
     kji_Intrinsics_checkNotNullParameter($type, $rt_s(754));
     cbg_Gdx_gl.$glEnable(3042);
     cbg_Gdx_gl.$glBlendFunc(770, 771);
@@ -43466,7 +43555,7 @@ cvs_BaseScreenKt_beginBlended$default = (var$1, var$2, var$3, var$4) => {
 cvs_BaseScreenKt_roundRectFilled = ($$this$roundRectFilled, $x, $y, $w, $h, $r) => {
     let $rr, var$8, var$9;
     cvs_BaseScreenKt_$callClinit();
-    kji_Intrinsics_checkNotNullParameter($$this$roundRectFilled, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$roundRectFilled, $rt_s(859));
     $rr = kr_RangesKt___RangesKt_coerceAtLeast(jl_Math_min0($r, jl_Math_min0($w / 2.0, $h / 2.0)), 0.5);
     var$8 = $x + $rr;
     $r = 2.0 * $rr;
@@ -43485,7 +43574,7 @@ cvs_BaseScreenKt_roundRectFilled = ($$this$roundRectFilled, $x, $y, $w, $h, $r) 
 cvs_BaseScreenKt_neonPanel = ($$this$neonPanel, $rect, $accent, $fill, $radius, $border, $k, $glowAlpha, $pulse) => {
     let $shapes, var$11, var$12, $e, var$14, var$15, var$16;
     cvs_BaseScreenKt_$callClinit();
-    kji_Intrinsics_checkNotNullParameter($$this$neonPanel, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$neonPanel, $rt_s(859));
     kji_Intrinsics_checkNotNullParameter($rect, $rt_s(823));
     kji_Intrinsics_checkNotNullParameter($accent, $rt_s(2413));
     kji_Intrinsics_checkNotNullParameter($fill, $rt_s(2445));
@@ -43533,7 +43622,7 @@ cvs_BaseScreenKt_neonPanel$default = (var$1, var$2, var$3, var$4, var$5, var$6, 
 cvs_BaseScreenKt_panelTicks = ($$this$panelTicks, $rect, $accent, $alpha) => {
     let $shapes;
     cvs_BaseScreenKt_$callClinit();
-    kji_Intrinsics_checkNotNullParameter($$this$panelTicks, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$panelTicks, $rt_s(859));
     kji_Intrinsics_checkNotNullParameter($rect, $rt_s(823));
     kji_Intrinsics_checkNotNullParameter($accent, $rt_s(2413));
     $shapes = cvs_SkyVanguardGame_getShapes($$this$panelTicks.$game);
@@ -43596,13 +43685,13 @@ kt_StringsKt__StringsJVMKt = $rt_classWithoutFields(kt_StringsKt__StringNumberCo
 kt_StringsKt__StringsJVMKt_startsWith$default = (var$1, var$2, var$3, var$4, var$5) => {
     if (var$4 & 2)
         var$3 = 0;
-    kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(859));
     kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(873));
     return !var$3 ? jl_String_startsWith(var$1, var$2) : kt_StringsKt__StringsJVMKt_regionMatches(var$1, 0, var$2, 0, var$2.$nativeString.length, var$3);
 },
 kt_StringsKt__StringsJVMKt_regionMatches = ($$this$regionMatches, $thisOffset, $other, $otherOffset, $length, $ignoreCase) => {
     let var$7, var$8;
-    kji_Intrinsics_checkNotNullParameter($$this$regionMatches, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$regionMatches, $rt_s(859));
     kji_Intrinsics_checkNotNullParameter($other, $rt_s(2449));
     if ($ignoreCase)
         $thisOffset = jl_String_regionMatches($$this$regionMatches, $ignoreCase, $thisOffset, $other, $otherOffset, $length);
@@ -43631,7 +43720,7 @@ kt_StringsKt__StringsJVMKt_regionMatches = ($$this$regionMatches, $thisOffset, $
 kt_StringsKt__StringsKt = $rt_classWithoutFields(kt_StringsKt__StringsJVMKt),
 kt_StringsKt__StringsKt_trim = $$this$trim => {
     let $startIndex$iv, $endIndex$iv, $startFound$iv, $index$iv, $match$iv;
-    kji_Intrinsics_checkNotNullParameter($$this$trim, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$trim, $rt_s(859));
     $startIndex$iv = 0;
     $$this$trim = $$this$trim;
     $endIndex$iv = $$this$trim.$nativeString.length - 1 | 0;
@@ -43659,9 +43748,9 @@ kt_StringsKt__StringsKt_trim = $$this$trim => {
 },
 kt_StringsKt__StringsKt_padStart = ($$this$padStart, $length, $padChar) => {
     let var$4, var$5, var$6;
-    kji_Intrinsics_checkNotNullParameter($$this$padStart, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$padStart, $rt_s(859));
     $$this$padStart = $$this$padStart;
-    kji_Intrinsics_checkNotNullParameter($$this$padStart, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$padStart, $rt_s(859));
     if ($length < 0) {
         $$this$padStart = new jl_IllegalArgumentException;
         var$4 = new jl_StringBuilder;
@@ -43696,7 +43785,7 @@ kt_StringsKt__StringsKt_padStart = ($$this$padStart, $length, $padChar) => {
 },
 kt_StringsKt__StringsKt_isBlank = $$this$isBlank => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($$this$isBlank, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$isBlank, $rt_s(859));
     var$2 = 0;
     $$this$isBlank = $$this$isBlank;
     a: {
@@ -43712,12 +43801,12 @@ kt_StringsKt__StringsKt_isBlank = $$this$isBlank => {
     return var$2;
 },
 kt_StringsKt__StringsKt_getLastIndex = $$this$lastIndex => {
-    kji_Intrinsics_checkNotNullParameter($$this$lastIndex, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$lastIndex, $rt_s(859));
     return $$this$lastIndex.$nativeString.length - 1 | 0;
 },
 kt_StringsKt__StringsKt_regionMatchesImpl = ($$this$regionMatchesImpl, $thisOffset, $other, $otherOffset, $length, $ignoreCase) => {
     let $index;
-    kji_Intrinsics_checkNotNullParameter($$this$regionMatchesImpl, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$regionMatchesImpl, $rt_s(859));
     kji_Intrinsics_checkNotNullParameter($other, $rt_s(2449));
     if ($otherOffset >= 0 && $thisOffset >= 0) {
         $$this$regionMatchesImpl = $$this$regionMatchesImpl;
@@ -43741,7 +43830,7 @@ kt_StringsKt__StringsKt_indexOf$StringsKt__StringsKt = ($$this$indexOf, $other, 
     $indices = $last ? kr_RangesKt___RangesKt_downTo(kr_RangesKt___RangesKt_coerceAtMost($startIndex, kt_StringsKt__StringsKt_getLastIndex($$this$indexOf)), kr_RangesKt___RangesKt_coerceAtLeast0($endIndex, 0)) : kr_IntRange__init_(kr_RangesKt___RangesKt_coerceAtLeast0($startIndex, 0), kr_RangesKt___RangesKt_coerceAtMost($endIndex, $$this$indexOf.$nativeString.length));
     a: {
         if ($$this$indexOf instanceof jl_String && $other instanceof jl_String) {
-            $index = $indices.$first5;
+            $index = $indices.$first6;
             var$9 = $indices.$last;
             $last = $indices.$step0;
             if (!($last > 0 && $index <= var$9)) {
@@ -43759,7 +43848,7 @@ kt_StringsKt__StringsKt_indexOf$StringsKt__StringsKt = ($$this$indexOf, $other, 
             }
             return $index;
         }
-        $index = $indices.$first5;
+        $index = $indices.$first6;
         var$9 = $indices.$last;
         $last = $indices.$step0;
         if (!($last > 0 && $index <= var$9)) {
@@ -43783,10 +43872,10 @@ kt_StringsKt__StringsKt_findAnyOf$StringsKt__StringsKt = ($$this$findAnyOf, $str
     if (!$ignoreCase && ju_Arrays$ArrayAsList_size($strings) == 1) {
         a: {
             $string = $strings;
-            kji_Intrinsics_checkNotNullParameter($string, $rt_s(839));
+            kji_Intrinsics_checkNotNullParameter($string, $rt_s(859));
             if ($rt_isInstance($string, ju_List)) {
                 $strings = $string;
-                kji_Intrinsics_checkNotNullParameter($strings, $rt_s(839));
+                kji_Intrinsics_checkNotNullParameter($strings, $rt_s(859));
                 $strings = $strings;
                 switch (ju_Arrays$ArrayAsList_size($strings)) {
                     case 0:
@@ -43820,7 +43909,7 @@ kt_StringsKt__StringsKt_findAnyOf$StringsKt__StringsKt = ($$this$findAnyOf, $str
         if (!$last)
             $index = kt_StringsKt__StringsKt_indexOf($$this$findAnyOf, $string, $startIndex, 0);
         else {
-            kji_Intrinsics_checkNotNullParameter($$this$findAnyOf, $rt_s(839));
+            kji_Intrinsics_checkNotNullParameter($$this$findAnyOf, $rt_s(859));
             kji_Intrinsics_checkNotNullParameter($string, $rt_s(220));
             $index = $$this$findAnyOf instanceof jl_String ? jl_String_lastIndexOf1($$this$findAnyOf, $string, $startIndex) : kt_StringsKt__StringsKt_indexOf$StringsKt__StringsKt($$this$findAnyOf, $string, $startIndex, 0, 0, 1);
         }
@@ -43829,7 +43918,7 @@ kt_StringsKt__StringsKt_findAnyOf$StringsKt__StringsKt = ($$this$findAnyOf, $str
     $indices = $last ? kr_RangesKt___RangesKt_downTo(kr_RangesKt___RangesKt_coerceAtMost($startIndex, kt_StringsKt__StringsKt_getLastIndex($$this$findAnyOf)), 0) : kr_IntRange__init_(kr_RangesKt___RangesKt_coerceAtLeast0($startIndex, 0), $$this$findAnyOf.$nativeString.length);
     b: {
         if (!($$this$findAnyOf instanceof jl_String)) {
-            $index = $indices.$first5;
+            $index = $indices.$first6;
             $startIndex = $indices.$last;
             var$9 = $indices.$step0;
             if (!(var$9 > 0 && $index <= $startIndex)) {
@@ -43864,7 +43953,7 @@ kt_StringsKt__StringsKt_findAnyOf$StringsKt__StringsKt = ($$this$findAnyOf, $str
             }
             return k_TuplesKt_to(jl_Integer_valueOf($index), $matchingString);
         }
-        $index = $indices.$first5;
+        $index = $indices.$first6;
         $startIndex = $indices.$last;
         var$9 = $indices.$step0;
         if (!(var$9 > 0 && $index <= $startIndex)) {
@@ -43906,7 +43995,7 @@ kt_StringsKt__StringsKt_indexOf$default = (var$1, var$2, var$3, var$4, var$5, va
         var$3 = 0;
     if (var$5 & 4)
         var$4 = 0;
-    kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(859));
     if (!var$4 && var$1 instanceof jl_String)
         var$3 = jl_String_indexOf(var$1, var$2, var$3);
     else
@@ -43914,12 +44003,12 @@ kt_StringsKt__StringsKt_indexOf$default = (var$1, var$2, var$3, var$4, var$5, va
             var$7 = $rt_createCharArray(1);
             var$8 = var$7.data;
             var$8[0] = var$2;
-            kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(839));
+            kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(859));
             kji_Intrinsics_checkNotNullParameter(var$7, $rt_s(2455));
             if (!var$4) {
                 var$2 = var$8.length;
                 if (var$2 == 1 && var$1 instanceof jl_String) {
-                    kji_Intrinsics_checkNotNullParameter(var$7, $rt_s(839));
+                    kji_Intrinsics_checkNotNullParameter(var$7, $rt_s(859));
                     switch (var$2) {
                         case 0:
                             break;
@@ -43970,7 +44059,7 @@ kt_StringsKt__StringsKt_indexOf$default = (var$1, var$2, var$3, var$4, var$5, va
     return var$3;
 },
 kt_StringsKt__StringsKt_indexOf = ($$this$indexOf, $string, $startIndex, $ignoreCase) => {
-    kji_Intrinsics_checkNotNullParameter($$this$indexOf, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$indexOf, $rt_s(859));
     kji_Intrinsics_checkNotNullParameter($string, $rt_s(220));
     return !$ignoreCase && $$this$indexOf instanceof jl_String ? jl_String_indexOf1($$this$indexOf, $string, $startIndex) : kt_StringsKt__StringsKt_indexOf$StringsKt__StringsKt($$this$indexOf, $string, $startIndex, $$this$indexOf.$nativeString.length, $ignoreCase, 0);
 },
@@ -43988,7 +44077,7 @@ kt_StringsKt__StringsKt_requireNonNegativeLimit = $limit => {
 };
 function cvs_AircraftDefinition() {
     let a = this; jl_Object.call(a);
-    a.$id0 = 0;
+    a.$id1 = 0;
     a.$country1 = null;
     a.$pilot = null;
     a.$name1 = null;
@@ -44010,10 +44099,10 @@ let cvs_AircraftDefinition__init_0 = ($this, $id, $country, $pilot, $name, $weap
     kji_Intrinsics_checkNotNullParameter($weaponStyle, $rt_s(2459));
     kji_Intrinsics_checkNotNullParameter($primary, $rt_s(2460));
     kji_Intrinsics_checkNotNullParameter($special, $rt_s(766));
-    kji_Intrinsics_checkNotNullParameter($passive, $rt_s(1647));
+    kji_Intrinsics_checkNotNullParameter($passive, $rt_s(1649));
     kji_Intrinsics_checkNotNullParameter($bodyColor, $rt_s(2461));
     kji_Intrinsics_checkNotNullParameter($accentColor, $rt_s(2462));
-    $this.$id0 = $id;
+    $this.$id1 = $id;
     $this.$country1 = $country;
     $this.$pilot = $pilot;
     $this.$name1 = $name;
@@ -44034,7 +44123,7 @@ cvs_AircraftDefinition__init_ = (var_0, var_1, var_2, var_3, var_4, var_5, var_6
     return var_14;
 },
 cvs_AircraftDefinition_getId = $this => {
-    return $this.$id0;
+    return $this.$id1;
 },
 cvs_AircraftDefinition_getCountry = $this => {
     return $this.$country1;
@@ -44074,7 +44163,7 @@ cvs_AircraftDefinition_getAccentColor = $this => {
 },
 cvs_AircraftDefinition_toString = $this => {
     let var$1, var$2, var$3, var$4, var$5, var$6, var$7, var$8, var$9, var$10, var$11, var$12, var$13, var$14, var$15;
-    var$1 = $this.$id0;
+    var$1 = $this.$id1;
     var$2 = $this.$country1;
     var$3 = $this.$pilot;
     var$4 = $this.$name1;
@@ -44096,7 +44185,7 @@ cvs_AircraftDefinition_toString = $this => {
 },
 cvs_AircraftDefinition_hashCode = $this => {
     let $result;
-    $result = $this.$id0;
+    $result = $this.$id1;
     jl_Integer_$callClinit();
     return ((((((((((((((((((((((((($result * 31 | 0) + jl_String_hashCode($this.$country1) | 0) * 31 | 0) + jl_String_hashCode($this.$pilot) | 0) * 31 | 0) + jl_String_hashCode($this.$name1) | 0) * 31 | 0) + jl_Object_identity($this.$weaponStyle) | 0) * 31 | 0) + jl_String_hashCode($this.$primary) | 0) * 31 | 0) + jl_String_hashCode($this.$special) | 0) * 31 | 0) + jl_String_hashCode($this.$passive) | 0) * 31 | 0) + $this.$power0 | 0) * 31 | 0) + $this.$speed0 | 0) * 31 | 0) + $this.$defense | 0) * 31 | 0)
     + $this.$control | 0) * 31 | 0) + cbgg_Color_hashCode($this.$bodyColor) | 0) * 31 | 0) + cbgg_Color_hashCode($this.$accentColor) | 0;
@@ -44107,7 +44196,7 @@ cvs_AircraftDefinition_equals = ($this, $other) => {
     if (!($other instanceof cvs_AircraftDefinition))
         return 0;
     $other = $other;
-    if ($this.$id0 != $other.$id0)
+    if ($this.$id1 != $other.$id1)
         return 0;
     if (!kji_Intrinsics_areEqual($this.$country1, $other.$country1))
         return 0;
@@ -44717,65 +44806,6 @@ function cbg_Graphics$BufferFormat() {
     a.$samples = 0;
     a.$coverageSampling = 0;
 }
-function kr_IntProgression() {
-    let a = this; jl_Object.call(a);
-    a.$first5 = 0;
-    a.$last = 0;
-    a.$step0 = 0;
-}
-let kr_IntProgression_Companion = null,
-kr_IntProgression_$callClinit = () => {
-    kr_IntProgression_$callClinit = $rt_eraseClinit(kr_IntProgression);
-    kr_IntProgression__clinit_();
-},
-kr_IntProgression__init_ = ($this, $start, $endInclusive, $step) => {
-    let var$4;
-    kr_IntProgression_$callClinit();
-    if (!$step) {
-        var$4 = new jl_IllegalArgumentException;
-        jl_RuntimeException__init_(var$4, $rt_s(2482));
-        $rt_throw(var$4);
-    }
-    if ($step != (-2147483648)) {
-        $this.$first5 = $start;
-        $this.$last = ki_ProgressionUtilKt_getProgressionLastElement($start, $endInclusive, $step);
-        $this.$step0 = $step;
-        return;
-    }
-    var$4 = new jl_IllegalArgumentException;
-    jl_RuntimeException__init_(var$4, $rt_s(2483));
-    $rt_throw(var$4);
-},
-kr_IntProgression__init_0 = (var_0, var_1, var_2) => {
-    let var_3 = new kr_IntProgression();
-    kr_IntProgression__init_(var_3, var_0, var_1, var_2);
-    return var_3;
-},
-kr_IntProgression__clinit_ = () => {
-    kr_IntProgression_Companion = new kr_IntProgression$Companion;
-},
-kr_ClosedRange = $rt_classWithoutFields(0),
-kr_OpenEndRange = $rt_classWithoutFields(0),
-kr_IntRange = $rt_classWithoutFields(kr_IntProgression),
-kr_IntRange_Companion = null,
-kr_IntRange_EMPTY = null,
-kr_IntRange_$callClinit = () => {
-    kr_IntRange_$callClinit = $rt_eraseClinit(kr_IntRange);
-    kr_IntRange__clinit_();
-},
-kr_IntRange__init_0 = ($this, $start, $endInclusive) => {
-    kr_IntRange_$callClinit();
-    kr_IntProgression__init_($this, $start, $endInclusive, 1);
-},
-kr_IntRange__init_ = (var_0, var_1) => {
-    let var_2 = new kr_IntRange();
-    kr_IntRange__init_0(var_2, var_0, var_1);
-    return var_2;
-},
-kr_IntRange__clinit_ = () => {
-    kr_IntRange_Companion = new kr_IntRange$Companion;
-    kr_IntRange_EMPTY = kr_IntRange__init_(1, 0);
-};
 function cbgc_ControllerMapping() {
     let a = this; jl_Object.call(a);
     a.$axisLeftX = 0;
@@ -44834,9 +44864,9 @@ cbgc_Controllers_getControllers = () => {
         var$3 = cbgc_Controllers_managers.$size6;
         var$4 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$4);
-        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2484)), var$3), $rt_s(2485));
+        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2482)), var$3), $rt_s(2483));
         var$4 = jl_AbstractStringBuilder_toString(var$4);
-        cgxgtbw_WebApplication_log(var$1, $rt_s(2486), var$4);
+        cgxgtbw_WebApplication_log(var$1, $rt_s(2484), var$4);
     }
     return (cbgu_ObjectMap_get(cbgc_Controllers_managers, cbg_Gdx_app)).$controllers;
 },
@@ -44848,7 +44878,7 @@ function cvs_CampaignMapScreen() {
     a.$time10 = 0.0;
     a.$countryIndex0 = 0;
     a.$previous1 = null;
-    a.$next6 = null;
+    a.$next5 = null;
     a.$back2 = null;
     a.$stageButtons = null;
 }
@@ -44878,10 +44908,10 @@ cvs_CampaignMapScreen_render = ($this, $delta) => {
     $index$iv = $country.$difficultyScale * 100.0 | 0;
     $$this$forEachIndexed$iv = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($$this$forEachIndexed$iv);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append($$this$forEachIndexed$iv, $rt_s(2487)), $index$iv), 37);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append($$this$forEachIndexed$iv, $rt_s(2485)), $index$iv), 37);
     cvs_BaseScreen_drawCentered($this, jl_AbstractStringBuilder_toString($$this$forEachIndexed$iv), 1615.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.6200000047683716, 0.2199999988079071, 1.0));
-    cvs_BaseScreen_drawButton$default(var$2, $this.$previous1, $rt_s(2488), 0, 4, null);
-    cvs_BaseScreen_drawButton$default(var$2, $this.$next6, $rt_s(2489), 0, 4, null);
+    cvs_BaseScreen_drawButton$default(var$2, $this.$previous1, $rt_s(2486), 0, 4, null);
+    cvs_BaseScreen_drawButton$default(var$2, $this.$next5, $rt_s(2487), 0, 4, null);
     $$this$forEachIndexed$iv = $country.$stages;
     $index$iv = 0;
     $country = ju_AbstractList_iterator($$this$forEachIndexed$iv);
@@ -44897,7 +44927,7 @@ cvs_CampaignMapScreen_render = ($this, $delta) => {
     $index$iv = cvs_SaveManager_getUnlockedStage(cvs_SkyVanguardGame_getSaveManager($this.$game)) + 1 | 0;
     $$this$forEachIndexed$iv = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($$this$forEachIndexed$iv);
-    jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append($$this$forEachIndexed$iv, $rt_s(2490)), $index$iv), $rt_s(2491));
+    jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append($$this$forEachIndexed$iv, $rt_s(2488)), $index$iv), $rt_s(2489));
     cvs_BaseScreen_drawCentered($this, jl_AbstractStringBuilder_toString($$this$forEachIndexed$iv), 300.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.699999988079071, 0.8600000143051147, 1.0, 1.0));
     cvs_BaseScreen_drawButton$default(var$2, $this.$back2, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(928)), 0, 4, null);
     cvs_GamepadInput_poll($this.$game.$gamepad);
@@ -44913,7 +44943,7 @@ cvs_CampaignMapScreen_drawStageCard = ($this, $rect, $stage) => {
     var$4 = $stage.$phase;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$5, $rt_s(2492)), var$4);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$5, $rt_s(2490)), var$4);
     var$6 = jl_AbstractStringBuilder_toString(var$5);
     var$7 = $rect.$x + 24.0;
     var$8 = $rect.$y + $rect.$height0 - 35.0;
@@ -44937,12 +44967,12 @@ cvs_CampaignMapScreen_drawStageCard = ($this, $rect, $stage) => {
         var$6 = $stage.$subBoss;
         var$5 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$5);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2493)), var$6);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2491)), var$6);
         cvs_BaseScreen_drawLabel($this, jl_AbstractStringBuilder_toString(var$5), $rect.$x + 24.0, $rect.$y + 80.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.75, 0.8199999928474426, 0.9200000166893005, 1.0));
         var$9 = $stage.$boss0;
         $stage = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($stage);
-        jl_StringBuilder_append(jl_StringBuilder_append($stage, $rt_s(2494)), var$9);
+        jl_StringBuilder_append(jl_StringBuilder_append($stage, $rt_s(2492)), var$9);
         cvs_BaseScreen_drawLabel($this, jl_AbstractStringBuilder_toString($stage), $rect.$x + 24.0, $rect.$y + 36.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.6200000047683716, 0.2199999988079071, 1.0));
     }
 };
@@ -44950,7 +44980,7 @@ function cvs_HangarScreen() {
     let a = this; cvs_BaseScreen.call(a);
     a.$back3 = null;
     a.$previous2 = null;
-    a.$next5 = null;
+    a.$next4 = null;
     a.$select = null;
     a.$shop = null;
     a.$hangarMessage = null;
@@ -44975,18 +45005,18 @@ cvs_HangarScreen_render = ($this, $delta) => {
     cvs_MenuScreensKt_drawVideoBackdrop$default(var$2, $this.$time3, null, null, 6, null);
     cvs_AircraftCatalog_$callClinit();
     $aircraft = cvs_AircraftCatalog_get(cvs_AircraftCatalog_INSTANCE, $this.$aircraftIndex);
-    $selectLabel = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(844));
+    $selectLabel = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(843));
     $item$iv = cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this));
     cbgg_Color_$callClinit();
     $rect = cbgg_Color_WHITE;
     kji_Intrinsics_checkNotNullExpressionValue($rect, $rt_s(822));
     cvs_BaseScreen_drawTracked($this, $selectLabel, 540.0, 1810.0, $item$iv, $rect, 8.0);
-    cvs_BaseScreen_drawCentered($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1634)), 1736.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.41999998688697815, 0.9399999976158142, 1.0, 1.0));
+    cvs_BaseScreen_drawCentered($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1636)), 1736.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.41999998688697815, 0.9399999976158142, 1.0, 1.0));
     cvs_BaseScreen_drawCentered($this, cvs_AircraftDefinition_getName($aircraft), 1676.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cvs_AircraftDefinition_getAccentColor($aircraft));
     $$this$forEachIndexed$iv = cvs_AircraftDefinition_getPilot($aircraft);
     $selectLabel = cvs_AircraftDefinition_getCountry($aircraft);
     $item$iv = jl_StringBuilder__init_();
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($item$iv, $$this$forEachIndexed$iv), $rt_s(2495)), $selectLabel);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($item$iv, $$this$forEachIndexed$iv), $rt_s(2493)), $selectLabel);
     $rect = jl_StringBuilder_toString($item$iv);
     $$this$forEachIndexed$iv = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
     $selectLabel = cbgg_Color_WHITE;
@@ -45005,13 +45035,13 @@ cvs_HangarScreen_render = ($this, $delta) => {
         cvs_HangarScreen_drawAircraftTile($this, $item$iv, cvs_AircraftCatalog_get(cvs_AircraftCatalog_INSTANCE, $index$iv), $index$iv != $this.$aircraftIndex ? 0 : 1);
         $index$iv = $owned;
     }
-    cvs_BaseScreen_drawButton$default(var$2, $this.$previous2, $rt_s(2488), 0, 4, null);
-    cvs_BaseScreen_drawButton$default(var$2, $this.$next5, $rt_s(2489), 0, 4, null);
-    cvs_HangarScreen_drawStat($this, $rt_s(996), cvs_AircraftDefinition_getPower($aircraft), 330.0, 960.0, cvs_AircraftDefinition_getAccentColor($aircraft));
-    cvs_HangarScreen_drawStat($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1640)), cvs_AircraftDefinition_getSpeed($aircraft), 330.0, 845.0, cvs_AircraftDefinition_getAccentColor($aircraft));
-    cvs_HangarScreen_drawStat($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1642)), cvs_AircraftDefinition_getDefense($aircraft), 330.0, 730.0, cvs_AircraftDefinition_getAccentColor($aircraft));
-    cvs_HangarScreen_drawStat($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1644)), cvs_AircraftDefinition_getControl($aircraft), 330.0, 615.0, cvs_AircraftDefinition_getAccentColor($aircraft));
-    $$this$forEachIndexed$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1645));
+    cvs_BaseScreen_drawButton$default(var$2, $this.$previous2, $rt_s(2486), 0, 4, null);
+    cvs_BaseScreen_drawButton$default(var$2, $this.$next4, $rt_s(2487), 0, 4, null);
+    cvs_HangarScreen_drawStat($this, $rt_s(997), cvs_AircraftDefinition_getPower($aircraft), 330.0, 960.0, cvs_AircraftDefinition_getAccentColor($aircraft));
+    cvs_HangarScreen_drawStat($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1642)), cvs_AircraftDefinition_getSpeed($aircraft), 330.0, 845.0, cvs_AircraftDefinition_getAccentColor($aircraft));
+    cvs_HangarScreen_drawStat($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1644)), cvs_AircraftDefinition_getDefense($aircraft), 330.0, 730.0, cvs_AircraftDefinition_getAccentColor($aircraft));
+    cvs_HangarScreen_drawStat($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1646)), cvs_AircraftDefinition_getControl($aircraft), 330.0, 615.0, cvs_AircraftDefinition_getAccentColor($aircraft));
+    $$this$forEachIndexed$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1647));
     $selectLabel = cvs_AircraftDefinition_getPrimary($aircraft);
     $item$iv = jl_StringBuilder__init_();
     jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($item$iv, $$this$forEachIndexed$iv), $rt_s(68)), $selectLabel);
@@ -45029,14 +45059,14 @@ cvs_HangarScreen_render = ($this, $delta) => {
     $selectLabel = cbgg_Color_WHITE;
     kji_Intrinsics_checkNotNullExpressionValue($selectLabel, $rt_s(822));
     cvs_BaseScreen_drawLabel($this, $rect, 118.0, 496.0, $$this$forEachIndexed$iv, $selectLabel);
-    $$this$forEachIndexed$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1647));
+    $$this$forEachIndexed$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1649));
     $aircraft = cvs_AircraftDefinition_getPassive($aircraft);
     $selectLabel = jl_StringBuilder__init_();
     jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($selectLabel, $$this$forEachIndexed$iv), $rt_s(68)), $aircraft);
     cvs_BaseScreen_drawLabel($this, jl_StringBuilder_toString($selectLabel), 118.0, 450.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.6200000047683716, 0.8799999952316284, 1.0, 1.0));
     $owned = cvs_SaveManager_isAircraftOwned(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this)), $this.$aircraftIndex);
     if (!$owned) {
-        $aircraft = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(971));
+        $aircraft = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(972));
         var$10 = cvs_SaveManager_aircraftPrice(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this)), $this.$aircraftIndex);
         $$this$forEachIndexed$iv = jl_StringBuilder__init_();
         jl_StringBuilder_append0(jl_StringBuilder_append3(jl_StringBuilder_append($$this$forEachIndexed$iv, $aircraft), 32), var$10);
@@ -45044,12 +45074,12 @@ cvs_HangarScreen_render = ($this, $delta) => {
     } else
         $selectLabel = cvs_SaveManager_getSelectedAircraft(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this))) != $this.$aircraftIndex ? cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(951)) : cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(953));
     cvs_BaseScreen_drawButton($this, $this.$select, $selectLabel, cvs_SaveManager_getSelectedAircraft(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this))) != $this.$aircraftIndex ? 0 : 1);
-    cvs_BaseScreen_drawButton$default(var$2, $this.$shop, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(979)), 0, 4, null);
+    cvs_BaseScreen_drawButton$default(var$2, $this.$shop, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(980)), 0, 4, null);
     $index$iv = cvs_SaveManager_totalRunPowerStacks(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this)));
     $$this$forEachIndexed$iv = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append($$this$forEachIndexed$iv, $rt_s(2496)), $index$iv);
+    jl_StringBuilder_append0(jl_StringBuilder_append($$this$forEachIndexed$iv, $rt_s(2494)), $index$iv);
     cvs_BaseScreen_drawLabel($this, jl_StringBuilder_toString($$this$forEachIndexed$iv), 660.0, 520.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.8199999928474426, 0.25, 1.0));
-    $aircraft = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(973));
+    $aircraft = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(974));
     $index$iv = cvs_SaveManager_getCredits(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this)));
     $$this$forEachIndexed$iv = jl_StringBuilder__init_();
     jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append($$this$forEachIndexed$iv, $aircraft), $rt_s(68)), $index$iv);
@@ -45124,9 +45154,9 @@ let cvs_SettingsScreen__init_0 = ($this, $game) => {
     var$4 = new cvs_SettingsScreen$Toggle;
     var$5 = cbgm_Rectangle__init_(170.0, 1348.0, 740.0, 100.0);
     var$6 = new cvs_SettingsScreen$_init_$lambda$_0_0;
-    var$6.$_021 = $game;
+    var$6.$_019 = $game;
     var$7 = new cvs_SettingsScreen$_init_$lambda$_0_1;
-    var$7.$_012 = $game;
+    var$7.$_011 = $game;
     cvs_SettingsScreen$Toggle__init_(var$4, $rt_s(942), var$5, var$6, var$7);
     var$3[0] = var$4;
     var$4 = new cvs_SettingsScreen$Toggle;
@@ -45134,7 +45164,7 @@ let cvs_SettingsScreen__init_0 = ($this, $game) => {
     var$6 = new cvs_SettingsScreen$_init_$lambda$_0_2;
     var$6.$_048 = $game;
     var$7 = new cvs_SettingsScreen$_init_$lambda$_0_3;
-    var$7.$_051 = $game;
+    var$7.$_050 = $game;
     cvs_SettingsScreen$Toggle__init_(var$4, $rt_s(944), var$5, var$6, var$7);
     var$3[1] = var$4;
     var$4 = new cvs_SettingsScreen$Toggle;
@@ -45142,7 +45172,7 @@ let cvs_SettingsScreen__init_0 = ($this, $game) => {
     var$6 = new cvs_SettingsScreen$_init_$lambda$_0_4;
     var$6.$_039 = $game;
     var$7 = new cvs_SettingsScreen$_init_$lambda$_0_5;
-    var$7.$_015 = $game;
+    var$7.$_013 = $game;
     cvs_SettingsScreen$Toggle__init_(var$4, $rt_s(742), var$5, var$6, var$7);
     var$3[2] = var$4;
     var$4 = new cvs_SettingsScreen$Toggle;
@@ -45150,7 +45180,7 @@ let cvs_SettingsScreen__init_0 = ($this, $game) => {
     var$6 = new cvs_SettingsScreen$_init_$lambda$_0_6;
     var$6.$_01 = $game;
     var$7 = new cvs_SettingsScreen$_init_$lambda$_0_7;
-    var$7.$_010 = $game;
+    var$7.$_09 = $game;
     cvs_SettingsScreen$Toggle__init_(var$4, $rt_s(947), var$5, var$6, var$7);
     var$3[3] = var$4;
     var$5 = new cvs_SettingsScreen$Toggle;
@@ -45190,7 +45220,7 @@ cvs_SettingsScreen_render = ($this, $delta) => {
     cvs_BaseScreen_clear($this, 0.004000000189989805, 0.012000000104308128, 0.029999999329447746);
     var$3 = $this;
     cvs_MenuScreensKt_drawVideoBackdrop$default(var$3, $this.$time4, null, null, 6, null);
-    $$this$forEach$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(845));
+    $$this$forEach$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(844));
     $element$iv = cvs_SkyVanguardGame_getFont($this.$game);
     cbgg_Color_$callClinit();
     $it = cbgg_Color_WHITE;
@@ -45198,7 +45228,7 @@ cvs_SettingsScreen_render = ($this, $delta) => {
     cvs_BaseScreen_drawTracked($this, $$this$forEach$iv, 540.0, 1810.0, $element$iv, $it, 7.0);
     $pilotLabel = cvs_SaveManager_getPilotName(cvs_SkyVanguardGame_getSaveManager($this.$game));
     if (kt_StringsKt__StringsKt_isBlank($pilotLabel))
-        $pilotLabel = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1632));
+        $pilotLabel = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1633));
     $pilotLabel = $pilotLabel;
     ju_Locale_$callClinit();
     $pilotLabel = jl_String_toUpperCase($pilotLabel, ju_Locale_ROOT);
@@ -45206,38 +45236,38 @@ cvs_SettingsScreen_render = ($this, $delta) => {
     $$this$forEach$iv = $this.$nameButton;
     $element$iv = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($element$iv);
-    jl_StringBuilder_append(jl_StringBuilder_append($element$iv, $rt_s(2497)), $pilotLabel);
+    jl_StringBuilder_append(jl_StringBuilder_append($element$iv, $rt_s(2495)), $pilotLabel);
     cvs_BaseScreen_drawButton$default(var$3, $$this$forEach$iv, jl_AbstractStringBuilder_toString($element$iv), 0, 4, null);
-    cvs_BaseScreen_drawButton$default(var$3, $this.$photoButton, $this.$game.$pilotPhoto === null ? $rt_s(2498) : $rt_s(2499), 0, 4, null);
+    cvs_BaseScreen_drawButton$default(var$3, $this.$photoButton, $this.$game.$pilotPhoto === null ? $rt_s(2496) : $rt_s(2497), 0, 4, null);
     $pilotLabel = $this.$toggles.$iterator0();
     while ($pilotLabel.$hasNext()) {
         $it = $pilotLabel.$next();
         var$8 = ($it.$getter.$invoke0()).$value0;
         var$9 = $it.$rect3;
         $$this$forEach$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $it.$key0);
-        $element$iv = !var$8 ? $rt_s(1789) : $rt_s(1788);
+        $element$iv = !var$8 ? $rt_s(1791) : $rt_s(1790);
         $it = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($it);
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($it, $$this$forEach$iv), $rt_s(2500)), $element$iv);
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($it, $$this$forEach$iv), $rt_s(2498)), $element$iv);
         cvs_BaseScreen_drawButton($this, var$9, jl_AbstractStringBuilder_toString($it), var$8);
     }
     a: {
         $$this$forEach$iv = $this.$graphics0;
-        $element$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1705));
+        $element$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1707));
         switch (cvs_SaveManager_getGraphicsQuality(cvs_SkyVanguardGame_getSaveManager($this.$game))) {
             case 0:
                 break;
             case 1:
-                var$10 = $rt_s(1710);
-                break a;
-            case 2:
                 var$10 = $rt_s(1712);
                 break a;
+            case 2:
+                var$10 = $rt_s(1714);
+                break a;
             default:
-                var$10 = $rt_s(2501);
+                var$10 = $rt_s(2499);
                 break a;
         }
-        var$10 = $rt_s(1708);
+        var$10 = $rt_s(1710);
     }
     $pilotLabel = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($pilotLabel);
@@ -45317,7 +45347,7 @@ cvs_SettingsScreen_access$getPrivacy$p = $$this => {
 cvs_SettingsScreen_access$getBack$p = $$this => {
     return $$this.$back;
 };
-function cvs_MainMenuScreen$requestRemoveAds$lambda$_8_0() {
+function cvs_MainMenuScreen$requestRemoveAds$lambda$_9_0() {
     jl_Object.call(this);
     this.$_064 = null;
 }
@@ -45326,17 +45356,7 @@ function cvs_CreditsScreen() {
     a.$back0 = null;
     a.$time5 = 0.0;
 }
-let cvs_CreditsScreen__init_0 = ($this, $game) => {
-    kji_Intrinsics_checkNotNullParameter($game, $rt_s(212));
-    cvs_BaseScreen__init_($this, $game);
-    $this.$back0 = cbgm_Rectangle__init_(190.0, 130.0, 700.0, 120.0);
-},
-cvs_CreditsScreen__init_ = var_0 => {
-    let var_1 = new cvs_CreditsScreen();
-    cvs_CreditsScreen__init_0(var_1, var_0);
-    return var_1;
-},
-cvs_CreditsScreen_show = $this => {
+let cvs_CreditsScreen_show = $this => {
     let var$1, var$2;
     var$1 = cbg_Gdx_input;
     var$2 = new cvs_CreditsScreen$show$1;
@@ -45356,12 +45376,12 @@ cvs_CreditsScreen_render = ($this, $delta) => {
     var$5 = cbgg_Color_WHITE;
     kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(822));
     cvs_BaseScreen_drawTracked($this, var$3, 540.0, 1780.0, var$4, var$5, 7.0);
-    cvs_BaseScreen_drawCentered($this, $rt_s(2502), 1500.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.30000001192092896, 0.8999999761581421, 1.0, 1.0));
-    cvs_BaseScreen_drawCentered$default(var$2, $rt_s(2503), 1370.0, cvs_SkyVanguardGame_getSmallFont($this.$game), null, 8, null);
-    cvs_BaseScreen_drawCentered$default(var$2, $rt_s(2504), 1260.0, cvs_SkyVanguardGame_getSmallFont($this.$game), null, 8, null);
-    cvs_BaseScreen_drawCentered$default(var$2, $rt_s(2505), 1150.0, cvs_SkyVanguardGame_getSmallFont($this.$game), null, 8, null);
-    cvs_BaseScreen_drawCentered($this, $rt_s(2506), 1040.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.699999988079071, 0.8500000238418579, 1.0, 1.0));
-    cvs_BaseScreen_drawCentered($this, $rt_s(2507), 930.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.25, 0.8500000238418579, 1.0, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(2500), 1500.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.30000001192092896, 0.8999999761581421, 1.0, 1.0));
+    cvs_BaseScreen_drawCentered$default(var$2, $rt_s(2501), 1370.0, cvs_SkyVanguardGame_getSmallFont($this.$game), null, 8, null);
+    cvs_BaseScreen_drawCentered$default(var$2, $rt_s(2502), 1260.0, cvs_SkyVanguardGame_getSmallFont($this.$game), null, 8, null);
+    cvs_BaseScreen_drawCentered$default(var$2, $rt_s(2503), 1150.0, cvs_SkyVanguardGame_getSmallFont($this.$game), null, 8, null);
+    cvs_BaseScreen_drawCentered($this, $rt_s(2504), 1040.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.699999988079071, 0.8500000238418579, 1.0, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(2505), 930.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.25, 0.8500000238418579, 1.0, 1.0));
     cvs_BaseScreen_drawButton$default(var$2, $this.$back0, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(928)), 0, 4, null);
     cvs_GamepadInput_poll($this.$game.$gamepad);
     if (cvs_GamepadInput_getJustB($this.$game.$gamepad)) {
@@ -45377,12 +45397,12 @@ kt_StringsKt___StringsJvmKt = $rt_classWithoutFields(kt_StringsKt__StringsKt),
 kt_StringsKt___StringsKt = $rt_classWithoutFields(kt_StringsKt___StringsJvmKt),
 kt_StringsKt___StringsKt_first = $$this$first => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($$this$first, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$first, $rt_s(859));
     $$this$first = $$this$first;
     if (!($$this$first.$nativeString.length ? 0 : 1))
         return jl_String_charAt($$this$first, 0);
     var$2 = new ju_NoSuchElementException;
-    jl_RuntimeException__init_(var$2, $rt_s(2508));
+    jl_RuntimeException__init_(var$2, $rt_s(2506));
     $rt_throw(var$2);
 };
 function cbgu_SnapshotArray() {
@@ -45485,7 +45505,7 @@ let jnc_CharsetEncoder_onMalformedInput = ($this, $newAction) => {
         return $this;
     }
     var$2 = new jl_IllegalArgumentException;
-    jl_RuntimeException__init_(var$2, $rt_s(2509));
+    jl_RuntimeException__init_(var$2, $rt_s(2507));
     $rt_throw(var$2);
 },
 jnc_CharsetEncoder_onUnmappableCharacter = ($this, $newAction) => {
@@ -45495,7 +45515,7 @@ jnc_CharsetEncoder_onUnmappableCharacter = ($this, $newAction) => {
         return $this;
     }
     var$2 = new jl_IllegalArgumentException;
-    jl_RuntimeException__init_(var$2, $rt_s(2509));
+    jl_RuntimeException__init_(var$2, $rt_s(2507));
     $rt_throw(var$2);
 },
 jnc_CharsetEncoder_encode = ($this, $in, $out, $endOfInput) => {
@@ -45605,7 +45625,6 @@ jnc_CharsetEncoder_allocateMore = ($this, $buffer) => {
     jn_Buffer_position($result, $buffer.$position0);
     return $result;
 },
-jl_ArithmeticException = $rt_classWithoutFields(jl_RuntimeException),
 cvs_WeaponStyle = $rt_classWithoutFields(jl_Enum),
 cvs_WeaponStyle_RAPID = null,
 cvs_WeaponStyle_HEAVY = null,
@@ -45628,10 +45647,10 @@ cvs_WeaponStyle__init_ = (var_0, var_1) => {
 },
 cvs_WeaponStyle__clinit_ = () => {
     let var$1, var$2, var$3;
-    cvs_WeaponStyle_RAPID = cvs_WeaponStyle__init_($rt_s(2510), 0);
-    cvs_WeaponStyle_HEAVY = cvs_WeaponStyle__init_($rt_s(2511), 1);
-    cvs_WeaponStyle_GATLING = cvs_WeaponStyle__init_($rt_s(2512), 2);
-    var$1 = cvs_WeaponStyle__init_($rt_s(1662), 3);
+    cvs_WeaponStyle_RAPID = cvs_WeaponStyle__init_($rt_s(2508), 0);
+    cvs_WeaponStyle_HEAVY = cvs_WeaponStyle__init_($rt_s(2509), 1);
+    cvs_WeaponStyle_GATLING = cvs_WeaponStyle__init_($rt_s(2510), 2);
+    var$1 = cvs_WeaponStyle__init_($rt_s(1664), 3);
     cvs_WeaponStyle_LASER = var$1;
     var$2 = $rt_createArray(cvs_WeaponStyle, 4);
     var$3 = var$2.data;
@@ -45681,10 +45700,10 @@ cvs_CampaignCatalog_country = ($this, $index, $name, $subtitle, $scale, $seeds) 
         var$18 = $scale * (1.0 + $index$iv$iv * 0.08500000089406967);
         kji_Intrinsics_checkNotNullParameter($name, $rt_s(2458));
         kji_Intrinsics_checkNotNullParameter($$this$mapIndexed$iv, $rt_s(774));
-        kji_Intrinsics_checkNotNullParameter($item$iv$iv, $rt_s(2513));
-        kji_Intrinsics_checkNotNullParameter(var$15, $rt_s(2514));
+        kji_Intrinsics_checkNotNullParameter($item$iv$iv, $rt_s(2511));
+        kji_Intrinsics_checkNotNullParameter(var$15, $rt_s(2512));
         kji_Intrinsics_checkNotNullParameter(var$16, $rt_s(934));
-        kji_Intrinsics_checkNotNullParameter(var$17, $rt_s(2515));
+        kji_Intrinsics_checkNotNullParameter(var$17, $rt_s(2513));
         var$13.$globalIndex = var$14;
         var$13.$countryIndex = $index;
         var$13.$phase = var$11;
@@ -45701,8 +45720,8 @@ cvs_CampaignCatalog_country = ($this, $index, $name, $subtitle, $scale, $seeds) 
     $seeds = $destination$iv$iv;
     $destination$iv$iv = new cvs_CountryCampaign;
     kji_Intrinsics_checkNotNullParameter($name, $rt_s(774));
-    kji_Intrinsics_checkNotNullParameter($subtitle, $rt_s(2276));
-    kji_Intrinsics_checkNotNullParameter($seeds, $rt_s(2516));
+    kji_Intrinsics_checkNotNullParameter($subtitle, $rt_s(836));
+    kji_Intrinsics_checkNotNullParameter($seeds, $rt_s(2514));
     $destination$iv$iv.$name3 = $name;
     $destination$iv$iv.$subtitle = $subtitle;
     $destination$iv$iv.$difficultyScale = $scale;
@@ -45732,53 +45751,53 @@ cvs_CampaignCatalog__clinit_ = () => {
     var$3 = var$2.data;
     var$4 = $rt_createArray(cvs_CampaignCatalog$StageSeed, 6);
     var$5 = var$4.data;
-    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2517), $rt_s(2518), $rt_s(2519), $rt_s(2520), $rt_s(2521));
-    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2522), $rt_s(2523), $rt_s(2524), $rt_s(2525), $rt_s(2526));
-    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2527), $rt_s(2528), $rt_s(2529), $rt_s(2530), $rt_s(2531));
-    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2532), $rt_s(2533), $rt_s(2534), $rt_s(2535), $rt_s(2526));
-    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2536), $rt_s(2537), $rt_s(2538), $rt_s(2539), $rt_s(2521));
-    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2540), $rt_s(2541), $rt_s(2542), $rt_s(2543), $rt_s(2544));
-    var$3[0] = cvs_CampaignCatalog_country($$this$flatMap$iv, 0, $rt_s(2421), $rt_s(2545), 1.0, kc_CollectionsKt__CollectionsKt_listOf(var$4));
+    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2515), $rt_s(2516), $rt_s(2517), $rt_s(2518), $rt_s(2519));
+    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2520), $rt_s(2521), $rt_s(2522), $rt_s(2523), $rt_s(2524));
+    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2525), $rt_s(2526), $rt_s(2527), $rt_s(2528), $rt_s(2529));
+    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2530), $rt_s(2531), $rt_s(2532), $rt_s(2533), $rt_s(2524));
+    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2534), $rt_s(2535), $rt_s(2536), $rt_s(2537), $rt_s(2519));
+    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2538), $rt_s(2539), $rt_s(2540), $rt_s(2541), $rt_s(2542));
+    var$3[0] = cvs_CampaignCatalog_country($$this$flatMap$iv, 0, $rt_s(2421), $rt_s(2543), 1.0, kc_CollectionsKt__CollectionsKt_listOf(var$4));
     $$this$flatMap$iv = cvs_CampaignCatalog_INSTANCE;
     var$4 = $rt_createArray(cvs_CampaignCatalog$StageSeed, 6);
     var$5 = var$4.data;
-    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2546), $rt_s(2547), $rt_s(2548), $rt_s(2549), $rt_s(2550));
-    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2551), $rt_s(2552), $rt_s(2553), $rt_s(2554), $rt_s(2521));
-    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2555), $rt_s(2556), $rt_s(2557), $rt_s(2558), $rt_s(2526));
-    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2559), $rt_s(2560), $rt_s(2561), $rt_s(2562), $rt_s(2531));
-    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2563), $rt_s(2564), $rt_s(2565), $rt_s(2566), $rt_s(2544));
-    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2567), $rt_s(2568), $rt_s(2569), $rt_s(2570), $rt_s(2526));
-    var$3[1] = cvs_CampaignCatalog_country($$this$flatMap$iv, 1, $rt_s(2433), $rt_s(2571), 1.25, kc_CollectionsKt__CollectionsKt_listOf(var$4));
+    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2544), $rt_s(2545), $rt_s(2546), $rt_s(2547), $rt_s(2548));
+    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2549), $rt_s(2550), $rt_s(2551), $rt_s(2552), $rt_s(2519));
+    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2553), $rt_s(2554), $rt_s(2555), $rt_s(2556), $rt_s(2524));
+    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2557), $rt_s(2558), $rt_s(2559), $rt_s(2560), $rt_s(2529));
+    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2561), $rt_s(2562), $rt_s(2563), $rt_s(2564), $rt_s(2542));
+    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2565), $rt_s(2566), $rt_s(2567), $rt_s(2568), $rt_s(2524));
+    var$3[1] = cvs_CampaignCatalog_country($$this$flatMap$iv, 1, $rt_s(2433), $rt_s(2569), 1.25, kc_CollectionsKt__CollectionsKt_listOf(var$4));
     $$this$flatMap$iv = cvs_CampaignCatalog_INSTANCE;
     var$4 = $rt_createArray(cvs_CampaignCatalog$StageSeed, 6);
     var$5 = var$4.data;
-    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2572), $rt_s(2573), $rt_s(2574), $rt_s(2575), $rt_s(2544));
-    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2576), $rt_s(2577), $rt_s(2578), $rt_s(2579), $rt_s(2521));
-    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2580), $rt_s(2581), $rt_s(2582), $rt_s(2583), $rt_s(2526));
-    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2584), $rt_s(2585), $rt_s(2586), $rt_s(2587), $rt_s(2526));
-    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2588), $rt_s(2589), $rt_s(2590), $rt_s(2591), $rt_s(2531));
-    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2592), $rt_s(2593), $rt_s(2594), $rt_s(2595), $rt_s(2544));
-    var$3[2] = cvs_CampaignCatalog_country($$this$flatMap$iv, 2, $rt_s(2439), $rt_s(2596), 1.5199999809265137, kc_CollectionsKt__CollectionsKt_listOf(var$4));
+    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2570), $rt_s(2571), $rt_s(2572), $rt_s(2573), $rt_s(2542));
+    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2574), $rt_s(2575), $rt_s(2576), $rt_s(2577), $rt_s(2519));
+    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2578), $rt_s(2579), $rt_s(2580), $rt_s(2581), $rt_s(2524));
+    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2582), $rt_s(2583), $rt_s(2584), $rt_s(2585), $rt_s(2524));
+    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2586), $rt_s(2587), $rt_s(2588), $rt_s(2589), $rt_s(2529));
+    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2590), $rt_s(2591), $rt_s(2592), $rt_s(2593), $rt_s(2542));
+    var$3[2] = cvs_CampaignCatalog_country($$this$flatMap$iv, 2, $rt_s(2439), $rt_s(2594), 1.5199999809265137, kc_CollectionsKt__CollectionsKt_listOf(var$4));
     $$this$flatMap$iv = cvs_CampaignCatalog_INSTANCE;
     var$4 = $rt_createArray(cvs_CampaignCatalog$StageSeed, 6);
     var$5 = var$4.data;
-    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2597), $rt_s(2598), $rt_s(2599), $rt_s(2600), $rt_s(2550));
-    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2601), $rt_s(2602), $rt_s(2603), $rt_s(2604), $rt_s(2605));
-    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2606), $rt_s(2607), $rt_s(2608), $rt_s(2609), $rt_s(2526));
-    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2610), $rt_s(2611), $rt_s(2612), $rt_s(2613), $rt_s(2531));
-    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2614), $rt_s(2615), $rt_s(2616), $rt_s(2617), $rt_s(2544));
-    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2618), $rt_s(2619), $rt_s(2620), $rt_s(2621), $rt_s(2526));
-    var$3[3] = cvs_CampaignCatalog_country($$this$flatMap$iv, 3, $rt_s(2427), $rt_s(2622), 1.8200000524520874, kc_CollectionsKt__CollectionsKt_listOf(var$4));
+    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2595), $rt_s(2596), $rt_s(2597), $rt_s(2598), $rt_s(2548));
+    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2599), $rt_s(2600), $rt_s(2601), $rt_s(2602), $rt_s(2603));
+    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2604), $rt_s(2605), $rt_s(2606), $rt_s(2607), $rt_s(2524));
+    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2608), $rt_s(2609), $rt_s(2610), $rt_s(2611), $rt_s(2529));
+    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2612), $rt_s(2613), $rt_s(2614), $rt_s(2615), $rt_s(2542));
+    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2616), $rt_s(2617), $rt_s(2618), $rt_s(2619), $rt_s(2524));
+    var$3[3] = cvs_CampaignCatalog_country($$this$flatMap$iv, 3, $rt_s(2427), $rt_s(2620), 1.8200000524520874, kc_CollectionsKt__CollectionsKt_listOf(var$4));
     $$this$flatMap$iv = cvs_CampaignCatalog_INSTANCE;
     var$4 = $rt_createArray(cvs_CampaignCatalog$StageSeed, 6);
     var$5 = var$4.data;
-    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2623), $rt_s(2624), $rt_s(2625), $rt_s(2626), $rt_s(2521));
-    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2627), $rt_s(2628), $rt_s(2629), $rt_s(2630), $rt_s(2605));
-    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2631), $rt_s(2632), $rt_s(2633), $rt_s(2634), $rt_s(2531));
-    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2635), $rt_s(2636), $rt_s(2637), $rt_s(2638), $rt_s(2526));
-    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2639), $rt_s(2640), $rt_s(2641), $rt_s(2642), $rt_s(2544));
-    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2643), $rt_s(2644), $rt_s(2645), $rt_s(2646), $rt_s(2526));
-    var$3[4] = cvs_CampaignCatalog_country($$this$flatMap$iv, 4, $rt_s(2647), $rt_s(2648), 2.180000066757202, kc_CollectionsKt__CollectionsKt_listOf(var$4));
+    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2621), $rt_s(2622), $rt_s(2623), $rt_s(2624), $rt_s(2519));
+    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2625), $rt_s(2626), $rt_s(2627), $rt_s(2628), $rt_s(2603));
+    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2629), $rt_s(2630), $rt_s(2631), $rt_s(2632), $rt_s(2529));
+    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2633), $rt_s(2634), $rt_s(2635), $rt_s(2636), $rt_s(2524));
+    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2637), $rt_s(2638), $rt_s(2639), $rt_s(2640), $rt_s(2542));
+    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2641), $rt_s(2642), $rt_s(2643), $rt_s(2644), $rt_s(2524));
+    var$3[4] = cvs_CampaignCatalog_country($$this$flatMap$iv, 4, $rt_s(2645), $rt_s(2646), 2.180000066757202, kc_CollectionsKt__CollectionsKt_listOf(var$4));
     $$this$flatMap$iv = kc_CollectionsKt__CollectionsKt_listOf(var$2);
     cvs_CampaignCatalog_countries = $$this$flatMap$iv;
     $$this$flatMap$iv = $$this$flatMap$iv;
@@ -45799,8 +45818,8 @@ function cvs_SettingsScreen$Toggle() {
 let cvs_SettingsScreen$Toggle__init_ = ($this, $key, $rect, $getter, $setter) => {
     kji_Intrinsics_checkNotNullParameter($key, $rt_s(810));
     kji_Intrinsics_checkNotNullParameter($rect, $rt_s(823));
-    kji_Intrinsics_checkNotNullParameter($getter, $rt_s(2649));
-    kji_Intrinsics_checkNotNullParameter($setter, $rt_s(2650));
+    kji_Intrinsics_checkNotNullParameter($getter, $rt_s(2647));
+    kji_Intrinsics_checkNotNullParameter($setter, $rt_s(2648));
     $this.$key0 = $key;
     $this.$rect3 = $rect;
     $this.$getter = $getter;
@@ -45819,7 +45838,7 @@ cvs_SettingsScreen$Toggle_toString = $this => {
     var$4 = $this.$setter;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2651)), var$1), $rt_s(2278)), var$2), $rt_s(2652)), var$3), $rt_s(2653)), var$4), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2649)), var$1), $rt_s(2278)), var$2), $rt_s(2650)), var$3), $rt_s(2651)), var$4), 41);
     return jl_AbstractStringBuilder_toString(var$5);
 },
 cvs_SettingsScreen$Toggle_hashCode = $this => {
@@ -45844,19 +45863,19 @@ cvs_SettingsScreen$Toggle_equals = ($this, $other) => {
 kjf_Function0 = $rt_classWithoutFields(0);
 function cvs_SettingsScreen$_init_$lambda$_0_0() {
     jl_Object.call(this);
-    this.$_021 = null;
+    this.$_019 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_0_invoke = var$0 => {
-    return jl_Boolean_valueOf(cvs_SaveManager_getMusicEnabled(cvs_SkyVanguardGame_getSaveManager(var$0.$_021)));
+    return jl_Boolean_valueOf(cvs_SaveManager_getMusicEnabled(cvs_SkyVanguardGame_getSaveManager(var$0.$_019)));
 };
 function cvs_SettingsScreen$_init_$lambda$_0_1() {
     jl_Object.call(this);
-    this.$_012 = null;
+    this.$_011 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_1_invoke = (var$0, var$1) => {
     let var$2, var$3;
     var$1 = var$1;
-    var$2 = var$0.$_012;
+    var$2 = var$0.$_011;
     var$3 = var$1.$value0;
     cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(744), var$3));
     var$1 = cvs_SkyVanguardGame_getAudioManager(var$2);
@@ -45879,12 +45898,12 @@ let cvs_SettingsScreen$_init_$lambda$_0_2_invoke = var$0 => {
 };
 function cvs_SettingsScreen$_init_$lambda$_0_3() {
     jl_Object.call(this);
-    this.$_051 = null;
+    this.$_050 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_3_invoke = (var$0, var$1) => {
     let var$2, var$3;
     var$1 = var$1;
-    var$2 = var$0.$_051;
+    var$2 = var$0.$_050;
     var$3 = var$1.$value0;
     cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(745), var$3));
     k_Unit_$callClinit();
@@ -45899,12 +45918,12 @@ let cvs_SettingsScreen$_init_$lambda$_0_4_invoke = var$0 => {
 };
 function cvs_SettingsScreen$_init_$lambda$_0_5() {
     jl_Object.call(this);
-    this.$_015 = null;
+    this.$_013 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_5_invoke = (var$0, var$1) => {
     let var$2, var$3;
     var$1 = var$1;
-    var$2 = var$0.$_015;
+    var$2 = var$0.$_013;
     var$3 = var$1.$value0;
     cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(742), var$3));
     k_Unit_$callClinit();
@@ -45919,12 +45938,12 @@ let cvs_SettingsScreen$_init_$lambda$_0_6_invoke = var$0 => {
 };
 function cvs_SettingsScreen$_init_$lambda$_0_7() {
     jl_Object.call(this);
-    this.$_010 = null;
+    this.$_09 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_7_invoke = (var$0, var$1) => {
     let var$2, var$3;
     var$1 = var$1;
-    var$2 = var$0.$_010;
+    var$2 = var$0.$_09;
     var$3 = var$1.$value0;
     cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(741), var$3));
     k_Unit_$callClinit();
@@ -45987,7 +46006,7 @@ cbgu_DelayedRemovalArray_end = $this => {
     $n = $this.$iterating;
     if (!$n) {
         var$2 = new jl_IllegalStateException;
-        jl_RuntimeException__init_(var$2, $rt_s(2654));
+        jl_RuntimeException__init_(var$2, $rt_s(2652));
         $rt_throw(var$2);
     }
     $i = $n - 1 | 0;
@@ -46000,7 +46019,7 @@ cbgu_DelayedRemovalArray_end = $this => {
                 cbgu_DelayedRemovalArray_clear($this);
             } else {
                 $i = 0;
-                $n = $this.$remove6.$size1;
+                $n = $this.$remove6.$size2;
                 while ($i < $n) {
                     $index = cbgu_IntArray_pop($this.$remove6);
                     if ($index >= $this.$clear3)
@@ -46026,7 +46045,7 @@ cbgu_DelayedRemovalArray_removeIndex = ($this, $index) => {
     a: {
         if ($index >= $this.$clear3) {
             var$2 = 0;
-            var$3 = $this.$remove6.$size1;
+            var$3 = $this.$remove6.$size2;
             while (true) {
                 if (var$2 >= var$3) {
                     cbgu_IntArray_add($this.$remove6, $index);
@@ -46037,15 +46056,15 @@ cbgu_DelayedRemovalArray_removeIndex = ($this, $index) => {
                     break;
                 if (var$4 < 0) {
                     var$5 = $this.$remove6;
-                    var$3 = var$5.$size1;
+                    var$3 = var$5.$size2;
                     if (var$2 > var$3) {
                         var$6 = new jl_IndexOutOfBoundsException;
                         var$7 = new jl_StringBuilder;
                         jl_AbstractStringBuilder__init_(var$7);
-                        jl_AbstractStringBuilder_append(var$7, $rt_s(2655));
+                        jl_AbstractStringBuilder_append(var$7, $rt_s(2653));
                         var$7 = jl_StringBuilder_append0(var$7, var$2);
                         jl_AbstractStringBuilder_append(var$7, $rt_s(137));
-                        jl_RuntimeException__init_(var$6, jl_AbstractStringBuilder_toString(jl_StringBuilder_append0(var$7, var$5.$size1)));
+                        jl_RuntimeException__init_(var$6, jl_AbstractStringBuilder_toString(jl_StringBuilder_append0(var$7, var$5.$size2)));
                         $rt_throw(var$6);
                     }
                     var$8 = var$5.$items1;
@@ -46053,11 +46072,11 @@ cbgu_DelayedRemovalArray_removeIndex = ($this, $index) => {
                         var$8 = cbgu_IntArray_resize(var$5, jl_Math_max0(8, var$3 * 1.75 | 0));
                     if (!var$5.$ordered0) {
                         var$9 = var$8.data;
-                        var$9[var$5.$size1] = var$9[var$2];
+                        var$9[var$5.$size2] = var$9[var$2];
                     } else
-                        jl_System_fastArraycopy(var$8, var$2, var$8, var$2 + 1 | 0, var$5.$size1 - var$2 | 0);
+                        jl_System_fastArraycopy(var$8, var$2, var$8, var$2 + 1 | 0, var$5.$size2 - var$2 | 0);
                     var$8 = var$8.data;
-                    var$5.$size1 = var$5.$size1 + 1 | 0;
+                    var$5.$size2 = var$5.$size2 + 1 | 0;
                     var$8[var$2] = $index;
                     break a;
                 }
@@ -46222,7 +46241,7 @@ let cbgm_Interpolation$BounceOut__init_ = ($this, $bounces) => {
     var$5 = new jl_IllegalArgumentException;
     var$6 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$6);
-    jl_AbstractStringBuilder_append(var$6, $rt_s(2656));
+    jl_AbstractStringBuilder_append(var$6, $rt_s(2654));
     jl_RuntimeException__init_(var$5, jl_AbstractStringBuilder_toString(jl_StringBuilder_append0(var$6, $bounces)));
     $rt_throw(var$5);
 },
@@ -46233,32 +46252,6 @@ cbgm_Interpolation$BounceOut__init_0 = var_0 => {
 },
 cbgm_Interpolation$Bounce = $rt_classWithoutFields(cbgm_Interpolation$BounceOut),
 cbgm_Interpolation$BounceIn = $rt_classWithoutFields(cbgm_Interpolation$BounceOut),
-ki_ProgressionUtilKt = $rt_classWithoutFields(),
-ki_ProgressionUtilKt_mod = ($a, $b) => {
-    let $mod;
-    $mod = $a % $b | 0;
-    if ($mod < 0)
-        $mod = $mod + $b | 0;
-    return $mod;
-},
-ki_ProgressionUtilKt_differenceModulo = ($a, $b, $c) => {
-    return ki_ProgressionUtilKt_mod(ki_ProgressionUtilKt_mod($a, $c) - ki_ProgressionUtilKt_mod($b, $c) | 0, $c);
-},
-ki_ProgressionUtilKt_getProgressionLastElement = ($start, $end, $step) => {
-    let var$4;
-    if ($step <= 0) {
-        if ($step >= 0) {
-            var$4 = new jl_IllegalArgumentException;
-            jl_RuntimeException__init_(var$4, $rt_s(2657));
-            $rt_throw(var$4);
-        }
-        if ($start > $end)
-            $end = $end + ki_ProgressionUtilKt_differenceModulo($start, $end,  -$step | 0) | 0;
-    } else if ($start < $end)
-        $end = $end - ki_ProgressionUtilKt_differenceModulo($end, $start, $step) | 0;
-    return $end;
-},
-kr_IntRange$Companion = $rt_classWithoutFields(),
 cbgc_ControllerManager = $rt_classWithoutFields(0);
 function cbgc_AbstractControllerManager() {
     let a = this; jl_Object.call(a);
@@ -46331,7 +46324,7 @@ cbgct_TeavmControllers_handleGamepadConnect = ($this, $gamepad) => {
     $gamepad = cbgct_TeavmControllers_getGamepad(cbgct_TeavmControllers_getInstance(), var$4);
     var$3.$axes = $rt_createFloatArray((otji_JS_unwrapDoubleArray($gamepad.axes)).data.length);
     var$3.$buttonCount = (otji_JS_unwrapArray($rt_cls(otji_JSWrapper), $gamepad.buttons)).data.length;
-    var$3.$standardMapping = jl_String_equals($rt_str($gamepad.mapping), $rt_s(2658));
+    var$3.$standardMapping = jl_String_equals($rt_str($gamepad.mapping), $rt_s(2655));
     cbgu_IntMap_put($this.$controllerMap, var$2, var$3);
     $gamepad = $this.$eventQueue;
     jl_Object_monitorEnterSync($gamepad);
@@ -46380,15 +46373,73 @@ kc_ArraysKt___ArraysKt = $rt_classWithoutFields(kc_ArraysKt___ArraysJvmKt),
 kc_ArraysKt___ArraysKt_getLastIndex = $$this$lastIndex => {
     let var$2;
     var$2 = $$this$lastIndex.data;
-    kji_Intrinsics_checkNotNullParameter($$this$lastIndex, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$lastIndex, $rt_s(859));
     return var$2.length - 1 | 0;
 },
 ks_SequencesKt__SequenceBuilderKt = $rt_classWithoutFields(),
 ks_SequencesKt__SequencesJVMKt = $rt_classWithoutFields(ks_SequencesKt__SequenceBuilderKt),
 ks_SequencesKt__SequencesKt = $rt_classWithoutFields(ks_SequencesKt__SequencesJVMKt),
 ks_SequencesKt___SequencesJvmKt = $rt_classWithoutFields(ks_SequencesKt__SequencesKt),
-ks_SequencesKt___SequencesKt = $rt_classWithoutFields(ks_SequencesKt___SequencesJvmKt),
-kr_IntProgression$Companion = $rt_classWithoutFields(),
+ks_SequencesKt___SequencesKt = $rt_classWithoutFields(ks_SequencesKt___SequencesJvmKt);
+function kr_IntProgression() {
+    let a = this; jl_Object.call(a);
+    a.$first6 = 0;
+    a.$last = 0;
+    a.$step0 = 0;
+}
+let kr_IntProgression_Companion = null,
+kr_IntProgression_$callClinit = () => {
+    kr_IntProgression_$callClinit = $rt_eraseClinit(kr_IntProgression);
+    kr_IntProgression__clinit_();
+},
+kr_IntProgression__init_ = ($this, $start, $endInclusive, $step) => {
+    let var$4;
+    kr_IntProgression_$callClinit();
+    if (!$step) {
+        var$4 = new jl_IllegalArgumentException;
+        jl_RuntimeException__init_(var$4, $rt_s(2656));
+        $rt_throw(var$4);
+    }
+    if ($step != (-2147483648)) {
+        $this.$first6 = $start;
+        $this.$last = ki_ProgressionUtilKt_getProgressionLastElement($start, $endInclusive, $step);
+        $this.$step0 = $step;
+        return;
+    }
+    var$4 = new jl_IllegalArgumentException;
+    jl_RuntimeException__init_(var$4, $rt_s(2657));
+    $rt_throw(var$4);
+},
+kr_IntProgression__init_0 = (var_0, var_1, var_2) => {
+    let var_3 = new kr_IntProgression();
+    kr_IntProgression__init_(var_3, var_0, var_1, var_2);
+    return var_3;
+},
+kr_IntProgression__clinit_ = () => {
+    kr_IntProgression_Companion = new kr_IntProgression$Companion;
+},
+kr_ClosedRange = $rt_classWithoutFields(0),
+kr_OpenEndRange = $rt_classWithoutFields(0),
+kr_IntRange = $rt_classWithoutFields(kr_IntProgression),
+kr_IntRange_Companion = null,
+kr_IntRange_EMPTY = null,
+kr_IntRange_$callClinit = () => {
+    kr_IntRange_$callClinit = $rt_eraseClinit(kr_IntRange);
+    kr_IntRange__clinit_();
+},
+kr_IntRange__init_0 = ($this, $start, $endInclusive) => {
+    kr_IntRange_$callClinit();
+    kr_IntProgression__init_($this, $start, $endInclusive, 1);
+},
+kr_IntRange__init_ = (var_0, var_1) => {
+    let var_2 = new kr_IntRange();
+    kr_IntRange__init_0(var_2, var_0, var_1);
+    return var_2;
+},
+kr_IntRange__clinit_ = () => {
+    kr_IntRange_Companion = new kr_IntRange$Companion;
+    kr_IntRange_EMPTY = kr_IntRange__init_(1, 0);
+},
 cbgct_TeavmControllers$InstanceHolder = $rt_classWithoutFields(),
 cbgct_TeavmControllers$InstanceHolder_instance = null,
 cbgct_TeavmControllers$InstanceHolder_$callClinit = () => {
@@ -46447,9 +46498,9 @@ cbgct_TeavmControllers$InstanceHolder__clinit_ = () => {
 ke_EnumEntriesKt = $rt_classWithoutFields(),
 ke_EnumEntriesKt_enumEntries = $entries => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($entries, $rt_s(2659));
+    kji_Intrinsics_checkNotNullParameter($entries, $rt_s(2658));
     var$2 = new ke_EnumEntriesList;
-    kji_Intrinsics_checkNotNullParameter($entries, $rt_s(2659));
+    kji_Intrinsics_checkNotNullParameter($entries, $rt_s(2658));
     kc_AbstractList_$callClinit();
     var$2.$entries = $entries;
     return var$2;
@@ -46472,7 +46523,7 @@ cvs_CountryCampaign_toString = $this => {
     var$4 = $this.$stages;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2660)), var$1), $rt_s(2280)), var$2), $rt_s(2661)), var$3), $rt_s(2662)), var$4), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2659)), var$1), $rt_s(2280)), var$2), $rt_s(2660)), var$3), $rt_s(2661)), var$4), 41);
     return jl_AbstractStringBuilder_toString(var$5);
 },
 cvs_CountryCampaign_hashCode = $this => {
@@ -46504,10 +46555,10 @@ function cvs_CampaignCatalog$StageSeed() {
 }
 let cvs_CampaignCatalog$StageSeed__init_0 = ($this, $name, $environment, $subBoss, $boss, $sprite) => {
     kji_Intrinsics_checkNotNullParameter($name, $rt_s(774));
-    kji_Intrinsics_checkNotNullParameter($environment, $rt_s(2513));
-    kji_Intrinsics_checkNotNullParameter($subBoss, $rt_s(2514));
+    kji_Intrinsics_checkNotNullParameter($environment, $rt_s(2511));
+    kji_Intrinsics_checkNotNullParameter($subBoss, $rt_s(2512));
     kji_Intrinsics_checkNotNullParameter($boss, $rt_s(934));
-    kji_Intrinsics_checkNotNullParameter($sprite, $rt_s(2663));
+    kji_Intrinsics_checkNotNullParameter($sprite, $rt_s(2662));
     $this.$name2 = $name;
     $this.$environment = $environment;
     $this.$subBoss0 = $subBoss;
@@ -46528,7 +46579,7 @@ cvs_CampaignCatalog$StageSeed_toString = $this => {
     var$5 = $this.$sprite;
     var$6 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$6);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(2664)), var$1), $rt_s(2665)), var$2), $rt_s(2666)), var$3), $rt_s(2667)), var$4), $rt_s(2668)), var$5), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(2663)), var$1), $rt_s(2664)), var$2), $rt_s(2665)), var$3), $rt_s(2666)), var$4), $rt_s(2667)), var$5), 41);
     return jl_AbstractStringBuilder_toString(var$6);
 },
 cvs_CampaignCatalog$StageSeed_hashCode = $this => {
@@ -46611,7 +46662,7 @@ cvs_StageDefinition_toString = $this => {
     var$11 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$11);
     jl_AbstractStringBuilder_append0(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$11,
-    $rt_s(2669)), var$1), $rt_s(2670)), var$2), $rt_s(2284)), var$3), $rt_s(2464)), var$4), $rt_s(2466)), var$5), $rt_s(2665)), var$6), $rt_s(2666)), var$7), $rt_s(2667)), var$8), $rt_s(2671)), var$9), $rt_s(2661)), var$10), 41);
+    $rt_s(2668)), var$1), $rt_s(2669)), var$2), $rt_s(2284)), var$3), $rt_s(2464)), var$4), $rt_s(2466)), var$5), $rt_s(2664)), var$6), $rt_s(2665)), var$7), $rt_s(2666)), var$8), $rt_s(2670)), var$9), $rt_s(2660)), var$10), 41);
     return jl_AbstractStringBuilder_toString(var$11);
 },
 cvs_StageDefinition_hashCode = $this => {
@@ -46660,7 +46711,7 @@ let kjf_Function2 = $rt_classWithoutFields(0);
 function kt_StringsKt__StringsKt$rangesDelimitedBy$StringsKt__StringsKt$lambda$_144_0() {
     let a = this; jl_Object.call(a);
     a.$_04 = null;
-    a.$_10 = 0;
+    a.$_11 = 0;
 }
 function ju_TemplateCollections$SingleElementList() {
     ju_TemplateCollections$AbstractImmutableList.call(this);
@@ -46676,7 +46727,8 @@ ju_TemplateCollections$SingleElementList_get = ($this, $index) => {
     var$2 = new jl_IndexOutOfBoundsException;
     jl_Exception__init_(var$2);
     $rt_throw(var$2);
-};
+},
+kr_IntRange$Companion = $rt_classWithoutFields();
 function cbgct_TeavmControllers$1() {
     cbgu_Pool.call(this);
     this.$this$071 = null;
@@ -46859,6 +46911,7 @@ cbgc_AbstractControllerManager$ManageCurrentControllerListener_axisMoved = ($thi
     $this.$this$08.$currentController = $controller;
     return 0;
 },
+kr_IntProgression$Companion = $rt_classWithoutFields(),
 kc_AbstractList$Companion = $rt_classWithoutFields(),
 kt_CharsKt__CharKt = $rt_classWithoutFields(kt_CharsKt__CharJVMKt),
 kt_CharsKt__CharKt_equals = ($$this$equals, $other, $ignoreCase) => {
@@ -46870,6 +46923,31 @@ kt_CharsKt__CharKt_equals = ($$this$equals, $other, $ignoreCase) => {
     $thisUpper = jl_Character_toUpperCase($$this$equals);
     $otherUpper = jl_Character_toUpperCase($other);
     return $thisUpper != $otherUpper && jl_Character_toLowerCase($thisUpper) != jl_Character_toLowerCase($otherUpper) ? 0 : 1;
+},
+ki_ProgressionUtilKt = $rt_classWithoutFields(),
+ki_ProgressionUtilKt_mod = ($a, $b) => {
+    let $mod;
+    $mod = $a % $b | 0;
+    if ($mod < 0)
+        $mod = $mod + $b | 0;
+    return $mod;
+},
+ki_ProgressionUtilKt_differenceModulo = ($a, $b, $c) => {
+    return ki_ProgressionUtilKt_mod(ki_ProgressionUtilKt_mod($a, $c) - ki_ProgressionUtilKt_mod($b, $c) | 0, $c);
+},
+ki_ProgressionUtilKt_getProgressionLastElement = ($start, $end, $step) => {
+    let var$4;
+    if ($step <= 0) {
+        if ($step >= 0) {
+            var$4 = new jl_IllegalArgumentException;
+            jl_RuntimeException__init_(var$4, $rt_s(2671));
+            $rt_throw(var$4);
+        }
+        if ($start > $end)
+            $end = $end + ki_ProgressionUtilKt_differenceModulo($start, $end,  -$step | 0) | 0;
+    } else if ($start < $end)
+        $end = $end - ki_ProgressionUtilKt_differenceModulo($end, $start, $step) | 0;
+    return $end;
 };
 function jnci_BufferedDecoder$Controller() {
     let a = this; jl_Object.call(a);
@@ -47201,19 +47279,159 @@ let ju_LinkedHashMapKeySet_iterator = $this => {
     var$1 = new ju_LinkedHashMapIterator$KeyIterator;
     ju_LinkedHashMapIterator__init_(var$1, $this.$base2, $this.$reversed);
     return var$1;
+},
+cvsw_WebLauncherKt = $rt_classWithoutFields(),
+cvsw_WebLauncherKt_access$mostrarAnuncioPremiado = ($nome, $aoTerminar) => {
+    let var$3, var$4, var$5, $$je;
+    var$3 = $rt_createBooleanArray(1);
+    var$4 = var$3.data;
+    var$4[0] = 0;
+    a: {
+        try {
+            var$5 = cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_3_0__init_(var$3, $aoTerminar);
+            cvsw_WebLauncherKt_mostrarAnuncioPremiadoJs$js_body$_2($rt_ustr($nome), otji_JS_function(otji_JSWrapper_unwrap(var$5), "recebeu"));
+            k_Unit_$callClinit();
+            $nome = k_Result_constructor_impl(k_Unit_INSTANCE);
+            break a;
+        } catch ($$e) {
+            $$je = $rt_wrapException($$e);
+            if ($$je instanceof jl_Throwable) {
+                $nome = $$je;
+                $nome = k_ResultKt_createFailure($nome);
+                k_Result_$callClinit();
+                break a;
+            } else {
+                throw $$e;
+            }
+        }
+    }
+    k_Result_$callClinit();
+    $nome = !($nome instanceof k_Result$Failure) ? null : $nome.$exception;
+    if ($nome !== null && !var$4[0]) {
+        var$4[0] = 1;
+        $aoTerminar.$invoke(jl_Boolean_valueOf(0));
+    }
+},
+cvsw_WebLauncherKt_access$decodificaBase64 = $texto => {
+    let var$2, var$3, var$4, var$5, var$6, var$7, var$8, var$9, var$10, var$11, var$12, var$13, var$14;
+    $texto = $texto;
+    var$2 = new jl_StringBuilder;
+    jl_AbstractStringBuilder__init_(var$2);
+    var$2 = var$2;
+    var$3 = 0;
+    var$4 = $texto;
+    var$5 = var$4.$nativeString.length;
+    while (var$3 < var$5) {
+        var$6 = jl_String_charAt(var$4, var$3);
+        if (kt_StringsKt__StringsKt_indexOf$default($rt_s(2672), var$6, 0, 0, 6, null) < 0 ? 0 : 1)
+            jl_AbstractStringBuilder_append0(var$2, var$6);
+        var$3 = var$3 + 1 | 0;
+    }
+    var$7 = jl_AbstractStringBuilder_toString(var$2);
+    var$8 = $rt_createByteArray((var$7.$nativeString.length * 3 | 0) / 4 | 0);
+    var$9 = var$8.data;
+    var$10 = 0;
+    var$5 = 0;
+    var$11 = 0;
+    var$12 = 0;
+    var$13 = var$7.$nativeString.length;
+    while (var$12 < var$13) {
+        var$14 = jl_String_charAt(var$7, var$12);
+        var$3 = kt_StringsKt__StringsKt_indexOf$default($rt_s(2672), var$14, 0, 0, 6, null);
+        if (var$3 >= 0) {
+            var$10 = var$10 << 6 | var$3;
+            var$5 = var$5 + 6 | 0;
+            if (var$5 >= 8) {
+                var$5 = var$5 + (-8) | 0;
+                var$3 = var$11 + 1 | 0;
+                var$9[var$11] = (var$10 >> var$5 & 255) << 24 >> 24;
+                var$11 = var$3;
+            }
+        }
+        var$12 = var$12 + 1 | 0;
+    }
+    if (var$11 != var$9.length) {
+        var$8 = ju_Arrays_copyOf(var$8, var$11);
+        kji_Intrinsics_checkNotNullExpressionValue(var$8, $rt_s(2673));
+    }
+    return var$8;
+},
+cvsw_WebLauncherKt_mostrarAnuncioPremiadoJs$js_body$_2 = (var$1, var$2) => {
+    if (typeof window.adBreak !== 'function') {
+        var$2.recebeu(false);
+        return;
+    }
+    var assistiu = false;
+    window.adBreak({ type : 'reward', name : var$1, beforeReward : function(mostrarAnuncio) {
+        mostrarAnuncio();
+    }, adViewed : function() {
+        assistiu = true;
+    }, adDismissed : function() {
+        assistiu = false;
+    }, afterAd : function() {
+    }, adBreakDone : function(info) {
+        var status = info && info.breakStatus;
+        if (status === 'viewed' || status === 'dismissed') {
+            window.__h5Frustradas = 0;
+        } else {
+            window.__h5Frustradas = (window.__h5Frustradas || 0) + 1;
+            if (window.__h5Frustradas >= 2) {
+                window.__h5SemAnuncio = true;
+            }
+        }
+        var$2.recebeu(assistiu);
+    } });
+},
+cvsw_WebLauncherKt_abrirSeletorDeFoto$js_body$_4 = var$1 => {
+    var entrada = document.createElement('input');
+    entrada.type = 'file';
+    entrada.accept = 'image/*';
+    entrada.style.display = 'none';
+    document.body.appendChild(entrada);
+    var encerra = function(valor) {
+        if (entrada.parentNode) {
+            entrada.parentNode.removeChild(entrada);
+        }
+        var$1.recebeu(valor);
+    };
+    entrada.onchange = function() {
+        var arquivo = entrada.files && entrada.files[0];
+        if (!arquivo) {
+            encerra(null);
+            return;
+        }
+        var endereco = URL.createObjectURL(arquivo);
+        var imagem = new Image();
+        imagem.onload = function() {
+            var lado = 512;
+            var escala = Math.min(1, lado / Math.max(imagem.width, imagem.height));
+            var tela = document.createElement('canvas');
+            tela.width = Math.max(1, Math.round(imagem.width * escala));
+            tela.height = Math.max(1, Math.round(imagem.height * escala));
+            (tela.getContext('2d')).drawImage(imagem, 0, 0, tela.width, tela.height);
+            URL.revokeObjectURL(endereco);
+            encerra(((tela.toDataURL('image/png')).split(','))[1]);
+        };
+        imagem.onerror = function() {
+            URL.revokeObjectURL(endereco);
+            encerra(null);
+        };
+        imagem.src = endereco;
+    };
+    entrada.click();
 };
 function cvs_CampaignMapScreen$show$1() {
     cbg_InputAdapter.call(this);
     this.$this$05 = null;
 }
-let cvs_CampaignMapScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $button) => {
+let cvs_CampaignMapScreen$show$1_touchUp = ($this, var$1, var$2, $pointer, $button) => {
     let $p, var$6, $$this$forEachIndexed$iv, $index$iv, var$9, $item$iv, $rect, $stage;
-    $p = cvs_BaseScreen_world($this.$this$05, $screenX, $screenY);
+    $p = cvs_BaseScreen_world($this.$this$05, var$1, var$2);
     if (cbgm_Rectangle_contains($this.$this$05.$previous1, $p.$x0, $p.$y0)) {
         $p = $this.$this$05;
         $p.$countryIndex0 = (($p.$countryIndex0 - 1 | 0) + 5 | 0) % 5 | 0;
         cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.0, 0.0, 6, null);
-    } else if (cbgm_Rectangle_contains($this.$this$05.$next6, $p.$x0, $p.$y0)) {
+    } else if (cbgm_Rectangle_contains($this.$this$05.$next5, $p.$x0, $p.$y0)) {
         $p = $this.$this$05;
         $p.$countryIndex0 = ($p.$countryIndex0 + 1 | 0) % 5 | 0;
         cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.0, 0.0, 6, null);
@@ -47227,7 +47445,7 @@ let cvs_CampaignMapScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer,
         var$9 = ju_AbstractList_iterator($$this$forEachIndexed$iv);
         while (ju_AbstractList$1_hasNext(var$9)) {
             $item$iv = ju_AbstractList$1_next(var$9);
-            $screenX = $index$iv + 1 | 0;
+            var$1 = $index$iv + 1 | 0;
             if ($index$iv < 0)
                 kc_CollectionsKt__CollectionsKt_throwIndexOverflow();
             $rect = $item$iv;
@@ -47237,7 +47455,7 @@ let cvs_CampaignMapScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer,
                 cvs_SkyVanguardGame_startStage$default(var$6.$game, $stage, 0, 2, null);
                 return 1;
             }
-            $index$iv = $screenX;
+            $index$iv = var$1;
         }
     }
     return 1;
@@ -47253,7 +47471,7 @@ let cvs_HangarScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $but
         $p = $this.$this$01;
         $p.$aircraftIndex = (($p.$aircraftIndex - 1 | 0) + 4 | 0) % 4 | 0;
         cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.0, 0.0, 6, null);
-    } else if (cbgm_Rectangle_contains($this.$this$01.$next5, $p.$x0, $p.$y0)) {
+    } else if (cbgm_Rectangle_contains($this.$this$01.$next4, $p.$x0, $p.$y0)) {
         $p = $this.$this$01;
         $p.$aircraftIndex = ($p.$aircraftIndex + 1 | 0) % 4 | 0;
         cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.0, 0.0, 6, null);
@@ -47305,14 +47523,14 @@ let cvs_HangarScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $but
         }
         if (!$screenX) {
             $p = $this.$this$01;
-            $p.$hangarMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($p.$game), $rt_s(975));
+            $p.$hangarMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($p.$game), $rt_s(976));
             $p = $this.$this$01;
             $p.$hangarMessageTimer = 2.4000000953674316;
             cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.6000000238418579, 0.7200000286102295);
         } else {
             cvs_SaveManager_setSelectedAircraft(cvs_SkyVanguardGame_getSaveManager($this.$this$01.$game), $this.$this$01.$aircraftIndex);
             $p = $this.$this$01;
-            $p.$hangarMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($p.$game), $rt_s(977));
+            $p.$hangarMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($p.$game), $rt_s(978));
             $p = $this.$this$01;
             $p.$hangarMessageTimer = 2.4000000953674316;
             cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(765), 1.0, 1.149999976158142);
@@ -47359,23 +47577,23 @@ let cvs_SettingsScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $b
             var$8 = cvs_SaveManager_getPilotName(cvs_SkyVanguardGame_getSaveManager($p.$game));
             $$this$firstOrNull$iv = $$this$firstOrNull$iv;
             cbg_Input$OnscreenKeyboardType_$callClinit();
-            cgxgtbw_WebInput_getTextInput($$this$firstOrNull$iv, $element$iv, $rt_s(1692), var$8, $rt_s(2672), cbg_Input$OnscreenKeyboardType_Default);
+            cgxgtbw_WebInput_getTextInput($$this$firstOrNull$iv, $element$iv, $rt_s(1694), var$8, $rt_s(2674), cbg_Input$OnscreenKeyboardType_Default);
             break b;
         }
         if (cbgm_Rectangle_contains($this.$this$0.$photoButton, $p.$x0, $p.$y0)) {
             cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$0.$game), $rt_s(768), 0.0, 0.0, 6, null);
             $p = $this.$this$0;
-            $p.$statusMessage = $rt_s(2673);
+            $p.$statusMessage = $rt_s(2675);
             $p.$statusTimer = 3.0;
             $element$iv = $p.$game.$platform;
             $$this$firstOrNull$iv = new cvs_SettingsScreen$pickPhoto$lambda$_2_0;
             $$this$firstOrNull$iv.$_034 = $p;
             $p = $element$iv;
             kji_Intrinsics_checkNotNullParameter($$this$firstOrNull$iv, $rt_s(838));
-            $element$iv = new cvsw_WebPlatformServices$pickPilotPhoto$lambda$_5_0;
-            $element$iv.$_059 = $p;
-            $element$iv.$_15 = $$this$firstOrNull$iv;
-            cvsw_WebLauncherKt_abrirSeletorDeFoto$js_body$_3(otji_JS_function(otji_JSWrapper_unwrap($element$iv), "recebeu"));
+            $element$iv = new cvsw_WebPlatformServices$pickPilotPhoto$lambda$_7_0;
+            $element$iv.$_058 = $p;
+            $element$iv.$_1 = $$this$firstOrNull$iv;
+            cvsw_WebLauncherKt_abrirSeletorDeFoto$js_body$_4(otji_JS_function(otji_JSWrapper_unwrap($element$iv), "recebeu"));
             break b;
         }
         if (cbgm_Rectangle_contains($this.$this$0.$graphics0, $p.$x0, $p.$y0)) {
@@ -47404,7 +47622,7 @@ let cvs_SettingsScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $b
         }
         if (cbgm_Rectangle_contains(cvs_SettingsScreen_access$getPrivacy$p($this.$this$0), $p.$x0, $p.$y0)) {
             cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(768), 0.0, 0.0, 6, null);
-            cvsw_WebPlatformServices_openUrl(cvs_SkyVanguardGame_getPlatform(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(2674));
+            cvsw_WebPlatformServices_openUrl(cvs_SkyVanguardGame_getPlatform(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(2676));
             break b;
         }
         if (!cbgm_Rectangle_contains(cvs_SettingsScreen_access$getBack$p($this.$this$0), $p.$x0, $p.$y0))
@@ -48080,7 +48298,7 @@ cbggg_PixmapTextureData_isPrepared = $this => {
 cbggg_PixmapTextureData_prepare = $this => {
     let var$1;
     var$1 = new cbgu_GdxRuntimeException;
-    jl_RuntimeException__init_(var$1, $rt_s(2675));
+    jl_RuntimeException__init_(var$1, $rt_s(2677));
     $rt_throw(var$1);
 },
 cbgm_MathUtils$Sin = $rt_classWithoutFields(),
@@ -48146,27 +48364,27 @@ cvs_PowerType_values = () => {
 },
 cvs_PowerType__clinit_ = () => {
     let var$1, var$2, var$3;
-    cvs_PowerType_ENERGY = cvs_PowerType__init_($rt_s(2676), 0);
-    cvs_PowerType_FIRE_RATE = cvs_PowerType__init_($rt_s(2677), 1);
-    cvs_PowerType_SPREAD = cvs_PowerType__init_($rt_s(1759), 2);
-    cvs_PowerType_MISSILE = cvs_PowerType__init_($rt_s(1084), 3);
-    cvs_PowerType_LASER = cvs_PowerType__init_($rt_s(1662), 4);
-    cvs_PowerType_SHIELD = cvs_PowerType__init_($rt_s(1040), 5);
-    cvs_PowerType_SPECIAL = cvs_PowerType__init_($rt_s(1041), 6);
-    cvs_PowerType_MULTIPLIER = cvs_PowerType__init_($rt_s(2678), 7);
-    cvs_PowerType_DRONE = cvs_PowerType__init_($rt_s(2679), 8);
-    cvs_PowerType_MAGNET = cvs_PowerType__init_($rt_s(2680), 9);
-    cvs_PowerType_CRITICAL = cvs_PowerType__init_($rt_s(1765), 10);
-    cvs_PowerType_CHAIN = cvs_PowerType__init_($rt_s(2681), 11);
-    cvs_PowerType_ARMOR = cvs_PowerType__init_($rt_s(1077), 12);
-    cvs_PowerType_REGEN = cvs_PowerType__init_($rt_s(2682), 13);
-    cvs_PowerType_PHOENIX = cvs_PowerType__init_($rt_s(2683), 14);
-    cvs_PowerType_ORBITAL = cvs_PowerType__init_($rt_s(2684), 15);
-    cvs_PowerType_TIME_CORE = cvs_PowerType__init_($rt_s(2685), 16);
-    cvs_PowerType_BLACK_HOLE = cvs_PowerType__init_($rt_s(2686), 17);
-    cvs_PowerType_BERSERK = cvs_PowerType__init_($rt_s(2687), 18);
-    cvs_PowerType_REFLECTOR = cvs_PowerType__init_($rt_s(2688), 19);
-    var$1 = cvs_PowerType__init_($rt_s(2689), 20);
+    cvs_PowerType_ENERGY = cvs_PowerType__init_($rt_s(2678), 0);
+    cvs_PowerType_FIRE_RATE = cvs_PowerType__init_($rt_s(2679), 1);
+    cvs_PowerType_SPREAD = cvs_PowerType__init_($rt_s(1761), 2);
+    cvs_PowerType_MISSILE = cvs_PowerType__init_($rt_s(1085), 3);
+    cvs_PowerType_LASER = cvs_PowerType__init_($rt_s(1664), 4);
+    cvs_PowerType_SHIELD = cvs_PowerType__init_($rt_s(1041), 5);
+    cvs_PowerType_SPECIAL = cvs_PowerType__init_($rt_s(1042), 6);
+    cvs_PowerType_MULTIPLIER = cvs_PowerType__init_($rt_s(2680), 7);
+    cvs_PowerType_DRONE = cvs_PowerType__init_($rt_s(2681), 8);
+    cvs_PowerType_MAGNET = cvs_PowerType__init_($rt_s(2682), 9);
+    cvs_PowerType_CRITICAL = cvs_PowerType__init_($rt_s(1767), 10);
+    cvs_PowerType_CHAIN = cvs_PowerType__init_($rt_s(2683), 11);
+    cvs_PowerType_ARMOR = cvs_PowerType__init_($rt_s(1078), 12);
+    cvs_PowerType_REGEN = cvs_PowerType__init_($rt_s(2684), 13);
+    cvs_PowerType_PHOENIX = cvs_PowerType__init_($rt_s(2685), 14);
+    cvs_PowerType_ORBITAL = cvs_PowerType__init_($rt_s(2686), 15);
+    cvs_PowerType_TIME_CORE = cvs_PowerType__init_($rt_s(2687), 16);
+    cvs_PowerType_BLACK_HOLE = cvs_PowerType__init_($rt_s(2688), 17);
+    cvs_PowerType_BERSERK = cvs_PowerType__init_($rt_s(2689), 18);
+    cvs_PowerType_REFLECTOR = cvs_PowerType__init_($rt_s(2690), 19);
+    var$1 = cvs_PowerType__init_($rt_s(2691), 20);
     cvs_PowerType_CLONE = var$1;
     var$2 = $rt_createArray(cvs_PowerType, 21);
     var$3 = var$2.data;
@@ -48220,7 +48438,7 @@ let cgxgtbwa_AssetLoadImpl$6_onSuccess = ($this, $url, $result) => {
     $url = $this.$val$assetPath;
     $output = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($output);
-    jl_StringBuilder_append(jl_StringBuilder_append($output, $rt_s(2690)), $url);
+    jl_StringBuilder_append(jl_StringBuilder_append($output, $rt_s(2692)), $url);
     jl_AbstractStringBuilder_toString($output);
     $byteArray = cgxgtbwdt_TypedArrays_toByteArray($result.$data15);
     $output = cgxgtbw_WebFileHandle_write($this.$val$fileHandle, 0, 4096);
@@ -48231,8 +48449,8 @@ let cgxgtbwa_AssetLoadImpl$6_onSuccess = ($this, $url, $result) => {
             $ex = $this.$val$assetPath;
             var$4 = var$7.length;
             var$8 = jl_StringBuilder__init_();
-            jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(2691)), $ex), $rt_s(277)), var$4);
-            cgxgtbwa_AssetLoadImpl_log($url, $rt_s(2692), jl_StringBuilder_toString(var$8));
+            jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(2693)), $ex), $rt_s(277)), var$4);
+            cgxgtbwa_AssetLoadImpl_log($url, $rt_s(2694), jl_StringBuilder_toString(var$8));
             cgxgtbwf_FileDB$1_write($output, $byteArray);
             break a;
         } catch ($$e) {
@@ -48243,8 +48461,8 @@ let cgxgtbwa_AssetLoadImpl$6_onSuccess = ($this, $url, $result) => {
                 $url = $this.$val$assetPath;
                 var$8 = jl_String_valueOf($ex);
                 var$9 = jl_StringBuilder__init_();
-                jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(2693)), $url), $rt_s(269)), var$8);
-                cgxgtbwa_AssetLoadImpl_log($result, $rt_s(2692), jl_StringBuilder_toString(var$9));
+                jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(2695)), $url), $rt_s(269)), var$8);
+                cgxgtbwa_AssetLoadImpl_log($result, $rt_s(2694), jl_StringBuilder_toString(var$9));
                 var$8 = new cbgu_GdxRuntimeException;
                 $data = jl_String_valueOf($this.$val$fileHandle);
                 var$9 = jl_String_valueOf(cgxgtbw_WebFileHandle_type($this.$val$fileHandle));
@@ -48258,7 +48476,7 @@ let cgxgtbwa_AssetLoadImpl$6_onSuccess = ($this, $url, $result) => {
                 $result = $this.$val$assetPath;
                 $output = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($output);
-                jl_StringBuilder_append(jl_StringBuilder_append($output, $rt_s(2694)), $result);
+                jl_StringBuilder_append(jl_StringBuilder_append($output, $rt_s(2696)), $result);
                 jl_AbstractStringBuilder_toString($output);
                 $rt_throw($url);
             }
@@ -48268,7 +48486,7 @@ let cgxgtbwa_AssetLoadImpl$6_onSuccess = ($this, $url, $result) => {
     $url = $this.$val$assetPath;
     $result = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($result);
-    jl_StringBuilder_append(jl_StringBuilder_append($result, $rt_s(2694)), $url);
+    jl_StringBuilder_append(jl_StringBuilder_append($result, $rt_s(2696)), $url);
     jl_AbstractStringBuilder_toString($result);
     $url = $this.$val$listener1;
     if ($url !== null) {
@@ -48288,7 +48506,7 @@ let cgxgtbwa_AssetLoadImpl$6_onSuccess = ($this, $url, $result) => {
             $output = $byteArray[var$11];
             $ex = new jl_StringBuilder;
             jl_AbstractStringBuilder__init_($ex);
-            jl_StringBuilder_append(jl_StringBuilder_append($ex, $rt_s(2695)), $output);
+            jl_StringBuilder_append(jl_StringBuilder_append($ex, $rt_s(2697)), $output);
             jl_AbstractStringBuilder_toString($ex);
             var$7 = (jl_String_split($output, $rt_s(239))).data;
             var$12 = var$7.length;
@@ -48296,7 +48514,7 @@ let cgxgtbwa_AssetLoadImpl$6_onSuccess = ($this, $url, $result) => {
                 $url = new cbgu_GdxRuntimeException;
                 $result = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($result);
-                $ex = jl_StringBuilder_append0(jl_StringBuilder_append($result, $rt_s(2696)), var$12);
+                $ex = jl_StringBuilder_append0(jl_StringBuilder_append($result, $rt_s(2698)), var$12);
                 jl_AbstractStringBuilder_append0($ex, 32);
                 jl_StringBuilder_append($ex, $output);
                 jl_RuntimeException__init_($url, jl_AbstractStringBuilder_toString($result));
@@ -48305,12 +48523,12 @@ let cgxgtbwa_AssetLoadImpl$6_onSuccess = ($this, $url, $result) => {
             $output = var$7[0];
             $ex = var$7[1];
             $data = jl_String_trim(var$7[2]);
-            var$12 = jl_String_equals(var$7[4], $rt_s(2697));
+            var$12 = jl_String_equals(var$7[4], $rt_s(2699));
             $data = jl_String_trim($data);
             if (!jl_String_isEmpty($data)) {
                 cbg_Files$FileType_$callClinit();
                 var$8 = cbg_Files$FileType_Internal;
-                if (jl_String_equals($output, $rt_s(2698)))
+                if (jl_String_equals($output, $rt_s(2700)))
                     var$8 = cbg_Files$FileType_Classpath;
                 else if (jl_String_equals($output, $rt_s(2396)))
                     var$8 = cbg_Files$FileType_Local;
@@ -48394,13 +48612,6 @@ function jnci_BufferedEncoder$Controller() {
 let jnci_BufferedEncoder$Controller_hasMoreOutput = ($this, $sz) => {
     return jn_Buffer_remaining($this.$out0) < $sz ? 0 : 1;
 };
-function kr_IntProgressionIterator() {
-    let a = this; kc_IntIterator.call(a);
-    a.$step1 = 0;
-    a.$finalElement = 0;
-    a.$hasNext3 = 0;
-    a.$next4 = 0;
-}
 function kt_DelimitedRangesSequence$iterator$1() {
     let a = this; jl_Object.call(a);
     a.$nextState = 0;
@@ -48436,9 +48647,9 @@ let kt_DelimitedRangesSequence$iterator$1_calcNext = $this => {
                     var$6 = var$6;
                     $match = $match;
                     var$7 = var$5.$_04;
-                    $index = var$5.$_10;
+                    $index = var$5.$_11;
                     var$8 = $match.$value;
-                    kji_Intrinsics_checkNotNullParameter(var$6, $rt_s(2699));
+                    kji_Intrinsics_checkNotNullParameter(var$6, $rt_s(2701));
                     $match = kt_StringsKt__StringsKt_findAnyOf$StringsKt__StringsKt(var$6, var$7, var$8, $index, 0);
                     $match = $match === null ? null : k_TuplesKt_to($match.$first4, jl_Integer_valueOf($match.$second.$nativeString.length));
                     if ($match === null) {
@@ -48640,12 +48851,12 @@ cbgu_Justify_matchChar = ($this, $ch) => {
 cbgu_Justify__clinit_ = () => {
     let var$1, var$2, var$3;
     cbgu_Justify_None = cbgu_Justify__init_($rt_s(44), 0);
-    cbgu_Justify_ParagraphBySpace = cbgu_Justify__init_($rt_s(2700), 1);
-    cbgu_Justify_ParagraphByGlyph = cbgu_Justify__init_($rt_s(2701), 2);
-    cbgu_Justify_WrappedLinesBySpace = cbgu_Justify__init_($rt_s(2702), 3);
-    cbgu_Justify_WrappedLinesByGlyph = cbgu_Justify__init_($rt_s(2703), 4);
-    cbgu_Justify_AllLinesBySpace = cbgu_Justify__init_($rt_s(2704), 5);
-    var$1 = cbgu_Justify__init_($rt_s(2705), 6);
+    cbgu_Justify_ParagraphBySpace = cbgu_Justify__init_($rt_s(2702), 1);
+    cbgu_Justify_ParagraphByGlyph = cbgu_Justify__init_($rt_s(2703), 2);
+    cbgu_Justify_WrappedLinesBySpace = cbgu_Justify__init_($rt_s(2704), 3);
+    cbgu_Justify_WrappedLinesByGlyph = cbgu_Justify__init_($rt_s(2705), 4);
+    cbgu_Justify_AllLinesBySpace = cbgu_Justify__init_($rt_s(2706), 5);
+    var$1 = cbgu_Justify__init_($rt_s(2707), 6);
     cbgu_Justify_AllLinesByGlyph = var$1;
     var$2 = $rt_createArray(cbgu_Justify, 7);
     var$3 = var$2.data;
@@ -48824,7 +49035,7 @@ let cgxgtbwa_AssetDownloadImpl$1_onFailure = ($this, $url) => {
         var$2 = jl_System_err();
         var$3 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$3);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2706)), $url);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2708)), $url);
         var$3 = jl_AbstractStringBuilder_toString(var$3);
         otcic_JsConsolePrintStream_println(var$2, var$3);
     }
@@ -48841,7 +49052,7 @@ let cgxgtbwa_AssetDownloadImpl$1_onFailure = ($this, $url) => {
         $url = var$2.$val$assetPath;
         var$3 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$3);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2707)), $url);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2709)), $url);
         jl_AbstractStringBuilder_toString(var$3);
         cgxgtbwa_AssetLoadImpl_downloadMultiAssets(var$2.$this$06);
     }
@@ -48852,13 +49063,13 @@ cgxgtbwa_AssetDownloadImpl$1_onSuccess = ($this, var$1, var$2) => {
     var$3 = var$2 === null ? 0 : 1;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(278)), var$1), $rt_s(2708)), var$3);
+    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(278)), var$1), $rt_s(2710)), var$3);
     jl_AbstractStringBuilder_toString(var$4);
     if ($this.$this$019.$showLogs) {
         var$5 = jl_System_out();
         var$6 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$6);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(2709)), var$1);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(2711)), var$1);
         var$4 = jl_AbstractStringBuilder_toString(var$6);
         otcic_JsConsolePrintStream_println(var$5, var$4);
     }
@@ -48900,8 +49111,8 @@ cbggg_HdpiMode__init_ = (var_0, var_1) => {
 },
 cbggg_HdpiMode__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbggg_HdpiMode_Logical = cbggg_HdpiMode__init_($rt_s(2710), 0);
-    var$1 = cbggg_HdpiMode__init_($rt_s(2711), 1);
+    cbggg_HdpiMode_Logical = cbggg_HdpiMode__init_($rt_s(2712), 0);
+    var$1 = cbggg_HdpiMode__init_($rt_s(2713), 1);
     cbggg_HdpiMode_Pixels = var$1;
     var$2 = $rt_createArray(cbggg_HdpiMode, 2);
     var$3 = var$2.data;
@@ -48931,7 +49142,7 @@ cbgggf_FreeType$Glyph_toBitmap = ($this, $renderMode) => {
     $renderMode = Module._c_FreeType_getLastErrorCode();
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2712)), $renderMode);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2714)), $renderMode);
     jl_RuntimeException__init_(var$3, jl_AbstractStringBuilder_toString(var$4));
     $rt_throw(var$3);
 },
@@ -48939,7 +49150,7 @@ cbgggf_FreeType$Glyph_getBitmap = $this => {
     let var$1;
     if (!$this.$rendered) {
         var$1 = new cbgu_GdxRuntimeException;
-        jl_RuntimeException__init_(var$1, $rt_s(2713));
+        jl_RuntimeException__init_(var$1, $rt_s(2715));
         $rt_throw(var$1);
     }
     var$1 = new cbgggf_FreeType$Bitmap;
@@ -48951,7 +49162,7 @@ cbgggf_FreeType$Glyph_getLeft = $this => {
     if ($this.$rendered)
         return Module._c_Glyph_getLeft($this.$address);
     var$1 = new cbgu_GdxRuntimeException;
-    jl_RuntimeException__init_(var$1, $rt_s(2713));
+    jl_RuntimeException__init_(var$1, $rt_s(2715));
     $rt_throw(var$1);
 },
 cbgggf_FreeType$Glyph_getTop = $this => {
@@ -48959,7 +49170,7 @@ cbgggf_FreeType$Glyph_getTop = $this => {
     if ($this.$rendered)
         return Module._c_Glyph_getTop($this.$address);
     var$1 = new cbgu_GdxRuntimeException;
-    jl_RuntimeException__init_(var$1, $rt_s(2713));
+    jl_RuntimeException__init_(var$1, $rt_s(2715));
     $rt_throw(var$1);
 },
 cbgggf_FreeType$Bitmap = $rt_classWithoutFields(cbgggf_FreeType$Pointer),
@@ -49106,13 +49317,13 @@ let cvs_ShopScreen__init_0 = ($this, var$1) => {
     var$3 = var$2.data;
     var$1 = new cvs_ShopScreen$Offer;
     cvs_PowerType_$callClinit();
-    cvs_ShopScreen$Offer__init_0(var$1, cvs_PowerType_FIRE_RATE, $rt_s(1650), $rt_s(1652), 18);
+    cvs_ShopScreen$Offer__init_0(var$1, cvs_PowerType_FIRE_RATE, $rt_s(1652), $rt_s(1654), 18);
     var$3[0] = var$1;
-    var$3[1] = cvs_ShopScreen$Offer__init_(cvs_PowerType_SPREAD, $rt_s(1654), $rt_s(1656), 22);
-    var$3[2] = cvs_ShopScreen$Offer__init_(cvs_PowerType_MISSILE, $rt_s(1658), $rt_s(1660), 26);
-    var$3[3] = cvs_ShopScreen$Offer__init_(cvs_PowerType_LASER, $rt_s(1662), $rt_s(1664), 30);
-    var$3[4] = cvs_ShopScreen$Offer__init_(cvs_PowerType_ARMOR, $rt_s(988), $rt_s(1667), 28);
-    var$3[5] = cvs_ShopScreen$Offer__init_(cvs_PowerType_CRITICAL, $rt_s(1669), $rt_s(1671), 34);
+    var$3[1] = cvs_ShopScreen$Offer__init_(cvs_PowerType_SPREAD, $rt_s(1656), $rt_s(1658), 22);
+    var$3[2] = cvs_ShopScreen$Offer__init_(cvs_PowerType_MISSILE, $rt_s(1660), $rt_s(1662), 26);
+    var$3[3] = cvs_ShopScreen$Offer__init_(cvs_PowerType_LASER, $rt_s(1664), $rt_s(1666), 30);
+    var$3[4] = cvs_ShopScreen$Offer__init_(cvs_PowerType_ARMOR, $rt_s(989), $rt_s(1669), 28);
+    var$3[5] = cvs_ShopScreen$Offer__init_(cvs_PowerType_CRITICAL, $rt_s(1671), $rt_s(1673), 34);
     $this.$offers = kc_CollectionsKt__CollectionsKt_listOf(var$2);
     var$1 = ju_ArrayList__init_0(6);
     var$4 = 0;
@@ -49137,22 +49348,22 @@ cvs_ShopScreen_offerKey = ($this, $p) => {
             case 1:
                 break;
             case 2:
-                $p = $rt_s(1653);
+                $p = $rt_s(1655);
                 break a;
             case 3:
-                $p = $rt_s(1657);
+                $p = $rt_s(1659);
                 break a;
             case 4:
-                $p = $rt_s(1661);
+                $p = $rt_s(1663);
                 break a;
             case 5:
-                $p = $rt_s(1665);
+                $p = $rt_s(1667);
                 break a;
             default:
-                $p = $rt_s(1668);
+                $p = $rt_s(1670);
                 break a;
         }
-        $p = $rt_s(1649);
+        $p = $rt_s(1651);
     }
     return $p;
 },
@@ -49183,9 +49394,9 @@ cvs_ShopScreen_render = ($this, $delta) => {
     cbgg_Color_$callClinit();
     var$5 = cbgg_Color_WHITE;
     kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(822));
-    cvs_BaseScreen_drawTracked($this, $rt_s(2714), 540.0, 1810.0, $rect, var$5, 8.0);
-    cvs_BaseScreen_drawCentered($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1636)), 1735.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.44999998807907104, 0.9399999976158142, 1.0, 1.0));
-    $$this$forEachIndexed$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(973));
+    cvs_BaseScreen_drawTracked($this, $rt_s(2716), 540.0, 1810.0, $rect, var$5, 8.0);
+    cvs_BaseScreen_drawCentered($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1638)), 1735.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.44999998807907104, 0.9399999976158142, 1.0, 1.0));
+    $$this$forEachIndexed$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(974));
     $index$iv = (cvs_SkyVanguardGame_getSaveManager($this.$game)).$creditsCache;
     $item$iv = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($item$iv);
@@ -49204,7 +49415,7 @@ cvs_ShopScreen_render = ($this, $delta) => {
     }
     if ($this.$messageTimer > 0.0)
         cvs_BaseScreen_drawCentered($this, $this.$message, 265.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.36000001430511475, 0.8199999928474426, 1.0));
-    cvs_BaseScreen_drawButton$default(var$3, $this.$back1, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1638)), 0, 4, null);
+    cvs_BaseScreen_drawButton$default(var$3, $this.$back1, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1640)), 0, 4, null);
     cvs_GamepadInput_poll($this.$game.$gamepad);
     if (cvs_GamepadInput_getJustB($this.$game.$gamepad)) {
         cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.0, 0.0, 6, null);
@@ -49227,7 +49438,7 @@ cvs_ShopScreen_drawOffer = ($this, $rect, $offer) => {
     var$12 = cbgg_Color_WHITE;
     kji_Intrinsics_checkNotNullExpressionValue(var$12, $rt_s(822));
     cvs_BaseScreen_drawLabel($this, var$8, var$9, var$10, var$11, var$12);
-    var$8 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(981));
+    var$8 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(982));
     $affordable = cvs_ShopScreen_allowedMax($this);
     var$11 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$11);
@@ -49242,12 +49453,12 @@ cvs_ShopScreen_drawOffer = ($this, $rect, $offer) => {
     var$8 = cvs_ShopScreen_offerKey($this, var$8);
     var$11 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$11);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$11, var$8), $rt_s(2715));
+    jl_StringBuilder_append(jl_StringBuilder_append(var$11, var$8), $rt_s(2717));
     cvs_BaseScreen_drawLabel($this, cvs_LocalizationManager_get($offer, jl_AbstractStringBuilder_toString(var$11)), $rect.$x + 24.0, $rect.$y + 118.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.7200000286102295, 0.8399999737739563, 0.9399999976158142, 1.0));
     if ($capped)
-        $offer = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(983));
+        $offer = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(984));
     else {
-        $offer = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(973));
+        $offer = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(974));
         var$8 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$8);
         var$11 = jl_StringBuilder_append0(var$8, $cost);
@@ -49265,13 +49476,13 @@ otjb_TimerHandler = $rt_classWithoutFields(0);
 function cgxgtbwa_AssetDownloadImpl$loadBinary$lambda$_3_0() {
     let a = this; jl_Object.call(a);
     a.$_037 = null;
-    a.$_114 = null;
+    a.$_115 = null;
     a.$_26 = null;
     a.$_34 = 0;
 }
 let cgxgtbwa_AssetDownloadImpl$loadBinary$lambda$_3_0_onTimer$exported$0 = var$1 => {
     var$1 = var$1;
-    cgxgtbwa_AssetDownloadImpl_loadBinaryInternally(var$1.$_037, 1, var$1.$_114, var$1.$_26, var$1.$_34);
+    cgxgtbwa_AssetDownloadImpl_loadBinaryInternally(var$1.$_037, 1, var$1.$_115, var$1.$_26, var$1.$_34);
 };
 function cvs_GameplayScreen() {
     let a = this; cvs_BaseScreen.call(a);
@@ -49471,23 +49682,23 @@ let cvs_GameplayScreen__init_0 = ($this, $game, $stageIndex) => {
     var$4 = var$3.data;
     var$5 = new cvs_GameplayScreen$ShopOffer;
     cvs_PowerType_$callClinit();
-    cvs_GameplayScreen$ShopOffer__init_0(var$5, $rt_s(1679), cvs_PowerType_ENERGY, 180);
+    cvs_GameplayScreen$ShopOffer__init_0(var$5, $rt_s(1681), cvs_PowerType_ENERGY, 180);
     var$4[0] = var$5;
-    var$4[1] = cvs_GameplayScreen$ShopOffer__init_($rt_s(1681), cvs_PowerType_FIRE_RATE, 220);
-    var$4[2] = cvs_GameplayScreen$ShopOffer__init_($rt_s(1683), cvs_PowerType_SPREAD, 270);
-    var$4[3] = cvs_GameplayScreen$ShopOffer__init_($rt_s(1685), cvs_PowerType_SHIELD, 340);
-    var$4[4] = cvs_GameplayScreen$ShopOffer__init_($rt_s(1687), null, 300);
-    var$4[5] = cvs_GameplayScreen$ShopOffer__init_($rt_s(1689), cvs_PowerType_SPECIAL, 450);
+    var$4[1] = cvs_GameplayScreen$ShopOffer__init_($rt_s(1683), cvs_PowerType_FIRE_RATE, 220);
+    var$4[2] = cvs_GameplayScreen$ShopOffer__init_($rt_s(1685), cvs_PowerType_SPREAD, 270);
+    var$4[3] = cvs_GameplayScreen$ShopOffer__init_($rt_s(1687), cvs_PowerType_SHIELD, 340);
+    var$4[4] = cvs_GameplayScreen$ShopOffer__init_($rt_s(1689), null, 300);
+    var$4[5] = cvs_GameplayScreen$ShopOffer__init_($rt_s(1691), cvs_PowerType_SPECIAL, 450);
     $this.$shopOffers = kc_CollectionsKt__CollectionsKt_listOf(var$3);
     $this.$missileRegion$delegate = k_LazyKt__LazyJVMKt_lazy(cvs_GameplayScreen$_init_$lambda$_0_0__init_($game));
     $this.$superMissileRegion$delegate = k_LazyKt__LazyJVMKt_lazy(cvs_GameplayScreen$_init_$lambda$_0_1__init_($game));
     var$3 = $rt_createArray(ju_List, 5);
     var$6 = var$3.data;
-    var$6[0] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2716), $rt_s(2717), $rt_s(2718), $rt_s(2719), $rt_s(2720), $rt_s(2721)]));
-    var$6[1] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2722), $rt_s(2723), $rt_s(2724), $rt_s(2725), $rt_s(2726), $rt_s(2727)]));
-    var$6[2] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2728), $rt_s(2729), $rt_s(2730), $rt_s(2731), $rt_s(2732), $rt_s(2733)]));
-    var$6[3] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2734), $rt_s(2735), $rt_s(2736), $rt_s(2737), $rt_s(2738), $rt_s(2739)]));
-    var$6[4] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2740), $rt_s(2741), $rt_s(2742), $rt_s(2743), $rt_s(2744), $rt_s(2745)]));
+    var$6[0] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2718), $rt_s(2719), $rt_s(2720), $rt_s(2721), $rt_s(2722), $rt_s(2723)]));
+    var$6[1] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2724), $rt_s(2725), $rt_s(2726), $rt_s(2727), $rt_s(2728), $rt_s(2729)]));
+    var$6[2] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2730), $rt_s(2731), $rt_s(2732), $rt_s(2733), $rt_s(2734), $rt_s(2735)]));
+    var$6[3] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2736), $rt_s(2737), $rt_s(2738), $rt_s(2739), $rt_s(2740), $rt_s(2741)]));
+    var$6[4] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2742), $rt_s(2743), $rt_s(2744), $rt_s(2745), $rt_s(2746), $rt_s(2747)]));
     $this.$stageBackgrounds = kc_CollectionsKt__CollectionsKt_listOf(var$3);
     $this.$firePointer = (-1);
     $this.$fireButton = cbgm_Rectangle__init_(828.0, 300.0, 190.0, 190.0);
@@ -49599,7 +49810,7 @@ cvs_GameplayScreen_getHighLevelPowers = $this => {
 cvs_GameplayScreen_getOverloadActive = $this => {
     let $$this$all$iv, var$2;
     a: {
-        if ((cvs_GameplayScreen_getHighLevelPowers($this)).$size2 >= 5) {
+        if ((cvs_GameplayScreen_getHighLevelPowers($this)).$size1 >= 5) {
             b: {
                 $$this$all$iv = cvs_GameplayScreen_getHighLevelPowers($this);
                 if ($rt_isInstance($$this$all$iv, ju_Collection) && ju_AbstractCollection_isEmpty($$this$all$iv))
@@ -49646,7 +49857,7 @@ cvs_GameplayScreen_show = $this => {
     var$4 = $this.$stage0.$countryIndex;
     var$3 = (0 > var$4 ? 0 : var$4 >= var$3.$size() ? 0 : 1) ? var$3.$get(var$4) : kc_CollectionsKt__CollectionsKt_emptyList();
     var$5 = $this.$stage0.$phase - 1 | 0;
-    var$3 = (0 > var$5 ? 0 : var$5 >= var$3.$size() ? 0 : 1) ? var$3.$get(var$5) : $rt_s(2716);
+    var$3 = (0 > var$5 ? 0 : var$5 >= var$3.$size() ? 0 : 1) ? var$3.$get(var$5) : $rt_s(2718);
     cbgg_Texture__init_0(var$1, cgxgtbw_WebFiles_internal($lastCountry, var$3));
     cbgg_Texture$TextureFilter_$callClinit();
     $lastCountry = cbgg_Texture$TextureFilter_Linear;
@@ -49667,7 +49878,7 @@ cvs_GameplayScreen_show = $this => {
     $this.$playerLifePercent = 100.0;
     $this.$lives = 3;
     cvs_GameplayScreen_setShield($this, $this.$shieldMax);
-    $lastCountry = cgxgtbw_WebPreferences_getString((cvs_SkyVanguardGame_getSaveManager($this.$game)).$prefs, $rt_s(2746), $rt_s(66));
+    $lastCountry = cgxgtbw_WebPreferences_getString((cvs_SkyVanguardGame_getSaveManager($this.$game)).$prefs, $rt_s(2748), $rt_s(66));
     kji_Intrinsics_checkNotNullExpressionValue($lastCountry, $rt_s(750));
     var$5 = $lastCountry.$nativeString.length <= 0 ? 0 : 1;
     if (var$5 && !kji_Intrinsics_areEqual($lastCountry, $this.$stage0.$country0))
@@ -49675,7 +49886,7 @@ cvs_GameplayScreen_show = $this => {
     var$1 = cvs_SkyVanguardGame_getSaveManager($this.$game);
     var$3 = $this.$stage0.$country0;
     kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(2458));
-    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putString(var$1.$prefs, $rt_s(2746), var$3));
+    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putString(var$1.$prefs, $rt_s(2748), var$3));
     cvs_GameplayScreen_recomputePowerState($this);
     if ($this.$game.$pendingRewardMessage.$nativeString.length <= 0 ? 0 : 1) {
         $lastCountry = $this.$game;
@@ -49686,7 +49897,7 @@ cvs_GameplayScreen_show = $this => {
     var$5 = ($this.$stage0.$globalIndex % 15 | 0) + 1 | 0;
     var$1 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$1);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$1, $rt_s(2747)), var$5);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$1, $rt_s(2749)), var$5);
     $lastCountry = jl_AbstractStringBuilder_toString(var$1);
     cvs_AudioManager_playMusic(cvs_SkyVanguardGame_getAudioManager($this.$game), $lastCountry);
     var$1 = cbg_Gdx_input;
@@ -50040,54 +50251,49 @@ cvs_GameplayScreen_loadEnemyVisuals = $this => {
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-18.0)), jl_Float_valueOf(44.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(18.0), jl_Float_valueOf(44.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2748), $rt_s(2749), 126.0, 126.0, 180.0, 42.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2750), $rt_s(2751), 126.0, 126.0, 180.0, 42.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-58.0)), jl_Float_valueOf(45.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(58.0), jl_Float_valueOf(45.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2544), $rt_s(2750), 220.0, 176.0, 180.0, 76.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2542), $rt_s(2752), 220.0, 176.0, 180.0, 76.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-36.0)), jl_Float_valueOf((-8.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(36.0), jl_Float_valueOf((-8.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2751), $rt_s(2752), 116.0, 116.0, 0.0, 40.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2753), $rt_s(2754), 116.0, 116.0, 0.0, 40.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf((-45.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2753), $rt_s(2754), 132.0, 132.0, 0.0, 56.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2755), $rt_s(2756), 132.0, 132.0, 0.0, 56.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf(72.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2550), $rt_s(2755), 128.0, 176.0, 180.0, 60.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2548), $rt_s(2757), 128.0, 176.0, 180.0, 60.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-28.0)), jl_Float_valueOf((-42.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(28.0), jl_Float_valueOf((-42.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2531), $rt_s(2756), 132.0, 132.0, 0.0, 58.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2529), $rt_s(2758), 132.0, 132.0, 0.0, 58.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf(52.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2526), $rt_s(2757), 132.0, 132.0, 180.0, 54.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2524), $rt_s(2759), 132.0, 132.0, 180.0, 54.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(45.0), jl_Float_valueOf(0.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2758), $rt_s(2759), 132.0, 132.0, (-90.0), 54.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2760), $rt_s(2761), 132.0, 132.0, (-90.0), 54.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-26.0)), jl_Float_valueOf(90.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(26.0), jl_Float_valueOf(90.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2521), $rt_s(2760), 118.0, 232.0, 180.0, 76.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2519), $rt_s(2762), 118.0, 232.0, 180.0, 76.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-24.0)), jl_Float_valueOf((-36.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(24.0), jl_Float_valueOf((-36.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2761), $rt_s(2762), 132.0, 132.0, 0.0, 58.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2763), $rt_s(2764), 132.0, 132.0, 0.0, 58.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-18.0)), jl_Float_valueOf(78.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(18.0), jl_Float_valueOf(78.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2605), $rt_s(2763), 96.0, 202.0, 180.0, 62.0, var$1);
-    var$1 = $rt_createArray(k_Pair, 2);
-    var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-18.0)), jl_Float_valueOf(44.0));
-    var$2[1] = k_TuplesKt_to(jl_Float_valueOf(18.0), jl_Float_valueOf(44.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2764), $rt_s(2765), 126.0, 126.0, 180.0, 42.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2603), $rt_s(2765), 96.0, 202.0, 180.0, 62.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-18.0)), jl_Float_valueOf(44.0));
@@ -50095,72 +50301,77 @@ cvs_GameplayScreen_loadEnemyVisuals = $this => {
     cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2766), $rt_s(2767), 126.0, 126.0, 180.0, 42.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
+    var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-18.0)), jl_Float_valueOf(44.0));
+    var$2[1] = k_TuplesKt_to(jl_Float_valueOf(18.0), jl_Float_valueOf(44.0));
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2768), $rt_s(2769), 126.0, 126.0, 180.0, 42.0, var$1);
+    var$1 = $rt_createArray(k_Pair, 2);
+    var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-34.0)), jl_Float_valueOf(30.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(34.0), jl_Float_valueOf(30.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2768), $rt_s(2769), 116.0, 116.0, 180.0, 40.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2770), $rt_s(2771), 116.0, 116.0, 180.0, 40.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-58.0)), jl_Float_valueOf(45.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(58.0), jl_Float_valueOf(45.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2770), $rt_s(2771), 220.0, 176.0, 180.0, 76.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2772), $rt_s(2773), 220.0, 176.0, 180.0, 76.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf(72.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2772), $rt_s(2773), 132.0, 176.0, 180.0, 60.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2774), $rt_s(2775), 132.0, 176.0, 180.0, 60.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-22.0)), jl_Float_valueOf((-44.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(22.0), jl_Float_valueOf((-44.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2774), $rt_s(2775), 136.0, 136.0, 0.0, 46.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2776), $rt_s(2777), 136.0, 136.0, 0.0, 46.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-56.0)), jl_Float_valueOf(44.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(56.0), jl_Float_valueOf(44.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2776), $rt_s(2777), 196.0, 147.0, 180.0, 66.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2778), $rt_s(2779), 196.0, 147.0, 180.0, 66.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-24.0)), jl_Float_valueOf((-44.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(24.0), jl_Float_valueOf((-44.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2778), $rt_s(2779), 148.0, 148.0, 0.0, 50.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2780), $rt_s(2781), 148.0, 148.0, 0.0, 50.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf((-34.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2780), $rt_s(2781), 156.0, 85.0, 0.0, 46.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2782), $rt_s(2783), 156.0, 85.0, 0.0, 46.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-46.0)), jl_Float_valueOf((-52.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(46.0), jl_Float_valueOf((-52.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2782), $rt_s(2783), 210.0, 158.0, 0.0, 74.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2784), $rt_s(2785), 210.0, 158.0, 0.0, 74.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-46.0)), jl_Float_valueOf(52.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(46.0), jl_Float_valueOf(52.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2784), $rt_s(2785), 210.0, 158.0, 180.0, 74.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2786), $rt_s(2787), 210.0, 158.0, 180.0, 74.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-46.0)), jl_Float_valueOf((-52.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(46.0), jl_Float_valueOf((-52.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2786), $rt_s(2787), 210.0, 158.0, 0.0, 74.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2788), $rt_s(2789), 210.0, 158.0, 0.0, 74.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-40.0)), jl_Float_valueOf((-48.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(40.0), jl_Float_valueOf((-48.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2788), $rt_s(2789), 210.0, 158.0, 0.0, 72.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2790), $rt_s(2791), 210.0, 158.0, 0.0, 72.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-38.0)), jl_Float_valueOf((-56.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(38.0), jl_Float_valueOf((-56.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2790), $rt_s(2791), 180.0, 180.0, 0.0, 70.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2792), $rt_s(2793), 180.0, 180.0, 0.0, 70.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-34.0)), jl_Float_valueOf(58.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(34.0), jl_Float_valueOf(58.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2792), $rt_s(2793), 176.0, 176.0, 180.0, 68.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2794), $rt_s(2795), 176.0, 176.0, 180.0, 68.0, var$1);
     $i = 0;
     while ($i < 4) {
         var$4 = jl_StringBuilder__init_();
-        jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2794)), $i);
+        jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2796)), $i);
         var$5 = jl_StringBuilder_toString(var$4);
         var$4 = jl_StringBuilder__init_();
-        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2795)), $i), $rt_s(198));
+        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2797)), $i), $rt_s(198));
         var$6 = jl_StringBuilder_toString(var$4);
         var$1 = $rt_createArray(k_Pair, 1);
         var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf((-52.0)));
@@ -50170,10 +50381,10 @@ cvs_GameplayScreen_loadEnemyVisuals = $this => {
     $i = 4;
     while ($i < 7) {
         var$4 = jl_StringBuilder__init_();
-        jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2794)), $i);
+        jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2796)), $i);
         var$5 = jl_StringBuilder_toString(var$4);
         var$4 = jl_StringBuilder__init_();
-        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2795)), $i), $rt_s(198));
+        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2797)), $i), $rt_s(198));
         var$6 = jl_StringBuilder_toString(var$4);
         var$1 = $rt_createArray(k_Pair, 1);
         var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf((-34.0)));
@@ -50184,43 +50395,43 @@ cvs_GameplayScreen_loadEnemyVisuals = $this => {
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-50.0)), jl_Float_valueOf((-50.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(50.0), jl_Float_valueOf((-50.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2796), $rt_s(2797), 212.0, 159.0, 0.0, 78.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2798), $rt_s(2799), 212.0, 159.0, 0.0, 78.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf((-62.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2798), $rt_s(2799), 190.0, 190.0, 0.0, 76.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2800), $rt_s(2801), 190.0, 190.0, 0.0, 76.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf((-42.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2800), $rt_s(2801), 212.0, 115.0, 0.0, 74.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2802), $rt_s(2803), 212.0, 115.0, 0.0, 74.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-70.0)), jl_Float_valueOf(96.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(70.0), jl_Float_valueOf(96.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2802), $rt_s(2803), 268.0, 268.0, 180.0, 122.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2804), $rt_s(2805), 268.0, 268.0, 180.0, 122.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-80.0)), jl_Float_valueOf(82.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(80.0), jl_Float_valueOf(82.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2804), $rt_s(2805), 300.0, 225.0, 180.0, 124.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2806), $rt_s(2807), 300.0, 225.0, 180.0, 124.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-76.0)), jl_Float_valueOf((-92.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(76.0), jl_Float_valueOf((-92.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2806), $rt_s(2807), 280.0, 280.0, 0.0, 128.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2808), $rt_s(2809), 280.0, 280.0, 0.0, 128.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-70.0)), jl_Float_valueOf(96.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(70.0), jl_Float_valueOf(96.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2808), $rt_s(2809), 268.0, 268.0, 180.0, 122.0, var$1);
-    var$1 = $rt_createArray(k_Pair, 2);
-    var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-72.0)), jl_Float_valueOf(96.0));
-    var$2[1] = k_TuplesKt_to(jl_Float_valueOf(72.0), jl_Float_valueOf(96.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2810), $rt_s(2811), 272.0, 272.0, 180.0, 124.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2810), $rt_s(2811), 268.0, 268.0, 180.0, 122.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-72.0)), jl_Float_valueOf(96.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(72.0), jl_Float_valueOf(96.0));
     cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2812), $rt_s(2813), 272.0, 272.0, 180.0, 124.0, var$1);
+    var$1 = $rt_createArray(k_Pair, 2);
+    var$2 = var$1.data;
+    var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-72.0)), jl_Float_valueOf(96.0));
+    var$2[1] = k_TuplesKt_to(jl_Float_valueOf(72.0), jl_Float_valueOf(96.0));
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2814), $rt_s(2815), 272.0, 272.0, 180.0, 124.0, var$1);
 },
 cvs_GameplayScreen_lifeBarColor = ($this, $ratio) => {
     return $ratio > 0.6600000262260437 ? cbgg_Color__init_(0.25, 0.949999988079071, 0.41999998688697815, 1.0) : $ratio > 0.41999998688697815 ? cbgg_Color__init_(1.0, 0.8500000238418579, 0.15000000596046448, 1.0) : !($ratio > 0.20000000298023224) ? cbgg_Color__init_(1.0, 0.2199999988079071, 0.18000000715255737, 1.0) : cbgg_Color__init_(1.0, 0.44999998807907104, 0.10000000149011612, 1.0);
@@ -50254,7 +50465,7 @@ cvs_GameplayScreen_breakBossShield = $this => {
     cvs_GameplayScreen_spawnExplosion($this, var$1.$x3, var$1.$y3, 30);
     $this.$flashTimer = jl_Math_max($this.$flashTimer, 0.18000000715255737);
     cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(769), 1.0, 0.6000000238418579);
-    $this.$warningText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1009));
+    $this.$warningText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1010));
     $this.$bossWarningTimer = 1.600000023841858;
 },
 cvs_GameplayScreen_renewBossShield = ($this, $seconds, $fraction) => {
@@ -50266,7 +50477,7 @@ cvs_GameplayScreen_renewBossShield = ($this, $seconds, $fraction) => {
     $this.$bossShieldTimer = $seconds;
     var$3.$hp0 = jl_Math_max(var$3.$hp0, var$3.$currentLifeLayer * var$3.$lifePerLayer);
     $this.$bossFightTime = 0.0;
-    $this.$warningText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1019));
+    $this.$warningText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1020));
     $this.$bossWarningTimer = 1.7999999523162842;
     cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(769), 0.8999999761581421, 1.100000023841858);
 },
@@ -50397,25 +50608,25 @@ cvs_GameplayScreen_variantsFor = ($this, $type) => {
         cvs_GameplayScreen$WhenMappings_$callClinit();
         switch (cvs_GameplayScreen$WhenMappings_$EnumSwitchMapping$1.data[$type.$ordinal0]) {
             case 1:
-                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2748), $rt_s(2774), $rt_s(2780)]));
+                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2750), $rt_s(2776), $rt_s(2782)]));
                 break a;
             case 2:
-                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2748), $rt_s(2751), $rt_s(2774), $rt_s(2778)]));
+                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2750), $rt_s(2753), $rt_s(2776), $rt_s(2780)]));
                 break a;
             case 3:
-                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2544), $rt_s(2521), $rt_s(2776), $rt_s(2782), $rt_s(2784), $rt_s(2786), $rt_s(2788)]));
+                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2542), $rt_s(2519), $rt_s(2778), $rt_s(2784), $rt_s(2786), $rt_s(2788), $rt_s(2790)]));
                 break a;
             case 4:
-                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2751), $rt_s(2780), $rt_s(2778)]));
+                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2753), $rt_s(2782), $rt_s(2780)]));
                 break a;
             case 5:
-                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2753), $rt_s(2550), $rt_s(2531), $rt_s(2526), $rt_s(2761), $rt_s(2605), $rt_s(2814), $rt_s(2815), $rt_s(2816), $rt_s(2817), $rt_s(2818), $rt_s(2819), $rt_s(2820), $rt_s(2796), $rt_s(2798), $rt_s(2800), $rt_s(2790), $rt_s(2792)]));
+                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2755), $rt_s(2548), $rt_s(2529), $rt_s(2524), $rt_s(2763), $rt_s(2603), $rt_s(2816), $rt_s(2817), $rt_s(2818), $rt_s(2819), $rt_s(2820), $rt_s(2821), $rt_s(2822), $rt_s(2798), $rt_s(2800), $rt_s(2802), $rt_s(2792), $rt_s(2794)]));
                 break a;
             case 6:
                 var$3 = ($this.$stage0.$globalIndex + 3 | 0) % 6 | 0;
                 $base = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($base);
-                jl_StringBuilder_append0(jl_StringBuilder_append($base, $rt_s(2821)), var$3);
+                jl_StringBuilder_append0(jl_StringBuilder_append($base, $rt_s(2823)), var$3);
                 $base = kc_CollectionsKt__CollectionsJVMKt_listOf(jl_AbstractStringBuilder_toString($base));
                 break a;
             default:
@@ -50427,19 +50638,19 @@ cvs_GameplayScreen_variantsFor = ($this, $type) => {
     b: {
         switch (cvs_GameplayScreen$WhenMappings_$EnumSwitchMapping$1.data[$type.$ordinal0]) {
             case 1:
-                $reserved = $rt_s(2764);
-                break b;
-            case 2:
                 $reserved = $rt_s(2766);
                 break b;
-            case 3:
-                $reserved = $rt_s(2770);
-                break b;
-            case 4:
+            case 2:
                 $reserved = $rt_s(2768);
                 break b;
-            case 5:
+            case 3:
                 $reserved = $rt_s(2772);
+                break b;
+            case 4:
+                $reserved = $rt_s(2770);
+                break b;
+            case 5:
+                $reserved = $rt_s(2774);
                 break b;
             case 6:
                 $reserved = null;
@@ -50452,7 +50663,7 @@ cvs_GameplayScreen_variantsFor = ($this, $type) => {
     }
     if ($reserved !== null && ju_HashMap_containsKey($this.$enemyVisuals, $reserved)) {
         $type = $base;
-        kji_Intrinsics_checkNotNullParameter($type, $rt_s(839));
+        kji_Intrinsics_checkNotNullParameter($type, $rt_s(859));
         $base = ju_ArrayList__init_0($type.$size() + 1 | 0);
         ju_AbstractCollection_addAll($base, $type);
         ju_ArrayList_add($base, $reserved);
@@ -50558,7 +50769,7 @@ cvs_GameplayScreen_unlockedPowerTypes = $this => {
         b: {
             var$1 = cvs_PowerType_values();
             var$2 = var$1.data;
-            kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(839));
+            kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(859));
             var$4 = var$2.length;
             switch (var$4) {
                 case 0:
@@ -50568,7 +50779,7 @@ cvs_GameplayScreen_unlockedPowerTypes = $this => {
                     break b;
                 default:
                     var$1 = ju_Arrays_copyOf0(var$1, var$4);
-                    kji_Intrinsics_checkNotNullExpressionValue(var$1, $rt_s(2822));
+                    kji_Intrinsics_checkNotNullExpressionValue(var$1, $rt_s(2673));
                     var$3 = kc_ArraysKt___ArraysJvmKt_asList(var$1);
                     break b;
             }
@@ -50770,71 +50981,71 @@ cvs_GameplayScreen_powerShortLabel = ($this, $type) => {
             case 1:
                 break;
             case 2:
-                $type = $rt_s(2823);
-                break a;
-            case 3:
                 $type = $rt_s(2824);
                 break a;
-            case 4:
+            case 3:
                 $type = $rt_s(2825);
                 break a;
-            case 5:
+            case 4:
                 $type = $rt_s(2826);
                 break a;
-            case 6:
+            case 5:
                 $type = $rt_s(2827);
                 break a;
-            case 7:
+            case 6:
                 $type = $rt_s(2828);
                 break a;
-            case 8:
+            case 7:
                 $type = $rt_s(2829);
                 break a;
-            case 9:
+            case 8:
                 $type = $rt_s(2830);
                 break a;
-            case 10:
+            case 9:
                 $type = $rt_s(2831);
                 break a;
-            case 11:
+            case 10:
                 $type = $rt_s(2832);
                 break a;
-            case 12:
+            case 11:
                 $type = $rt_s(2833);
                 break a;
-            case 13:
+            case 12:
                 $type = $rt_s(2834);
                 break a;
-            case 14:
+            case 13:
                 $type = $rt_s(2835);
                 break a;
-            case 15:
+            case 14:
                 $type = $rt_s(2836);
                 break a;
-            case 16:
+            case 15:
                 $type = $rt_s(2837);
                 break a;
-            case 17:
+            case 16:
                 $type = $rt_s(2838);
                 break a;
-            case 18:
+            case 17:
                 $type = $rt_s(2839);
                 break a;
-            case 19:
+            case 18:
                 $type = $rt_s(2840);
                 break a;
-            case 20:
+            case 19:
                 $type = $rt_s(2841);
                 break a;
-            case 21:
+            case 20:
                 $type = $rt_s(2842);
+                break a;
+            case 21:
+                $type = $rt_s(2843);
                 break a;
             default:
                 $type = new k_NoWhenBranchMatchedException;
                 jl_Exception__init_($type);
                 $rt_throw($type);
         }
-        $type = $rt_s(2843);
+        $type = $rt_s(2844);
     }
     return $type;
 },
@@ -50900,7 +51111,7 @@ cvs_GameplayScreen_updateOverloadState = $this => {
             $enemy.$maxHp = $enemy.$maxHp * 1.649999976158142;
             $enemy.$hp = $enemy.$hp * 1.649999976158142;
         }
-        $this.$warningText = $rt_s(1735);
+        $this.$warningText = $rt_s(1737);
         $this.$bossWarningTimer = jl_Math_max($this.$bossWarningTimer, 2.4000000953674316);
         cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(767), 0.7200000286102295, 1.2999999523162842);
     } else if (!cvs_GameplayScreen_getOverloadActive($this))
@@ -50971,11 +51182,11 @@ cvs_GameplayScreen_muzzlePositions = ($this, $enemy, $limit) => {
     cvs_EnemyType_$callClinit();
     $scale = $destination$iv$iv !== cvs_EnemyType_MINIBOSS ? 1.0 : 1.850000023841858;
     $$this$map$iv = $visual.$muzzles;
-    kji_Intrinsics_checkNotNullParameter($$this$map$iv, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$map$iv, $rt_s(859));
     if (!($limit < 0 ? 0 : 1)) {
         $enemy = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($enemy);
-        jl_AbstractStringBuilder_append($enemy, $rt_s(2844));
+        jl_AbstractStringBuilder_append($enemy, $rt_s(2845));
         $enemy = jl_StringBuilder_append0($enemy, $limit);
         jl_AbstractStringBuilder_append($enemy, $rt_s(2451));
         $visual = jl_AbstractStringBuilder_toString($enemy);
@@ -50988,12 +51199,12 @@ cvs_GameplayScreen_muzzlePositions = ($this, $enemy, $limit) => {
             $visual = kc_CollectionsKt__CollectionsKt_emptyList();
         else {
             if ($rt_isInstance($$this$map$iv, ju_Collection)) {
-                if ($limit >= $$this$map$iv.$size2) {
+                if ($limit >= $$this$map$iv.$size1) {
                     $visual = kc_CollectionsKt___CollectionsKt_toList($$this$map$iv);
                     break a;
                 }
                 if ($limit == 1) {
-                    kji_Intrinsics_checkNotNullParameter($$this$map$iv, $rt_s(839));
+                    kji_Intrinsics_checkNotNullParameter($$this$map$iv, $rt_s(859));
                     if ($rt_isInstance($$this$map$iv, ju_List))
                         $visual = kc_CollectionsKt___CollectionsKt_first($$this$map$iv);
                     else {
@@ -51116,7 +51327,7 @@ cvs_GameplayScreen_drawEnemySprites = $this => {
         var$6 = $e.$spriteKey;
         $visual = ju_LinkedHashMap_get($visual, var$6);
         if ($visual !== null) {
-            $scale = kt_StringsKt__StringsJVMKt_startsWith$default($this.$boss.$spriteKey, $rt_s(2821), 0, 2, null) ? 1.850000023841858 + $this.$stage0.$countryIndex * 0.11999999731779099 : !kji_Intrinsics_areEqual($this.$boss.$spriteKey, $rt_s(2521)) && !kji_Intrinsics_areEqual($this.$boss.$spriteKey, $rt_s(2605)) ? (!kji_Intrinsics_areEqual($this.$boss.$spriteKey, $rt_s(2544)) ? 2.3499999046325684 : 2.0) : 2.25;
+            $scale = kt_StringsKt__StringsJVMKt_startsWith$default($this.$boss.$spriteKey, $rt_s(2823), 0, 2, null) ? 1.850000023841858 + $this.$stage0.$countryIndex * 0.11999999731779099 : !kji_Intrinsics_areEqual($this.$boss.$spriteKey, $rt_s(2519)) && !kji_Intrinsics_areEqual($this.$boss.$spriteKey, $rt_s(2603)) ? (!kji_Intrinsics_areEqual($this.$boss.$spriteKey, $rt_s(2542)) ? 2.3499999046325684 : 2.0) : 2.25;
             $e = cvs_SkyVanguardGame_getBatch($this.$game);
             var$6 = $this.$boss;
             var$7 = var$6.$maxHp0;
@@ -51156,7 +51367,7 @@ cvs_GameplayScreen_updateReinforcements = ($this, $dt) => {
     if (!ju_AbstractCollection_isEmpty($this.$reinforcementOrders) && !($this.$elapsed >= $this.$forcedBossTime)) {
         $this.$reinforcementAccumulator = $this.$reinforcementAccumulator + $dt * (5.0 + $this.$stage0.$globalIndex * 0.699999988079071 + cvs_GameplayScreen_getDifficultyIndex($this) * 1.7999999523162842) * cvs_GameplayScreen_getHordeIntensity($this) * (!cvs_GameplayScreen_getOverloadActive($this) ? 1.0 : 2.200000047683716);
         $safety = 0;
-        while ($this.$reinforcementAccumulator >= 1.0 && (ju_AbstractCollection_isEmpty($this.$reinforcementOrders) ? 0 : 1) && $this.$enemies.$size2 < kr_RangesKt___RangesKt_coerceAtLeast0((12.0 + $this.$stage0.$globalIndex * 2.4000000953674316 + cvs_GameplayScreen_getDifficultyIndex($this) * 6.0) * cvs_GameplayScreen_getHordeIntensity($this) * (!cvs_GameplayScreen_getOverloadActive($this) ? 1.0 : 1.600000023841858) | 0, 9) && $safety < 90) {
+        while ($this.$reinforcementAccumulator >= 1.0 && (ju_AbstractCollection_isEmpty($this.$reinforcementOrders) ? 0 : 1) && $this.$enemies.$size1 < kr_RangesKt___RangesKt_coerceAtLeast0((12.0 + $this.$stage0.$globalIndex * 2.4000000953674316 + cvs_GameplayScreen_getDifficultyIndex($this) * 6.0) * cvs_GameplayScreen_getHordeIntensity($this) * (!cvs_GameplayScreen_getOverloadActive($this) ? 1.0 : 1.600000023841858) | 0, 9) && $safety < 90) {
             a: {
                 $order = kc_CollectionsKt___CollectionsKt_first($this.$reinforcementOrders);
                 var$4 = $order.$serial;
@@ -51175,7 +51386,7 @@ cvs_GameplayScreen_updateReinforcements = ($this, $dt) => {
                                 var$8 = $order.$pattern1;
                                 switch (jl_String_hashCode(var$8)) {
                                     case -1364013995:
-                                        if (jl_String_equals(var$8, $rt_s(2845))) {
+                                        if (jl_String_equals(var$8, $rt_s(2846))) {
                                             $dt = 540.0 + cbgm_MathUtils_sin(var$4 * 0.7099999785423279) * 250.0;
                                             break b;
                                         }
@@ -51183,19 +51394,19 @@ cvs_GameplayScreen_updateReinforcements = ($this, $dt) => {
                                     case -895684237:
                                         break;
                                     case 116630:
-                                        if (jl_String_equals(var$8, $rt_s(2846))) {
+                                        if (jl_String_equals(var$8, $rt_s(2847))) {
                                             $dt = 540.0 + ($lane - 5.5) * 82.0;
                                             break b;
                                         }
                                         break c;
                                     case 3530381:
-                                        if (jl_String_equals(var$8, $rt_s(2847))) {
+                                        if (jl_String_equals(var$8, $rt_s(2848))) {
                                             $dt = 90.0 + ((var$4 * 137 | 0) % 900 | 0);
                                             break b;
                                         }
                                         break c;
                                     case 94935104:
-                                        if (jl_String_equals(var$8, $rt_s(2848))) {
+                                        if (jl_String_equals(var$8, $rt_s(2849))) {
                                             if (var$4 % 2 | 0) {
                                                 $dt = 990.0 - (var$4 % 7 | 0) * 58.0;
                                                 break b;
@@ -51205,7 +51416,7 @@ cvs_GameplayScreen_updateReinforcements = ($this, $dt) => {
                                         }
                                         break c;
                                     case 949721053:
-                                        if (jl_String_equals(var$8, $rt_s(2849))) {
+                                        if (jl_String_equals(var$8, $rt_s(2850))) {
                                             $dt = 80.0 + (var$4 % 9 | 0) * 115.0;
                                             break b;
                                         }
@@ -51213,7 +51424,7 @@ cvs_GameplayScreen_updateReinforcements = ($this, $dt) => {
                                     default:
                                         break c;
                                 }
-                                if (jl_String_equals(var$8, $rt_s(2850))) {
+                                if (jl_String_equals(var$8, $rt_s(2851))) {
                                     $dt = 70.0 + ((var$4 * 193 | 0) % 940 | 0);
                                     break b;
                                 }
@@ -51319,7 +51530,7 @@ cvs_GameplayScreen_loadStage = $this => {
     $patterns = $this.$stage0;
     $pressure = $patterns.$countryIndex + (($patterns.$phase - 1 | 0) / 2 | 0) | 0;
     $this.$bossTime = $this.$forcedBossTime;
-    $patterns = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2851), $rt_s(2846), $rt_s(2848), $rt_s(2849), $rt_s(2847), $rt_s(2850)]));
+    $patterns = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2852), $rt_s(2847), $rt_s(2849), $rt_s(2850), $rt_s(2848), $rt_s(2851)]));
     var$3 = $rt_createArray(cvs_EnemyType, 5);
     var$4 = var$3.data;
     cvs_EnemyType_$callClinit();
@@ -51340,7 +51551,7 @@ cvs_GameplayScreen_loadStage = $this => {
     while (var$10 < $waveCount) {
         if (var$10 == $miniBossWave) {
             $type = $this.$waves;
-            $$this$sortBy$iv = cvs_WaveEvent__init_(var$12, cvs_EnemyType_MINIBOSS, 1, $rt_s(2845));
+            $$this$sortBy$iv = cvs_WaveEvent__init_(var$12, cvs_EnemyType_MINIBOSS, 1, $rt_s(2846));
             ju_ArrayList_add($type, $$this$sortBy$iv);
             var$12 = var$12 + $gap;
         } else {
@@ -51356,15 +51567,15 @@ cvs_GameplayScreen_loadStage = $this => {
     }
     $$this$sortBy$iv = $this.$waves;
     $types = $$this$sortBy$iv;
-    if ($types.$size2 > 1) {
+    if ($types.$size1 > 1) {
         $patterns = new cvs_GameplayScreen$loadStage$$inlined$sortBy$1;
-        kji_Intrinsics_checkNotNullParameter($$this$sortBy$iv, $rt_s(839));
-        kji_Intrinsics_checkNotNullParameter($patterns, $rt_s(2852));
-        if ($types.$size2 > 1) {
+        kji_Intrinsics_checkNotNullParameter($$this$sortBy$iv, $rt_s(859));
+        kji_Intrinsics_checkNotNullParameter($patterns, $rt_s(2853));
+        if ($types.$size1 > 1) {
             ju_Collections_$callClinit();
             if ($patterns === null)
                 $patterns = ju_Comparator$NaturalOrder_instance();
-            var$3 = $rt_createArray(jl_Object, $types.$size2);
+            var$3 = $rt_createArray(jl_Object, $types.$size1);
             var$4 = var$3.data;
             ju_AbstractCollection_toArray($$this$sortBy$iv, var$3);
             $waveCount = var$4.length;
@@ -51460,7 +51671,7 @@ cvs_GameplayScreen_loadStage = $this => {
 },
 cvs_GameplayScreen_spawnPostSubBossWave = $this => {
     let $patterns, var$2, var$3, $types, $type, $count, var$7, $pressure, var$9, $pattern;
-    $patterns = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2851), $rt_s(2846), $rt_s(2848), $rt_s(2849), $rt_s(2847), $rt_s(2850)]));
+    $patterns = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2852), $rt_s(2847), $rt_s(2849), $rt_s(2850), $rt_s(2848), $rt_s(2851)]));
     var$2 = $rt_createArray(cvs_EnemyType, 5);
     var$3 = var$2.data;
     cvs_EnemyType_$callClinit();
@@ -51510,7 +51721,7 @@ cvs_GameplayScreen_spawnWave = ($this, $event) => {
     var$8 = $event.$type3;
     var$3 = $event.$pattern2;
     kji_Intrinsics_checkNotNullParameter(var$8, $rt_s(754));
-    kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(2853));
+    kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(2854));
     var$2.$type7 = var$8;
     var$2.$pattern1 = var$3;
     var$2.$remaining0 = $hordeCount;
@@ -51631,7 +51842,7 @@ cvs_GameplayScreen_spawnBoss = $this => {
     var$5 = $this.$stage0.$globalIndex % 6 | 0;
     var$6 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$6);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$6, $rt_s(2821)), var$5);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$6, $rt_s(2823)), var$5);
     var$7 = jl_AbstractStringBuilder_toString(var$6);
     kji_Intrinsics_checkNotNullParameter(var$7, $rt_s(188));
     var$4.$spriteKey = var$7;
@@ -51894,7 +52105,7 @@ cvs_GameplayScreen_updateBossLockOn = ($this, $dt) => {
             var$7 = var$7 + 1 | 0;
         }
         cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(764), 0.6000000238418579, 1.2999999523162842);
-        $this.$warningText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1013));
+        $this.$warningText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1014));
         $this.$bossWarningTimer = 1.2000000476837158;
         $this.$bossLockTimer = 4.199999809265137 - $this.$stage0.$countryIndex * 0.3499999940395355;
     }
@@ -51947,7 +52158,7 @@ cvs_GameplayScreen_updateLock = $this => {
 },
 cvs_GameplayScreen_redirectToLock = ($this, $from) => {
     let var$2, $b, $dx, $dy, $len, $speed, var$8;
-    var$2 = $this.$playerBullets.$size2;
+    var$2 = $this.$playerBullets.$size1;
     while ($from < var$2) {
         $b = ju_ArrayList_get($this.$playerBullets, $from);
         $dx = $this.$lockedX - $b.$x6;
@@ -51969,7 +52180,7 @@ cvs_GameplayScreen_fireMissileManual = $this => {
     if (!$this.$paused && !$this.$missionEnded && !($this.$missileCooldown > 0.0)) {
         $this.$missileCooldown = 0.8999999761581421;
         $dmg = (18.0 + $this.$aircraft.$power0 * 0.3400000035762787 + $this.$weaponLevel * 4.800000190734863) * cvs_GameplayScreen_getPlayerDamageScale($this) * (1.7000000476837158 + $this.$missileStacks * 0.09000000357627869);
-        $start = $this.$playerBullets.$size2;
+        $start = $this.$playerBullets.$size1;
         var$3 = $this.$playerX - 60.0;
         var$4 = $this.$playerY + 20.0;
         cvs_BulletKind_$callClinit();
@@ -52010,7 +52221,7 @@ cvs_GameplayScreen_upgradeUp = $this => {
     $$this$firstOrNull$iv = cvs_GameplayScreen_powerShortLabel($this, $candidate);
     $candidate = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($candidate);
-    jl_StringBuilder_append(jl_StringBuilder_append($candidate, $$this$firstOrNull$iv), $rt_s(2854));
+    jl_StringBuilder_append(jl_StringBuilder_append($candidate, $$this$firstOrNull$iv), $rt_s(2855));
     $this.$pauseMessage = jl_AbstractStringBuilder_toString($candidate);
     cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(765), 0.800000011920929, 1.149999976158142);
 },
@@ -52044,7 +52255,7 @@ cvs_GameplayScreen_upgradeDown = $this => {
     $$this$lastOrNull$iv = cvs_GameplayScreen_powerShortLabel($this, $candidate);
     $iterator$iv = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($iterator$iv);
-    jl_StringBuilder_append(jl_StringBuilder_append($iterator$iv, $$this$lastOrNull$iv), $rt_s(2855));
+    jl_StringBuilder_append(jl_StringBuilder_append($iterator$iv, $$this$lastOrNull$iv), $rt_s(2856));
     $this.$pauseMessage = jl_AbstractStringBuilder_toString($iterator$iv);
     cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.699999988079071, 0.800000011920929);
 },
@@ -52078,7 +52289,7 @@ cvs_GameplayScreen_spawnMuzzleFlash = ($this, $x, $y) => {
 },
 cvs_GameplayScreen_spawnPlayerBullet = ($this, $x, $y, $vx, $vy, $damage, $radius, $kind, $pierce, $turnRate) => {
     let $b;
-    if ($this.$playerBullets.$size2 >= 1900)
+    if ($this.$playerBullets.$size1 >= 1900)
         return;
     $b = cbgu_Pool_obtain($this.$playerBulletPool);
     $b.$x6 = $x;
@@ -52110,7 +52321,7 @@ cvs_GameplayScreen_spawnPlayerBullet$default = (var$1, var$2, var$3, var$4, var$
 },
 cvs_GameplayScreen_spawnEnemyBullet = ($this, $x, $y, $vx, $vy, $radius) => {
     let $b;
-    if (!($this.$bombClearTimer > 0.0) && $this.$enemyBullets.$size2 < 3600) {
+    if (!($this.$bombClearTimer > 0.0) && $this.$enemyBullets.$size1 < 3600) {
         $b = cbgu_Pool_obtain($this.$enemyBulletPool);
         $b.$x10 = $x;
         $b.$y9 = $y;
@@ -52150,7 +52361,7 @@ cvs_GameplayScreen_shootAimed = ($this, $x, $y, $speed, $spreadRadians, $count) 
 cvs_GameplayScreen_updatePlayerBullets = ($this, $dt) => {
     let var$2, var$3, $b, $delta, $current, $target, $desired, $angle, $speed;
     a: {
-        var$2 = $this.$playerBullets.$size2 + (-1) | 0;
+        var$2 = $this.$playerBullets.$size1 + (-1) | 0;
         if (0 <= var$2)
             while (true) {
                 var$3 = var$2 + (-1) | 0;
@@ -52271,7 +52482,7 @@ cvs_GameplayScreen_updateEnemies = ($this, $dt) => {
                         ju_ArrayList_remove($this.$enemies, var$2);
                         cbgu_Pool_free($this.$enemyPool, $e);
                     }
-                } else if (!kt_StringsKt__StringsJVMKt_startsWith$default(cvs_Enemy_getVariant($e), $rt_s(2856), 0, 2, null) && !kt_StringsKt__StringsJVMKt_startsWith$default(cvs_Enemy_getVariant($e), $rt_s(2857), 0, 2, null)) {
+                } else if (!kt_StringsKt__StringsJVMKt_startsWith$default(cvs_Enemy_getVariant($e), $rt_s(2857), 0, 2, null) && !kt_StringsKt__StringsJVMKt_startsWith$default(cvs_Enemy_getVariant($e), $rt_s(2858), 0, 2, null)) {
                     d: {
                         e: {
                             f: {
@@ -52502,7 +52713,7 @@ cvs_GameplayScreen_updateBoss = ($this, $dt) => {
         $floorPercent = cvs_BossState_getCurrentLifeLayer($this.$boss);
         $pattern = cvs_BossState_getLifeLayers($this.$boss);
         var$2 = jl_StringBuilder__init_();
-        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append3(jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(2858)), $floorPercent), 47), $pattern), $rt_s(2859));
+        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append3(jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(2859)), $floorPercent), 47), $pattern), $rt_s(2860));
         $this.$warningText = jl_StringBuilder_toString(var$2);
         $this.$bossWarningTimer = jl_Math_max($this.$bossWarningTimer, 1.7999999523162842);
         $this.$shakeTimer = jl_Math_max($this.$shakeTimer, 0.44999998807907104);
@@ -52702,7 +52913,7 @@ cvs_GameplayScreen_updateBoss = ($this, $dt) => {
 cvs_GameplayScreen_updateEnemyBullets = ($this, $dt) => {
     let var$2, var$3, $b, $cur, $diff, $turn, $na, $want, $sp;
     a: {
-        var$2 = $this.$enemyBullets.$size2 + (-1) | 0;
+        var$2 = $this.$enemyBullets.$size1 + (-1) | 0;
         if (0 <= var$2)
             while (true) {
                 var$3 = var$2 + (-1) | 0;
@@ -52752,7 +52963,7 @@ cvs_GameplayScreen_updateEnemyBullets = ($this, $dt) => {
 cvs_GameplayScreen_updatePowerUps = ($this, $dt) => {
     let var$2, var$3, $p, $dx, $dy, $len, $pull;
     a: {
-        var$2 = $this.$powers.$size2 + (-1) | 0;
+        var$2 = $this.$powers.$size1 + (-1) | 0;
         if (0 <= var$2)
             while (true) {
                 var$3 = var$2 + (-1) | 0;
@@ -52783,7 +52994,7 @@ cvs_GameplayScreen_updatePowerUps = ($this, $dt) => {
 cvs_GameplayScreen_updateCoins = ($this, $dt, $forceMagnet) => {
     let var$3, var$4, $coin, $dx, $dy, $distance, var$9, $pull;
     a: {
-        var$3 = $this.$coins.$size2 + (-1) | 0;
+        var$3 = $this.$coins.$size1 + (-1) | 0;
         if (0 <= var$3)
             while (true) {
                 var$4 = var$3 + (-1) | 0;
@@ -52832,14 +53043,14 @@ cvs_GameplayScreen_collectCoinPickup = ($this, $coin) => {
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
     jl_AbstractStringBuilder_append0(var$4, 43);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(var$4, var$3), $rt_s(2860)), $coin);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(var$4, var$3), $rt_s(2861)), $coin);
     $this.$pauseMessage = jl_AbstractStringBuilder_toString(var$4);
     cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(765), 0.2800000011920929, 1.4500000476837158);
 },
 cvs_GameplayScreen_updateParticles = ($this, $dt) => {
     let var$2, var$3, var$4, $p, var$6, var$7, var$8;
     a: {
-        var$2 = $this.$particles.$size2 + (-1) | 0;
+        var$2 = $this.$particles.$size1 + (-1) | 0;
         if (0 <= var$2) {
             var$3 = 100.0 * $dt;
             while (true) {
@@ -53095,7 +53306,7 @@ cvs_GameplayScreen_enemyDestroyed = ($this, $e) => {
         $this.$subBossDefeated = 1;
         $this.$wavesSinceSubBoss = 0;
         $this.$extraWaveTimer = 1.2000000476837158;
-        $this.$warningText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1011));
+        $this.$warningText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1012));
         $this.$bossWarningTimer = jl_Math_max($this.$bossWarningTimer, 1.7999999523162842);
     }
     cvs_GameplayScreen_addScore($this, $e.$scoreValue);
@@ -53175,8 +53386,8 @@ cvs_GameplayScreen_randomPowerType = $this => {
         var$4[4] = cvs_PowerType_BERSERK;
         var$4[5] = cvs_PowerType_REFLECTOR;
         var$4[6] = cvs_PowerType_CLONE;
-        kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(2273));
-        kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(839));
+        kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(2275));
+        kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(859));
         $weight = var$4.length;
         switch ($weight) {
             case 0:
@@ -53187,13 +53398,13 @@ cvs_GameplayScreen_randomPowerType = $this => {
                 var$6 = new ju_TemplateCollections$SingleElementSet;
                 jl_Object__init_(var$6);
                 var$6.$element = $previous;
-                kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(2861));
+                kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(2862));
                 break a;
             default:
                 $previous = new ju_LinkedHashSet;
                 ju_HashSet__init_($previous, ju_LinkedHashMap__init_0(kc_MapsKt__MapsJVMKt_mapCapacity($weight)));
                 $previous = $previous;
-                kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(839));
+                kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(859));
                 kji_Intrinsics_checkNotNullParameter($previous, $rt_s(2309));
                 var$7 = 0;
                 while (var$7 < $weight) {
@@ -53249,7 +53460,7 @@ cvs_GameplayScreen_randomPowerType = $this => {
 },
 cvs_GameplayScreen_spawnPower = ($this, $type, $x, $y) => {
     let $p;
-    if ($this.$powers.$size2 >= 220)
+    if ($this.$powers.$size1 >= 220)
         return;
     $p = cbgu_Pool_obtain($this.$powerPool);
     kji_Intrinsics_checkNotNullParameter($type, $rt_s(188));
@@ -53263,7 +53474,7 @@ cvs_GameplayScreen_spawnPower = ($this, $type, $x, $y) => {
 },
 cvs_GameplayScreen_spawnCoin = ($this, $x, $y, $value) => {
     let $coin;
-    if ($this.$coins.$size2 >= 420)
+    if ($this.$coins.$size1 >= 420)
         return;
     $coin = cbgu_Pool_obtain($this.$coinPool);
     $coin.$x9 = $x;
@@ -53366,22 +53577,22 @@ cvs_GameplayScreen_shopLabel = ($this, $index) => {
             case 0:
                 break;
             case 1:
-                var$3 = $rt_s(1680);
-                break a;
-            case 2:
                 var$3 = $rt_s(1682);
                 break a;
-            case 3:
+            case 2:
                 var$3 = $rt_s(1684);
                 break a;
-            case 4:
+            case 3:
                 var$3 = $rt_s(1686);
                 break a;
-            default:
+            case 4:
                 var$3 = $rt_s(1688);
                 break a;
+            default:
+                var$3 = $rt_s(1690);
+                break a;
         }
-        var$3 = $rt_s(1678);
+        var$3 = $rt_s(1680);
     }
     return cvs_LocalizationManager_get(var$2, var$3);
 },
@@ -53619,8 +53830,8 @@ cvs_GameplayScreen_damagePlayer = ($this, $damageScale) => {
         $this.$lives = $phoenixRevive;
         $this.$playerLifePercent = 100.0;
         $phoenixRevive = $phoenixRevive <= 0 && $this.$phoenixCharges > 0 ? 1 : 0;
-        $bullet = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1015));
-        var$5 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1017));
+        $bullet = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1016));
+        var$5 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1018));
         var$6 = $this.$lives;
         var$7 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$7);
@@ -53690,8 +53901,8 @@ cvs_GameplayScreen_acceptAdOffer = $this => {
     var$1.$_035 = $this;
     kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(838));
     var$2 = new cvsw_WebPlatformServices$showRewardedAd$lambda$_2_0;
-    var$2.$_08 = var$1;
-    cvsw_WebLauncherKt_access$mostrarAnuncioPremiado($rt_s(2862), var$2);
+    var$2.$_07 = var$1;
+    cvsw_WebLauncherKt_access$mostrarAnuncioPremiado($rt_s(2863), var$2);
 },
 cvs_GameplayScreen_declineAdOffer = $this => {
     if ($this.$adOfferBusy)
@@ -53714,21 +53925,21 @@ cvs_GameplayScreen_drawAdOffer = $this => {
     $panel = cbgm_Rectangle__init_(100.0, 660.0, 880.0, 620.0);
     var$2 = $this;
     cvs_BaseScreenKt_neonPanel$default(var$2, $panel, cvs_BaseScreenKt_getNEON_MAGENTA(), cvs_BaseScreenKt_getPANEL_FILL_MAGENTA(), 32.0, 3.4000000953674316, 6, 0.12999999523162842, 0.0, 128, null);
-    $panel = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1732));
+    $panel = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1734));
     var$3 = cvs_SkyVanguardGame_getFont($this.$game);
     var$4 = cbgg_Color_WHITE;
     kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(822));
     cvs_BaseScreen_drawTracked($this, $panel, 540.0, 1216.0, var$3, var$4, 3.0);
-    cvs_BaseScreen_drawCentered($this, !$this.$adOfferIsLastChance ? $rt_s(2863) : $rt_s(1731), 1140.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.5, 0.4000000059604645, 1.0));
-    cvs_BaseScreen_drawCentered($this, $rt_s(1727), 1080.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.75, 0.8799999952316284, 1.0, 1.0));
-    cvs_BaseScreen_drawTracked($this, $rt_s(2864), 540.0, 1000.0, cvs_SkyVanguardGame_getFont($this.$game), cbgg_Color__init_(1.0, 0.8500000238418579, 0.25, 1.0), 3.0);
+    cvs_BaseScreen_drawCentered($this, !$this.$adOfferIsLastChance ? $rt_s(2864) : $rt_s(1733), 1140.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.5, 0.4000000059604645, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(1729), 1080.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.75, 0.8799999952316284, 1.0, 1.0));
+    cvs_BaseScreen_drawTracked($this, $rt_s(2865), 540.0, 1000.0, cvs_SkyVanguardGame_getFont($this.$game), cbgg_Color__init_(1.0, 0.8500000238418579, 0.25, 1.0), 3.0);
     if ($this.$adOfferBusy)
-        cvs_BaseScreen_drawCentered($this, $rt_s(1725), 840.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.4000000059604645, 0.949999988079071, 1.0, 1.0));
+        cvs_BaseScreen_drawCentered($this, $rt_s(1727), 840.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.4000000059604645, 0.949999988079071, 1.0, 1.0));
     else {
-        cvs_BaseScreen_drawButton($this, $this.$adWatchButton, $rt_s(1023), 1);
-        cvs_BaseScreen_drawButton$default(var$2, $this.$adSkipButton, !$this.$adOfferIsLastChance ? $rt_s(1729) : $rt_s(1677), 0, 4, null);
+        cvs_BaseScreen_drawButton($this, $this.$adWatchButton, $rt_s(1024), 1);
+        cvs_BaseScreen_drawButton$default(var$2, $this.$adSkipButton, !$this.$adOfferIsLastChance ? $rt_s(1731) : $rt_s(1679), 0, 4, null);
     }
-    cvs_BaseScreen_drawCentered($this, $rt_s(2865), 700.0, cvs_SkyVanguardGame_getTinyFont($this.$game), cbgg_Color__init_(0.550000011920929, 0.699999988079071, 0.8500000238418579, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(2866), 700.0, cvs_SkyVanguardGame_getTinyFont($this.$game), cbgg_Color__init_(0.550000011920929, 0.699999988079071, 0.8500000238418579, 1.0));
 },
 cvs_GameplayScreen_destroyBossPart = ($this, $x, $y) => {
     let var$3;
@@ -54211,71 +54422,71 @@ cvs_GameplayScreen_drawPowerLabels = $this => {
                 case 1:
                     break;
                 case 2:
-                    $letter = $rt_s(2866);
-                    break a;
-                case 3:
                     $letter = $rt_s(2867);
                     break a;
-                case 4:
+                case 3:
                     $letter = $rt_s(2868);
                     break a;
-                case 5:
+                case 4:
                     $letter = $rt_s(2869);
                     break a;
-                case 6:
+                case 5:
                     $letter = $rt_s(2870);
                     break a;
-                case 7:
+                case 6:
                     $letter = $rt_s(2871);
                     break a;
-                case 8:
+                case 7:
                     $letter = $rt_s(2872);
+                    break a;
+                case 8:
+                    $letter = $rt_s(2873);
                     break a;
                 case 9:
                     $letter = $rt_s(541);
                     break a;
                 case 10:
-                    $letter = $rt_s(2873);
-                    break a;
-                case 11:
                     $letter = $rt_s(2874);
                     break a;
-                case 12:
+                case 11:
                     $letter = $rt_s(2875);
                     break a;
-                case 13:
+                case 12:
                     $letter = $rt_s(2876);
                     break a;
-                case 14:
+                case 13:
                     $letter = $rt_s(2877);
                     break a;
-                case 15:
+                case 14:
                     $letter = $rt_s(2878);
                     break a;
-                case 16:
+                case 15:
                     $letter = $rt_s(2879);
                     break a;
-                case 17:
+                case 16:
                     $letter = $rt_s(2880);
+                    break a;
+                case 17:
+                    $letter = $rt_s(2881);
                     break a;
                 case 18:
                     $letter = $rt_s(674);
                     break a;
                 case 19:
-                    $letter = $rt_s(2881);
-                    break a;
-                case 20:
                     $letter = $rt_s(2882);
                     break a;
-                case 21:
+                case 20:
                     $letter = $rt_s(2883);
+                    break a;
+                case 21:
+                    $letter = $rt_s(2884);
                     break a;
                 default:
                     $power = new k_NoWhenBranchMatchedException;
                     jl_Exception__init_($power);
                     $rt_throw($power);
             }
-            $letter = $rt_s(2884);
+            $letter = $rt_s(2885);
         }
         var$5 = $this.$layout0;
         var$1 = cvs_SkyVanguardGame_getSmallFont($this.$game);
@@ -54299,7 +54510,7 @@ cvs_GameplayScreen_drawCoinLabels = $this => {
     while (ju_AbstractList$1_hasNext(var$1)) {
         $coin = ju_AbstractList$1_next(var$1);
         var$3 = $coin.$value5;
-        $label = var$3 <= 1 ? $rt_s(2874) : jl_String_valueOf0(var$3);
+        $label = var$3 <= 1 ? $rt_s(2875) : jl_String_valueOf0(var$3);
         var$5 = $this.$layout0;
         var$6 = cvs_SkyVanguardGame_getSmallFont($this.$game);
         $label = $label;
@@ -54332,7 +54543,7 @@ cvs_GameplayScreen_formatNumber = ($this, $n) => {
         $index$iv = var$8;
     }
     $s = jl_AbstractStringBuilder_toString($sb);
-    kji_Intrinsics_checkNotNullExpressionValue($s, $rt_s(2885));
+    kji_Intrinsics_checkNotNullExpressionValue($s, $rt_s(2886));
     return $s;
 },
 cvs_GameplayScreen_detonateSuperWave = ($this, $x, $y, $damage) => {
@@ -54406,7 +54617,7 @@ cvs_GameplayScreen_drawSupportDrones = $this => {
     let $n, $tex, var$3, var$4, var$5, $off, $bob, $dx, $dy;
     $n = kr_RangesKt___RangesKt_coerceAtMost($this.$drones, 4);
     $tex = $this.$game;
-    var$3 = $this.$aircraft.$id0;
+    var$3 = $this.$aircraft.$id1;
     $tex = (cvs_SkyVanguardGame_getDroneTextures($tex)).data[kr_RangesKt___RangesKt_coerceIn0(var$3, 0, kc_ArraysKt___ArraysKt_getLastIndex(cvs_SkyVanguardGame_getDroneTextures($tex)))];
     cbggg_SpriteBatch_begin(cvs_SkyVanguardGame_getBatch($this.$game));
     var$4 = cvs_SkyVanguardGame_getBatch($this.$game);
@@ -54453,7 +54664,7 @@ cvs_GameplayScreen_drawRewardToast = $this => {
     cbggg_ShapeRenderer_setColor(cvs_SkyVanguardGame_getShapes($this.$game), cbgg_Color__init_(1.0, 0.8399999737739563, 0.20000000298023224, 0.25 * $alpha));
     cvs_BaseScreenKt_roundRectFilled(cvs_SkyVanguardGame_getShapes($this.$game), 206.0, 1624.0, 668.0, 104.0, 24.0);
     cbggg_ShapeRenderer_end(cvs_SkyVanguardGame_getShapes($this.$game));
-    cvs_BaseScreen_drawCentered($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(849)), 1694.0, cvs_SkyVanguardGame_getTinyFont($this.$game), cbgg_Color__init_(0.550000011920929, 0.8500000238418579, 1.0, $alpha));
+    cvs_BaseScreen_drawCentered($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(848)), 1694.0, cvs_SkyVanguardGame_getTinyFont($this.$game), cbgg_Color__init_(0.550000011920929, 0.8500000238418579, 1.0, $alpha));
     cvs_BaseScreen_drawCentered($this, $this.$rewardToastText, 1652.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.8999999761581421, 0.4000000059604645, $alpha));
 },
 cvs_GameplayScreen_drawHud = $this => {
@@ -54573,7 +54784,7 @@ cvs_GameplayScreen_drawHud = $this => {
         cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.949999988079071, 0.8199999928474426, 0.3499999940395355, 0.949999988079071));
         var$21 = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
         $label = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
-        $shieldCol = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(987));
+        $shieldCol = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(988));
         var$14 = $this.$armorPoints;
         $lifeCol = jl_StringBuilder__init_();
         jl_StringBuilder_append0(jl_StringBuilder_append3(jl_StringBuilder_append($lifeCol, $shieldCol), 32), var$14);
@@ -54582,10 +54793,10 @@ cvs_GameplayScreen_drawHud = $this => {
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.5, 0.949999988079071, 1.0, 0.949999988079071));
     $label = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
     $shieldCol = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
-    var$21 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(989));
+    var$21 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(990));
     var$14 = $this.$lives;
     $lifeCol = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append($lifeCol, var$21), $rt_s(2886)), var$14);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append($lifeCol, var$21), $rt_s(2887)), var$14);
     cbggg_BitmapFont_draw($label, $shieldCol, jl_StringBuilder_toString($lifeCol), 42.0 + kr_RangesKt___RangesKt_coerceIn0($this.$lives, 0, 6) * 34.0 + 8.0, $pipY + 20.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.550000011920929, 0.8799999952316284, 1.0, 0.8500000238418579));
     var$21 = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
@@ -54594,10 +54805,10 @@ cvs_GameplayScreen_drawHud = $this => {
     ju_Locale_$callClinit();
     $shieldCol = jl_String_toUpperCase($shieldCol, ju_Locale_ROOT);
     kji_Intrinsics_checkNotNullExpressionValue($shieldCol, $rt_s(811));
-    $lifeCol = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(997));
+    $lifeCol = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(998));
     var$14 = cvs_StageDefinition_getPhase($this.$stage0);
     $label2 = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append3(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($label2, $shieldCol), $rt_s(2887)), $lifeCol), 32), var$14);
+    jl_StringBuilder_append0(jl_StringBuilder_append3(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($label2, $shieldCol), $rt_s(2888)), $lifeCol), 32), var$14);
     cbggg_BitmapFont_draw(var$21, $label, jl_StringBuilder_toString($label2), 36.0, 1902.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cbgg_Color_WHITE);
     cbggg_BitmapFont_draw(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)), cvs_GameplayScreen_formatNumber($this, jl_Integer_valueOf($this.$score)), 36.0, 1866.0);
@@ -54606,18 +54817,18 @@ cvs_GameplayScreen_drawHud = $this => {
     var$21 = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
     var$14 = $this.$combo;
     $label = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append($label, $rt_s(2888)), var$14);
+    jl_StringBuilder_append0(jl_StringBuilder_append($label, $rt_s(2889)), var$14);
     cbggg_BitmapFont_draw($accent, var$21, jl_StringBuilder_toString($label), 36.0, 1804.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.800000011920929, 0.8600000143051147, 0.949999988079071, 0.800000011920929));
     $accent = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
     var$21 = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
-    $label = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(995));
+    $label = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(996));
     var$14 = $this.$weaponLevel;
     $shieldCol = jl_StringBuilder__init_();
     jl_StringBuilder_append0(jl_StringBuilder_append3(jl_StringBuilder_append($shieldCol, $label), 32), var$14);
     cbggg_BitmapFont_draw($accent, var$21, jl_StringBuilder_toString($shieldCol), 40.0 + kr_RangesKt___RangesKt_coerceIn0($this.$lives, 0, 6) * 28.0 + 18.0, 1723.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.75, 0.8799999952316284, 1.0, 0.8999999761581421));
-    $accent = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(991));
+    $accent = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(992));
     var$14 = $seconds / 60 | 0;
     var$21 = kt_StringsKt__StringsKt_padStart(jl_String_valueOf0($seconds % 60 | 0), 2, 48);
     $label = jl_StringBuilder__init_();
@@ -54639,7 +54850,7 @@ cvs_GameplayScreen_drawHud = $this => {
     $accent = cvs_GameplayScreen_formatNumber($this, jl_Integer_valueOf(cvs_SaveManager_getCredits(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this)))));
     $seconds = $this.$coinsEarnedInStage;
     var$21 = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$21, $accent), $rt_s(2889)), $seconds);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$21, $accent), $rt_s(2890)), $seconds);
     $label = jl_StringBuilder_toString(var$21);
     $accent = cvs_BaseScreen_getLayout($this);
     var$21 = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
@@ -54647,7 +54858,7 @@ cvs_GameplayScreen_drawHud = $this => {
     cbggg_GlyphLayout_setText($accent, var$21, $label);
     cbggg_BitmapFont_draw(cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)), $label, 900.0 - (cvs_BaseScreen_getLayout($this)).$width2, 1860.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.6000000238418579, 0.20000000298023224, 0.8999999761581421));
-    $accent = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(993));
+    $accent = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(994));
     var$21 = cvs_GameplayScreen_formatNumber($this, jl_Long_valueOf($this.$logicalEnemiesDestroyed));
     $label = cvs_GameplayScreen_formatNumber($this, jl_Long_valueOf($this.$logicalEnemiesScheduled));
     $shieldCol = jl_StringBuilder__init_();
@@ -54678,7 +54889,7 @@ cvs_GameplayScreen_drawHud = $this => {
                 $accent = cvs_StageDefinition_getBoss($this.$stage0);
                 $seconds = $sFrac * 100.0 | 0;
                 var$21 = jl_StringBuilder__init_();
-                jl_StringBuilder_append3(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$21, $accent), $rt_s(2890)), $seconds), 37);
+                jl_StringBuilder_append3(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$21, $accent), $rt_s(2891)), $seconds), 37);
                 $label2 = jl_StringBuilder_toString(var$21);
                 $accent = cvs_BaseScreen_getLayout($this);
                 var$21 = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
@@ -54733,8 +54944,8 @@ cvs_GameplayScreen_drawControls = $this => {
     cbggg_ShapeRenderer_end(cvs_SkyVanguardGame_getShapes(cvs_BaseScreen_getGame($this)));
     cbggg_SpriteBatch_begin(cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)));
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 1.0, 1.0, $this.$specials <= 0 ? 0.44999998807907104 : 1.0));
-    cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), $rt_s(2871));
-    cbggg_BitmapFont_draw(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)), $rt_s(2871), $sx - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $sy + (cvs_BaseScreen_getLayout($this)).$height4 / 2.0 + 12.0);
+    cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), $rt_s(2872));
+    cbggg_BitmapFont_draw(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)), $rt_s(2872), $sx - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $sy + (cvs_BaseScreen_getLayout($this)).$height4 / 2.0 + 12.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 1.0, 1.0, $this.$specials <= 0 ? 0.4000000059604645 : 0.8999999761581421));
     $specialColor = cvs_BaseScreen_getLayout($this);
     $defenseColor = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
@@ -54823,40 +55034,40 @@ cvs_GameplayScreen_drawExtraControls = $this => {
     cbggg_SpriteBatch_begin(cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)));
     if ($touchMode) {
         cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 1.0, 1.0, 0.949999988079071));
-        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(999)));
+        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1000)));
         $lockLabel = cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this));
         $fc = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
-        var$6 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(999));
+        var$6 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1000));
         var$7 = $this.$fireButton;
         var$4 = var$7.$x + var$7.$width0 / 2.0 - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0;
         var$7 = $this.$fireButton;
         cbggg_BitmapFont_draw($lockLabel, $fc, var$6, var$4, var$7.$y + var$7.$height0 / 2.0 + (cvs_BaseScreen_getLayout($this)).$height4 / 2.0);
         cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 1.0, 1.0, !($this.$missileCooldown <= 0.0) ? 0.44999998807907104 : 0.949999988079071));
-        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1001)));
+        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1002)));
         $lockLabel = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
         var$6 = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
-        var$7 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1001));
+        var$7 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1002));
         $fc = $this.$missileButton;
         var$4 = $fc.$x + $fc.$width0 / 2.0 - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0;
         $fc = $this.$missileButton;
         cbggg_BitmapFont_draw($lockLabel, var$6, var$7, var$4, $fc.$y + $fc.$height0 / 2.0 + (cvs_BaseScreen_getLayout($this)).$height4 / 2.0);
         cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.6000000238418579, 1.0, 0.75, 0.949999988079071));
-        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), $rt_s(2891));
-        $lockLabel = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
-        $fc = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
-        var$6 = $rt_s(2891);
-        var$7 = $this.$upgradeUpButton;
-        cbggg_BitmapFont_draw($lockLabel, $fc, var$6, var$7.$x + var$7.$width0 / 2.0 - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $this.$upgradeUpButton.$y + 70.0);
-        cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.6000000238418579, 0.6499999761581421, 0.949999988079071));
         cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), $rt_s(2892));
         $lockLabel = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
         $fc = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
         var$6 = $rt_s(2892);
+        var$7 = $this.$upgradeUpButton;
+        cbggg_BitmapFont_draw($lockLabel, $fc, var$6, var$7.$x + var$7.$width0 / 2.0 - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $this.$upgradeUpButton.$y + 70.0);
+        cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.6000000238418579, 0.6499999761581421, 0.949999988079071));
+        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), $rt_s(2893));
+        $lockLabel = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
+        $fc = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
+        var$6 = $rt_s(2893);
         var$7 = $this.$upgradeDownButton;
         cbggg_BitmapFont_draw($lockLabel, $fc, var$6, var$7.$x + var$7.$width0 / 2.0 - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $this.$upgradeDownButton.$y + 70.0);
     }
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), !$this.$lockOn ? cbgg_Color__init_(0.5, 0.949999988079071, 1.0, 0.8999999761581421) : cbgg_Color__init_(1.0, 0.550000011920929, 0.6000000238418579, 0.949999988079071));
-    $lockLabel = $this.$lockOn ? cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1005)) : !$this.$aimingMode ? cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1003)) : cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1007));
+    $lockLabel = $this.$lockOn ? cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1006)) : !$this.$aimingMode ? cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1004)) : cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1008));
     $fc = cvs_BaseScreen_getLayout($this);
     var$6 = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
     $lockLabel = $lockLabel;
@@ -55049,9 +55260,9 @@ cvs_GameplayScreen_drawPauseOverlay = $this => {
     cvs_BaseScreen_drawTracked($this, $c, 540.0, 1850.0, $type, $rect, 8.0);
     $collected = cvs_GameplayScreen_formatNumber($this, jl_Integer_valueOf(cvs_SaveManager_getCredits(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this)))));
     $c = jl_StringBuilder__init_();
-    jl_StringBuilder_append(jl_StringBuilder_append($c, $rt_s(2893)), $collected);
+    jl_StringBuilder_append(jl_StringBuilder_append($c, $rt_s(2894)), $collected);
     cvs_BaseScreen_drawCentered($this, jl_StringBuilder_toString($c), 1775.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.8600000143051147, 0.25, 1.0));
-    cvs_BaseScreen_drawCentered($this, $rt_s(2894), 1700.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.6200000047683716, 0.8999999761581421, 1.0, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(2895), 1700.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.6200000047683716, 0.8999999761581421, 1.0, 1.0));
     $collected = cvs_GameplayScreen_visibleCollectedPowers($this);
     cvs_BaseScreenKt_beginBlended$default(cvs_SkyVanguardGame_getShapes(cvs_BaseScreen_getGame($this)), null, 1, null);
     $collected = ju_AbstractList_iterator($collected);
@@ -55094,13 +55305,13 @@ cvs_GameplayScreen_drawPauseOverlay = $this => {
         $offer = cvs_GameplayScreen_powerShortLabel($this, $type);
         $columns = cvs_GameplayScreen_phasePowerCount($this, $type);
         $accent = cvs_GameplayScreen_powerDurationLabel($this, $type);
-        $type = !cvs_GameplayScreen_isPowerEnabled($this, $type) ? $rt_s(1789) : $rt_s(1788);
+        $type = !cvs_GameplayScreen_isPowerEnabled($this, $type) ? $rt_s(1791) : $rt_s(1790);
         var$14 = jl_StringBuilder__init_();
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$14, $offer), $rt_s(2895)), $columns), $rt_s(2495)), $accent), $rt_s(2495)), $type);
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$14, $offer), $rt_s(2896)), $columns), $rt_s(2493)), $accent), $rt_s(2493)), $type);
         cbggg_BitmapFont_draw($c, $rect_0, jl_StringBuilder_toString(var$14), $rect.$x + 14.0, $rect.$y + 37.0);
     }
     cbggg_SpriteBatch_end(cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)));
-    cvs_BaseScreen_drawCentered($this, $rt_s(1675), 1050.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.7799999713897705, 0.25, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(1677), 1050.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.7799999713897705, 0.25, 1.0));
     cvs_BaseScreenKt_beginBlended$default(cvs_SkyVanguardGame_getShapes(cvs_BaseScreen_getGame($this)), null, 1, null);
     $collected = $this.$shopOffers.$iterator0();
     $columns = 0;
@@ -55149,13 +55360,13 @@ cvs_GameplayScreen_drawPauseOverlay = $this => {
         $type = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
         $columns = cvs_GameplayScreen$ShopOffer_getCost($offer);
         $rect_0 = jl_StringBuilder__init_();
-        jl_StringBuilder_append(jl_StringBuilder_append0($rect_0, $columns), $rt_s(2896));
+        jl_StringBuilder_append(jl_StringBuilder_append0($rect_0, $columns), $rt_s(2897));
         cbggg_BitmapFont_draw($c, $type, jl_StringBuilder_toString($rect_0), $rect.$x + 16.0, $rect.$y + 28.0);
     }
     cbggg_SpriteBatch_end(cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)));
     if (jl_String_length($this.$pauseMessage) <= 0 ? 0 : 1)
         cvs_BaseScreen_drawCentered($this, $this.$pauseMessage, 650.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.47999998927116394, 0.20000000298023224, 1.0));
-    cvs_BaseScreen_drawCentered($this, $rt_s(2897), 570.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.7200000286102295, 0.8399999737739563, 0.9399999976158142, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(2898), 570.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.7200000286102295, 0.8399999737739563, 0.9399999976158142, 1.0));
     cvs_BaseScreen_drawButton($this, $this.$continueButton, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(903)), 1);
     $collected = $this;
     cvs_BaseScreen_drawButton$default($collected, $this.$restartButton, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(905)), 0, 4, null);
@@ -55176,16 +55387,16 @@ cvs_GameplayScreen_handlePauseTap = ($this, $x, $y) => {
                     continue;
                 else {
                     var$3 = $this.$shopOffers;
-                    kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(839));
+                    kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(859));
                     var$3 = !(0 > $index ? 0 : $index >= var$3.$size() ? 0 : 1) ? null : var$3.$get($index);
                     if (var$3 !== null) {
                         $type = var$3.$power1;
                         cvs_PowerType_$callClinit();
                         if ($type === cvs_PowerType_SPECIAL && $this.$specials >= 10) {
-                            $this.$pauseMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1690));
+                            $this.$pauseMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1692));
                             cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.5, 0.7200000286102295);
                         } else if (!cvs_SaveManager_spendCoins(cvs_SkyVanguardGame_getSaveManager($this.$game), var$3.$cost)) {
-                            $this.$pauseMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(975));
+                            $this.$pauseMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(976));
                             cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.5, 0.7200000286102295);
                         } else {
                             $rect = cvs_GameplayScreen_unlockedPowerTypes($this);
@@ -55208,7 +55419,7 @@ cvs_GameplayScreen_handlePauseTap = ($this, $x, $y) => {
                             var$3 = cvs_GameplayScreen_powerShortLabel($this, var$3);
                             $rect = new jl_StringBuilder;
                             jl_AbstractStringBuilder__init_($rect);
-                            jl_StringBuilder_append(jl_StringBuilder_append($rect, var$3), $rt_s(2898));
+                            jl_StringBuilder_append(jl_StringBuilder_append($rect, var$3), $rt_s(2899));
                             $this.$pauseMessage = jl_AbstractStringBuilder_toString($rect);
                             cvs_SaveManager_flushPending(cvs_SkyVanguardGame_getSaveManager($this.$game));
                         }
@@ -55242,7 +55453,7 @@ cvs_GameplayScreen_handlePauseTap = ($this, $x, $y) => {
     cvs_SaveManager_setRunPowerEnabled(cvs_SkyVanguardGame_getSaveManager($this.$game), $type, cvs_GameplayScreen_isPowerEnabled($this, $type));
     cvs_GameplayScreen_recomputePowerState($this);
     var$3 = cvs_GameplayScreen_powerShortLabel($this, $type);
-    $rect = !cvs_GameplayScreen_isPowerEnabled($this, $type) ? $rt_s(1716) : $rt_s(1715);
+    $rect = !cvs_GameplayScreen_isPowerEnabled($this, $type) ? $rt_s(1718) : $rt_s(1717);
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
     var$3 = jl_StringBuilder_append(var$4, var$3);
@@ -55312,15 +55523,15 @@ cvs_GameplayScreen_dispose = $this => {
         ju_ArrayList_add($element$iv, var$5);
     }
     $$this$forEach$iv = $element$iv;
-    kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(839));
-    kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(859));
+    kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(859));
     if (!$rt_isInstance($$this$forEach$iv, ju_Collection))
         $$this$forEach$iv = kc_CollectionsKt___CollectionsKt_toCollection($$this$forEach$iv, ju_LinkedHashSet__init_());
     else {
         $element$iv = new ju_LinkedHashSet;
         $$this$forEach$iv = $$this$forEach$iv;
         $it = new ju_LinkedHashMap;
-        var$6 = $$this$forEach$iv.$size2;
+        var$6 = $$this$forEach$iv.$size1;
         ju_LinkedHashMap__init_1($it, var$6 < 6 ? 11 : var$6 * 2 | 0);
         ju_HashSet__init_($element$iv, $it);
         var$1 = ju_AbstractList_iterator($$this$forEach$iv);
@@ -55427,9 +55638,9 @@ function cvs_ShopScreen$Offer() {
     a.$baseCost = 0;
 }
 let cvs_ShopScreen$Offer__init_0 = ($this, $power, $name, $description, $baseCost) => {
-    kji_Intrinsics_checkNotNullParameter($power, $rt_s(995));
+    kji_Intrinsics_checkNotNullParameter($power, $rt_s(996));
     kji_Intrinsics_checkNotNullParameter($name, $rt_s(774));
-    kji_Intrinsics_checkNotNullParameter($description, $rt_s(2899));
+    kji_Intrinsics_checkNotNullParameter($description, $rt_s(2900));
     $this.$power = $power;
     $this.$name4 = $name;
     $this.$description = $description;
@@ -55448,7 +55659,7 @@ cvs_ShopScreen$Offer_toString = $this => {
     var$4 = $this.$baseCost;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2900)), var$1), $rt_s(2466)), var$2), $rt_s(2901)), var$3), $rt_s(2902)), var$4), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2901)), var$1), $rt_s(2466)), var$2), $rt_s(2902)), var$3), $rt_s(2903)), var$4), 41);
     return jl_AbstractStringBuilder_toString(var$5);
 },
 cvs_ShopScreen$Offer_hashCode = $this => {
@@ -55483,36 +55694,36 @@ function cvs_SettingsScreen$pickPhoto$lambda$_2_0() {
     jl_Object.call(this);
     this.$_034 = null;
 }
-function cvs_MainMenuScreen$show$lambda$0$lambda$_27_0() {
+function cvs_MainMenuScreen$show$lambda$0$lambda$_29_0() {
     jl_Object.call(this);
-    this.$_013 = null;
+    this.$_055 = null;
 }
-let cvs_MainMenuScreen$show$lambda$0$lambda$_27_0_run = var$0 => {
-    cvs_SaveManager_setAdsRemoved(cvs_SkyVanguardGame_getSaveManager(var$0.$_013.$game), 1);
+let cvs_MainMenuScreen$show$lambda$0$lambda$_29_0_run = var$0 => {
+    cvs_SaveManager_setAdsRemoved(cvs_SkyVanguardGame_getSaveManager(var$0.$_055.$game), 1);
 };
-function cvs_MainMenuScreen$requestRemoveAds$lambda$0$lambda$_29_0() {
+function cvs_MainMenuScreen$requestRemoveAds$lambda$0$lambda$_31_0() {
     let a = this; jl_Object.call(a);
-    a.$_061 = null;
+    a.$_062 = null;
     a.$_125 = 0;
 }
-let cvs_MainMenuScreen$requestRemoveAds$lambda$0$lambda$_29_0_run = var$0 => {
+let cvs_MainMenuScreen$requestRemoveAds$lambda$0$lambda$_31_0_run = var$0 => {
     let var$1, var$2;
-    var$1 = var$0.$_061;
+    var$1 = var$0.$_062;
     var$2 = var$0.$_125;
     var$1.$removeAdsBusy = 0;
     if (!var$2)
-        cvs_MainMenuScreen_setRemoveAdsMessage(var$1, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$1.$game), $rt_s(1720)));
+        cvs_MainMenuScreen_setRemoveAdsMessage(var$1, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$1.$game), $rt_s(1722)));
     else {
         cvs_SaveManager_setAdsRemoved(cvs_SkyVanguardGame_getSaveManager(var$1.$game), 1);
-        cvs_MainMenuScreen_setRemoveAdsMessage(var$1, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$1.$game), $rt_s(1722)));
+        cvs_MainMenuScreen_setRemoveAdsMessage(var$1, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$1.$game), $rt_s(1724)));
         cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$1.$game), $rt_s(765), 1.0, 1.100000023841858);
     }
 },
 otja_XMLHttpRequest = $rt_classWithoutFields();
 function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_0() {
     let a = this; jl_Object.call(a);
-    a.$_016 = null;
-    a.$_13 = null;
+    a.$_014 = null;
+    a.$_14 = null;
     a.$_22 = 0;
     a.$_32 = null;
     a.$_40 = 0;
@@ -55521,8 +55732,8 @@ function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_0() {
 let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_0_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7;
     var$1 = var$1;
-    var$2 = var$1.$_016;
-    var$3 = var$1.$_13;
+    var$2 = var$1.$_014;
+    var$3 = var$1.$_14;
     var$4 = var$1.$_22;
     var$5 = var$1.$_32;
     var$6 = var$1.$_40;
@@ -55537,7 +55748,7 @@ let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_0_handleEvent$expo
 function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_1() {
     let a = this; jl_Object.call(a);
     a.$_02 = null;
-    a.$_1 = null;
+    a.$_10 = null;
     a.$_2 = 0;
     a.$_3 = null;
     a.$_4 = 0;
@@ -55547,7 +55758,7 @@ let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_1_handleEvent$expo
     let var$3, var$4, var$5, var$6, var$7;
     var$1 = var$1;
     var$2 = var$1.$_02;
-    var$3 = var$1.$_1;
+    var$3 = var$1.$_10;
     var$4 = var$1.$_2;
     var$5 = var$1.$_3;
     var$6 = var$1.$_4;
@@ -55561,7 +55772,7 @@ let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_1_handleEvent$expo
 };
 function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_2() {
     let a = this; jl_Object.call(a);
-    a.$_053 = null;
+    a.$_052 = null;
     a.$_122 = null;
     a.$_211 = 0;
     a.$_37 = null;
@@ -55571,7 +55782,7 @@ function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_2() {
 let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_2_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7;
     var$1 = var$1;
-    var$2 = var$1.$_053;
+    var$2 = var$1.$_052;
     var$3 = var$1.$_122;
     var$4 = var$1.$_211;
     var$5 = var$1.$_37;
@@ -55587,7 +55798,7 @@ let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_2_handleEvent$expo
 function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_3() {
     let a = this; jl_Object.call(a);
     a.$_040 = null;
-    a.$_116 = null;
+    a.$_117 = null;
     a.$_27 = null;
     a.$_35 = 0;
     a.$_42 = null;
@@ -55597,7 +55808,7 @@ function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_3() {
 function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_4() {
     let a = this; jl_Object.call(a);
     a.$_029 = null;
-    a.$_19 = null;
+    a.$_110 = null;
     a.$_23 = null;
     a.$_33 = 0;
     a.$_41 = null;
@@ -55608,7 +55819,7 @@ let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_4_handleEvent$expo
     let var$3, var$4, var$5, var$6, var$7, var$8, var$9;
     var$1 = var$1;
     var$2 = var$1.$_029;
-    var$3 = var$1.$_19;
+    var$3 = var$1.$_110;
     var$4 = var$1.$_23;
     var$5 = var$1.$_33;
     var$6 = var$1.$_41;
@@ -55624,7 +55835,7 @@ let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_4_handleEvent$expo
     else if (var$4.readyState == 4) {
         var$1 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$1);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(2903)), var$3), $rt_s(255)), var$5);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(2904)), var$3), $rt_s(255)), var$5);
         jl_AbstractStringBuilder_toString(var$1);
     }
 },
@@ -55762,7 +55973,7 @@ let cvs_BossState__init_0 = $this => {
     $this.$leftTurretHp = 650.0;
     $this.$rightTurretHp = 650.0;
     $this.$phase1 = 1;
-    $this.$spriteKey = $rt_s(2521);
+    $this.$spriteKey = $rt_s(2519);
 },
 cvs_BossState__init_ = () => {
     let var_0 = new cvs_BossState();
@@ -55860,7 +56071,7 @@ function cvs_GameplayScreen$ShopOffer() {
     a.$cost = 0;
 }
 let cvs_GameplayScreen$ShopOffer__init_0 = ($this, $label, $power, $cost) => {
-    kji_Intrinsics_checkNotNullParameter($label, $rt_s(2904));
+    kji_Intrinsics_checkNotNullParameter($label, $rt_s(2905));
     $this.$label = $label;
     $this.$power1 = $power;
     $this.$cost = $cost;
@@ -55883,7 +56094,7 @@ cvs_GameplayScreen$ShopOffer_toString = $this => {
     var$3 = $this.$cost;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(2905)), var$1), $rt_s(2471)), var$2), $rt_s(2906)), var$3), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(2906)), var$1), $rt_s(2471)), var$2), $rt_s(2907)), var$3), 41);
     return jl_AbstractStringBuilder_toString(var$4);
 },
 cvs_GameplayScreen$ShopOffer_hashCode = $this => {
@@ -55911,10 +56122,10 @@ cvs_GameplayScreen$ShopOffer_equals = ($this, $other) => {
 };
 function cvs_GameplayScreen$_init_$lambda$_0_0() {
     jl_Object.call(this);
-    this.$_028 = null;
+    this.$_027 = null;
 }
 let cvs_GameplayScreen$_init_$lambda$_0_0__init_0 = (var$0, var$1) => {
-    var$0.$_028 = var$1;
+    var$0.$_027 = var$1;
 },
 cvs_GameplayScreen$_init_$lambda$_0_0__init_ = var_0 => {
     let var_1 = new cvs_GameplayScreen$_init_$lambda$_0_0();
@@ -55923,15 +56134,15 @@ cvs_GameplayScreen$_init_$lambda$_0_0__init_ = var_0 => {
 },
 cvs_GameplayScreen$_init_$lambda$_0_0_invoke = var$0 => {
     let var$1;
-    var$1 = var$0.$_028;
+    var$1 = var$0.$_027;
     return cbggg_TextureRegion__init_(cvs_SkyVanguardGame_getMissileTexture(var$1));
 },
 k_LazyKt__LazyJVMKt = $rt_classWithoutFields(),
 k_LazyKt__LazyJVMKt_lazy = $initializer => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($initializer, $rt_s(2907));
+    kji_Intrinsics_checkNotNullParameter($initializer, $rt_s(2908));
     var$2 = new k_SynchronizedLazyImpl;
-    kji_Intrinsics_checkNotNullParameter($initializer, $rt_s(2907));
+    kji_Intrinsics_checkNotNullParameter($initializer, $rt_s(2908));
     var$2.$initializer = $initializer;
     k_UNINITIALIZED_VALUE_$callClinit();
     var$2.$_value = k_UNINITIALIZED_VALUE_INSTANCE;
@@ -55958,17 +56169,17 @@ cvs_GameplayScreen$_init_$lambda$_0_1_invoke = var$0 => {
 function otja_XMLHttpRequest$onComplete$lambda$_23_0() {
     let a = this; jl_Object.call(a);
     a.$_044 = null;
-    a.$_118 = null;
+    a.$_119 = null;
 }
 let otja_XMLHttpRequest$onComplete$lambda$_23_0_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7, var$8, var$9, var$10;
     var$1 = var$1;
     var$2 = var$1.$_044;
-    var$1 = var$1.$_118;
+    var$1 = var$1.$_119;
     if (var$2.readyState == 4) {
         var$1 = var$1;
         var$2 = var$1.$_040;
-        var$3 = var$1.$_116;
+        var$3 = var$1.$_117;
         var$4 = var$1.$_27;
         var$5 = var$1.$_35;
         var$6 = var$1.$_42;
@@ -55978,7 +56189,7 @@ let otja_XMLHttpRequest$onComplete$lambda$_23_0_handleEvent$exported$0 = (var$1,
         var$10 = var$4.status;
         var$1 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$1);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(278)), var$3), $rt_s(271)), var$9), $rt_s(2908)), var$10), $rt_s(255)), var$5);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(278)), var$3), $rt_s(271)), var$9), $rt_s(2909)), var$10), $rt_s(255)), var$5);
         jl_AbstractStringBuilder_toString(var$1);
         if (cgxgtbwa_AssetDownloadImpl_trySettle(var$2, var$6))
             cgxgtbwa_AssetDownloadImpl_handleTerminalStatus(var$2, var$7, var$3, var$8, var$5, var$4);
@@ -56000,7 +56211,7 @@ let cgxgtbwa_AssetDownloadImpl$setOnProgress$lambda$_8_0_handleEvent$exported$0 
     var$6 = var$5 <= 0 ? (-1.0) : var$4 / var$5;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    var$3 = jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(278)), var$3), $rt_s(2909)), var$4), $rt_s(2910)), var$5), $rt_s(2911));
+    var$3 = jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(278)), var$3), $rt_s(2910)), var$4), $rt_s(2911)), var$5), $rt_s(2912));
     var$7 = var$3.$length2;
     jl_AbstractStringBuilder_insert3(var$3, var$7, var$6);
     jl_AbstractStringBuilder_toString(var$2);
@@ -56009,13 +56220,13 @@ let cgxgtbwa_AssetDownloadImpl$setOnProgress$lambda$_8_0_handleEvent$exported$0 
         var$2 = var$1.$val$url0;
         var$3 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$3);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(278)), var$2), $rt_s(2909)), var$4), $rt_s(2910)), var$5);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(278)), var$2), $rt_s(2910)), var$4), $rt_s(2911)), var$5);
         jl_AbstractStringBuilder_toString(var$3);
     }
 };
 function cgxgtbwa_AssetDownloadImpl$retryOrFail$lambda$_6_0() {
     let a = this; jl_Object.call(a);
-    a.$_052 = null;
+    a.$_051 = null;
     a.$_121 = 0;
     a.$_210 = null;
     a.$_36 = null;
@@ -56023,7 +56234,7 @@ function cgxgtbwa_AssetDownloadImpl$retryOrFail$lambda$_6_0() {
 }
 let cgxgtbwa_AssetDownloadImpl$retryOrFail$lambda$_6_0_onTimer$exported$0 = var$1 => {
     var$1 = var$1;
-    cgxgtbwa_AssetDownloadImpl_loadBinary(var$1.$_052, var$1.$_121, var$1.$_210, var$1.$_36, var$1.$_43);
+    cgxgtbwa_AssetDownloadImpl_loadBinary(var$1.$_051, var$1.$_121, var$1.$_210, var$1.$_36, var$1.$_43);
 },
 k_Lazy = $rt_classWithoutFields(0);
 function k_SynchronizedLazyImpl() {
@@ -56168,7 +56379,7 @@ cbgu_FloatArray_addAll1 = ($this, $array, $offset, $length) => {
     var$4 = new jl_IllegalArgumentException;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append(var$5, $rt_s(2912));
+    jl_AbstractStringBuilder_append(var$5, $rt_s(2913));
     var$5 = jl_StringBuilder_append0(var$5, $offset);
     jl_AbstractStringBuilder_append(var$5, $rt_s(133));
     var$5 = jl_StringBuilder_append0(var$5, $length);
@@ -56299,10 +56510,10 @@ let cvs_ShopScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $butto
             $level = cvs_SaveManager_upgradeStacks(cvs_SkyVanguardGame_getSaveManager(var$6.$game), $offer.$power);
             $cost = ($offer.$baseCost + ($level * 8 | 0) | 0) * 0.699999988079071 | 0;
             if ($level >= cvs_ShopScreen_allowedMax(var$6)) {
-                var$6.$message = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$6.$game), $rt_s(1672));
+                var$6.$message = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$6.$game), $rt_s(1674));
                 cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$6.$game), $rt_s(768), 0.699999988079071, 0.7200000286102295);
             } else if (!cvs_SaveManager_spendCoins(cvs_SkyVanguardGame_getSaveManager(var$6.$game), $cost)) {
-                var$6.$message = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$6.$game), $rt_s(975));
+                var$6.$message = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$6.$game), $rt_s(976));
                 cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$6.$game), $rt_s(768), 0.699999988079071, 0.75);
             } else {
                 $p = cvs_SkyVanguardGame_getSaveManager(var$6.$game);
@@ -56326,7 +56537,7 @@ let cvs_ShopScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $butto
                 cgxgtbw_WebPreferences_putInteger($$this$forEachIndexed$iv, $item$iv, $screenX);
                 $p.$upgradesDirty = 1;
                 $item$iv = cvs_ShopScreen_offerName(var$6, $offer.$power);
-                $p = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$6.$game), $rt_s(981));
+                $p = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$6.$game), $rt_s(982));
                 $screenX = $level + 1 | 0;
                 $$this$forEachIndexed$iv = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($$this$forEachIndexed$iv);
@@ -56349,15 +56560,15 @@ let cvs_ShopScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $butto
 };
 function cgxgtbwft_LocalDBStorage$removeFile$lambda$_3_0() {
     jl_Object.call(this);
-    this.$_023 = null;
+    this.$_022 = null;
 }
 let cgxgtbwft_LocalDBStorage$removeFile$lambda$_3_0_handleEvent$exported$0 = var$1 => {
     let var$2, var$3;
-    var$1 = var$1.$_023;
+    var$1 = var$1.$_022;
     var$2 = jl_System_err();
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2913)), var$1);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2914)), var$1);
     var$1 = jl_AbstractStringBuilder_toString(var$3);
     otcic_JsConsolePrintStream_println(var$2, var$1);
 };
@@ -56835,12 +57046,12 @@ cbg_Input$OnscreenKeyboardType__init_ = (var_0, var_1) => {
 },
 cbg_Input$OnscreenKeyboardType__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbg_Input$OnscreenKeyboardType_Default = cbg_Input$OnscreenKeyboardType__init_($rt_s(2914), 0);
-    cbg_Input$OnscreenKeyboardType_NumberPad = cbg_Input$OnscreenKeyboardType__init_($rt_s(2915), 1);
-    cbg_Input$OnscreenKeyboardType_PhonePad = cbg_Input$OnscreenKeyboardType__init_($rt_s(2916), 2);
-    cbg_Input$OnscreenKeyboardType_Email = cbg_Input$OnscreenKeyboardType__init_($rt_s(2917), 3);
-    cbg_Input$OnscreenKeyboardType_Password = cbg_Input$OnscreenKeyboardType__init_($rt_s(2918), 4);
-    var$1 = cbg_Input$OnscreenKeyboardType__init_($rt_s(2919), 5);
+    cbg_Input$OnscreenKeyboardType_Default = cbg_Input$OnscreenKeyboardType__init_($rt_s(2915), 0);
+    cbg_Input$OnscreenKeyboardType_NumberPad = cbg_Input$OnscreenKeyboardType__init_($rt_s(2916), 1);
+    cbg_Input$OnscreenKeyboardType_PhonePad = cbg_Input$OnscreenKeyboardType__init_($rt_s(2917), 2);
+    cbg_Input$OnscreenKeyboardType_Email = cbg_Input$OnscreenKeyboardType__init_($rt_s(2918), 3);
+    cbg_Input$OnscreenKeyboardType_Password = cbg_Input$OnscreenKeyboardType__init_($rt_s(2919), 4);
+    var$1 = cbg_Input$OnscreenKeyboardType__init_($rt_s(2920), 5);
     cbg_Input$OnscreenKeyboardType_URI = var$1;
     var$2 = $rt_createArray(cbg_Input$OnscreenKeyboardType, 6);
     var$3 = var$2.data;
@@ -56853,15 +57064,15 @@ cbg_Input$OnscreenKeyboardType__clinit_ = () => {
     cbg_Input$OnscreenKeyboardType_$VALUES = var$2;
 },
 cvsw_RetornoDaFoto = $rt_classWithoutFields(0);
-function cvsw_WebPlatformServices$pickPilotPhoto$lambda$_5_0() {
+function cvsw_WebPlatformServices$pickPilotPhoto$lambda$_7_0() {
     let a = this; jl_Object.call(a);
-    a.$_059 = null;
-    a.$_15 = null;
+    a.$_058 = null;
+    a.$_1 = null;
 }
-let cvsw_WebPlatformServices$pickPilotPhoto$lambda$_5_0_recebeu$exported$0 = (var$1, var$2) => {
+let cvsw_WebPlatformServices$pickPilotPhoto$lambda$_7_0_recebeu$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, $$je;
     var$2 = $rt_str(var$2);
-    var$1 = var$1.$_15;
+    var$1 = var$1.$_1;
     if (var$2 === null)
         var$3 = null;
     else {
@@ -56917,150 +57128,10 @@ let cvsw_WebPlatformServices$pickPilotPhoto$lambda$_5_0_recebeu$exported$0 = (va
     var$4 = var$2.$value0;
     var$2 = cbg_Gdx_app;
     var$5 = new cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0;
-    var$5.$_018 = var$4;
+    var$5.$_016 = var$4;
     var$5.$_16 = var$1;
     cgxgtbw_WebApplication_postRunnable(var$2, var$5);
     k_Unit_$callClinit();
-},
-cvsw_WebLauncherKt = $rt_classWithoutFields(),
-cvsw_WebLauncherKt_access$mostrarAnuncioPremiado = ($nome, $aoTerminar) => {
-    let var$3, var$4, var$5, $$je;
-    var$3 = $rt_createBooleanArray(1);
-    var$4 = var$3.data;
-    var$4[0] = 0;
-    a: {
-        try {
-            var$5 = cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0__init_(var$3, $aoTerminar);
-            cvsw_WebLauncherKt_mostrarAnuncioPremiadoJs$js_body$_1($rt_ustr($nome), otji_JS_function(otji_JSWrapper_unwrap(var$5), "recebeu"));
-            k_Unit_$callClinit();
-            $nome = k_Result_constructor_impl(k_Unit_INSTANCE);
-            break a;
-        } catch ($$e) {
-            $$je = $rt_wrapException($$e);
-            if ($$je instanceof jl_Throwable) {
-                $nome = $$je;
-                $nome = k_ResultKt_createFailure($nome);
-                k_Result_$callClinit();
-                break a;
-            } else {
-                throw $$e;
-            }
-        }
-    }
-    k_Result_$callClinit();
-    $nome = !($nome instanceof k_Result$Failure) ? null : $nome.$exception;
-    if ($nome !== null && !var$4[0]) {
-        var$4[0] = 1;
-        $aoTerminar.$invoke(jl_Boolean_valueOf(0));
-    }
-},
-cvsw_WebLauncherKt_access$decodificaBase64 = $texto => {
-    let var$2, var$3, var$4, var$5, var$6, var$7, var$8, var$9, var$10, var$11, var$12, var$13, var$14;
-    $texto = $texto;
-    var$2 = new jl_StringBuilder;
-    jl_AbstractStringBuilder__init_(var$2);
-    var$2 = var$2;
-    var$3 = 0;
-    var$4 = $texto;
-    var$5 = var$4.$nativeString.length;
-    while (var$3 < var$5) {
-        var$6 = jl_String_charAt(var$4, var$3);
-        if (kt_StringsKt__StringsKt_indexOf$default($rt_s(2920), var$6, 0, 0, 6, null) < 0 ? 0 : 1)
-            jl_AbstractStringBuilder_append0(var$2, var$6);
-        var$3 = var$3 + 1 | 0;
-    }
-    var$7 = jl_AbstractStringBuilder_toString(var$2);
-    var$8 = $rt_createByteArray((var$7.$nativeString.length * 3 | 0) / 4 | 0);
-    var$9 = var$8.data;
-    var$10 = 0;
-    var$5 = 0;
-    var$11 = 0;
-    var$12 = 0;
-    var$13 = var$7.$nativeString.length;
-    while (var$12 < var$13) {
-        var$14 = jl_String_charAt(var$7, var$12);
-        var$3 = kt_StringsKt__StringsKt_indexOf$default($rt_s(2920), var$14, 0, 0, 6, null);
-        if (var$3 >= 0) {
-            var$10 = var$10 << 6 | var$3;
-            var$5 = var$5 + 6 | 0;
-            if (var$5 >= 8) {
-                var$5 = var$5 + (-8) | 0;
-                var$3 = var$11 + 1 | 0;
-                var$9[var$11] = (var$10 >> var$5 & 255) << 24 >> 24;
-                var$11 = var$3;
-            }
-        }
-        var$12 = var$12 + 1 | 0;
-    }
-    if (var$11 != var$9.length) {
-        var$8 = ju_Arrays_copyOf(var$8, var$11);
-        kji_Intrinsics_checkNotNullExpressionValue(var$8, $rt_s(2822));
-    }
-    return var$8;
-},
-cvsw_WebLauncherKt_mostrarAnuncioPremiadoJs$js_body$_1 = (var$1, var$2) => {
-    if (typeof window.adBreak !== 'function') {
-        var$2.recebeu(false);
-        return;
-    }
-    var assistiu = false;
-    window.adBreak({ type : 'reward', name : var$1, beforeReward : function(mostrarAnuncio) {
-        mostrarAnuncio();
-    }, adViewed : function() {
-        assistiu = true;
-    }, adDismissed : function() {
-        assistiu = false;
-    }, afterAd : function() {
-    }, adBreakDone : function(info) {
-        var status = info && info.breakStatus;
-        if (status === 'viewed' || status === 'dismissed') {
-            window.__h5Frustradas = 0;
-        } else {
-            window.__h5Frustradas = (window.__h5Frustradas || 0) + 1;
-            if (window.__h5Frustradas >= 2) {
-                window.__h5SemAnuncio = true;
-            }
-        }
-        var$2.recebeu(assistiu);
-    } });
-},
-cvsw_WebLauncherKt_abrirSeletorDeFoto$js_body$_3 = var$1 => {
-    var entrada = document.createElement('input');
-    entrada.type = 'file';
-    entrada.accept = 'image/*';
-    entrada.style.display = 'none';
-    document.body.appendChild(entrada);
-    var encerra = function(valor) {
-        if (entrada.parentNode) {
-            entrada.parentNode.removeChild(entrada);
-        }
-        var$1.recebeu(valor);
-    };
-    entrada.onchange = function() {
-        var arquivo = entrada.files && entrada.files[0];
-        if (!arquivo) {
-            encerra(null);
-            return;
-        }
-        var endereco = URL.createObjectURL(arquivo);
-        var imagem = new Image();
-        imagem.onload = function() {
-            var lado = 512;
-            var escala = Math.min(1, lado / Math.max(imagem.width, imagem.height));
-            var tela = document.createElement('canvas');
-            tela.width = Math.max(1, Math.round(imagem.width * escala));
-            tela.height = Math.max(1, Math.round(imagem.height * escala));
-            (tela.getContext('2d')).drawImage(imagem, 0, 0, tela.width, tela.height);
-            URL.revokeObjectURL(endereco);
-            encerra(((tela.toDataURL('image/png')).split(','))[1]);
-        };
-        imagem.onerror = function() {
-            URL.revokeObjectURL(endereco);
-            encerra(null);
-        };
-        imagem.src = endereco;
-    };
-    entrada.click();
 },
 cgxgtbwwh_Howl = $rt_classWithoutFields(),
 cgxgtbwwh_Howl_create$js_body$_1 = var$1 => {
@@ -57279,7 +57350,7 @@ cvs_EnemyType__clinit_ = () => {
     cvs_EnemyType_SCOUT = cvs_EnemyType__init_($rt_s(2966), 0);
     cvs_EnemyType_STRIKER = cvs_EnemyType__init_($rt_s(2967), 1);
     cvs_EnemyType_BOMBER = cvs_EnemyType__init_($rt_s(2968), 2);
-    cvs_EnemyType_DRONE = cvs_EnemyType__init_($rt_s(2679), 3);
+    cvs_EnemyType_DRONE = cvs_EnemyType__init_($rt_s(2681), 3);
     cvs_EnemyType_TANK = cvs_EnemyType__init_($rt_s(2969), 4);
     var$1 = cvs_EnemyType__init_($rt_s(2970), 5);
     cvs_EnemyType_MINIBOSS = var$1;
@@ -57303,7 +57374,7 @@ function cvs_WaveEvent() {
 }
 let cvs_WaveEvent__init_0 = ($this, $time, $type, $count, $pattern) => {
     kji_Intrinsics_checkNotNullParameter($type, $rt_s(754));
-    kji_Intrinsics_checkNotNullParameter($pattern, $rt_s(2853));
+    kji_Intrinsics_checkNotNullParameter($pattern, $rt_s(2854));
     $this.$time0 = $time;
     $this.$type3 = $type;
     $this.$count0 = $count;
@@ -57436,7 +57507,7 @@ cvs_ResultsScreen_render = ($this, $delta) => {
     jl_AbstractStringBuilder__init_(var$4);
     jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$4, var$5), $rt_s(68)), var$6);
     cvs_BaseScreen_drawCentered($this, jl_StringBuilder_toString(var$4), 1280.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.550000011920929, 0.8500000238418579, 1.0, 1.0));
-    var$5 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1738));
+    var$5 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1740));
     var$6 = $this.$bestCombo0;
     var$4 = jl_StringBuilder__init_();
     jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$4, var$5), $rt_s(2975)), var$6);
@@ -57446,8 +57517,8 @@ cvs_ResultsScreen_render = ($this, $delta) => {
     var$4 = jl_StringBuilder__init_();
     jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$4, var$5), $rt_s(68)), var$6);
     cvs_BaseScreen_drawCentered($this, jl_StringBuilder_toString(var$4), 1152.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.8500000238418579, 0.25, 1.0));
-    cvs_BaseScreen_drawCentered($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1736)), 1092.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.7200000286102295, 0.8999999761581421, 1.0, 1.0));
-    var$5 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1740));
+    cvs_BaseScreen_drawCentered($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1738)), 1092.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.7200000286102295, 0.8999999761581421, 1.0, 1.0));
+    var$5 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1742));
     var$6 = cvs_SaveManager_getCredits(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this)));
     var$4 = jl_StringBuilder__init_();
     jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$4, var$5), $rt_s(68)), var$6);
@@ -57471,7 +57542,7 @@ cvs_ResultsScreen_render = ($this, $delta) => {
                 cvs_BaseScreen_drawButton($this, $this.$nextStage, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(955)), 1);
         }
         cvs_BaseScreen_drawButton$default(var$2, $this.$retry, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(905)), 0, 4, null);
-        cvs_BaseScreen_drawButton$default(var$2, $this.$campaign, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(847)), 0, 4, null);
+        cvs_BaseScreen_drawButton$default(var$2, $this.$campaign, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(846)), 0, 4, null);
     }
 },
 cvs_ResultsScreen_grade = $this => {
@@ -57481,7 +57552,7 @@ cvs_ResultsScreen_grade = $this => {
     else {
         var$2 = $this.$score0;
         var$3 = $this.$stageIndex;
-        var$1 = var$2 >= (140000 + (var$3 * 3500 | 0) | 0) ? $rt_s(539) : var$2 >= (90000 + (var$3 * 2500 | 0) | 0) ? $rt_s(2867) : var$2 < (55000 + (var$3 * 1600 | 0) | 0) ? $rt_s(2874) : $rt_s(2871);
+        var$1 = var$2 >= (140000 + (var$3 * 3500 | 0) | 0) ? $rt_s(539) : var$2 >= (90000 + (var$3 * 2500 | 0) | 0) ? $rt_s(2868) : var$2 < (55000 + (var$3 * 1600 | 0) | 0) ? $rt_s(2875) : $rt_s(2872);
     }
     return var$1;
 };
@@ -57569,10 +57640,10 @@ cvs_EndingScreen_show = $this => {
     }
     var$1 = var$1;
     var$2 = new cvs_EndingScreen$show$lambda$_2_0;
-    var$2.$_055 = $this;
+    var$2.$_054 = $this;
     kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(2982));
     kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(2983));
-    var$2 = var$2.$_055;
+    var$2 = var$2.$_054;
     var$2.$phase2 = 1;
     cvs_AudioManager_playMusic(cvs_SkyVanguardGame_getAudioManager(var$2.$game), $rt_s(837));
     k_Unit_$callClinit();
@@ -57611,7 +57682,7 @@ cvs_EndingScreen_loadFoe = ($this, $path, $name, $desc) => {
     kji_Intrinsics_checkNotNullParameter($desc, $rt_s(2985));
     cvs_EndingScreen$Row__init_(var$6, 310.0, null);
     var$6.$tex = $tex;
-    var$6.$name7 = $name;
+    var$6.$name8 = $name;
     var$6.$desc = $desc;
     ju_ArrayList_add(var$4, var$6);
 },
@@ -57632,7 +57703,7 @@ cvs_EndingScreen_buildRows = $this => {
     var$7 = $this.$pilotName;
     var$8 = cvs_AircraftDefinition_getName($this.$aircraft0);
     var$9 = jl_StringBuilder__init_();
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$9, var$7), $rt_s(2887)), var$8);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$9, var$7), $rt_s(2888)), var$8);
     cvs_EndingScreen$LineRow__init_0($line, jl_StringBuilder_toString(var$9), 1, $gold);
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
@@ -57642,7 +57713,7 @@ cvs_EndingScreen_buildRows = $this => {
     $line = cvs_EndingScreen$Gap__init_(70.0);
     ju_ArrayList_add($it, $line);
     var$7 = $this.$rows;
-    var$8 = cvs_EndingScreen$TitleRow__init_(cvs_EndingScreen_s($this, $rt_s(2988), $rt_s(1036)), cbgg_Color__init_(0.25, 1.0, 0.6499999761581421, 1.0));
+    var$8 = cvs_EndingScreen$TitleRow__init_(cvs_EndingScreen_s($this, $rt_s(2988), $rt_s(1037)), cbgg_Color__init_(0.25, 1.0, 0.6499999761581421, 1.0));
     ju_ArrayList_add(var$7, var$8);
     $it = $this.$rows;
     $line = cvs_EndingScreen$Gap__init_(30.0);
@@ -57665,19 +57736,19 @@ cvs_EndingScreen_buildRows = $this => {
     $it = $this.$rows;
     $line = cvs_EndingScreen$Gap__init_(20.0);
     ju_ArrayList_add($it, $line);
-    cvs_EndingScreen_loadFoe($this, $rt_s(2803), $rt_s(2991), cvs_EndingScreen_s($this, $rt_s(2992), $rt_s(2993)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2805), $rt_s(2994), cvs_EndingScreen_s($this, $rt_s(2995), $rt_s(2996)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2807), $rt_s(2997), cvs_EndingScreen_s($this, $rt_s(2998), $rt_s(2999)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2809), $rt_s(3000), cvs_EndingScreen_s($this, $rt_s(3001), $rt_s(3002)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2811), $rt_s(3003), cvs_EndingScreen_s($this, $rt_s(3004), $rt_s(3005)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2813), $rt_s(3006), cvs_EndingScreen_s($this, $rt_s(3007), $rt_s(3008)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2775), $rt_s(3009), cvs_EndingScreen_s($this, $rt_s(3010), $rt_s(3011)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2777), $rt_s(3012), cvs_EndingScreen_s($this, $rt_s(3013), $rt_s(3014)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2779), $rt_s(3015), cvs_EndingScreen_s($this, $rt_s(3016), $rt_s(3017)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2805), $rt_s(2991), cvs_EndingScreen_s($this, $rt_s(2992), $rt_s(2993)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2807), $rt_s(2994), cvs_EndingScreen_s($this, $rt_s(2995), $rt_s(2996)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2809), $rt_s(2997), cvs_EndingScreen_s($this, $rt_s(2998), $rt_s(2999)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2811), $rt_s(3000), cvs_EndingScreen_s($this, $rt_s(3001), $rt_s(3002)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2813), $rt_s(3003), cvs_EndingScreen_s($this, $rt_s(3004), $rt_s(3005)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2815), $rt_s(3006), cvs_EndingScreen_s($this, $rt_s(3007), $rt_s(3008)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2777), $rt_s(3009), cvs_EndingScreen_s($this, $rt_s(3010), $rt_s(3011)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2779), $rt_s(3012), cvs_EndingScreen_s($this, $rt_s(3013), $rt_s(3014)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2781), $rt_s(3015), cvs_EndingScreen_s($this, $rt_s(3016), $rt_s(3017)));
     cvs_EndingScreen_loadFoe($this, $rt_s(3018), $rt_s(3019), cvs_EndingScreen_s($this, $rt_s(3020), $rt_s(3021)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2783), $rt_s(3022), cvs_EndingScreen_s($this, $rt_s(3023), $rt_s(3024)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2797), $rt_s(3025), cvs_EndingScreen_s($this, $rt_s(3026), $rt_s(3027)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2781), $rt_s(3028), cvs_EndingScreen_s($this, $rt_s(3029), $rt_s(3030)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2785), $rt_s(3022), cvs_EndingScreen_s($this, $rt_s(3023), $rt_s(3024)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2799), $rt_s(3025), cvs_EndingScreen_s($this, $rt_s(3026), $rt_s(3027)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2783), $rt_s(3028), cvs_EndingScreen_s($this, $rt_s(3029), $rt_s(3030)));
     $it = $this.$rows;
     $line = cvs_EndingScreen$Gap__init_(70.0);
     ju_ArrayList_add($it, $line);
@@ -57688,11 +57759,11 @@ cvs_EndingScreen_buildRows = $this => {
     $line = cvs_EndingScreen$Gap__init_(10.0);
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
-    $line = cvs_EndingScreen$LineRow__init_($rt_s(2502), 1, $cyan);
+    $line = cvs_EndingScreen$LineRow__init_($rt_s(2500), 1, $cyan);
     ju_ArrayList_add($it, $line);
     $cyan = $this.$rows;
     $it = new cvs_EndingScreen$LineRow;
-    $line = cvs_EndingScreen_s($this, $rt_s(2503), $rt_s(3033));
+    $line = cvs_EndingScreen_s($this, $rt_s(2501), $rt_s(3033));
     kji_Intrinsics_checkNotNull($white);
     cvs_EndingScreen$LineRow__init_0($it, $line, 0, $white);
     ju_ArrayList_add($cyan, $it);
@@ -57786,7 +57857,7 @@ cvs_EndingScreen_drawRow = ($this, $row, $topY) => {
             cbggg_SpriteBatch_setColor($row, cbgg_Color_WHITE);
             cbggg_SpriteBatch_draw(cvs_SkyVanguardGame_getBatch($this.$game), var$6, 540.0 - var$8 / 2.0, var$7 - 82.5, var$8, 165.0);
             cbggg_SpriteBatch_end(cvs_SkyVanguardGame_getBatch($this.$game));
-            var$9 = var$5.$name7;
+            var$9 = var$5.$name8;
             var$10 = $topY - 218.0;
             var$3 = cvs_SkyVanguardGame_getSmallFont($this.$game);
             var$6 = cbgg_Color_WHITE;
@@ -57802,8 +57873,8 @@ cvs_EndingScreen_finish = $this => {
         return;
     $this.$finished0 = 1;
     var$1 = $this.$onDone;
-    var$2 = var$1.$_025;
-    var$3 = var$1.$_18;
+    var$2 = var$1.$_024;
+    var$3 = var$1.$_19;
     var$4 = var$2.$game;
     var$1 = cvs_ResultsScreen__init_(var$4, var$2.$stageIndex0, var$2.$score, var$2.$bestCombo, var$3, var$2.$missionVictory);
     cbg_Game_setScreen(var$4, var$1);
@@ -57830,12 +57901,12 @@ cvs_EndingScreen_dispose = $this => {
 };
 function cvs_GameplayScreen$update$lambda$_25_0() {
     let a = this; jl_Object.call(a);
-    a.$_025 = null;
-    a.$_18 = 0;
+    a.$_024 = null;
+    a.$_19 = 0;
 }
 let cvs_GameplayScreen$update$lambda$_25_0__init_ = (var$0, var$1, var$2) => {
-    var$0.$_025 = var$1;
-    var$0.$_18 = var$2;
+    var$0.$_024 = var$1;
+    var$0.$_19 = var$2;
 },
 cvs_GameplayScreen$update$lambda$_25_0__init_0 = (var_0, var_1) => {
     let var_2 = new cvs_GameplayScreen$update$lambda$_25_0();
@@ -57940,8 +58011,8 @@ cvs_BulletKind__clinit_ = () => {
     cvs_BulletKind_CANNON = cvs_BulletKind__init_($rt_s(3052), 0);
     cvs_BulletKind_PLASMA = cvs_BulletKind__init_($rt_s(3053), 1);
     cvs_BulletKind_TRACER = cvs_BulletKind__init_($rt_s(3054), 2);
-    cvs_BulletKind_LASER = cvs_BulletKind__init_($rt_s(1662), 3);
-    var$1 = cvs_BulletKind__init_($rt_s(1084), 4);
+    cvs_BulletKind_LASER = cvs_BulletKind__init_($rt_s(1664), 3);
+    var$1 = cvs_BulletKind__init_($rt_s(1085), 4);
     cvs_BulletKind_MISSILE = var$1;
     var$2 = $rt_createArray(cvs_BulletKind, 5);
     var$3 = var$2.data;
@@ -58192,10 +58263,10 @@ cgxgtbw_WebInput$1_run = $this => {
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_0() {
     jl_Object.call(this);
-    this.$_024 = null;
+    this.$_023 = null;
 }
 let cgxgtbw_WebInput$getTextInput$lambda$_69_0__init_ = (var$0, var$1) => {
-    var$0.$_024 = var$1;
+    var$0.$_023 = var$1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_0__init_0 = var_0 => {
     let var_1 = new cgxgtbw_WebInput$getTextInput$lambda$_69_0();
@@ -58203,17 +58274,17 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_0__init_0 = var_0 => {
     return var_1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_0_handleEvent$exported$0 = (var$1, var$2) => {
-    cgxgtbw_WebInput$1_run(var$1.$_024);
+    cgxgtbw_WebInput$1_run(var$1.$_023);
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_1() {
     let a = this; jl_Object.call(a);
     a.$_036 = null;
-    a.$_113 = null;
+    a.$_114 = null;
     a.$_25 = null;
 }
 let cgxgtbw_WebInput$getTextInput$lambda$_69_1__init_ = (var$0, var$1, var$2, var$3) => {
     var$0.$_036 = var$1;
-    var$0.$_113 = var$2;
+    var$0.$_114 = var$2;
     var$0.$_25 = var$3;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_1__init_0 = (var_0, var_1, var_2) => {
@@ -58225,7 +58296,7 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_1_handleEvent$exported$0 = (var$1, var$
     let var$3, var$4;
     var$1 = var$1;
     var$3 = var$1.$_036;
-    var$4 = var$1.$_113;
+    var$4 = var$1.$_114;
     var$1 = var$1.$_25;
     if (var$2.target === var$3)
         cgxgtbw_WebInput$1_run(var$1);
@@ -58297,7 +58368,7 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_3_run = var$0 => {
         var$1.style.setProperty("border-color", "red");
         var$1.style.setProperty("animation", "shake 0.5s");
         var$2 = new cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0;
-        var$2.$_014 = var$1;
+        var$2.$_012 = var$1;
         setTimeout(otji_JS_function(otji_JSWrapper_unwrap(var$2), "onTimer"), 1000);
     } else {
         cgxgtbw_WebInput$1_run(var$2);
@@ -58308,26 +58379,26 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_3_run = var$0 => {
             kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(3063));
             var$2 = var$2.$prefs;
             var$5 = kt_StringsKt__StringsKt_trim(var$4);
-            kji_Intrinsics_checkNotNullParameter(var$5, $rt_s(839));
+            kji_Intrinsics_checkNotNullParameter(var$5, $rt_s(859));
             var$4 = jl_String_substring(var$5, 0, kr_RangesKt___RangesKt_coerceAtMost(16, var$5.$nativeString.length));
             kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(3064));
             cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putString(var$2, $rt_s(749), var$4));
             var$3 = var$1.$this$014;
-            var$3.$statusMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$3.$game), $rt_s(1699));
+            var$3.$statusMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$3.$game), $rt_s(1701));
             var$1.$this$014.$statusTimer = 2.5;
         }
     }
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_4() {
     let a = this; jl_Object.call(a);
-    a.$_09 = null;
-    a.$_12 = null;
+    a.$_08 = null;
+    a.$_13 = null;
     a.$_21 = null;
     a.$_31 = null;
 }
 let cgxgtbw_WebInput$getTextInput$lambda$_69_4__init_0 = (var$0, var$1, var$2, var$3, var$4) => {
-    var$0.$_09 = var$1;
-    var$0.$_12 = var$2;
+    var$0.$_08 = var$1;
+    var$0.$_13 = var$2;
     var$0.$_21 = var$3;
     var$0.$_31 = var$4;
 },
@@ -58339,8 +58410,8 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_4__init_ = (var_0, var_1, var_2, var_3)
 cgxgtbw_WebInput$getTextInput$lambda$_69_4_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7, var$8;
     var$1 = var$1;
-    var$3 = var$1.$_09;
-    var$4 = var$1.$_12;
+    var$3 = var$1.$_08;
+    var$4 = var$1.$_13;
     var$5 = var$1.$_21;
     var$1 = var$1.$_31;
     if (jl_String_equals($rt_s(408), $rt_str(var$2.key)))
@@ -58372,10 +58443,10 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_4_handleEvent$exported$0 = (var$1, var$
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_5() {
     jl_Object.call(this);
-    this.$_020 = null;
+    this.$_018 = null;
 }
 let cgxgtbw_WebInput$getTextInput$lambda$_69_5__init_ = (var$0, var$1) => {
-    var$0.$_020 = var$1;
+    var$0.$_018 = var$1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_5__init_0 = var_0 => {
     let var_1 = new cgxgtbw_WebInput$getTextInput$lambda$_69_5();
@@ -58383,7 +58454,7 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_5__init_0 = var_0 => {
     return var_1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_5_handleEvent$exported$0 = (var$1, var$2) => {
-    cgxgtbw_WebInput$getTextInput$lambda$_69_3_run(var$1.$_020);
+    cgxgtbw_WebInput$getTextInput$lambda$_69_3_run(var$1.$_018);
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_6() {
     jl_Object.call(this);
@@ -58438,9 +58509,9 @@ let cvs_ResultsScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $bu
                 cvs_SkyVanguardGame_startStage($p.$game, $p.$stageIndex + 1 | 0, 1);
             else {
                 $p.$adBusy = 1;
-                $p.$adLoadingText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($p.$game), $rt_s(1724));
+                $p.$adLoadingText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($p.$game), $rt_s(1726));
                 var$6 = new cvs_ResultsScreen$goToNextStageWithAd$lambda$_2_0;
-                var$6.$_026 = $p;
+                var$6.$_025 = $p;
                 kji_Intrinsics_checkNotNullParameter(var$6, $rt_s(838));
                 var$7 = new cvsw_WebPlatformServices$showInterstitialAd$lambda$_3_0;
                 var$7.$_00 = var$6;
@@ -58474,7 +58545,7 @@ cvs_EndingScreen$show$1_touchUp = ($this, $x, $y, $pointer, $button) => {
 };
 function cvs_EndingScreen$show$lambda$_2_0() {
     jl_Object.call(this);
-    this.$_055 = null;
+    this.$_054 = null;
 }
 function cvs_EndingScreen$Row() {
     jl_Object.call(this);
@@ -58488,12 +58559,12 @@ cvs_EndingScreen$Row__init_ = ($this, $h, $$constructor_marker) => {
 };
 function cvsw_WebPlatformServices$showRewardedAd$lambda$_2_0() {
     jl_Object.call(this);
-    this.$_08 = null;
+    this.$_07 = null;
 }
 let cvsw_WebPlatformServices$showRewardedAd$lambda$_2_0_invoke = (var$0, var$1) => {
     let var$2, var$3, var$4;
     var$1 = var$1;
-    var$2 = var$0.$_08;
+    var$2 = var$0.$_07;
     var$1 = jl_Boolean_valueOf(var$1.$value0);
     var$2 = var$2;
     var$1 = var$1;
@@ -58502,7 +58573,7 @@ let cvsw_WebPlatformServices$showRewardedAd$lambda$_2_0_invoke = (var$0, var$1) 
     var$1 = cbg_Gdx_app;
     var$4 = new cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0;
     var$4.$_032 = var$2;
-    var$4.$_111 = var$3;
+    var$4.$_112 = var$3;
     cgxgtbw_WebApplication_postRunnable(var$1, var$4);
     k_Unit_$callClinit();
     return k_Unit_INSTANCE;
@@ -58598,7 +58669,7 @@ cvs_EndingScreen$HeadRow__init_ = var_0 => {
 function cvs_EndingScreen$FoeRow() {
     let a = this; cvs_EndingScreen$Row.call(a);
     a.$tex = null;
-    a.$name7 = null;
+    a.$name8 = null;
     a.$desc = null;
 }
 let cbg_Input$VibrationType = $rt_classWithoutFields(jl_Enum),
@@ -58622,8 +58693,8 @@ cbg_Input$VibrationType__init_ = (var_0, var_1) => {
 cbg_Input$VibrationType__clinit_ = () => {
     let var$1, var$2, var$3;
     cbg_Input$VibrationType_LIGHT = cbg_Input$VibrationType__init_($rt_s(3066), 0);
-    cbg_Input$VibrationType_MEDIUM = cbg_Input$VibrationType__init_($rt_s(1786), 1);
-    var$1 = cbg_Input$VibrationType__init_($rt_s(2511), 2);
+    cbg_Input$VibrationType_MEDIUM = cbg_Input$VibrationType__init_($rt_s(1788), 1);
+    var$1 = cbg_Input$VibrationType__init_($rt_s(2509), 2);
     cbg_Input$VibrationType_HEAVY = var$1;
     var$2 = $rt_createArray(cbg_Input$VibrationType, 3);
     var$3 = var$2.data;
@@ -58633,26 +58704,26 @@ cbg_Input$VibrationType__clinit_ = () => {
     cbg_Input$VibrationType_$VALUES = var$2;
 },
 cvsw_RetornoDoAnuncio = $rt_classWithoutFields(0);
-function cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0() {
+function cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_3_0() {
     let a = this; jl_Object.call(a);
-    a.$_049 = null;
-    a.$_119 = null;
+    a.$_020 = null;
+    a.$_17 = null;
 }
-let cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0__init_0 = (var$0, var$1, var$2) => {
-    var$0.$_049 = var$1;
-    var$0.$_119 = var$2;
+let cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_3_0__init_0 = (var$0, var$1, var$2) => {
+    var$0.$_020 = var$1;
+    var$0.$_17 = var$2;
 },
-cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0__init_ = (var_0, var_1) => {
-    let var_2 = new cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0();
-    cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0__init_0(var_2, var_0, var_1);
+cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_3_0__init_ = (var_0, var_1) => {
+    let var_2 = new cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_3_0();
+    cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_3_0__init_0(var_2, var_0, var_1);
     return var_2;
 },
-cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0_recebeu$exported$0 = (var$1, var$2) => {
+cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_3_0_recebeu$exported$0 = (var$1, var$2) => {
     let var$3, var$4;
     var$3 = var$2 ? 1 : 0;
     var$1 = var$1;
-    var$4 = var$1.$_049.data;
-    var$1 = var$1.$_119;
+    var$4 = var$1.$_020.data;
+    var$1 = var$1.$_17;
     if (!var$4[0]) {
         var$4[0] = 1;
         var$1.$invoke(jl_Boolean_valueOf(var$3));
@@ -58903,22 +58974,22 @@ otcit_DoubleAnalyzer__clinit_ = () => {
 };
 function cvs_ResultsScreen$goToNextStageWithAd$lambda$_2_0() {
     jl_Object.call(this);
-    this.$_026 = null;
+    this.$_025 = null;
 }
 function cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0() {
     let a = this; jl_Object.call(a);
-    a.$_018 = 0;
+    a.$_016 = 0;
     a.$_16 = null;
 }
 let cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0_run = var$0 => {
     let var$1, var$2;
-    var$1 = var$0.$_018;
+    var$1 = var$0.$_016;
     var$2 = var$0.$_16;
     if (var$1) {
         cvs_SkyVanguardGame_reloadPilotPhoto(var$2.$game);
         var$2.$statusMessage = $rt_s(3067);
     } else
-        var$2.$statusMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$2.$game), $rt_s(1703));
+        var$2.$statusMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$2.$game), $rt_s(1705));
     var$2.$statusTimer = 2.5;
 };
 function jn_CharBufferOverDataView() {
@@ -59181,12 +59252,12 @@ let cvsw_WebPlatformServices$showInterstitialAd$lambda$_3_0_invoke = (var$0, var
     var$1 = jl_Boolean_valueOf(var$1.$value0);
     var$2 = var$2;
     var$1 = var$1;
-    var$2 = var$2.$_026;
+    var$2 = var$2.$_025;
     var$3 = var$1.$value0;
     var$1 = cbg_Gdx_app;
     var$4 = new cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0;
     var$4.$_038 = var$3;
-    var$4.$_115 = var$2;
+    var$4.$_116 = var$2;
     cgxgtbw_WebApplication_postRunnable(var$1, var$4);
     k_Unit_$callClinit();
     return k_Unit_INSTANCE;
@@ -59201,22 +59272,22 @@ let cbggg_PixmapPacker$Page$1_dispose = $this => {
 };
 function cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0() {
     jl_Object.call(this);
-    this.$_014 = null;
+    this.$_012 = null;
 }
 let cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0_onTimer$exported$0 = var$1 => {
-    var$1 = var$1.$_014;
+    var$1 = var$1.$_012;
     var$1.style.removeProperty("border-color");
     var$1.style.removeProperty("animation");
 };
 function cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0() {
     let a = this; jl_Object.call(a);
     a.$_032 = null;
-    a.$_111 = 0;
+    a.$_112 = 0;
 }
 let cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0_run = var$0 => {
     let var$1, var$2;
     var$1 = var$0.$_032;
-    var$2 = var$0.$_111;
+    var$2 = var$0.$_112;
     var$1.$adOfferBusy = 0;
     var$1.$adOfferActive = 0;
     var$1.$paused = 0;
@@ -59261,12 +59332,12 @@ cgxgtbwf_FileDB$1_close = $this => {
 function cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0() {
     let a = this; jl_Object.call(a);
     a.$_038 = 0;
-    a.$_115 = null;
+    a.$_116 = null;
 }
 let cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run = var$0 => {
     let var$1, var$2, var$3, var$4, var$5, var$6, var$7, var$8, var$9, var$10, var$11;
     var$1 = var$0.$_038;
-    var$2 = var$0.$_115;
+    var$2 = var$0.$_116;
     if (var$1) {
         cvs_SaveManager_addCoins(cvs_SkyVanguardGame_getSaveManager(var$2.$game), 500);
         var$3 = $rt_createArray(cvs_PowerType, 6);
@@ -59315,10 +59386,10 @@ let cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run = var$0 => {
                     var$8 = $rt_s(3070);
                     break a;
                 case 5:
-                    var$8 = $rt_s(988);
+                    var$8 = $rt_s(989);
                     break a;
                 case 6:
-                    var$8 = $rt_s(2679);
+                    var$8 = $rt_s(2681);
                     break a;
                 default:
                     var$8 = $rt_s(3071);
@@ -59668,7 +59739,7 @@ otji_JS, 0, jl_Object, [], 17, 0, 0, 0,
 otci_IntegerUtil, 0, jl_Object, [], 17, 0, 0, 0,
 cbgm_Vector, 0, jl_Object, [], 1537, 0, 0, 0]);
 $rt_metadata([cbgm_Vector2, "Vector2", 24, jl_Object, [ji_Serializable, cbgm_Vector], 1, 0, () => cbgm_Vector2_$callClinit(), ["$toString", $rt_wrapFunction0(cbgm_Vector2_toString), "$hashCode", $rt_wrapFunction0(cbgm_Vector2_hashCode), "$equals", $rt_wrapFunction1(cbgm_Vector2_equals)],
-cbggg_BitmapFont, 0, jl_Object, [cbgu_Disposable], 1, 0, 0, 0,
+cbggg_BitmapFont, "BitmapFont", 27, jl_Object, [cbgu_Disposable], 1, 0, 0, ["$toString", $rt_wrapFunction0(cbggg_BitmapFont_toString)],
 cbgg_Color, "Color", 25, jl_Object, [], 1, 0, () => cbgg_Color_$callClinit(), ["$equals", $rt_wrapFunction1(cbgg_Color_equals), "$hashCode", $rt_wrapFunction0(cbgg_Color_hashCode), "$toString", $rt_wrapFunction0(cbgg_Color_toString)],
 cbgu_DefaultPool, "DefaultPool", 16, cbgu_Pool, [], 1, 0, 0, ["$newObject", $rt_wrapFunction0(cbgu_DefaultPool_newObject)],
 cbgu_DefaultPool$PoolSupplier, 0, jl_Object, [], 1537, 0, 0, 0,
@@ -60150,12 +60221,13 @@ cbga_Sound, 0, jl_Object, [cbgu_Disposable], 1537, 0, 0, 0,
 kr_RangesKt__RangesKt, 0, jl_Object, [], 0, 0, 0, 0,
 kr_RangesKt___RangesKt, 0, kr_RangesKt__RangesKt, [], 0, 0, 0, 0,
 k_Result, 0, jl_Object, [ji_Serializable], 17, 0, () => k_Result_$callClinit(), 0,
-k_Triple, 0, jl_Object, [ji_Serializable], 17, 0, 0, 0,
+k_Triple, "Triple", 47, jl_Object, [ji_Serializable], 17, 0, 0, ["$toString", $rt_wrapFunction0(k_Triple_toString), "$hashCode", $rt_wrapFunction0(k_Triple_hashCode), "$equals", $rt_wrapFunction1(k_Triple_equals)],
 cvs_Langs, 0, jl_Object, [], 17, 0, () => cvs_Langs_$callClinit(), 0,
 k_ResultKt, 0, jl_Object, [], 17, 0, 0, 0,
 kc_CollectionsKt__CollectionsJVMKt, 0, jl_Object, [], 0, 0, 0, 0,
 kc_CollectionsKt__CollectionsKt, 0, kc_CollectionsKt__CollectionsJVMKt, [], 0, 0, 0, 0,
 k_Unit, 0, jl_Object, [], 17, 0, () => k_Unit_$callClinit(), 0,
+kc_CollectionsKt__IterablesKt, 0, kc_CollectionsKt__CollectionsKt, [], 0, 0, 0, 0,
 cvs_MainMenuScreen$NeonButton, "MainMenuScreen$NeonButton", 30, jl_Object, [], 16, 0, 0, ["$toString", $rt_wrapFunction0(cvs_MainMenuScreen$NeonButton_toString), "$hashCode", $rt_wrapFunction0(cvs_MainMenuScreen$NeonButton_hashCode), "$equals", $rt_wrapFunction1(cvs_MainMenuScreen$NeonButton_equals)],
 cvs_MainMenuScreen$Streak, "MainMenuScreen$Streak", 30, jl_Object, [], 16, 0, 0, ["$toString", $rt_wrapFunction0(cvs_MainMenuScreen$Streak_toString), "$hashCode", $rt_wrapFunction0(cvs_MainMenuScreen$Streak_hashCode), "$equals", $rt_wrapFunction1(cvs_MainMenuScreen$Streak_equals)],
 jl_AbstractStringBuilder$Constants, 0, jl_Object, [], 0, 0, () => jl_AbstractStringBuilder$Constants_$callClinit(), 0,
@@ -60172,7 +60244,6 @@ k_Result$Failure, 0, jl_Object, [ji_Serializable], 17, 0, 0, 0,
 cbggg_TextureRegion, "TextureRegion", 27, jl_Object, [], 1, 0, 0, 0,
 ju_SequencedSet, 0, jl_Object, [ju_SequencedCollection, ju_Set], 1537, 0, 0, 0,
 ju_LinkedHashSet, "LinkedHashSet", 33, ju_HashSet, [ju_SequencedSet, jl_Cloneable, ji_Serializable], 1, 0, 0, 0,
-kc_CollectionsKt__IterablesKt, 0, kc_CollectionsKt__CollectionsKt, [], 0, 0, 0, 0,
 kc_CollectionsKt__IteratorsJVMKt, 0, kc_CollectionsKt__IterablesKt, [], 0, 0, 0, 0,
 kc_CollectionsKt__IteratorsKt, 0, kc_CollectionsKt__IteratorsJVMKt, [], 0, 0, 0, 0,
 kc_CollectionsKt__MutableCollectionsJVMKt, 0, kc_CollectionsKt__IteratorsKt, [], 0, 0, 0, 0,
@@ -60190,7 +60261,8 @@ cbgg_OrthographicCamera, 0, cbgg_Camera, [], 1, 0, 0, 0,
 cbguv_Viewport, 0, jl_Object, [], 1025, 0, 0, 0,
 cbguv_ScalingViewport, 0, cbguv_Viewport, [], 1, 0, 0, ["$update0", $rt_wrapFunction3(cbguv_ScalingViewport_update)],
 cbguv_StretchViewport, 0, cbguv_ScalingViewport, [], 1, 0, 0, 0]);
-$rt_metadata([jur_IntArrHash, 0, jl_Object, [], 0, 0, 0, 0,
+$rt_metadata([jl_ArithmeticException, "ArithmeticException", 38, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jur_IntArrHash, 0, jl_Object, [], 0, 0, 0, 0,
 k_UninitializedPropertyAccessException, "UninitializedPropertyAccessException", 47, jl_RuntimeException, [], 17, [0,0,0], 0, 0,
 cbgg_VertexAttributes, 0, jl_Object, [jl_Iterable, jl_Comparable], 17, 0, 0, 0,
 cbggg_ShaderProgram, "ShaderProgram", 26, jl_Object, [cbgu_Disposable], 1, 0, () => cbggg_ShaderProgram_$callClinit(), 0,
@@ -60242,9 +60314,9 @@ cgxgtbw_WebTool, 0, jl_Object, [], 1, 0, () => cgxgtbw_WebTool_$callClinit(), 0,
 jn_IntBuffer, 0, jn_Buffer, [jl_Comparable], 1025, 0, 0, 0,
 kc_EmptyMap, 0, jl_Object, [ju_Map, ji_Serializable, kjim_KMappedMarker], 16, 0, () => kc_EmptyMap_$callClinit(), ["$isEmpty", $rt_wrapFunction0(kc_EmptyMap_isEmpty), "$size", $rt_wrapFunction0(kc_EmptyMap_size), "$entrySet", $rt_wrapFunction0(kc_EmptyMap_entrySet)],
 kt_StringsKt__AppendableKt, 0, jl_Object, [], 0, 0, 0, 0,
-cbgggf_FreeType$Face, 0, cbgggf_FreeType$Pointer, [cbgu_Disposable], 1, 0, 0, 0,
-cbgggf_FreeType$GlyphSlot, 0, cbgggf_FreeType$Pointer, [], 1, 0, 0, 0]);
-$rt_metadata([cbggg_Gdx2DPixmapNative, 0, jl_Object, [cbgu_Disposable], 1, 0, 0, 0,
+cbgggf_FreeType$Face, 0, cbgggf_FreeType$Pointer, [cbgu_Disposable], 1, 0, 0, 0]);
+$rt_metadata([cbgggf_FreeType$GlyphSlot, 0, cbgggf_FreeType$Pointer, [], 1, 0, 0, 0,
+cbggg_Gdx2DPixmapNative, 0, jl_Object, [cbgu_Disposable], 1, 0, 0, 0,
 cbgg_Texture$TextureWrap, 0, jl_Enum, [], 65553, 0, () => cbgg_Texture$TextureWrap_$callClinit(), 0,
 ju_Arrays$ArrayAsList, "Arrays$ArrayAsList", 33, ju_AbstractList, [ju_RandomAccess, ji_Serializable], 0, 0, 0, ["$get", $rt_wrapFunction1(ju_Arrays$ArrayAsList_get), "$size", $rt_wrapFunction0(ju_Arrays$ArrayAsList_size)],
 cbgm_Plane, 0, jl_Object, [ji_Serializable], 1, 0, 0, 0,
@@ -60295,9 +60367,9 @@ ji_BufferedReader, 0, ji_Reader, [], 1, 0, 0, ["$close", $rt_wrapFunction0(ji_Bu
 ji_InputStreamReader, 0, ji_Reader, [], 1, 0, 0, 0,
 ju_StringTokenizer, 0, jl_Object, [ju_Enumeration], 1, 0, 0, 0,
 cbggg_BitmapFontCache, 0, jl_Object, [], 1, 0, () => cbggg_BitmapFontCache_$callClinit(), 0,
-otcin_Buffers, 0, jl_Object, [], 17, 0, 0, 0,
-ju_ConcurrentModificationException, "ConcurrentModificationException", 33, jl_RuntimeException, [], 1, [0,0,0], 0, 0]);
-$rt_metadata([ji_ByteArrayOutputStream, 0, ji_OutputStream, [], 1, 0, 0, 0,
+otcin_Buffers, 0, jl_Object, [], 17, 0, 0, 0]);
+$rt_metadata([ju_ConcurrentModificationException, "ConcurrentModificationException", 33, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+ji_ByteArrayOutputStream, 0, ji_OutputStream, [], 1, 0, 0, 0,
 cbgu_StreamUtils$OptimizedByteArrayOutputStream, 0, ji_ByteArrayOutputStream, [], 1, 0, 0, 0,
 cgxgtbwf_HEXCoder, 0, jl_Object, [], 1, 0, () => cgxgtbwf_HEXCoder_$callClinit(), 0,
 jnci_UTF8Charset, 0, jnc_Charset, [], 1, 0, () => jnci_UTF8Charset_$callClinit(), 0,
@@ -60336,7 +60408,7 @@ ju_LinkedHashMapValues, 0, ju_AbstractCollection, [ju_SequencedCollection], 0, 0
 cvs_MainMenuScreen$show$2, 0, cbg_InputAdapter, [], 17, 0, 0, ["$touchDown", $rt_wrapFunction4(cvs_MainMenuScreen$show$2_touchDown), "$touchDragged", $rt_wrapFunction3(cvs_MainMenuScreen$show$2_touchDragged), "$touchUp", $rt_wrapFunction4(cvs_MainMenuScreen$show$2_touchUp)],
 k_Function, 0, jl_Object, [], 1537, 0, 0, 0,
 kjf_Function1, 0, jl_Object, [k_Function], 1537, 0, 0, 0,
-cvs_MainMenuScreen$show$lambda$_1_0, 0, jl_Object, [kjf_Function1], 1, 0, 0, 0,
+cvs_MainMenuScreen$show$lambda$_2_0, 0, jl_Object, [kjf_Function1], 1, 0, 0, 0,
 cgxgtbwa_AssetType, "AssetType", 7, jl_Enum, [], 65553, 0, () => cgxgtbwa_AssetType_$callClinit(), 0,
 cgxgtbw_WebPreloadApplicationListener$1, 0, jl_Object, [cgxgtbwa_AssetLoaderListener], 0, 0, 0, ["$onFailure", $rt_wrapFunction1(cgxgtbwa_AssetLoaderListener_onFailure)],
 cbgu_ScreenUtils, 0, jl_Object, [], 17, 0, 0, 0,
@@ -60345,8 +60417,7 @@ cbggg_TextureAtlas$AtlasRegion, 0, cbggg_TextureRegion, [], 1, 0, 0, 0,
 ju_HashMap$1, 0, ju_AbstractSet, [], 0, 0, 0, ["$iterator0", $rt_wrapFunction0(ju_HashMap$1_iterator)],
 cbguv_ScreenViewport, 0, cbguv_Viewport, [], 1, 0, 0, ["$update0", $rt_wrapFunction3(cbguv_ScreenViewport_update)],
 cgxgtbw_WebPreloadApplicationListener$BorderDrawable, 0, cbgssu_BaseDrawable, [], 0, 0, 0, ["$draw", function(var_1, var_2, var_3, var_4, var_5) { cgxgtbw_WebPreloadApplicationListener$BorderDrawable_draw(this, var_1, var_2, var_3, var_4, var_5); }],
-cbga_Music, 0, jl_Object, [cbgu_Disposable], 1537, 0, 0, 0,
-kc_IntIterator, 0, jl_Object, [ju_Iterator, kjim_KMappedMarker], 1025, 0, 0, 0]);
+cbga_Music, 0, jl_Object, [cbgu_Disposable], 1537, 0, 0, 0]);
 $rt_metadata([cvs_MainMenuScreen$ClickSpark, "MainMenuScreen$ClickSpark", 30, jl_Object, [], 16, 0, 0, ["$toString", $rt_wrapFunction0(cvs_MainMenuScreen$ClickSpark_toString), "$hashCode", $rt_wrapFunction0(cvs_MainMenuScreen$ClickSpark_hashCode), "$equals", $rt_wrapFunction1(cvs_MainMenuScreen$ClickSpark_equals)],
 cvs_AircraftCatalog, 0, jl_Object, [], 17, 0, () => cvs_AircraftCatalog_$callClinit(), 0,
 cvs_BaseScreenKt, 0, jl_Object, [], 17, 0, () => cvs_BaseScreenKt_$callClinit(), 0,
@@ -60364,17 +60435,13 @@ cvs_AircraftDefinition, "AircraftDefinition", 30, jl_Object, [], 17, 0, 0, ["$to
 cbggg_PixmapPacker, 0, jl_Object, [cbgu_Disposable], 1, 0, () => cbggg_PixmapPacker_$callClinit(), 0,
 cbgm_Interpolation, 0, jl_Object, [], 1025, 0, () => cbgm_Interpolation_$callClinit(), 0,
 cbg_Graphics$BufferFormat, 0, jl_Object, [], 1, 0, 0, 0,
-kr_IntProgression, 0, jl_Object, [jl_Iterable, kjim_KMappedMarker], 1, 0, () => kr_IntProgression_$callClinit(), 0,
-kr_ClosedRange, 0, jl_Object, [], 1537, 0, 0, 0,
-kr_OpenEndRange, 0, jl_Object, [], 1537, 0, 0, 0,
-kr_IntRange, 0, kr_IntProgression, [kr_ClosedRange, kr_OpenEndRange], 17, 0, () => kr_IntRange_$callClinit(), 0,
 cbgc_ControllerMapping, 0, jl_Object, [], 1, 0, 0, 0,
 cbgc_Controller, 0, jl_Object, [], 1537, 0, 0, 0,
 cbgc_Controllers, 0, jl_Object, [], 1, 0, () => cbgc_Controllers_$callClinit(), 0,
 cvs_CampaignMapScreen, 0, cvs_BaseScreen, [], 17, 0, 0, ["$show", $rt_wrapFunction0(cvs_CampaignMapScreen_show), "$render0", $rt_wrapFunction1(cvs_CampaignMapScreen_render)],
 cvs_HangarScreen, 0, cvs_BaseScreen, [], 17, 0, 0, ["$show", $rt_wrapFunction0(cvs_HangarScreen_show), "$render0", $rt_wrapFunction1(cvs_HangarScreen_render)],
 cvs_SettingsScreen, 0, cvs_BaseScreen, [], 17, 0, 0, ["$show", $rt_wrapFunction0(cvs_SettingsScreen_show), "$render0", $rt_wrapFunction1(cvs_SettingsScreen_render)],
-cvs_MainMenuScreen$requestRemoveAds$lambda$_8_0, 0, jl_Object, [kjf_Function1], 1, 0, 0, 0,
+cvs_MainMenuScreen$requestRemoveAds$lambda$_9_0, 0, jl_Object, [kjf_Function1], 1, 0, 0, 0,
 cvs_CreditsScreen, 0, cvs_BaseScreen, [], 17, 0, 0, ["$show", $rt_wrapFunction0(cvs_CreditsScreen_show), "$render0", $rt_wrapFunction1(cvs_CreditsScreen_render)],
 kt_CharsKt__CharJVMKt, 0, jl_Object, [], 0, 0, 0, 0,
 kt_StringsKt___StringsJvmKt, 0, kt_StringsKt__StringsKt, [], 0, 0, 0, 0,
@@ -60385,7 +60452,6 @@ cbgss_Stage$_init_$lambda$_2_1, 0, jl_Object, [cbgu_DefaultPool$PoolSupplier], 1
 cbgss_Stage$_init_$lambda$_2_2, 0, jl_Object, [cbgu_DefaultPool$PoolSupplier], 1, 0, 0, ["$get6", $rt_wrapFunction0(cbgss_Stage$_init_$lambda$_2_2_get)],
 cbgss_Stage$_init_$lambda$_2_3, 0, jl_Object, [cbgu_DefaultPool$PoolSupplier], 1, 0, 0, ["$get6", $rt_wrapFunction0(cbgss_Stage$_init_$lambda$_2_3_get)],
 jnc_CharsetEncoder, 0, jl_Object, [], 1025, 0, 0, 0,
-jl_ArithmeticException, "ArithmeticException", 38, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
 cvs_WeaponStyle, "WeaponStyle", 30, jl_Enum, [], 65553, 0, () => cvs_WeaponStyle_$callClinit(), 0,
 cvs_CampaignCatalog, 0, jl_Object, [], 17, 0, () => cvs_CampaignCatalog_$callClinit(), 0,
 cvs_SettingsScreen$Toggle, "SettingsScreen$Toggle", 30, jl_Object, [], 16, 0, 0, ["$toString", $rt_wrapFunction0(cvs_SettingsScreen$Toggle_toString), "$hashCode", $rt_wrapFunction0(cvs_SettingsScreen$Toggle_hashCode), "$equals", $rt_wrapFunction1(cvs_SettingsScreen$Toggle_equals)],
@@ -60396,13 +60462,13 @@ cvs_SettingsScreen$_init_$lambda$_0_2, "SettingsScreen$<init>$lambda$_0_2", 30, 
 cvs_SettingsScreen$_init_$lambda$_0_3, "SettingsScreen$<init>$lambda$_0_3", 30, jl_Object, [kjf_Function1], 1, 0, 0, ["$invoke", $rt_wrapFunction1(cvs_SettingsScreen$_init_$lambda$_0_3_invoke)],
 cvs_SettingsScreen$_init_$lambda$_0_4, "SettingsScreen$<init>$lambda$_0_4", 30, jl_Object, [kjf_Function0], 1, 0, 0, ["$invoke0", $rt_wrapFunction0(cvs_SettingsScreen$_init_$lambda$_0_4_invoke)],
 cvs_SettingsScreen$_init_$lambda$_0_5, "SettingsScreen$<init>$lambda$_0_5", 30, jl_Object, [kjf_Function1], 1, 0, 0, ["$invoke", $rt_wrapFunction1(cvs_SettingsScreen$_init_$lambda$_0_5_invoke)],
-cvs_SettingsScreen$_init_$lambda$_0_6, "SettingsScreen$<init>$lambda$_0_6", 30, jl_Object, [kjf_Function0], 1, 0, 0, ["$invoke0", $rt_wrapFunction0(cvs_SettingsScreen$_init_$lambda$_0_6_invoke)]]);
-$rt_metadata([cvs_SettingsScreen$_init_$lambda$_0_7, "SettingsScreen$<init>$lambda$_0_7", 30, jl_Object, [kjf_Function1], 1, 0, 0, ["$invoke", $rt_wrapFunction1(cvs_SettingsScreen$_init_$lambda$_0_7_invoke)],
+cvs_SettingsScreen$_init_$lambda$_0_6, "SettingsScreen$<init>$lambda$_0_6", 30, jl_Object, [kjf_Function0], 1, 0, 0, ["$invoke0", $rt_wrapFunction0(cvs_SettingsScreen$_init_$lambda$_0_6_invoke)],
+cvs_SettingsScreen$_init_$lambda$_0_7, "SettingsScreen$<init>$lambda$_0_7", 30, jl_Object, [kjf_Function1], 1, 0, 0, ["$invoke", $rt_wrapFunction1(cvs_SettingsScreen$_init_$lambda$_0_7_invoke)],
 cvs_SettingsScreen$_init_$lambda$_0_8, "SettingsScreen$<init>$lambda$_0_8", 30, jl_Object, [kjf_Function0], 1, 0, 0, ["$invoke0", $rt_wrapFunction0(cvs_SettingsScreen$_init_$lambda$_0_8_invoke)],
 cvs_SettingsScreen$_init_$lambda$_0_9, "SettingsScreen$<init>$lambda$_0_9", 30, jl_Object, [kjf_Function1], 1, 0, 0, ["$invoke", $rt_wrapFunction1(cvs_SettingsScreen$_init_$lambda$_0_9_invoke)],
 cbgss_Group$_init_$lambda$_0_0, 0, jl_Object, [cbgu_ArraySupplier], 1, 0, 0, ["$get", $rt_wrapFunction1(cbgss_Group$_init_$lambda$_0_0_get)],
-cbgm_Affine2, 0, jl_Object, [ji_Serializable], 17, 0, 0, 0,
-cbgu_DelayedRemovalArray, 0, cbgu_Array, [], 1, 0, 0, 0,
+cbgm_Affine2, 0, jl_Object, [ji_Serializable], 17, 0, 0, 0]);
+$rt_metadata([cbgu_DelayedRemovalArray, 0, cbgu_Array, [], 1, 0, 0, 0,
 cbgm_Interpolation$1, 0, cbgm_Interpolation, [], 0, 0, 0, 0,
 cbgm_Interpolation$2, 0, cbgm_Interpolation, [], 0, 0, 0, 0,
 cbgm_Interpolation$3, 0, cbgm_Interpolation, [], 0, 0, 0, 0,
@@ -60432,8 +60498,6 @@ cbgm_Interpolation$SwingOut, 0, cbgm_Interpolation, [], 1, 0, 0, 0,
 cbgm_Interpolation$BounceOut, 0, cbgm_Interpolation, [], 1, 0, 0, 0,
 cbgm_Interpolation$Bounce, 0, cbgm_Interpolation$BounceOut, [], 1, 0, 0, 0,
 cbgm_Interpolation$BounceIn, 0, cbgm_Interpolation$BounceOut, [], 1, 0, 0, 0,
-ki_ProgressionUtilKt, 0, jl_Object, [], 17, 0, 0, 0,
-kr_IntRange$Companion, 0, jl_Object, [], 17, 0, 0, 0,
 cbgc_ControllerManager, 0, jl_Object, [], 1537, 0, 0, 0,
 cbgc_AbstractControllerManager, 0, jl_Object, [cbgc_ControllerManager], 1025, 0, 0, 0,
 cbgct_GamepadSupportListener, 0, jl_Object, [], 1537, 0, 0, 0,
@@ -60445,13 +60509,16 @@ ks_SequencesKt__SequencesJVMKt, 0, ks_SequencesKt__SequenceBuilderKt, [], 0, 0, 
 ks_SequencesKt__SequencesKt, 0, ks_SequencesKt__SequencesJVMKt, [], 0, 0, 0, 0,
 ks_SequencesKt___SequencesJvmKt, 0, ks_SequencesKt__SequencesKt, [], 0, 0, 0, 0,
 ks_SequencesKt___SequencesKt, 0, ks_SequencesKt___SequencesJvmKt, [], 0, 0, 0, 0,
-kr_IntProgression$Companion, 0, jl_Object, [], 17, 0, 0, 0,
-cbgct_TeavmControllers$InstanceHolder, 0, jl_Object, [], 16, 0, () => cbgct_TeavmControllers$InstanceHolder_$callClinit(), 0]);
-$rt_metadata([ke_EnumEntriesKt, 0, jl_Object, [], 17, 0, 0, 0,
+kr_IntProgression, 0, jl_Object, [jl_Iterable, kjim_KMappedMarker], 1, 0, () => kr_IntProgression_$callClinit(), 0,
+kr_ClosedRange, 0, jl_Object, [], 1537, 0, 0, 0,
+kr_OpenEndRange, 0, jl_Object, [], 1537, 0, 0, 0,
+kr_IntRange, 0, kr_IntProgression, [kr_ClosedRange, kr_OpenEndRange], 17, 0, () => kr_IntRange_$callClinit(), 0,
+cbgct_TeavmControllers$InstanceHolder, 0, jl_Object, [], 16, 0, () => cbgct_TeavmControllers$InstanceHolder_$callClinit(), 0,
+ke_EnumEntriesKt, 0, jl_Object, [], 17, 0, 0, 0,
 cvs_CountryCampaign, "CountryCampaign", 30, jl_Object, [], 17, 0, 0, ["$toString", $rt_wrapFunction0(cvs_CountryCampaign_toString), "$hashCode", $rt_wrapFunction0(cvs_CountryCampaign_hashCode), "$equals", $rt_wrapFunction1(cvs_CountryCampaign_equals)],
 cvs_CampaignCatalog$StageSeed, "CampaignCatalog$StageSeed", 30, jl_Object, [], 16, 0, 0, ["$toString", $rt_wrapFunction0(cvs_CampaignCatalog$StageSeed_toString), "$hashCode", $rt_wrapFunction0(cvs_CampaignCatalog$StageSeed_hashCode), "$equals", $rt_wrapFunction1(cvs_CampaignCatalog$StageSeed_equals)],
-ks_SequencesKt___SequencesKt$asIterable$$inlined$Iterable$1, 0, jl_Object, [jl_Iterable, kjim_KMappedMarker], 17, 0, 0, 0,
-kc_AbstractCollection, 0, jl_Object, [ju_Collection, kjim_KMappedMarker], 1025, 0, 0, 0,
+ks_SequencesKt___SequencesKt$asIterable$$inlined$Iterable$1, 0, jl_Object, [jl_Iterable, kjim_KMappedMarker], 17, 0, 0, 0]);
+$rt_metadata([kc_AbstractCollection, 0, jl_Object, [ju_Collection, kjim_KMappedMarker], 1025, 0, 0, 0,
 kc_AbstractList, 0, kc_AbstractCollection, [ju_List, kjim_KMappedMarker], 1025, 0, () => kc_AbstractList_$callClinit(), 0,
 ke_EnumEntries, 0, jl_Object, [ju_List, kjim_KMappedMarker], 1537, 0, 0, 0,
 ke_EnumEntriesList, 0, kc_AbstractList, [ke_EnumEntries, ju_RandomAccess, ji_Serializable], 16, 0, 0, 0,
@@ -60461,13 +60528,16 @@ kt_DelimitedRangesSequence, 0, jl_Object, [ks_Sequence], 16, 0, 0, 0,
 kjf_Function2, 0, jl_Object, [k_Function], 1537, 0, 0, 0,
 kt_StringsKt__StringsKt$rangesDelimitedBy$StringsKt__StringsKt$lambda$_144_0, 0, jl_Object, [kjf_Function2], 1, 0, 0, 0,
 ju_TemplateCollections$SingleElementList, 0, ju_TemplateCollections$AbstractImmutableList, [ju_RandomAccess], 0, 0, 0, ["$size", $rt_wrapFunction0(ju_TemplateCollections$SingleElementList_size), "$get", $rt_wrapFunction1(ju_TemplateCollections$SingleElementList_get)],
+kr_IntRange$Companion, 0, jl_Object, [], 17, 0, 0, 0,
 cbgct_TeavmControllers$1, 0, cbgu_Pool, [], 0, 0, 0, ["$newObject", $rt_wrapFunction0(cbgct_TeavmControllers$1_newObject)],
 cbgct_TeavmControllers$Ticker, "TeavmControllers$Ticker", 23, jl_Object, [otjb_AnimationFrameCallback], 0, 0, 0, 0,
 cbgc_ControllerListener, 0, jl_Object, [], 1537, 0, 0, 0,
 cbgc_ControllerAdapter, 0, jl_Object, [cbgc_ControllerListener], 1, 0, 0, 0,
 cbgc_AbstractControllerManager$ManageCurrentControllerListener, "AbstractControllerManager$ManageCurrentControllerListener", 22, cbgc_ControllerAdapter, [], 1, 0, 0, 0,
+kr_IntProgression$Companion, 0, jl_Object, [], 17, 0, 0, 0,
 kc_AbstractList$Companion, 0, jl_Object, [], 17, 0, 0, 0,
 kt_CharsKt__CharKt, 0, kt_CharsKt__CharJVMKt, [], 0, 0, 0, 0,
+ki_ProgressionUtilKt, 0, jl_Object, [], 17, 0, 0, 0,
 jnci_BufferedDecoder$Controller, 0, jl_Object, [], 1, 0, 0, 0,
 ju_LinkedHashMapIterator, 0, jl_Object, [], 0, 0, 0, ["$hasNext", $rt_wrapFunction0(ju_LinkedHashMapIterator_hasNext)],
 ju_LinkedHashMapIterator$ValueIterator, 0, ju_LinkedHashMapIterator, [ju_Iterator], 0, 0, 0, 0,
@@ -60484,6 +60554,7 @@ cgxgtbw_WebAudio, 0, jl_Object, [cbg_Audio], 1537, 0, 0, 0,
 cgxgtbwwh_HowlTeaAudio, 0, jl_Object, [cgxgtbw_WebAudio], 1, 0, 0, 0,
 ju_LinkedHashMapEntrySet, 0, ju_AbstractSet, [ju_SequencedSet], 0, 0, 0, ["$iterator0", $rt_wrapFunction0(ju_LinkedHashMapEntrySet_iterator)],
 ju_LinkedHashMapKeySet, 0, ju_AbstractSet, [ju_SequencedSet], 0, 0, 0, ["$iterator0", $rt_wrapFunction0(ju_LinkedHashMapKeySet_iterator)],
+cvsw_WebLauncherKt, 0, jl_Object, [], 17, 0, 0, 0,
 cvs_CampaignMapScreen$show$1, 0, cbg_InputAdapter, [], 17, 0, 0, ["$touchUp", $rt_wrapFunction4(cvs_CampaignMapScreen$show$1_touchUp)],
 cvs_HangarScreen$show$1, 0, cbg_InputAdapter, [], 17, 0, 0, ["$touchUp", $rt_wrapFunction4(cvs_HangarScreen$show$1_touchUp)],
 cvs_SettingsScreen$show$1, 0, cbg_InputAdapter, [], 17, 0, 0, ["$touchUp", $rt_wrapFunction4(cvs_SettingsScreen$show$1_touchUp)],
@@ -60509,7 +60580,6 @@ ji_ByteArrayInputStream, 0, ji_InputStream, [], 1, 0, 0, ["$close", $rt_wrapFunc
 ju_LinkedHashMapIterator$EntryIterator, 0, ju_LinkedHashMapIterator, [ju_Iterator], 0, 0, 0, ["$next", $rt_wrapFunction0(ju_LinkedHashMapIterator$EntryIterator_next)],
 ju_LinkedHashMapIterator$KeyIterator, 0, ju_LinkedHashMapIterator, [ju_Iterator], 0, 0, 0, ["$next", $rt_wrapFunction0(ju_LinkedHashMapIterator$KeyIterator_next)],
 jnci_BufferedEncoder$Controller, 0, jl_Object, [], 1, 0, 0, 0,
-kr_IntProgressionIterator, 0, kc_IntIterator, [], 17, 0, 0, 0,
 kt_DelimitedRangesSequence$iterator$1, 0, jl_Object, [ju_Iterator, kjim_KMappedMarker], 17, 0, 0, 0,
 cbggg_HdpiUtils, 0, jl_Object, [], 1, 0, () => cbggg_HdpiUtils_$callClinit(), 0,
 cbggg_PixmapPacker$PixmapPackerRectangle, "PixmapPacker$PixmapPackerRectangle", 27, jl_Object, [], 1, 0, 0, 0,
@@ -60530,8 +60600,8 @@ cvs_ShopScreen$Offer, "ShopScreen$Offer", 30, jl_Object, [], 16, 0, 0, ["$toStri
 cbg_Input$TextInputListener, 0, jl_Object, [], 1537, 0, 0, 0,
 cvs_SettingsScreen$editPilotName$1, 0, jl_Object, [cbg_Input$TextInputListener], 17, 0, 0, 0,
 cvs_SettingsScreen$pickPhoto$lambda$_2_0, 0, jl_Object, [kjf_Function1], 1, 0, 0, 0,
-cvs_MainMenuScreen$show$lambda$0$lambda$_27_0, "MainMenuScreen$show$lambda$0$lambda$_27_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_MainMenuScreen$show$lambda$0$lambda$_27_0_run)],
-cvs_MainMenuScreen$requestRemoveAds$lambda$0$lambda$_29_0, "MainMenuScreen$requestRemoveAds$lambda$0$lambda$_29_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_MainMenuScreen$requestRemoveAds$lambda$0$lambda$_29_0_run)],
+cvs_MainMenuScreen$show$lambda$0$lambda$_29_0, "MainMenuScreen$show$lambda$0$lambda$_29_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_MainMenuScreen$show$lambda$0$lambda$_29_0_run)],
+cvs_MainMenuScreen$requestRemoveAds$lambda$0$lambda$_31_0, "MainMenuScreen$requestRemoveAds$lambda$0$lambda$_31_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_MainMenuScreen$requestRemoveAds$lambda$0$lambda$_31_0_run)],
 otja_XMLHttpRequest, 0, jl_Object, [otj_JSObject, otjde_EventTarget], 1, 0, 0, 0,
 cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_0, "AssetDownloadImpl$loadBinaryInternally$lambda$_4_0", 7, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
 cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_1, "AssetDownloadImpl$loadBinaryInternally$lambda$_4_1", 7, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
@@ -60547,9 +60617,9 @@ cvs_GameplayScreen$particlePool$1, 0, cbgu_Pool, [], 17, 0, 0, ["$newObject", $r
 cvs_BossState, 0, jl_Object, [], 17, 0, 0, 0,
 cvs_GameplayScreen$ShopOffer, "GameplayScreen$ShopOffer", 30, jl_Object, [], 17, 0, 0, ["$toString", $rt_wrapFunction0(cvs_GameplayScreen$ShopOffer_toString), "$hashCode", $rt_wrapFunction0(cvs_GameplayScreen$ShopOffer_hashCode), "$equals", $rt_wrapFunction1(cvs_GameplayScreen$ShopOffer_equals)],
 cvs_GameplayScreen$_init_$lambda$_0_0, 0, jl_Object, [kjf_Function0], 1, 0, 0, ["$invoke0", $rt_wrapFunction0(cvs_GameplayScreen$_init_$lambda$_0_0_invoke)],
-k_LazyKt__LazyJVMKt, 0, jl_Object, [], 0, 0, 0, 0]);
-$rt_metadata([cvs_GameplayScreen$_init_$lambda$_0_1, 0, jl_Object, [kjf_Function0], 1, 0, 0, ["$invoke0", $rt_wrapFunction0(cvs_GameplayScreen$_init_$lambda$_0_1_invoke)],
-otja_XMLHttpRequest$onComplete$lambda$_23_0, "XMLHttpRequest$onComplete$lambda$_23_0", 43, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
+k_LazyKt__LazyJVMKt, 0, jl_Object, [], 0, 0, 0, 0,
+cvs_GameplayScreen$_init_$lambda$_0_1, 0, jl_Object, [kjf_Function0], 1, 0, 0, ["$invoke0", $rt_wrapFunction0(cvs_GameplayScreen$_init_$lambda$_0_1_invoke)]]);
+$rt_metadata([otja_XMLHttpRequest$onComplete$lambda$_23_0, "XMLHttpRequest$onComplete$lambda$_23_0", 43, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
 cgxgtbwa_AssetDownloadImpl$setOnProgress$lambda$_8_0, "AssetDownloadImpl$setOnProgress$lambda$_8_0", 7, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
 cgxgtbwa_AssetDownloadImpl$retryOrFail$lambda$_6_0, "AssetDownloadImpl$retryOrFail$lambda$_6_0", 7, jl_Object, [otjb_TimerHandler], 1, 0, 0, 0,
 k_Lazy, 0, jl_Object, [], 1537, 0, 0, 0,
@@ -60572,8 +60642,7 @@ cvs_Particle, "Particle", 30, jl_Object, [cbgu_Pool$Poolable], 17, 0, 0, ["$rese
 cvs_GameplayScreen$show$2, 0, cbg_InputAdapter, [], 17, 0, 0, ["$touchDown", $rt_wrapFunction4(cvs_GameplayScreen$show$2_touchDown), "$touchDragged", $rt_wrapFunction3(cvs_GameplayScreen$show$2_touchDragged), "$touchUp", $rt_wrapFunction4(cvs_GameplayScreen$show$2_touchUp), "$keyDown", $rt_wrapFunction1(cvs_GameplayScreen$show$2_keyDown)],
 cbg_Input$OnscreenKeyboardType, "Input$OnscreenKeyboardType", 15, jl_Enum, [], 65553, 0, () => cbg_Input$OnscreenKeyboardType_$callClinit(), 0,
 cvsw_RetornoDaFoto, 0, jl_Object, [otj_JSObject], 1537, 0, 0, 0,
-cvsw_WebPlatformServices$pickPilotPhoto$lambda$_5_0, "WebPlatformServices$pickPilotPhoto$lambda$_5_0", 31, jl_Object, [cvsw_RetornoDaFoto], 1, 0, 0, 0,
-cvsw_WebLauncherKt, 0, jl_Object, [], 17, 0, 0, 0,
+cvsw_WebPlatformServices$pickPilotPhoto$lambda$_7_0, "WebPlatformServices$pickPilotPhoto$lambda$_7_0", 31, jl_Object, [cvsw_RetornoDaFoto], 1, 0, 0, 0,
 cgxgtbwwh_Howl, 0, jl_Object, [otj_JSObject], 1, 0, 0, 0,
 cbggg_GlyphLayout$WrapState, "GlyphLayout$WrapState", 27, jl_Enum, [], 65553, 0, () => cbggg_GlyphLayout$WrapState_$callClinit(), 0,
 cbgg_Colors, 0, jl_Object, [], 17, 0, () => cbgg_Colors_$callClinit(), 0,
@@ -60597,10 +60666,10 @@ cvs_ShopScreen$WhenMappings, 0, jl_Object, [], 32785, 0, () => cvs_ShopScreen$Wh
 ju_Comparator$NaturalOrder, 0, jl_Object, [ju_Comparator], 1, 0, () => ju_Comparator$NaturalOrder_$callClinit(), ["$compare1", $rt_wrapFunction2(ju_Comparator$NaturalOrder_compare)],
 cvs_GameplayScreenKt, 0, jl_Object, [], 17, 0, 0, 0,
 kc_SetsKt__SetsJVMKt, 0, jl_Object, [], 0, 0, 0, 0,
-kc_SetsKt__SetsKt, 0, kc_SetsKt__SetsJVMKt, [], 0, 0, 0, 0]);
-$rt_metadata([ju_TemplateCollections$SingleElementSet, 0, ju_TemplateCollections$AbstractImmutableSet, [], 0, 0, 0, ["$contains0", $rt_wrapFunction1(ju_TemplateCollections$SingleElementSet_contains)],
-cbgct_WebMapping, 0, cbgc_ControllerMapping, [], 1, 0, 0, 0,
-ju_AbstractList$TListIteratorImpl, 0, jl_Object, [ju_ListIterator], 0, 0, 0, ["$hasPrevious", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_hasPrevious), "$previous", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_previous)],
+kc_SetsKt__SetsKt, 0, kc_SetsKt__SetsJVMKt, [], 0, 0, 0, 0,
+ju_TemplateCollections$SingleElementSet, 0, ju_TemplateCollections$AbstractImmutableSet, [], 0, 0, 0, ["$contains0", $rt_wrapFunction1(ju_TemplateCollections$SingleElementSet_contains)],
+cbgct_WebMapping, 0, cbgc_ControllerMapping, [], 1, 0, 0, 0]);
+$rt_metadata([ju_AbstractList$TListIteratorImpl, 0, jl_Object, [ju_ListIterator], 0, 0, 0, ["$hasPrevious", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_hasPrevious), "$previous", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_previous)],
 cgxgtbw_WebInput$1, 0, jl_Object, [jl_Runnable], 0, 0, 0, 0,
 cgxgtbw_WebInput$getTextInput$lambda$_69_0, "WebInput$getTextInput$lambda$_69_0", 6, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
 cgxgtbw_WebInput$getTextInput$lambda$_69_1, "WebInput$getTextInput$lambda$_69_1", 6, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
@@ -60626,7 +60695,7 @@ cvs_EndingScreen$HeadRow, "EndingScreen$HeadRow", 30, cvs_EndingScreen$Row, [], 
 cvs_EndingScreen$FoeRow, "EndingScreen$FoeRow", 30, cvs_EndingScreen$Row, [], 16, 0, 0, 0,
 cbg_Input$VibrationType, "Input$VibrationType", 15, jl_Enum, [], 65553, 0, () => cbg_Input$VibrationType_$callClinit(), 0,
 cvsw_RetornoDoAnuncio, 0, jl_Object, [otj_JSObject], 1537, 0, 0, 0,
-cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0, "WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0", 31, jl_Object, [cvsw_RetornoDoAnuncio], 1, 0, 0, 0,
+cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_3_0, "WebLauncherKt$mostrarAnuncioPremiado$lambda$_3_0", 31, jl_Object, [cvsw_RetornoDoAnuncio], 1, 0, 0, 0,
 cbggg_PixmapPacker$GuillotineStrategy$GuillotinePage, "PixmapPacker$GuillotineStrategy$GuillotinePage", 27, cbggg_PixmapPacker$Page, [], 0, 0, 0, 0,
 cbggg_PixmapPacker$GuillotineStrategy$Node, 0, jl_Object, [], 16, 0, 0, 0,
 cbggg_PixmapPacker$SkylineStrategy$SkylinePage, "PixmapPacker$SkylineStrategy$SkylinePage", 27, cbggg_PixmapPacker$Page, [], 0, 0, 0, 0,
@@ -60647,10 +60716,10 @@ cvsw_WebPlatformServices$showInterstitialAd$lambda$_3_0, 0, jl_Object, [kjf_Func
 cbggg_PixmapPacker$Page$1, "PixmapPacker$Page$1", 27, cbgg_Texture, [], 0, 0, 0, ["$dispose", $rt_wrapFunction0(cbggg_PixmapPacker$Page$1_dispose)],
 cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0, "WebInput$lambda$getTextInput$4$lambda$_82_0", 6, jl_Object, [otjb_TimerHandler], 1, 0, 0, 0,
 cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0, "GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0_run)],
-cgxgtbwf_FileDB$1, 0, ji_OutputStream, [], 0, 0, 0, ["$close", $rt_wrapFunction0(cgxgtbwf_FileDB$1_close)]]);
-$rt_metadata([cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0, "ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run)],
-cgxgtbw_WebPreloadApplicationListener$2, 0, jl_Object, [cgxgtbwa_AssetLoaderListener], 0, 0, 0, ["$onFailure", $rt_wrapFunction1(cgxgtbwa_AssetLoaderListener_onFailure)],
-cvs_ResultsScreen$WhenMappings, 0, jl_Object, [], 32785, 0, () => cvs_ResultsScreen$WhenMappings_$callClinit(), 0,
+cgxgtbwf_FileDB$1, 0, ji_OutputStream, [], 0, 0, 0, ["$close", $rt_wrapFunction0(cgxgtbwf_FileDB$1_close)],
+cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0, "ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run)],
+cgxgtbw_WebPreloadApplicationListener$2, 0, jl_Object, [cgxgtbwa_AssetLoaderListener], 0, 0, 0, ["$onFailure", $rt_wrapFunction1(cgxgtbwa_AssetLoaderListener_onFailure)]]);
+$rt_metadata([cvs_ResultsScreen$WhenMappings, 0, jl_Object, [], 32785, 0, () => cvs_ResultsScreen$WhenMappings_$callClinit(), 0,
 cgxgtbwa_TeaAssetManifest, 0, jl_Object, [], 1, 0, 0, 0]);
 let $rt_booleanArrayCls = $rt_arraycls($rt_booleancls),
 $rt_charArrayCls = $rt_arraycls($rt_charcls),
@@ -60688,34 +60757,34 @@ $rt_stringPool(["Can\'t enter monitor from another thread synchronously", "Alrea
 "#ifdef GL_ES\n#define LOWP lowp\nprecision mediump float;\n#else\n#define LOWP \n#endif\nvarying LOWP vec4 v_color;\nvarying vec2 v_texCoords;\nuniform sampler2D u_texture;\nvoid main()\n{\n  gl_FragColor = v_color * texture2D(u_texture, v_texCoords);\n}", "Error compiling shader: ", "SpriteBatch.end must be called before begin.", "SpriteBatch.begin must be called before end.", "SpriteBatch.begin must be called before draw.", "u_projTrans", "u_texture", "attribute vec4 a_position;\n", "attribute vec4 a_color;\n",
 "attribute vec2 a_texCoord", ";\n", "uniform mat4 u_projModelView;\n", "varying vec4 v_col;\n", "varying vec2 v_tex", "void main() {\n   gl_Position = u_projModelView * a_position;\n", "   v_col = a_color;\n   v_col.a *= 255.0 / 254.0;\n", "   v_tex", " = ", "a_texCoord", "   gl_PointSize = 1.0;\n}\n", "autoShapeType must be true to use this method.", "Call end() before beginning a new shape batch.", "begin must be called first.", "autoShapeType must be enabled.", "segments must be > 0.", "Must call begin(ShapeType.",
 ").", ") or begin(ShapeType.", "u_projModelView", "getLanguage(...)", "key", "toUpperCase(...)", "Nearest", "Linear", "MipMap", "MipMapNearestNearest", "MipMapLinearNearest", "MipMapNearestLinear", "MipMapLinearLinear", "unproject(...)", "color", "Super calls with default arguments not supported in this target, function: drawCentered", "WHITE", "rect", "Super calls with default arguments not supported in this target, function: drawButton", "CAMPANHA", "INICIAR MISSÃO", "HANGAR", "SELECIONAR NAVE", "CONFIGURAÇÕES",
-"AJUSTES DO JOGO", "REMOVER ANÚNCIOS", "SEM ANÚNCIOS PARA SEMPRE", "CRÉDITOS", "EQUIPE E AGRADECIMENTOS", "SAIR", "SAIR DO JOGO", "menu", "onResult", "<this>", "ANÚNCIOS JÁ REMOVIDOS - OBRIGADO!", "store_unavailable", "SKY VANGUARD", "ARCADE STRIKE COMMAND", "hangar", "settings", "remove_ads", "campaign", "ads_off", "reward", "sub_hangar", "sub_settings", "sub_ads", "sub_credits", "sub_exit", "sub_campaign", "ONLINE", "V 1.0.37", "PILOTO ATIVO", "(C) 2026 SKY VANGUARD SYSTEMS", "delimiters", "input", "getNextMatch",
-"null cannot be cast to non-null type kotlin.ranges.IntRange", "range", "null cannot be cast to non-null type java.lang.String", "Script download success: ", "Script download failed: ", "IndexedDB Error putting file: ", "Cannot coerce value to an empty range: maximum ", " is less than minimum ", "...", "separator", "prefix", "postfix", "truncated", "buffer", "pt", "en", "es", "de", "fr", "it", "id", "tr", "ru", "ja", "PORTUGUES", "ENGLISH", "ESPANOL", "DEUTSCH", "FRANCAIS", "ITALIANO", "INDONESIA", "TURKCE",
-"РУССКИЙ", "日本語", "play", "JOGAR", "pilot", "PILOTO", "pause", "PAUSADO", "resume", "CONTINUAR", "restart", "REINICIAR", "MENU PRINCIPAL", "victory", "MISSÃO CONCLUÍDA", "defeat", "AERONAVE ABATIDA", "score", "PONTUAÇÃO", "highscore", "RECORDE", "combo", "COMBO", "ESCUDO", "ESPECIAL", "DIFICULDADE", "recruit", "RECRUTA", "pilot_difficulty", "ace", "ÁS", "legend", "LENDA", "back", "VOLTAR", "privacy", "POLÍTICA DE PRIVACIDADE", "tap_drag", "ARRASTE PARA PILOTAR", "boss", "ALERTA DE CHEFE", "subboss", "SUBCHEFE",
-"grade", "CLASSIFICAÇÃO", "earned", "MOEDAS COLETADAS", "music", "MÚSICA", "sfx", "EFEITOS SONOROS", "VIBRAÇÃO", "flash", "REDUZIR FLASHES", "hitbox", "MOSTRAR COLISÃO", "select", "SELECIONAR", "selected", "SELECIONADA", "next", "PRÓXIMA FASE", "locked", "BLOQUEADA", "upgrades", "UPGRADES ACUMULADOS", "IDIOMA", "control", "CONTROLE", "ctrl_auto", "TIRO AUTOMÁTICO", "ctrl_pad", "GAMEPAD", "ctrl_touch", "BOTÕES NA TELA", "ANÚNCIOS OFF", "buy", "COMPRAR", "coins", "MOEDAS", "no_coins", "MOEDAS INSUFICIENTES", "bought",
-"AERONAVE ADQUIRIDA!", "upgrade_shop", "LOJA DE UPGRADES", "level", "NÍVEL", "max_now", "MÁXIMO POR AGORA", "life", "VIDA", "armor", "BLINDAGEM", "ships", "NAVES", "time", "TEMPO", "targets", "ALVOS", "power", "PODER", "stage", "FASE", "fire", "TIRO", "missile", "MÍSSIL", "aim", "MIRA", "aim_on", "MIRA ATIVA", "aim_tap", "TOQUE NO ALVO", "shield_broken", "ESCUDO DO CHEFE QUEBRADO!", "subboss_down", "SUBCHEFE ABATIDO!", "missile_warn", "MÍSSEIS TRAVADOS! DESVIE!", "ship_down", "NAVE ABATIDA!", "remaining", "RESTAM",
-"shield_renew", "ESCUDO REATIVADO!", "RECOMPENSA", "watch_ad", "ASSISTIR ANÚNCIO", "no_thanks", "AGORA NÃO", "PLAY", "CAMPAIGN", "SETTINGS", "CREDITS", "EXIT", "PILOT", "PAUSED", "RESUME", "RESTART", "MAIN MENU", "MISSION COMPLETE", "AIRCRAFT DOWN", "SCORE", "HIGH SCORE", "SHIELD", "SPECIAL", "DIFFICULTY", "RECRUIT", "ACE", "LEGEND", "BACK", "PRIVACY POLICY", "DRAG TO FLY", "BOSS WARNING", "SUB-BOSS", "GRADE", "COINS COLLECTED", "MUSIC", "SOUND EFFECTS", "VIBRATION", "REDUCE FLASHES", "SHOW HITBOX", "SELECT",
-"SELECTED", "NEXT STAGE", "LOCKED", "STACKED UPGRADES", "LANGUAGE", "CONTROLS", "AUTO FIRE", "ON-SCREEN BUTTONS", "REMOVE ADS", "ADS OFF", "BUY", "COINS", "NOT ENOUGH COINS", "AIRCRAFT PURCHASED!", "UPGRADE SHOP", "LEVEL", "MAX FOR NOW", "LIFE", "ARMOR", "SHIPS", "TIME", "TARGETS", "POWER", "STAGE", "FIRE", "MISSILE", "LOCK", "LOCK ON", "TAP TARGET", "BOSS SHIELD DOWN!", "SUB-BOSS DEFEATED!", "MISSILES LOCKED! DODGE!", "SHIP DOWN!", "LEFT", "SHIELD RESTORED!", "REWARD", "WATCH AD", "NOT NOW", "JUGAR", "CAMPAÑA",
-"AJUSTES", "SALIR", "PAUSA", "MENÚ PRINCIPAL", "MISIÓN COMPLETA", "NAVE DERRIBADA", "PUNTUACIÓN", "RÉCORD", "DIFICULTAD", "RECLUTA", "AS", "LEYENDA", "VOLVER", "POLÍTICA DE PRIVACIDAD", "ARRASTRA PARA VOLAR", "ALERTA DE JEFE", "SUBJEFE", "CALIFICACIÓN", "MONEDAS OBTENIDAS", "EFECTOS DE SONIDO", "VIBRACIÓN", "REDUCIR DESTELLOS", "MOSTRAR COLISIÓN", "SELECCIONAR", "SELECCIONADA", "SIGUIENTE FASE", "MEJORAS ACUMULADAS", "CONTROLES", "DISPARO AUTOMÁTICO", "MANDO", "BOTONES EN PANTALLA", "QUITAR ANUNCIOS", "SIN ANUNCIOS",
-"MONEDAS", "MONEDAS INSUFICIENTES", "¡NAVE ADQUIRIDA!", "TIENDA DE MEJORAS", "NIVEL", "MÁXIMO POR AHORA", "BLINDAJE", "TIEMPO", "OBJETIVOS", "POTENCIA", "DISPARO", "MISIL", "FIJAR", "FIJADO", "TOCA EL OBJETIVO", "¡ESCUDO DEL JEFE ROTO!", "¡SUBJEFE DERROTADO!", "¡MISILES FIJADOS! ¡ESQUIVA!", "¡NAVE DERRIBADA!", "QUEDAN", "¡ESCUDO RESTAURADO!", "VER ANUNCIO", "AHORA NO", "SPIELEN", "KAMPAGNE", "EINSTELLUNGEN", "BEENDEN", "PAUSE", "FORTSETZEN", "NEUSTART", "HAUPTMENÜ", "MISSION ERFÜLLT", "JÄGER ABGESCHOSSEN", "PUNKTE",
-"REKORD", "SCHILD", "SPEZIAL", "SCHWIERIGKEIT", "REKRUT", "ASS", "LEGENDE", "ZURÜCK", "DATENSCHUTZ", "ZIEHEN ZUM FLIEGEN", "BOSS-ALARM", "UNTERBOSS", "WERTUNG", "MÜNZEN GESAMMELT", "MUSIK", "SOUNDEFFEKTE", "BLITZE REDUZIEREN", "TREFFERZONE ZEIGEN", "WÄHLEN", "GEWÄHLT", "NÄCHSTE STUFE", "GESPERRT", "GESAMMELTE UPGRADES", "SPRACHE", "STEUERUNG", "AUTOMATISCH FEUERN", "BILDSCHIRMTASTEN", "WERBUNG ENTFERNEN", "KEINE WERBUNG", "KAUFEN", "MÜNZEN", "NICHT GENUG MÜNZEN", "JÄGER GEKAUFT!", "UPGRADE-SHOP", "STUFE", "MAXIMUM VORERST",
-"LEBEN", "PANZERUNG", "SCHIFFE", "ZEIT", "ZIELE", "STÄRKE", "FEUER", "RAKETE", "ZIEL", "ZIEL FIXIERT", "ZIEL ANTIPPEN", "BOSS-SCHILD ZERSTÖRT!", "UNTERBOSS BESIEGT!", "RAKETEN ERFASST! AUSWEICHEN!", "SCHIFF VERLOREN!", "ÜBRIG", "SCHILD WIEDERHERGESTELLT!", "BELOHNUNG", "WERBUNG ANSEHEN", "JETZT NICHT", "JOUER", "CAMPAGNE", "PARAMÈTRES", "CRÉDITS", "QUITTER", "PILOTE", "REPRENDRE", "RECOMMENCER", "MISSION ACCOMPLIE", "APPAREIL ABATTU", "RECORD", "BOUCLIER", "SPÉCIAL", "DIFFICULTÉ", "RECRUE", "LÉGENDE", "RETOUR",
-"CONFIDENTIALITÉ", "GLISSEZ POUR VOLER", "ALERTE BOSS", "SOUS-BOSS", "NOTE", "PIÈCES OBTENUES", "MUSIQUE", "EFFETS SONORES", "RÉDUIRE LES FLASHS", "AFFICHER COLLISION", "CHOISIR", "CHOISI", "NIVEAU SUIVANT", "VERROUILLÉ", "AMÉLIORATIONS CUMULÉES", "LANGUE", "COMMANDES", "TIR AUTOMATIQUE", "MANETTE", "BOUTONS À L\'ÉCRAN", "SUPPRIMER LES PUBS", "SANS PUBS", "ACHETER", "PIÈCES", "PIÈCES INSUFFISANTES", "APPAREIL ACHETÉ !", "BOUTIQUE D\'AMÉLIORATIONS", "NIVEAU", "MAXIMUM ACTUEL", "VIE", "BLINDAGE", "VAISSEAUX",
-"TEMPS", "CIBLES", "PUISSANCE", "TIR", "VERROU", "TOUCHEZ LA CIBLE", "BOUCLIER DU BOSS BRISÉ !", "SOUS-BOSS VAINCU !", "MISSILES VERROUILLÉS ! ESQUIVEZ !", "VAISSEAU PERDU !", "RESTANTS", "BOUCLIER RESTAURÉ !", "RÉCOMPENSE", "REGARDER LA PUB", "PAS MAINTENANT", "GIOCA", "CAMPAGNA", "IMPOSTAZIONI", "CREDITI", "ESCI", "PILOTA", "RIPRENDI", "RIAVVIA", "MENU PRINCIPALE", "MISSIONE COMPLETATA", "VELIVOLO ABBATTUTO", "PUNTEGGIO", "SCUDO", "SPECIALE", "DIFFICOLTÀ", "ASSO", "LEGGENDA", "INDIETRO", "PRIVACY", "TRASCINA PER VOLARE",
-"ALLARME BOSS", "SOTTO-BOSS", "VALUTAZIONE", "MONETE RACCOLTE", "MUSICA", "EFFETTI SONORI", "VIBRAZIONE", "RIDUCI I LAMPI", "MOSTRA COLLISIONE", "SELEZIONA", "SELEZIONATO", "LIVELLO SUCCESSIVO", "BLOCCATO", "POTENZIAMENTI ACCUMULATI", "LINGUA", "COMANDI", "FUOCO AUTOMATICO", "CONTROLLER", "PULSANTI A SCHERMO", "RIMUOVI ANNUNCI", "SENZA ANNUNCI", "ACQUISTA", "MONETE", "MONETE INSUFFICIENTI", "VELIVOLO ACQUISTATO!", "NEGOZIO POTENZIAMENTI", "LIVELLO", "MASSIMO PER ORA", "VITA", "CORAZZA", "NAVI", "BERSAGLI", "POTENZA",
-"FUOCO", "MIRA FISSA", "TOCCA IL BERSAGLIO", "SCUDO DEL BOSS DISTRUTTO!", "SOTTO-BOSS SCONFITTO!", "MISSILI AGGANCIATI! SCHIVA!", "NAVE ABBATTUTA!", "RIMASTE", "SCUDO RIPRISTINATO!", "RICOMPENSA", "GUARDA L\'ANNUNCIO", "NON ORA", "MAIN", "KAMPANYE", "PENGATURAN", "KREDIT", "KELUAR", "JEDA", "LANJUTKAN", "ULANGI", "MENU UTAMA", "MISI SELESAI", "PESAWAT JATUH", "SKOR", "REKOR", "KOMBO", "PERISAI", "SPESIAL", "KESULITAN", "LEGENDA", "KEMBALI", "KEBIJAKAN PRIVASI", "GESER UNTUK TERBANG", "PERINGATAN BOS", "SUB-BOS",
-"NILAI", "KOIN TERKUMPUL", "EFEK SUARA", "GETARAN", "KURANGI KILATAN", "TAMPILKAN TABRAKAN", "PILIH", "TERPILIH", "TAHAP BERIKUTNYA", "TERKUNCI", "PENINGKATAN TERKUMPUL", "BAHASA", "KONTROL", "TEMBAK OTOMATIS", "TOMBOL LAYAR", "HAPUS IKLAN", "TANPA IKLAN", "BELI", "KOIN", "KOIN TIDAK CUKUP", "PESAWAT DIBELI!", "TOKO PENINGKATAN", "MAKSIMAL SAAT INI", "NYAWA", "BAJA", "PESAWAT", "WAKTU", "TARGET", "KEKUATAN", "TAHAP", "TEMBAK", "RUDAL", "KUNCI", "SENTUH TARGET", "PERISAI BOS HANCUR!", "SUB-BOS DIKALAHKAN!", "RUDAL TERKUNCI! HINDARI!",
-"PESAWAT JATUH!", "SISA", "PERISAI PULIH!", "HADIAH", "TONTON IKLAN", "NANTI SAJA", "OYNA", "SEFER", "AYARLAR", "EMEĞI GEÇENLER", "ÇIKIŞ", "PİLOT", "DURAKLATILDI", "DEVAM ET", "YENIDEN BAŞLAT", "ANA MENÜ", "GÖREV TAMAMLANDI", "UÇAK DÜŞTÜ", "PUAN", "KALKAN", "ÖZEL", "ZORLUK", "ACEMİ", "EFSANE", "GERİ", "GİZLİLİK POLİTİKASI", "UÇMAK İÇİN SÜRÜKLE", "PATRON UYARISI", "ALT PATRON", "DERECE", "TOPLANAN PARA", "MÜZİK", "SES EFEKTLERİ", "TİTREŞİM", "PARLAMAYI AZALT", "ÇARPIŞMAYI GÖSTER", "SEÇ", "SEÇİLDİ", "SONRAKİ BÖLÜM",
-"KİLİTLİ", "BİRİKEN YÜKSELTMELER", "DİL", "OTOMATİK ATEŞ", "OYUN KOLU", "EKRAN TUŞLARI", "REKLAMLARI KALDIR", "REKLAMSIZ", "SATIN AL", "PARA", "YETERSİZ PARA", "UÇAK SATIN ALINDI!", "YÜKSELTME DÜKKANI", "SEVİYE", "ŞİMDİLİK AZAMİ", "CAN", "ZIRH", "UÇAKLAR", "SÜRE", "HEDEFLER", "GÜÇ", "BÖLÜM", "ATEŞ", "FÜZE", "KİLİT", "KİLİTLENDİ", "HEDEFE DOKUN", "PATRON KALKANI KIRILDI!", "ALT PATRON YENİLDİ!", "FÜZELER KİLİTLENDİ! KAÇIN!", "UÇAK DÜŞTÜ!", "KALAN", "KALKAN YENİLENDİ!", "ÖDÜL", "REKLAMI İZLE", "ŞİMDİ DEĞİL", "ИГРАТЬ",
-"КАМПАНИЯ", "АНГАР", "НАСТРОЙКИ", "АВТОРЫ", "ВЫХОД", "ПИЛОТ", "ПАУЗА", "ПРОДОЛЖИТЬ", "ЗАНОВО", "ГЛАВНОЕ МЕНЮ", "МИССИЯ ВЫПОЛНЕНА", "САМОЛЁТ СБИТ", "ОЧКИ", "РЕКОРД", "КОМБО", "ЩИТ", "СПЕЦИАЛЬНАЯ", "СЛОЖНОСТЬ", "НОВОБРАНЕЦ", "АС", "ЛЕГЕНДА", "НАЗАД", "КОНФИДЕНЦИАЛЬНОСТЬ", "ВЕДИТЕ ПАЛЬЦЕМ", "ТРЕВОГА: БОСС", "СУБ-БОСС", "ОЦЕНКА", "СОБРАНО МОНЕТ", "МУЗЫКА", "ЗВУКОВЫЕ ЭФФЕКТЫ", "ВИБРАЦИЯ", "МЕНЬШЕ ВСПЫШЕК", "ПОКАЗАТЬ ХИТБОКС", "ВЫБРАТЬ", "ВЫБРАНО", "СЛЕДУЮЩИЙ УРОВЕНЬ", "ЗАБЛОКИРОВАНО", "НАКОПЛЕННЫЕ УЛУЧШЕНИЯ", "ЯЗЫК",
-"УПРАВЛЕНИЕ", "АВТООГОНЬ", "ГЕЙМПАД", "КНОПКИ НА ЭКРАНЕ", "УБРАТЬ РЕКЛАМУ", "БЕЗ РЕКЛАМЫ", "КУПИТЬ", "МОНЕТЫ", "НЕ ХВАТАЕТ МОНЕТ", "САМОЛЁТ КУПЛЕН!", "МАГАЗИН УЛУЧШЕНИЙ", "УРОВЕНЬ", "МАКСИМУМ ПОКА", "ЖИЗНЬ", "БРОНЯ", "САМОЛЁТЫ", "ВРЕМЯ", "ЦЕЛИ", "МОЩЬ", "ОГОНЬ", "РАКЕТА", "ЗАХВАТ", "ЗАХВАЧЕНО", "КОСНИТЕСЬ ЦЕЛИ", "ЩИТ БОССА ПРОБИТ!", "СУБ-БОСС ПОВЕРЖЕН!", "РАКЕТЫ НАВЕДЕНЫ! УКЛОНЯЙСЯ!", "САМОЛЁТ ПОТЕРЯН!", "ОСТАЛОСЬ", "ЩИТ ВОССТАНОВЛЕН!", "НАГРАДА", "СМОТРЕТЬ РЕКЛАМУ", "НЕ СЕЙЧАС", "プレイ", "キャンペーン", "ハンガー", "設定",
-"クレジット", "終了", "パイロット", "一時停止", "再開", "やり直し", "メインメニュー", "ミッション達成", "機体撃墜", "スコア", "ハイスコア", "コンボ", "シールド", "スペシャル", "難易度", "新兵", "エース", "レジェンド", "戻る", "プライバシーポリシー", "ドラッグで操縦", "ボス警報", "中ボス", "評価", "獲得コイン", "音楽", "効果音", "振動", "点滅を減らす", "当たり判定表示", "選択", "選択中", "次のステージ", "ロック中", "強化の蓄積", "言語", "操作方法", "自動射撃", "ゲームパッド", "画面ボタン", "広告を削除", "広告なし", "購入", "コイン", "コインが足りません", "機体を購入しました!", "強化ショップ", "レベル", "現在の上限", "ライフ", "装甲", "機体", "時間", "目標", "パワー", "ステージ", "ショット", "ミサイル", "ロック", "目標をタップ", "ボスのシールド破壊!", "中ボス撃破!",
-"ミサイルロック! 回避せよ!", "機体喪失!", "残り", "シールド復活!", "報酬", "広告を見る", "今はいい", "default_aircraft", "PADRÃO DA AERONAVE", "aircraft_matrix", "MATRIZ TÁTICA DE AERONAVES", "perm_upgrades", "UPGRADES PERMANENTES", "back_hangar", "VOLTAR AO HANGAR", "speed", "VELOCIDADE", "defense", "DEFESA", "stat_control", "weapon", "ARMA", "passive", "PASSIVA", "up_firerate", "CADÊNCIA", "up_firerate_d", "Aumenta a frequência dos disparos", "up_spread", "DISPERSÃO", "up_spread_d", "Adiciona projéteis laterais", "up_missile", "MÍSSEIS", "up_missile_d",
-"Mísseis guiados mais fortes", "up_laser", "LASER", "up_laser_d", "Amplifica o feixe de energia", "up_armor", "up_armor_d", "Reduz o dano recebido", "up_crit", "CRÍTICO", "up_crit_d", "Eleva a chance de dano crítico", "limit_progress", "LIMITE ATUAL - AVANCE NA CAMPANHA", "shop_powerups", "LOJA DE POWER-UPS", "end_mission", "ENCERRAR MISSÃO", "off_damage", "DANO +20s", "off_rate", "CADÊNCIA +20s", "off_spread", "TIRO ABERTO +20s", "off_shield", "ESCUDO (7 TIROS)", "off_random", "PODER ALEATÓRIO", "off_bomb",
-"BOMBA", "bomb_limit", "BOMBAS NO LIMITE: 10", "NOME DO PILOTO", "pilot_photo", "FOTO DO PILOTO", "photo_set", "DEFINIDA", "photo_choose", "ESCOLHER", "name_updated", "NOME ATUALIZADO", "photo_updated", "FOTO ATUALIZADA", "photo_unchanged", "FOTO NÃO ALTERADA", "graphics", "QUALIDADE GRÁFICA", "gfx_low", "BAIXA", "gfx_med", "MÉDIA", "gfx_high", "ALTA", "gfx_ultra", "ULTRA", "ATIVADO", "DESATIVADO", "opening_store", "ABRINDO A LOJA...", "LOJA INDISPONÍVEL", "purchase_failed", "COMPRA NÃO CONCLUÍDA", "ads_removed_ok",
-"ANÚNCIOS REMOVIDOS - OBRIGADO!", "loading_ad", "CARREGANDO ANÚNCIO...", "watch_and_get", "ASSISTA A UM ANÚNCIO E RECEBA:", "continue_no_prize", "CONTINUAR SEM PRÊMIO", "last_aircraft", "SUA ÚLTIMA AERONAVE FOI ABATIDA!", "emergency", "REFORÇOS DE EMERGÊNCIA", "overload", "SOBRECARGA: INIMIGOS MULTIPLICADOS", "powers_kept", "PODERES MANTIDOS COM O TEMPO RESTANTE", "best_combo", "MELHOR COMBO", "total_coins", "MOEDAS TOTAIS", "AIRCRAFT DEFAULT", "START MISSION", "CHOOSE AIRCRAFT", "GAME OPTIONS", "NO ADS FOREVER",
-"TEAM AND THANKS", "QUIT GAME", "TACTICAL AIRCRAFT MATRIX", "PERMANENT UPGRADES", "BACK TO HANGAR", "SPEED", "DEFENSE", "HANDLING", "WEAPON", "PASSIVE", "FIRE RATE", "Increases shot frequency", "SPREAD", "Adds side projectiles", "MISSILES", "Stronger homing missiles", "Amplifies the energy beam", "Reduces damage taken", "CRITICAL", "Raises critical hit chance", "CURRENT LIMIT - ADVANCE THE CAMPAIGN", "POWER-UP SHOP", "END MISSION", "DAMAGE +20s", "FIRE RATE +20s", "SPREAD +20s", "SHIELD (7 HITS)", "RANDOM POWER",
-"BOMB", "BOMBS AT LIMIT: 10", "PILOT NAME", "PILOT PHOTO", "SET", "CHOOSE", "NAME UPDATED", "PHOTO UPDATED", "PHOTO UNCHANGED", "GRAPHICS QUALITY", "LOW", "MEDIUM", "HIGH", "ON", "OFF", "OPENING STORE...", "STORE UNAVAILABLE", "PURCHASE NOT COMPLETED", "ADS REMOVED - THANK YOU!", "LOADING AD...", "WATCH AN AD AND GET:", "CONTINUE WITHOUT PRIZE", "YOUR LAST AIRCRAFT WAS DOWNED!", "EMERGENCY REINFORCEMENTS", "OVERLOAD: ENEMIES MULTIPLIED", "POWERS KEPT WITH REMAINING TIME", "BEST COMBO", "TOTAL COINS", "PREDETERMINADO",
-"INICIAR MISIÓN", "ELEGIR NAVE", "OPCIONES DEL JUEGO", "SIN ANUNCIOS PARA SIEMPRE", "EQUIPO Y AGRADECIMIENTOS", "SALIR DEL JUEGO", "MATRIZ TÁCTICA DE NAVES", "MEJORAS PERMANENTES", "VOLVER AL HANGAR", "VELOCIDAD", "DEFENSA", "MANEJO", "PASIVA", "CADENCIA", "Aumenta la frecuencia de disparo", "DISPERSIÓN", "Añade proyectiles laterales", "MISILES", "Misiles guiados más fuertes", "LÁSER", "Amplifica el haz de energía", "Reduce el daño recibido", "Aumenta el daño crítico", "LÍMITE ACTUAL - AVANZA EN LA CAMPAÑA",
+"AJUSTES DO JOGO", "CRÉDITOS", "EQUIPE E AGRADECIMENTOS", "SAIR", "SAIR DO JOGO", "title", "subtitle", "menu", "onResult", "ANÚNCIOS JÁ REMOVIDOS - OBRIGADO!", "store_unavailable", "SKY VANGUARD", "ARCADE STRIKE COMMAND", "hangar", "settings", "remove_ads", "campaign", "ads_off", "reward", "sub_hangar", "sub_settings", "sub_ads", "sub_credits", "sub_exit", "sub_campaign", "ONLINE", "V 1.0.37", "PILOTO ATIVO", "(C) 2026 SKY VANGUARD SYSTEMS", "<this>", "delimiters", "input", "getNextMatch", "null cannot be cast to non-null type kotlin.ranges.IntRange",
+"range", "null cannot be cast to non-null type java.lang.String", "Script download success: ", "Script download failed: ", "IndexedDB Error putting file: ", "Cannot coerce value to an empty range: maximum ", " is less than minimum ", "...", "separator", "prefix", "postfix", "truncated", "buffer", "pt", "en", "es", "de", "fr", "it", "id", "tr", "ru", "ja", "PORTUGUES", "ENGLISH", "ESPANOL", "DEUTSCH", "FRANCAIS", "ITALIANO", "INDONESIA", "TURKCE", "РУССКИЙ", "日本語", "play", "JOGAR", "pilot", "PILOTO", "pause",
+"PAUSADO", "resume", "CONTINUAR", "restart", "REINICIAR", "MENU PRINCIPAL", "victory", "MISSÃO CONCLUÍDA", "defeat", "AERONAVE ABATIDA", "score", "PONTUAÇÃO", "highscore", "RECORDE", "combo", "COMBO", "ESCUDO", "ESPECIAL", "DIFICULDADE", "recruit", "RECRUTA", "pilot_difficulty", "ace", "ÁS", "legend", "LENDA", "back", "VOLTAR", "privacy", "POLÍTICA DE PRIVACIDADE", "tap_drag", "ARRASTE PARA PILOTAR", "boss", "ALERTA DE CHEFE", "subboss", "SUBCHEFE", "grade", "CLASSIFICAÇÃO", "earned", "MOEDAS COLETADAS", "music",
+"MÚSICA", "sfx", "EFEITOS SONOROS", "VIBRAÇÃO", "flash", "REDUZIR FLASHES", "hitbox", "MOSTRAR COLISÃO", "select", "SELECIONAR", "selected", "SELECIONADA", "next", "PRÓXIMA FASE", "locked", "BLOQUEADA", "upgrades", "UPGRADES ACUMULADOS", "IDIOMA", "control", "CONTROLE", "ctrl_auto", "TIRO AUTOMÁTICO", "ctrl_pad", "GAMEPAD", "ctrl_touch", "BOTÕES NA TELA", "REMOVER ANÚNCIOS", "ANÚNCIOS OFF", "buy", "COMPRAR", "coins", "MOEDAS", "no_coins", "MOEDAS INSUFICIENTES", "bought", "AERONAVE ADQUIRIDA!", "upgrade_shop",
+"LOJA DE UPGRADES", "level", "NÍVEL", "max_now", "MÁXIMO POR AGORA", "life", "VIDA", "armor", "BLINDAGEM", "ships", "NAVES", "time", "TEMPO", "targets", "ALVOS", "power", "PODER", "stage", "FASE", "fire", "TIRO", "missile", "MÍSSIL", "aim", "MIRA", "aim_on", "MIRA ATIVA", "aim_tap", "TOQUE NO ALVO", "shield_broken", "ESCUDO DO CHEFE QUEBRADO!", "subboss_down", "SUBCHEFE ABATIDO!", "missile_warn", "MÍSSEIS TRAVADOS! DESVIE!", "ship_down", "NAVE ABATIDA!", "remaining", "RESTAM", "shield_renew", "ESCUDO REATIVADO!",
+"RECOMPENSA", "watch_ad", "ASSISTIR ANÚNCIO", "no_thanks", "AGORA NÃO", "PLAY", "CAMPAIGN", "SETTINGS", "CREDITS", "EXIT", "PILOT", "PAUSED", "RESUME", "RESTART", "MAIN MENU", "MISSION COMPLETE", "AIRCRAFT DOWN", "SCORE", "HIGH SCORE", "SHIELD", "SPECIAL", "DIFFICULTY", "RECRUIT", "ACE", "LEGEND", "BACK", "PRIVACY POLICY", "DRAG TO FLY", "BOSS WARNING", "SUB-BOSS", "GRADE", "COINS COLLECTED", "MUSIC", "SOUND EFFECTS", "VIBRATION", "REDUCE FLASHES", "SHOW HITBOX", "SELECT", "SELECTED", "NEXT STAGE", "LOCKED",
+"STACKED UPGRADES", "LANGUAGE", "CONTROLS", "AUTO FIRE", "ON-SCREEN BUTTONS", "REMOVE ADS", "ADS OFF", "BUY", "COINS", "NOT ENOUGH COINS", "AIRCRAFT PURCHASED!", "UPGRADE SHOP", "LEVEL", "MAX FOR NOW", "LIFE", "ARMOR", "SHIPS", "TIME", "TARGETS", "POWER", "STAGE", "FIRE", "MISSILE", "LOCK", "LOCK ON", "TAP TARGET", "BOSS SHIELD DOWN!", "SUB-BOSS DEFEATED!", "MISSILES LOCKED! DODGE!", "SHIP DOWN!", "LEFT", "SHIELD RESTORED!", "REWARD", "WATCH AD", "NOT NOW", "JUGAR", "CAMPAÑA", "AJUSTES", "SALIR", "PAUSA", "MENÚ PRINCIPAL",
+"MISIÓN COMPLETA", "NAVE DERRIBADA", "PUNTUACIÓN", "RÉCORD", "DIFICULTAD", "RECLUTA", "AS", "LEYENDA", "VOLVER", "POLÍTICA DE PRIVACIDAD", "ARRASTRA PARA VOLAR", "ALERTA DE JEFE", "SUBJEFE", "CALIFICACIÓN", "MONEDAS OBTENIDAS", "EFECTOS DE SONIDO", "VIBRACIÓN", "REDUCIR DESTELLOS", "MOSTRAR COLISIÓN", "SELECCIONAR", "SELECCIONADA", "SIGUIENTE FASE", "MEJORAS ACUMULADAS", "CONTROLES", "DISPARO AUTOMÁTICO", "MANDO", "BOTONES EN PANTALLA", "QUITAR ANUNCIOS", "SIN ANUNCIOS", "MONEDAS", "MONEDAS INSUFICIENTES", "¡NAVE ADQUIRIDA!",
+"TIENDA DE MEJORAS", "NIVEL", "MÁXIMO POR AHORA", "BLINDAJE", "TIEMPO", "OBJETIVOS", "POTENCIA", "DISPARO", "MISIL", "FIJAR", "FIJADO", "TOCA EL OBJETIVO", "¡ESCUDO DEL JEFE ROTO!", "¡SUBJEFE DERROTADO!", "¡MISILES FIJADOS! ¡ESQUIVA!", "¡NAVE DERRIBADA!", "QUEDAN", "¡ESCUDO RESTAURADO!", "VER ANUNCIO", "AHORA NO", "SPIELEN", "KAMPAGNE", "EINSTELLUNGEN", "BEENDEN", "PAUSE", "FORTSETZEN", "NEUSTART", "HAUPTMENÜ", "MISSION ERFÜLLT", "JÄGER ABGESCHOSSEN", "PUNKTE", "REKORD", "SCHILD", "SPEZIAL", "SCHWIERIGKEIT",
+"REKRUT", "ASS", "LEGENDE", "ZURÜCK", "DATENSCHUTZ", "ZIEHEN ZUM FLIEGEN", "BOSS-ALARM", "UNTERBOSS", "WERTUNG", "MÜNZEN GESAMMELT", "MUSIK", "SOUNDEFFEKTE", "BLITZE REDUZIEREN", "TREFFERZONE ZEIGEN", "WÄHLEN", "GEWÄHLT", "NÄCHSTE STUFE", "GESPERRT", "GESAMMELTE UPGRADES", "SPRACHE", "STEUERUNG", "AUTOMATISCH FEUERN", "BILDSCHIRMTASTEN", "WERBUNG ENTFERNEN", "KEINE WERBUNG", "KAUFEN", "MÜNZEN", "NICHT GENUG MÜNZEN", "JÄGER GEKAUFT!", "UPGRADE-SHOP", "STUFE", "MAXIMUM VORERST", "LEBEN", "PANZERUNG", "SCHIFFE",
+"ZEIT", "ZIELE", "STÄRKE", "FEUER", "RAKETE", "ZIEL", "ZIEL FIXIERT", "ZIEL ANTIPPEN", "BOSS-SCHILD ZERSTÖRT!", "UNTERBOSS BESIEGT!", "RAKETEN ERFASST! AUSWEICHEN!", "SCHIFF VERLOREN!", "ÜBRIG", "SCHILD WIEDERHERGESTELLT!", "BELOHNUNG", "WERBUNG ANSEHEN", "JETZT NICHT", "JOUER", "CAMPAGNE", "PARAMÈTRES", "CRÉDITS", "QUITTER", "PILOTE", "REPRENDRE", "RECOMMENCER", "MISSION ACCOMPLIE", "APPAREIL ABATTU", "RECORD", "BOUCLIER", "SPÉCIAL", "DIFFICULTÉ", "RECRUE", "LÉGENDE", "RETOUR", "CONFIDENTIALITÉ", "GLISSEZ POUR VOLER",
+"ALERTE BOSS", "SOUS-BOSS", "NOTE", "PIÈCES OBTENUES", "MUSIQUE", "EFFETS SONORES", "RÉDUIRE LES FLASHS", "AFFICHER COLLISION", "CHOISIR", "CHOISI", "NIVEAU SUIVANT", "VERROUILLÉ", "AMÉLIORATIONS CUMULÉES", "LANGUE", "COMMANDES", "TIR AUTOMATIQUE", "MANETTE", "BOUTONS À L\'ÉCRAN", "SUPPRIMER LES PUBS", "SANS PUBS", "ACHETER", "PIÈCES", "PIÈCES INSUFFISANTES", "APPAREIL ACHETÉ !", "BOUTIQUE D\'AMÉLIORATIONS", "NIVEAU", "MAXIMUM ACTUEL", "VIE", "BLINDAGE", "VAISSEAUX", "TEMPS", "CIBLES", "PUISSANCE", "TIR", "VERROU",
+"TOUCHEZ LA CIBLE", "BOUCLIER DU BOSS BRISÉ !", "SOUS-BOSS VAINCU !", "MISSILES VERROUILLÉS ! ESQUIVEZ !", "VAISSEAU PERDU !", "RESTANTS", "BOUCLIER RESTAURÉ !", "RÉCOMPENSE", "REGARDER LA PUB", "PAS MAINTENANT", "GIOCA", "CAMPAGNA", "IMPOSTAZIONI", "CREDITI", "ESCI", "PILOTA", "RIPRENDI", "RIAVVIA", "MENU PRINCIPALE", "MISSIONE COMPLETATA", "VELIVOLO ABBATTUTO", "PUNTEGGIO", "SCUDO", "SPECIALE", "DIFFICOLTÀ", "ASSO", "LEGGENDA", "INDIETRO", "PRIVACY", "TRASCINA PER VOLARE", "ALLARME BOSS", "SOTTO-BOSS", "VALUTAZIONE",
+"MONETE RACCOLTE", "MUSICA", "EFFETTI SONORI", "VIBRAZIONE", "RIDUCI I LAMPI", "MOSTRA COLLISIONE", "SELEZIONA", "SELEZIONATO", "LIVELLO SUCCESSIVO", "BLOCCATO", "POTENZIAMENTI ACCUMULATI", "LINGUA", "COMANDI", "FUOCO AUTOMATICO", "CONTROLLER", "PULSANTI A SCHERMO", "RIMUOVI ANNUNCI", "SENZA ANNUNCI", "ACQUISTA", "MONETE", "MONETE INSUFFICIENTI", "VELIVOLO ACQUISTATO!", "NEGOZIO POTENZIAMENTI", "LIVELLO", "MASSIMO PER ORA", "VITA", "CORAZZA", "NAVI", "BERSAGLI", "POTENZA", "FUOCO", "MIRA FISSA", "TOCCA IL BERSAGLIO",
+"SCUDO DEL BOSS DISTRUTTO!", "SOTTO-BOSS SCONFITTO!", "MISSILI AGGANCIATI! SCHIVA!", "NAVE ABBATTUTA!", "RIMASTE", "SCUDO RIPRISTINATO!", "RICOMPENSA", "GUARDA L\'ANNUNCIO", "NON ORA", "MAIN", "KAMPANYE", "PENGATURAN", "KREDIT", "KELUAR", "JEDA", "LANJUTKAN", "ULANGI", "MENU UTAMA", "MISI SELESAI", "PESAWAT JATUH", "SKOR", "REKOR", "KOMBO", "PERISAI", "SPESIAL", "KESULITAN", "LEGENDA", "KEMBALI", "KEBIJAKAN PRIVASI", "GESER UNTUK TERBANG", "PERINGATAN BOS", "SUB-BOS", "NILAI", "KOIN TERKUMPUL", "EFEK SUARA",
+"GETARAN", "KURANGI KILATAN", "TAMPILKAN TABRAKAN", "PILIH", "TERPILIH", "TAHAP BERIKUTNYA", "TERKUNCI", "PENINGKATAN TERKUMPUL", "BAHASA", "KONTROL", "TEMBAK OTOMATIS", "TOMBOL LAYAR", "HAPUS IKLAN", "TANPA IKLAN", "BELI", "KOIN", "KOIN TIDAK CUKUP", "PESAWAT DIBELI!", "TOKO PENINGKATAN", "MAKSIMAL SAAT INI", "NYAWA", "BAJA", "PESAWAT", "WAKTU", "TARGET", "KEKUATAN", "TAHAP", "TEMBAK", "RUDAL", "KUNCI", "SENTUH TARGET", "PERISAI BOS HANCUR!", "SUB-BOS DIKALAHKAN!", "RUDAL TERKUNCI! HINDARI!", "PESAWAT JATUH!",
+"SISA", "PERISAI PULIH!", "HADIAH", "TONTON IKLAN", "NANTI SAJA", "OYNA", "SEFER", "AYARLAR", "EMEĞI GEÇENLER", "ÇIKIŞ", "PİLOT", "DURAKLATILDI", "DEVAM ET", "YENIDEN BAŞLAT", "ANA MENÜ", "GÖREV TAMAMLANDI", "UÇAK DÜŞTÜ", "PUAN", "KALKAN", "ÖZEL", "ZORLUK", "ACEMİ", "EFSANE", "GERİ", "GİZLİLİK POLİTİKASI", "UÇMAK İÇİN SÜRÜKLE", "PATRON UYARISI", "ALT PATRON", "DERECE", "TOPLANAN PARA", "MÜZİK", "SES EFEKTLERİ", "TİTREŞİM", "PARLAMAYI AZALT", "ÇARPIŞMAYI GÖSTER", "SEÇ", "SEÇİLDİ", "SONRAKİ BÖLÜM", "KİLİTLİ",
+"BİRİKEN YÜKSELTMELER", "DİL", "OTOMATİK ATEŞ", "OYUN KOLU", "EKRAN TUŞLARI", "REKLAMLARI KALDIR", "REKLAMSIZ", "SATIN AL", "PARA", "YETERSİZ PARA", "UÇAK SATIN ALINDI!", "YÜKSELTME DÜKKANI", "SEVİYE", "ŞİMDİLİK AZAMİ", "CAN", "ZIRH", "UÇAKLAR", "SÜRE", "HEDEFLER", "GÜÇ", "BÖLÜM", "ATEŞ", "FÜZE", "KİLİT", "KİLİTLENDİ", "HEDEFE DOKUN", "PATRON KALKANI KIRILDI!", "ALT PATRON YENİLDİ!", "FÜZELER KİLİTLENDİ! KAÇIN!", "UÇAK DÜŞTÜ!", "KALAN", "KALKAN YENİLENDİ!", "ÖDÜL", "REKLAMI İZLE", "ŞİMDİ DEĞİL", "ИГРАТЬ", "КАМПАНИЯ",
+"АНГАР", "НАСТРОЙКИ", "АВТОРЫ", "ВЫХОД", "ПИЛОТ", "ПАУЗА", "ПРОДОЛЖИТЬ", "ЗАНОВО", "ГЛАВНОЕ МЕНЮ", "МИССИЯ ВЫПОЛНЕНА", "САМОЛЁТ СБИТ", "ОЧКИ", "РЕКОРД", "КОМБО", "ЩИТ", "СПЕЦИАЛЬНАЯ", "СЛОЖНОСТЬ", "НОВОБРАНЕЦ", "АС", "ЛЕГЕНДА", "НАЗАД", "КОНФИДЕНЦИАЛЬНОСТЬ", "ВЕДИТЕ ПАЛЬЦЕМ", "ТРЕВОГА: БОСС", "СУБ-БОСС", "ОЦЕНКА", "СОБРАНО МОНЕТ", "МУЗЫКА", "ЗВУКОВЫЕ ЭФФЕКТЫ", "ВИБРАЦИЯ", "МЕНЬШЕ ВСПЫШЕК", "ПОКАЗАТЬ ХИТБОКС", "ВЫБРАТЬ", "ВЫБРАНО", "СЛЕДУЮЩИЙ УРОВЕНЬ", "ЗАБЛОКИРОВАНО", "НАКОПЛЕННЫЕ УЛУЧШЕНИЯ", "ЯЗЫК", "УПРАВЛЕНИЕ",
+"АВТООГОНЬ", "ГЕЙМПАД", "КНОПКИ НА ЭКРАНЕ", "УБРАТЬ РЕКЛАМУ", "БЕЗ РЕКЛАМЫ", "КУПИТЬ", "МОНЕТЫ", "НЕ ХВАТАЕТ МОНЕТ", "САМОЛЁТ КУПЛЕН!", "МАГАЗИН УЛУЧШЕНИЙ", "УРОВЕНЬ", "МАКСИМУМ ПОКА", "ЖИЗНЬ", "БРОНЯ", "САМОЛЁТЫ", "ВРЕМЯ", "ЦЕЛИ", "МОЩЬ", "ОГОНЬ", "РАКЕТА", "ЗАХВАТ", "ЗАХВАЧЕНО", "КОСНИТЕСЬ ЦЕЛИ", "ЩИТ БОССА ПРОБИТ!", "СУБ-БОСС ПОВЕРЖЕН!", "РАКЕТЫ НАВЕДЕНЫ! УКЛОНЯЙСЯ!", "САМОЛЁТ ПОТЕРЯН!", "ОСТАЛОСЬ", "ЩИТ ВОССТАНОВЛЕН!", "НАГРАДА", "СМОТРЕТЬ РЕКЛАМУ", "НЕ СЕЙЧАС", "プレイ", "キャンペーン", "ハンガー", "設定", "クレジット", "終了",
+"パイロット", "一時停止", "再開", "やり直し", "メインメニュー", "ミッション達成", "機体撃墜", "スコア", "ハイスコア", "コンボ", "シールド", "スペシャル", "難易度", "新兵", "エース", "レジェンド", "戻る", "プライバシーポリシー", "ドラッグで操縦", "ボス警報", "中ボス", "評価", "獲得コイン", "音楽", "効果音", "振動", "点滅を減らす", "当たり判定表示", "選択", "選択中", "次のステージ", "ロック中", "強化の蓄積", "言語", "操作方法", "自動射撃", "ゲームパッド", "画面ボタン", "広告を削除", "広告なし", "購入", "コイン", "コインが足りません", "機体を購入しました!", "強化ショップ", "レベル", "現在の上限", "ライフ", "装甲", "機体", "時間", "目標", "パワー", "ステージ", "ショット", "ミサイル", "ロック", "目標をタップ", "ボスのシールド破壊!", "中ボス撃破!", "ミサイルロック! 回避せよ!",
+"機体喪失!", "残り", "シールド復活!", "報酬", "広告を見る", "今はいい", "default_aircraft", "PADRÃO DA AERONAVE", "SEM ANÚNCIOS PARA SEMPRE", "aircraft_matrix", "MATRIZ TÁTICA DE AERONAVES", "perm_upgrades", "UPGRADES PERMANENTES", "back_hangar", "VOLTAR AO HANGAR", "speed", "VELOCIDADE", "defense", "DEFESA", "stat_control", "weapon", "ARMA", "passive", "PASSIVA", "up_firerate", "CADÊNCIA", "up_firerate_d", "Aumenta a frequência dos disparos", "up_spread", "DISPERSÃO", "up_spread_d", "Adiciona projéteis laterais", "up_missile", "MÍSSEIS",
+"up_missile_d", "Mísseis guiados mais fortes", "up_laser", "LASER", "up_laser_d", "Amplifica o feixe de energia", "up_armor", "up_armor_d", "Reduz o dano recebido", "up_crit", "CRÍTICO", "up_crit_d", "Eleva a chance de dano crítico", "limit_progress", "LIMITE ATUAL - AVANCE NA CAMPANHA", "shop_powerups", "LOJA DE POWER-UPS", "end_mission", "ENCERRAR MISSÃO", "off_damage", "DANO +20s", "off_rate", "CADÊNCIA +20s", "off_spread", "TIRO ABERTO +20s", "off_shield", "ESCUDO (7 TIROS)", "off_random", "PODER ALEATÓRIO",
+"off_bomb", "BOMBA", "bomb_limit", "BOMBAS NO LIMITE: 10", "NOME DO PILOTO", "pilot_photo", "FOTO DO PILOTO", "photo_set", "DEFINIDA", "photo_choose", "ESCOLHER", "name_updated", "NOME ATUALIZADO", "photo_updated", "FOTO ATUALIZADA", "photo_unchanged", "FOTO NÃO ALTERADA", "graphics", "QUALIDADE GRÁFICA", "gfx_low", "BAIXA", "gfx_med", "MÉDIA", "gfx_high", "ALTA", "gfx_ultra", "ULTRA", "ATIVADO", "DESATIVADO", "opening_store", "ABRINDO A LOJA...", "LOJA INDISPONÍVEL", "purchase_failed", "COMPRA NÃO CONCLUÍDA",
+"ads_removed_ok", "ANÚNCIOS REMOVIDOS - OBRIGADO!", "loading_ad", "CARREGANDO ANÚNCIO...", "watch_and_get", "ASSISTA A UM ANÚNCIO E RECEBA:", "continue_no_prize", "CONTINUAR SEM PRÊMIO", "last_aircraft", "SUA ÚLTIMA AERONAVE FOI ABATIDA!", "emergency", "REFORÇOS DE EMERGÊNCIA", "overload", "SOBRECARGA: INIMIGOS MULTIPLICADOS", "powers_kept", "PODERES MANTIDOS COM O TEMPO RESTANTE", "best_combo", "MELHOR COMBO", "total_coins", "MOEDAS TOTAIS", "AIRCRAFT DEFAULT", "START MISSION", "CHOOSE AIRCRAFT", "GAME OPTIONS",
+"NO ADS FOREVER", "TEAM AND THANKS", "QUIT GAME", "TACTICAL AIRCRAFT MATRIX", "PERMANENT UPGRADES", "BACK TO HANGAR", "SPEED", "DEFENSE", "HANDLING", "WEAPON", "PASSIVE", "FIRE RATE", "Increases shot frequency", "SPREAD", "Adds side projectiles", "MISSILES", "Stronger homing missiles", "Amplifies the energy beam", "Reduces damage taken", "CRITICAL", "Raises critical hit chance", "CURRENT LIMIT - ADVANCE THE CAMPAIGN", "POWER-UP SHOP", "END MISSION", "DAMAGE +20s", "FIRE RATE +20s", "SPREAD +20s", "SHIELD (7 HITS)",
+"RANDOM POWER", "BOMB", "BOMBS AT LIMIT: 10", "PILOT NAME", "PILOT PHOTO", "SET", "CHOOSE", "NAME UPDATED", "PHOTO UPDATED", "PHOTO UNCHANGED", "GRAPHICS QUALITY", "LOW", "MEDIUM", "HIGH", "ON", "OFF", "OPENING STORE...", "STORE UNAVAILABLE", "PURCHASE NOT COMPLETED", "ADS REMOVED - THANK YOU!", "LOADING AD...", "WATCH AN AD AND GET:", "CONTINUE WITHOUT PRIZE", "YOUR LAST AIRCRAFT WAS DOWNED!", "EMERGENCY REINFORCEMENTS", "OVERLOAD: ENEMIES MULTIPLIED", "POWERS KEPT WITH REMAINING TIME", "BEST COMBO", "TOTAL COINS",
+"PREDETERMINADO", "INICIAR MISIÓN", "ELEGIR NAVE", "OPCIONES DEL JUEGO", "SIN ANUNCIOS PARA SIEMPRE", "EQUIPO Y AGRADECIMIENTOS", "SALIR DEL JUEGO", "MATRIZ TÁCTICA DE NAVES", "MEJORAS PERMANENTES", "VOLVER AL HANGAR", "VELOCIDAD", "DEFENSA", "MANEJO", "PASIVA", "CADENCIA", "Aumenta la frecuencia de disparo", "DISPERSIÓN", "Añade proyectiles laterales", "MISILES", "Misiles guiados más fuertes", "LÁSER", "Amplifica el haz de energía", "Reduce el daño recibido", "Aumenta el daño crítico", "LÍMITE ACTUAL - AVANZA EN LA CAMPAÑA",
 "TERMINAR MISIÓN", "DAÑO +20s", "CADENCIA +20s", "DISPERSIÓN +20s", "ESCUDO (7 GOLPES)", "PODER ALEATORIO", "BOMBAS AL LÍMITE: 10", "NOMBRE DEL PILOTO", "FOTO DEL PILOTO", "ELEGIR", "NOMBRE ACTUALIZADO", "FOTO ACTUALIZADA", "FOTO SIN CAMBIOS", "CALIDAD GRÁFICA", "MEDIA", "ACTIVADO", "DESACTIVADO", "ABRIENDO TIENDA...", "TIENDA NO DISPONIBLE", "COMPRA NO COMPLETADA", "¡ANUNCIOS ELIMINADOS - GRACIAS!", "CARGANDO ANUNCIO...", "MIRA UN ANUNCIO Y RECIBE:", "CONTINUAR SIN PREMIO", "¡TU ÚLTIMA NAVE FUE DERRIBADA!",
 "REFUERZOS DE EMERGENCIA", "SOBRECARGA: ENEMIGOS MULTIPLICADOS", "PODERES CONSERVADOS CON EL TIEMPO RESTANTE", "MEJOR COMBO", "MONEDAS TOTALES", "STANDARD", "MISSION STARTEN", "JÄGER WÄHLEN", "SPIELOPTIONEN", "FÜR IMMER OHNE WERBUNG", "TEAM UND DANK", "SPIEL BEENDEN", "TAKTISCHE JÄGERMATRIX", "DAUERHAFTE UPGRADES", "ZURÜCK ZUM HANGAR", "VERTEIDIGUNG", "WAFFE", "PASSIV", "FEUERRATE", "Erhöht die Schussfrequenz", "STREUUNG", "Fügt seitliche Geschosse hinzu", "RAKETEN", "Stärkere Lenkraketen", "Verstärkt den Energiestrahl",
 "Verringert erlittenen Schaden", "KRITISCH", "Erhöht die kritische Trefferchance", "AKTUELLES LIMIT - KAMPAGNE FORTSETZEN", "POWER-UP-SHOP", "MISSION BEENDEN", "SCHADEN +20s", "FEUERRATE +20s", "STREUUNG +20s", "SCHILD (7 TREFFER)", "ZUFALLSKRAFT", "BOMBE", "BOMBEN AM LIMIT: 10", "PILOTENNAME", "PILOTENFOTO", "GESETZT", "NAME AKTUALISIERT", "FOTO AKTUALISIERT", "FOTO UNVERÄNDERT", "GRAFIKQUALITÄT", "NIEDRIG", "MITTEL", "HOCH", "AN", "AUS", "SHOP WIRD GEÖFFNET...", "SHOP NICHT VERFÜGBAR", "KAUF NICHT ABGESCHLOSSEN",
@@ -60732,46 +60801,46 @@ $rt_stringPool(["Can\'t enter monitor from another thread synchronously", "Alrea
 "Увеличивает частоту выстрелов", "РАЗБРОС", "Добавляет боковые снаряды", "РАКЕТЫ", "Более мощные самонаводящиеся ракеты", "ЛАЗЕР", "Усиливает энергетический луч", "Снижает получаемый урон", "КРИТ", "Повышает шанс критического удара", "ТЕКУЩИЙ ПРЕДЕЛ - ПРОДВИГАЙТЕСЬ ДАЛЬШЕ", "МАГАЗИН УСИЛЕНИЙ", "ЗАВЕРШИТЬ МИССИЮ", "УРОН +20с", "СКОРОСТРЕЛЬНОСТЬ +20с", "РАЗБРОС +20с", "ЩИТ (7 УДАРОВ)", "СЛУЧАЙНАЯ СИЛА", "БОМБА", "БОМБ МАКСИМУМ: 10", "ИМЯ ПИЛОТА", "ФОТО ПИЛОТА", "ЗАДАНО", "ИМЯ ОБНОВЛЕНО", "ФОТО ОБНОВЛЕНО", "ФОТО НЕ ИЗМЕНЕНО",
 "КАЧЕСТВО ГРАФИКИ", "НИЗКОЕ", "СРЕДНЕЕ", "ВЫСОКОЕ", "УЛЬТРА", "ВКЛ", "ВЫКЛ", "ОТКРЫТИЕ МАГАЗИНА...", "МАГАЗИН НЕДОСТУПЕН", "ПОКУПКА НЕ ЗАВЕРШЕНА", "РЕКЛАМА УБРАНА - СПАСИБО!", "ЗАГРУЗКА РЕКЛАМЫ...", "ПОСМОТРИТЕ РЕКЛАМУ И ПОЛУЧИТЕ:", "ПРОДОЛЖИТЬ БЕЗ НАГРАДЫ", "ВАШ ПОСЛЕДНИЙ САМОЛЁТ СБИТ!", "ЭКСТРЕННОЕ ПОДКРЕПЛЕНИЕ", "ПЕРЕГРУЗКА: ВРАГОВ БОЛЬШЕ", "СИЛЫ СОХРАНЕНЫ С ОСТАВШИМСЯ ВРЕМЕНЕМ", "ЛУЧШЕЕ КОМБО", "ВСЕГО МОНЕТ", "機体の既定", "ミッション開始", "機体を選ぶ", "ゲーム設定", "ずっと広告なし", "チームと感謝", "ゲーム終了", "戦術機体マトリクス", "恒久強化", "ハンガーに戻る",
 "速度", "防御", "操作性", "武器", "パッシブ", "連射速度", "射撃の頻度を上げる", "拡散", "側面の弾を追加する", "より強力な追尾ミサイル", "レーザー", "エネルギー光線を増幅する", "受けるダメージを減らす", "クリティカル", "会心の一撃の確率を上げる", "現在の上限 - キャンペーンを進めよう", "パワーアップ商店", "ミッション終了", "ダメージ +20秒", "連射 +20秒", "拡散 +20秒", "シールド (7発)", "ランダムパワー", "ボム", "ボム上限: 10", "パイロット名", "パイロット写真", "設定済み", "選ぶ", "名前を更新しました", "写真を更新しました", "写真は変更なし", "画質", "低", "中", "高", "ウルトラ", "オン", "オフ", "ストアを開いています...", "ストア利用不可", "購入は完了しませんでした", "広告を削除しました - ありがとう!", "広告を読み込み中...", "広告を見て入手:", "報酬なしで続行", "最後の機体が撃墜された!", "緊急増援",
-"オーバーロード: 敵が増加", "残り時間とともに強化を維持", "最高コンボ", "総コイン", "exception", "singletonList(...)", "elements", "Index overflow has happened.", "title", "subtitle", "NeonButton(id=", ", rect=", ", title=", ", subtitle=", ", magenta=", "Streak(angle=", ", speed=", ", phase=", ", thickness=", ", blueShift=", "VertexArray", "VertexBufferObject", "VertexBufferObjectSubData", "VertexBufferObjectWithVAO", "Mesh attempting to access memory outside of the index buffer (count: ", ", offset: ", ", max: ", "und", "CA", "zh", "CN", "FR",
-"DE", "IT", "JP", "ko", "KR", "TW", "GB", "US", "texture cannot be null.", "List is empty.", "destination", "asList(...)", "Error reading file: ", "attributes must be >= 1", "vertex shader must not be null", "fragment shader must not be null", "Fragment shader:\n", "Vertex shader\n", "An attempted fetch uniform from uncompiled shader \n", "No uniform with name \'", "\' in shader", "a_normal", "u_sampler", "#ifdef GL_ES\nprecision mediump float;\n#endif\n", "uniform sampler2D u_sampler", "void main() {\n   gl_FragColor = ",
-"vec4(1, 1, 1, 1)", "v_col", " * ", " texture2D(u_sampler", ",  v_tex", ") *", ";\n}", "pairs", "null cannot be cast to non-null type kotlin.collections.Map<K of kotlin.collections.MapsKt__MapsKt.emptyMap, V of kotlin.collections.MapsKt__MapsKt.emptyMap>", "map", "Already prepared", "Call prepare() before calling getPixmap()", "This TextureData implementation does not upload data itself", "File is null, it does not exist: ", "Pixmap already disposed!", "unknown format: ", "Unknown Gdx2DPixmap Format: ", "Index: ",
-"element", "Empty list doesn\'t contain element at index ", "No buffer allocated!", "IndexBufferObject cannot be used after it has been disposed.", "data must be a ByteBuffer or FloatBuffer", "dst must be a ByteBuffer", "Can\'t copy to a ", " instance", "Buffers must be of same type or ByteBuffer", "buffer not allocated with newUnsafeByteBuffer or already disposed", "Couldn\'t create FreeType stroker, FreeType error code: ", "SourceOver", "NearestNeighbour", "BiLinear", "New position ", " is outside of range [0;",
-"Couldn\'t get glyph, FreeType error code: ", "Can only free direct buffer", "MirroredRepeat", "ClampToEdge", "Repeat", "BIG_ENDIAN", "LITTLE_ENDIAN", "Capacity is negative: ", " is not set", " at ", "[ByteBuffer position=", ", limit=", ", capacity=", ", mark ", "Unknown Format: ", "Intensity", "LuminanceAlpha", "RGB565", "RGBA4444", "RGB888", "RGBA8888", "Index ", "This buffer is not allocated in linear memory and does not wrap native JS buffer", "FileType \'", "\' Not supported in web backend", "File not found: ",
-" (", "Cannot write to a classpath file: ", "Cannot write to an internal file: ", "Error writing file: ", "Classpath", "Internal", "External", "Absolute", "Local", "b", "i", "l", "f", "Couldn\'t flush preferences", "�", "Replacement preconditions do not hold", "UTF-8", "IGNORE", "REPLACE", "REPORT", "newAction must be non-null", "Pixmap", "Custom", "texture width and height must be square when using mipmapping.", "Malformed input of length ", "Unmappable characters of length ", "Binary", "Directory", "accent",
-"accent2", "aircraft", "ClickSpark(x=", ", y=", ", vx=", ", vy=", ", life=", "BRASIL", "ARLEY VARGAS", "AURORA BR-01", "Canhões duplos de íons", "Tempestade do Cruzeiro", "Combo aumenta o dano", "RÚSSIA", "IRINA VOLKOV", "BURAN RX-7", "Canhão de plasma pesado", "Pulso Glacial", "Blindagem absorve impacto", "ESTADOS UNIDOS", "MASON COLE", "EAGLE AX-9", "Gatling com munição traçante", "Ataque Águia", "Mísseis procuram alvos", "JAPÃO", "AIKO TANAKA", "RAIJIN JX-4", "Lasers gêmeos de precisão", "Corte do Trovão",
-"Drones energizam o feixe", "fill", "Point", "Line", "Filled", "other", "Desired length ", " is less than zero.", "List has more than one element.", "Collection is empty.", "Collection has more than one element.", "chars", "Array has more than one element.", "Limit must be non-negative, but was ", "country", "weaponStyle", "primary", "bodyColor", "accentColor", "AircraftDefinition(id=", ", country=", ", pilot=", ", name=", ", weaponStyle=", ", primary=", ", special=", ", passive=", ", power=", ", defense=",
-", control=", ", bodyColor=", ", accentColor=", "Pixmap has already been packed with name: ", ".9", "Page size too small for pixmap.", "Page size too small for pixmap: ", "  ", "(.+)_(\\d+)$", "Step must be non-zero.", "Step must be greater than Int.MIN_VALUE to avoid overflow on negation.", "added manager for application, ", " managers active", "Controllers", "NÍVEL DE AMEAÇA: ", "<", ">", "PROGRESSO: ", "/30", "FASE ", "SUB: ", "CHEFE: ", " - ", "PODERES: ", "NOME DO PILOTO: ", "FOTO DO PILOTO: ESCOLHER",
-"FOTO DO PILOTO: DEFINIDA", "   ", "ULTRA / 4K", "SKY VANGUARD: GLOBAL ASSAULT", "CONCEITO E DIREÇÃO: MESTRE ARLEY", "CAMPANHA: 5 PAÍSES E 30 FASES", "4 PILOTOS E AERONAVES ORIGINAIS", "POWER-UPS TEMPORÁRIOS COM ATIVAÇÃO MANUAL", "SPRITES ORIENTADOS PARA O JOGADOR", "Char sequence is empty.", "Action must be non-null", "RAPID", "HEAVY", "GATLING", "environment", "subBoss", "bossSprite", "stages", "Costa do Rio", "Litoral futurista e ilhas defensivas", "Caça Jaguar", "Porta-aviões Trovão", "ship_top", "Amazônia Oculta",
-"Rios, tempestades e bases na floresta", "Drone Harpia", "Plataforma Curupira", "turret_top", "Cerrado de Aço", "Planícies, refinarias e comboios blindados", "Tanque Lobo-Guará", "Fortaleza Anhanguera", "tank_missile", "São Paulo Neon", "Megacidade noturna e corredores aéreos", "Esquadrão Falcão", "Torre Bandeirante", "Atlântico em Guerra", "Tempestade, navios e plataformas oceânicas", "Submarino Abissal", "Cruzador Iara", "Pantanal Ômega", "Pântanos militarizados e usinas móveis", "Colosso Jacaré", "Guardião Tupã",
-"bomber_gray", "Operação Cruzeiro", "Deserto de Nevada", "Bases secretas e cânions", "Interceptador Raptor", "Trem Blindado Liberty", "tank_top", "Costa da Califórnia", "Portos, pontes e frotas automatizadas", "Drone Seeker", "Cruzador Pacific", "Chicago de Ferro", "Arranha-céus e fábricas bélicas", "Torre Sentinel", "Aranha Mecânica Union", "Montanhas Rochosas", "Neve, radares e silos de mísseis", "Tanque Grizzly", "Fortaleza Eagle", "Nova York Sitiada", "Cidade em evacuação e enxames de drones", "Esquadrão Phantom",
-"Colosso Manhattan", "Pentágono ORION", "Complexo subterrâneo de comando", "Guardião Patriot", "Núcleo Liberty Prime", "Escudo Continental", "Tóquio Neon", "Chuva, trens e letreiros holográficos", "Caça Kitsune", "Mecha Shogun", "Baía de Osaka", "Portos automatizados e navios-drones", "Submarino Kappa", "Cruzador Yamabiko", "Monte Fuji", "Cinzas vulcânicas e laboratórios ocultos", "Drone Tengu", "Fortaleza Oni", "Kyoto Cibernética", "Templos tecnológicos e defesas laser", "Torre Ronin", "Dragão Mecânico", "Hokkaido Glacial",
-"Nevasca, bases e tanques de plasma", "Tanque Yuki", "Colosso Susanoo", "Elevador Orbital", "Ascensão da atmosfera até o espaço", "Guardião Amaterasu", "Raijin Omega", "Tempestade Raijin", "Sibéria Congelada", "Florestas nevadas e comboios pesados", "Tanque Volk", "Fortaleza Boreal", "Mar de Barents", "Gelo quebrado, submarinos e tempestades", "Submarino Moroz", "Leviatã Ártico", "sub_top", "Moscou Escarlate", "Defesas urbanas e canhões de energia", "Torre Kremlin", "Titã Moscóvia", "Urais Industriais", "Minas, fundições e trens de guerra",
-"Colosso Ural", "Forja Perun", "Cosmódromo Baikonur", "Foguetes, hangares e plataformas aéreas", "Interceptor Sputnik", "Cidadela Vostok", "Órbita Soviética", "Satélites armados e destroços espaciais", "Guardião Zarya", "Coração de Kosmos", "Inverno Vermelho", "Costa de Roma", "Ruínas costeiras e baterias automatizadas", "Caça Lupo", "Cruzador Roma", "Veneza Submersa", "Canais, tempestades e drones anfíbios", "Submarino Gondola", "Leviatã Adriático", "Alpes de Titânio", "Montanhas, túneis e fortalezas aéreas",
-"Tanque Alpino", "Colosso Dolomita", "Milão Mecânica", "Torres industriais e tráfego aéreo", "Torre Duomo", "Arquiteto Nero", "Vesúvio em Chamas", "Lava, cinzas e usinas geotérmicas", "Drone Vulcano", "Imperador Magma", "Fortaleza Mediterrânea", "Batalha final sobre o mar e a órbita", "Guardião Centurião", "ORION Imperator", "ITÁLIA", "Cerco Mediterrâneo", "getter", "setter", "Toggle(key=", ", getter=", ", setter=", "begin must be called before end.", "index can\'t be > size: ", "bounces cannot be < 2 or > 5: ",
-"Step is zero.", "standard", "entries", "CountryCampaign(name=", ", difficultyScale=", ", stages=", "sprite", "StageSeed(name=", ", environment=", ", subBoss=", ", boss=", ", sprite=", "StageDefinition(globalIndex=", ", countryIndex=", ", bossSprite=", "Digite seu nome de piloto", "ABRINDO GALERIA...", "https://sites.google.com/view/vanguardglobalassault", "prepare() must not be called on a PixmapTextureData instance as it is already prepared.", "ENERGY", "FIRE_RATE", "MULTIPLIER", "DRONE", "MAGNET", "CHAIN",
-"REGEN", "PHOENIX", "ORBITAL", "TIME_CORE", "BLACK_HOLE", "BERSERK", "REFLECTOR", "CLONE", "createDownloadListener.onSuccess.afterUpdate path=", "writing file path=", "createDownloadListener.onSuccess", "write error path=", "write stream closed path=", "line=", "Invalid assets description. ", "1", "c", "$this$DelimitedRangesSequence", "ParagraphBySpace", "ParagraphByGlyph", "WrappedLinesBySpace", "WrappedLinesByGlyph", "AllLinesBySpace", "AllLinesByGlyph", "Asset download failed: ", "createDownloadListener.onFailure.afterUpdate path=",
-", hasResult=", "Asset download success: ", "Logical", "Pixels", "Couldn\'t render glyph, FreeType error code: ", "Glyph is not yet rendered", "ARSENAL NEXUS", "_d", "backgrounds/stage_00.jpg", "backgrounds/stage_01.jpg", "backgrounds/stage_02.jpg", "backgrounds/stage_03.jpg", "backgrounds/stage_04.jpg", "backgrounds/stage_05.jpg", "backgrounds/stage_06.jpg", "backgrounds/stage_07.jpg", "backgrounds/stage_08.jpg", "backgrounds/stage_09.jpg", "backgrounds/stage_10.jpg", "backgrounds/stage_11.jpg", "backgrounds/stage_12.jpg",
+"オーバーロード: 敵が増加", "残り時間とともに強化を維持", "最高コンボ", "総コイン", "exception", "singletonList(...)", "elements", "Index overflow has happened.", "NeonButton(id=", ", rect=", ", title=", ", subtitle=", ", magenta=", "Streak(angle=", ", speed=", ", phase=", ", thickness=", ", blueShift=", "VertexArray", "VertexBufferObject", "VertexBufferObjectSubData", "VertexBufferObjectWithVAO", "Mesh attempting to access memory outside of the index buffer (count: ", ", offset: ", ", max: ", "und", "CA", "zh", "CN", "FR", "DE", "IT", "JP",
+"ko", "KR", "TW", "GB", "US", "texture cannot be null.", "List is empty.", "destination", "asList(...)", "Error reading file: ", "attributes must be >= 1", "vertex shader must not be null", "fragment shader must not be null", "Fragment shader:\n", "Vertex shader\n", "An attempted fetch uniform from uncompiled shader \n", "No uniform with name \'", "\' in shader", "a_normal", "u_sampler", "#ifdef GL_ES\nprecision mediump float;\n#endif\n", "uniform sampler2D u_sampler", "void main() {\n   gl_FragColor = ", "vec4(1, 1, 1, 1)",
+"v_col", " * ", " texture2D(u_sampler", ",  v_tex", ") *", ";\n}", "pairs", "null cannot be cast to non-null type kotlin.collections.Map<K of kotlin.collections.MapsKt__MapsKt.emptyMap, V of kotlin.collections.MapsKt__MapsKt.emptyMap>", "map", "Already prepared", "Call prepare() before calling getPixmap()", "This TextureData implementation does not upload data itself", "File is null, it does not exist: ", "Pixmap already disposed!", "unknown format: ", "Unknown Gdx2DPixmap Format: ", "Index: ", "element", "Empty list doesn\'t contain element at index ",
+"No buffer allocated!", "IndexBufferObject cannot be used after it has been disposed.", "data must be a ByteBuffer or FloatBuffer", "dst must be a ByteBuffer", "Can\'t copy to a ", " instance", "Buffers must be of same type or ByteBuffer", "buffer not allocated with newUnsafeByteBuffer or already disposed", "Couldn\'t create FreeType stroker, FreeType error code: ", "SourceOver", "NearestNeighbour", "BiLinear", "New position ", " is outside of range [0;", "Couldn\'t get glyph, FreeType error code: ", "Can only free direct buffer",
+"MirroredRepeat", "ClampToEdge", "Repeat", "BIG_ENDIAN", "LITTLE_ENDIAN", "Capacity is negative: ", " is not set", " at ", "[ByteBuffer position=", ", limit=", ", capacity=", ", mark ", "Unknown Format: ", "Intensity", "LuminanceAlpha", "RGB565", "RGBA4444", "RGB888", "RGBA8888", "Index ", "This buffer is not allocated in linear memory and does not wrap native JS buffer", "FileType \'", "\' Not supported in web backend", "File not found: ", " (", "Cannot write to a classpath file: ", "Cannot write to an internal file: ",
+"Error writing file: ", "Classpath", "Internal", "External", "Absolute", "Local", "b", "i", "l", "f", "Couldn\'t flush preferences", "�", "Replacement preconditions do not hold", "UTF-8", "IGNORE", "REPLACE", "REPORT", "newAction must be non-null", "Pixmap", "Custom", "texture width and height must be square when using mipmapping.", "Malformed input of length ", "Unmappable characters of length ", "Binary", "Directory", "accent", "accent2", "aircraft", "ClickSpark(x=", ", y=", ", vx=", ", vy=", ", life=", "BRASIL",
+"ARLEY VARGAS", "AURORA BR-01", "Canhões duplos de íons", "Tempestade do Cruzeiro", "Combo aumenta o dano", "RÚSSIA", "IRINA VOLKOV", "BURAN RX-7", "Canhão de plasma pesado", "Pulso Glacial", "Blindagem absorve impacto", "ESTADOS UNIDOS", "MASON COLE", "EAGLE AX-9", "Gatling com munição traçante", "Ataque Águia", "Mísseis procuram alvos", "JAPÃO", "AIKO TANAKA", "RAIJIN JX-4", "Lasers gêmeos de precisão", "Corte do Trovão", "Drones energizam o feixe", "fill", "Point", "Line", "Filled", "other", "Desired length ",
+" is less than zero.", "List has more than one element.", "Collection is empty.", "Collection has more than one element.", "chars", "Array has more than one element.", "Limit must be non-negative, but was ", "country", "weaponStyle", "primary", "bodyColor", "accentColor", "AircraftDefinition(id=", ", country=", ", pilot=", ", name=", ", weaponStyle=", ", primary=", ", special=", ", passive=", ", power=", ", defense=", ", control=", ", bodyColor=", ", accentColor=", "Pixmap has already been packed with name: ",
+".9", "Page size too small for pixmap.", "Page size too small for pixmap: ", "  ", "(.+)_(\\d+)$", "added manager for application, ", " managers active", "Controllers", "NÍVEL DE AMEAÇA: ", "<", ">", "PROGRESSO: ", "/30", "FASE ", "SUB: ", "CHEFE: ", " - ", "PODERES: ", "NOME DO PILOTO: ", "FOTO DO PILOTO: ESCOLHER", "FOTO DO PILOTO: DEFINIDA", "   ", "ULTRA / 4K", "SKY VANGUARD: GLOBAL ASSAULT", "CONCEITO E DIREÇÃO: MESTRE ARLEY", "CAMPANHA: 5 PAÍSES E 30 FASES", "4 PILOTOS E AERONAVES ORIGINAIS", "POWER-UPS TEMPORÁRIOS COM ATIVAÇÃO MANUAL",
+"SPRITES ORIENTADOS PARA O JOGADOR", "Char sequence is empty.", "Action must be non-null", "RAPID", "HEAVY", "GATLING", "environment", "subBoss", "bossSprite", "stages", "Costa do Rio", "Litoral futurista e ilhas defensivas", "Caça Jaguar", "Porta-aviões Trovão", "ship_top", "Amazônia Oculta", "Rios, tempestades e bases na floresta", "Drone Harpia", "Plataforma Curupira", "turret_top", "Cerrado de Aço", "Planícies, refinarias e comboios blindados", "Tanque Lobo-Guará", "Fortaleza Anhanguera", "tank_missile",
+"São Paulo Neon", "Megacidade noturna e corredores aéreos", "Esquadrão Falcão", "Torre Bandeirante", "Atlântico em Guerra", "Tempestade, navios e plataformas oceânicas", "Submarino Abissal", "Cruzador Iara", "Pantanal Ômega", "Pântanos militarizados e usinas móveis", "Colosso Jacaré", "Guardião Tupã", "bomber_gray", "Operação Cruzeiro", "Deserto de Nevada", "Bases secretas e cânions", "Interceptador Raptor", "Trem Blindado Liberty", "tank_top", "Costa da Califórnia", "Portos, pontes e frotas automatizadas",
+"Drone Seeker", "Cruzador Pacific", "Chicago de Ferro", "Arranha-céus e fábricas bélicas", "Torre Sentinel", "Aranha Mecânica Union", "Montanhas Rochosas", "Neve, radares e silos de mísseis", "Tanque Grizzly", "Fortaleza Eagle", "Nova York Sitiada", "Cidade em evacuação e enxames de drones", "Esquadrão Phantom", "Colosso Manhattan", "Pentágono ORION", "Complexo subterrâneo de comando", "Guardião Patriot", "Núcleo Liberty Prime", "Escudo Continental", "Tóquio Neon", "Chuva, trens e letreiros holográficos", "Caça Kitsune",
+"Mecha Shogun", "Baía de Osaka", "Portos automatizados e navios-drones", "Submarino Kappa", "Cruzador Yamabiko", "Monte Fuji", "Cinzas vulcânicas e laboratórios ocultos", "Drone Tengu", "Fortaleza Oni", "Kyoto Cibernética", "Templos tecnológicos e defesas laser", "Torre Ronin", "Dragão Mecânico", "Hokkaido Glacial", "Nevasca, bases e tanques de plasma", "Tanque Yuki", "Colosso Susanoo", "Elevador Orbital", "Ascensão da atmosfera até o espaço", "Guardião Amaterasu", "Raijin Omega", "Tempestade Raijin", "Sibéria Congelada",
+"Florestas nevadas e comboios pesados", "Tanque Volk", "Fortaleza Boreal", "Mar de Barents", "Gelo quebrado, submarinos e tempestades", "Submarino Moroz", "Leviatã Ártico", "sub_top", "Moscou Escarlate", "Defesas urbanas e canhões de energia", "Torre Kremlin", "Titã Moscóvia", "Urais Industriais", "Minas, fundições e trens de guerra", "Colosso Ural", "Forja Perun", "Cosmódromo Baikonur", "Foguetes, hangares e plataformas aéreas", "Interceptor Sputnik", "Cidadela Vostok", "Órbita Soviética", "Satélites armados e destroços espaciais",
+"Guardião Zarya", "Coração de Kosmos", "Inverno Vermelho", "Costa de Roma", "Ruínas costeiras e baterias automatizadas", "Caça Lupo", "Cruzador Roma", "Veneza Submersa", "Canais, tempestades e drones anfíbios", "Submarino Gondola", "Leviatã Adriático", "Alpes de Titânio", "Montanhas, túneis e fortalezas aéreas", "Tanque Alpino", "Colosso Dolomita", "Milão Mecânica", "Torres industriais e tráfego aéreo", "Torre Duomo", "Arquiteto Nero", "Vesúvio em Chamas", "Lava, cinzas e usinas geotérmicas", "Drone Vulcano",
+"Imperador Magma", "Fortaleza Mediterrânea", "Batalha final sobre o mar e a órbita", "Guardião Centurião", "ORION Imperator", "ITÁLIA", "Cerco Mediterrâneo", "getter", "setter", "Toggle(key=", ", getter=", ", setter=", "begin must be called before end.", "index can\'t be > size: ", "bounces cannot be < 2 or > 5: ", "standard", "Step must be non-zero.", "Step must be greater than Int.MIN_VALUE to avoid overflow on negation.", "entries", "CountryCampaign(name=", ", difficultyScale=", ", stages=", "sprite", "StageSeed(name=",
+", environment=", ", subBoss=", ", boss=", ", sprite=", "StageDefinition(globalIndex=", ", countryIndex=", ", bossSprite=", "Step is zero.", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", "copyOf(...)", "Digite seu nome de piloto", "ABRINDO GALERIA...", "https://sites.google.com/view/vanguardglobalassault", "prepare() must not be called on a PixmapTextureData instance as it is already prepared.", "ENERGY", "FIRE_RATE", "MULTIPLIER", "DRONE", "MAGNET", "CHAIN", "REGEN", "PHOENIX", "ORBITAL",
+"TIME_CORE", "BLACK_HOLE", "BERSERK", "REFLECTOR", "CLONE", "createDownloadListener.onSuccess.afterUpdate path=", "writing file path=", "createDownloadListener.onSuccess", "write error path=", "write stream closed path=", "line=", "Invalid assets description. ", "1", "c", "$this$DelimitedRangesSequence", "ParagraphBySpace", "ParagraphByGlyph", "WrappedLinesBySpace", "WrappedLinesByGlyph", "AllLinesBySpace", "AllLinesByGlyph", "Asset download failed: ", "createDownloadListener.onFailure.afterUpdate path=", ", hasResult=",
+"Asset download success: ", "Logical", "Pixels", "Couldn\'t render glyph, FreeType error code: ", "Glyph is not yet rendered", "ARSENAL NEXUS", "_d", "backgrounds/stage_00.jpg", "backgrounds/stage_01.jpg", "backgrounds/stage_02.jpg", "backgrounds/stage_03.jpg", "backgrounds/stage_04.jpg", "backgrounds/stage_05.jpg", "backgrounds/stage_06.jpg", "backgrounds/stage_07.jpg", "backgrounds/stage_08.jpg", "backgrounds/stage_09.jpg", "backgrounds/stage_10.jpg", "backgrounds/stage_11.jpg", "backgrounds/stage_12.jpg",
 "backgrounds/stage_13.jpg", "backgrounds/stage_14.jpg", "backgrounds/stage_15.jpg", "backgrounds/stage_16.jpg", "backgrounds/stage_17.jpg", "backgrounds/stage_18.jpg", "backgrounds/stage_19.jpg", "backgrounds/stage_20.jpg", "backgrounds/stage_21.jpg", "backgrounds/stage_22.jpg", "backgrounds/stage_23.jpg", "backgrounds/stage_24.jpg", "backgrounds/stage_25.jpg", "backgrounds/stage_26.jpg", "backgrounds/stage_27.jpg", "backgrounds/stage_28.jpg", "backgrounds/stage_29.jpg", "lastCountry", "fase", "fighter_red",
 "sprites/enemies/fighter_red.png", "sprites/enemies/bomber_gray.png", "drone_blue", "sprites/enemies/drone_blue.png", "tank_front", "sprites/enemies/tank_front.png", "sprites/enemies/tank_top.png", "sprites/enemies/tank_missile.png", "sprites/enemies/turret_top.png", "turret_green", "sprites/enemies/turret_green.png", "sprites/enemies/ship_top.png", "sub_front", "sprites/enemies/sub_front.png", "sprites/enemies/sub_top.png", "scout_new", "sprites/enemies/scout_new.png", "striker_new", "sprites/enemies/striker_new.png",
 "drone_new", "sprites/enemies/drone_new.png", "bomber_new", "sprites/enemies/bomber_new.png", "tank_new", "sprites/enemies/tank_new.png", "e_jet", "sprites/enemies/e_jet.png", "e_gunship", "sprites/enemies/e_gunship.png", "e_heli", "sprites/enemies/e_heli.png", "e_pod", "sprites/enemies/e_pod.png", "e_ship_0", "sprites/enemies/e_ship_0.png", "e_ship_1", "sprites/enemies/e_ship_1.png", "e_ship_2", "sprites/enemies/e_ship_2.png", "e_ship_3", "sprites/enemies/e_ship_3.png", "e_ship_4", "sprites/enemies/e_ship_4.png",
 "e_ship_5", "sprites/enemies/e_ship_5.png", "e_tank_", "sprites/enemies/e_tank_", "e_base_0", "sprites/enemies/e_base_0.png", "e_base_1", "sprites/enemies/e_base_1.png", "e_base_2", "sprites/enemies/e_base_2.png", "boss_0", "sprites/enemies/boss_0.png", "boss_1", "sprites/enemies/boss_1.png", "boss_2", "sprites/enemies/boss_2.png", "boss_3", "sprites/enemies/boss_3.png", "boss_4", "sprites/enemies/boss_4.png", "boss_5", "sprites/enemies/boss_5.png", "e_tank_0", "e_tank_1", "e_tank_2", "e_tank_3", "e_tank_4",
-"e_tank_5", "e_tank_6", "boss_", "copyOf(...)", "ROF", "SPR", "MIS", "LAS", "SHD", "BMB", "MLT", "DRN", "MAG", "CRT", "CHN", "ARM", "REG", "PHX", "ORB", "TIM", "BLK", "BRK", "RFL", "CLN", "DMG", "Requested element count ", "center", "vee", "sine", "cross", "columns", "spread", "line", "comparator", "pattern", " ATIVADO", " DESLIGADO", "e_ship_", "e_base_", "NÚCLEO ", " — CHEFE ENFURECIDO", " MOEDA", "singleton(...)", "vida-extra", "AERONAVE ABATIDA!", "+1 VIDA  E  +2 BOMBAS", "GAMEPAD: A = ASSISTIR   B = RECUSAR",
-"R", "A", "M", "L", "E", "B", "X", "I", "C", "T", "O", "G", "F", "Q", "H", "K", "V", "Z", "P", "toString(...)", " x", " — ", "COMBO x", "  +", "  -  ESCUDO ", "UP +", "UP -", "MOEDAS: ", "PODERES TEMPORÁRIOS — TOQUE PARA ATIVAR/DESATIVAR", " N", " MOEDAS", "PODER ATIVO CONSOME TEMPO. DESATIVADO PRESERVA OS SEGUNDOS.", " COMPRADO", "description", "Offer(power=", ", description=", ", baseCost=", "DONE ignored because already settled url=", "label", "ShopOffer(label=", ", cost=", "initializer", ", status=", ", loaded=",
-", total=", ", percent=", "offset + length must be <= size: ", "IndexedDB Error removing file: ", "Default", "NumberPad", "PhonePad", "Email", "Password", "URI", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", "notWrapped", "wrapped", "lastWrapped", "CLEAR", "CLEAR_WHITE", "BLACK", "LIGHT_GRAY", "GRAY", "DARK_GRAY", "BLUE", "NAVY", "ROYAL", "SLATE", "SKY", "CYAN", "TEAL", "GREEN", "CHARTREUSE", "LIME", "FOREST", "OLIVE", "YELLOW", "GOLD", "GOLDENROD", "ORANGE", "BROWN", "TAN", "FIREBRICK",
-"RED", "SCARLET", "CORAL", "SALMON", "PINK", "MAGENTA", "PURPLE", "VIOLET", "MAROON", "texture", "muzzles", "EnemyVisual(texture=", ", width=", ", height=", ", rotation=", ", collisionRadius=", ", muzzles=", "SCOUT", "STRIKER", "BOMBER", "TANK", "MINIBOSS", "WaveEvent(time=", ", count=", ", pattern=", " - FASE ", ": x", "onDone", "br_1", "br_2", "jp_full", "videos/end_", ".mp4", "assetPaths", "onFinished", "tex", "desc", "REGRESSA COMO HERÓI", "RETURNS A HERO", "MISSÃO CUMPRIDA", "GALERIA DE AMEAÇAS", "THREAT GALLERY",
-"GUARDIÃO TUPÃ", "Brasil · Chefe final", "Brazil · Final boss", "LIBERTY PRIME", "EUA · Chefe final", "USA · Final boss", "RAIJIN OMEGA", "Japão · Chefe final", "Japan · Final boss", "CORAÇÃO DE KOSMOS", "Rússia · Chefe final", "Russia · Final boss", "ORION IMPERATOR", "Itália · Chefe final", "Italy · Final boss", "MECHA SHOGUN", "Japão · Chefe intermediário", "Japan · Mid boss", "INTERCEPTOR VESPA", "Caça leve e veloz", "Fast light fighter", "GUNSHIP TROVÃO", "Nave de ataque pesada", "Heavy attack gunship",
-"HELICÓPTERO HARPIA", "Metralha em voo rasante", "Strafing helicopter", "sprites/enemies/e_tank_0.png", "TANQUE LOBO-GUARÁ", "Blindado de superfície", "Armored ground tank", "CORVETA ABISSO", "Navio lança-mísseis", "Missile warship", "BATERIA COSTEIRA", "Base fixa antiaérea", "Fixed AA emplacement", "POD SENTINELA", "Drone orbital vigia", "Orbital sentry drone", "EQUIPE", "STAFF", "CONCEPT & DIRECTION: MASTER ARLEY", "5 PAÍSES · 30 FASES · 4 AERONAVES", "5 NATIONS · 30 STAGES · 4 AIRCRAFT", "FEITO COM LIBGDX + KOTLIN",
-"BUILT WITH LIBGDX + KOTLIN", "OBRIGADO POR JOGAR, PILOTO.", "THANK YOU FOR PLAYING, PILOT.", "FIM", "THE END", "FIVE NATIONS. ONE UNITED FRONT.", "FROM THE COAST OF BRAZIL TO THE ORBIT OVER ITALY,", "THE SKY VANGUARD PILOTS BROKE THE ORION INVASION.", "THE SKIES ARE SILENT NOW — AND THEY ARE COMING HOME.", "CINCO NAÇÕES. UMA SÓ FRENTE DE BATALHA.", "DO LITORAL DO BRASIL ATÉ A ÓRBITA DA ITÁLIA,", "OS PILOTOS DA SKY VANGUARD DERRUBARAM A INVASÃO ORION.", "AGORA O CÉU ESTÁ EM SILÊNCIO — E ELES VOLTAM PARA CASA.",
-"PULAR", "SKIP", "CANNON", "PLASMA", "TRACER", "SonicWave(originX=", ", originY=", ", radius=", ", delay=", ", damage=", "ReinforcementOrder(type=", ", remaining=", ", serial=", "value", "substring(...)", "entre-fases", "LIGHT", "FOTO DO PILOTO ATUALIZADA", "CADENCIA DE TIRO", "TIRO TRIPLO", "ENERGIA", "UPGRADE", "+500 MOEDAS  +  ", "i:b:/audio/boss_warning.wav:39734:1", "i:b:/audio/click.wav:3572:1", "i:b:/audio/explosion.wav:24298:1", "i:b:/audio/fase1.ogg:813393:1", "i:b:/audio/fase10.ogg:980900:1", "i:b:/audio/fase11.ogg:219592:1",
-"i:b:/audio/fase12.ogg:528733:1", "i:b:/audio/fase13.ogg:301534:1", "i:b:/audio/fase14.ogg:280632:1", "i:b:/audio/fase15.ogg:317800:1", "i:b:/audio/fase2.ogg:675440:1", "i:b:/audio/fase3.ogg:328609:1", "i:b:/audio/fase4.ogg:328609:1", "i:b:/audio/fase5.ogg:855034:1", "i:b:/audio/fase6.ogg:282945:1", "i:b:/audio/fase7.ogg:408356:1", "i:b:/audio/fase8.ogg:695377:1", "i:b:/audio/fase9.ogg:695377:1", "i:b:/audio/hangar.ogg:438896:1", "i:b:/audio/menu.ogg:1202324:1", "i:b:/audio/menu_music.wav:352844:1", "i:b:/audio/powerup.wav:11068:1",
-"i:b:/audio/shield.wav:22094:1", "i:b:/audio/shot.wav:3130:1", "i:b:/audio/special.wav:39734:1", "i:b:/audio/stage_music.wav:352844:1", "i:b:/audio/tela upgrade.ogg:697872:1", "i:b:/backgrounds/stage_00.jpg:532220:1", "i:b:/backgrounds/stage_01.jpg:485053:1", "i:b:/backgrounds/stage_02.jpg:426433:1", "i:b:/backgrounds/stage_03.jpg:437812:1", "i:b:/backgrounds/stage_04.jpg:413546:1", "i:b:/backgrounds/stage_05.jpg:566604:1", "i:b:/backgrounds/stage_06.jpg:474180:1", "i:b:/backgrounds/stage_07.jpg:532658:1", "i:b:/backgrounds/stage_08.jpg:492756:1",
-"i:b:/backgrounds/stage_09.jpg:578934:1", "i:b:/backgrounds/stage_10.jpg:530075:1", "i:b:/backgrounds/stage_11.jpg:540193:1", "i:b:/backgrounds/stage_12.jpg:408294:1", "i:b:/backgrounds/stage_13.jpg:454960:1", "i:b:/backgrounds/stage_14.jpg:389324:1", "i:b:/backgrounds/stage_15.jpg:439509:1", "i:b:/backgrounds/stage_16.jpg:472245:1", "i:b:/backgrounds/stage_17.jpg:556022:1", "i:b:/backgrounds/stage_18.jpg:445499:1", "i:b:/backgrounds/stage_19.jpg:556022:1", "i:b:/backgrounds/stage_20.jpg:506271:1", "i:b:/backgrounds/stage_21.jpg:574565:1",
-"i:b:/backgrounds/stage_22.jpg:455773:1", "i:b:/backgrounds/stage_23.jpg:545564:1", "i:b:/backgrounds/stage_24.jpg:532220:1", "i:b:/backgrounds/stage_25.jpg:454960:1", "i:b:/backgrounds/stage_26.jpg:578934:1", "i:b:/backgrounds/stage_27.jpg:509101:1", "i:b:/backgrounds/stage_28.jpg:389324:1", "i:b:/backgrounds/stage_29.jpg:437812:1", "i:b:/data/aircraft.json:1107:1", "i:b:/data/bosses.json:137:1", "i:b:/data/campaign_30_stages.json:7170:1", "i:b:/data/difficulty.json:210:1", "i:b:/data/enemies.json:344:1", "i:b:/data/pilots.json:542:1",
-"i:b:/data/upgrades.json:1087:1", "i:b:/fonts/noto_bold.ttf:27528:1", "i:b:/fonts/noto_jp_bold.ttf:120864:1", "i:b:/fonts/noto_jp_regular.ttf:119588:1", "i:b:/fonts/noto_regular.ttf:27572:1", "i:b:/fonts/OFL_rajdhani.txt:4373:1", "i:b:/fonts/rajdhani_bold.ttf:31776:1", "i:b:/fonts/rajdhani_medium.ttf:29480:1", "i:b:/menu_background_4k.png:317009:1", "i:b:/menu_main_hd.jpg:273772:1", "i:b:/sprites/enemies/bomber_gray.png:17750:1", "i:b:/sprites/enemies/boss_0.png:25871:1", "i:b:/sprites/enemies/boss_1.png:17494:1",
-"i:b:/sprites/enemies/boss_2.png:33211:1", "i:b:/sprites/enemies/boss_3.png:25895:1", "i:b:/sprites/enemies/boss_4.png:23717:1", "i:b:/sprites/enemies/boss_5.png:23328:1", "i:b:/sprites/enemies/drone_blue.png:15229:1", "i:b:/sprites/enemies/e_base_0.png:18018:1", "i:b:/sprites/enemies/e_base_1.png:24378:1", "i:b:/sprites/enemies/e_base_2.png:12784:1", "i:b:/sprites/enemies/e_gunship.png:17750:1", "i:b:/sprites/enemies/e_heli.png:19011:1", "i:b:/sprites/enemies/e_jet.png:27775:1", "i:b:/sprites/enemies/e_pod.png:15229:1",
-"i:b:/sprites/enemies/e_ship_0.png:13645:1", "i:b:/sprites/enemies/e_ship_1.png:8077:1", "i:b:/sprites/enemies/e_ship_2.png:15584:1", "i:b:/sprites/enemies/e_ship_3.png:14019:1", "i:b:/sprites/enemies/e_ship_4.png:12814:1", "i:b:/sprites/enemies/e_ship_5.png:8477:1", "i:b:/sprites/enemies/e_tank_0.png:16641:1", "i:b:/sprites/enemies/e_tank_1.png:23057:1", "i:b:/sprites/enemies/e_tank_2.png:22797:1", "i:b:/sprites/enemies/e_tank_3.png:20049:1", "i:b:/sprites/enemies/e_tank_4.png:11901:1", "i:b:/sprites/enemies/e_tank_5.png:7177:1",
-"i:b:/sprites/enemies/e_tank_6.png:13317:1", "i:b:/sprites/enemies/fighter_red.png:15476:1", "i:b:/sprites/enemies/ship_top.png:8077:1", "i:b:/sprites/enemies/sub_front.png:12814:1", "i:b:/sprites/enemies/sub_top.png:8477:1", "i:b:/sprites/enemies/tank_front.png:23057:1", "i:b:/sprites/enemies/tank_missile.png:20049:1", "i:b:/sprites/enemies/tank_top.png:22797:1", "i:b:/sprites/enemies/turret_green.png:12784:1", "i:b:/sprites/enemies/turret_top.png:24378:1", "i:b:/sprites/player/drone_0.png:16798:1", "i:b:/sprites/player/drone_1.png:15361:1",
-"i:b:/sprites/player/drone_2.png:13649:1", "i:b:/sprites/player/drone_3.png:15052:1", "i:b:/sprites/player/missile.png:5295:1", "i:b:/sprites/player/missile2.png:5242:1", "i:b:/sprites/player/pilot_1_brasil.png:16273:1", "i:b:/sprites/player/ship_0.png:19073:1", "i:b:/sprites/player/ship_1.png:18027:1", "i:b:/sprites/player/ship_2.png:17760:1", "i:b:/sprites/player/ship_3.png:18391:1", "c:b:/com/badlogic/gdx/utils/lsans-15.fnt:17711:1", "c:b:/com/badlogic/gdx/utils/lsans-15.png:10270:1", "c:b:/com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:820:1",
+"e_tank_5", "e_tank_6", "boss_", "ROF", "SPR", "MIS", "LAS", "SHD", "BMB", "MLT", "DRN", "MAG", "CRT", "CHN", "ARM", "REG", "PHX", "ORB", "TIM", "BLK", "BRK", "RFL", "CLN", "DMG", "Requested element count ", "center", "vee", "sine", "cross", "columns", "spread", "line", "comparator", "pattern", " ATIVADO", " DESLIGADO", "e_ship_", "e_base_", "NÚCLEO ", " — CHEFE ENFURECIDO", " MOEDA", "singleton(...)", "vida-extra", "AERONAVE ABATIDA!", "+1 VIDA  E  +2 BOMBAS", "GAMEPAD: A = ASSISTIR   B = RECUSAR", "R", "A",
+"M", "L", "E", "B", "X", "I", "C", "T", "O", "G", "F", "Q", "H", "K", "V", "Z", "P", "toString(...)", " x", " — ", "COMBO x", "  +", "  -  ESCUDO ", "UP +", "UP -", "MOEDAS: ", "PODERES TEMPORÁRIOS — TOQUE PARA ATIVAR/DESATIVAR", " N", " MOEDAS", "PODER ATIVO CONSOME TEMPO. DESATIVADO PRESERVA OS SEGUNDOS.", " COMPRADO", "description", "Offer(power=", ", description=", ", baseCost=", "DONE ignored because already settled url=", "label", "ShopOffer(label=", ", cost=", "initializer", ", status=", ", loaded=",
+", total=", ", percent=", "offset + length must be <= size: ", "IndexedDB Error removing file: ", "Default", "NumberPad", "PhonePad", "Email", "Password", "URI", "notWrapped", "wrapped", "lastWrapped", "CLEAR", "CLEAR_WHITE", "BLACK", "LIGHT_GRAY", "GRAY", "DARK_GRAY", "BLUE", "NAVY", "ROYAL", "SLATE", "SKY", "CYAN", "TEAL", "GREEN", "CHARTREUSE", "LIME", "FOREST", "OLIVE", "YELLOW", "GOLD", "GOLDENROD", "ORANGE", "BROWN", "TAN", "FIREBRICK", "RED", "SCARLET", "CORAL", "SALMON", "PINK", "MAGENTA", "PURPLE",
+"VIOLET", "MAROON", "texture", "muzzles", "EnemyVisual(texture=", ", width=", ", height=", ", rotation=", ", collisionRadius=", ", muzzles=", "SCOUT", "STRIKER", "BOMBER", "TANK", "MINIBOSS", "WaveEvent(time=", ", count=", ", pattern=", " - FASE ", ": x", "onDone", "br_1", "br_2", "jp_full", "videos/end_", ".mp4", "assetPaths", "onFinished", "tex", "desc", "REGRESSA COMO HERÓI", "RETURNS A HERO", "MISSÃO CUMPRIDA", "GALERIA DE AMEAÇAS", "THREAT GALLERY", "GUARDIÃO TUPÃ", "Brasil · Chefe final", "Brazil · Final boss",
+"LIBERTY PRIME", "EUA · Chefe final", "USA · Final boss", "RAIJIN OMEGA", "Japão · Chefe final", "Japan · Final boss", "CORAÇÃO DE KOSMOS", "Rússia · Chefe final", "Russia · Final boss", "ORION IMPERATOR", "Itália · Chefe final", "Italy · Final boss", "MECHA SHOGUN", "Japão · Chefe intermediário", "Japan · Mid boss", "INTERCEPTOR VESPA", "Caça leve e veloz", "Fast light fighter", "GUNSHIP TROVÃO", "Nave de ataque pesada", "Heavy attack gunship", "HELICÓPTERO HARPIA", "Metralha em voo rasante", "Strafing helicopter",
+"sprites/enemies/e_tank_0.png", "TANQUE LOBO-GUARÁ", "Blindado de superfície", "Armored ground tank", "CORVETA ABISSO", "Navio lança-mísseis", "Missile warship", "BATERIA COSTEIRA", "Base fixa antiaérea", "Fixed AA emplacement", "POD SENTINELA", "Drone orbital vigia", "Orbital sentry drone", "EQUIPE", "STAFF", "CONCEPT & DIRECTION: MASTER ARLEY", "5 PAÍSES · 30 FASES · 4 AERONAVES", "5 NATIONS · 30 STAGES · 4 AIRCRAFT", "FEITO COM LIBGDX + KOTLIN", "BUILT WITH LIBGDX + KOTLIN", "OBRIGADO POR JOGAR, PILOTO.",
+"THANK YOU FOR PLAYING, PILOT.", "FIM", "THE END", "FIVE NATIONS. ONE UNITED FRONT.", "FROM THE COAST OF BRAZIL TO THE ORBIT OVER ITALY,", "THE SKY VANGUARD PILOTS BROKE THE ORION INVASION.", "THE SKIES ARE SILENT NOW — AND THEY ARE COMING HOME.", "CINCO NAÇÕES. UMA SÓ FRENTE DE BATALHA.", "DO LITORAL DO BRASIL ATÉ A ÓRBITA DA ITÁLIA,", "OS PILOTOS DA SKY VANGUARD DERRUBARAM A INVASÃO ORION.", "AGORA O CÉU ESTÁ EM SILÊNCIO — E ELES VOLTAM PARA CASA.", "PULAR", "SKIP", "CANNON", "PLASMA", "TRACER", "SonicWave(originX=",
+", originY=", ", radius=", ", delay=", ", damage=", "ReinforcementOrder(type=", ", remaining=", ", serial=", "value", "substring(...)", "entre-fases", "LIGHT", "FOTO DO PILOTO ATUALIZADA", "CADENCIA DE TIRO", "TIRO TRIPLO", "ENERGIA", "UPGRADE", "+500 MOEDAS  +  ", "i:b:/audio/boss_warning.wav:39734:1", "i:b:/audio/click.wav:3572:1", "i:b:/audio/explosion.wav:24298:1", "i:b:/audio/fase1.ogg:813393:1", "i:b:/audio/fase10.ogg:980900:1", "i:b:/audio/fase11.ogg:219592:1", "i:b:/audio/fase12.ogg:528733:1", "i:b:/audio/fase13.ogg:301534:1",
+"i:b:/audio/fase14.ogg:280632:1", "i:b:/audio/fase15.ogg:317800:1", "i:b:/audio/fase2.ogg:675440:1", "i:b:/audio/fase3.ogg:328609:1", "i:b:/audio/fase4.ogg:328609:1", "i:b:/audio/fase5.ogg:855034:1", "i:b:/audio/fase6.ogg:282945:1", "i:b:/audio/fase7.ogg:408356:1", "i:b:/audio/fase8.ogg:695377:1", "i:b:/audio/fase9.ogg:695377:1", "i:b:/audio/hangar.ogg:438896:1", "i:b:/audio/menu.ogg:1202324:1", "i:b:/audio/menu_music.wav:352844:1", "i:b:/audio/powerup.wav:11068:1", "i:b:/audio/shield.wav:22094:1", "i:b:/audio/shot.wav:3130:1",
+"i:b:/audio/special.wav:39734:1", "i:b:/audio/stage_music.wav:352844:1", "i:b:/audio/tela upgrade.ogg:697872:1", "i:b:/backgrounds/stage_00.jpg:532220:1", "i:b:/backgrounds/stage_01.jpg:485053:1", "i:b:/backgrounds/stage_02.jpg:426433:1", "i:b:/backgrounds/stage_03.jpg:437812:1", "i:b:/backgrounds/stage_04.jpg:413546:1", "i:b:/backgrounds/stage_05.jpg:566604:1", "i:b:/backgrounds/stage_06.jpg:474180:1", "i:b:/backgrounds/stage_07.jpg:532658:1", "i:b:/backgrounds/stage_08.jpg:492756:1", "i:b:/backgrounds/stage_09.jpg:578934:1",
+"i:b:/backgrounds/stage_10.jpg:530075:1", "i:b:/backgrounds/stage_11.jpg:540193:1", "i:b:/backgrounds/stage_12.jpg:408294:1", "i:b:/backgrounds/stage_13.jpg:454960:1", "i:b:/backgrounds/stage_14.jpg:389324:1", "i:b:/backgrounds/stage_15.jpg:439509:1", "i:b:/backgrounds/stage_16.jpg:472245:1", "i:b:/backgrounds/stage_17.jpg:556022:1", "i:b:/backgrounds/stage_18.jpg:445499:1", "i:b:/backgrounds/stage_19.jpg:556022:1", "i:b:/backgrounds/stage_20.jpg:506271:1", "i:b:/backgrounds/stage_21.jpg:574565:1", "i:b:/backgrounds/stage_22.jpg:455773:1",
+"i:b:/backgrounds/stage_23.jpg:545564:1", "i:b:/backgrounds/stage_24.jpg:532220:1", "i:b:/backgrounds/stage_25.jpg:454960:1", "i:b:/backgrounds/stage_26.jpg:578934:1", "i:b:/backgrounds/stage_27.jpg:509101:1", "i:b:/backgrounds/stage_28.jpg:389324:1", "i:b:/backgrounds/stage_29.jpg:437812:1", "i:b:/data/aircraft.json:1107:1", "i:b:/data/bosses.json:137:1", "i:b:/data/campaign_30_stages.json:7170:1", "i:b:/data/difficulty.json:210:1", "i:b:/data/enemies.json:344:1", "i:b:/data/pilots.json:542:1", "i:b:/data/upgrades.json:1087:1",
+"i:b:/fonts/noto_bold.ttf:27528:1", "i:b:/fonts/noto_jp_bold.ttf:120864:1", "i:b:/fonts/noto_jp_regular.ttf:119588:1", "i:b:/fonts/noto_regular.ttf:27572:1", "i:b:/fonts/OFL_rajdhani.txt:4373:1", "i:b:/fonts/rajdhani_bold.ttf:31776:1", "i:b:/fonts/rajdhani_medium.ttf:29480:1", "i:b:/menu_background_4k.png:317009:1", "i:b:/menu_main_hd.jpg:273772:1", "i:b:/sprites/enemies/bomber_gray.png:17750:1", "i:b:/sprites/enemies/boss_0.png:25871:1", "i:b:/sprites/enemies/boss_1.png:17494:1", "i:b:/sprites/enemies/boss_2.png:33211:1",
+"i:b:/sprites/enemies/boss_3.png:25895:1", "i:b:/sprites/enemies/boss_4.png:23717:1", "i:b:/sprites/enemies/boss_5.png:23328:1", "i:b:/sprites/enemies/drone_blue.png:15229:1", "i:b:/sprites/enemies/e_base_0.png:18018:1", "i:b:/sprites/enemies/e_base_1.png:24378:1", "i:b:/sprites/enemies/e_base_2.png:12784:1", "i:b:/sprites/enemies/e_gunship.png:17750:1", "i:b:/sprites/enemies/e_heli.png:19011:1", "i:b:/sprites/enemies/e_jet.png:27775:1", "i:b:/sprites/enemies/e_pod.png:15229:1", "i:b:/sprites/enemies/e_ship_0.png:13645:1",
+"i:b:/sprites/enemies/e_ship_1.png:8077:1", "i:b:/sprites/enemies/e_ship_2.png:15584:1", "i:b:/sprites/enemies/e_ship_3.png:14019:1", "i:b:/sprites/enemies/e_ship_4.png:12814:1", "i:b:/sprites/enemies/e_ship_5.png:8477:1", "i:b:/sprites/enemies/e_tank_0.png:16641:1", "i:b:/sprites/enemies/e_tank_1.png:23057:1", "i:b:/sprites/enemies/e_tank_2.png:22797:1", "i:b:/sprites/enemies/e_tank_3.png:20049:1", "i:b:/sprites/enemies/e_tank_4.png:11901:1", "i:b:/sprites/enemies/e_tank_5.png:7177:1", "i:b:/sprites/enemies/e_tank_6.png:13317:1",
+"i:b:/sprites/enemies/fighter_red.png:15476:1", "i:b:/sprites/enemies/ship_top.png:8077:1", "i:b:/sprites/enemies/sub_front.png:12814:1", "i:b:/sprites/enemies/sub_top.png:8477:1", "i:b:/sprites/enemies/tank_front.png:23057:1", "i:b:/sprites/enemies/tank_missile.png:20049:1", "i:b:/sprites/enemies/tank_top.png:22797:1", "i:b:/sprites/enemies/turret_green.png:12784:1", "i:b:/sprites/enemies/turret_top.png:24378:1", "i:b:/sprites/player/drone_0.png:16798:1", "i:b:/sprites/player/drone_1.png:15361:1", "i:b:/sprites/player/drone_2.png:13649:1",
+"i:b:/sprites/player/drone_3.png:15052:1", "i:b:/sprites/player/missile.png:5295:1", "i:b:/sprites/player/missile2.png:5242:1", "i:b:/sprites/player/pilot_1_brasil.png:16273:1", "i:b:/sprites/player/ship_0.png:19073:1", "i:b:/sprites/player/ship_1.png:18027:1", "i:b:/sprites/player/ship_2.png:17760:1", "i:b:/sprites/player/ship_3.png:18391:1", "c:b:/com/badlogic/gdx/utils/lsans-15.fnt:17711:1", "c:b:/com/badlogic/gdx/utils/lsans-15.png:10270:1", "c:b:/com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:820:1",
 "c:b:/com/badlogic/gdx/graphics/g3d/particles/particles.vertex.glsl:2886:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/default.fragment.glsl:5874:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/default.vertex.glsl:9096:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/depth.fragment.glsl:869:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/depth.vertex.glsl:2931:1"]);
 jl_String.prototype.toString = function() {
     return $rt_ustr(this);
@@ -60872,8 +60941,8 @@ let $rt_jso_marker = Symbol('jsoClass');
     c.onTimer = $rt_callWithReceiver(cgxgtbwa_AssetDownloadImpl$retryOrFail$lambda$_6_0_onTimer$exported$0);
     c = cgxgtbwft_LocalDBStorage$removeFile$lambda$_3_0.prototype;
     c.handleEvent = $rt_callWithReceiver(cgxgtbwft_LocalDBStorage$removeFile$lambda$_3_0_handleEvent$exported$0);
-    c = cvsw_WebPlatformServices$pickPilotPhoto$lambda$_5_0.prototype;
-    c.recebeu = $rt_callWithReceiver(cvsw_WebPlatformServices$pickPilotPhoto$lambda$_5_0_recebeu$exported$0);
+    c = cvsw_WebPlatformServices$pickPilotPhoto$lambda$_7_0.prototype;
+    c.recebeu = $rt_callWithReceiver(cvsw_WebPlatformServices$pickPilotPhoto$lambda$_7_0_recebeu$exported$0);
     c = cgxgtbw_WebInput$getTextInput$lambda$_69_0.prototype;
     c.handleEvent = $rt_callWithReceiver(cgxgtbw_WebInput$getTextInput$lambda$_69_0_handleEvent$exported$0);
     c = cgxgtbw_WebInput$getTextInput$lambda$_69_1.prototype;
@@ -60886,8 +60955,8 @@ let $rt_jso_marker = Symbol('jsoClass');
     c.handleEvent = $rt_callWithReceiver(cgxgtbw_WebInput$getTextInput$lambda$_69_5_handleEvent$exported$0);
     c = cgxgtbw_WebInput$getTextInput$lambda$_69_6.prototype;
     c.onTimer = $rt_callWithReceiver(cgxgtbw_WebInput$getTextInput$lambda$_69_6_onTimer$exported$0);
-    c = cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0.prototype;
-    c.recebeu = $rt_callWithReceiver(cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0_recebeu$exported$0);
+    c = cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_3_0.prototype;
+    c.recebeu = $rt_callWithReceiver(cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_3_0_recebeu$exported$0);
     c = cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0.prototype;
     c.onTimer = $rt_callWithReceiver(cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0_onTimer$exported$0);
 })();
