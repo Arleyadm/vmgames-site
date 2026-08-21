@@ -47362,7 +47362,22 @@ cvsw_WebLauncherKt_mostrarAnuncioPremiadoJs$js_body$_2 = (var$1, var$2) => {
         return;
     }
     var assistiu = false;
+    var terminou = false;
+    var concluir = function(ganhou) {
+        if (terminou) return;
+        terminou = true;
+        clearTimeout(limite);
+        var$2.recebeu(ganhou);
+    };
+    var limite = setTimeout(function() {
+        window.__h5Frustradas = (window.__h5Frustradas || 0) + 1;
+        if (window.__h5Frustradas >= 2) {
+            window.__h5SemAnuncio = true;
+        }
+        concluir(true);
+    }, 8000);
     window.adBreak({ type : 'reward', name : var$1, beforeReward : function(mostrarAnuncio) {
+        clearTimeout(limite);
         mostrarAnuncio();
     }, adViewed : function() {
         assistiu = true;
@@ -47379,7 +47394,7 @@ cvsw_WebLauncherKt_mostrarAnuncioPremiadoJs$js_body$_2 = (var$1, var$2) => {
                 window.__h5SemAnuncio = true;
             }
         }
-        var$2.recebeu(assistiu);
+        concluir(status === 'viewed' || status === 'dismissed' ? assistiu : true);
     } });
 },
 cvsw_WebLauncherKt_abrirSeletorDeFoto$js_body$_4 = var$1 => {
@@ -49611,6 +49626,7 @@ function cvs_GameplayScreen() {
     a.$adOfferActive = 0;
     a.$adOfferIsLastChance = 0;
     a.$adOfferBusy = 0;
+    a.$adOfferCountdown = 0.0;
     a.$adWatchButton = null;
     a.$adSkipButton = null;
     a.$weaponLevel = 0;
@@ -49913,6 +49929,8 @@ cvs_GameplayScreen_render = ($this, $delta) => {
     if (!$this.$paused && !$this.$adOfferActive)
         cvs_GameplayScreen_update($this, $dt);
     else {
+        if ($this.$adOfferBusy)
+            $this.$adOfferCountdown = jl_Math_max(0.0, $this.$adOfferCountdown - $dt);
         $this.$flashTimer = jl_Math_max(0.0, $this.$flashTimer - $dt);
         $this.$shakeTimer = jl_Math_max(0.0, $this.$shakeTimer - $dt);
         $this.$playerDamageFlash = jl_Math_max(0.0, $this.$playerDamageFlash - $dt);
@@ -53896,6 +53914,7 @@ cvs_GameplayScreen_acceptAdOffer = $this => {
     if ($this.$adOfferBusy)
         return;
     $this.$adOfferBusy = 1;
+    $this.$adOfferCountdown = 8.0;
     cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.0, 0.0, 6, null);
     var$1 = new cvs_GameplayScreen$acceptAdOffer$lambda$_120_0;
     var$1.$_035 = $this;
@@ -53917,7 +53936,7 @@ cvs_GameplayScreen_declineAdOffer = $this => {
         cvs_GameplayScreen_endMission($this, 0);
 },
 cvs_GameplayScreen_drawAdOffer = $this => {
-    let $panel, var$2, var$3, var$4;
+    let $panel, var$2, var$3, var$4, $segundos;
     cvs_BaseScreenKt_beginBlended$default(cvs_SkyVanguardGame_getShapes($this.$game), null, 1, null);
     cbggg_ShapeRenderer_setColor(cvs_SkyVanguardGame_getShapes($this.$game), cbgg_Color__init_(0.004000000189989805, 0.012000000104308128, 0.029999999329447746, 0.8799999952316284));
     cbggg_ShapeRenderer_rect(cvs_SkyVanguardGame_getShapes($this.$game), 0.0, 0.0, 1080.0, 1920.0);
@@ -53925,21 +53944,26 @@ cvs_GameplayScreen_drawAdOffer = $this => {
     $panel = cbgm_Rectangle__init_(100.0, 660.0, 880.0, 620.0);
     var$2 = $this;
     cvs_BaseScreenKt_neonPanel$default(var$2, $panel, cvs_BaseScreenKt_getNEON_MAGENTA(), cvs_BaseScreenKt_getPANEL_FILL_MAGENTA(), 32.0, 3.4000000953674316, 6, 0.12999999523162842, 0.0, 128, null);
-    $panel = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1734));
-    var$3 = cvs_SkyVanguardGame_getFont($this.$game);
+    var$3 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1734));
+    $panel = cvs_SkyVanguardGame_getFont($this.$game);
     var$4 = cbgg_Color_WHITE;
     kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(822));
-    cvs_BaseScreen_drawTracked($this, $panel, 540.0, 1216.0, var$3, var$4, 3.0);
+    cvs_BaseScreen_drawTracked($this, var$3, 540.0, 1216.0, $panel, var$4, 3.0);
     cvs_BaseScreen_drawCentered($this, !$this.$adOfferIsLastChance ? $rt_s(2864) : $rt_s(1733), 1140.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.5, 0.4000000059604645, 1.0));
     cvs_BaseScreen_drawCentered($this, $rt_s(1729), 1080.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.75, 0.8799999952316284, 1.0, 1.0));
     cvs_BaseScreen_drawTracked($this, $rt_s(2865), 540.0, 1000.0, cvs_SkyVanguardGame_getFont($this.$game), cbgg_Color__init_(1.0, 0.8500000238418579, 0.25, 1.0), 3.0);
-    if ($this.$adOfferBusy)
-        cvs_BaseScreen_drawCentered($this, $rt_s(1727), 840.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.4000000059604645, 0.949999988079071, 1.0, 1.0));
-    else {
+    if (!$this.$adOfferBusy) {
         cvs_BaseScreen_drawButton($this, $this.$adWatchButton, $rt_s(1024), 1);
         cvs_BaseScreen_drawButton$default(var$2, $this.$adSkipButton, !$this.$adOfferIsLastChance ? $rt_s(1731) : $rt_s(1679), 0, 4, null);
+    } else {
+        $segundos = kr_RangesKt___RangesKt_coerceAtLeast0(jl_Math_ceil($this.$adOfferCountdown) | 0, 0);
+        var$3 = new jl_StringBuilder;
+        jl_AbstractStringBuilder__init_(var$3);
+        jl_StringBuilder_append0(jl_StringBuilder_append(var$3, $rt_s(2866)), $segundos);
+        cvs_BaseScreen_drawCentered($this, jl_AbstractStringBuilder_toString(var$3), 840.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.4000000059604645, 0.949999988079071, 1.0, 1.0));
+        cvs_BaseScreen_drawCentered($this, $rt_s(2867), 785.0, cvs_SkyVanguardGame_getTinyFont($this.$game), cbgg_Color__init_(0.6499999761581421, 0.8199999928474426, 0.949999988079071, 1.0));
     }
-    cvs_BaseScreen_drawCentered($this, $rt_s(2866), 700.0, cvs_SkyVanguardGame_getTinyFont($this.$game), cbgg_Color__init_(0.550000011920929, 0.699999988079071, 0.8500000238418579, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(2868), 700.0, cvs_SkyVanguardGame_getTinyFont($this.$game), cbgg_Color__init_(0.550000011920929, 0.699999988079071, 0.8500000238418579, 1.0));
 },
 cvs_GameplayScreen_destroyBossPart = ($this, $x, $y) => {
     let var$3;
@@ -54422,71 +54446,71 @@ cvs_GameplayScreen_drawPowerLabels = $this => {
                 case 1:
                     break;
                 case 2:
-                    $letter = $rt_s(2867);
-                    break a;
-                case 3:
-                    $letter = $rt_s(2868);
-                    break a;
-                case 4:
                     $letter = $rt_s(2869);
                     break a;
-                case 5:
+                case 3:
                     $letter = $rt_s(2870);
                     break a;
-                case 6:
+                case 4:
                     $letter = $rt_s(2871);
                     break a;
-                case 7:
+                case 5:
                     $letter = $rt_s(2872);
                     break a;
-                case 8:
+                case 6:
                     $letter = $rt_s(2873);
+                    break a;
+                case 7:
+                    $letter = $rt_s(2874);
+                    break a;
+                case 8:
+                    $letter = $rt_s(2875);
                     break a;
                 case 9:
                     $letter = $rt_s(541);
                     break a;
                 case 10:
-                    $letter = $rt_s(2874);
-                    break a;
-                case 11:
-                    $letter = $rt_s(2875);
-                    break a;
-                case 12:
                     $letter = $rt_s(2876);
                     break a;
-                case 13:
+                case 11:
                     $letter = $rt_s(2877);
                     break a;
-                case 14:
+                case 12:
                     $letter = $rt_s(2878);
                     break a;
-                case 15:
+                case 13:
                     $letter = $rt_s(2879);
                     break a;
-                case 16:
+                case 14:
                     $letter = $rt_s(2880);
                     break a;
-                case 17:
+                case 15:
                     $letter = $rt_s(2881);
+                    break a;
+                case 16:
+                    $letter = $rt_s(2882);
+                    break a;
+                case 17:
+                    $letter = $rt_s(2883);
                     break a;
                 case 18:
                     $letter = $rt_s(674);
                     break a;
                 case 19:
-                    $letter = $rt_s(2882);
+                    $letter = $rt_s(2884);
                     break a;
                 case 20:
-                    $letter = $rt_s(2883);
+                    $letter = $rt_s(2885);
                     break a;
                 case 21:
-                    $letter = $rt_s(2884);
+                    $letter = $rt_s(2886);
                     break a;
                 default:
                     $power = new k_NoWhenBranchMatchedException;
                     jl_Exception__init_($power);
                     $rt_throw($power);
             }
-            $letter = $rt_s(2885);
+            $letter = $rt_s(2887);
         }
         var$5 = $this.$layout0;
         var$1 = cvs_SkyVanguardGame_getSmallFont($this.$game);
@@ -54510,7 +54534,7 @@ cvs_GameplayScreen_drawCoinLabels = $this => {
     while (ju_AbstractList$1_hasNext(var$1)) {
         $coin = ju_AbstractList$1_next(var$1);
         var$3 = $coin.$value5;
-        $label = var$3 <= 1 ? $rt_s(2875) : jl_String_valueOf0(var$3);
+        $label = var$3 <= 1 ? $rt_s(2877) : jl_String_valueOf0(var$3);
         var$5 = $this.$layout0;
         var$6 = cvs_SkyVanguardGame_getSmallFont($this.$game);
         $label = $label;
@@ -54543,7 +54567,7 @@ cvs_GameplayScreen_formatNumber = ($this, $n) => {
         $index$iv = var$8;
     }
     $s = jl_AbstractStringBuilder_toString($sb);
-    kji_Intrinsics_checkNotNullExpressionValue($s, $rt_s(2886));
+    kji_Intrinsics_checkNotNullExpressionValue($s, $rt_s(2888));
     return $s;
 },
 cvs_GameplayScreen_detonateSuperWave = ($this, $x, $y, $damage) => {
@@ -54796,7 +54820,7 @@ cvs_GameplayScreen_drawHud = $this => {
     var$21 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(990));
     var$14 = $this.$lives;
     $lifeCol = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append($lifeCol, var$21), $rt_s(2887)), var$14);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append($lifeCol, var$21), $rt_s(2889)), var$14);
     cbggg_BitmapFont_draw($label, $shieldCol, jl_StringBuilder_toString($lifeCol), 42.0 + kr_RangesKt___RangesKt_coerceIn0($this.$lives, 0, 6) * 34.0 + 8.0, $pipY + 20.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.550000011920929, 0.8799999952316284, 1.0, 0.8500000238418579));
     var$21 = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
@@ -54808,7 +54832,7 @@ cvs_GameplayScreen_drawHud = $this => {
     $lifeCol = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(998));
     var$14 = cvs_StageDefinition_getPhase($this.$stage0);
     $label2 = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append3(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($label2, $shieldCol), $rt_s(2888)), $lifeCol), 32), var$14);
+    jl_StringBuilder_append0(jl_StringBuilder_append3(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($label2, $shieldCol), $rt_s(2890)), $lifeCol), 32), var$14);
     cbggg_BitmapFont_draw(var$21, $label, jl_StringBuilder_toString($label2), 36.0, 1902.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cbgg_Color_WHITE);
     cbggg_BitmapFont_draw(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)), cvs_GameplayScreen_formatNumber($this, jl_Integer_valueOf($this.$score)), 36.0, 1866.0);
@@ -54817,7 +54841,7 @@ cvs_GameplayScreen_drawHud = $this => {
     var$21 = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
     var$14 = $this.$combo;
     $label = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append($label, $rt_s(2889)), var$14);
+    jl_StringBuilder_append0(jl_StringBuilder_append($label, $rt_s(2891)), var$14);
     cbggg_BitmapFont_draw($accent, var$21, jl_StringBuilder_toString($label), 36.0, 1804.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.800000011920929, 0.8600000143051147, 0.949999988079071, 0.800000011920929));
     $accent = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
@@ -54850,7 +54874,7 @@ cvs_GameplayScreen_drawHud = $this => {
     $accent = cvs_GameplayScreen_formatNumber($this, jl_Integer_valueOf(cvs_SaveManager_getCredits(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this)))));
     $seconds = $this.$coinsEarnedInStage;
     var$21 = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$21, $accent), $rt_s(2890)), $seconds);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$21, $accent), $rt_s(2892)), $seconds);
     $label = jl_StringBuilder_toString(var$21);
     $accent = cvs_BaseScreen_getLayout($this);
     var$21 = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
@@ -54889,7 +54913,7 @@ cvs_GameplayScreen_drawHud = $this => {
                 $accent = cvs_StageDefinition_getBoss($this.$stage0);
                 $seconds = $sFrac * 100.0 | 0;
                 var$21 = jl_StringBuilder__init_();
-                jl_StringBuilder_append3(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$21, $accent), $rt_s(2891)), $seconds), 37);
+                jl_StringBuilder_append3(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$21, $accent), $rt_s(2893)), $seconds), 37);
                 $label2 = jl_StringBuilder_toString(var$21);
                 $accent = cvs_BaseScreen_getLayout($this);
                 var$21 = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
@@ -54944,8 +54968,8 @@ cvs_GameplayScreen_drawControls = $this => {
     cbggg_ShapeRenderer_end(cvs_SkyVanguardGame_getShapes(cvs_BaseScreen_getGame($this)));
     cbggg_SpriteBatch_begin(cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)));
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 1.0, 1.0, $this.$specials <= 0 ? 0.44999998807907104 : 1.0));
-    cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), $rt_s(2872));
-    cbggg_BitmapFont_draw(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)), $rt_s(2872), $sx - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $sy + (cvs_BaseScreen_getLayout($this)).$height4 / 2.0 + 12.0);
+    cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), $rt_s(2874));
+    cbggg_BitmapFont_draw(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)), $rt_s(2874), $sx - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $sy + (cvs_BaseScreen_getLayout($this)).$height4 / 2.0 + 12.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 1.0, 1.0, $this.$specials <= 0 ? 0.4000000059604645 : 0.8999999761581421));
     $specialColor = cvs_BaseScreen_getLayout($this);
     $defenseColor = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
@@ -55052,17 +55076,17 @@ cvs_GameplayScreen_drawExtraControls = $this => {
         $fc = $this.$missileButton;
         cbggg_BitmapFont_draw($lockLabel, var$6, var$7, var$4, $fc.$y + $fc.$height0 / 2.0 + (cvs_BaseScreen_getLayout($this)).$height4 / 2.0);
         cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.6000000238418579, 1.0, 0.75, 0.949999988079071));
-        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), $rt_s(2892));
+        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), $rt_s(2894));
         $lockLabel = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
         $fc = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
-        var$6 = $rt_s(2892);
+        var$6 = $rt_s(2894);
         var$7 = $this.$upgradeUpButton;
         cbggg_BitmapFont_draw($lockLabel, $fc, var$6, var$7.$x + var$7.$width0 / 2.0 - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $this.$upgradeUpButton.$y + 70.0);
         cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.6000000238418579, 0.6499999761581421, 0.949999988079071));
-        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), $rt_s(2893));
+        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), $rt_s(2895));
         $lockLabel = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
         $fc = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
-        var$6 = $rt_s(2893);
+        var$6 = $rt_s(2895);
         var$7 = $this.$upgradeDownButton;
         cbggg_BitmapFont_draw($lockLabel, $fc, var$6, var$7.$x + var$7.$width0 / 2.0 - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $this.$upgradeDownButton.$y + 70.0);
     }
@@ -55260,9 +55284,9 @@ cvs_GameplayScreen_drawPauseOverlay = $this => {
     cvs_BaseScreen_drawTracked($this, $c, 540.0, 1850.0, $type, $rect, 8.0);
     $collected = cvs_GameplayScreen_formatNumber($this, jl_Integer_valueOf(cvs_SaveManager_getCredits(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this)))));
     $c = jl_StringBuilder__init_();
-    jl_StringBuilder_append(jl_StringBuilder_append($c, $rt_s(2894)), $collected);
+    jl_StringBuilder_append(jl_StringBuilder_append($c, $rt_s(2896)), $collected);
     cvs_BaseScreen_drawCentered($this, jl_StringBuilder_toString($c), 1775.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.8600000143051147, 0.25, 1.0));
-    cvs_BaseScreen_drawCentered($this, $rt_s(2895), 1700.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.6200000047683716, 0.8999999761581421, 1.0, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(2897), 1700.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.6200000047683716, 0.8999999761581421, 1.0, 1.0));
     $collected = cvs_GameplayScreen_visibleCollectedPowers($this);
     cvs_BaseScreenKt_beginBlended$default(cvs_SkyVanguardGame_getShapes(cvs_BaseScreen_getGame($this)), null, 1, null);
     $collected = ju_AbstractList_iterator($collected);
@@ -55307,7 +55331,7 @@ cvs_GameplayScreen_drawPauseOverlay = $this => {
         $accent = cvs_GameplayScreen_powerDurationLabel($this, $type);
         $type = !cvs_GameplayScreen_isPowerEnabled($this, $type) ? $rt_s(1791) : $rt_s(1790);
         var$14 = jl_StringBuilder__init_();
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$14, $offer), $rt_s(2896)), $columns), $rt_s(2493)), $accent), $rt_s(2493)), $type);
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$14, $offer), $rt_s(2898)), $columns), $rt_s(2493)), $accent), $rt_s(2493)), $type);
         cbggg_BitmapFont_draw($c, $rect_0, jl_StringBuilder_toString(var$14), $rect.$x + 14.0, $rect.$y + 37.0);
     }
     cbggg_SpriteBatch_end(cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)));
@@ -55360,13 +55384,13 @@ cvs_GameplayScreen_drawPauseOverlay = $this => {
         $type = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
         $columns = cvs_GameplayScreen$ShopOffer_getCost($offer);
         $rect_0 = jl_StringBuilder__init_();
-        jl_StringBuilder_append(jl_StringBuilder_append0($rect_0, $columns), $rt_s(2897));
+        jl_StringBuilder_append(jl_StringBuilder_append0($rect_0, $columns), $rt_s(2899));
         cbggg_BitmapFont_draw($c, $type, jl_StringBuilder_toString($rect_0), $rect.$x + 16.0, $rect.$y + 28.0);
     }
     cbggg_SpriteBatch_end(cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)));
     if (jl_String_length($this.$pauseMessage) <= 0 ? 0 : 1)
         cvs_BaseScreen_drawCentered($this, $this.$pauseMessage, 650.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.47999998927116394, 0.20000000298023224, 1.0));
-    cvs_BaseScreen_drawCentered($this, $rt_s(2898), 570.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.7200000286102295, 0.8399999737739563, 0.9399999976158142, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(2900), 570.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.7200000286102295, 0.8399999737739563, 0.9399999976158142, 1.0));
     cvs_BaseScreen_drawButton($this, $this.$continueButton, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(903)), 1);
     $collected = $this;
     cvs_BaseScreen_drawButton$default($collected, $this.$restartButton, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(905)), 0, 4, null);
@@ -55419,7 +55443,7 @@ cvs_GameplayScreen_handlePauseTap = ($this, $x, $y) => {
                             var$3 = cvs_GameplayScreen_powerShortLabel($this, var$3);
                             $rect = new jl_StringBuilder;
                             jl_AbstractStringBuilder__init_($rect);
-                            jl_StringBuilder_append(jl_StringBuilder_append($rect, var$3), $rt_s(2899));
+                            jl_StringBuilder_append(jl_StringBuilder_append($rect, var$3), $rt_s(2901));
                             $this.$pauseMessage = jl_AbstractStringBuilder_toString($rect);
                             cvs_SaveManager_flushPending(cvs_SkyVanguardGame_getSaveManager($this.$game));
                         }
@@ -55640,7 +55664,7 @@ function cvs_ShopScreen$Offer() {
 let cvs_ShopScreen$Offer__init_0 = ($this, $power, $name, $description, $baseCost) => {
     kji_Intrinsics_checkNotNullParameter($power, $rt_s(996));
     kji_Intrinsics_checkNotNullParameter($name, $rt_s(774));
-    kji_Intrinsics_checkNotNullParameter($description, $rt_s(2900));
+    kji_Intrinsics_checkNotNullParameter($description, $rt_s(2902));
     $this.$power = $power;
     $this.$name4 = $name;
     $this.$description = $description;
@@ -55659,7 +55683,7 @@ cvs_ShopScreen$Offer_toString = $this => {
     var$4 = $this.$baseCost;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2901)), var$1), $rt_s(2466)), var$2), $rt_s(2902)), var$3), $rt_s(2903)), var$4), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2903)), var$1), $rt_s(2466)), var$2), $rt_s(2904)), var$3), $rt_s(2905)), var$4), 41);
     return jl_AbstractStringBuilder_toString(var$5);
 },
 cvs_ShopScreen$Offer_hashCode = $this => {
@@ -55835,7 +55859,7 @@ let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_4_handleEvent$expo
     else if (var$4.readyState == 4) {
         var$1 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$1);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(2904)), var$3), $rt_s(255)), var$5);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(2906)), var$3), $rt_s(255)), var$5);
         jl_AbstractStringBuilder_toString(var$1);
     }
 },
@@ -56071,7 +56095,7 @@ function cvs_GameplayScreen$ShopOffer() {
     a.$cost = 0;
 }
 let cvs_GameplayScreen$ShopOffer__init_0 = ($this, $label, $power, $cost) => {
-    kji_Intrinsics_checkNotNullParameter($label, $rt_s(2905));
+    kji_Intrinsics_checkNotNullParameter($label, $rt_s(2907));
     $this.$label = $label;
     $this.$power1 = $power;
     $this.$cost = $cost;
@@ -56094,7 +56118,7 @@ cvs_GameplayScreen$ShopOffer_toString = $this => {
     var$3 = $this.$cost;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(2906)), var$1), $rt_s(2471)), var$2), $rt_s(2907)), var$3), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(2908)), var$1), $rt_s(2471)), var$2), $rt_s(2909)), var$3), 41);
     return jl_AbstractStringBuilder_toString(var$4);
 },
 cvs_GameplayScreen$ShopOffer_hashCode = $this => {
@@ -56140,9 +56164,9 @@ cvs_GameplayScreen$_init_$lambda$_0_0_invoke = var$0 => {
 k_LazyKt__LazyJVMKt = $rt_classWithoutFields(),
 k_LazyKt__LazyJVMKt_lazy = $initializer => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($initializer, $rt_s(2908));
+    kji_Intrinsics_checkNotNullParameter($initializer, $rt_s(2910));
     var$2 = new k_SynchronizedLazyImpl;
-    kji_Intrinsics_checkNotNullParameter($initializer, $rt_s(2908));
+    kji_Intrinsics_checkNotNullParameter($initializer, $rt_s(2910));
     var$2.$initializer = $initializer;
     k_UNINITIALIZED_VALUE_$callClinit();
     var$2.$_value = k_UNINITIALIZED_VALUE_INSTANCE;
@@ -56189,7 +56213,7 @@ let otja_XMLHttpRequest$onComplete$lambda$_23_0_handleEvent$exported$0 = (var$1,
         var$10 = var$4.status;
         var$1 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$1);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(278)), var$3), $rt_s(271)), var$9), $rt_s(2909)), var$10), $rt_s(255)), var$5);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(278)), var$3), $rt_s(271)), var$9), $rt_s(2911)), var$10), $rt_s(255)), var$5);
         jl_AbstractStringBuilder_toString(var$1);
         if (cgxgtbwa_AssetDownloadImpl_trySettle(var$2, var$6))
             cgxgtbwa_AssetDownloadImpl_handleTerminalStatus(var$2, var$7, var$3, var$8, var$5, var$4);
@@ -56211,7 +56235,7 @@ let cgxgtbwa_AssetDownloadImpl$setOnProgress$lambda$_8_0_handleEvent$exported$0 
     var$6 = var$5 <= 0 ? (-1.0) : var$4 / var$5;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    var$3 = jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(278)), var$3), $rt_s(2910)), var$4), $rt_s(2911)), var$5), $rt_s(2912));
+    var$3 = jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(278)), var$3), $rt_s(2912)), var$4), $rt_s(2913)), var$5), $rt_s(2914));
     var$7 = var$3.$length2;
     jl_AbstractStringBuilder_insert3(var$3, var$7, var$6);
     jl_AbstractStringBuilder_toString(var$2);
@@ -56220,7 +56244,7 @@ let cgxgtbwa_AssetDownloadImpl$setOnProgress$lambda$_8_0_handleEvent$exported$0 
         var$2 = var$1.$val$url0;
         var$3 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$3);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(278)), var$2), $rt_s(2910)), var$4), $rt_s(2911)), var$5);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(278)), var$2), $rt_s(2912)), var$4), $rt_s(2913)), var$5);
         jl_AbstractStringBuilder_toString(var$3);
     }
 };
@@ -56379,7 +56403,7 @@ cbgu_FloatArray_addAll1 = ($this, $array, $offset, $length) => {
     var$4 = new jl_IllegalArgumentException;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append(var$5, $rt_s(2913));
+    jl_AbstractStringBuilder_append(var$5, $rt_s(2915));
     var$5 = jl_StringBuilder_append0(var$5, $offset);
     jl_AbstractStringBuilder_append(var$5, $rt_s(133));
     var$5 = jl_StringBuilder_append0(var$5, $length);
@@ -56568,7 +56592,7 @@ let cgxgtbwft_LocalDBStorage$removeFile$lambda$_3_0_handleEvent$exported$0 = var
     var$2 = jl_System_err();
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2914)), var$1);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2916)), var$1);
     var$1 = jl_AbstractStringBuilder_toString(var$3);
     otcic_JsConsolePrintStream_println(var$2, var$1);
 };
@@ -57046,12 +57070,12 @@ cbg_Input$OnscreenKeyboardType__init_ = (var_0, var_1) => {
 },
 cbg_Input$OnscreenKeyboardType__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbg_Input$OnscreenKeyboardType_Default = cbg_Input$OnscreenKeyboardType__init_($rt_s(2915), 0);
-    cbg_Input$OnscreenKeyboardType_NumberPad = cbg_Input$OnscreenKeyboardType__init_($rt_s(2916), 1);
-    cbg_Input$OnscreenKeyboardType_PhonePad = cbg_Input$OnscreenKeyboardType__init_($rt_s(2917), 2);
-    cbg_Input$OnscreenKeyboardType_Email = cbg_Input$OnscreenKeyboardType__init_($rt_s(2918), 3);
-    cbg_Input$OnscreenKeyboardType_Password = cbg_Input$OnscreenKeyboardType__init_($rt_s(2919), 4);
-    var$1 = cbg_Input$OnscreenKeyboardType__init_($rt_s(2920), 5);
+    cbg_Input$OnscreenKeyboardType_Default = cbg_Input$OnscreenKeyboardType__init_($rt_s(2917), 0);
+    cbg_Input$OnscreenKeyboardType_NumberPad = cbg_Input$OnscreenKeyboardType__init_($rt_s(2918), 1);
+    cbg_Input$OnscreenKeyboardType_PhonePad = cbg_Input$OnscreenKeyboardType__init_($rt_s(2919), 2);
+    cbg_Input$OnscreenKeyboardType_Email = cbg_Input$OnscreenKeyboardType__init_($rt_s(2920), 3);
+    cbg_Input$OnscreenKeyboardType_Password = cbg_Input$OnscreenKeyboardType__init_($rt_s(2921), 4);
+    var$1 = cbg_Input$OnscreenKeyboardType__init_($rt_s(2922), 5);
     cbg_Input$OnscreenKeyboardType_URI = var$1;
     var$2 = $rt_createArray(cbg_Input$OnscreenKeyboardType, 6);
     var$3 = var$2.data;
@@ -57159,9 +57183,9 @@ cbggg_GlyphLayout$WrapState__init_ = (var_0, var_1) => {
 },
 cbggg_GlyphLayout$WrapState__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbggg_GlyphLayout$WrapState_notWrapped = cbggg_GlyphLayout$WrapState__init_($rt_s(2921), 0);
-    cbggg_GlyphLayout$WrapState_wrapped = cbggg_GlyphLayout$WrapState__init_($rt_s(2922), 1);
-    var$1 = cbggg_GlyphLayout$WrapState__init_($rt_s(2923), 2);
+    cbggg_GlyphLayout$WrapState_notWrapped = cbggg_GlyphLayout$WrapState__init_($rt_s(2923), 0);
+    cbggg_GlyphLayout$WrapState_wrapped = cbggg_GlyphLayout$WrapState__init_($rt_s(2924), 1);
+    var$1 = cbggg_GlyphLayout$WrapState__init_($rt_s(2925), 2);
     cbggg_GlyphLayout$WrapState_lastWrapped = var$1;
     var$2 = $rt_createArray(cbggg_GlyphLayout$WrapState, 3);
     var$3 = var$2.data;
@@ -57182,41 +57206,41 @@ cbgg_Colors_reset = () => {
     cbgu_ObjectMap_clear(cbgg_Colors_map);
     var$1 = cbgg_Colors_map;
     cbgg_Color_$callClinit();
-    cbgu_ObjectMap_put(var$1, $rt_s(2924), cbgg_Color_CLEAR);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2925), cbgg_Color_CLEAR_WHITE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2926), cbgg_Color_BLACK);
+    cbgu_ObjectMap_put(var$1, $rt_s(2926), cbgg_Color_CLEAR);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2927), cbgg_Color_CLEAR_WHITE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2928), cbgg_Color_BLACK);
     cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(822), cbgg_Color_WHITE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2927), cbgg_Color_LIGHT_GRAY);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2928), cbgg_Color_GRAY);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2929), cbgg_Color_DARK_GRAY);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2930), cbgg_Color_BLUE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2931), cbgg_Color_NAVY);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2932), cbgg_Color_ROYAL);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2933), cbgg_Color_SLATE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2934), cbgg_Color_SKY);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2935), cbgg_Color_CYAN);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2936), cbgg_Color_TEAL);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2937), cbgg_Color_GREEN);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2938), cbgg_Color_CHARTREUSE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2939), cbgg_Color_LIME);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2940), cbgg_Color_FOREST);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2941), cbgg_Color_OLIVE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2942), cbgg_Color_YELLOW);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2943), cbgg_Color_GOLD);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2944), cbgg_Color_GOLDENROD);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2945), cbgg_Color_ORANGE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2946), cbgg_Color_BROWN);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2947), cbgg_Color_TAN);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2948), cbgg_Color_FIREBRICK);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2949), cbgg_Color_RED);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2950), cbgg_Color_SCARLET);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2951), cbgg_Color_CORAL);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2952), cbgg_Color_SALMON);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2953), cbgg_Color_PINK);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2954), cbgg_Color_MAGENTA);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2955), cbgg_Color_PURPLE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2956), cbgg_Color_VIOLET);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2957), cbgg_Color_MAROON);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2929), cbgg_Color_LIGHT_GRAY);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2930), cbgg_Color_GRAY);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2931), cbgg_Color_DARK_GRAY);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2932), cbgg_Color_BLUE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2933), cbgg_Color_NAVY);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2934), cbgg_Color_ROYAL);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2935), cbgg_Color_SLATE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2936), cbgg_Color_SKY);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2937), cbgg_Color_CYAN);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2938), cbgg_Color_TEAL);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2939), cbgg_Color_GREEN);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2940), cbgg_Color_CHARTREUSE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2941), cbgg_Color_LIME);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2942), cbgg_Color_FOREST);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2943), cbgg_Color_OLIVE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2944), cbgg_Color_YELLOW);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2945), cbgg_Color_GOLD);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2946), cbgg_Color_GOLDENROD);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2947), cbgg_Color_ORANGE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2948), cbgg_Color_BROWN);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2949), cbgg_Color_TAN);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2950), cbgg_Color_FIREBRICK);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2951), cbgg_Color_RED);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2952), cbgg_Color_SCARLET);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2953), cbgg_Color_CORAL);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2954), cbgg_Color_SALMON);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2955), cbgg_Color_PINK);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2956), cbgg_Color_MAGENTA);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2957), cbgg_Color_PURPLE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2958), cbgg_Color_VIOLET);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2959), cbgg_Color_MAROON);
 },
 cbgg_Colors__clinit_ = () => {
     cbgg_Colors_map = cbgu_ObjectMap__init_();
@@ -57273,8 +57297,8 @@ function cvs_GameplayScreen$EnemyVisual() {
     a.$muzzles = null;
 }
 let cvs_GameplayScreen$EnemyVisual__init_0 = ($this, $texture, $width, $height, $rotation, $collisionRadius, $muzzles) => {
-    kji_Intrinsics_checkNotNullParameter($texture, $rt_s(2958));
-    kji_Intrinsics_checkNotNullParameter($muzzles, $rt_s(2959));
+    kji_Intrinsics_checkNotNullParameter($texture, $rt_s(2960));
+    kji_Intrinsics_checkNotNullParameter($muzzles, $rt_s(2961));
     $this.$texture0 = $texture;
     $this.$width5 = $width;
     $this.$height5 = $height;
@@ -57297,7 +57321,7 @@ cvs_GameplayScreen$EnemyVisual_toString = $this => {
     var$6 = $this.$muzzles;
     var$7 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$7);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$7, $rt_s(2960)), var$1), $rt_s(2961)), var$2), $rt_s(2962)), var$3), $rt_s(2963)), var$4), $rt_s(2964)), var$5), $rt_s(2965)), var$6), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$7, $rt_s(2962)), var$1), $rt_s(2963)), var$2), $rt_s(2964)), var$3), $rt_s(2965)), var$4), $rt_s(2966)), var$5), $rt_s(2967)), var$6), 41);
     return jl_AbstractStringBuilder_toString(var$7);
 },
 cvs_GameplayScreen$EnemyVisual_hashCode = $this => {
@@ -57347,12 +57371,12 @@ cvs_EnemyType__init_ = (var_0, var_1) => {
 },
 cvs_EnemyType__clinit_ = () => {
     let var$1, var$2, var$3;
-    cvs_EnemyType_SCOUT = cvs_EnemyType__init_($rt_s(2966), 0);
-    cvs_EnemyType_STRIKER = cvs_EnemyType__init_($rt_s(2967), 1);
-    cvs_EnemyType_BOMBER = cvs_EnemyType__init_($rt_s(2968), 2);
+    cvs_EnemyType_SCOUT = cvs_EnemyType__init_($rt_s(2968), 0);
+    cvs_EnemyType_STRIKER = cvs_EnemyType__init_($rt_s(2969), 1);
+    cvs_EnemyType_BOMBER = cvs_EnemyType__init_($rt_s(2970), 2);
     cvs_EnemyType_DRONE = cvs_EnemyType__init_($rt_s(2681), 3);
-    cvs_EnemyType_TANK = cvs_EnemyType__init_($rt_s(2969), 4);
-    var$1 = cvs_EnemyType__init_($rt_s(2970), 5);
+    cvs_EnemyType_TANK = cvs_EnemyType__init_($rt_s(2971), 4);
+    var$1 = cvs_EnemyType__init_($rt_s(2972), 5);
     cvs_EnemyType_MINIBOSS = var$1;
     var$2 = $rt_createArray(cvs_EnemyType, 6);
     var$3 = var$2.data;
@@ -57396,7 +57420,7 @@ cvs_WaveEvent_toString = $this => {
     var$4 = $this.$pattern2;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(var$5, $rt_s(2971)), var$1), $rt_s(247)), var$2), $rt_s(2972)), var$3), $rt_s(2973)), var$4), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(var$5, $rt_s(2973)), var$1), $rt_s(247)), var$2), $rt_s(2974)), var$3), $rt_s(2975)), var$4), 41);
     return jl_AbstractStringBuilder_toString(var$5);
 },
 cvs_WaveEvent_hashCode = $this => {
@@ -57487,7 +57511,7 @@ cvs_ResultsScreen_render = ($this, $delta) => {
     var$6 = var$4.$phase;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$4, var$5), $rt_s(2974)), var$6);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$4, var$5), $rt_s(2976)), var$6);
     cvs_BaseScreen_drawCentered($this, jl_AbstractStringBuilder_toString(var$4), 1600.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.3499999940395355, 0.8999999761581421, 1.0, 1.0));
     var$7 = $this.$stage4.$name0;
     var$5 = cvs_SkyVanguardGame_getSmallFont($this.$game);
@@ -57510,7 +57534,7 @@ cvs_ResultsScreen_render = ($this, $delta) => {
     var$5 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1740));
     var$6 = $this.$bestCombo0;
     var$4 = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$4, var$5), $rt_s(2975)), var$6);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$4, var$5), $rt_s(2977)), var$6);
     cvs_BaseScreen_drawCentered$default(var$2, jl_StringBuilder_toString(var$4), 1216.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), null, 8, null);
     var$5 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(940));
     var$6 = $this.$earned;
@@ -57552,7 +57576,7 @@ cvs_ResultsScreen_grade = $this => {
     else {
         var$2 = $this.$score0;
         var$3 = $this.$stageIndex;
-        var$1 = var$2 >= (140000 + (var$3 * 3500 | 0) | 0) ? $rt_s(539) : var$2 >= (90000 + (var$3 * 2500 | 0) | 0) ? $rt_s(2868) : var$2 < (55000 + (var$3 * 1600 | 0) | 0) ? $rt_s(2875) : $rt_s(2872);
+        var$1 = var$2 >= (140000 + (var$3 * 3500 | 0) | 0) ? $rt_s(539) : var$2 >= (90000 + (var$3 * 2500 | 0) | 0) ? $rt_s(2870) : var$2 < (55000 + (var$3 * 1600 | 0) | 0) ? $rt_s(2877) : $rt_s(2874);
     }
     return var$1;
 };
@@ -57575,7 +57599,7 @@ function cvs_EndingScreen() {
 }
 let cvs_EndingScreen__init_ = ($this, $game, $aircraftId, $onDone) => {
     kji_Intrinsics_checkNotNullParameter($game, $rt_s(212));
-    kji_Intrinsics_checkNotNullParameter($onDone, $rt_s(2976));
+    kji_Intrinsics_checkNotNullParameter($onDone, $rt_s(2978));
     cvs_BaseScreen__init_($this, $game);
     $this.$aircraftId = $aircraftId;
     $this.$onDone = $onDone;
@@ -57615,13 +57639,13 @@ cvs_EndingScreen_show = $this => {
         var$1.$processor = var$2;
         switch ($this.$aircraftId) {
             case 0:
-                var$2 = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2977), $rt_s(2978)]));
+                var$2 = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2979), $rt_s(2980)]));
                 break a;
             case 1:
             case 2:
                 break;
             case 3:
-                var$2 = kc_CollectionsKt__CollectionsJVMKt_listOf($rt_s(2979));
+                var$2 = kc_CollectionsKt__CollectionsJVMKt_listOf($rt_s(2981));
                 break a;
             default:
         }
@@ -57634,15 +57658,15 @@ cvs_EndingScreen_show = $this => {
         var$3 = var$2.$next();
         var$4 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$4);
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(2980)), var$3), $rt_s(2981));
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(2982)), var$3), $rt_s(2983));
         var$4 = jl_AbstractStringBuilder_toString(var$4);
         ju_ArrayList_add(var$1, var$4);
     }
     var$1 = var$1;
     var$2 = new cvs_EndingScreen$show$lambda$_2_0;
     var$2.$_054 = $this;
-    kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(2982));
-    kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(2983));
+    kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(2984));
+    kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(2985));
     var$2 = var$2.$_054;
     var$2.$phase2 = 1;
     cvs_AudioManager_playMusic(cvs_SkyVanguardGame_getAudioManager(var$2.$game), $rt_s(837));
@@ -57677,9 +57701,9 @@ cvs_EndingScreen_loadFoe = ($this, $path, $name, $desc) => {
     ju_ArrayList_add($this.$foeTextures, $tex);
     var$4 = $this.$rows;
     var$6 = new cvs_EndingScreen$FoeRow;
-    kji_Intrinsics_checkNotNullParameter($tex, $rt_s(2984));
+    kji_Intrinsics_checkNotNullParameter($tex, $rt_s(2986));
     kji_Intrinsics_checkNotNullParameter($name, $rt_s(774));
-    kji_Intrinsics_checkNotNullParameter($desc, $rt_s(2985));
+    kji_Intrinsics_checkNotNullParameter($desc, $rt_s(2987));
     cvs_EndingScreen$Row__init_(var$6, 310.0, null);
     var$6.$tex = $tex;
     var$6.$name8 = $name;
@@ -57703,17 +57727,17 @@ cvs_EndingScreen_buildRows = $this => {
     var$7 = $this.$pilotName;
     var$8 = cvs_AircraftDefinition_getName($this.$aircraft0);
     var$9 = jl_StringBuilder__init_();
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$9, var$7), $rt_s(2888)), var$8);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$9, var$7), $rt_s(2890)), var$8);
     cvs_EndingScreen$LineRow__init_0($line, jl_StringBuilder_toString(var$9), 1, $gold);
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
-    $line = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(2986), $rt_s(2987)), 0, $soft);
+    $line = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(2988), $rt_s(2989)), 0, $soft);
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
     $line = cvs_EndingScreen$Gap__init_(70.0);
     ju_ArrayList_add($it, $line);
     var$7 = $this.$rows;
-    var$8 = cvs_EndingScreen$TitleRow__init_(cvs_EndingScreen_s($this, $rt_s(2988), $rt_s(1037)), cbgg_Color__init_(0.25, 1.0, 0.6499999761581421, 1.0));
+    var$8 = cvs_EndingScreen$TitleRow__init_(cvs_EndingScreen_s($this, $rt_s(2990), $rt_s(1037)), cbgg_Color__init_(0.25, 1.0, 0.6499999761581421, 1.0));
     ju_ArrayList_add(var$7, var$8);
     $it = $this.$rows;
     $line = cvs_EndingScreen$Gap__init_(30.0);
@@ -57731,29 +57755,29 @@ cvs_EndingScreen_buildRows = $this => {
     $line = cvs_EndingScreen$Gap__init_(80.0);
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
-    $line = cvs_EndingScreen$HeadRow__init_(cvs_EndingScreen_s($this, $rt_s(2989), $rt_s(2990)));
+    $line = cvs_EndingScreen$HeadRow__init_(cvs_EndingScreen_s($this, $rt_s(2991), $rt_s(2992)));
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
     $line = cvs_EndingScreen$Gap__init_(20.0);
     ju_ArrayList_add($it, $line);
-    cvs_EndingScreen_loadFoe($this, $rt_s(2805), $rt_s(2991), cvs_EndingScreen_s($this, $rt_s(2992), $rt_s(2993)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2807), $rt_s(2994), cvs_EndingScreen_s($this, $rt_s(2995), $rt_s(2996)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2809), $rt_s(2997), cvs_EndingScreen_s($this, $rt_s(2998), $rt_s(2999)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2811), $rt_s(3000), cvs_EndingScreen_s($this, $rt_s(3001), $rt_s(3002)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2813), $rt_s(3003), cvs_EndingScreen_s($this, $rt_s(3004), $rt_s(3005)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2815), $rt_s(3006), cvs_EndingScreen_s($this, $rt_s(3007), $rt_s(3008)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2777), $rt_s(3009), cvs_EndingScreen_s($this, $rt_s(3010), $rt_s(3011)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2779), $rt_s(3012), cvs_EndingScreen_s($this, $rt_s(3013), $rt_s(3014)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2781), $rt_s(3015), cvs_EndingScreen_s($this, $rt_s(3016), $rt_s(3017)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(3018), $rt_s(3019), cvs_EndingScreen_s($this, $rt_s(3020), $rt_s(3021)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2785), $rt_s(3022), cvs_EndingScreen_s($this, $rt_s(3023), $rt_s(3024)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2799), $rt_s(3025), cvs_EndingScreen_s($this, $rt_s(3026), $rt_s(3027)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2783), $rt_s(3028), cvs_EndingScreen_s($this, $rt_s(3029), $rt_s(3030)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2805), $rt_s(2993), cvs_EndingScreen_s($this, $rt_s(2994), $rt_s(2995)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2807), $rt_s(2996), cvs_EndingScreen_s($this, $rt_s(2997), $rt_s(2998)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2809), $rt_s(2999), cvs_EndingScreen_s($this, $rt_s(3000), $rt_s(3001)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2811), $rt_s(3002), cvs_EndingScreen_s($this, $rt_s(3003), $rt_s(3004)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2813), $rt_s(3005), cvs_EndingScreen_s($this, $rt_s(3006), $rt_s(3007)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2815), $rt_s(3008), cvs_EndingScreen_s($this, $rt_s(3009), $rt_s(3010)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2777), $rt_s(3011), cvs_EndingScreen_s($this, $rt_s(3012), $rt_s(3013)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2779), $rt_s(3014), cvs_EndingScreen_s($this, $rt_s(3015), $rt_s(3016)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2781), $rt_s(3017), cvs_EndingScreen_s($this, $rt_s(3018), $rt_s(3019)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(3020), $rt_s(3021), cvs_EndingScreen_s($this, $rt_s(3022), $rt_s(3023)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2785), $rt_s(3024), cvs_EndingScreen_s($this, $rt_s(3025), $rt_s(3026)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2799), $rt_s(3027), cvs_EndingScreen_s($this, $rt_s(3028), $rt_s(3029)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2783), $rt_s(3030), cvs_EndingScreen_s($this, $rt_s(3031), $rt_s(3032)));
     $it = $this.$rows;
     $line = cvs_EndingScreen$Gap__init_(70.0);
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
-    $line = cvs_EndingScreen$HeadRow__init_(cvs_EndingScreen_s($this, $rt_s(3031), $rt_s(3032)));
+    $line = cvs_EndingScreen$HeadRow__init_(cvs_EndingScreen_s($this, $rt_s(3033), $rt_s(3034)));
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
     $line = cvs_EndingScreen$Gap__init_(10.0);
@@ -57763,27 +57787,27 @@ cvs_EndingScreen_buildRows = $this => {
     ju_ArrayList_add($it, $line);
     $cyan = $this.$rows;
     $it = new cvs_EndingScreen$LineRow;
-    $line = cvs_EndingScreen_s($this, $rt_s(2501), $rt_s(3033));
+    $line = cvs_EndingScreen_s($this, $rt_s(2501), $rt_s(3035));
     kji_Intrinsics_checkNotNull($white);
     cvs_EndingScreen$LineRow__init_0($it, $line, 0, $white);
-    ju_ArrayList_add($cyan, $it);
-    $cyan = $this.$rows;
-    $it = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(3034), $rt_s(3035)), 0, $soft);
     ju_ArrayList_add($cyan, $it);
     $cyan = $this.$rows;
     $it = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(3036), $rt_s(3037)), 0, $soft);
     ju_ArrayList_add($cyan, $it);
     $cyan = $this.$rows;
+    $it = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(3038), $rt_s(3039)), 0, $soft);
+    ju_ArrayList_add($cyan, $it);
+    $cyan = $this.$rows;
     $it = cvs_EndingScreen$Gap__init_(70.0);
     ju_ArrayList_add($cyan, $it);
     $cyan = $this.$rows;
-    var$7 = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(3038), $rt_s(3039)), 1, $gold);
+    var$7 = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(3040), $rt_s(3041)), 1, $gold);
     ju_ArrayList_add($cyan, var$7);
     $cyan = $this.$rows;
     $gold = cvs_EndingScreen$Gap__init_(40.0);
     ju_ArrayList_add($cyan, $gold);
     $cyan = $this.$rows;
-    $gold = cvs_EndingScreen$TitleRow__init_(cvs_EndingScreen_s($this, $rt_s(3040), $rt_s(3041)), $white);
+    $gold = cvs_EndingScreen$TitleRow__init_(cvs_EndingScreen_s($this, $rt_s(3042), $rt_s(3043)), $white);
     ju_ArrayList_add($cyan, $gold);
     $cyan = $this.$rows;
     $gold = cvs_EndingScreen$Gap__init_(160.0);
@@ -57797,7 +57821,7 @@ cvs_EndingScreen_buildRows = $this => {
     $this.$totalHeight = var$10;
 },
 cvs_EndingScreen_story = $this => {
-    return !$this.$pt ? kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(3042), $rt_s(3043), $rt_s(3044), $rt_s(3045)])) : kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(3046), $rt_s(3047), $rt_s(3048), $rt_s(3049)]));
+    return !$this.$pt ? kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(3044), $rt_s(3045), $rt_s(3046), $rt_s(3047)])) : kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(3048), $rt_s(3049), $rt_s(3050), $rt_s(3051)]));
 },
 cvs_EndingScreen_render = ($this, $delta) => {
     let var$2, $virtualY, var$4, $row, $topY;
@@ -57817,7 +57841,7 @@ cvs_EndingScreen_render = ($this, $delta) => {
             cvs_EndingScreen_drawRow($this, $row, $topY);
         $virtualY = $virtualY + $row.$h;
     }
-    cvs_BaseScreen_drawButton$default(var$2, $this.$skipButton, cvs_EndingScreen_s($this, $rt_s(3050), $rt_s(3051)), 0, 4, null);
+    cvs_BaseScreen_drawButton$default(var$2, $this.$skipButton, cvs_EndingScreen_s($this, $rt_s(3052), $rt_s(3053)), 0, 4, null);
     if ($this.$scroll > $this.$totalHeight + 1920.0 + 40.0)
         cvs_EndingScreen_finish($this);
     cvs_GamepadInput_poll($this.$game.$gamepad);
@@ -58008,9 +58032,9 @@ cvs_BulletKind__init_ = (var_0, var_1) => {
 },
 cvs_BulletKind__clinit_ = () => {
     let var$1, var$2, var$3;
-    cvs_BulletKind_CANNON = cvs_BulletKind__init_($rt_s(3052), 0);
-    cvs_BulletKind_PLASMA = cvs_BulletKind__init_($rt_s(3053), 1);
-    cvs_BulletKind_TRACER = cvs_BulletKind__init_($rt_s(3054), 2);
+    cvs_BulletKind_CANNON = cvs_BulletKind__init_($rt_s(3054), 0);
+    cvs_BulletKind_PLASMA = cvs_BulletKind__init_($rt_s(3055), 1);
+    cvs_BulletKind_TRACER = cvs_BulletKind__init_($rt_s(3056), 2);
     cvs_BulletKind_LASER = cvs_BulletKind__init_($rt_s(1664), 3);
     var$1 = cvs_BulletKind__init_($rt_s(1085), 4);
     cvs_BulletKind_MISSILE = var$1;
@@ -58053,7 +58077,7 @@ cvs_GameplayScreen$SonicWave_toString = $this => {
     var$5 = $this.$damage;
     var$6 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$6);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(var$6, $rt_s(3055)), var$1), $rt_s(3056)), var$2), $rt_s(3057)), var$3), $rt_s(3058)), var$4), $rt_s(3059)), var$5), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(var$6, $rt_s(3057)), var$1), $rt_s(3058)), var$2), $rt_s(3059)), var$3), $rt_s(3060)), var$4), $rt_s(3061)), var$5), 41);
     return jl_AbstractStringBuilder_toString(var$6);
 },
 cvs_GameplayScreen$SonicWave_hashCode = $this => {
@@ -58114,7 +58138,7 @@ let cvs_GameplayScreen$ReinforcementOrder_toString = $this => {
     var$4 = $this.$serial;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(3060)), var$1), $rt_s(2973)), var$2), $rt_s(3061)), var$3), $rt_s(3062)), var$4), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(3062)), var$1), $rt_s(2975)), var$2), $rt_s(3063)), var$3), $rt_s(3064)), var$4), 41);
     return jl_AbstractStringBuilder_toString(var$5);
 },
 cvs_GameplayScreen$ReinforcementOrder_hashCode = $this => {
@@ -58206,9 +58230,7 @@ function ju_TemplateCollections$SingleElementSet() {
 }
 let ju_TemplateCollections$SingleElementSet_contains = ($this, $o) => {
     return ju_Objects_equals($o, $this.$element);
-},
-cbgct_WebMapping = $rt_classWithoutFields(cbgc_ControllerMapping),
-cbgct_WebMapping_instance = null;
+};
 function ju_AbstractList$TListIteratorImpl() {
     let a = this; jl_Object.call(a);
     a.$i = 0;
@@ -58238,7 +58260,9 @@ ju_AbstractList$TListIteratorImpl_previous = $this => {
     var$2 = new ju_NoSuchElementException;
     jl_Exception__init_(var$2);
     $rt_throw(var$2);
-};
+},
+cbgct_WebMapping = $rt_classWithoutFields(cbgc_ControllerMapping),
+cbgct_WebMapping_instance = null;
 function cgxgtbw_WebInput$1() {
     let a = this; jl_Object.call(a);
     a.$val$document = null;
@@ -58376,12 +58400,12 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_3_run = var$0 => {
             var$1 = var$3;
             kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(187));
             var$2 = cvs_SkyVanguardGame_getSaveManager(var$1.$this$014.$game);
-            kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(3063));
+            kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(3065));
             var$2 = var$2.$prefs;
             var$5 = kt_StringsKt__StringsKt_trim(var$4);
             kji_Intrinsics_checkNotNullParameter(var$5, $rt_s(859));
             var$4 = jl_String_substring(var$5, 0, kr_RangesKt___RangesKt_coerceAtMost(16, var$5.$nativeString.length));
-            kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(3064));
+            kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(3066));
             cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putString(var$2, $rt_s(749), var$4));
             var$3 = var$1.$this$014;
             var$3.$statusMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$3.$game), $rt_s(1701));
@@ -58515,7 +58539,7 @@ let cvs_ResultsScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $bu
                 kji_Intrinsics_checkNotNullParameter(var$6, $rt_s(838));
                 var$7 = new cvsw_WebPlatformServices$showInterstitialAd$lambda$_3_0;
                 var$7.$_00 = var$6;
-                cvsw_WebLauncherKt_access$mostrarAnuncioPremiado($rt_s(3065), var$7);
+                cvsw_WebLauncherKt_access$mostrarAnuncioPremiado($rt_s(3067), var$7);
             }
         }
     }
@@ -58692,7 +58716,7 @@ cbg_Input$VibrationType__init_ = (var_0, var_1) => {
 },
 cbg_Input$VibrationType__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbg_Input$VibrationType_LIGHT = cbg_Input$VibrationType__init_($rt_s(3066), 0);
+    cbg_Input$VibrationType_LIGHT = cbg_Input$VibrationType__init_($rt_s(3068), 0);
     cbg_Input$VibrationType_MEDIUM = cbg_Input$VibrationType__init_($rt_s(1788), 1);
     var$1 = cbg_Input$VibrationType__init_($rt_s(2509), 2);
     cbg_Input$VibrationType_HEAVY = var$1;
@@ -58987,7 +59011,7 @@ let cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0_run = var$0 => {
     var$2 = var$0.$_16;
     if (var$1) {
         cvs_SkyVanguardGame_reloadPilotPhoto(var$2.$game);
-        var$2.$statusMessage = $rt_s(3067);
+        var$2.$statusMessage = $rt_s(3069);
     } else
         var$2.$statusMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$2.$game), $rt_s(1705));
     var$2.$statusTimer = 2.5;
@@ -59377,13 +59401,13 @@ let cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run = var$0 => {
                 case 1:
                     break;
                 case 2:
-                    var$8 = $rt_s(3068);
+                    var$8 = $rt_s(3070);
                     break a;
                 case 3:
-                    var$8 = $rt_s(3069);
+                    var$8 = $rt_s(3071);
                     break a;
                 case 4:
-                    var$8 = $rt_s(3070);
+                    var$8 = $rt_s(3072);
                     break a;
                 case 5:
                     var$8 = $rt_s(989);
@@ -59392,14 +59416,14 @@ let cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run = var$0 => {
                     var$8 = $rt_s(2681);
                     break a;
                 default:
-                    var$8 = $rt_s(3071);
+                    var$8 = $rt_s(3073);
                     break a;
             }
             var$8 = $rt_s(918);
         }
         var$5 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$5);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(3072)), var$8);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(3074)), var$8);
         cvs_SkyVanguardGame_setPendingRewardMessage(var$9, jl_AbstractStringBuilder_toString(var$5));
     }
     cvs_SkyVanguardGame_startStage(var$2.$game, var$2.$stageIndex + 1 | 0, 1);
@@ -59428,10 +59452,10 @@ cvs_ResultsScreen$WhenMappings__clinit_ = () => {
 },
 cgxgtbwa_TeaAssetManifest = $rt_classWithoutFields(),
 cgxgtbwa_TeaAssetManifest_getAssets = () => {
-    return $rt_wrapArray(jl_String, [$rt_s(3073), $rt_s(3074), $rt_s(3075), $rt_s(3076), $rt_s(3077), $rt_s(3078), $rt_s(3079), $rt_s(3080), $rt_s(3081), $rt_s(3082), $rt_s(3083), $rt_s(3084), $rt_s(3085), $rt_s(3086), $rt_s(3087), $rt_s(3088), $rt_s(3089), $rt_s(3090), $rt_s(3091), $rt_s(3092), $rt_s(3093), $rt_s(3094), $rt_s(3095), $rt_s(3096), $rt_s(3097), $rt_s(3098), $rt_s(3099), $rt_s(3100), $rt_s(3101), $rt_s(3102), $rt_s(3103), $rt_s(3104), $rt_s(3105), $rt_s(3106), $rt_s(3107), $rt_s(3108), $rt_s(3109),
-    $rt_s(3110), $rt_s(3111), $rt_s(3112), $rt_s(3113), $rt_s(3114), $rt_s(3115), $rt_s(3116), $rt_s(3117), $rt_s(3118), $rt_s(3119), $rt_s(3120), $rt_s(3121), $rt_s(3122), $rt_s(3123), $rt_s(3124), $rt_s(3125), $rt_s(3126), $rt_s(3127), $rt_s(3128), $rt_s(3129), $rt_s(3130), $rt_s(3131), $rt_s(3132), $rt_s(3133), $rt_s(3134), $rt_s(3135), $rt_s(3136), $rt_s(3137), $rt_s(3138), $rt_s(3139), $rt_s(3140), $rt_s(3141), $rt_s(3142), $rt_s(3143), $rt_s(3144), $rt_s(3145), $rt_s(3146), $rt_s(3147), $rt_s(3148), $rt_s(3149),
-    $rt_s(3150), $rt_s(3151), $rt_s(3152), $rt_s(3153), $rt_s(3154), $rt_s(3155), $rt_s(3156), $rt_s(3157), $rt_s(3158), $rt_s(3159), $rt_s(3160), $rt_s(3161), $rt_s(3162), $rt_s(3163), $rt_s(3164), $rt_s(3165), $rt_s(3166), $rt_s(3167), $rt_s(3168), $rt_s(3169), $rt_s(3170), $rt_s(3171), $rt_s(3172), $rt_s(3173), $rt_s(3174), $rt_s(3175), $rt_s(3176), $rt_s(3177), $rt_s(3178), $rt_s(3179), $rt_s(3180), $rt_s(3181), $rt_s(3182), $rt_s(3183), $rt_s(3184), $rt_s(3185), $rt_s(3186), $rt_s(3187), $rt_s(3188), $rt_s(3189),
-    $rt_s(3190), $rt_s(3191), $rt_s(3192), $rt_s(3193), $rt_s(3194), $rt_s(3195), $rt_s(3196), $rt_s(3197), $rt_s(3198), $rt_s(3199), $rt_s(3200), $rt_s(3201)]);
+    return $rt_wrapArray(jl_String, [$rt_s(3075), $rt_s(3076), $rt_s(3077), $rt_s(3078), $rt_s(3079), $rt_s(3080), $rt_s(3081), $rt_s(3082), $rt_s(3083), $rt_s(3084), $rt_s(3085), $rt_s(3086), $rt_s(3087), $rt_s(3088), $rt_s(3089), $rt_s(3090), $rt_s(3091), $rt_s(3092), $rt_s(3093), $rt_s(3094), $rt_s(3095), $rt_s(3096), $rt_s(3097), $rt_s(3098), $rt_s(3099), $rt_s(3100), $rt_s(3101), $rt_s(3102), $rt_s(3103), $rt_s(3104), $rt_s(3105), $rt_s(3106), $rt_s(3107), $rt_s(3108), $rt_s(3109), $rt_s(3110), $rt_s(3111),
+    $rt_s(3112), $rt_s(3113), $rt_s(3114), $rt_s(3115), $rt_s(3116), $rt_s(3117), $rt_s(3118), $rt_s(3119), $rt_s(3120), $rt_s(3121), $rt_s(3122), $rt_s(3123), $rt_s(3124), $rt_s(3125), $rt_s(3126), $rt_s(3127), $rt_s(3128), $rt_s(3129), $rt_s(3130), $rt_s(3131), $rt_s(3132), $rt_s(3133), $rt_s(3134), $rt_s(3135), $rt_s(3136), $rt_s(3137), $rt_s(3138), $rt_s(3139), $rt_s(3140), $rt_s(3141), $rt_s(3142), $rt_s(3143), $rt_s(3144), $rt_s(3145), $rt_s(3146), $rt_s(3147), $rt_s(3148), $rt_s(3149), $rt_s(3150), $rt_s(3151),
+    $rt_s(3152), $rt_s(3153), $rt_s(3154), $rt_s(3155), $rt_s(3156), $rt_s(3157), $rt_s(3158), $rt_s(3159), $rt_s(3160), $rt_s(3161), $rt_s(3162), $rt_s(3163), $rt_s(3164), $rt_s(3165), $rt_s(3166), $rt_s(3167), $rt_s(3168), $rt_s(3169), $rt_s(3170), $rt_s(3171), $rt_s(3172), $rt_s(3173), $rt_s(3174), $rt_s(3175), $rt_s(3176), $rt_s(3177), $rt_s(3178), $rt_s(3179), $rt_s(3180), $rt_s(3181), $rt_s(3182), $rt_s(3183), $rt_s(3184), $rt_s(3185), $rt_s(3186), $rt_s(3187), $rt_s(3188), $rt_s(3189), $rt_s(3190), $rt_s(3191),
+    $rt_s(3192), $rt_s(3193), $rt_s(3194), $rt_s(3195), $rt_s(3196), $rt_s(3197), $rt_s(3198), $rt_s(3199), $rt_s(3200), $rt_s(3201), $rt_s(3202), $rt_s(3203)]);
 };
 $rt_packages([-1, "com", 0, "github", 1, "xpenatan", 2, "gdx", 3, "teavm", 4, "backends", 5, "web", 6, "assetloader", 6, "dom", 8, "impl", 6, "webaudio", 10, "howler", 6, "filesystem", 12, "types", 0, "badlogic", 14, "gdx", 15, "utils", 15, "scenes", 17, "scene2d", 18, "ui", 18, "utils", 18, "actions", 15, "controllers", 22, "teavm", 15, "math", 15, "graphics", 25, "glutils", 25, "g2d", 27, "freetype", 0, "vieiramarketing", 29, "skyvanguard", 30, "web", -1, "java", 32, "util", 33, "regex", 32, "nio", 35, "charset",
 32, "io", 32, "lang", -1, "org", 39, "teavm", 40, "jso", 41, "impl", 41, "ajax", 40, "classlib", 44, "impl", 45, "unicode", -1, "kotlin", 47, "jvm", 48, "internal", 47, "collections"
@@ -60668,8 +60692,8 @@ cvs_GameplayScreenKt, 0, jl_Object, [], 17, 0, 0, 0,
 kc_SetsKt__SetsJVMKt, 0, jl_Object, [], 0, 0, 0, 0,
 kc_SetsKt__SetsKt, 0, kc_SetsKt__SetsJVMKt, [], 0, 0, 0, 0,
 ju_TemplateCollections$SingleElementSet, 0, ju_TemplateCollections$AbstractImmutableSet, [], 0, 0, 0, ["$contains0", $rt_wrapFunction1(ju_TemplateCollections$SingleElementSet_contains)],
-cbgct_WebMapping, 0, cbgc_ControllerMapping, [], 1, 0, 0, 0]);
-$rt_metadata([ju_AbstractList$TListIteratorImpl, 0, jl_Object, [ju_ListIterator], 0, 0, 0, ["$hasPrevious", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_hasPrevious), "$previous", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_previous)],
+ju_AbstractList$TListIteratorImpl, 0, jl_Object, [ju_ListIterator], 0, 0, 0, ["$hasPrevious", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_hasPrevious), "$previous", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_previous)]]);
+$rt_metadata([cbgct_WebMapping, 0, cbgc_ControllerMapping, [], 1, 0, 0, 0,
 cgxgtbw_WebInput$1, 0, jl_Object, [jl_Runnable], 0, 0, 0, 0,
 cgxgtbw_WebInput$getTextInput$lambda$_69_0, "WebInput$getTextInput$lambda$_69_0", 6, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
 cgxgtbw_WebInput$getTextInput$lambda$_69_1, "WebInput$getTextInput$lambda$_69_1", 6, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
@@ -60824,23 +60848,23 @@ $rt_stringPool(["Can\'t enter monitor from another thread synchronously", "Alrea
 "sprites/enemies/fighter_red.png", "sprites/enemies/bomber_gray.png", "drone_blue", "sprites/enemies/drone_blue.png", "tank_front", "sprites/enemies/tank_front.png", "sprites/enemies/tank_top.png", "sprites/enemies/tank_missile.png", "sprites/enemies/turret_top.png", "turret_green", "sprites/enemies/turret_green.png", "sprites/enemies/ship_top.png", "sub_front", "sprites/enemies/sub_front.png", "sprites/enemies/sub_top.png", "scout_new", "sprites/enemies/scout_new.png", "striker_new", "sprites/enemies/striker_new.png",
 "drone_new", "sprites/enemies/drone_new.png", "bomber_new", "sprites/enemies/bomber_new.png", "tank_new", "sprites/enemies/tank_new.png", "e_jet", "sprites/enemies/e_jet.png", "e_gunship", "sprites/enemies/e_gunship.png", "e_heli", "sprites/enemies/e_heli.png", "e_pod", "sprites/enemies/e_pod.png", "e_ship_0", "sprites/enemies/e_ship_0.png", "e_ship_1", "sprites/enemies/e_ship_1.png", "e_ship_2", "sprites/enemies/e_ship_2.png", "e_ship_3", "sprites/enemies/e_ship_3.png", "e_ship_4", "sprites/enemies/e_ship_4.png",
 "e_ship_5", "sprites/enemies/e_ship_5.png", "e_tank_", "sprites/enemies/e_tank_", "e_base_0", "sprites/enemies/e_base_0.png", "e_base_1", "sprites/enemies/e_base_1.png", "e_base_2", "sprites/enemies/e_base_2.png", "boss_0", "sprites/enemies/boss_0.png", "boss_1", "sprites/enemies/boss_1.png", "boss_2", "sprites/enemies/boss_2.png", "boss_3", "sprites/enemies/boss_3.png", "boss_4", "sprites/enemies/boss_4.png", "boss_5", "sprites/enemies/boss_5.png", "e_tank_0", "e_tank_1", "e_tank_2", "e_tank_3", "e_tank_4",
-"e_tank_5", "e_tank_6", "boss_", "ROF", "SPR", "MIS", "LAS", "SHD", "BMB", "MLT", "DRN", "MAG", "CRT", "CHN", "ARM", "REG", "PHX", "ORB", "TIM", "BLK", "BRK", "RFL", "CLN", "DMG", "Requested element count ", "center", "vee", "sine", "cross", "columns", "spread", "line", "comparator", "pattern", " ATIVADO", " DESLIGADO", "e_ship_", "e_base_", "NÚCLEO ", " — CHEFE ENFURECIDO", " MOEDA", "singleton(...)", "vida-extra", "AERONAVE ABATIDA!", "+1 VIDA  E  +2 BOMBAS", "GAMEPAD: A = ASSISTIR   B = RECUSAR", "R", "A",
-"M", "L", "E", "B", "X", "I", "C", "T", "O", "G", "F", "Q", "H", "K", "V", "Z", "P", "toString(...)", " x", " — ", "COMBO x", "  +", "  -  ESCUDO ", "UP +", "UP -", "MOEDAS: ", "PODERES TEMPORÁRIOS — TOQUE PARA ATIVAR/DESATIVAR", " N", " MOEDAS", "PODER ATIVO CONSOME TEMPO. DESATIVADO PRESERVA OS SEGUNDOS.", " COMPRADO", "description", "Offer(power=", ", description=", ", baseCost=", "DONE ignored because already settled url=", "label", "ShopOffer(label=", ", cost=", "initializer", ", status=", ", loaded=",
-", total=", ", percent=", "offset + length must be <= size: ", "IndexedDB Error removing file: ", "Default", "NumberPad", "PhonePad", "Email", "Password", "URI", "notWrapped", "wrapped", "lastWrapped", "CLEAR", "CLEAR_WHITE", "BLACK", "LIGHT_GRAY", "GRAY", "DARK_GRAY", "BLUE", "NAVY", "ROYAL", "SLATE", "SKY", "CYAN", "TEAL", "GREEN", "CHARTREUSE", "LIME", "FOREST", "OLIVE", "YELLOW", "GOLD", "GOLDENROD", "ORANGE", "BROWN", "TAN", "FIREBRICK", "RED", "SCARLET", "CORAL", "SALMON", "PINK", "MAGENTA", "PURPLE",
-"VIOLET", "MAROON", "texture", "muzzles", "EnemyVisual(texture=", ", width=", ", height=", ", rotation=", ", collisionRadius=", ", muzzles=", "SCOUT", "STRIKER", "BOMBER", "TANK", "MINIBOSS", "WaveEvent(time=", ", count=", ", pattern=", " - FASE ", ": x", "onDone", "br_1", "br_2", "jp_full", "videos/end_", ".mp4", "assetPaths", "onFinished", "tex", "desc", "REGRESSA COMO HERÓI", "RETURNS A HERO", "MISSÃO CUMPRIDA", "GALERIA DE AMEAÇAS", "THREAT GALLERY", "GUARDIÃO TUPÃ", "Brasil · Chefe final", "Brazil · Final boss",
-"LIBERTY PRIME", "EUA · Chefe final", "USA · Final boss", "RAIJIN OMEGA", "Japão · Chefe final", "Japan · Final boss", "CORAÇÃO DE KOSMOS", "Rússia · Chefe final", "Russia · Final boss", "ORION IMPERATOR", "Itália · Chefe final", "Italy · Final boss", "MECHA SHOGUN", "Japão · Chefe intermediário", "Japan · Mid boss", "INTERCEPTOR VESPA", "Caça leve e veloz", "Fast light fighter", "GUNSHIP TROVÃO", "Nave de ataque pesada", "Heavy attack gunship", "HELICÓPTERO HARPIA", "Metralha em voo rasante", "Strafing helicopter",
-"sprites/enemies/e_tank_0.png", "TANQUE LOBO-GUARÁ", "Blindado de superfície", "Armored ground tank", "CORVETA ABISSO", "Navio lança-mísseis", "Missile warship", "BATERIA COSTEIRA", "Base fixa antiaérea", "Fixed AA emplacement", "POD SENTINELA", "Drone orbital vigia", "Orbital sentry drone", "EQUIPE", "STAFF", "CONCEPT & DIRECTION: MASTER ARLEY", "5 PAÍSES · 30 FASES · 4 AERONAVES", "5 NATIONS · 30 STAGES · 4 AIRCRAFT", "FEITO COM LIBGDX + KOTLIN", "BUILT WITH LIBGDX + KOTLIN", "OBRIGADO POR JOGAR, PILOTO.",
-"THANK YOU FOR PLAYING, PILOT.", "FIM", "THE END", "FIVE NATIONS. ONE UNITED FRONT.", "FROM THE COAST OF BRAZIL TO THE ORBIT OVER ITALY,", "THE SKY VANGUARD PILOTS BROKE THE ORION INVASION.", "THE SKIES ARE SILENT NOW — AND THEY ARE COMING HOME.", "CINCO NAÇÕES. UMA SÓ FRENTE DE BATALHA.", "DO LITORAL DO BRASIL ATÉ A ÓRBITA DA ITÁLIA,", "OS PILOTOS DA SKY VANGUARD DERRUBARAM A INVASÃO ORION.", "AGORA O CÉU ESTÁ EM SILÊNCIO — E ELES VOLTAM PARA CASA.", "PULAR", "SKIP", "CANNON", "PLASMA", "TRACER", "SonicWave(originX=",
-", originY=", ", radius=", ", delay=", ", damage=", "ReinforcementOrder(type=", ", remaining=", ", serial=", "value", "substring(...)", "entre-fases", "LIGHT", "FOTO DO PILOTO ATUALIZADA", "CADENCIA DE TIRO", "TIRO TRIPLO", "ENERGIA", "UPGRADE", "+500 MOEDAS  +  ", "i:b:/audio/boss_warning.wav:39734:1", "i:b:/audio/click.wav:3572:1", "i:b:/audio/explosion.wav:24298:1", "i:b:/audio/fase1.ogg:813393:1", "i:b:/audio/fase10.ogg:980900:1", "i:b:/audio/fase11.ogg:219592:1", "i:b:/audio/fase12.ogg:528733:1", "i:b:/audio/fase13.ogg:301534:1",
-"i:b:/audio/fase14.ogg:280632:1", "i:b:/audio/fase15.ogg:317800:1", "i:b:/audio/fase2.ogg:675440:1", "i:b:/audio/fase3.ogg:328609:1", "i:b:/audio/fase4.ogg:328609:1", "i:b:/audio/fase5.ogg:855034:1", "i:b:/audio/fase6.ogg:282945:1", "i:b:/audio/fase7.ogg:408356:1", "i:b:/audio/fase8.ogg:695377:1", "i:b:/audio/fase9.ogg:695377:1", "i:b:/audio/hangar.ogg:438896:1", "i:b:/audio/menu.ogg:1202324:1", "i:b:/audio/menu_music.wav:352844:1", "i:b:/audio/powerup.wav:11068:1", "i:b:/audio/shield.wav:22094:1", "i:b:/audio/shot.wav:3130:1",
-"i:b:/audio/special.wav:39734:1", "i:b:/audio/stage_music.wav:352844:1", "i:b:/audio/tela upgrade.ogg:697872:1", "i:b:/backgrounds/stage_00.jpg:532220:1", "i:b:/backgrounds/stage_01.jpg:485053:1", "i:b:/backgrounds/stage_02.jpg:426433:1", "i:b:/backgrounds/stage_03.jpg:437812:1", "i:b:/backgrounds/stage_04.jpg:413546:1", "i:b:/backgrounds/stage_05.jpg:566604:1", "i:b:/backgrounds/stage_06.jpg:474180:1", "i:b:/backgrounds/stage_07.jpg:532658:1", "i:b:/backgrounds/stage_08.jpg:492756:1", "i:b:/backgrounds/stage_09.jpg:578934:1",
-"i:b:/backgrounds/stage_10.jpg:530075:1", "i:b:/backgrounds/stage_11.jpg:540193:1", "i:b:/backgrounds/stage_12.jpg:408294:1", "i:b:/backgrounds/stage_13.jpg:454960:1", "i:b:/backgrounds/stage_14.jpg:389324:1", "i:b:/backgrounds/stage_15.jpg:439509:1", "i:b:/backgrounds/stage_16.jpg:472245:1", "i:b:/backgrounds/stage_17.jpg:556022:1", "i:b:/backgrounds/stage_18.jpg:445499:1", "i:b:/backgrounds/stage_19.jpg:556022:1", "i:b:/backgrounds/stage_20.jpg:506271:1", "i:b:/backgrounds/stage_21.jpg:574565:1", "i:b:/backgrounds/stage_22.jpg:455773:1",
-"i:b:/backgrounds/stage_23.jpg:545564:1", "i:b:/backgrounds/stage_24.jpg:532220:1", "i:b:/backgrounds/stage_25.jpg:454960:1", "i:b:/backgrounds/stage_26.jpg:578934:1", "i:b:/backgrounds/stage_27.jpg:509101:1", "i:b:/backgrounds/stage_28.jpg:389324:1", "i:b:/backgrounds/stage_29.jpg:437812:1", "i:b:/data/aircraft.json:1107:1", "i:b:/data/bosses.json:137:1", "i:b:/data/campaign_30_stages.json:7170:1", "i:b:/data/difficulty.json:210:1", "i:b:/data/enemies.json:344:1", "i:b:/data/pilots.json:542:1", "i:b:/data/upgrades.json:1087:1",
-"i:b:/fonts/noto_bold.ttf:27528:1", "i:b:/fonts/noto_jp_bold.ttf:120864:1", "i:b:/fonts/noto_jp_regular.ttf:119588:1", "i:b:/fonts/noto_regular.ttf:27572:1", "i:b:/fonts/OFL_rajdhani.txt:4373:1", "i:b:/fonts/rajdhani_bold.ttf:31776:1", "i:b:/fonts/rajdhani_medium.ttf:29480:1", "i:b:/menu_background_4k.png:317009:1", "i:b:/menu_main_hd.jpg:273772:1", "i:b:/sprites/enemies/bomber_gray.png:17750:1", "i:b:/sprites/enemies/boss_0.png:25871:1", "i:b:/sprites/enemies/boss_1.png:17494:1", "i:b:/sprites/enemies/boss_2.png:33211:1",
-"i:b:/sprites/enemies/boss_3.png:25895:1", "i:b:/sprites/enemies/boss_4.png:23717:1", "i:b:/sprites/enemies/boss_5.png:23328:1", "i:b:/sprites/enemies/drone_blue.png:15229:1", "i:b:/sprites/enemies/e_base_0.png:18018:1", "i:b:/sprites/enemies/e_base_1.png:24378:1", "i:b:/sprites/enemies/e_base_2.png:12784:1", "i:b:/sprites/enemies/e_gunship.png:17750:1", "i:b:/sprites/enemies/e_heli.png:19011:1", "i:b:/sprites/enemies/e_jet.png:27775:1", "i:b:/sprites/enemies/e_pod.png:15229:1", "i:b:/sprites/enemies/e_ship_0.png:13645:1",
-"i:b:/sprites/enemies/e_ship_1.png:8077:1", "i:b:/sprites/enemies/e_ship_2.png:15584:1", "i:b:/sprites/enemies/e_ship_3.png:14019:1", "i:b:/sprites/enemies/e_ship_4.png:12814:1", "i:b:/sprites/enemies/e_ship_5.png:8477:1", "i:b:/sprites/enemies/e_tank_0.png:16641:1", "i:b:/sprites/enemies/e_tank_1.png:23057:1", "i:b:/sprites/enemies/e_tank_2.png:22797:1", "i:b:/sprites/enemies/e_tank_3.png:20049:1", "i:b:/sprites/enemies/e_tank_4.png:11901:1", "i:b:/sprites/enemies/e_tank_5.png:7177:1", "i:b:/sprites/enemies/e_tank_6.png:13317:1",
-"i:b:/sprites/enemies/fighter_red.png:15476:1", "i:b:/sprites/enemies/ship_top.png:8077:1", "i:b:/sprites/enemies/sub_front.png:12814:1", "i:b:/sprites/enemies/sub_top.png:8477:1", "i:b:/sprites/enemies/tank_front.png:23057:1", "i:b:/sprites/enemies/tank_missile.png:20049:1", "i:b:/sprites/enemies/tank_top.png:22797:1", "i:b:/sprites/enemies/turret_green.png:12784:1", "i:b:/sprites/enemies/turret_top.png:24378:1", "i:b:/sprites/player/drone_0.png:16798:1", "i:b:/sprites/player/drone_1.png:15361:1", "i:b:/sprites/player/drone_2.png:13649:1",
-"i:b:/sprites/player/drone_3.png:15052:1", "i:b:/sprites/player/missile.png:5295:1", "i:b:/sprites/player/missile2.png:5242:1", "i:b:/sprites/player/pilot_1_brasil.png:16273:1", "i:b:/sprites/player/ship_0.png:19073:1", "i:b:/sprites/player/ship_1.png:18027:1", "i:b:/sprites/player/ship_2.png:17760:1", "i:b:/sprites/player/ship_3.png:18391:1", "c:b:/com/badlogic/gdx/utils/lsans-15.fnt:17711:1", "c:b:/com/badlogic/gdx/utils/lsans-15.png:10270:1", "c:b:/com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:820:1",
+"e_tank_5", "e_tank_6", "boss_", "ROF", "SPR", "MIS", "LAS", "SHD", "BMB", "MLT", "DRN", "MAG", "CRT", "CHN", "ARM", "REG", "PHX", "ORB", "TIM", "BLK", "BRK", "RFL", "CLN", "DMG", "Requested element count ", "center", "vee", "sine", "cross", "columns", "spread", "line", "comparator", "pattern", " ATIVADO", " DESLIGADO", "e_ship_", "e_base_", "NÚCLEO ", " — CHEFE ENFURECIDO", " MOEDA", "singleton(...)", "vida-extra", "AERONAVE ABATIDA!", "+1 VIDA  E  +2 BOMBAS", "AGUARDANDO ANÚNCIO — ", "SE NÃO CARREGAR, A PARTIDA CONTINUA",
+"GAMEPAD: A = ASSISTIR   B = RECUSAR", "R", "A", "M", "L", "E", "B", "X", "I", "C", "T", "O", "G", "F", "Q", "H", "K", "V", "Z", "P", "toString(...)", " x", " — ", "COMBO x", "  +", "  -  ESCUDO ", "UP +", "UP -", "MOEDAS: ", "PODERES TEMPORÁRIOS — TOQUE PARA ATIVAR/DESATIVAR", " N", " MOEDAS", "PODER ATIVO CONSOME TEMPO. DESATIVADO PRESERVA OS SEGUNDOS.", " COMPRADO", "description", "Offer(power=", ", description=", ", baseCost=", "DONE ignored because already settled url=", "label", "ShopOffer(label=", ", cost=",
+"initializer", ", status=", ", loaded=", ", total=", ", percent=", "offset + length must be <= size: ", "IndexedDB Error removing file: ", "Default", "NumberPad", "PhonePad", "Email", "Password", "URI", "notWrapped", "wrapped", "lastWrapped", "CLEAR", "CLEAR_WHITE", "BLACK", "LIGHT_GRAY", "GRAY", "DARK_GRAY", "BLUE", "NAVY", "ROYAL", "SLATE", "SKY", "CYAN", "TEAL", "GREEN", "CHARTREUSE", "LIME", "FOREST", "OLIVE", "YELLOW", "GOLD", "GOLDENROD", "ORANGE", "BROWN", "TAN", "FIREBRICK", "RED", "SCARLET", "CORAL",
+"SALMON", "PINK", "MAGENTA", "PURPLE", "VIOLET", "MAROON", "texture", "muzzles", "EnemyVisual(texture=", ", width=", ", height=", ", rotation=", ", collisionRadius=", ", muzzles=", "SCOUT", "STRIKER", "BOMBER", "TANK", "MINIBOSS", "WaveEvent(time=", ", count=", ", pattern=", " - FASE ", ": x", "onDone", "br_1", "br_2", "jp_full", "videos/end_", ".mp4", "assetPaths", "onFinished", "tex", "desc", "REGRESSA COMO HERÓI", "RETURNS A HERO", "MISSÃO CUMPRIDA", "GALERIA DE AMEAÇAS", "THREAT GALLERY", "GUARDIÃO TUPÃ",
+"Brasil · Chefe final", "Brazil · Final boss", "LIBERTY PRIME", "EUA · Chefe final", "USA · Final boss", "RAIJIN OMEGA", "Japão · Chefe final", "Japan · Final boss", "CORAÇÃO DE KOSMOS", "Rússia · Chefe final", "Russia · Final boss", "ORION IMPERATOR", "Itália · Chefe final", "Italy · Final boss", "MECHA SHOGUN", "Japão · Chefe intermediário", "Japan · Mid boss", "INTERCEPTOR VESPA", "Caça leve e veloz", "Fast light fighter", "GUNSHIP TROVÃO", "Nave de ataque pesada", "Heavy attack gunship", "HELICÓPTERO HARPIA",
+"Metralha em voo rasante", "Strafing helicopter", "sprites/enemies/e_tank_0.png", "TANQUE LOBO-GUARÁ", "Blindado de superfície", "Armored ground tank", "CORVETA ABISSO", "Navio lança-mísseis", "Missile warship", "BATERIA COSTEIRA", "Base fixa antiaérea", "Fixed AA emplacement", "POD SENTINELA", "Drone orbital vigia", "Orbital sentry drone", "EQUIPE", "STAFF", "CONCEPT & DIRECTION: MASTER ARLEY", "5 PAÍSES · 30 FASES · 4 AERONAVES", "5 NATIONS · 30 STAGES · 4 AIRCRAFT", "FEITO COM LIBGDX + KOTLIN", "BUILT WITH LIBGDX + KOTLIN",
+"OBRIGADO POR JOGAR, PILOTO.", "THANK YOU FOR PLAYING, PILOT.", "FIM", "THE END", "FIVE NATIONS. ONE UNITED FRONT.", "FROM THE COAST OF BRAZIL TO THE ORBIT OVER ITALY,", "THE SKY VANGUARD PILOTS BROKE THE ORION INVASION.", "THE SKIES ARE SILENT NOW — AND THEY ARE COMING HOME.", "CINCO NAÇÕES. UMA SÓ FRENTE DE BATALHA.", "DO LITORAL DO BRASIL ATÉ A ÓRBITA DA ITÁLIA,", "OS PILOTOS DA SKY VANGUARD DERRUBARAM A INVASÃO ORION.", "AGORA O CÉU ESTÁ EM SILÊNCIO — E ELES VOLTAM PARA CASA.", "PULAR", "SKIP", "CANNON",
+"PLASMA", "TRACER", "SonicWave(originX=", ", originY=", ", radius=", ", delay=", ", damage=", "ReinforcementOrder(type=", ", remaining=", ", serial=", "value", "substring(...)", "entre-fases", "LIGHT", "FOTO DO PILOTO ATUALIZADA", "CADENCIA DE TIRO", "TIRO TRIPLO", "ENERGIA", "UPGRADE", "+500 MOEDAS  +  ", "i:b:/audio/boss_warning.wav:39734:1", "i:b:/audio/click.wav:3572:1", "i:b:/audio/explosion.wav:24298:1", "i:b:/audio/fase1.ogg:813393:1", "i:b:/audio/fase10.ogg:980900:1", "i:b:/audio/fase11.ogg:219592:1",
+"i:b:/audio/fase12.ogg:528733:1", "i:b:/audio/fase13.ogg:301534:1", "i:b:/audio/fase14.ogg:280632:1", "i:b:/audio/fase15.ogg:317800:1", "i:b:/audio/fase2.ogg:675440:1", "i:b:/audio/fase3.ogg:328609:1", "i:b:/audio/fase4.ogg:328609:1", "i:b:/audio/fase5.ogg:855034:1", "i:b:/audio/fase6.ogg:282945:1", "i:b:/audio/fase7.ogg:408356:1", "i:b:/audio/fase8.ogg:695377:1", "i:b:/audio/fase9.ogg:695377:1", "i:b:/audio/hangar.ogg:438896:1", "i:b:/audio/menu.ogg:1202324:1", "i:b:/audio/menu_music.wav:352844:1", "i:b:/audio/powerup.wav:11068:1",
+"i:b:/audio/shield.wav:22094:1", "i:b:/audio/shot.wav:3130:1", "i:b:/audio/special.wav:39734:1", "i:b:/audio/stage_music.wav:352844:1", "i:b:/audio/tela upgrade.ogg:697872:1", "i:b:/backgrounds/stage_00.jpg:532220:1", "i:b:/backgrounds/stage_01.jpg:485053:1", "i:b:/backgrounds/stage_02.jpg:426433:1", "i:b:/backgrounds/stage_03.jpg:437812:1", "i:b:/backgrounds/stage_04.jpg:413546:1", "i:b:/backgrounds/stage_05.jpg:566604:1", "i:b:/backgrounds/stage_06.jpg:474180:1", "i:b:/backgrounds/stage_07.jpg:532658:1", "i:b:/backgrounds/stage_08.jpg:492756:1",
+"i:b:/backgrounds/stage_09.jpg:578934:1", "i:b:/backgrounds/stage_10.jpg:530075:1", "i:b:/backgrounds/stage_11.jpg:540193:1", "i:b:/backgrounds/stage_12.jpg:408294:1", "i:b:/backgrounds/stage_13.jpg:454960:1", "i:b:/backgrounds/stage_14.jpg:389324:1", "i:b:/backgrounds/stage_15.jpg:439509:1", "i:b:/backgrounds/stage_16.jpg:472245:1", "i:b:/backgrounds/stage_17.jpg:556022:1", "i:b:/backgrounds/stage_18.jpg:445499:1", "i:b:/backgrounds/stage_19.jpg:556022:1", "i:b:/backgrounds/stage_20.jpg:506271:1", "i:b:/backgrounds/stage_21.jpg:574565:1",
+"i:b:/backgrounds/stage_22.jpg:455773:1", "i:b:/backgrounds/stage_23.jpg:545564:1", "i:b:/backgrounds/stage_24.jpg:532220:1", "i:b:/backgrounds/stage_25.jpg:454960:1", "i:b:/backgrounds/stage_26.jpg:578934:1", "i:b:/backgrounds/stage_27.jpg:509101:1", "i:b:/backgrounds/stage_28.jpg:389324:1", "i:b:/backgrounds/stage_29.jpg:437812:1", "i:b:/data/aircraft.json:1107:1", "i:b:/data/bosses.json:137:1", "i:b:/data/campaign_30_stages.json:7170:1", "i:b:/data/difficulty.json:210:1", "i:b:/data/enemies.json:344:1", "i:b:/data/pilots.json:542:1",
+"i:b:/data/upgrades.json:1087:1", "i:b:/fonts/noto_bold.ttf:27528:1", "i:b:/fonts/noto_jp_bold.ttf:120864:1", "i:b:/fonts/noto_jp_regular.ttf:119588:1", "i:b:/fonts/noto_regular.ttf:27572:1", "i:b:/fonts/OFL_rajdhani.txt:4373:1", "i:b:/fonts/rajdhani_bold.ttf:31776:1", "i:b:/fonts/rajdhani_medium.ttf:29480:1", "i:b:/menu_background_4k.png:317009:1", "i:b:/menu_main_hd.jpg:273772:1", "i:b:/sprites/enemies/bomber_gray.png:17750:1", "i:b:/sprites/enemies/boss_0.png:25871:1", "i:b:/sprites/enemies/boss_1.png:17494:1",
+"i:b:/sprites/enemies/boss_2.png:33211:1", "i:b:/sprites/enemies/boss_3.png:25895:1", "i:b:/sprites/enemies/boss_4.png:23717:1", "i:b:/sprites/enemies/boss_5.png:23328:1", "i:b:/sprites/enemies/drone_blue.png:15229:1", "i:b:/sprites/enemies/e_base_0.png:18018:1", "i:b:/sprites/enemies/e_base_1.png:24378:1", "i:b:/sprites/enemies/e_base_2.png:12784:1", "i:b:/sprites/enemies/e_gunship.png:17750:1", "i:b:/sprites/enemies/e_heli.png:19011:1", "i:b:/sprites/enemies/e_jet.png:27775:1", "i:b:/sprites/enemies/e_pod.png:15229:1",
+"i:b:/sprites/enemies/e_ship_0.png:13645:1", "i:b:/sprites/enemies/e_ship_1.png:8077:1", "i:b:/sprites/enemies/e_ship_2.png:15584:1", "i:b:/sprites/enemies/e_ship_3.png:14019:1", "i:b:/sprites/enemies/e_ship_4.png:12814:1", "i:b:/sprites/enemies/e_ship_5.png:8477:1", "i:b:/sprites/enemies/e_tank_0.png:16641:1", "i:b:/sprites/enemies/e_tank_1.png:23057:1", "i:b:/sprites/enemies/e_tank_2.png:22797:1", "i:b:/sprites/enemies/e_tank_3.png:20049:1", "i:b:/sprites/enemies/e_tank_4.png:11901:1", "i:b:/sprites/enemies/e_tank_5.png:7177:1",
+"i:b:/sprites/enemies/e_tank_6.png:13317:1", "i:b:/sprites/enemies/fighter_red.png:15476:1", "i:b:/sprites/enemies/ship_top.png:8077:1", "i:b:/sprites/enemies/sub_front.png:12814:1", "i:b:/sprites/enemies/sub_top.png:8477:1", "i:b:/sprites/enemies/tank_front.png:23057:1", "i:b:/sprites/enemies/tank_missile.png:20049:1", "i:b:/sprites/enemies/tank_top.png:22797:1", "i:b:/sprites/enemies/turret_green.png:12784:1", "i:b:/sprites/enemies/turret_top.png:24378:1", "i:b:/sprites/player/drone_0.png:16798:1", "i:b:/sprites/player/drone_1.png:15361:1",
+"i:b:/sprites/player/drone_2.png:13649:1", "i:b:/sprites/player/drone_3.png:15052:1", "i:b:/sprites/player/missile.png:5295:1", "i:b:/sprites/player/missile2.png:5242:1", "i:b:/sprites/player/pilot_1_brasil.png:16273:1", "i:b:/sprites/player/ship_0.png:19073:1", "i:b:/sprites/player/ship_1.png:18027:1", "i:b:/sprites/player/ship_2.png:17760:1", "i:b:/sprites/player/ship_3.png:18391:1", "c:b:/com/badlogic/gdx/utils/lsans-15.fnt:17711:1", "c:b:/com/badlogic/gdx/utils/lsans-15.png:10270:1", "c:b:/com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:820:1",
 "c:b:/com/badlogic/gdx/graphics/g3d/particles/particles.vertex.glsl:2886:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/default.fragment.glsl:5874:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/default.vertex.glsl:9096:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/depth.fragment.glsl:869:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/depth.vertex.glsl:2931:1"]);
 jl_String.prototype.toString = function() {
     return $rt_ustr(this);
