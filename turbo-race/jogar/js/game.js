@@ -2322,7 +2322,13 @@ class TelaDeCorrida {
     const self = this;
 
     this._aoApontarDown = function (ev) {
-      self.canvas.setPointerCapture && self.canvas.setPointerCapture(ev.pointerId);
+      // A captura mantém o dedo "preso" ao canvas mesmo se ele escorregar para
+      // fora — é o que evita o botão ficar grudado. Mas ela lança quando o
+      // ponteiro não está mais ativo, e uma exceção aqui engoliria o toque
+      // inteiro, então o pedido é apenas uma tentativa.
+      try {
+        if (self.canvas.setPointerCapture) self.canvas.setPointerCapture(ev.pointerId);
+      } catch (e) { /* ponteiro já solto: segue sem captura */ }
       const p = self._pontoDoEvento(ev);
       self.ponteiros.set(ev.pointerId, p);
       // Toques em botões de UI (pause / telas) tratados ao pressionar,
