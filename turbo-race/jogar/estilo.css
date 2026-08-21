@@ -1,0 +1,138 @@
+/*
+ * A página inteira é moldura: o jogo mora no canvas. Tudo aqui existe só para
+ * o canvas ocupar a tela toda, não rolar e não deixar o navegador fazer zoom
+ * quando o jogador toca dois botões ao mesmo tempo.
+ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #06080f;
+  color: #f4f4f4;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Sem seleção de texto nem menu de "copiar" no meio da corrida. */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  /* Impede o arrastar da página puxar a tela para baixo no celular. */
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+#tela {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  touch-action: none;
+  /* A pista é desenhada em pixels grandes de propósito: deixar o navegador
+     suavizar borraria o visual de 16 bits. */
+  image-rendering: auto;
+}
+
+/* Camada para vídeo e caixas de texto, por cima do canvas. */
+#camada-html {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+#camada-html > * { pointer-events: auto; }
+#camada-html video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+/* ---------------- Tela de carregamento ---------------- */
+
+#aviso-carregando {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: radial-gradient(circle at 50% 40%, #1b1440 0%, #06080f 70%);
+  z-index: 30;
+  transition: opacity .4s ease;
+}
+#aviso-carregando.sumindo { opacity: 0; }
+#aviso-carregando img {
+  width: 92px;
+  height: 92px;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(0, 245, 212, .35);
+}
+#aviso-carregando h1 {
+  font-size: clamp(26px, 6vw, 46px);
+  letter-spacing: .16em;
+  color: #00f5d4;
+  text-shadow: 0 0 18px rgba(0, 245, 212, .5);
+}
+#aviso-carregando p {
+  font-size: 14px;
+  color: rgba(244, 244, 244, .65);
+}
+#aviso-carregando .trilho {
+  width: min(280px, 62vw);
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(244, 244, 244, .14);
+  overflow: hidden;
+}
+#progresso {
+  width: 0;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #00f5d4, #ffd24d);
+  transition: width .2s ease;
+}
+
+/* ---------------- Aviso de girar o celular ---------------- */
+
+/* O HUD do jogo foi desenhado só para paisagem, igual ao app: em retrato a
+   pista vira uma fatia fina e os botões saem do lugar. Em vez de redesenhar
+   tudo, pedimos para virar o aparelho — a mesma decisão tomada no Android. */
+#aviso-girar { display: none; }
+
+@media (orientation: portrait) and (max-width: 900px) {
+  #aviso-girar {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #06080f;
+    z-index: 40;
+    text-align: center;
+    padding: 24px;
+  }
+  #aviso-girar .icone {
+    font-size: 56px;
+    display: block;
+    margin-bottom: 16px;
+    animation: girando 2.2s ease-in-out infinite;
+  }
+  #aviso-girar p {
+    font-size: 20px;
+    font-weight: 700;
+    color: #00f5d4;
+    margin-bottom: 8px;
+  }
+  #aviso-girar span {
+    font-size: 14px;
+    color: rgba(244, 244, 244, .6);
+  }
+}
+
+@keyframes girando {
+  0%, 45% { transform: rotate(0deg); }
+  55%, 100% { transform: rotate(90deg); }
+}

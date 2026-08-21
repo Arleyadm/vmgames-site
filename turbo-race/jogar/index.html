@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Turbo Race — corrida no navegador</title>
+<meta name="description" content="Turbo Race no navegador: corrida em perspectiva no estilo dos clássicos de 16 bits, com 28 fases por Brasil, Estados Unidos, Japão e Itália, garagem, turbo e sala online para até 8 jogadores na mesma pista.">
+<meta name="theme-color" content="#06080f">
+<link rel="icon" href="assets/img/icone.png">
+<link rel="apple-touch-icon" href="assets/img/icone.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="VM Games">
+<meta property="og:title" content="Turbo Race — jogue no navegador">
+<meta property="og:description" content="28 fases, garagem, turbo e sala online para até 8 jogadores na mesma pista.">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<canvas id="tela" width="1280" height="720" aria-label="Turbo Race"></canvas>
+
+<!-- Camada para os poucos elementos que precisam ser HTML de verdade:
+     o vídeo de abertura e os de zeramento por país. -->
+<div id="camada-html"></div>
+
+<div id="aviso-girar">
+  <div class="capa">
+    <div class="icone">📱</div>
+    <p>Vire o celular para o lado</p>
+    <span>O Turbo Race corre em tela deitada, como no aparelho.</span>
+  </div>
+</div>
+
+<div id="aviso-carregando">
+  <img src="assets/img/icone.png" alt="">
+  <h1>TURBO RACE</h1>
+  <div class="trilho"><div id="progresso"></div></div>
+  <p>carregando a pista…</p>
+</div>
+
+<!-- Scripts clássicos, sem módulos: a ordem importa, cada um publica no window
+     o que o seguinte precisa. Ver PORTE.md. -->
+<script src="js/colors.js"></script>
+<script src="js/util.js"></script>
+<script src="js/mathutils.js"></script>
+<script src="js/manifesto.js"></script>
+<script src="js/assets.js"></script>
+<script src="js/roadsegment.js"></script>
+<script src="js/coin.js"></script>
+<script src="js/controls.js"></script>
+<script src="js/enemycar.js"></script>
+<script src="js/gamestate.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/speechbank.js"></script>
+<script src="js/data/cars.js"></script>
+<script src="js/data/stages.js"></script>
+<script src="js/data/save.js"></script>
+<script src="js/playercar.js"></script>
+<script src="js/trackgenerator.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/online.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/hud.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ui/menu.js"></script>
+<script src="js/ui/worldtour.js"></script>
+<script src="js/ui/garage.js"></script>
+<script src="js/ui/settings.js"></script>
+<script src="js/ui/videos.js"></script>
+<script src="js/ui/online.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
