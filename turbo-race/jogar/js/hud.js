@@ -1577,7 +1577,10 @@ class HUD {
 
     this.drawSadPilotScene(ctx);
 
-    const statY = h * 0.60;
+    // As caixas tem 0.065h de altura, entao comecar em 0.60 fazia a borda de
+    // baixo terminar exatamente em 0.665 — em cima da linha de ultrapassagens.
+    // Sobem um tico para as duas coisas respirarem.
+    const statY = h * 0.585;
     this.drawVictoryStat(ctx, w * 0.25, statY, "POSIÇÃO", state.rank + "º/" + state.totalRacers, Cor.rgb(0xFF, 0x78, 0x78));
     this.drawVictoryStat(ctx, w * 0.50, statY, "PONTOS", "" + state.score, Cor.rgb(0xFF, 0xC1, 0x07));
     this.drawVictoryStat(ctx, w * 0.75, statY, "MOEDAS", "" + this.animatedFinalCoins(state), this.magenta);
@@ -1585,7 +1588,7 @@ class HUD {
     ctx.textAlign = "center";
     this._setTextSize(ctx, h * 0.016);
     ctx.fillStyle = Cor.css(Cor.rgb(0xDF, 0xE7, 0xF6));
-    ctx.fillText("Ultrapassagens: " + state.overtakes, w / 2, h * 0.665);
+    ctx.fillText("Ultrapassagens: " + state.overtakes, w / 2, h * 0.672);
     this.drawRewardPanel(ctx, state, h * 0.685);
 
     const bw = w * 0.17;
