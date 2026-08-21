@@ -4,6 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <title>Sky Vanguard: Global Assault</title>
+
+    <!-- AdSense: anúncios laterais (computador) e anúncio premiado do
+         H5 Games Ads. O data-ad-frequency-hint é exigência da Ad Placement
+         API e limita a frequência dos anúncios entre partidas. -->
+    <script async data-ad-frequency-hint="30s"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8110755806771816"
+            crossorigin="anonymous"></script>
+    <script>
+        // A Ad Placement API funciona empurrando objetos para a fila do
+        // AdSense; adBreak e adConfig são definidos aqui, pela página.
+        window.adsbygoogle = window.adsbygoogle || [];
+        window.adBreak = window.adConfig = function (o) { window.adsbygoogle.push(o); };
+        window.adConfig({ preloadAdBreaks: 'on', sound: 'on' });
+    </script>
+
     <style>
         html, body {
             height: 100%;
@@ -20,9 +35,6 @@
             align-items: center;
             justify-content: center;
         }
-        /* O jogo é retrato (1080x1920). A caixa mantém a proporção 9:16 e
-           encolhe pelo lado que faltar — no celular vira tela cheia, no
-           computador fica uma faixa retrato centralizada. */
         /* ⚠️ NÃO colocar position/transform aqui. O gdx-teavm descobre onde o
            canvas começa na página subindo pelos offsetParent, e um elemento
            posicionado vira o offsetParent do canvas, zerando o offsetLeft —
@@ -35,6 +47,39 @@
             height: 100dvh;
             max-width: 100vw;
         }
+        #canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            /* Impede o navegador de rolar/dar zoom quando o dedo arrasta. */
+            touch-action: none;
+        }
+
+        /* Trilhos de anúncio, um de cada lado, dentro da tarja preta que sobra
+           no computador. Ficam FORA da área de jogo de propósito: anúncio
+           colado no controle vira clique sem querer — e isso é violação de
+           política do AdSense, além de irritante. */
+        .trilho {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 600px;
+            display: none;
+            z-index: 1;
+        }
+        .trilho.esquerda { left: 24px; }
+        .trilho.direita { right: 24px; }
+        /* Só aparecem quando sobra faixa preta de verdade dos dois lados.
+           A caixa do jogo tem 9:16, então numa janela de 1280x800 ela ocupa
+           450 px e sobram ~415 de cada lado. Abaixo disso (ou numa janela
+           baixa) o anúncio some em vez de espremer o jogo. */
+        @media (min-width: 1280px) and (min-height: 620px) {
+            .trilho { display: block; }
+        }
+
         /* Link de volta para o site, na tarja preta ao lado do jogo. So
            aparece quando sobra margem (tela larga); no celular o jogo ocupa
            tudo e o link sumiria por cima da imagem. */
@@ -53,25 +98,42 @@
         @media (min-aspect-ratio: 3/4) {
             #voltar { display: block; }
         }
-        #canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-            border: none;
-            outline: none;
-            /* Impede o navegador de rolar/dar zoom quando o dedo arrasta. */
-            touch-action: none;
-        }
     </style>
 </head>
 <body oncontextmenu="return false">
     <a id="voltar" href="/sky-vanguard/">&larr; VM GAMES</a>
+
+    <aside class="trilho esquerda" aria-label="Publicidade">
+        <ins class="adsbygoogle"
+             style="display:block;width:300px;height:600px"
+             data-ad-client="ca-pub-8110755806771816"
+             data-ad-slot="2688993034"></ins>
+    </aside>
+
     <div id="frame">
         <canvas id="canvas"></canvas>
     </div>
+
+    <aside class="trilho direita" aria-label="Publicidade">
+        <ins class="adsbygoogle"
+             style="display:block;width:300px;height:600px"
+             data-ad-client="ca-pub-8110755806771816"
+             data-ad-slot="2688993034"></ins>
+    </aside>
+
     <script>
-        window.addEventListener("load", function () { main(); });
+        // Só pede os anúncios laterais quando eles estão realmente visíveis.
+        // Pedir com o trilho em display:none faz o AdSense registrar um espaço
+        // de tamanho zero e não preencher mais nada naquela sessão.
+        window.addEventListener("load", function () {
+            document.querySelectorAll(".trilho").forEach(function (trilho) {
+                if (getComputedStyle(trilho).display !== "none") {
+                    (window.adsbygoogle = window.adsbygoogle || []).push({});
+                }
+            });
+            main();
+        });
     </script>
-    <script type="text/javascript" charset="utf-8" src="app.js?v=a073db5f74"></script>
+    <script type="text/javascript" charset="utf-8" src="app.js?v=fa8f7b7a61"></script>
 </body>
 </html>

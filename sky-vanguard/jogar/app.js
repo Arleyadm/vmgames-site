@@ -750,7 +750,7 @@ jl_Object_monitorEnterWait = ($o, $count, $callback) => {
     }
     $monitor = $monitor.$enteringThreads;
     var$6 = new jl_Object$monitorEnterWait$lambda$_6_0;
-    var$6.$_06 = $thread_0;
+    var$6.$_07 = $thread_0;
     var$6.$_11 = $o;
     var$6.$_20 = $count;
     var$6.$_30 = $callback;
@@ -816,7 +816,7 @@ jl_Object_monitorExit = $o => {
             var$2 = var$2.$enteringThreads;
             if (var$2 !== null && !ju_ArrayDeque_isEmpty(var$2)) {
                 var$2 = new jl_Object$monitorExit$lambda$_8_1;
-                var$2.$_025 = $o;
+                var$2.$_027 = $o;
                 otp_Platform_schedule(var$2, 0);
             } else
                 jl_Object_isEmptyMonitor($o);
@@ -1123,7 +1123,7 @@ cbggg_BitmapFont$BitmapFontData_load = ($this, $fontFile, $flip) => {
                             }
                         }
                     }
-                    $rt_throw(cbgu_GdxRuntimeException__init_0(jl_StringBuilder_toString(jl_StringBuilder_append4(jl_StringBuilder_append4(jl_StringBuilder__init_(), $rt_s(21)), $id)), $ex));
+                    $rt_throw(cbgu_GdxRuntimeException__init_1(jl_StringBuilder_toString(jl_StringBuilder_append4(jl_StringBuilder_append4(jl_StringBuilder__init_(), $rt_s(21)), $id)), $ex));
                 }
                 $this.$descent = 0.0;
                 h: {
@@ -1348,7 +1348,7 @@ cbggg_BitmapFont$BitmapFontData_load = ($this, $fontFile, $flip) => {
             return;
         }
         try {
-            $rt_throw(cbgu_GdxRuntimeException__init_0(jl_StringBuilder_toString(jl_StringBuilder_append(jl_StringBuilder_append4(jl_StringBuilder__init_(), $rt_s(27)), $fontFile)), $ex));
+            $rt_throw(cbgu_GdxRuntimeException__init_1(jl_StringBuilder_toString(jl_StringBuilder_append(jl_StringBuilder_append4(jl_StringBuilder__init_(), $rt_s(27)), $fontFile)), $ex));
         } catch ($$e) {
             $$je = $rt_wrapException($$e);
             $fontFile = $$je;
@@ -10406,7 +10406,7 @@ cvsw_WebLauncher_$callClinit = () => {
     cvsw_WebLauncher__clinit_();
 },
 cvsw_WebLauncher_main = var$1 => {
-    let $config, var$3, var$4, var$5, var$6, var$7, $w, $h, var$10, var$11;
+    let $config, var$3, $w, $h, var$6, var$7;
     cvsw_WebLauncher_$callClinit();
     kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(121));
     $config = new cgxgtbw_WebApplicationConfiguration;
@@ -10430,17 +10430,9 @@ cvsw_WebLauncher_main = var$1 => {
     $config.$powerPreference = $rt_s(125);
     $config.$baseUrlProvider = new cgxgtbwu_WebDefaultBaseUrlProvider;
     $config.$canvasID = $rt_s(124);
-    var$3 = window.innerWidth;
-    var$4 = window.innerHeight;
-    var$5 = var$4 * 1080.0 / 1920.0;
-    if (!(var$5 > var$3))
-        var$3 = var$5;
-    else
-        var$4 = var$3 * 1920.0 / 1080.0;
-    var$6 = jl_Math_minImpl(1.0, 1920.0 / var$4);
-    var$7 = k_Pair__init_(jl_Integer_valueOf(kr_RangesKt___RangesKt_coerceAtLeast0(var$3 * var$6 | 0, 1)), jl_Integer_valueOf(kr_RangesKt___RangesKt_coerceAtLeast0(var$4 * var$6 | 0, 1)));
-    $w = var$7.$first4.$intValue();
-    $h = var$7.$second.$intValue();
+    var$3 = k_Pair__init_(jl_Integer_valueOf(1080), jl_Integer_valueOf(1920));
+    $w = var$3.$first4.$intValue();
+    $h = var$3.$second.$intValue();
     $config.$width8 = $w;
     $config.$height7 = $h;
     $config.$useGL30 = 1;
@@ -10448,44 +10440,44 @@ cvsw_WebLauncher_main = var$1 => {
     $config.$antialiasing = 1;
     $config.$powerPreference = $rt_s(125);
     $config.$preloadListener = new cvsw_WebLauncher$main$lambda$_2_0;
-    var$7 = new cgxgtbw_WebApplication;
-    var$10 = new cvs_SkyVanguardGame;
-    var$11 = new cvsw_WebPlatformServices;
-    kji_Intrinsics_checkNotNullParameter(var$11, $rt_s(126));
-    var$10.$platform = var$11;
-    var$11 = new cvs_GamepadInput;
-    var$11.$previous0 = ju_LinkedHashMap__init_();
-    var$11.$current = ju_LinkedHashMap__init_();
-    var$10.$gamepad = var$11;
-    var$10.$pendingRewardMessage = $rt_s(66);
-    var$11 = var$10;
+    var$3 = new cgxgtbw_WebApplication;
+    var$6 = new cvs_SkyVanguardGame;
+    var$7 = new cvsw_WebPlatformServices;
+    kji_Intrinsics_checkNotNullParameter(var$7, $rt_s(126));
+    var$6.$platform = var$7;
+    var$7 = new cvs_GamepadInput;
+    var$7.$previous0 = ju_LinkedHashMap__init_();
+    var$7.$current = ju_LinkedHashMap__init_();
+    var$6.$gamepad = var$7;
+    var$6.$pendingRewardMessage = $rt_s(66);
+    var$7 = var$6;
     cgxgtbw_WebApplication_$callClinit();
-    var$7.$lifecycleListeners = cbgu_Array__init_0(4);
+    var$3.$lifecycleListeners = cbgu_Array__init_0(4);
     cgxgtbw_WebApplication$AppState_$callClinit();
-    var$7.$initState = cgxgtbw_WebApplication$AppState_INIT;
-    var$7.$isPreloadReady = 0;
-    var$7.$lastWidth = (-1);
-    var$7.$lastHeight = 1;
-    var$7.$logLevel = 2;
-    var$7.$prefs0 = cbgu_ObjectMap__init_();
-    var$7.$runnables = cbgu_Array__init_();
-    var$7.$runnablesHelper = cbgu_Array__init_();
-    var$7.$window = cgxgtbwdi_WebWindow_get();
-    var$7.$config = $config;
-    var$7.$appListener = var$11;
-    var$11 = new cgxgtbw_WebPreloadApplicationListener;
-    var$11.$startupLogo = $rt_s(127);
-    var$11.$animationSpeed = 0.8999999761581421;
-    var$11.$initQueue = 0;
+    var$3.$initState = cgxgtbw_WebApplication$AppState_INIT;
+    var$3.$isPreloadReady = 0;
+    var$3.$lastWidth = (-1);
+    var$3.$lastHeight = 1;
+    var$3.$logLevel = 2;
+    var$3.$prefs0 = cbgu_ObjectMap__init_();
+    var$3.$runnables = cbgu_Array__init_();
+    var$3.$runnablesHelper = cbgu_Array__init_();
+    var$3.$window = cgxgtbwdi_WebWindow_get();
+    var$3.$config = $config;
+    var$3.$appListener = var$7;
+    var$7 = new cgxgtbw_WebPreloadApplicationListener;
+    var$7.$startupLogo = $rt_s(127);
+    var$7.$animationSpeed = 0.8999999761581421;
+    var$7.$initQueue = 0;
     cgxgtbw_WebPreloadApplicationListener$Step_$callClinit();
-    var$11.$preloadStep = cgxgtbw_WebPreloadApplicationListener$Step_PRELOAD_LOADING_ASSETS;
-    var$11.$targetProgress = 0.0;
-    var$11.$displayedProgress = 0.0;
-    var$11.$assetsCount = (-1);
-    var$11.$isAnimation = 0;
-    var$11.$initStage = 0;
-    var$7.$curListener = var$11;
-    cgxgtbw_WebApplication_init(var$7);
+    var$7.$preloadStep = cgxgtbw_WebPreloadApplicationListener$Step_PRELOAD_LOADING_ASSETS;
+    var$7.$targetProgress = 0.0;
+    var$7.$displayedProgress = 0.0;
+    var$7.$assetsCount = (-1);
+    var$7.$isAnimation = 0;
+    var$7.$initStage = 0;
+    var$3.$curListener = var$7;
+    cgxgtbw_WebApplication_init(var$3);
 },
 cvsw_WebLauncher__clinit_ = () => {
     let var$1;
@@ -10506,7 +10498,7 @@ otp_Platform_clone = var$1 => {
 },
 otp_Platform_launchThread = var$1 => {
     let var$2, var$3, var$4, var$5;
-    var$1 = var$1.$_025;
+    var$1 = var$1.$_027;
     if (!jl_Object_isEmptyMonitor(var$1)) {
         var$2 = var$1.$monitor;
         if (var$2.$owner === null) {
@@ -10531,7 +10523,7 @@ otp_Platform_launchThread = var$1 => {
                 var$4 = var$4;
                 var$2.$enteringThreads = null;
                 var$1 = var$4;
-                var$2 = var$1.$_06;
+                var$2 = var$1.$_07;
                 var$4 = var$1.$_11;
                 var$3 = var$1.$_20;
                 var$1 = var$1.$_30;
@@ -13507,6 +13499,9 @@ cvs_SkyVanguardGame_createFonts$lambda$1$params = ($extraChars, $langChars, $px)
 },
 cvs_PlatformServices = $rt_classWithoutFields(0),
 cvsw_WebPlatformServices = $rt_classWithoutFields(),
+cvsw_WebPlatformServices_getRewardedAdAvailable = $this => {
+    return typeof window.adBreak === 'function' && !window.__h5SemAnuncio ? 1 : 0;
+},
 cvsw_WebPlatformServices_openUrl = ($this, $url) => {
     let $$je;
     kji_Intrinsics_checkNotNullParameter($url, $rt_s(216));
@@ -14081,162 +14076,7 @@ cbgu_ArraySupplier__clinit_ = () => {
     cbgu_ArraySupplier_ANY = new cbgu_ArraySupplier$_clinit_$lambda$_3_0;
 },
 cgxgtbwu_WebBaseUrlProvider = $rt_classWithoutFields(0),
-cgxgtbwu_WebDefaultBaseUrlProvider = $rt_classWithoutFields(),
-jl_Math = $rt_classWithoutFields(),
-jl_Math_sin = var$1 => {
-    return Math.sin(var$1);
-},
-jl_Math_cos = var$1 => {
-    return Math.cos(var$1);
-},
-jl_Math_sqrt = var$1 => {
-    return Math.sqrt(var$1);
-},
-jl_Math_cbrt = var$1 => {
-    return var$1 > 0.0 ? jl_Math_pow(var$1, 0.3333333333333333) :  -jl_Math_pow( -var$1, 0.3333333333333333);
-},
-jl_Math_ceil = var$1 => {
-    return Math.ceil(var$1);
-},
-jl_Math_floor = var$1 => {
-    return Math.floor(var$1);
-},
-jl_Math_pow = (var$1, $y) => {
-    return jl_Math_powImpl(var$1, $y);
-},
-jl_Math_powImpl = (var$1, var$2) => {
-    return Math.pow(var$1, var$2);
-},
-jl_Math_atan2 = (var$1, var$2) => {
-    return Math.atan2(var$1, var$2);
-},
-jl_Math_round = var$1 => {
-    return var$1 + jl_Math_sign0(var$1) * 0.5 | 0;
-},
-jl_Math_randomImpl = () => {
-    return Math.random();
-},
-jl_Math_min = ($a, $b) => {
-    if ($a < $b)
-        $b = $a;
-    return $b;
-},
-jl_Math_max0 = ($a, $b) => {
-    if ($a > $b)
-        $b = $a;
-    return $b;
-},
-jl_Math_minImpl = (var$1, var$2) => {
-    return Math.min(var$1, var$2);
-},
-jl_Math_minImpl0 = (var$1, var$2) => {
-    return Math.min(var$1, var$2);
-},
-jl_Math_min0 = (var$1, var$2) => {
-    return jl_Math_minImpl0(var$1, var$2);
-},
-jl_Math_maxImpl = (var$1, var$2) => {
-    return Math.max(var$1, var$2);
-},
-jl_Math_max = (var$1, var$2) => {
-    return jl_Math_maxImpl(var$1, var$2);
-},
-jl_Math_abs0 = $n => {
-    if ($n < 0)
-        $n =  -$n | 0;
-    return $n;
-},
-jl_Math_absImpl = var$1 => {
-    return Math.abs(var$1);
-},
-jl_Math_abs = var$1 => {
-    return jl_Math_absImpl(var$1);
-},
-jl_Math_absImpl0 = var$1 => {
-    return Math.abs(var$1);
-},
-jl_Math_sign = var$1 => {
-    return Math.sign(var$1);
-},
-jl_Math_sign0 = var$1 => {
-    return Math.sign(var$1);
-},
-kr_RangesKt__RangesKt = $rt_classWithoutFields(),
-kr_RangesKt___RangesKt = $rt_classWithoutFields(kr_RangesKt__RangesKt),
-kr_RangesKt___RangesKt_downTo = (var$1, $to) => {
-    kr_IntProgression_$callClinit();
-    return kr_IntProgression__init_0(var$1, $to, (-1));
-};
-let kr_RangesKt___RangesKt_coerceAtLeast0 = ($$this$coerceAtLeast, $minimumValue) => {
-    if ($$this$coerceAtLeast < $minimumValue)
-        $$this$coerceAtLeast = $minimumValue;
-    return $$this$coerceAtLeast;
-},
-kr_RangesKt___RangesKt_coerceAtLeast1 = ($$this$coerceAtLeast, $minimumValue) => {
-    if (Long_lt($$this$coerceAtLeast, $minimumValue))
-        $$this$coerceAtLeast = $minimumValue;
-    return $$this$coerceAtLeast;
-},
-kr_RangesKt___RangesKt_coerceAtLeast = ($$this$coerceAtLeast, $minimumValue) => {
-    if ($$this$coerceAtLeast < $minimumValue)
-        $$this$coerceAtLeast = $minimumValue;
-    return $$this$coerceAtLeast;
-},
-kr_RangesKt___RangesKt_coerceAtMost = ($$this$coerceAtMost, $maximumValue) => {
-    if ($$this$coerceAtMost > $maximumValue)
-        $$this$coerceAtMost = $maximumValue;
-    return $$this$coerceAtMost;
-},
-kr_RangesKt___RangesKt_coerceAtMost1 = ($$this$coerceAtMost, $maximumValue) => {
-    if (Long_gt($$this$coerceAtMost, $maximumValue))
-        $$this$coerceAtMost = $maximumValue;
-    return $$this$coerceAtMost;
-},
-kr_RangesKt___RangesKt_coerceAtMost0 = ($$this$coerceAtMost, $maximumValue) => {
-    if ($$this$coerceAtMost > $maximumValue)
-        $$this$coerceAtMost = $maximumValue;
-    return $$this$coerceAtMost;
-},
-kr_RangesKt___RangesKt_coerceIn0 = ($$this$coerceIn, $minimumValue, $maximumValue) => {
-    let var$4, var$5;
-    if ($minimumValue <= $maximumValue) {
-        if ($$this$coerceIn < $minimumValue)
-            return $minimumValue;
-        if ($$this$coerceIn <= $maximumValue)
-            return $$this$coerceIn;
-        return $maximumValue;
-    }
-    var$4 = new jl_IllegalArgumentException;
-    var$5 = new jl_StringBuilder;
-    jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append(var$5, $rt_s(217));
-    var$5 = jl_StringBuilder_append0(var$5, $maximumValue);
-    jl_AbstractStringBuilder_append(var$5, $rt_s(218));
-    var$5 = jl_StringBuilder_append0(var$5, $minimumValue);
-    jl_AbstractStringBuilder_append0(var$5, 46);
-    jl_RuntimeException__init_(var$4, jl_AbstractStringBuilder_toString(var$5));
-    $rt_throw(var$4);
-},
-kr_RangesKt___RangesKt_coerceIn = ($$this$coerceIn, $minimumValue, $maximumValue) => {
-    let var$4, var$5;
-    if (!($minimumValue > $maximumValue)) {
-        if ($$this$coerceIn < $minimumValue)
-            return $minimumValue;
-        if (!($$this$coerceIn > $maximumValue))
-            return $$this$coerceIn;
-        return $maximumValue;
-    }
-    var$4 = new jl_IllegalArgumentException;
-    var$5 = new jl_StringBuilder;
-    jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append(var$5, $rt_s(217));
-    var$5 = jl_StringBuilder_append1(var$5, $maximumValue);
-    jl_AbstractStringBuilder_append(var$5, $rt_s(218));
-    var$5 = jl_StringBuilder_append1(var$5, $minimumValue);
-    jl_AbstractStringBuilder_append0(var$5, 46);
-    jl_RuntimeException__init_(var$4, jl_AbstractStringBuilder_toString(var$5));
-    $rt_throw(var$4);
-};
+cgxgtbwu_WebDefaultBaseUrlProvider = $rt_classWithoutFields();
 function cvs_GamepadInput() {
     let a = this; jl_Object.call(a);
     a.$previous0 = null;
@@ -14247,7 +14087,7 @@ let cvs_GamepadInput_getController = $this => {
     a: {
         try {
             var$1 = cbgc_Controllers_getControllers();
-            kji_Intrinsics_checkNotNullExpressionValue(var$1, $rt_s(219));
+            kji_Intrinsics_checkNotNullExpressionValue(var$1, $rt_s(217));
             var$2 = k_Result_constructor_impl(kc_CollectionsKt___CollectionsKt_firstOrNull(var$1));
             break a;
         } catch ($$e) {
@@ -14400,7 +14240,7 @@ otji_JSWrapper_wrap = $jsNumber => {
     if ($jsNumber === null)
         return null;
     $type = $rt_str(typeof $jsNumber);
-    $isObject = !jl_String_equals($type, $rt_s(220)) && !jl_String_equals($type, $rt_s(221)) ? 0 : 1;
+    $isObject = !jl_String_equals($type, $rt_s(218)) && !jl_String_equals($type, $rt_s(219)) ? 0 : 1;
     otji_JSWrapper$Helper_$callClinit();
     $wrappers = otji_JSWrapper$Helper_wrappers;
     if ($wrappers !== null) {
@@ -14413,7 +14253,7 @@ otji_JSWrapper_wrap = $jsNumber => {
             $wrappers.set($jsNumber, new WeakRef($wrapper));
             return $wrapper;
         }
-        if (jl_String_equals($type, $rt_s(222))) {
+        if (jl_String_equals($type, $rt_s(220))) {
             $stringWrappers = otji_JSWrapper$Helper_stringWrappers;
             $stringFinalizationRegistry = otji_JSWrapper$Helper_stringFinalizationRegistry;
             $existingRef = $stringWrappers.get($jsNumber);
@@ -14426,7 +14266,7 @@ otji_JSWrapper_wrap = $jsNumber => {
             $stringFinalizationRegistry.register($wrapperAsJs, $jsNumber);
             return $wrapper;
         }
-        if (jl_String_equals($type, $rt_s(223))) {
+        if (jl_String_equals($type, $rt_s(221))) {
             $numberWrappers = otji_JSWrapper$Helper_numberWrappers;
             $numberFinalizationRegistry = otji_JSWrapper$Helper_numberFinalizationRegistry;
             $existingRef = $numberWrappers.get($jsNumber);
@@ -14439,7 +14279,7 @@ otji_JSWrapper_wrap = $jsNumber => {
             $numberFinalizationRegistry.register($wrapperAsJs, $jsNumber);
             return $wrapper;
         }
-        if (jl_String_equals($type, $rt_s(224))) {
+        if (jl_String_equals($type, $rt_s(222))) {
             $existingRef = otji_JSWrapper$Helper_undefinedWrapper;
             $existing = $existingRef === null ? void 0 : $existingRef.deref();
             if (!(typeof $existing == 'undefined' ? 1 : 0))
@@ -14474,13 +14314,13 @@ otji_JSWrapper_jsToJava = $o => {
 otji_JSWrapper_hashCode = $this => {
     let $type, $s, $hashCode, $i, $code;
     $type = $rt_str(typeof $this.$js);
-    if (!jl_String_equals($type, $rt_s(220)) && !jl_String_equals($type, $rt_s(225)) && !jl_String_equals($type, $rt_s(221))) {
-        if (jl_String_equals($type, $rt_s(223)))
+    if (!jl_String_equals($type, $rt_s(218)) && !jl_String_equals($type, $rt_s(223)) && !jl_String_equals($type, $rt_s(219))) {
+        if (jl_String_equals($type, $rt_s(221)))
             return $this.$js;
-        if (jl_String_equals($type, $rt_s(226)))
+        if (jl_String_equals($type, $rt_s(224)))
             return BigInt.asIntN($this.$js, 32);
-        if (!jl_String_equals($type, $rt_s(222))) {
-            if (!jl_String_equals($type, $rt_s(227)))
+        if (!jl_String_equals($type, $rt_s(220))) {
+            if (!jl_String_equals($type, $rt_s(225)))
                 return 0;
             return $this.$js !== !!1 ? 0 : 1;
         }
@@ -14513,7 +14353,7 @@ otji_JSWrapper_equals = ($this, $obj) => {
     return $this.$js !== $obj.$js ? 0 : 1;
 },
 otji_JSWrapper_toString = $this => {
-    return (typeof $this.$js == 'undefined' ? 1 : 0) ? $rt_s(224) : $rt_str($this.$js.toString());
+    return (typeof $this.$js == 'undefined' ? 1 : 0) ? $rt_s(222) : $rt_str($this.$js.toString());
 },
 jl_Cloneable = $rt_classWithoutFields(0),
 jl_CloneNotSupportedException = $rt_classWithoutFields(jl_Exception),
@@ -14874,12 +14714,12 @@ ju_AbstractMap_toString = $this => {
         var$4 = ju_LinkedHashMapIterator$EntryIterator_next($iter);
         $e = var$4.$key;
         if ($e === $this)
-            $e = $rt_s(228);
+            $e = $rt_s(226);
         jl_StringBuilder_append($sb, $e);
         jl_AbstractStringBuilder_append0($sb, 61);
-        $e = var$4.$value0;
+        $e = var$4.$value1;
         if ($e === $this)
-            $e = $rt_s(228);
+            $e = $rt_s(226);
         jl_StringBuilder_append($sb, $e);
     }
     while (ju_LinkedHashMapIterator_hasNext(var$3)) {
@@ -14887,12 +14727,12 @@ ju_AbstractMap_toString = $this => {
         $e = ju_LinkedHashMapIterator$EntryIterator_next($iter);
         var$4 = $e.$key;
         if (var$4 === $this)
-            var$4 = $rt_s(228);
+            var$4 = $rt_s(226);
         jl_StringBuilder_append($sb, var$4);
         jl_AbstractStringBuilder_append0($sb, 61);
-        $e = $e.$value0;
+        $e = $e.$value1;
         if ($e === $this)
-            $e = $rt_s(228);
+            $e = $rt_s(226);
         jl_StringBuilder_append($sb, $e);
     }
     jl_AbstractStringBuilder_append0($sb, 125);
@@ -14959,7 +14799,7 @@ ju_HashMap_get = ($this, $key) => {
     $m = ju_HashMap_entryByKey($this, $key);
     if ($m === null)
         return null;
-    return $m.$value0;
+    return $m.$value1;
 },
 ju_HashMap_entryByKey = ($this, $key) => {
     let $m, $hash;
@@ -15024,8 +14864,8 @@ ju_HashMap_put = ($this, $key, $value) => {
                 ju_HashMap_rehash($this);
         }
     }
-    $key = var$3.$value0;
-    var$3.$value0 = $value;
+    $key = var$3.$value1;
+    var$3.$value1 = $value;
     return $key;
 },
 ju_HashMap_createHashedEntry = ($this, $key, $index, $hash) => {
@@ -15046,7 +14886,7 @@ ju_HashMap_putAll = ($this, $map) => {
         $map = ($map.$entrySet()).$iterator0();
         while ($map.$hasNext()) {
             var$4 = $map.$next();
-            ju_LinkedHashMap_putImpl(var$2, var$4.$key, var$4.$value0, 0, var$2.$accessOrder);
+            ju_LinkedHashMap_putImpl(var$2, var$4.$key, var$4.$value1, 0, var$2.$accessOrder);
         }
     }
 },
@@ -15083,7 +14923,7 @@ ju_HashMap_remove = ($this, $key) => {
     $entry = ju_HashMap_removeByKey($this, $key);
     if ($entry === null)
         return null;
-    return $entry.$value0;
+    return $entry.$value1;
 },
 ju_HashMap_removeByKey = ($this, $key) => {
     let $index, $last, $entry, $entry_0, $hash, var$7;
@@ -15169,7 +15009,7 @@ ju_LinkedHashMap_get = ($this, $key) => {
     if ($key !== null) {
         if ($this.$accessOrder)
             ju_LinkedHashMap_linkEntry($this, $key, 0);
-        var$2 = $key.$value0;
+        var$2 = $key.$value1;
     }
     return var$2;
 },
@@ -15224,8 +15064,8 @@ ju_LinkedHashMap_putImpl = ($this, $key, $value, $first, $forceMotion) => {
         $entry = $existing;
     } else if ($forceMotion)
         ju_LinkedHashMap_linkEntry($this, $entry, $first);
-    $existing = $entry.$value0;
-    $entry.$value0 = $value;
+    $existing = $entry.$value1;
+    $entry.$value1 = $value;
     return $existing;
 },
 ju_LinkedHashMap_linkEntry = ($this, $entry, $first) => {
@@ -15297,7 +15137,7 @@ ju_LinkedHashMap_remove = ($this, $key) => {
     if ($m === null)
         return null;
     ju_LinkedHashMap_unlinkEntry($this, $m);
-    return $m.$value0;
+    return $m.$value1;
 },
 ju_LinkedHashMap_unlinkEntry = ($this, $entry) => {
     let $p, $n;
@@ -15345,8 +15185,8 @@ cgxgtbw_WebApplication$AppState__init_ = (var_0, var_1) => {
 },
 cgxgtbw_WebApplication$AppState__clinit_ = () => {
     let var$1, var$2, var$3;
-    cgxgtbw_WebApplication$AppState_INIT = cgxgtbw_WebApplication$AppState__init_($rt_s(229), 0);
-    var$1 = cgxgtbw_WebApplication$AppState__init_($rt_s(230), 1);
+    cgxgtbw_WebApplication$AppState_INIT = cgxgtbw_WebApplication$AppState__init_($rt_s(227), 0);
+    var$1 = cgxgtbw_WebApplication$AppState__init_($rt_s(228), 1);
     cgxgtbw_WebApplication$AppState_APP_LOOP = var$1;
     var$2 = $rt_createArray(cgxgtbw_WebApplication$AppState, 2);
     var$3 = var$2.data;
@@ -15480,7 +15320,7 @@ jl_Long_parseLongImpl = ($s, $beginIndex, $endIndex, $radix) => {
             }
             if (Long_gt($value, $maxValue)) {
                 $s = new jl_NumberFormatException;
-                jl_RuntimeException__init_($s, $rt_s(231));
+                jl_RuntimeException__init_($s, $rt_s(229));
                 $rt_throw($s);
             }
             $value = Long_add(Long_mul(var$8, $value), Long_fromInt($digit));
@@ -15491,7 +15331,7 @@ jl_Long_parseLongImpl = ($s, $beginIndex, $endIndex, $radix) => {
                 $s = jl_String_valueOf(jl_String_substring($s, $beginIndex, $endIndex));
                 var$12 = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_(var$12);
-                jl_StringBuilder_append(jl_StringBuilder_append(var$12, $rt_s(232)), $s);
+                jl_StringBuilder_append(jl_StringBuilder_append(var$12, $rt_s(230)), $s);
                 jl_RuntimeException__init_(var$11, jl_AbstractStringBuilder_toString(var$12));
                 $rt_throw(var$11);
             }
@@ -15683,7 +15523,7 @@ jl_Thread__clinit_ = () => {
     var$2 = null;
     var$1.$finishedLock = new jl_Object;
     var$1.$alive = 1;
-    var$1.$name11 = $rt_s(233);
+    var$1.$name11 = $rt_s(231);
     var$1.$target2 = var$2;
     var$3 = jl_Thread_nextId;
     jl_Thread_nextId = var$3 + 1 | 0;
@@ -15699,16 +15539,92 @@ function jl_StackTraceElement() {
     a.$declaringClass = null;
     a.$methodName = null;
 }
-let cbgm_MathUtils = $rt_classWithoutFields(),
+let jl_Math = $rt_classWithoutFields(),
+jl_Math_sin = var$1 => {
+    return Math.sin(var$1);
+},
+jl_Math_cos = var$1 => {
+    return Math.cos(var$1);
+},
+jl_Math_sqrt = var$1 => {
+    return Math.sqrt(var$1);
+},
+jl_Math_cbrt = var$1 => {
+    return var$1 > 0.0 ? jl_Math_pow(var$1, 0.3333333333333333) :  -jl_Math_pow( -var$1, 0.3333333333333333);
+},
+jl_Math_ceil = var$1 => {
+    return Math.ceil(var$1);
+},
+jl_Math_floor = var$1 => {
+    return Math.floor(var$1);
+},
+jl_Math_pow = (var$1, $y) => {
+    return jl_Math_powImpl(var$1, $y);
+},
+jl_Math_powImpl = (var$1, var$2) => {
+    return Math.pow(var$1, var$2);
+},
+jl_Math_atan2 = (var$1, var$2) => {
+    return Math.atan2(var$1, var$2);
+},
+jl_Math_round = var$1 => {
+    return var$1 + jl_Math_sign0(var$1) * 0.5 | 0;
+},
+jl_Math_randomImpl = () => {
+    return Math.random();
+},
+jl_Math_min = ($a, $b) => {
+    if ($a < $b)
+        $b = $a;
+    return $b;
+},
+jl_Math_max0 = ($a, $b) => {
+    if ($a > $b)
+        $b = $a;
+    return $b;
+},
+jl_Math_minImpl = (var$1, var$2) => {
+    return Math.min(var$1, var$2);
+},
+jl_Math_min0 = (var$1, var$2) => {
+    return jl_Math_minImpl(var$1, var$2);
+},
+jl_Math_maxImpl = (var$1, var$2) => {
+    return Math.max(var$1, var$2);
+},
+jl_Math_max = (var$1, var$2) => {
+    return jl_Math_maxImpl(var$1, var$2);
+},
+jl_Math_abs0 = $n => {
+    if ($n < 0)
+        $n =  -$n | 0;
+    return $n;
+},
+jl_Math_absImpl = var$1 => {
+    return Math.abs(var$1);
+},
+jl_Math_abs = var$1 => {
+    return jl_Math_absImpl(var$1);
+},
+jl_Math_absImpl0 = var$1 => {
+    return Math.abs(var$1);
+},
+jl_Math_sign = var$1 => {
+    return Math.sign(var$1);
+},
+jl_Math_sign0 = var$1 => {
+    return Math.sign(var$1);
+},
+cbgm_MathUtils = $rt_classWithoutFields(),
 cbgm_MathUtils_random0 = null,
 cbgm_MathUtils_$callClinit = () => {
     cbgm_MathUtils_$callClinit = $rt_eraseClinit(cbgm_MathUtils);
     cbgm_MathUtils__clinit_();
 },
-cbgm_MathUtils_sin = $radians => {
+cbgm_MathUtils_sin = var$1 => {
     cbgm_MathUtils_$callClinit();
     cbgm_MathUtils$Sin_$callClinit();
-    return cbgm_MathUtils$Sin_table.data[($radians * 2607.594482421875 | 0) & 16383];
+    return cbgm_MathUtils$Sin_table.data[(var$1 * 2607.594482421875 | 0) & 16383];
 },
 cbgm_MathUtils_cos = $radians => {
     cbgm_MathUtils_$callClinit();
@@ -15769,7 +15685,7 @@ cbgm_MathUtils_random1 = $range => {
     var$3 = Long_fromInt($range);
     if (Long_le(var$3, Long_ZERO)) {
         var$2 = new jl_IllegalArgumentException;
-        jl_RuntimeException__init_(var$2, $rt_s(234));
+        jl_RuntimeException__init_(var$2, $rt_s(232));
         $rt_throw(var$2);
     }
     var$4 = Long_sub(var$3, Long_fromInt(1));
@@ -16037,7 +15953,7 @@ jl_System_arraycopy = ($src, $srcPos, $dest, $destPos, $length) => {
         $rt_throw($src);
     }
     $dest = new jl_NullPointerException;
-    jl_RuntimeException__init_($dest, $rt_s(235));
+    jl_RuntimeException__init_($dest, $rt_s(233));
     $rt_throw($dest);
 },
 jl_System_fastArraycopy = ($src, $srcPos, $dest, $destPos, $length) => {
@@ -16075,16 +15991,16 @@ jl_System_setProperty = (var$1, var$2) => {
         var$3 = new ju_Properties;
         ju_Hashtable__init_(var$3);
         var$4 = var$3;
-        ju_Hashtable_put(var$4, $rt_s(236), $rt_s(237));
-        ju_Hashtable_put(var$4, $rt_s(156), $rt_s(238));
+        ju_Hashtable_put(var$4, $rt_s(234), $rt_s(235));
+        ju_Hashtable_put(var$4, $rt_s(156), $rt_s(236));
         otrf_VirtualFileSystemProvider_getInstance();
-        ju_Hashtable_put(var$4, $rt_s(239), $rt_s(18));
+        ju_Hashtable_put(var$4, $rt_s(237), $rt_s(18));
         otrf_VirtualFileSystemProvider_getInstance();
+        ju_Hashtable_put(var$4, $rt_s(238), $rt_s(239));
         ju_Hashtable_put(var$4, $rt_s(240), $rt_s(241));
         ju_Hashtable_put(var$4, $rt_s(242), $rt_s(243));
-        ju_Hashtable_put(var$4, $rt_s(244), $rt_s(245));
-        ju_Hashtable_put(var$4, $rt_s(246), $rt_s(237));
-        ju_Hashtable_put(var$4, $rt_s(247), $rt_s(18));
+        ju_Hashtable_put(var$4, $rt_s(244), $rt_s(235));
+        ju_Hashtable_put(var$4, $rt_s(245), $rt_s(18));
         var$5 = new ju_Properties;
         ju_Hashtable__init_(var$5);
         var$5.$defaults0 = var$3;
@@ -16198,7 +16114,7 @@ let cgxgtbwa_AssetDownloadImpl_load = ($this, $async, $url, $type, $listener) =>
     var$6 = $listener === null ? 0 : 1;
     var$7 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$7);
-    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(var$7, $rt_s(248)), $async), $rt_s(249)), $internalListener), $rt_s(250)), $url), $rt_s(251)), var$6);
+    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(var$7, $rt_s(246)), $async), $rt_s(247)), $internalListener), $rt_s(248)), $url), $rt_s(249)), var$6);
     jl_AbstractStringBuilder_toString(var$7);
     $internalListener = new cgxgtbwa_AssetDownloadImpl$1;
     $internalListener.$this$019 = $this;
@@ -16208,7 +16124,7 @@ let cgxgtbwa_AssetDownloadImpl_load = ($this, $async, $url, $type, $listener) =>
         var$7 = jl_System_out();
         $listener = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($listener);
-        jl_StringBuilder_append(jl_StringBuilder_append($listener, $rt_s(252)), $url);
+        jl_StringBuilder_append(jl_StringBuilder_append($listener, $rt_s(250)), $url);
         $listener = jl_AbstractStringBuilder_toString($listener);
         otcic_JsConsolePrintStream_println(var$7, $listener);
     }
@@ -16225,13 +16141,13 @@ let cgxgtbwa_AssetDownloadImpl_load = ($this, $async, $url, $type, $listener) =>
                 $url = jl_String_valueOf($type);
                 $listener = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($listener);
-                jl_StringBuilder_append(jl_StringBuilder_append($listener, $rt_s(253)), $url);
+                jl_StringBuilder_append(jl_StringBuilder_append($listener, $rt_s(251)), $url);
                 jl_AbstractStringBuilder_toString($listener);
                 $url = new cbgu_GdxRuntimeException;
                 $type = jl_String_valueOf($type);
                 $listener = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($listener);
-                jl_StringBuilder_append(jl_StringBuilder_append($listener, $rt_s(254)), $type);
+                jl_StringBuilder_append(jl_StringBuilder_append($listener, $rt_s(252)), $type);
                 jl_RuntimeException__init_($url, jl_AbstractStringBuilder_toString($listener));
                 $rt_throw($url);
         }
@@ -16243,13 +16159,13 @@ cgxgtbwa_AssetDownloadImpl_loadScript = ($this, $async, $url, $listener) => {
     var$4 = $listener === null ? 0 : 1;
     $current = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($current);
-    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append($current, $rt_s(248)), $async), $rt_s(250)), $url), $rt_s(251)), var$4);
+    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append($current, $rt_s(246)), $async), $rt_s(248)), $url), $rt_s(249)), var$4);
     jl_AbstractStringBuilder_toString($current);
     if ($this.$showLogs) {
         var$6 = jl_System_out();
         $document = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($document);
-        jl_StringBuilder_append(jl_StringBuilder_append($document, $rt_s(255)), $url);
+        jl_StringBuilder_append(jl_StringBuilder_append($document, $rt_s(253)), $url);
         $document = jl_AbstractStringBuilder_toString($document);
         otcic_JsConsolePrintStream_println(var$6, $document);
     }
@@ -16261,8 +16177,8 @@ cgxgtbwa_AssetDownloadImpl_loadScript = ($this, $async, $url, $listener) => {
     var$8.$val$listener0 = $listener;
     $current.addEventListener("load", otji_JS_function(otji_JSWrapper_unwrap(var$8), "handleEvent"));
     var$9 = new cgxgtbwa_AssetDownloadImpl$loadScript$lambda$_2_0;
-    var$9.$_031 = $this;
-    var$9.$_111 = $url;
+    var$9.$_033 = $this;
+    var$9.$_112 = $url;
     var$9.$_24 = $listener;
     $current.addEventListener("error", otji_JS_function(otji_JSWrapper_unwrap(var$9), "handleEvent"));
     $listener = $rt_ustr($url);
@@ -16270,19 +16186,19 @@ cgxgtbwa_AssetDownloadImpl_loadScript = ($this, $async, $url, $listener) => {
     $document.body.appendChild($current);
     $listener = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($listener);
-    jl_StringBuilder_append(jl_StringBuilder_append($listener, $rt_s(256)), $url);
+    jl_StringBuilder_append(jl_StringBuilder_append($listener, $rt_s(254)), $url);
     jl_AbstractStringBuilder_toString($listener);
 },
 cgxgtbwa_AssetDownloadImpl_loadBinary = ($this, $async, $url, $listener, $count) => {
     let var$5, var$6;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(var$5, $rt_s(248)), $async), $rt_s(257)), $count), $rt_s(250)), $url);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(var$5, $rt_s(246)), $async), $rt_s(255)), $count), $rt_s(248)), $url);
     jl_AbstractStringBuilder_toString(var$5);
     if ($count == 3) {
         var$6 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$6);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(258)), $url);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(256)), $url);
         jl_AbstractStringBuilder_toString(var$6);
         if ($listener !== null)
             cgxgtbwa_AssetDownloadImpl$1_onFailure($listener, $url);
@@ -16291,17 +16207,17 @@ cgxgtbwa_AssetDownloadImpl_loadBinary = ($this, $async, $url, $listener, $count)
     if (!$async) {
         var$5 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$5);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(259)), $url), $rt_s(257)), $count);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(257)), $url), $rt_s(255)), $count);
         jl_AbstractStringBuilder_toString(var$5);
         cgxgtbwa_AssetDownloadImpl_loadBinaryInternally($this, 0, $url, $listener, $count);
     } else {
         var$5 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$5);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(260)), $url), $rt_s(257)), $count);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(258)), $url), $rt_s(255)), $count);
         jl_AbstractStringBuilder_toString(var$5);
         var$5 = new cgxgtbwa_AssetDownloadImpl$loadBinary$lambda$_3_0;
-        var$5.$_035 = $this;
-        var$5.$_113 = $url;
+        var$5.$_037 = $this;
+        var$5.$_114 = $url;
         var$5.$_26 = $listener;
         var$5.$_34 = $count;
         setTimeout(otji_JS_function(otji_JSWrapper_unwrap(var$5), "onTimer"), 0);
@@ -16311,50 +16227,50 @@ cgxgtbwa_AssetDownloadImpl_loadBinaryInternally = ($this, $async, $url, $listene
     let $t, $request, $settled, var$8, var$9, $$je;
     $t = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($t);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append($t, $rt_s(261)), $async), $rt_s(257)), $count), $rt_s(250)), $url);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append($t, $rt_s(259)), $async), $rt_s(255)), $count), $rt_s(248)), $url);
     jl_AbstractStringBuilder_toString($t);
     $request = new XMLHttpRequest();
     $settled = $rt_createBooleanArray(1);
     $settled.data[0] = 0;
     $t = new cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_0;
-    $t.$_014 = $this;
+    $t.$_016 = $this;
     $t.$_13 = $url;
     $t.$_22 = $count;
     $t.$_32 = $settled;
     $t.$_40 = $async;
     $t.$_50 = $listener;
-    otjde_EventTarget_onEvent$static($request, $rt_s(262), otji_JSWrapper_unwrap($t));
+    otjde_EventTarget_onEvent$static($request, $rt_s(260), otji_JSWrapper_unwrap($t));
     $t = new cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_1;
-    $t.$_01 = $this;
+    $t.$_02 = $this;
     $t.$_1 = $url;
     $t.$_2 = $count;
     $t.$_3 = $settled;
     $t.$_4 = $async;
     $t.$_5 = $listener;
-    otjde_EventTarget_onEvent$static($request, $rt_s(263), otji_JSWrapper_unwrap($t));
+    otjde_EventTarget_onEvent$static($request, $rt_s(261), otji_JSWrapper_unwrap($t));
     $t = new cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_2;
-    $t.$_050 = $this;
-    $t.$_120 = $url;
+    $t.$_053 = $this;
+    $t.$_122 = $url;
     $t.$_211 = $count;
     $t.$_37 = $settled;
     $t.$_44 = $async;
     $t.$_53 = $listener;
-    otjde_EventTarget_onEvent$static($request, $rt_s(264), otji_JSWrapper_unwrap($t));
+    otjde_EventTarget_onEvent$static($request, $rt_s(262), otji_JSWrapper_unwrap($t));
     $t = new cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_3;
-    $t.$_038 = $this;
-    $t.$_115 = $url;
+    $t.$_040 = $this;
+    $t.$_116 = $url;
     $t.$_27 = $request;
     $t.$_35 = $count;
     $t.$_42 = $settled;
     $t.$_52 = $async;
     $t.$_60 = $listener;
     var$8 = new otja_XMLHttpRequest$onComplete$lambda$_23_0;
-    var$8.$_042 = $request;
-    var$8.$_117 = $t;
-    otjde_EventTarget_onEvent$static($request, $rt_s(265), otji_JSWrapper_unwrap(var$8));
+    var$8.$_044 = $request;
+    var$8.$_118 = $t;
+    otjde_EventTarget_onEvent$static($request, $rt_s(263), otji_JSWrapper_unwrap(var$8));
     $t = new cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_4;
-    $t.$_027 = $this;
-    $t.$_18 = $url;
+    $t.$_029 = $this;
+    $t.$_19 = $url;
     $t.$_23 = $request;
     $t.$_33 = $count;
     $t.$_41 = $settled;
@@ -16364,21 +16280,21 @@ cgxgtbwa_AssetDownloadImpl_loadBinaryInternally = ($this, $async, $url, $listene
     var$9 = $listener === null ? 0 : 1;
     $t = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($t);
-    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($t, $rt_s(266)), $url), $rt_s(251)), var$9);
+    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($t, $rt_s(264)), $url), $rt_s(249)), var$9);
     jl_AbstractStringBuilder_toString($t);
     $t = new cgxgtbwa_AssetDownloadImpl$setOnProgress$lambda$_8_0;
-    $t.$_059 = $this;
-    $t.$_121 = $url;
+    $t.$_063 = $this;
+    $t.$_123 = $url;
     $t.$_212 = $listener;
-    otjde_EventTarget_onEvent$static($request, $rt_s(267), otji_JSWrapper_unwrap($t));
+    otjde_EventTarget_onEvent$static($request, $rt_s(265), otji_JSWrapper_unwrap($t));
     a: {
         try {
             $request.open("GET", $rt_ustr($url), !!$async);
             if ($async)
                 $request.responseType = "arraybuffer";
             var$8 = jl_StringBuilder__init_();
-            jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(268)), $url), $rt_s(257)), $count);
-            cgxgtbwa_AssetDownloadImpl_log($this, $rt_s(269), jl_StringBuilder_toString(var$8));
+            jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(266)), $url), $rt_s(255)), $count);
+            cgxgtbwa_AssetDownloadImpl_log($this, $rt_s(267), jl_StringBuilder_toString(var$8));
             $request.send();
             break a;
         } catch ($$e) {
@@ -16388,7 +16304,7 @@ cgxgtbwa_AssetDownloadImpl_loadBinaryInternally = ($this, $async, $url, $listene
                 $t = jl_String_valueOf($t);
                 var$8 = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_(var$8);
-                jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(270)), $url), $rt_s(257)), $count), $rt_s(271)), $t);
+                jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(268)), $url), $rt_s(255)), $count), $rt_s(269)), $t);
                 jl_AbstractStringBuilder_toString(var$8);
                 if (!cgxgtbwa_AssetDownloadImpl_trySettle($this, $settled))
                     break a;
@@ -16406,20 +16322,20 @@ cgxgtbwa_AssetDownloadImpl_handleTerminalStatus = ($this, $async, $url, $listene
     var$7 = $request.readyState;
     $data = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($data);
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append($data, $rt_s(272)), $status), $rt_s(250)), $url), $rt_s(257)), $count), $rt_s(273)), var$7);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append($data, $rt_s(270)), $status), $rt_s(248)), $url), $rt_s(255)), $count), $rt_s(271)), var$7);
     jl_AbstractStringBuilder_toString($data);
     if ($status != 200) {
         if ($status != 404 && $status != 403) {
             $request = new jl_StringBuilder;
             jl_AbstractStringBuilder__init_($request);
-            jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append($request, $rt_s(274)), $status), $rt_s(250)), $url), $rt_s(257)), $count);
+            jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append($request, $rt_s(272)), $status), $rt_s(248)), $url), $rt_s(255)), $count);
             jl_AbstractStringBuilder_toString($request);
             cgxgtbwa_AssetDownloadImpl_retryOrFail($this, $async, $url, $listener, $count);
             return;
         }
         $request = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($request);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append($request, $rt_s(275)), $status), $rt_s(250)), $url), $rt_s(257)), $count);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append($request, $rt_s(273)), $status), $rt_s(248)), $url), $rt_s(255)), $count);
         jl_AbstractStringBuilder_toString($request);
         if ($listener !== null)
             cgxgtbwa_AssetDownloadImpl$1_onFailure($listener, $url);
@@ -16429,13 +16345,13 @@ cgxgtbwa_AssetDownloadImpl_handleTerminalStatus = ($this, $async, $url, $listene
     if (!(typeof $arrayBuffer == 'string' ? 1 : 0)) {
         $request = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($request);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($request, $rt_s(276)), $url), $rt_s(257)), $count);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($request, $rt_s(274)), $url), $rt_s(255)), $count);
         jl_AbstractStringBuilder_toString($request);
         $data = new Int8Array($arrayBuffer);
     } else {
         $request = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($request);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($request, $rt_s(277)), $url), $rt_s(257)), $count);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($request, $rt_s(275)), $url), $rt_s(255)), $count);
         jl_AbstractStringBuilder_toString($request);
         $data = cgxgtbwdt_TypedArrays_getInt8Array(jl_String_getBytes($rt_str($arrayBuffer)));
         $arrayBuffer = $data.buffer;
@@ -16444,7 +16360,7 @@ cgxgtbwa_AssetDownloadImpl_handleTerminalStatus = ($this, $async, $url, $listene
         $async = $data.length;
         $request = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($request);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($request, $rt_s(278)), $url), $rt_s(279)), $async), $rt_s(257)), $count);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($request, $rt_s(276)), $url), $rt_s(277)), $async), $rt_s(255)), $count);
         jl_AbstractStringBuilder_toString($request);
         $request = new cgxgtbwa_WebBlob;
         $request.$data15 = $data;
@@ -16457,12 +16373,12 @@ cgxgtbwa_AssetDownloadImpl_retryOrFail = ($this, $async, $url, $listener, $count
     $newCount = $count + 1 | 0;
     var$6 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$6);
-    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(280)), $url), $rt_s(281)), $count), $rt_s(282)), $newCount), $rt_s(283)), $async);
+    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(278)), $url), $rt_s(279)), $count), $rt_s(280)), $newCount), $rt_s(281)), $async);
     jl_AbstractStringBuilder_toString(var$6);
     if ($newCount >= 3) {
         var$7 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$7);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$7, $rt_s(284)), $url), $rt_s(257)), $count);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$7, $rt_s(282)), $url), $rt_s(255)), $count);
         jl_AbstractStringBuilder_toString(var$7);
         if ($listener !== null)
             cgxgtbwa_AssetDownloadImpl$1_onFailure($listener, $url);
@@ -16470,11 +16386,11 @@ cgxgtbwa_AssetDownloadImpl_retryOrFail = ($this, $async, $url, $listener, $count
     }
     var$7 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$7);
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$7, $rt_s(285)), $url), $rt_s(257)), $newCount);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$7, $rt_s(283)), $url), $rt_s(255)), $newCount);
     jl_AbstractStringBuilder_toString(var$7);
     var$7 = new cgxgtbwa_AssetDownloadImpl$retryOrFail$lambda$_6_0;
-    var$7.$_049 = $this;
-    var$7.$_119 = $async;
+    var$7.$_052 = $this;
+    var$7.$_121 = $async;
     var$7.$_210 = $url;
     var$7.$_36 = $listener;
     var$7.$_43 = $newCount;
@@ -16486,7 +16402,7 @@ cgxgtbwa_AssetDownloadImpl_trySettle = ($this, $settled) => {
     var$2 = $settled[0];
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append2(jl_StringBuilder_append(var$3, $rt_s(286)), var$2);
+    jl_StringBuilder_append2(jl_StringBuilder_append(var$3, $rt_s(284)), var$2);
     jl_AbstractStringBuilder_toString(var$3);
     if ($settled[0])
         return 0;
@@ -16515,7 +16431,7 @@ let cgxgtbwa_AssetLoadImpl_setupFileDrop = ($this, $canvas, $teaApplication) => 
     var$3 = $teaApplication.$config.$windowListener === null ? 0 : 1;
     $config = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($config);
-    jl_StringBuilder_append2(jl_StringBuilder_append($config, $rt_s(287)), var$3);
+    jl_StringBuilder_append2(jl_StringBuilder_append($config, $rt_s(285)), var$3);
     jl_AbstractStringBuilder_toString($config);
     $config = $teaApplication.$config;
     if ($config.$windowListener !== null) {
@@ -16537,12 +16453,12 @@ cgxgtbwa_AssetLoadImpl_getAssetUrl = $this => {
     var$1 = $this.$baseUrl;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(288)), var$1), $rt_s(289));
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(286)), var$1), $rt_s(287));
     jl_AbstractStringBuilder_toString(var$2);
     var$1 = $this.$baseUrl;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$2, var$1), $rt_s(289));
+    jl_StringBuilder_append(jl_StringBuilder_append(var$2, var$1), $rt_s(287));
     return jl_AbstractStringBuilder_toString(var$2);
 },
 cgxgtbwa_AssetLoadImpl_getScriptUrl = $this => {
@@ -16550,12 +16466,12 @@ cgxgtbwa_AssetLoadImpl_getScriptUrl = $this => {
     var$1 = $this.$baseUrl;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(288)), var$1), $rt_s(290));
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(286)), var$1), $rt_s(288));
     jl_AbstractStringBuilder_toString(var$2);
     var$1 = $this.$baseUrl;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$2, var$1), $rt_s(290));
+    jl_StringBuilder_append(jl_StringBuilder_append(var$2, var$1), $rt_s(288));
     return jl_AbstractStringBuilder_toString(var$2);
 },
 cgxgtbwa_AssetLoadImpl_loadScript = ($this, $path, $listener) => {
@@ -16563,7 +16479,7 @@ cgxgtbwa_AssetLoadImpl_loadScript = ($this, $path, $listener) => {
     var$3 = $listener === null ? 0 : 1;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(151)), $path), $rt_s(251)), var$3);
+    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(151)), $path), $rt_s(249)), var$3);
     jl_AbstractStringBuilder_toString(var$4);
     var$4 = $this.$assetDownloader;
     var$5 = cgxgtbwa_AssetLoadImpl_getScriptUrl($this);
@@ -16578,7 +16494,7 @@ cgxgtbwa_AssetLoadImpl_getQueue = $this => {
     $size = $this.$assetInQueue.$size0;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(291)), $size);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(289)), $size);
     jl_AbstractStringBuilder_toString(var$2);
     return $size;
 },
@@ -16589,7 +16505,7 @@ cgxgtbwa_AssetLoadImpl_isDownloading = $this => {
             $result = ju_HashSet_size($this.$assetDownloading);
             var$2 = new jl_StringBuilder;
             jl_AbstractStringBuilder__init_(var$2);
-            jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(291)), $result);
+            jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(289)), $result);
             jl_AbstractStringBuilder_toString(var$2);
             if ($result <= 0) {
                 $result = 0;
@@ -16600,32 +16516,32 @@ cgxgtbwa_AssetLoadImpl_isDownloading = $this => {
     }
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append2(jl_StringBuilder_append(var$2, $rt_s(288)), $result);
+    jl_StringBuilder_append2(jl_StringBuilder_append(var$2, $rt_s(286)), $result);
     jl_AbstractStringBuilder_toString(var$2);
     return $result;
 },
 cgxgtbwa_AssetLoadImpl_addAssetToQueue = ($this, $path, $assetType, $fileType, $listener, $overwrite) => {
     let $path1, $queueAsset, var$8, var$9, $exists, var$11, $fileHandle;
-    $path1 = jl_String_replace(jl_String_trim($path), $rt_s(292), $rt_s(18));
+    $path1 = jl_String_replace(jl_String_trim($path), $rt_s(290), $rt_s(18));
     if (jl_String_startsWith($path1, $rt_s(18)))
         $path1 = jl_String_substring0($path1, 1);
     $queueAsset = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($queueAsset);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(293)), $path), $rt_s(294)), $path1);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(291)), $path), $rt_s(292)), $path1);
     jl_AbstractStringBuilder_toString($queueAsset);
     var$8 = jl_String_valueOf($assetType);
     var$9 = jl_String_valueOf($fileType);
     $exists = $listener === null ? 0 : 1;
     $queueAsset = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($queueAsset);
-    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(151)), $path), $rt_s(294)), $path1), $rt_s(295)), var$8), $rt_s(296)), var$9), $rt_s(251)), $exists), $rt_s(297)), $overwrite);
+    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(151)), $path), $rt_s(292)), $path1), $rt_s(293)), var$8), $rt_s(294)), var$9), $rt_s(249)), $exists), $rt_s(295)), $overwrite);
     jl_AbstractStringBuilder_toString($queueAsset);
     if (jl_String_isEmpty($path1))
         return;
     $exists = $this.$assetInQueue.$size0;
     $path = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($path);
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(151)), $path1), $rt_s(298)), $exists);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(151)), $path1), $rt_s(296)), $exists);
     jl_AbstractStringBuilder_toString($path);
     var$11 = 0;
     a: {
@@ -16636,7 +16552,7 @@ cgxgtbwa_AssetLoadImpl_addAssetToQueue = ($this, $path, $assetType, $fileType, $
             if (jl_String_equals((cbgu_Array_get($path, var$11)).$assetUrl, $path1)) {
                 $path = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($path);
-                jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(299)), $path1), $rt_s(300)), var$11);
+                jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(297)), $path1), $rt_s(298)), var$11);
                 jl_AbstractStringBuilder_toString($path);
                 $exists = 1;
                 break a;
@@ -16645,21 +16561,21 @@ cgxgtbwa_AssetLoadImpl_addAssetToQueue = ($this, $path, $assetType, $fileType, $
         }
         $path = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($path);
-        jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(301)), $path1);
+        jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(299)), $path1);
         jl_AbstractStringBuilder_toString($path);
         $exists = 0;
     }
     if ($exists) {
         $path = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($path);
-        jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(302)), $path1);
+        jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(300)), $path1);
         jl_AbstractStringBuilder_toString($path);
         return;
     }
     if (ju_HashSet_contains($this.$assetDownloading, $path1)) {
         $path = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($path);
-        jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(303)), $path1);
+        jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(301)), $path1);
         jl_AbstractStringBuilder_toString($path);
         return;
     }
@@ -16668,7 +16584,7 @@ cgxgtbwa_AssetLoadImpl_addAssetToQueue = ($this, $path, $assetType, $fileType, $
     if (!$overwrite && $exists) {
         $path = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($path);
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(304)), $path1), $rt_s(305));
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(302)), $path1), $rt_s(303));
         jl_AbstractStringBuilder_toString($path);
         return;
     }
@@ -16682,7 +16598,7 @@ cgxgtbwa_AssetLoadImpl_addAssetToQueue = ($this, $path, $assetType, $fileType, $
         ju_HashSet_remove($this.$assetFailed, $path1);
         $path = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($path);
-        jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(306)), $path1);
+        jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(304)), $path1);
         jl_AbstractStringBuilder_toString($path);
         return;
     }
@@ -16690,12 +16606,12 @@ cgxgtbwa_AssetLoadImpl_addAssetToQueue = ($this, $path, $assetType, $fileType, $
         cgxgtbwf_MemoryFileStorage_mkdirs(cgxgtbw_WebFiles_getFileDB($fileHandle.$teaFiles, $fileHandle.$type0), $fileHandle);
         $path = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($path);
-        jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(307)), $path1);
+        jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(305)), $path1);
         jl_AbstractStringBuilder_toString($path);
     }
     $path = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($path);
-    jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(308)), $path1);
+    jl_StringBuilder_append(jl_StringBuilder_append($path, $rt_s(306)), $path1);
     jl_AbstractStringBuilder_toString($path);
 },
 cgxgtbwa_AssetLoadImpl_downloadMultiAssets = $this => {
@@ -16703,13 +16619,13 @@ cgxgtbwa_AssetLoadImpl_downloadMultiAssets = $this => {
     $i = $this.$maxMultiDownloadCount;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(309)), $i);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(307)), $i);
     jl_AbstractStringBuilder_toString(var$2);
     $i = 0;
     while ($i < $this.$maxMultiDownloadCount) {
         var$2 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$2);
-        jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(310)), $i);
+        jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(308)), $i);
         jl_AbstractStringBuilder_toString(var$2);
         cgxgtbwa_AssetLoadImpl_downloadQueueAssets($this);
         $i = $i + 1 | 0;
@@ -16726,24 +16642,24 @@ cgxgtbwa_AssetLoadImpl_downloadQueueAssets = $this => {
             var$5 = $listener === null ? 0 : 1;
             $queueAsset = new jl_StringBuilder;
             jl_AbstractStringBuilder__init_($queueAsset);
-            jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(311)), $assetPath), $rt_s(251)), var$5);
+            jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(309)), $assetPath), $rt_s(249)), var$5);
             jl_AbstractStringBuilder_toString($queueAsset);
             if (!ju_HashSet_contains($this.$assetDownloading, $assetPath)) {
                 ju_HashSet_add($this.$assetDownloading, $assetPath);
                 $queueAsset = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($queueAsset);
-                jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(312)), $assetPath);
+                jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(310)), $assetPath);
                 jl_AbstractStringBuilder_toString($queueAsset);
                 var$6 = jl_String_valueOf($fileHandle.$type0);
                 var$5 = $listener === null ? 0 : 1;
                 $queueAsset = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($queueAsset);
-                jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(313)), $assetPath), $rt_s(296)), var$6), $rt_s(251)), var$5);
+                jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(311)), $assetPath), $rt_s(294)), var$6), $rt_s(249)), var$5);
                 jl_AbstractStringBuilder_toString($queueAsset);
                 var$5 = $listener === null ? 0 : 1;
                 $queueAsset = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($queueAsset);
-                jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(313)), $assetPath), $rt_s(251)), var$5);
+                jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(311)), $assetPath), $rt_s(249)), var$5);
                 jl_AbstractStringBuilder_toString($queueAsset);
                 var$7 = new cgxgtbwa_AssetLoadImpl$6;
                 var$7.$this$06 = $this;
@@ -16761,8 +16677,8 @@ cgxgtbwa_AssetLoadImpl_downloadQueueAssets = $this => {
                         $queueAsset = cgxgtbwa_AssetType_Binary;
                         cgxgtbwa_AssetDownloadImpl_load(var$8, 1, $fileHandle, $queueAsset, var$7);
                         $fileHandle = jl_StringBuilder__init_();
-                        jl_StringBuilder_append(jl_StringBuilder_append($fileHandle, $rt_s(314)), $assetPath);
-                        cgxgtbwa_AssetLoadImpl_log($this, $rt_s(315), jl_StringBuilder_toString($fileHandle));
+                        jl_StringBuilder_append(jl_StringBuilder_append($fileHandle, $rt_s(312)), $assetPath);
+                        cgxgtbwa_AssetLoadImpl_log($this, $rt_s(313), jl_StringBuilder_toString($fileHandle));
                         break a;
                     } catch ($$e) {
                         $$je = $rt_wrapException($$e);
@@ -16773,11 +16689,11 @@ cgxgtbwa_AssetLoadImpl_downloadQueueAssets = $this => {
                             $queueAsset = jl_String_valueOf($queueAsset);
                             $fileHandle = new jl_StringBuilder;
                             jl_AbstractStringBuilder__init_($fileHandle);
-                            jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($fileHandle, $rt_s(316)), $assetPath), $rt_s(271)), $queueAsset);
+                            jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($fileHandle, $rt_s(314)), $assetPath), $rt_s(269)), $queueAsset);
                             jl_AbstractStringBuilder_toString($fileHandle);
                             $queueAsset = new jl_StringBuilder;
                             jl_AbstractStringBuilder__init_($queueAsset);
-                            jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(317)), $assetPath);
+                            jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(315)), $assetPath);
                             jl_AbstractStringBuilder_toString($queueAsset);
                             cgxgtbwa_AssetLoadImpl_downloadMultiAssets($this);
                             break a;
@@ -16790,7 +16706,7 @@ cgxgtbwa_AssetLoadImpl_downloadQueueAssets = $this => {
             }
             $queueAsset = new jl_StringBuilder;
             jl_AbstractStringBuilder__init_($queueAsset);
-            jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(318)), $assetPath);
+            jl_StringBuilder_append(jl_StringBuilder_append($queueAsset, $rt_s(316)), $assetPath);
             jl_AbstractStringBuilder_toString($queueAsset);
         }
         return;
@@ -16799,7 +16715,7 @@ cgxgtbwa_AssetLoadImpl_downloadQueueAssets = $this => {
     var$9 = ju_HashSet_size($this.$assetDownloading) < $this.$maxMultiDownloadCount ? 0 : 1;
     $queueAsset = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($queueAsset);
-    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append($queueAsset, $rt_s(319)), var$5), $rt_s(320)), var$9);
+    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append($queueAsset, $rt_s(317)), var$5), $rt_s(318)), var$9);
     jl_AbstractStringBuilder_toString($queueAsset);
 },
 cgxgtbwa_AssetLoadImpl_log = ($this, $method, $message) => {
@@ -16884,11 +16800,11 @@ cgxgtbw_WebGraphics_setCanvasSize = ($this, $width, $height, $usePhysicalPixels)
         $style = $this.$canvas0.style;
         var$8 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$8);
-        jl_StringBuilder_append(jl_StringBuilder_append0(var$8, $width), $rt_s(321));
+        jl_StringBuilder_append(jl_StringBuilder_append0(var$8, $width), $rt_s(319));
         $style.setProperty("width", $rt_ustr(jl_AbstractStringBuilder_toString(var$8)));
         var$8 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$8);
-        jl_StringBuilder_append(jl_StringBuilder_append0(var$8, $height), $rt_s(321));
+        jl_StringBuilder_append(jl_StringBuilder_append0(var$8, $height), $rt_s(319));
         $style.setProperty("height", $rt_ustr(jl_AbstractStringBuilder_toString(var$8)));
     }
 },
@@ -16982,7 +16898,7 @@ cgxgtbw_WebInput_handleMouseEvents = ($this, $touchEvent) => {
     let $type, $target, $touch, var$5, $button, $relativeX, $relativeY, $mouseX, $mouseY, $wheelDelta, $touches, $i, $j, $real, $equals, $touch_0, $touchId, $j_0, var$20;
     a: {
         $type = $rt_str($touchEvent.type);
-        if (jl_String_equals($type, $rt_s(322))) {
+        if (jl_String_equals($type, $rt_s(320))) {
             window.focus();
             $target = $touchEvent.target;
             $touch = $this.$canvas;
@@ -17023,7 +16939,7 @@ cgxgtbw_WebInput_handleMouseEvents = ($this, $touchEvent) => {
                 $this.$hasFocus = 0;
             return;
         }
-        if (jl_String_equals($type, $rt_s(323))) {
+        if (jl_String_equals($type, $rt_s(321))) {
             if (!$this.$touched.data[0])
                 return;
             cbgu_IntSet_remove($this.$pressedButtons, cgxgtbwu_KeyCodes_getButton($touchEvent.button));
@@ -17045,8 +16961,8 @@ cgxgtbw_WebInput_handleMouseEvents = ($this, $touchEvent) => {
             $touch = $this.$processor;
             if ($touch !== null)
                 $touch.$touchUp($this.$touchX.data[0], $this.$touchY.data[0], 0, cgxgtbwu_KeyCodes_getButton($touchEvent.button));
-        } else if (!jl_String_equals($type, $rt_s(324))) {
-            if (jl_String_equals($type, $rt_s(325))) {
+        } else if (!jl_String_equals($type, $rt_s(322))) {
+            if (jl_String_equals($type, $rt_s(323))) {
                 if ($this.$processor !== null) {
                     $wheelDelta = cgxgtbw_WebInput_getMouseWheelVelocity($touchEvent);
                     $touch = $this.$processor;
@@ -17054,7 +16970,7 @@ cgxgtbw_WebInput_handleMouseEvents = ($this, $touchEvent) => {
                     cbg_InputAdapter_scrolled($touch, 0.0, $wheelDelta);
                 }
                 $this.$currentEventTimeStamp = cbgu_TimeUtils_nanoTime();
-            } else if (jl_String_equals($type, $rt_s(326))) {
+            } else if (jl_String_equals($type, $rt_s(324))) {
                 $this.$justTouched = 1;
                 $touches = $touchEvent.changedTouches;
                 $i = 0;
@@ -17104,7 +17020,7 @@ cgxgtbw_WebInput_handleMouseEvents = ($this, $touchEvent) => {
             }
         }
     }
-    if (jl_String_equals($type, $rt_s(327))) {
+    if (jl_String_equals($type, $rt_s(325))) {
         $touches = $touchEvent.changedTouches;
         $i = 0;
         $j = $touches.length;
@@ -17123,7 +17039,7 @@ cgxgtbw_WebInput_handleMouseEvents = ($this, $touchEvent) => {
         $this.$currentEventTimeStamp = cbgu_TimeUtils_nanoTime();
         $touchEvent.preventDefault();
     }
-    if (jl_String_equals($type, $rt_s(328))) {
+    if (jl_String_equals($type, $rt_s(326))) {
         $touches = $touchEvent.changedTouches;
         $i = 0;
         $j_0 = $touches.length;
@@ -17148,7 +17064,7 @@ cgxgtbw_WebInput_handleMouseEvents = ($this, $touchEvent) => {
         $this.$currentEventTimeStamp = cbgu_TimeUtils_nanoTime();
         $touchEvent.preventDefault();
     }
-    if (jl_String_equals($type, $rt_s(329))) {
+    if (jl_String_equals($type, $rt_s(327))) {
         $touches = $touchEvent.changedTouches;
         $i = 0;
         $j_0 = $touches.length;
@@ -17187,13 +17103,13 @@ cgxgtbw_WebInput_resolveKeyCode = $keyboardEvent => {
 cgxgtbw_WebInput_handleKeyboardEvents = ($this, $keyboardEvent) => {
     let $type, $code, var$4, $key;
     $type = $rt_str($keyboardEvent.type);
-    if (!(jl_String_equals($type, $rt_s(330)) && $this.$hasFocus)) {
-        if (jl_String_equals($type, $rt_s(331)) && $this.$hasFocus) {
+    if (!(jl_String_equals($type, $rt_s(328)) && $this.$hasFocus)) {
+        if (jl_String_equals($type, $rt_s(329)) && $this.$hasFocus) {
             if (($keyboardEvent.charCode & 65535) == 9) {
                 $keyboardEvent.preventDefault();
                 $keyboardEvent.stopPropagation();
             }
-        } else if (jl_String_equals($type, $rt_s(332)) && $this.$hasFocus) {
+        } else if (jl_String_equals($type, $rt_s(330)) && $this.$hasFocus) {
             $code = cgxgtbw_WebInput_resolveKeyCode($keyboardEvent);
             if (cbg_AbstractInput_isCatchKey($this, $code))
                 $keyboardEvent.preventDefault();
@@ -17353,7 +17269,7 @@ cgxgtbw_WebInput_setDelta = ($this, $touchId, $x, $y) => {
     $this.$deltaY.data[$touchId] = $y;
 },
 cgxgtbw_WebInput_getCompatMode = ($this, $element) => {
-    if (jl_String_equals($rt_str($element.compatMode), $rt_s(333)))
+    if (jl_String_equals($rt_str($element.compatMode), $rt_s(331)))
         $element = $element.documentElement;
     return $element;
 },
@@ -17560,22 +17476,22 @@ let cgxgtbw_WebFiles__init_0 = ($this, $config, $teaApplication) => {
         var$6 = indexedDB || mozIndexedDB || webkitIndexedDB || msIndexedDB;
         if (typeof var$6 === 'undefined' ? 1 : 0) {
             $teaApplication = new jl_IllegalStateException;
-            jl_RuntimeException__init_($teaApplication, $rt_s(334));
+            jl_RuntimeException__init_($teaApplication, $rt_s(332));
             $rt_throw($teaApplication);
         }
         var$7 = var$5.$localStoragePrefix;
         var$8 = var$6.open($rt_ustr(var$7), 1);
         var$3 = new cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_0;
-        var$3.$_043 = var$8;
+        var$3.$_045 = var$8;
         var$8.onupgradeneeded = otji_JS_function(otji_JSWrapper_unwrap(var$3), "handleEvent");
         var$3 = new cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_1;
-        var$3.$_039 = var$4;
-        var$3.$_116 = var$8;
+        var$3.$_041 = var$4;
+        var$3.$_117 = var$8;
         var$3.$_28 = $teaApplication;
         var$8.onsuccess = otji_JS_function(otji_JSWrapper_unwrap(var$3), "handleEvent");
         var$3 = new cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_2;
-        var$3.$_020 = var$7;
-        var$3.$_16 = $teaApplication;
+        var$3.$_022 = var$7;
+        var$3.$_17 = $teaApplication;
         var$8.onerror = otji_JS_function(otji_JSWrapper_unwrap(var$3), "handleEvent");
     }
     $this.$localStorage = var$4;
@@ -17609,7 +17525,7 @@ cgxgtbw_WebFiles_getFileHandle = ($this, $path, $type) => {
     $type = jl_String_valueOf($type);
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(335)), $type), $rt_s(336));
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(333)), $type), $rt_s(334));
     jl_RuntimeException__init_($path, jl_AbstractStringBuilder_toString(var$3));
     $rt_throw($path);
 },
@@ -17671,15 +17587,15 @@ let cgxgtbw_WebClipboard__init_0 = $this => {
     $this.$content = $rt_s(66);
     var$1 = cgxgtbwdi_WebWindow_getDocument(cgxgtbwdi_WebWindow_get());
     var$2 = new cgxgtbw_WebClipboard$_init_$lambda$_0_0;
-    var$2.$_02 = $this;
+    var$2.$_03 = $this;
     var$1.addEventListener("copy", otji_JS_function(otji_JSWrapper_unwrap(var$2), "handleEvent"));
     var$1 = cgxgtbwdi_WebWindow_getDocument(cgxgtbwdi_WebWindow_get());
     var$2 = new cgxgtbw_WebClipboard$_init_$lambda$_0_1;
-    var$2.$_051 = $this;
+    var$2.$_054 = $this;
     var$1.addEventListener("cut", otji_JS_function(otji_JSWrapper_unwrap(var$2), "handleEvent"));
     var$1 = cgxgtbwdi_WebWindow_getDocument(cgxgtbwdi_WebWindow_get());
     var$2 = new cgxgtbw_WebClipboard$_init_$lambda$_0_2;
-    var$2.$_040 = $this;
+    var$2.$_042 = $this;
     var$1.addEventListener("paste", otji_JS_function(otji_JSWrapper_unwrap(var$2), "handleEvent"));
 },
 cgxgtbw_WebClipboard__init_ = () => {
@@ -17743,7 +17659,7 @@ cgxgtbw_WebApplication$2_handleEvent$exported$0 = (var$1, var$2) => {
     cgxgtbw_WebApplication$AppState_$callClinit();
     if (var$4 === cgxgtbw_WebApplication$AppState_APP_LOOP) {
         var$3 = $rt_str((cgxgtbwdi_WebWindow_getDocument(var$3.$window)).visibilityState);
-        if (jl_String_equals(var$3, $rt_s(337))) {
+        if (jl_String_equals(var$3, $rt_s(335))) {
             var$2 = var$1.$this$09.$lifecycleListeners;
             jl_Object_monitorEnterSync(var$2);
             a: {
@@ -17784,7 +17700,7 @@ cgxgtbw_WebApplication$2_handleEvent$exported$0 = (var$1, var$2) => {
                 $rt_throw(var$1);
             }
             var$1.$this$09.$curListener.$pause();
-        } else if (jl_String_equals(var$3, $rt_s(338))) {
+        } else if (jl_String_equals(var$3, $rt_s(336))) {
             var$2 = var$1.$this$09.$lifecycleListeners;
             jl_Object_monitorEnterSync(var$2);
             c: {
@@ -17978,13 +17894,13 @@ let cgxgtbw_WebPreloadApplicationListener_create = $this => {
     var$8 = jl_String_valueOf(var$1);
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(151)), var$3), $rt_s(295)), var$7), $rt_s(296)), var$8), $rt_s(251)), 1), $rt_s(305));
+    jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(151)), var$3), $rt_s(293)), var$7), $rt_s(294)), var$8), $rt_s(249)), 1), $rt_s(303));
     jl_AbstractStringBuilder_toString(var$2);
     var$2 = jl_String_valueOf(var$4);
     var$8 = jl_String_valueOf(var$1);
     var$9 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$9);
-    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(151)), var$3), $rt_s(295)), var$2), $rt_s(296)), var$8), $rt_s(251)), 1), $rt_s(297)), 0);
+    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(151)), var$3), $rt_s(293)), var$2), $rt_s(294)), var$8), $rt_s(249)), 1), $rt_s(295)), 0);
     jl_AbstractStringBuilder_toString(var$9);
     cgxgtbwa_AssetLoadImpl_addAssetToQueue(var$6, var$3, var$4, var$1, var$5, 0);
     cgxgtbwa_AssetLoadImpl_downloadQueueAssets(var$6);
@@ -18078,7 +17994,7 @@ cgxgtbw_WebPreloadApplicationListener_setupScene2d = $this => {
     $pixmap = cbgu_Scaling_fill;
     if ($pixmap === null) {
         $pixmap = new jl_IllegalArgumentException;
-        jl_RuntimeException__init_($pixmap, $rt_s(339));
+        jl_RuntimeException__init_($pixmap, $rt_s(337));
         $rt_throw($pixmap);
     }
     $internal.$scaling = $pixmap;
@@ -18379,11 +18295,11 @@ ju_Map$Entry = $rt_classWithoutFields(0);
 function ju_MapEntry() {
     let a = this; jl_Object.call(a);
     a.$key = null;
-    a.$value0 = null;
+    a.$value1 = null;
 }
 let ju_MapEntry__init_ = ($this, $theKey, $theValue) => {
     $this.$key = $theKey;
-    $this.$value0 = $theValue;
+    $this.$value1 = $theValue;
 },
 ju_MapEntry__init_0 = (var_0, var_1) => {
     let var_2 = new ju_MapEntry();
@@ -18399,21 +18315,21 @@ ju_MapEntry_equals = ($this, $object) => {
     $entry = $object;
     $object = $this.$key;
     $entry = $entry;
-    return ju_Objects_equals($object, $entry.$key) && ju_Objects_equals($this.$value0, $entry.$value0) ? 1 : 0;
+    return ju_Objects_equals($object, $entry.$key) && ju_Objects_equals($this.$value1, $entry.$value1) ? 1 : 0;
 },
 ju_MapEntry_getKey = $this => {
     return $this.$key;
 },
 ju_MapEntry_getValue = $this => {
-    return $this.$value0;
+    return $this.$value1;
 },
 ju_MapEntry_hashCode = $this => {
-    return ju_Objects_hashCode($this.$key) ^ ju_Objects_hashCode($this.$value0);
+    return ju_Objects_hashCode($this.$key) ^ ju_Objects_hashCode($this.$value1);
 },
 ju_MapEntry_toString = $this => {
     let var$1, var$2, var$3;
     var$1 = jl_String_valueOf($this.$key);
-    var$2 = jl_String_valueOf($this.$value0);
+    var$2 = jl_String_valueOf($this.$value1);
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
     var$1 = jl_StringBuilder_append(var$3, var$1);
@@ -18497,14 +18413,14 @@ ju_AbstractCollection_toString = $this => {
     if ($iter.$hasNext()) {
         $e = $iter.$next();
         if ($e === $this)
-            $e = $rt_s(340);
+            $e = $rt_s(338);
         jl_StringBuilder_append($sb, $e);
     }
     while ($iter.$hasNext()) {
         $e = $iter.$next();
         jl_AbstractStringBuilder_append($sb, $rt_s(80));
         if ($e === $this)
-            $e = $rt_s(340);
+            $e = $rt_s(338);
         jl_StringBuilder_append($sb, $e);
     }
     jl_AbstractStringBuilder_append0($sb, 93);
@@ -18597,517 +18513,517 @@ cgxgtbwu_KeyCodes_keyForCode0 = $code => {
         var$2 = (-1);
         switch (jl_String_hashCode($code)) {
             case -2099925287:
-                if (!jl_String_equals($code, $rt_s(341)))
+                if (!jl_String_equals($code, $rt_s(339)))
                     break a;
                 var$2 = 81;
                 break a;
             case -1911885398:
-                if (!jl_String_equals($code, $rt_s(342)))
+                if (!jl_String_equals($code, $rt_s(340)))
                     break a;
                 var$2 = 79;
                 break a;
             case -1907858975:
-                if (!jl_String_equals($code, $rt_s(343)))
+                if (!jl_String_equals($code, $rt_s(341)))
                     break a;
                 var$2 = 96;
                 break a;
             case -1470983457:
-                if (!jl_String_equals($code, $rt_s(344)))
+                if (!jl_String_equals($code, $rt_s(342)))
                     break a;
                 var$2 = 68;
                 break a;
             case -1397911671:
-                if (!jl_String_equals($code, $rt_s(345)))
+                if (!jl_String_equals($code, $rt_s(343)))
                     break a;
                 var$2 = 65;
                 break a;
             case -970629562:
-                if (!jl_String_equals($code, $rt_s(346)))
+                if (!jl_String_equals($code, $rt_s(344)))
                     break a;
                 var$2 = 50;
                 break a;
             case -939175467:
-                if (!jl_String_equals($code, $rt_s(347)))
+                if (!jl_String_equals($code, $rt_s(345)))
                     break a;
                 var$2 = 98;
                 break a;
             case -937610026:
-                if (!jl_String_equals($code, $rt_s(348)))
+                if (!jl_String_equals($code, $rt_s(346)))
                     break a;
                 var$2 = 100;
                 break a;
             case -937491361:
-                if (!jl_String_equals($code, $rt_s(349)))
+                if (!jl_String_equals($code, $rt_s(347)))
                     break a;
                 var$2 = 86;
                 break a;
             case -477542223:
-                if (!jl_String_equals($code, $rt_s(350)))
+                if (!jl_String_equals($code, $rt_s(348)))
                     break a;
                 var$2 = 46;
                 break a;
             case -386071604:
-                if (!jl_String_equals($code, $rt_s(351)))
+                if (!jl_String_equals($code, $rt_s(349)))
                     break a;
                 var$2 = 71;
                 break a;
             case -379927846:
-                if (!jl_String_equals($code, $rt_s(352)))
+                if (!jl_String_equals($code, $rt_s(350)))
                     break a;
                 var$2 = 66;
                 break a;
             case -336508495:
-                if (!jl_String_equals($code, $rt_s(353)))
+                if (!jl_String_equals($code, $rt_s(351)))
                     break a;
                 var$2 = 52;
                 break a;
             case -335449501:
-                if (!jl_String_equals($code, $rt_s(354)))
+                if (!jl_String_equals($code, $rt_s(352)))
                     break a;
                 var$2 = 36;
                 break a;
             case -335449500:
-                if (!jl_String_equals($code, $rt_s(355)))
+                if (!jl_String_equals($code, $rt_s(353)))
                     break a;
                 var$2 = 37;
                 break a;
             case -335449499:
-                if (!jl_String_equals($code, $rt_s(356)))
+                if (!jl_String_equals($code, $rt_s(354)))
                     break a;
                 var$2 = 38;
                 break a;
             case -335449498:
-                if (!jl_String_equals($code, $rt_s(357)))
+                if (!jl_String_equals($code, $rt_s(355)))
                     break a;
                 var$2 = 39;
                 break a;
             case -335449497:
-                if (!jl_String_equals($code, $rt_s(358)))
+                if (!jl_String_equals($code, $rt_s(356)))
                     break a;
                 var$2 = 40;
                 break a;
             case -335449496:
-                if (!jl_String_equals($code, $rt_s(359)))
+                if (!jl_String_equals($code, $rt_s(357)))
                     break a;
                 var$2 = 41;
                 break a;
             case -335449495:
-                if (!jl_String_equals($code, $rt_s(360)))
+                if (!jl_String_equals($code, $rt_s(358)))
                     break a;
                 var$2 = 42;
                 break a;
             case -335449494:
-                if (!jl_String_equals($code, $rt_s(361)))
+                if (!jl_String_equals($code, $rt_s(359)))
                     break a;
                 var$2 = 43;
                 break a;
             case -335449493:
-                if (!jl_String_equals($code, $rt_s(362)))
+                if (!jl_String_equals($code, $rt_s(360)))
                     break a;
                 var$2 = 44;
                 break a;
             case -335449492:
-                if (!jl_String_equals($code, $rt_s(363)))
+                if (!jl_String_equals($code, $rt_s(361)))
                     break a;
                 var$2 = 45;
                 break a;
             case -244403724:
-                if (!jl_String_equals($code, $rt_s(364)))
+                if (!jl_String_equals($code, $rt_s(362)))
                     break a;
                 var$2 = 47;
                 break a;
             case -156800220:
-                if (!jl_String_equals($code, $rt_s(365)))
+                if (!jl_String_equals($code, $rt_s(363)))
                     break a;
                 var$2 = 49;
                 break a;
             case -47633692:
-                if (!jl_String_equals($code, $rt_s(366)))
+                if (!jl_String_equals($code, $rt_s(364)))
                     break a;
                 var$2 = 67;
                 break a;
             case 2219:
-                if (!jl_String_equals($code, $rt_s(367)))
+                if (!jl_String_equals($code, $rt_s(365)))
                     break a;
                 var$2 = 53;
                 break a;
             case 2220:
-                if (!jl_String_equals($code, $rt_s(368)))
+                if (!jl_String_equals($code, $rt_s(366)))
                     break a;
                 var$2 = 54;
                 break a;
             case 2221:
-                if (!jl_String_equals($code, $rt_s(369)))
+                if (!jl_String_equals($code, $rt_s(367)))
                     break a;
                 var$2 = 55;
                 break a;
             case 2222:
-                if (!jl_String_equals($code, $rt_s(370)))
+                if (!jl_String_equals($code, $rt_s(368)))
                     break a;
                 var$2 = 56;
                 break a;
             case 2223:
-                if (!jl_String_equals($code, $rt_s(371)))
+                if (!jl_String_equals($code, $rt_s(369)))
                     break a;
                 var$2 = 57;
                 break a;
             case 2224:
-                if (!jl_String_equals($code, $rt_s(372)))
+                if (!jl_String_equals($code, $rt_s(370)))
                     break a;
                 var$2 = 58;
                 break a;
             case 2225:
-                if (!jl_String_equals($code, $rt_s(373)))
+                if (!jl_String_equals($code, $rt_s(371)))
                     break a;
                 var$2 = 59;
                 break a;
             case 2226:
-                if (!jl_String_equals($code, $rt_s(374)))
+                if (!jl_String_equals($code, $rt_s(372)))
                     break a;
                 var$2 = 60;
                 break a;
             case 2227:
-                if (!jl_String_equals($code, $rt_s(375)))
+                if (!jl_String_equals($code, $rt_s(373)))
                     break a;
                 var$2 = 61;
                 break a;
             case 68837:
-                if (!jl_String_equals($code, $rt_s(376)))
+                if (!jl_String_equals($code, $rt_s(374)))
                     break a;
                 var$2 = 62;
                 break a;
             case 68838:
-                if (!jl_String_equals($code, $rt_s(377)))
+                if (!jl_String_equals($code, $rt_s(375)))
                     break a;
                 var$2 = 63;
                 break a;
             case 68839:
-                if (!jl_String_equals($code, $rt_s(378)))
+                if (!jl_String_equals($code, $rt_s(376)))
                     break a;
                 var$2 = 64;
                 break a;
             case 69819:
-                if (!jl_String_equals($code, $rt_s(379)))
+                if (!jl_String_equals($code, $rt_s(377)))
                     break a;
                 var$2 = 78;
                 break a;
             case 83829:
-                if (!jl_String_equals($code, $rt_s(380)))
+                if (!jl_String_equals($code, $rt_s(378)))
                     break a;
                 var$2 = 85;
                 break a;
             case 2255103:
-                if (!jl_String_equals($code, $rt_s(381)))
+                if (!jl_String_equals($code, $rt_s(379)))
                     break a;
                 var$2 = 77;
                 break a;
             case 2335202:
-                if (!jl_String_equals($code, $rt_s(382)))
+                if (!jl_String_equals($code, $rt_s(380)))
                     break a;
                 var$2 = 0;
                 break a;
             case 2335203:
-                if (!jl_String_equals($code, $rt_s(383)))
+                if (!jl_String_equals($code, $rt_s(381)))
                     break a;
                 var$2 = 1;
                 break a;
             case 2335204:
-                if (!jl_String_equals($code, $rt_s(384)))
+                if (!jl_String_equals($code, $rt_s(382)))
                     break a;
                 var$2 = 2;
                 break a;
             case 2335205:
-                if (!jl_String_equals($code, $rt_s(385)))
+                if (!jl_String_equals($code, $rt_s(383)))
                     break a;
                 var$2 = 3;
                 break a;
             case 2335206:
-                if (!jl_String_equals($code, $rt_s(386)))
+                if (!jl_String_equals($code, $rt_s(384)))
                     break a;
                 var$2 = 4;
                 break a;
             case 2335207:
-                if (!jl_String_equals($code, $rt_s(387)))
+                if (!jl_String_equals($code, $rt_s(385)))
                     break a;
                 var$2 = 5;
                 break a;
             case 2335208:
-                if (!jl_String_equals($code, $rt_s(388)))
+                if (!jl_String_equals($code, $rt_s(386)))
                     break a;
                 var$2 = 6;
                 break a;
             case 2335209:
-                if (!jl_String_equals($code, $rt_s(389)))
+                if (!jl_String_equals($code, $rt_s(387)))
                     break a;
                 var$2 = 7;
                 break a;
             case 2335210:
-                if (!jl_String_equals($code, $rt_s(390)))
+                if (!jl_String_equals($code, $rt_s(388)))
                     break a;
                 var$2 = 8;
                 break a;
             case 2335211:
-                if (!jl_String_equals($code, $rt_s(391)))
+                if (!jl_String_equals($code, $rt_s(389)))
                     break a;
                 var$2 = 9;
                 break a;
             case 2335212:
-                if (!jl_String_equals($code, $rt_s(392)))
+                if (!jl_String_equals($code, $rt_s(390)))
                     break a;
                 var$2 = 10;
                 break a;
             case 2335213:
-                if (!jl_String_equals($code, $rt_s(393)))
+                if (!jl_String_equals($code, $rt_s(391)))
                     break a;
                 var$2 = 11;
                 break a;
             case 2335214:
-                if (!jl_String_equals($code, $rt_s(394)))
+                if (!jl_String_equals($code, $rt_s(392)))
                     break a;
                 var$2 = 12;
                 break a;
             case 2335215:
-                if (!jl_String_equals($code, $rt_s(395)))
+                if (!jl_String_equals($code, $rt_s(393)))
                     break a;
                 var$2 = 13;
                 break a;
             case 2335216:
-                if (!jl_String_equals($code, $rt_s(396)))
+                if (!jl_String_equals($code, $rt_s(394)))
                     break a;
                 var$2 = 14;
                 break a;
             case 2335217:
-                if (!jl_String_equals($code, $rt_s(397)))
+                if (!jl_String_equals($code, $rt_s(395)))
                     break a;
                 var$2 = 15;
                 break a;
             case 2335218:
-                if (!jl_String_equals($code, $rt_s(398)))
+                if (!jl_String_equals($code, $rt_s(396)))
                     break a;
                 var$2 = 16;
                 break a;
             case 2335219:
-                if (!jl_String_equals($code, $rt_s(399)))
+                if (!jl_String_equals($code, $rt_s(397)))
                     break a;
                 var$2 = 17;
                 break a;
             case 2335220:
-                if (!jl_String_equals($code, $rt_s(400)))
+                if (!jl_String_equals($code, $rt_s(398)))
                     break a;
                 var$2 = 18;
                 break a;
             case 2335221:
-                if (!jl_String_equals($code, $rt_s(401)))
+                if (!jl_String_equals($code, $rt_s(399)))
                     break a;
                 var$2 = 19;
                 break a;
             case 2335222:
-                if (!jl_String_equals($code, $rt_s(402)))
+                if (!jl_String_equals($code, $rt_s(400)))
                     break a;
                 var$2 = 20;
                 break a;
             case 2335223:
-                if (!jl_String_equals($code, $rt_s(403)))
+                if (!jl_String_equals($code, $rt_s(401)))
                     break a;
                 var$2 = 21;
                 break a;
             case 2335224:
-                if (!jl_String_equals($code, $rt_s(404)))
+                if (!jl_String_equals($code, $rt_s(402)))
                     break a;
                 var$2 = 22;
                 break a;
             case 2335225:
-                if (!jl_String_equals($code, $rt_s(405)))
+                if (!jl_String_equals($code, $rt_s(403)))
                     break a;
                 var$2 = 23;
                 break a;
             case 2335226:
-                if (!jl_String_equals($code, $rt_s(406)))
+                if (!jl_String_equals($code, $rt_s(404)))
                     break a;
                 var$2 = 24;
                 break a;
             case 2335227:
-                if (!jl_String_equals($code, $rt_s(407)))
+                if (!jl_String_equals($code, $rt_s(405)))
                     break a;
                 var$2 = 25;
                 break a;
             case 12763084:
-                if (!jl_String_equals($code, $rt_s(408)))
+                if (!jl_String_equals($code, $rt_s(406)))
                     break a;
                 var$2 = 88;
                 break a;
             case 65290933:
-                if (!jl_String_equals($code, $rt_s(409)))
+                if (!jl_String_equals($code, $rt_s(407)))
                     break a;
                 var$2 = 94;
                 break a;
             case 67114680:
-                if (!jl_String_equals($code, $rt_s(410)))
+                if (!jl_String_equals($code, $rt_s(408)))
                     break a;
                 var$2 = 84;
                 break a;
             case 67204884:
-                if (!jl_String_equals($code, $rt_s(411)))
+                if (!jl_String_equals($code, $rt_s(409)))
                     break a;
                 var$2 = 93;
                 break a;
             case 74348624:
-                if (!jl_String_equals($code, $rt_s(412)))
+                if (!jl_String_equals($code, $rt_s(410)))
                     break a;
                 var$2 = 95;
                 break a;
             case 76887510:
-                if (!jl_String_equals($code, $rt_s(413)))
+                if (!jl_String_equals($code, $rt_s(411)))
                     break a;
                 var$2 = 90;
                 break a;
             case 78401116:
-                if (!jl_String_equals($code, $rt_s(414)))
+                if (!jl_String_equals($code, $rt_s(412)))
                     break a;
                 var$2 = 102;
                 break a;
             case 79966557:
-                if (!jl_String_equals($code, $rt_s(415)))
+                if (!jl_String_equals($code, $rt_s(413)))
                     break a;
                 var$2 = 97;
                 break a;
             case 80085222:
-                if (!jl_String_equals($code, $rt_s(416)))
+                if (!jl_String_equals($code, $rt_s(414)))
                     break a;
                 var$2 = 83;
                 break a;
             case 251549619:
-                if (!jl_String_equals($code, $rt_s(417)))
+                if (!jl_String_equals($code, $rt_s(415)))
                     break a;
                 var$2 = 76;
                 break a;
             case 759638320:
-                if (!jl_String_equals($code, $rt_s(418)))
+                if (!jl_String_equals($code, $rt_s(416)))
                     break a;
                 var$2 = 69;
                 break a;
             case 922343159:
-                if (!jl_String_equals($code, $rt_s(419)))
+                if (!jl_String_equals($code, $rt_s(417)))
                     break a;
                 var$2 = 72;
                 break a;
             case 923631601:
-                if (!jl_String_equals($code, $rt_s(420)))
+                if (!jl_String_equals($code, $rt_s(418)))
                     break a;
                 var$2 = 80;
                 break a;
             case 930625636:
-                if (!jl_String_equals($code, $rt_s(421)))
+                if (!jl_String_equals($code, $rt_s(419)))
                     break a;
                 var$2 = 73;
                 break a;
             case 977535019:
-                if (!jl_String_equals($code, $rt_s(422)))
+                if (!jl_String_equals($code, $rt_s(420)))
                     break a;
                 var$2 = 74;
                 break a;
             case 977763216:
-                if (!jl_String_equals($code, $rt_s(423)))
+                if (!jl_String_equals($code, $rt_s(421)))
                     break a;
                 var$2 = 75;
                 break a;
             case 1103347105:
-                if (!jl_String_equals($code, $rt_s(424)))
+                if (!jl_String_equals($code, $rt_s(422)))
                     break a;
                 var$2 = 48;
                 break a;
             case 1149837940:
-                if (!jl_String_equals($code, $rt_s(425)))
+                if (!jl_String_equals($code, $rt_s(423)))
                     break a;
                 var$2 = 101;
                 break a;
             case 1289876625:
-                if (!jl_String_equals($code, $rt_s(426)))
+                if (!jl_String_equals($code, $rt_s(424)))
                     break a;
                 var$2 = 92;
                 break a;
             case 1318883673:
-                if (!jl_String_equals($code, $rt_s(427)))
+                if (!jl_String_equals($code, $rt_s(425)))
                     break a;
                 var$2 = 91;
                 break a;
             case 1355233131:
-                if (!jl_String_equals($code, $rt_s(428)))
+                if (!jl_String_equals($code, $rt_s(426)))
                     break a;
                 var$2 = 51;
                 break a;
             case 1422382255:
-                if (!jl_String_equals($code, $rt_s(429)))
+                if (!jl_String_equals($code, $rt_s(427)))
                     break a;
                 var$2 = 99;
                 break a;
             case 2043376075:
-                if (!jl_String_equals($code, $rt_s(430)))
+                if (!jl_String_equals($code, $rt_s(428)))
                     break a;
                 var$2 = 82;
                 break a;
             case 2046924995:
-                if (!jl_String_equals($code, $rt_s(431)))
+                if (!jl_String_equals($code, $rt_s(429)))
                     break a;
                 var$2 = 26;
                 break a;
             case 2046924996:
-                if (!jl_String_equals($code, $rt_s(432)))
+                if (!jl_String_equals($code, $rt_s(430)))
                     break a;
                 var$2 = 27;
                 break a;
             case 2046924997:
-                if (!jl_String_equals($code, $rt_s(433)))
+                if (!jl_String_equals($code, $rt_s(431)))
                     break a;
                 var$2 = 28;
                 break a;
             case 2046924998:
-                if (!jl_String_equals($code, $rt_s(434)))
+                if (!jl_String_equals($code, $rt_s(432)))
                     break a;
                 var$2 = 29;
                 break a;
             case 2046924999:
-                if (!jl_String_equals($code, $rt_s(435)))
+                if (!jl_String_equals($code, $rt_s(433)))
                     break a;
                 var$2 = 30;
                 break a;
             case 2046925000:
-                if (!jl_String_equals($code, $rt_s(436)))
+                if (!jl_String_equals($code, $rt_s(434)))
                     break a;
                 var$2 = 31;
                 break a;
             case 2046925001:
-                if (!jl_String_equals($code, $rt_s(437)))
+                if (!jl_String_equals($code, $rt_s(435)))
                     break a;
                 var$2 = 32;
                 break a;
             case 2046925002:
-                if (!jl_String_equals($code, $rt_s(438)))
+                if (!jl_String_equals($code, $rt_s(436)))
                     break a;
                 var$2 = 33;
                 break a;
             case 2046925003:
-                if (!jl_String_equals($code, $rt_s(439)))
+                if (!jl_String_equals($code, $rt_s(437)))
                     break a;
                 var$2 = 34;
                 break a;
             case 2046925004:
-                if (!jl_String_equals($code, $rt_s(440)))
+                if (!jl_String_equals($code, $rt_s(438)))
                     break a;
                 var$2 = 35;
                 break a;
             case 2059521464:
-                if (!jl_String_equals($code, $rt_s(441)))
+                if (!jl_String_equals($code, $rt_s(439)))
                     break a;
                 var$2 = 89;
                 break a;
             case 2079612435:
-                if (!jl_String_equals($code, $rt_s(442)))
+                if (!jl_String_equals($code, $rt_s(440)))
                     break a;
                 var$2 = 70;
                 break a;
             case 2084662433:
-                if (!jl_String_equals($code, $rt_s(443)))
+                if (!jl_String_equals($code, $rt_s(441)))
                     break a;
                 var$2 = 87;
                 break a;
@@ -19729,13 +19645,13 @@ cgxgtbwf_MemoryFileStorage_read = ($this, $file) => {
         jl_AbstractStringBuilder_append0($data, 34);
         jl_AbstractStringBuilder_append0(jl_StringBuilder_append($data, $path), 34);
         var$7 = jl_AbstractStringBuilder_toString($data);
-        var$8 = var$6 !== null && cgxgtbwf_FileData_isDirectory(var$6) ? $rt_s(444) : $rt_s(445);
+        var$8 = var$6 !== null && cgxgtbwf_FileData_isDirectory(var$6) ? $rt_s(442) : $rt_s(443);
         var$9 = jl_System_out();
         $data = jl_Class_getSimpleName(jl_Object_getClass($this));
         var$10 = var$6 === null ? 0 : 1;
         $file = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($file);
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append($file, $data), var$8), var$10), $rt_s(446)), var$7);
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append($file, $data), var$8), var$10), $rt_s(444)), var$7);
         $data = jl_AbstractStringBuilder_toString($file);
         otcic_JsConsolePrintStream_println(var$9, $data);
     }
@@ -19745,7 +19661,7 @@ cgxgtbwf_MemoryFileStorage_read = ($this, $file) => {
     $data = jl_Class_getSimpleName(jl_Object_getClass($this));
     var$8 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$8);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$8, $data), $rt_s(447)), $path);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$8, $data), $rt_s(445)), $path);
     jl_Throwable__init_($file, jl_AbstractStringBuilder_toString(var$8), $e);
     $rt_throw($file);
 },
@@ -19803,12 +19719,12 @@ cgxgtbwf_MemoryFileStorage_exists = ($this, $file) => {
     $file = cbgu_ObjectMap_get($this.$fileMap, $path);
     var$3 = $file === null ? 0 : 1;
     if ($this.$debug0) {
-        $file = $file !== null && cgxgtbwf_FileData_isDirectory($file) ? $rt_s(448) : $rt_s(449);
+        $file = $file !== null && cgxgtbwf_FileData_isDirectory($file) ? $rt_s(446) : $rt_s(447);
         var$4 = jl_System_out();
         var$5 = jl_Class_getSimpleName(jl_Object_getClass($this));
         var$6 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$6);
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(var$6, var$5), $file), var$3), $rt_s(446)), $path);
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(var$6, var$5), $file), var$3), $rt_s(444)), $path);
         $file = jl_AbstractStringBuilder_toString(var$6);
         otcic_JsConsolePrintStream_println(var$4, $file);
     }
@@ -19824,7 +19740,7 @@ cgxgtbwf_MemoryFileStorage_length = ($this, $file) => {
 cgxgtbwf_MemoryFileStorage_isRootFolder = ($this, $cur) => {
     let $path;
     $path = cgxgtbwf_MemoryFileStorage_fixPath($this, $cur.$file);
-    if (!jl_String_isEmpty($path) && !jl_String_equals($path, $rt_s(149)) && !jl_String_equals($path, $rt_s(18)) && !jl_String_equals($path, $rt_s(450)))
+    if (!jl_String_isEmpty($path) && !jl_String_equals($path, $rt_s(149)) && !jl_String_equals($path, $rt_s(18)) && !jl_String_equals($path, $rt_s(448)))
         return 0;
     return 1;
 },
@@ -19843,7 +19759,7 @@ cgxgtbwf_MemoryFileStorage_getInternal = ($this, $path) => {
         jl_AbstractStringBuilder_append0($type, 34);
         jl_AbstractStringBuilder_append0(jl_StringBuilder_append($type, $path), 34);
         var$4 = jl_AbstractStringBuilder_toString($type);
-        $type = $fileData !== null && cgxgtbwf_FileData_isDirectory($fileData) ? $rt_s(451) : $rt_s(452);
+        $type = $fileData !== null && cgxgtbwf_FileData_isDirectory($fileData) ? $rt_s(449) : $rt_s(450);
         $path = jl_System_out();
         var$5 = jl_Class_getSimpleName(jl_Object_getClass($this));
         var$6 = $fileData === null ? 0 : 1;
@@ -19855,7 +19771,7 @@ cgxgtbwf_MemoryFileStorage_getInternal = ($this, $path) => {
         }
         var$9 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$9);
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(var$9, var$5), $type), var$6), $rt_s(453)), var$7), $rt_s(446)), var$4);
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(var$9, var$5), $type), var$6), $rt_s(451)), var$7), $rt_s(444)), var$4);
         $type = jl_AbstractStringBuilder_toString(var$9);
         otcic_JsConsolePrintStream_println($path, $type);
     }
@@ -19875,11 +19791,11 @@ cgxgtbwf_MemoryFileStorage_putFileInternal = ($this, $path, $bytes, $callMethod)
         var$8 = var$4.length;
         var$9 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$9);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$9, var$7), $rt_s(454)), var$6), $rt_s(455)), var$8);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$9, var$7), $rt_s(452)), var$6), $rt_s(453)), var$8);
         var$7 = jl_AbstractStringBuilder_toString(var$9);
         otcic_JsConsolePrintStream_println($fileData, var$7);
     }
-    if (!jl_String_isEmpty($path) && !jl_String_equals($path, $rt_s(149)) && !jl_String_equals($path, $rt_s(18)) && !jl_String_equals($path, $rt_s(450))) {
+    if (!jl_String_isEmpty($path) && !jl_String_equals($path, $rt_s(149)) && !jl_String_equals($path, $rt_s(18)) && !jl_String_equals($path, $rt_s(448))) {
         $fileData = cgxgtbwf_FileData__init_0($path, $bytes);
         cbgu_OrderedMap_put($this.$fileMap, $path, $fileData);
         if ($callMethod)
@@ -19887,7 +19803,7 @@ cgxgtbwf_MemoryFileStorage_putFileInternal = ($this, $path, $bytes, $callMethod)
         return;
     }
     $fileData = new cbgu_GdxRuntimeException;
-    jl_RuntimeException__init_($fileData, $rt_s(456));
+    jl_RuntimeException__init_($fileData, $rt_s(454));
     $rt_throw($fileData);
 },
 cgxgtbwf_MemoryFileStorage_putFolderInternal = ($this, $path) => {
@@ -19905,11 +19821,11 @@ cgxgtbwf_MemoryFileStorage_putFolderInternal0 = ($this, $path, $callMethod) => {
         var$5 = jl_Class_getSimpleName(jl_Object_getClass($this));
         $fileData = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($fileData);
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($fileData, var$5), $rt_s(457)), var$4);
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($fileData, var$5), $rt_s(455)), var$4);
         var$5 = jl_AbstractStringBuilder_toString($fileData);
         otcic_JsConsolePrintStream_println(var$3, var$5);
     }
-    if (!jl_String_isEmpty($path) && !jl_String_equals($path, $rt_s(149)) && !jl_String_equals($path, $rt_s(18)) && !jl_String_equals($path, $rt_s(450))) {
+    if (!jl_String_isEmpty($path) && !jl_String_equals($path, $rt_s(149)) && !jl_String_equals($path, $rt_s(18)) && !jl_String_equals($path, $rt_s(448))) {
         $fileData = cgxgtbwf_FileData__init_1($path);
         cbgu_OrderedMap_put($this.$fileMap, $path, cgxgtbwf_FileData__init_1($path));
         if ($callMethod)
@@ -19917,14 +19833,14 @@ cgxgtbwf_MemoryFileStorage_putFolderInternal0 = ($this, $path, $callMethod) => {
         return;
     }
     var$3 = new cbgu_GdxRuntimeException;
-    jl_RuntimeException__init_(var$3, $rt_s(456));
+    jl_RuntimeException__init_(var$3, $rt_s(454));
     $rt_throw(var$3);
 },
 cgxgtbwf_MemoryFileStorage_fixPath = ($this, $path) => {
     let var$2, var$3;
     var$2 = jl_String_trim($path);
-    if (jl_String_startsWith(var$2, $rt_s(450)))
-        var$2 = jl_String_replace(var$2, $rt_s(450), $rt_s(66));
+    if (jl_String_startsWith(var$2, $rt_s(448)))
+        var$2 = jl_String_replace(var$2, $rt_s(448), $rt_s(66));
     if (jl_String_startsWith(var$2, $rt_s(149))) {
         var$2 = jur_Pattern_matcher(jur_Pattern_compile($rt_s(149)), var$2);
         jur_Matcher_reset(var$2);
@@ -19961,7 +19877,7 @@ function cgxgtbwft_LocalDBStorage() {
 let cgxgtbwft_LocalDBStorage_putFile = ($this, $key, $fileData) => {
     let $type, $transaction, $objectStore, $dbFileData, $request;
     if ($this.$debug0) {
-        $type = $fileData !== null && cgxgtbwf_FileData_isDirectory($fileData) ? $rt_s(458) : $rt_s(459);
+        $type = $fileData !== null && cgxgtbwf_FileData_isDirectory($fileData) ? $rt_s(456) : $rt_s(457);
         $transaction = jl_System_out();
         $objectStore = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($objectStore);
@@ -19976,7 +19892,7 @@ let cgxgtbwft_LocalDBStorage_putFile = ($this, $key, $fileData) => {
     $type = $rt_ustr($key);
     $request = $objectStore.put($dbFileData, $type);
     $fileData = new cgxgtbwft_LocalDBStorage$putFile$lambda$_2_0;
-    $fileData.$_017 = $key;
+    $fileData.$_019 = $key;
     $key = otji_JS_function(otji_JSWrapper_unwrap($fileData), "handleEvent");
     $request.onerror = $key;
 },
@@ -19986,7 +19902,7 @@ cgxgtbwft_LocalDBStorage_removeFile = ($this, $key) => {
         $objectStore = jl_System_out();
         $transaction = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($transaction);
-        jl_StringBuilder_append(jl_StringBuilder_append($transaction, $rt_s(460)), $key);
+        jl_StringBuilder_append(jl_StringBuilder_append($transaction, $rt_s(458)), $key);
         $transaction = jl_AbstractStringBuilder_toString($transaction);
         otcic_JsConsolePrintStream_println($objectStore, $transaction);
     }
@@ -19994,7 +19910,7 @@ cgxgtbwft_LocalDBStorage_removeFile = ($this, $key) => {
     $transaction = $rt_ustr($key);
     $request = $objectStore.delete($transaction);
     $objectStore = new cgxgtbwft_LocalDBStorage$removeFile$lambda$_3_0;
-    $objectStore.$_021 = $key;
+    $objectStore.$_023 = $key;
     $key = otji_JS_function(otji_JSWrapper_unwrap($objectStore), "handleEvent");
     $request.onerror = $key;
 },
@@ -20018,11 +19934,11 @@ cgxgtbw_WebClipboard$ClipboardWriteHandler_denied$exported$2 = var$1 => {
 };
 function cgxgtbw_WebClipboard$_init_$lambda$_0_0() {
     jl_Object.call(this);
-    this.$_02 = null;
+    this.$_03 = null;
 }
 let cgxgtbw_WebClipboard$_init_$lambda$_0_0_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3;
-    var$1 = var$1.$_02;
+    var$1 = var$1.$_03;
     var$3 = var$2.clipboardData;
     if (var$3 !== null)
         var$3.setData("text/plain", $rt_ustr(var$1.$content));
@@ -20030,11 +19946,11 @@ let cgxgtbw_WebClipboard$_init_$lambda$_0_0_handleEvent$exported$0 = (var$1, var
 };
 function cgxgtbw_WebClipboard$_init_$lambda$_0_1() {
     jl_Object.call(this);
-    this.$_051 = null;
+    this.$_054 = null;
 }
 let cgxgtbw_WebClipboard$_init_$lambda$_0_1_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3;
-    var$1 = var$1.$_051;
+    var$1 = var$1.$_054;
     var$3 = var$2.clipboardData;
     if (var$3 !== null)
         var$3.setData("text/plain", $rt_ustr(var$1.$content));
@@ -20042,11 +19958,11 @@ let cgxgtbw_WebClipboard$_init_$lambda$_0_1_handleEvent$exported$0 = (var$1, var
 };
 function cgxgtbw_WebClipboard$_init_$lambda$_0_2() {
     jl_Object.call(this);
-    this.$_040 = null;
+    this.$_042 = null;
 }
 let cgxgtbw_WebClipboard$_init_$lambda$_0_2_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3;
-    var$1 = var$1.$_040;
+    var$1 = var$1.$_042;
     var$3 = var$2.clipboardData;
     if (var$3 !== null)
         var$1.$content = $rt_str(var$3.getData("text/plain"));
@@ -20072,8 +19988,8 @@ cgxgtbw_WebPreloadApplicationListener$Step__init_ = (var_0, var_1) => {
 },
 cgxgtbw_WebPreloadApplicationListener$Step__clinit_ = () => {
     let var$1, var$2, var$3;
-    cgxgtbw_WebPreloadApplicationListener$Step_PRELOAD_LOADING_ASSETS = cgxgtbw_WebPreloadApplicationListener$Step__init_($rt_s(461), 0);
-    var$1 = cgxgtbw_WebPreloadApplicationListener$Step__init_($rt_s(462), 1);
+    cgxgtbw_WebPreloadApplicationListener$Step_PRELOAD_LOADING_ASSETS = cgxgtbw_WebPreloadApplicationListener$Step__init_($rt_s(459), 0);
+    var$1 = cgxgtbw_WebPreloadApplicationListener$Step__init_($rt_s(460), 1);
     cgxgtbw_WebPreloadApplicationListener$Step_PRELOAD_ASSETS = var$1;
     var$2 = $rt_createArray(cgxgtbw_WebPreloadApplicationListener$Step, 2);
     var$3 = var$2.data;
@@ -20135,8 +20051,8 @@ ju_Hashtable_put = ($this, $key, $value) => {
                 $entry = $entry.$next3;
             }
             if ($entry !== null) {
-                $result = $entry.$value0;
-                $entry.$value0 = $value;
+                $result = $entry.$value1;
+                $entry.$value1 = $value;
                 return $result;
             }
             $this.$modCount2 = $this.$modCount2 + 1 | 0;
@@ -20256,33 +20172,33 @@ function otji_IDBFactory__init_($this) {
 }
 function cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_0() {
     jl_Object.call(this);
-    this.$_043 = null;
+    this.$_045 = null;
 }
 let cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_0_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3;
-    var$2 = var$1.$_043.result;
+    var$2 = var$1.$_045.result;
     var$3 = otji_IDBObjectStoreParameters_create$js_body$_1();
     var$2.createObjectStore("FILE_DATA", var$3);
 },
 otji_EventHandler = $rt_classWithoutFields(0);
 function cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_1() {
     let a = this; jl_Object.call(a);
-    a.$_039 = null;
-    a.$_116 = null;
+    a.$_041 = null;
+    a.$_117 = null;
     a.$_28 = null;
 }
 let cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_1_handleEvent$exported$0 = var$1 => {
     let var$2, var$3, var$4, var$5;
     var$1 = var$1;
-    var$2 = var$1.$_039;
-    var$3 = var$1.$_116;
+    var$2 = var$1.$_041;
+    var$3 = var$1.$_117;
     var$1 = var$1.$_28;
     var$3 = var$3.result;
     var$2.$dataBase = var$3;
     var$4 = var$3.transaction("FILE_DATA", "readonly");
     var$5 = var$4.objectStore("FILE_DATA").openCursor();
     var$3 = new cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_0;
-    var$3.$_015 = var$2;
+    var$3.$_017 = var$2;
     var$3.$_14 = var$5;
     var$2 = otji_JS_function(otji_JSWrapper_unwrap(var$3), "handleEvent");
     var$5.onsuccess = var$2;
@@ -20291,24 +20207,24 @@ let cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_1_handleEvent$exported$0 =
     var$3 = otji_JS_function(otji_JSWrapper_unwrap(var$2), "handleEvent");
     var$4.oncomplete = var$3;
     var$2 = new cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_2;
-    var$2.$_09 = var$1;
+    var$2.$_011 = var$1;
     var$1 = otji_JS_function(otji_JSWrapper_unwrap(var$2), "handleEvent");
     var$5.onerror = var$1;
 };
 function cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_2() {
     let a = this; jl_Object.call(a);
-    a.$_020 = null;
-    a.$_16 = null;
+    a.$_022 = null;
+    a.$_17 = null;
 }
 let cgxgtbwft_LocalDBStorage$setupIndexedDB$lambda$_1_2_handleEvent$exported$0 = var$1 => {
     let var$2, var$3, var$4;
     var$1 = var$1;
-    var$2 = var$1.$_020;
-    var$1 = var$1.$_16;
+    var$2 = var$1.$_022;
+    var$1 = var$1.$_17;
     var$3 = jl_System_err();
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(463)), var$2);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(461)), var$2);
     var$4 = jl_AbstractStringBuilder_toString(var$4);
     otcic_JsConsolePrintStream_println(var$3, var$4);
     cgxgtbw_WebApplication_subtractInitQueue(var$1);
@@ -20413,12 +20329,12 @@ cbgu_GdxRuntimeException__init_4 = var_0 => {
     cbgu_GdxRuntimeException__init_2(var_1, var_0);
     return var_1;
 },
-cbgu_GdxRuntimeException__init_1 = ($this, $message, $t) => {
+cbgu_GdxRuntimeException__init_0 = ($this, $message, $t) => {
     jl_Throwable__init_($this, $message, $t);
 },
-cbgu_GdxRuntimeException__init_0 = (var_0, var_1) => {
+cbgu_GdxRuntimeException__init_1 = (var_0, var_1) => {
     let var_2 = new cbgu_GdxRuntimeException();
-    cbgu_GdxRuntimeException__init_1(var_2, var_0, var_1);
+    cbgu_GdxRuntimeException__init_0(var_2, var_0, var_1);
     return var_2;
 };
 function cgxgtbw_WebGLGraphics() {
@@ -20473,7 +20389,7 @@ let cgxgtbw_WebGLGraphics__init_ = ($this, $config) => {
     $document = new cbggg_GLVersion;
     cbg_Application$ApplicationType_$callClinit();
     $window = cbg_Application$ApplicationType_WebGL;
-    $document.$TAG = $rt_s(464);
+    $document.$TAG = $rt_s(462);
     if ($window === cbg_Application$ApplicationType_Android) {
         cbggg_GLVersion$Type_$callClinit();
         $document.$type4 = cbggg_GLVersion$Type_GLES;
@@ -20496,11 +20412,11 @@ let cgxgtbw_WebGLGraphics__init_ = ($this, $config) => {
     $window = $document.$type4;
     cbggg_GLVersion$Type_$callClinit();
     if ($window === cbggg_GLVersion$Type_GLES)
-        cbggg_GLVersion_extractVersion($document, $rt_s(465), $versionString);
+        cbggg_GLVersion_extractVersion($document, $rt_s(463), $versionString);
     else if ($window === cbggg_GLVersion$Type_WebGL)
-        cbggg_GLVersion_extractVersion($document, $rt_s(466), $versionString);
+        cbggg_GLVersion_extractVersion($document, $rt_s(464), $versionString);
     else if ($window === cbggg_GLVersion$Type_OpenGL)
-        cbggg_GLVersion_extractVersion($document, $rt_s(467), $versionString);
+        cbggg_GLVersion_extractVersion($document, $rt_s(465), $versionString);
     else {
         $document.$majorVersion = (-1);
         $document.$minorVersion = (-1);
@@ -20582,14 +20498,14 @@ let cgxgtbwa_AssetLoadImpl$3_handleEvent$exported$0 = (var$1, var$2) => {
     var$4 = var$3.length;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(468)), var$4);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(466)), var$4);
     jl_AbstractStringBuilder_toString(var$2);
     var$2 = var$1.$this$026;
     var$1 = var$1.$val$config;
     var$4 = var$3.length;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$5, $rt_s(469)), var$4);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$5, $rt_s(467)), var$4);
     jl_AbstractStringBuilder_toString(var$5);
     var$4 = var$3.length;
     if (var$4 > 0) {
@@ -20601,25 +20517,25 @@ let cgxgtbwa_AssetLoadImpl$3_handleEvent$exported$0 = (var$1, var$2) => {
             var$8 = $rt_str(var$7.name);
             var$9 = new jl_StringBuilder;
             jl_AbstractStringBuilder__init_(var$9);
-            jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(470)), var$8);
+            jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(468)), var$8);
             jl_AbstractStringBuilder_toString(var$9);
             if (!var$1.$windowListener.$acceptFileDropped(var$8)) {
                 var$9 = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_(var$9);
-                jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(471)), var$8);
+                jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(469)), var$8);
                 jl_AbstractStringBuilder_toString(var$9);
             } else {
                 var$9 = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_(var$9);
-                jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(472)), var$8);
+                jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(470)), var$8);
                 jl_AbstractStringBuilder_toString(var$9);
                 var$9 = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_(var$9);
-                jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(473)), var$8);
+                jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(471)), var$8);
                 jl_AbstractStringBuilder_toString(var$9);
                 var$9 = new cgxgtbwa_AssetLoadImpl$getFile$lambda$_2_0;
-                var$9.$_047 = var$2;
-                var$9.$_118 = var$7;
+                var$9.$_050 = var$2;
+                var$9.$_120 = var$7;
                 var$9.$_29 = var$8;
                 var$5.push(new Promise(otji_JS_function(otji_JSWrapper_unwrap(var$9), "onExecute")));
             }
@@ -20627,13 +20543,13 @@ let cgxgtbwa_AssetLoadImpl$3_handleEvent$exported$0 = (var$1, var$2) => {
         }
         var$3 = Promise.all(var$5);
         var$5 = new cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_0;
-        var$5.$_058 = var$2;
-        var$5.$_19 = var$1;
+        var$5.$_062 = var$2;
+        var$5.$_110 = var$1;
         var$1 = new cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_1;
-        var$1.$_056 = var$2;
+        var$1.$_060 = var$2;
         var$5 = var$3.then(otji_JS_function(otji_JSWrapper_unwrap(var$5), "apply"), otji_JS_function(otji_JSWrapper_unwrap(var$1), "apply"));
         var$1 = new cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_2;
-        var$1.$_055 = var$2;
+        var$1.$_058 = var$2;
         var$5.finally(otji_JS_function(otji_JSWrapper_unwrap(var$1), "get"));
     }
 },
@@ -20646,7 +20562,7 @@ function cgxgtbw_WebApplication$6() {
     this.$this$031 = null;
 }
 let cgxgtbw_WebApplication$6_onFailure = ($this, $url) => {
-    $rt_throw(jl_RuntimeException__init_0($rt_s(474)));
+    $rt_throw(jl_RuntimeException__init_0($rt_s(472)));
 },
 cgxgtbw_WebApplication$6_onSuccess = ($this, var$1, var$2) => {
     cgxgtbw_WebApplication_subtractInitQueue($this.$this$031);
@@ -20866,7 +20782,7 @@ cgxgtbw_WebGL20_glGetFloatv = ($this, $pname, $params) => {
     let var$3;
     if ($pname != 2931 && $pname != 2849 && $pname != 32824 && $pname != 10752 && $pname != 32938) {
         $params = new cbgu_GdxRuntimeException;
-        jl_RuntimeException__init_($params, $rt_s(475));
+        jl_RuntimeException__init_($params, $rt_s(473));
         $rt_throw($params);
     }
     var$3 = $this.$gl.getParameter($pname);
@@ -21052,7 +20968,7 @@ cgxgtbw_WebGL30Debug_checkError = $this => {
     var$3 = jl_Integer_toHexString(var$1);
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(476)), var$1), $rt_s(80)), var$3);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(474)), var$1), $rt_s(80)), var$3);
     jl_RuntimeException__init_(var$2, jl_AbstractStringBuilder_toString(var$4));
     $rt_throw(var$2);
 },
@@ -21280,7 +21196,7 @@ function cbggg_GLVersion() {
     a.$vendorString = null;
     a.$rendererString = null;
     a.$type4 = null;
-    a.$TAG = $rt_s(464);
+    a.$TAG = $rt_s(462);
 }
 let cbggg_GLVersion_extractVersion = ($this, $patternString, $versionString) => {
     let $matcher, $pattern, $resultSplit, $found;
@@ -21289,15 +21205,15 @@ let cbggg_GLVersion_extractVersion = ($this, $patternString, $versionString) => 
         $pattern = cbg_Gdx_app;
         $patternString = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($patternString);
-        jl_AbstractStringBuilder_append($patternString, $rt_s(477));
+        jl_AbstractStringBuilder_append($patternString, $rt_s(475));
         jl_AbstractStringBuilder_append($patternString, $versionString);
         $versionString = jl_AbstractStringBuilder_toString($patternString);
-        cgxgtbw_WebApplication_log($pattern, $rt_s(464), $versionString);
+        cgxgtbw_WebApplication_log($pattern, $rt_s(462), $versionString);
         $this.$majorVersion = 2;
         $this.$minorVersion = 0;
         $this.$releaseVersion = 0;
     } else {
-        $resultSplit = (jl_String_split(jur_Matcher_group($matcher, 1), $rt_s(478))).data;
+        $resultSplit = (jl_String_split(jur_Matcher_group($matcher, 1), $rt_s(476))).data;
         $this.$majorVersion = cbggg_GLVersion_parseInt($this, $resultSplit[0], 2);
         $found = $resultSplit.length;
         $this.$minorVersion = $found < 2 ? 0 : cbggg_GLVersion_parseInt($this, $resultSplit[1], 0);
@@ -21322,15 +21238,15 @@ cbggg_GLVersion_parseInt = ($this, $v, $defaultValue) => {
     var$4 = cbg_Gdx_app;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append(var$5, $rt_s(479));
+    jl_AbstractStringBuilder_append(var$5, $rt_s(477));
     jl_AbstractStringBuilder_append(var$5, $v);
-    jl_AbstractStringBuilder_append(var$5, $rt_s(480));
+    jl_AbstractStringBuilder_append(var$5, $rt_s(478));
     var$6 = jl_AbstractStringBuilder_toString(jl_StringBuilder_append0(var$5, $defaultValue));
     if (var$4.$logLevel >= 1) {
         $v = jl_System_err();
         var$5 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$5);
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(481)), $rt_s(68)), var$6);
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(479)), $rt_s(68)), var$6);
         var$7 = jl_AbstractStringBuilder_toString(var$5);
         otcic_JsConsolePrintStream_println($v, var$7);
     }
@@ -21360,11 +21276,11 @@ cbg_Application$ApplicationType__init_ = (var_0, var_1) => {
 cbg_Application$ApplicationType__clinit_ = () => {
     let var$1, var$2, var$3;
     cbg_Application$ApplicationType_Android = cbg_Application$ApplicationType__init_($rt_s(87), 0);
-    cbg_Application$ApplicationType_Desktop = cbg_Application$ApplicationType__init_($rt_s(482), 1);
-    cbg_Application$ApplicationType_HeadlessDesktop = cbg_Application$ApplicationType__init_($rt_s(483), 2);
-    cbg_Application$ApplicationType_Applet = cbg_Application$ApplicationType__init_($rt_s(484), 3);
-    cbg_Application$ApplicationType_WebGL = cbg_Application$ApplicationType__init_($rt_s(485), 4);
-    var$1 = cbg_Application$ApplicationType__init_($rt_s(486), 5);
+    cbg_Application$ApplicationType_Desktop = cbg_Application$ApplicationType__init_($rt_s(480), 1);
+    cbg_Application$ApplicationType_HeadlessDesktop = cbg_Application$ApplicationType__init_($rt_s(481), 2);
+    cbg_Application$ApplicationType_Applet = cbg_Application$ApplicationType__init_($rt_s(482), 3);
+    cbg_Application$ApplicationType_WebGL = cbg_Application$ApplicationType__init_($rt_s(483), 4);
+    var$1 = cbg_Application$ApplicationType__init_($rt_s(484), 5);
     cbg_Application$ApplicationType_iOS = var$1;
     var$2 = $rt_createArray(cbg_Application$ApplicationType, 6);
     var$3 = var$2.data;
@@ -21394,7 +21310,7 @@ cgxgtbw_WebGL20Debug_checkError = $this => {
     var$3 = jl_Integer_toHexString(var$1);
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(476)), var$1), $rt_s(80)), var$3);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(474)), var$1), $rt_s(80)), var$3);
     jl_RuntimeException__init_(var$2, jl_AbstractStringBuilder_toString(var$4));
     $rt_throw(var$2);
 },
@@ -21596,7 +21512,7 @@ cgxgtbw_WebGL20Debug_glVertexAttribPointer = ($this, $indx, $size, $type, $norma
 otp_PlatformRunnable = $rt_classWithoutFields(0);
 function jl_Object$monitorExit$lambda$_8_1() {
     jl_Object.call(this);
-    this.$_025 = null;
+    this.$_027 = null;
 }
 let otji_IDBObjectStoreParameters = $rt_classWithoutFields();
 function otji_IDBObjectStoreParameters__init_($this) {
@@ -21607,13 +21523,13 @@ let otji_IDBObjectStoreParameters_create$js_body$_1 = () => {
 };
 function cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_0() {
     let a = this; jl_Object.call(a);
-    a.$_015 = null;
+    a.$_017 = null;
     a.$_14 = null;
 }
 let cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_0_handleEvent$exported$0 = var$1 => {
     let var$2, var$3, var$4;
     var$1 = var$1;
-    var$2 = var$1.$_015;
+    var$2 = var$1.$_017;
     var$3 = var$1.$_14.result;
     if (var$3 !== null) {
         var$1 = cgxgtbwf_MemoryFileStorage_fixPath(var$2, $rt_str(var$3.key));
@@ -21634,11 +21550,11 @@ let cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_1_handleEvent$exported$
 };
 function cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_2() {
     jl_Object.call(this);
-    this.$_09 = null;
+    this.$_011 = null;
 }
 let cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_2_handleEvent$exported$0 = var$1 => {
-    var$1 = var$1.$_09;
-    otcic_JsConsolePrintStream_println(jl_System_err(), $rt_s(487));
+    var$1 = var$1.$_011;
+    otcic_JsConsolePrintStream_println(jl_System_err(), $rt_s(485));
     cgxgtbw_WebApplication_subtractInitQueue(var$1);
 },
 jl_AutoCloseable = $rt_classWithoutFields(0),
@@ -21674,7 +21590,7 @@ function otcic_JsConsolePrintStream__init_($this) {
 }
 let otcic_JsConsolePrintStream_println = ($this, $s) => {
     $this.$print($s);
-    $this.$print($rt_s(243));
+    $this.$print($rt_s(241));
 },
 otcic_JSStderrPrintStream = $rt_classWithoutFields(otcic_JsConsolePrintStream),
 otcic_JSStderrPrintStream_print = ($this, $s) => {
@@ -21720,10 +21636,10 @@ cbggg_GLVersion$Type__init_ = (var_0, var_1) => {
 },
 cbggg_GLVersion$Type__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbggg_GLVersion$Type_OpenGL = cbggg_GLVersion$Type__init_($rt_s(488), 0);
-    cbggg_GLVersion$Type_GLES = cbggg_GLVersion$Type__init_($rt_s(489), 1);
-    cbggg_GLVersion$Type_WebGL = cbggg_GLVersion$Type__init_($rt_s(485), 2);
-    var$1 = cbggg_GLVersion$Type__init_($rt_s(490), 3);
+    cbggg_GLVersion$Type_OpenGL = cbggg_GLVersion$Type__init_($rt_s(486), 0);
+    cbggg_GLVersion$Type_GLES = cbggg_GLVersion$Type__init_($rt_s(487), 1);
+    cbggg_GLVersion$Type_WebGL = cbggg_GLVersion$Type__init_($rt_s(483), 2);
+    var$1 = cbggg_GLVersion$Type__init_($rt_s(488), 3);
     cbggg_GLVersion$Type_NONE = var$1;
     var$2 = $rt_createArray(cbggg_GLVersion$Type, 4);
     var$3 = var$2.data;
@@ -22661,7 +22577,7 @@ jur_Pattern_compile = $pattern => {
     let var$2, var$3, var$4, var$5;
     if ($pattern === null) {
         $pattern = new jl_NullPointerException;
-        jl_RuntimeException__init_($pattern, $rt_s(491));
+        jl_RuntimeException__init_($pattern, $rt_s(489));
         $rt_throw($pattern);
     }
     jur_AbstractSet_$callClinit();
@@ -23081,7 +22997,7 @@ otpp_AsyncCallbackWrapper_error = ($this, $e) => {
 };
 function jl_Object$monitorEnterWait$lambda$_6_0() {
     let a = this; jl_Object.call(a);
-    a.$_06 = null;
+    a.$_07 = null;
     a.$_11 = null;
     a.$_20 = 0;
     a.$_30 = null;
@@ -23239,7 +23155,7 @@ jur_FSet_getGroupIndex = $this => {
     return $this.$groupIndex0;
 },
 jur_FSet_getName = $this => {
-    return $rt_s(492);
+    return $rt_s(490);
 },
 jur_FSet_hasConsumed = ($this, $mr) => {
     return 0;
@@ -23632,7 +23548,7 @@ jur_Lexer_movePointer = $this => {
                                             if ($nonCap > 57)
                                                 break a;
                                             if ($nameBuilder === null)
-                                                $rt_throw(jur_PatternSyntaxException__init_($rt_s(493), jur_Lexer_toString($this), $this.$index));
+                                                $rt_throw(jur_PatternSyntaxException__init_($rt_s(491), jur_Lexer_toString($this), $this.$index));
                                             jl_StringBuilder_append3($nameBuilder, $nonCap);
                                             jur_Lexer_nextIndex($this);
                                             $nonCap = $this.$pattern0.data[$this.$index];
@@ -23728,7 +23644,7 @@ jur_Lexer_parseCharClassName = $this => {
             $sb = jl_String__init_1(var$3, jur_Lexer_nextIndex($this), 1);
             $res = new jl_StringBuilder;
             jl_AbstractStringBuilder__init_($res);
-            jl_StringBuilder_append(jl_StringBuilder_append($res, $rt_s(494)), $sb);
+            jl_StringBuilder_append(jl_StringBuilder_append($res, $rt_s(492)), $sb);
             return jl_AbstractStringBuilder_toString($res);
         }
         jur_Lexer_nextIndex($this);
@@ -23754,15 +23670,15 @@ jur_Lexer_parseCharClassName = $this => {
     if ($res.$nativeString.length == 1) {
         $sb = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($sb);
-        jl_StringBuilder_append(jl_StringBuilder_append($sb, $rt_s(494)), $res);
+        jl_StringBuilder_append(jl_StringBuilder_append($sb, $rt_s(492)), $res);
         return jl_AbstractStringBuilder_toString($sb);
     }
     b: {
         c: {
             if ($res.$nativeString.length > 3) {
-                if (jl_String_startsWith($res, $rt_s(494)))
+                if (jl_String_startsWith($res, $rt_s(492)))
                     break c;
-                if (jl_String_startsWith($res, $rt_s(495)))
+                if (jl_String_startsWith($res, $rt_s(493)))
                     break c;
             }
             break b;
@@ -24291,11 +24207,11 @@ ju_ArrayList_toString = $this => {
     $i = 0;
     while ($i < $length) {
         var$4 = $this.$array1.data;
-        jl_AbstractStringBuilder_append(jl_StringBuilder_append($buffer, var$4[$i] !== $this ? var$4[$i] : $rt_s(340)), $rt_s(80));
+        jl_AbstractStringBuilder_append(jl_StringBuilder_append($buffer, var$4[$i] !== $this ? var$4[$i] : $rt_s(338)), $rt_s(80));
         $i = $i + 1 | 0;
     }
     var$4 = $this.$array1.data;
-    jl_StringBuilder_append($buffer, var$4[$length] !== $this ? var$4[$length] : $rt_s(340));
+    jl_StringBuilder_append($buffer, var$4[$length] !== $this ? var$4[$length] : $rt_s(338));
     jl_AbstractStringBuilder_append0($buffer, 93);
     return jl_AbstractStringBuilder_toString($buffer);
 },
@@ -24317,7 +24233,7 @@ jur_NonCapFSet_matches = ($this, $stringIndex, $testString, $matchResult) => {
     return $this.$next1.$matches($stringIndex, $testString, $matchResult);
 },
 jur_NonCapFSet_getName = $this => {
-    return $rt_s(496);
+    return $rt_s(494);
 },
 jur_NonCapFSet_hasConsumed = ($this, $mr) => {
     return 0;
@@ -24327,7 +24243,7 @@ jur_AheadFSet_matches = ($this, $stringIndex, $testString, $matchResult) => {
     return $stringIndex;
 },
 jur_AheadFSet_getName = $this => {
-    return $rt_s(497);
+    return $rt_s(495);
 },
 jur_BehindFSet = $rt_classWithoutFields(jur_FSet),
 jur_BehindFSet_matches = ($this, $stringIndex, $testString, $matchResult) => {
@@ -24336,7 +24252,7 @@ jur_BehindFSet_matches = ($this, $stringIndex, $testString, $matchResult) => {
     return $stringIndex;
 },
 jur_BehindFSet_getName = $this => {
-    return $rt_s(498);
+    return $rt_s(496);
 };
 function jur_AtomicFSet() {
     jur_FSet.call(this);
@@ -24350,7 +24266,7 @@ let jur_AtomicFSet_matches = ($this, $stringIndex, $testString, $matchResult) =>
     return $stringIndex;
 },
 jur_AtomicFSet_getName = $this => {
-    return $rt_s(499);
+    return $rt_s(497);
 },
 jur_AtomicFSet_hasConsumed = ($this, $mr) => {
     return 0;
@@ -24364,7 +24280,7 @@ jur_FinalSet_matches = ($this, $stringIndex, $testString, $matchResult) => {
     return $stringIndex;
 },
 jur_FinalSet_getName = $this => {
-    return $rt_s(500);
+    return $rt_s(498);
 };
 function jur_LeafSet() {
     jur_AbstractSet.call(this);
@@ -24448,7 +24364,7 @@ jur_EmptySet_findBack = ($this, $stringIndex, $startSearch, $testString, $matchR
     return $startSearch;
 },
 jur_EmptySet_getName = $this => {
-    return $rt_s(501);
+    return $rt_s(499);
 },
 jur_EmptySet_hasConsumed = ($this, $mr) => {
     return 0;
@@ -24494,7 +24410,7 @@ jur_JointSet_setNext = ($this, $next) => {
     $this.$fSet.$next1 = $next;
 },
 jur_JointSet_getName = $this => {
-    return $rt_s(502);
+    return $rt_s(500);
 },
 jur_JointSet_first = ($this, $set) => {
     let $i, var$3;
@@ -24569,7 +24485,7 @@ jur_NonCapJointSet_matches = ($this, $stringIndex, $testString, $matchResult) =>
     return $shift;
 },
 jur_NonCapJointSet_getName = $this => {
-    return $rt_s(503);
+    return $rt_s(501);
 },
 jur_NonCapJointSet_hasConsumed = ($this, $matchResult) => {
     return !jur_MatchResultImpl_getConsumed($matchResult, $this.$groupIndex) ? 0 : 1;
@@ -24593,7 +24509,7 @@ jur_AtomicJointSet_setNext = ($this, $next) => {
     $this.$next1 = $next;
 },
 jur_AtomicJointSet_getName = $this => {
-    return $rt_s(503);
+    return $rt_s(501);
 },
 jur_PositiveLookAhead = $rt_classWithoutFields(jur_AtomicJointSet),
 jur_PositiveLookAhead_matches = ($this, $stringIndex, $testString, $matchResult) => {
@@ -24611,7 +24527,7 @@ jur_PositiveLookAhead_hasConsumed = ($this, $matchResult) => {
     return 0;
 },
 jur_PositiveLookAhead_getName = $this => {
-    return $rt_s(504);
+    return $rt_s(502);
 },
 jur_NegativeLookAhead = $rt_classWithoutFields(jur_AtomicJointSet),
 jur_NegativeLookAhead_matches = ($this, $stringIndex, $testString, $matchResult) => {
@@ -24631,7 +24547,7 @@ jur_NegativeLookAhead_hasConsumed = ($this, $matchResult) => {
     return 0;
 },
 jur_NegativeLookAhead_getName = $this => {
-    return $rt_s(505);
+    return $rt_s(503);
 },
 jur_PositiveLookBehind = $rt_classWithoutFields(jur_AtomicJointSet),
 jur_PositiveLookBehind_matches = ($this, $stringIndex, $testString, $matchResult) => {
@@ -24660,7 +24576,7 @@ jur_PositiveLookBehind_hasConsumed = ($this, $matchResult) => {
     return 0;
 },
 jur_PositiveLookBehind_getName = $this => {
-    return $rt_s(506);
+    return $rt_s(504);
 },
 jur_NegativeLookBehind = $rt_classWithoutFields(jur_AtomicJointSet),
 jur_NegativeLookBehind_matches = ($this, $stringIndex, $testString, $matchResult) => {
@@ -24681,7 +24597,7 @@ jur_NegativeLookBehind_hasConsumed = ($this, $matchResult) => {
     return 0;
 },
 jur_NegativeLookBehind_getName = $this => {
-    return $rt_s(507);
+    return $rt_s(505);
 };
 function jur_SingleSet() {
     jur_JointSet.call(this);
@@ -25449,7 +25365,7 @@ jur_LeafQuantifierSet_matches = ($this, $stringIndex, $testString, $matchResult)
     return var$5;
 },
 jur_LeafQuantifierSet_getName = $this => {
-    return $rt_s(508);
+    return $rt_s(506);
 };
 function jur_CompositeQuantifierSet() {
     jur_LeafQuantifierSet.call(this);
@@ -25520,7 +25436,7 @@ jur_GroupQuantifierSet_matches = ($this, $stringIndex, $testString, $matchResult
     return $this.$next1.$matches($stringIndex, $testString, $matchResult);
 },
 jur_GroupQuantifierSet_getName = $this => {
-    return $rt_s(509);
+    return $rt_s(507);
 },
 jur_AltQuantifierSet = $rt_classWithoutFields(jur_LeafQuantifierSet),
 jur_AltQuantifierSet_matches = ($this, $stringIndex, $testString, $matchResult) => {
@@ -25574,777 +25490,777 @@ jur_AbstractCharClass$PredefinedCharacterClasses__clinit_ = () => {
     var$2 = var$1.data;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(510);
+    var$4[0] = $rt_s(508);
     var$4[1] = jur_AbstractCharClass$LazyLower__init_0();
     var$2[0] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(511);
+    var$4[0] = $rt_s(509);
     var$4[1] = jur_AbstractCharClass$LazyUpper__init_();
     var$2[1] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(512);
+    var$4[0] = $rt_s(510);
     var$4[1] = jur_AbstractCharClass$LazyASCII__init_0();
     var$2[2] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(513);
+    var$4[0] = $rt_s(511);
     var$4[1] = jur_AbstractCharClass$LazyAlpha__init_0();
     var$2[3] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(514);
+    var$4[0] = $rt_s(512);
     var$4[1] = jur_AbstractCharClass$PredefinedCharacterClasses_digit;
     var$2[4] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(515);
+    var$4[0] = $rt_s(513);
     var$4[1] = jur_AbstractCharClass$LazyAlnum__init_0();
     var$2[5] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(516);
+    var$4[0] = $rt_s(514);
     var$4[1] = jur_AbstractCharClass$LazyPunct__init_();
     var$2[6] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(517);
+    var$4[0] = $rt_s(515);
     var$4[1] = jur_AbstractCharClass$LazyGraph__init_0();
     var$2[7] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(518);
+    var$4[0] = $rt_s(516);
     var$4[1] = jur_AbstractCharClass$LazyPrint__init_0();
     var$2[8] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(519);
+    var$4[0] = $rt_s(517);
     var$4[1] = jur_AbstractCharClass$LazyBlank__init_();
     var$2[9] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(520);
+    var$4[0] = $rt_s(518);
     var$4[1] = jur_AbstractCharClass$LazyCntrl__init_();
     var$2[10] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(521);
+    var$4[0] = $rt_s(519);
     var$4[1] = jur_AbstractCharClass$LazyXDigit__init_0();
     var$2[11] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(522);
+    var$4[0] = $rt_s(520);
     var$4[1] = jur_AbstractCharClass$LazyJavaLowerCase__init_();
     var$2[12] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(523);
+    var$4[0] = $rt_s(521);
     var$4[1] = jur_AbstractCharClass$LazyJavaUpperCase__init_();
     var$2[13] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(524);
+    var$4[0] = $rt_s(522);
     var$4[1] = jur_AbstractCharClass$LazyJavaWhitespace__init_0();
     var$2[14] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(525);
+    var$4[0] = $rt_s(523);
     var$4[1] = jur_AbstractCharClass$LazyJavaMirrored__init_();
     var$2[15] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(526);
+    var$4[0] = $rt_s(524);
     var$4[1] = jur_AbstractCharClass$LazyJavaDefined__init_0();
     var$2[16] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(527);
+    var$4[0] = $rt_s(525);
     var$4[1] = jur_AbstractCharClass$LazyJavaDigit__init_0();
     var$2[17] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(528);
+    var$4[0] = $rt_s(526);
     var$4[1] = jur_AbstractCharClass$LazyJavaIdentifierIgnorable__init_0();
     var$2[18] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(529);
+    var$4[0] = $rt_s(527);
     var$4[1] = jur_AbstractCharClass$LazyJavaISOControl__init_();
     var$2[19] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(530);
+    var$4[0] = $rt_s(528);
     var$4[1] = jur_AbstractCharClass$LazyJavaJavaIdentifierPart__init_0();
     var$2[20] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(531);
+    var$4[0] = $rt_s(529);
     var$4[1] = jur_AbstractCharClass$LazyJavaJavaIdentifierStart__init_0();
     var$2[21] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(532);
+    var$4[0] = $rt_s(530);
     var$4[1] = jur_AbstractCharClass$LazyJavaLetter__init_0();
     var$2[22] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(533);
+    var$4[0] = $rt_s(531);
     var$4[1] = jur_AbstractCharClass$LazyJavaLetterOrDigit__init_0();
     var$2[23] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(534);
+    var$4[0] = $rt_s(532);
     var$4[1] = jur_AbstractCharClass$LazyJavaSpaceChar__init_0();
     var$2[24] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(535);
+    var$4[0] = $rt_s(533);
     var$4[1] = jur_AbstractCharClass$LazyJavaTitleCase__init_0();
     var$2[25] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(536);
+    var$4[0] = $rt_s(534);
     var$4[1] = jur_AbstractCharClass$LazyJavaUnicodeIdentifierPart__init_();
     var$2[26] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(537);
+    var$4[0] = $rt_s(535);
     var$4[1] = jur_AbstractCharClass$LazyJavaUnicodeIdentifierStart__init_0();
     var$2[27] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(416);
+    var$4[0] = $rt_s(414);
     var$4[1] = jur_AbstractCharClass$PredefinedCharacterClasses_space;
     var$2[28] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(538);
+    var$4[0] = $rt_s(536);
     var$4[1] = jur_AbstractCharClass$LazyWord__init_0();
     var$2[29] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(539);
+    var$4[0] = $rt_s(537);
     var$4[1] = jur_AbstractCharClass$LazyNonWord__init_();
     var$2[30] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(540);
+    var$4[0] = $rt_s(538);
     var$4[1] = jur_AbstractCharClass$PredefinedCharacterClasses_space;
     var$2[31] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(541);
+    var$4[0] = $rt_s(539);
     var$4[1] = jur_AbstractCharClass$LazyNonSpace__init_();
     var$2[32] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(542);
+    var$4[0] = $rt_s(540);
     var$4[1] = jur_AbstractCharClass$PredefinedCharacterClasses_digit;
     var$2[33] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(543);
+    var$4[0] = $rt_s(541);
     var$4[1] = jur_AbstractCharClass$LazyNonDigit__init_();
     var$2[34] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(544);
+    var$4[0] = $rt_s(542);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(0, 127);
     var$2[35] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(545);
+    var$4[0] = $rt_s(543);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(128, 255);
     var$2[36] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(546);
+    var$4[0] = $rt_s(544);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(256, 383);
     var$2[37] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(547);
+    var$4[0] = $rt_s(545);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(384, 591);
     var$2[38] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(548);
+    var$4[0] = $rt_s(546);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(592, 687);
     var$2[39] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(549);
+    var$4[0] = $rt_s(547);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(688, 767);
     var$2[40] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(550);
+    var$4[0] = $rt_s(548);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(768, 879);
     var$2[41] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(551);
+    var$4[0] = $rt_s(549);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(880, 1023);
     var$2[42] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(552);
+    var$4[0] = $rt_s(550);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(1024, 1279);
     var$2[43] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(553);
+    var$4[0] = $rt_s(551);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(1280, 1327);
     var$2[44] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(554);
+    var$4[0] = $rt_s(552);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(1328, 1423);
     var$2[45] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(555);
+    var$4[0] = $rt_s(553);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(1424, 1535);
     var$2[46] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(556);
+    var$4[0] = $rt_s(554);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(1536, 1791);
     var$2[47] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(557);
+    var$4[0] = $rt_s(555);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(1792, 1871);
     var$2[48] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(558);
+    var$4[0] = $rt_s(556);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(1872, 1919);
     var$2[49] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(559);
+    var$4[0] = $rt_s(557);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(1920, 1983);
     var$2[50] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(560);
+    var$4[0] = $rt_s(558);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(2304, 2431);
     var$2[51] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(561);
+    var$4[0] = $rt_s(559);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(2432, 2559);
     var$2[52] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(562);
+    var$4[0] = $rt_s(560);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(2560, 2687);
     var$2[53] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(563);
+    var$4[0] = $rt_s(561);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(2688, 2815);
     var$2[54] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(564);
+    var$4[0] = $rt_s(562);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(2816, 2943);
     var$2[55] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(565);
+    var$4[0] = $rt_s(563);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(2944, 3071);
     var$2[56] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(566);
+    var$4[0] = $rt_s(564);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(3072, 3199);
     var$2[57] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(567);
+    var$4[0] = $rt_s(565);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(3200, 3327);
     var$2[58] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(568);
+    var$4[0] = $rt_s(566);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(3328, 3455);
     var$2[59] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(569);
+    var$4[0] = $rt_s(567);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(3456, 3583);
     var$2[60] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(570);
+    var$4[0] = $rt_s(568);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(3584, 3711);
     var$2[61] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(571);
+    var$4[0] = $rt_s(569);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(3712, 3839);
     var$2[62] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(572);
+    var$4[0] = $rt_s(570);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(3840, 4095);
     var$2[63] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(573);
+    var$4[0] = $rt_s(571);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(4096, 4255);
     var$2[64] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(574);
+    var$4[0] = $rt_s(572);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(4256, 4351);
     var$2[65] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(575);
+    var$4[0] = $rt_s(573);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(4352, 4607);
     var$2[66] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(576);
+    var$4[0] = $rt_s(574);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(4608, 4991);
     var$2[67] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(577);
+    var$4[0] = $rt_s(575);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(4992, 5023);
     var$2[68] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(578);
+    var$4[0] = $rt_s(576);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(5024, 5119);
     var$2[69] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(579);
+    var$4[0] = $rt_s(577);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(5120, 5759);
     var$2[70] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(580);
+    var$4[0] = $rt_s(578);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(5760, 5791);
     var$2[71] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(581);
+    var$4[0] = $rt_s(579);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(5792, 5887);
     var$2[72] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(582);
+    var$4[0] = $rt_s(580);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(5888, 5919);
     var$2[73] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(583);
+    var$4[0] = $rt_s(581);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(5920, 5951);
     var$2[74] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(584);
+    var$4[0] = $rt_s(582);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(5952, 5983);
     var$2[75] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(585);
+    var$4[0] = $rt_s(583);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(5984, 6015);
     var$2[76] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(586);
+    var$4[0] = $rt_s(584);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(6016, 6143);
     var$2[77] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(587);
+    var$4[0] = $rt_s(585);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(6144, 6319);
     var$2[78] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(588);
+    var$4[0] = $rt_s(586);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(6400, 6479);
     var$2[79] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(589);
+    var$4[0] = $rt_s(587);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(6480, 6527);
     var$2[80] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(590);
+    var$4[0] = $rt_s(588);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(6528, 6623);
     var$2[81] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(591);
+    var$4[0] = $rt_s(589);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(6624, 6655);
     var$2[82] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(592);
+    var$4[0] = $rt_s(590);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(6656, 6687);
     var$2[83] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(593);
+    var$4[0] = $rt_s(591);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(7424, 7551);
     var$2[84] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(594);
+    var$4[0] = $rt_s(592);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(7552, 7615);
     var$2[85] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(595);
+    var$4[0] = $rt_s(593);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(7616, 7679);
     var$2[86] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(596);
+    var$4[0] = $rt_s(594);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(7680, 7935);
     var$2[87] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(597);
+    var$4[0] = $rt_s(595);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(7936, 8191);
     var$2[88] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(598);
+    var$4[0] = $rt_s(596);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(8192, 8303);
     var$2[89] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(599);
+    var$4[0] = $rt_s(597);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(8304, 8351);
     var$2[90] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(600);
+    var$4[0] = $rt_s(598);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(8352, 8399);
     var$2[91] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(601);
+    var$4[0] = $rt_s(599);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(8400, 8447);
     var$2[92] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(602);
+    var$4[0] = $rt_s(600);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(8448, 8527);
     var$2[93] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(603);
+    var$4[0] = $rt_s(601);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(8528, 8591);
     var$2[94] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(604);
+    var$4[0] = $rt_s(602);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(8592, 8703);
     var$2[95] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(605);
+    var$4[0] = $rt_s(603);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(8704, 8959);
     var$2[96] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(606);
+    var$4[0] = $rt_s(604);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(8960, 9215);
     var$2[97] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(607);
+    var$4[0] = $rt_s(605);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(9216, 9279);
     var$2[98] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(608);
+    var$4[0] = $rt_s(606);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(9280, 9311);
     var$2[99] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(609);
+    var$4[0] = $rt_s(607);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(9312, 9471);
     var$2[100] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(610);
+    var$4[0] = $rt_s(608);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(9472, 9599);
     var$2[101] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(611);
+    var$4[0] = $rt_s(609);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(9600, 9631);
     var$2[102] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(612);
+    var$4[0] = $rt_s(610);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(9632, 9727);
     var$2[103] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(613);
+    var$4[0] = $rt_s(611);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(9728, 9983);
     var$2[104] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(614);
+    var$4[0] = $rt_s(612);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(9984, 10175);
     var$2[105] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(615);
+    var$4[0] = $rt_s(613);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(10176, 10223);
     var$2[106] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(616);
+    var$4[0] = $rt_s(614);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(10224, 10239);
     var$2[107] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(617);
+    var$4[0] = $rt_s(615);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(10240, 10495);
     var$2[108] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(618);
+    var$4[0] = $rt_s(616);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(10496, 10623);
     var$2[109] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(619);
+    var$4[0] = $rt_s(617);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(10624, 10751);
     var$2[110] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(620);
+    var$4[0] = $rt_s(618);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(10752, 11007);
     var$2[111] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(621);
+    var$4[0] = $rt_s(619);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(11008, 11263);
     var$2[112] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(622);
+    var$4[0] = $rt_s(620);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(11264, 11359);
     var$2[113] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(623);
+    var$4[0] = $rt_s(621);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(11392, 11519);
     var$2[114] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(624);
+    var$4[0] = $rt_s(622);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(11520, 11567);
     var$2[115] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(625);
+    var$4[0] = $rt_s(623);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(11568, 11647);
     var$2[116] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(626);
+    var$4[0] = $rt_s(624);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(11648, 11743);
     var$2[117] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(627);
+    var$4[0] = $rt_s(625);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(11776, 11903);
     var$2[118] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(628);
+    var$4[0] = $rt_s(626);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(11904, 12031);
     var$2[119] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(629);
+    var$4[0] = $rt_s(627);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(12032, 12255);
     var$2[120] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(630);
+    var$4[0] = $rt_s(628);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(12272, 12287);
     var$2[121] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(631);
+    var$4[0] = $rt_s(629);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(12288, 12351);
     var$2[122] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(632);
+    var$4[0] = $rt_s(630);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(12352, 12447);
     var$2[123] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(633);
+    var$4[0] = $rt_s(631);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(12448, 12543);
     var$2[124] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(634);
+    var$4[0] = $rt_s(632);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(12544, 12591);
     var$2[125] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(635);
+    var$4[0] = $rt_s(633);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(12592, 12687);
     var$2[126] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(636);
+    var$4[0] = $rt_s(634);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(12688, 12703);
     var$2[127] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(637);
+    var$4[0] = $rt_s(635);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(12704, 12735);
     var$2[128] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(638);
+    var$4[0] = $rt_s(636);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(12736, 12783);
     var$2[129] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(639);
+    var$4[0] = $rt_s(637);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(12784, 12799);
     var$2[130] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(640);
+    var$4[0] = $rt_s(638);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(12800, 13055);
     var$2[131] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(641);
+    var$4[0] = $rt_s(639);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(13056, 13311);
     var$2[132] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(642);
+    var$4[0] = $rt_s(640);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(13312, 19893);
     var$2[133] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(643);
+    var$4[0] = $rt_s(641);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(19904, 19967);
     var$2[134] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(644);
+    var$4[0] = $rt_s(642);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(19968, 40959);
     var$2[135] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(645);
+    var$4[0] = $rt_s(643);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(40960, 42127);
     var$2[136] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(646);
+    var$4[0] = $rt_s(644);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(42128, 42191);
     var$2[137] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(647);
+    var$4[0] = $rt_s(645);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(42752, 42783);
     var$2[138] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(648);
+    var$4[0] = $rt_s(646);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(43008, 43055);
     var$2[139] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(649);
+    var$4[0] = $rt_s(647);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(44032, 55203);
     var$2[140] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(650);
+    var$4[0] = $rt_s(648);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(55296, 56191);
     var$2[141] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(651);
+    var$4[0] = $rt_s(649);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(56192, 56319);
     var$2[142] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(652);
+    var$4[0] = $rt_s(650);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(56320, 57343);
     var$2[143] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(653);
+    var$4[0] = $rt_s(651);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(57344, 63743);
     var$2[144] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(654);
+    var$4[0] = $rt_s(652);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(63744, 64255);
     var$2[145] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(655);
+    var$4[0] = $rt_s(653);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(64256, 64335);
     var$2[146] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(656);
+    var$4[0] = $rt_s(654);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(64336, 65023);
     var$2[147] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(657);
+    var$4[0] = $rt_s(655);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(65024, 65039);
     var$2[148] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(658);
+    var$4[0] = $rt_s(656);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(65040, 65055);
     var$2[149] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(659);
+    var$4[0] = $rt_s(657);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(65056, 65071);
     var$2[150] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(660);
+    var$4[0] = $rt_s(658);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(65072, 65103);
     var$2[151] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(661);
+    var$4[0] = $rt_s(659);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(65104, 65135);
     var$2[152] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(662);
+    var$4[0] = $rt_s(660);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(65136, 65279);
     var$2[153] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(663);
+    var$4[0] = $rt_s(661);
     var$4[1] = jur_AbstractCharClass$LazyRange__init_(65280, 65519);
     var$2[154] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
@@ -26354,192 +26270,192 @@ jur_AbstractCharClass$PredefinedCharacterClasses__clinit_ = () => {
     var$2[155] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(664);
+    var$4[0] = $rt_s(662);
     var$4[1] = jur_AbstractCharClass$LazySpecialsBlock__init_0();
     var$2[156] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(665);
+    var$4[0] = $rt_s(663);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(0, 1);
     var$2[157] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(666);
+    var$4[0] = $rt_s(664);
     var$4[1] = jur_AbstractCharClass$LazyCategoryScope__init_(62, 1);
     var$2[158] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(667);
+    var$4[0] = $rt_s(665);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(1, 1);
     var$2[159] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(668);
+    var$4[0] = $rt_s(666);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(2, 1);
     var$2[160] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(669);
+    var$4[0] = $rt_s(667);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(3, 0);
     var$2[161] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(670);
+    var$4[0] = $rt_s(668);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(4, 0);
     var$2[162] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(671);
+    var$4[0] = $rt_s(669);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(5, 1);
     var$2[163] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(672);
+    var$4[0] = $rt_s(670);
     var$4[1] = jur_AbstractCharClass$LazyCategoryScope__init_(448, 1);
     var$2[164] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(673);
+    var$4[0] = $rt_s(671);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(6, 1);
     var$2[165] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(674);
+    var$4[0] = $rt_s(672);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(7, 0);
     var$2[166] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(675);
+    var$4[0] = $rt_s(673);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(8, 1);
     var$2[167] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(676);
+    var$4[0] = $rt_s(674);
     var$4[1] = jur_AbstractCharClass$LazyCategoryScope__init_(3584, 1);
     var$2[168] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(677);
+    var$4[0] = $rt_s(675);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(9, 1);
     var$2[169] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(678);
+    var$4[0] = $rt_s(676);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(10, 1);
     var$2[170] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(679);
+    var$4[0] = $rt_s(677);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(11, 1);
     var$2[171] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(680);
+    var$4[0] = $rt_s(678);
     var$4[1] = jur_AbstractCharClass$LazyCategoryScope__init_(28672, 0);
     var$2[172] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(681);
+    var$4[0] = $rt_s(679);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(12, 0);
     var$2[173] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(682);
+    var$4[0] = $rt_s(680);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(13, 0);
     var$2[174] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(683);
+    var$4[0] = $rt_s(681);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(14, 0);
     var$2[175] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(684);
+    var$4[0] = $rt_s(682);
     var$4[1] = jur_AbstractCharClass$LazyCategoryScope__init_2(983040, 1, 1);
     var$2[176] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(685);
+    var$4[0] = $rt_s(683);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(15, 0);
     var$2[177] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(686);
+    var$4[0] = $rt_s(684);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(16, 1);
     var$2[178] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(687);
+    var$4[0] = $rt_s(685);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(18, 1);
     var$2[179] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(688);
+    var$4[0] = $rt_s(686);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_1(19, 0, 1);
     var$2[180] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(689);
+    var$4[0] = $rt_s(687);
     var$4[1] = jur_AbstractCharClass$LazyCategoryScope__init_(1643118592, 1);
     var$2[181] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(690);
+    var$4[0] = $rt_s(688);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(20, 0);
     var$2[182] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(691);
+    var$4[0] = $rt_s(689);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(21, 0);
     var$2[183] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(692);
+    var$4[0] = $rt_s(690);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(22, 0);
     var$2[184] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(693);
+    var$4[0] = $rt_s(691);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(23, 0);
     var$2[185] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(694);
+    var$4[0] = $rt_s(692);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(24, 1);
     var$2[186] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(695);
+    var$4[0] = $rt_s(693);
     var$4[1] = jur_AbstractCharClass$LazyCategoryScope__init_(2113929216, 1);
     var$2[187] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(696);
+    var$4[0] = $rt_s(694);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(25, 1);
     var$2[188] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(697);
+    var$4[0] = $rt_s(695);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(26, 0);
     var$2[189] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(698);
+    var$4[0] = $rt_s(696);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(27, 0);
     var$2[190] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(699);
+    var$4[0] = $rt_s(697);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(28, 1);
     var$2[191] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(700);
+    var$4[0] = $rt_s(698);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(29, 0);
     var$2[192] = var$3;
     var$3 = $rt_createArray(jl_Object, 2);
     var$4 = var$3.data;
-    var$4[0] = $rt_s(701);
+    var$4[0] = $rt_s(699);
     var$4[1] = jur_AbstractCharClass$LazyCategory__init_(30, 0);
     var$2[193] = var$3;
     jur_AbstractCharClass$PredefinedCharacterClasses_contents = var$1;
@@ -26581,7 +26497,7 @@ jur_FSet$PossessiveFSet_matches = ($this, $stringIndex, $testString, $matchResul
     return $stringIndex;
 },
 jur_FSet$PossessiveFSet_getName = $this => {
-    return $rt_s(702);
+    return $rt_s(700);
 },
 jur_FSet$PossessiveFSet_hasConsumed = ($this, $mr) => {
     return 0;
@@ -26813,11 +26729,11 @@ function jur_LowHighSurrogateRangeSet() {
 }
 let jur_LowHighSurrogateRangeSet_getName = $this => {
     let var$1, var$2, var$3;
-    var$1 = !$this.$alt3 ? $rt_s(7) : $rt_s(703);
+    var$1 = !$this.$alt3 ? $rt_s(7) : $rt_s(701);
     var$2 = $this.$surrChars.$toString();
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(704)), var$1), var$2);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(702)), var$1), var$2);
     return jl_AbstractStringBuilder_toString(var$3);
 };
 function jur_CompositeRangeSet() {
@@ -26882,7 +26798,7 @@ jur_CompositeRangeSet_getName = $this => {
     var$2 = jl_String_valueOf($this.$withSurrogates);
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(705)), var$1), $rt_s(706)), var$2);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(703)), var$1), $rt_s(704)), var$2);
     return jl_AbstractStringBuilder_toString(var$3);
 },
 jur_CompositeRangeSet_hasConsumed = ($this, $matchResult) => {
@@ -26929,11 +26845,11 @@ jur_SupplRangeSet_matches = ($this, $stringIndex, $testString, $matchResult) => 
 },
 jur_SupplRangeSet_getName = $this => {
     let var$1, var$2, var$3;
-    var$1 = !$this.$alt0 ? $rt_s(7) : $rt_s(703);
+    var$1 = !$this.$alt0 ? $rt_s(7) : $rt_s(701);
     var$2 = $this.$chars.$toString();
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(704)), var$1), var$2);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(702)), var$1), var$2);
     return jl_AbstractStringBuilder_toString(var$3);
 },
 jur_SupplRangeSet_contains = ($this, $ch) => {
@@ -26965,11 +26881,11 @@ jur_UCISupplRangeSet_contains = ($this, $ch) => {
 },
 jur_UCISupplRangeSet_getName = $this => {
     let var$1, var$2, var$3;
-    var$1 = !$this.$alt0 ? $rt_s(7) : $rt_s(703);
+    var$1 = !$this.$alt0 ? $rt_s(7) : $rt_s(701);
     var$2 = $this.$chars.$toString();
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(707)), var$1), var$2);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(705)), var$1), var$2);
     return jl_AbstractStringBuilder_toString(var$3);
 };
 function jur_UCIRangeSet() {
@@ -26992,11 +26908,11 @@ jur_UCIRangeSet_accepts = ($this, $strIndex, $testString) => {
 },
 jur_UCIRangeSet_getName = $this => {
     let var$1, var$2, var$3;
-    var$1 = !$this.$alt1 ? $rt_s(7) : $rt_s(703);
+    var$1 = !$this.$alt1 ? $rt_s(7) : $rt_s(701);
     var$2 = $this.$chars1.$toString();
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(707)), var$1), var$2);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(705)), var$1), var$2);
     return jl_AbstractStringBuilder_toString(var$3);
 };
 function jur_RangeSet() {
@@ -27019,11 +26935,11 @@ jur_RangeSet_accepts = ($this, $strIndex, $testString) => {
 },
 jur_RangeSet_getName = $this => {
     let var$1, var$2, var$3;
-    var$1 = !$this.$alt2 ? $rt_s(7) : $rt_s(703);
+    var$1 = !$this.$alt2 ? $rt_s(7) : $rt_s(701);
     var$2 = $this.$chars0.$toString();
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(704)), var$1), var$2);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(702)), var$1), var$2);
     return jl_AbstractStringBuilder_toString(var$3);
 },
 jur_RangeSet_first = ($this, $set) => {
@@ -27067,7 +26983,7 @@ jur_HangulDecomposedCharSet_getName = $this => {
     var$1 = jur_HangulDecomposedCharSet_getDecomposedChar($this);
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(708)), var$1);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(706)), var$1);
     return jl_AbstractStringBuilder_toString(var$2);
 },
 jur_HangulDecomposedCharSet_matches = ($this, $strIndex, $testString, $matchResult) => {
@@ -27260,7 +27176,7 @@ jur_UCICharSet_getName = $this => {
     var$1 = $this.$ch4;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(709)), var$1);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(707)), var$1);
     return jl_AbstractStringBuilder_toString(var$2);
 };
 function jur_CICharSet() {
@@ -27289,7 +27205,7 @@ jur_CICharSet_getName = $this => {
     var$1 = $this.$ch3;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(710)), var$1);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(708)), var$1);
     return jl_AbstractStringBuilder_toString(var$2);
 };
 function jur_DecomposedCharSet() {
@@ -27393,7 +27309,7 @@ jur_DecomposedCharSet_getName = $this => {
     var$1 = jur_DecomposedCharSet_getDecomposedChar($this);
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(711)), var$1);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(709)), var$1);
     return jl_AbstractStringBuilder_toString(var$2);
 },
 jur_DecomposedCharSet_codePointAt = ($this, $strIndex, $testString, $rightBound) => {
@@ -27606,7 +27522,7 @@ jur_DotAllQuantifierSet_find = ($this, $stringIndex, $testString, $matchResult) 
     return (-1);
 },
 jur_DotAllQuantifierSet_getName = $this => {
-    return $rt_s(712);
+    return $rt_s(710);
 };
 function jur_DotQuantifierSet() {
     jur_QuantifierSet.call(this);
@@ -27663,7 +27579,7 @@ jur_DotQuantifierSet_findLineTerminator = ($this, $i, $to, $testString) => {
     return $i;
 },
 jur_DotQuantifierSet_getName = $this => {
-    return $rt_s(713);
+    return $rt_s(711);
 },
 jur_AbstractLineTerminator = $rt_classWithoutFields(),
 jur_AbstractLineTerminator_unixLT = null,
@@ -27820,7 +27736,7 @@ jur_SOLSet_hasConsumed = ($this, $matchResult) => {
     return 0;
 },
 jur_SOLSet_getName = $this => {
-    return $rt_s(714);
+    return $rt_s(712);
 };
 function jur_WordBoundary() {
     jur_AbstractSet.call(this);
@@ -27851,7 +27767,7 @@ jur_WordBoundary_hasConsumed = ($this, $matchResult) => {
     return 0;
 },
 jur_WordBoundary_getName = $this => {
-    return $rt_s(715);
+    return $rt_s(713);
 },
 jur_WordBoundary_isSpace = ($this, $ch, $index, $leftBound, $testString) => {
     let var$5;
@@ -27883,7 +27799,7 @@ jur_PreviousMatch_hasConsumed = ($this, $matchResult) => {
     return 0;
 },
 jur_PreviousMatch_getName = $this => {
-    return $rt_s(716);
+    return $rt_s(714);
 };
 function jur_EOLSet() {
     jur_AbstractSet.call(this);
@@ -27937,7 +27853,7 @@ jur_EOLSet_hasConsumed = ($this, $matchResult) => {
     return $res;
 },
 jur_EOLSet_getName = $this => {
-    return $rt_s(717);
+    return $rt_s(715);
 },
 jur_EOISet = $rt_classWithoutFields(jur_AbstractSet),
 jur_EOISet_matches = ($this, $stringIndex, $testString, $matchResult) => {
@@ -27951,7 +27867,7 @@ jur_EOISet_hasConsumed = ($this, $matchResult) => {
     return 0;
 },
 jur_EOISet_getName = $this => {
-    return $rt_s(718);
+    return $rt_s(716);
 };
 function jur_MultiLineSOLSet() {
     jur_AbstractSet.call(this);
@@ -27979,7 +27895,7 @@ jur_MultiLineSOLSet_hasConsumed = ($this, $matchResult) => {
     return 0;
 },
 jur_MultiLineSOLSet_getName = $this => {
-    return $rt_s(719);
+    return $rt_s(717);
 },
 jur_DotAllSet = $rt_classWithoutFields(jur_JointSet),
 jur_DotAllSet__init_0 = $this => {
@@ -28008,7 +27924,7 @@ jur_DotAllSet_matches = ($this, $stringIndex, $testString, $matchResult) => {
     return $this.$next1.$matches(var$5, $testString, $matchResult);
 },
 jur_DotAllSet_getName = $this => {
-    return $rt_s(720);
+    return $rt_s(718);
 },
 jur_DotAllSet_setNext = ($this, $next) => {
     $this.$next1 = $next;
@@ -28097,7 +28013,7 @@ jur_UEOLSet_hasConsumed = ($this, $matchResult) => {
     return $res;
 },
 jur_UEOLSet_getName = $this => {
-    return $rt_s(717);
+    return $rt_s(715);
 };
 function jur_UMultiLineEOLSet() {
     jur_AbstractSet.call(this);
@@ -28129,7 +28045,7 @@ jur_UMultiLineEOLSet_hasConsumed = ($this, $matchResult) => {
     return $res;
 },
 jur_UMultiLineEOLSet_getName = $this => {
-    return $rt_s(721);
+    return $rt_s(719);
 };
 function jur_MultiLineEOLSet() {
     jur_AbstractSet.call(this);
@@ -28184,7 +28100,7 @@ jur_MultiLineEOLSet_hasConsumed = ($this, $matchResult) => {
     return $res;
 },
 jur_MultiLineEOLSet_getName = $this => {
-    return $rt_s(722);
+    return $rt_s(720);
 };
 function jur_CIBackReferenceSet() {
     let a = this; jur_JointSet.call(a);
@@ -28237,7 +28153,7 @@ jur_CIBackReferenceSet_getName = $this => {
     var$1 = $this.$groupIndex;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(723)), var$1);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(721)), var$1);
     return jl_AbstractStringBuilder_toString(var$2);
 },
 jur_CIBackReferenceSet_hasConsumed = ($this, $matchResult) => {
@@ -28318,7 +28234,7 @@ jur_BackReferenceSet_getName = $this => {
     var$1 = $this.$groupIndex;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(724)), var$1);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(722)), var$1);
     return jl_AbstractStringBuilder_toString(var$2);
 };
 function jur_UCIBackReferenceSet() {
@@ -28358,7 +28274,7 @@ jur_UCIBackReferenceSet_getName = $this => {
     var$1 = $this.$groupIndex1;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(725)), var$1);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(723)), var$1);
     return jl_AbstractStringBuilder_toString(var$2);
 },
 jl_StringBuffer = $rt_classWithoutFields(jl_AbstractStringBuilder),
@@ -28462,7 +28378,7 @@ jur_SequenceSet_getName = $this => {
     var$1 = $this.$string;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(726)), var$1);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(724)), var$1);
     return jl_AbstractStringBuilder_toString(var$2);
 },
 jur_SequenceSet_first = ($this, $set) => {
@@ -28555,7 +28471,7 @@ jur_UCISequenceSet_getName = $this => {
     var$1 = $this.$string3;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(727)), var$1);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(725)), var$1);
     return jl_AbstractStringBuilder_toString(var$2);
 };
 function jur_CISequenceSet() {
@@ -28592,7 +28508,7 @@ jur_CISequenceSet_getName = $this => {
     var$1 = $this.$string2;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(728)), var$1);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(726)), var$1);
     return jl_AbstractStringBuilder_toString(var$2);
 },
 ju_TemplateCollections$AbstractImmutableSet = $rt_classWithoutFields(ju_AbstractSet),
@@ -28633,7 +28549,7 @@ jur_UCISupplCharSet_getName = $this => {
     var$1 = jl_String__init_0(jl_Character_toChars($this.$ch2));
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(709)), var$1);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(707)), var$1);
     return jl_AbstractStringBuilder_toString(var$2);
 };
 function jur_LowSurrogateCharSet() {
@@ -30062,7 +29978,7 @@ cbgg_GLTexture_unsafeSetAnisotropicFilter = ($this, $level, $force) => {
     cbgg_GLTexture_$callClinit();
     $max = cbgg_GLTexture_maxAnisotropicFilterLevel;
     if (!($max > 0.0)) {
-        if (!cgxgtbw_WebGLGraphics_supportsExtension(cbg_Gdx_graphics, $rt_s(729))) {
+        if (!cgxgtbw_WebGLGraphics_supportsExtension(cbg_Gdx_graphics, $rt_s(727))) {
             $max = 1.0;
             cbgg_GLTexture_maxAnisotropicFilterLevel = $max;
         } else {
@@ -30190,7 +30106,7 @@ cbgg_Texture_load = ($this, $data) => {
     let var$2, var$3, var$4, var$5, var$6, var$7;
     if ($this.$data9 !== null && $data.$isManaged() != $this.$data9.$isManaged()) {
         $data = new cbgu_GdxRuntimeException;
-        jl_RuntimeException__init_($data, $rt_s(730));
+        jl_RuntimeException__init_($data, $rt_s(728));
         $rt_throw($data);
     }
     $this.$data9 = $data;
@@ -30231,7 +30147,7 @@ cbgg_Texture_load = ($this, $data) => {
                 var$3 = cgxgtbw_WebApplication_getType(cbg_Gdx_app);
                 cbg_Application$ApplicationType_$callClinit();
                 if (var$3 !== cbg_Application$ApplicationType_Android && cgxgtbw_WebApplication_getType(cbg_Gdx_app) !== cbg_Application$ApplicationType_WebGL && cgxgtbw_WebApplication_getType(cbg_Gdx_app) !== cbg_Application$ApplicationType_iOS) {
-                    if (!cgxgtbw_WebGLGraphics_supportsExtension(cbg_Gdx_graphics, $rt_s(731)) && !cgxgtbw_WebGLGraphics_supportsExtension(cbg_Gdx_graphics, $rt_s(732)) && !jl_String_equals(jl_Class_getName(jl_Object_getClass(cbg_Gdx_gl20)), $rt_s(733)) && cbg_Gdx_gl30 === null)
+                    if (!cgxgtbw_WebGLGraphics_supportsExtension(cbg_Gdx_graphics, $rt_s(729)) && !cgxgtbw_WebGLGraphics_supportsExtension(cbg_Gdx_graphics, $rt_s(730)) && !jl_String_equals(jl_Class_getName(jl_Object_getClass(cbg_Gdx_gl20)), $rt_s(731)) && cbg_Gdx_gl30 === null)
                         cbggg_MipMapGenerator_generateMipMapCPU(3553, var$5, var$6, var$7);
                     else {
                         cbg_Gdx_gl.$glTexImage2D(3553, 0, cbgg_Pixmap_getGLInternalFormat(var$5), cbgg_Pixmap_getWidth(var$5), cbgg_Pixmap_getHeight(var$5), 0, cbgg_Pixmap_getGLFormat(var$5), cbgg_Pixmap_getGLType(var$5), cbgg_Pixmap_getPixels(var$5));
@@ -30286,19 +30202,19 @@ cbgg_Texture__clinit_ = () => {
 otjf_JSMapping = $rt_classWithoutFields(0);
 function cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_0() {
     let a = this; jl_Object.call(a);
-    a.$_058 = null;
-    a.$_19 = null;
+    a.$_062 = null;
+    a.$_110 = null;
 }
 let cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_0_apply$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7;
     var$2 = otji_JSWrapper_jsToJava(var$2);
     var$1 = var$1;
     var$2 = otji_JSWrapper_unwrap(var$2);
-    var$1 = var$1.$_19;
+    var$1 = var$1.$_110;
     var$3 = var$2.length;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(734)), var$3);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(732)), var$3);
     jl_AbstractStringBuilder_toString(var$4);
     var$5 = var$2.length;
     var$6 = $rt_createArray(cgxgtbwf_FileData, var$5);
@@ -30309,11 +30225,11 @@ let cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_0_apply$exported$0 = (v
         var$3 = var$3 + 1 | 0;
     }
     var$1.$windowListener.$filesDropped(var$6);
-    return otji_JSWrapper_javaToJs($rt_s(735));
+    return otji_JSWrapper_javaToJs($rt_s(733));
 };
 function cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_1() {
     jl_Object.call(this);
-    this.$_056 = null;
+    this.$_060 = null;
 }
 let cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_1_apply$exported$0 = (var$1, var$2) => {
     var$2 = otji_JSWrapper_jsToJava(var$2);
@@ -30321,14 +30237,14 @@ let cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_1_apply$exported$0 = (v
     var$1 = jl_String_valueOf(var$2);
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(736)), var$1);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(734)), var$1);
     jl_AbstractStringBuilder_toString(var$2);
-    return otji_JSWrapper_javaToJs($rt_s(737));
+    return otji_JSWrapper_javaToJs($rt_s(735));
 },
 otjf_JSSupplier = $rt_classWithoutFields(0);
 function cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_2() {
     jl_Object.call(this);
-    this.$_055 = null;
+    this.$_058 = null;
 }
 let cgxgtbwa_AssetLoadImpl$downloadDroppedFile$lambda$_3_2_get$exported$0 = var$1 => {
     var$1;
@@ -30356,7 +30272,7 @@ cgxgtbwdt_TypedArrays_getTypedArray = $buffer => {
                 $buffer = jl_String_valueOf(jl_Object_getClass($buffer));
                 var$3 = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_(var$3);
-                jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(738)), $buffer);
+                jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(736)), $buffer);
                 jl_RuntimeException__init_(var$2, jl_AbstractStringBuilder_toString(var$3));
                 $rt_throw(var$2);
             }
@@ -30388,8 +30304,8 @@ cgxgtbw_WebWindowListener = $rt_classWithoutFields(0),
 otjc_JSPromise$Executor = $rt_classWithoutFields(0);
 function cgxgtbwa_AssetLoadImpl$getFile$lambda$_2_0() {
     let a = this; jl_Object.call(a);
-    a.$_047 = null;
-    a.$_118 = null;
+    a.$_050 = null;
+    a.$_120 = null;
     a.$_29 = null;
 }
 let cgxgtbwa_AssetLoadImpl$getFile$lambda$_2_0_onExecute$exported$0 = (var$1, var$2, var$3) => {
@@ -30397,8 +30313,8 @@ let cgxgtbwa_AssetLoadImpl$getFile$lambda$_2_0_onExecute$exported$0 = (var$1, va
     var$2 = otji_JS_functionAsObject(var$2, "accept");
     otji_JS_functionAsObject(var$3, "accept");
     var$1 = var$1;
-    var$3 = var$1.$_047;
-    var$4 = var$1.$_118;
+    var$3 = var$1.$_050;
+    var$4 = var$1.$_120;
     var$1 = var$1.$_29;
     var$5 = new FileReader();
     var$5.readAsArrayBuffer(var$4);
@@ -30489,7 +30405,7 @@ function cvs_SaveManager() {
     a.$coinsDirty = 0;
 }
 let cvs_SaveManager_getHighScore = $this => {
-    return cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(739), 0);
+    return cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(737), 0);
 },
 cvs_SaveManager_getCredits = $this => {
     return $this.$creditsCache;
@@ -30542,7 +30458,7 @@ cvs_SaveManager_isAircraftOwned = ($this, $index) => {
             var$2 = $this.$prefs;
             var$3 = new jl_StringBuilder;
             jl_AbstractStringBuilder__init_(var$3);
-            jl_StringBuilder_append0(jl_StringBuilder_append(var$3, $rt_s(740)), $index);
+            jl_StringBuilder_append0(jl_StringBuilder_append(var$3, $rt_s(738)), $index);
             var$3 = jl_AbstractStringBuilder_toString(var$3);
             if (!cgxgtbw_WebPreferences_getBoolean(var$2, var$3, 0)) {
                 $index = 0;
@@ -30554,90 +30470,90 @@ cvs_SaveManager_isAircraftOwned = ($this, $index) => {
     return $index;
 },
 cvs_SaveManager_getSelectedAircraft = $this => {
-    return kr_RangesKt___RangesKt_coerceIn0(cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(741), 0), 0, 3);
+    return kr_RangesKt___RangesKt_coerceIn0(cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(739), 0), 0, 3);
 },
 cvs_SaveManager_setSelectedAircraft = ($this, $value) => {
     let var$2;
     var$2 = $this.$prefs;
     $value = kr_RangesKt___RangesKt_coerceIn0($value, 0, 3);
-    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger(var$2, $rt_s(741), $value));
+    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger(var$2, $rt_s(739), $value));
 },
 cvs_SaveManager_getUnlockedStage = $this => {
     let var$1;
-    var$1 = cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(742), 0);
+    var$1 = cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(740), 0);
     cvs_CampaignCatalog_$callClinit();
     return kr_RangesKt___RangesKt_coerceIn0(var$1, 0, kc_CollectionsKt__CollectionsKt_getLastIndex(cvs_CampaignCatalog_getStages(cvs_CampaignCatalog_INSTANCE)));
 },
 cvs_SaveManager_getReducedFlash = $this => {
-    return cgxgtbw_WebPreferences_getBoolean($this.$prefs, $rt_s(743), 0);
+    return cgxgtbw_WebPreferences_getBoolean($this.$prefs, $rt_s(741), 0);
 },
 cvs_SaveManager_getVibration = $this => {
-    return cgxgtbw_WebPreferences_getBoolean($this.$prefs, $rt_s(744), 1);
+    return cgxgtbw_WebPreferences_getBoolean($this.$prefs, $rt_s(742), 1);
 },
 cvs_SaveManager_getShowHitbox = $this => {
-    return cgxgtbw_WebPreferences_getBoolean($this.$prefs, $rt_s(745), 1);
+    return cgxgtbw_WebPreferences_getBoolean($this.$prefs, $rt_s(743), 1);
 },
 cvs_SaveManager_getMusicEnabled = $this => {
-    return cgxgtbw_WebPreferences_getBoolean($this.$prefs, $rt_s(746), 1);
+    return cgxgtbw_WebPreferences_getBoolean($this.$prefs, $rt_s(744), 1);
 },
 cvs_SaveManager_getSfxEnabled = $this => {
-    return cgxgtbw_WebPreferences_getBoolean($this.$prefs, $rt_s(747), 1);
+    return cgxgtbw_WebPreferences_getBoolean($this.$prefs, $rt_s(745), 1);
 },
 cvs_SaveManager_getDifficulty = $this => {
-    return kr_RangesKt___RangesKt_coerceIn0(cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(748), 1), 0, 3);
+    return kr_RangesKt___RangesKt_coerceIn0(cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(746), 1), 0, 3);
 },
 cvs_SaveManager_setDifficulty = ($this, $value) => {
     let var$2;
     var$2 = $this.$prefs;
     $value = kr_RangesKt___RangesKt_coerceIn0($value, 0, 3);
-    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger(var$2, $rt_s(748), $value));
+    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger(var$2, $rt_s(746), $value));
 },
 cvs_SaveManager_getGraphicsQuality = $this => {
-    return kr_RangesKt___RangesKt_coerceIn0(cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(749), 2), 0, 3);
+    return kr_RangesKt___RangesKt_coerceIn0(cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(747), 2), 0, 3);
 },
 cvs_SaveManager_setGraphicsQuality = ($this, $value) => {
     let var$2;
     var$2 = $this.$prefs;
     $value = kr_RangesKt___RangesKt_coerceIn0($value, 0, 3);
-    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger(var$2, $rt_s(749), $value));
+    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger(var$2, $rt_s(747), $value));
 },
 cvs_SaveManager_getRunBombs = $this => {
-    return kr_RangesKt___RangesKt_coerceIn0(cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(750), 10), 0, 10);
+    return kr_RangesKt___RangesKt_coerceIn0(cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(748), 10), 0, 10);
 },
 cvs_SaveManager_setRunBombs = ($this, $value) => {
     let var$2;
     var$2 = $this.$prefs;
     $value = kr_RangesKt___RangesKt_coerceIn0($value, 0, 10);
-    cgxgtbw_WebPreferences_putInteger(var$2, $rt_s(750), $value);
+    cgxgtbw_WebPreferences_putInteger(var$2, $rt_s(748), $value);
     $this.$runPowersDirty = 1;
 },
 cvs_SaveManager_getPilotName = $this => {
     let var$1;
-    var$1 = cgxgtbw_WebPreferences_getString($this.$prefs, $rt_s(751), $rt_s(66));
-    kji_Intrinsics_checkNotNullExpressionValue(var$1, $rt_s(752));
+    var$1 = cgxgtbw_WebPreferences_getString($this.$prefs, $rt_s(749), $rt_s(66));
+    kji_Intrinsics_checkNotNullExpressionValue(var$1, $rt_s(750));
     return var$1;
 },
 cvs_SaveManager_setLanguage = ($this, $value) => {
-    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger($this.$prefs, $rt_s(753), $value));
+    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger($this.$prefs, $rt_s(751), $value));
 },
 cvs_SaveManager_getControlMode = $this => {
-    return kr_RangesKt___RangesKt_coerceIn0(cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(754), 0), 0, 2);
+    return kr_RangesKt___RangesKt_coerceIn0(cgxgtbw_WebPreferences_getInteger($this.$prefs, $rt_s(752), 0), 0, 2);
 },
 cvs_SaveManager_setControlMode = ($this, $value) => {
     let var$2;
     var$2 = $this.$prefs;
     $value = kr_RangesKt___RangesKt_coerceIn0($value, 0, 2);
-    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger(var$2, $rt_s(754), $value));
+    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger(var$2, $rt_s(752), $value));
 },
 cvs_SaveManager_getAdsRemoved = $this => {
-    return cgxgtbw_WebPreferences_getBoolean($this.$prefs, $rt_s(755), 0);
+    return cgxgtbw_WebPreferences_getBoolean($this.$prefs, $rt_s(753), 0);
 },
 cvs_SaveManager_setAdsRemoved = ($this, $value) => {
-    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean($this.$prefs, $rt_s(755), $value));
+    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean($this.$prefs, $rt_s(753), $value));
 },
 cvs_SaveManager_upgradeStacks = ($this, $type) => {
     let $$this$getOrPut$iv, $answer$iv, var$4, var$5, var$6;
-    kji_Intrinsics_checkNotNullParameter($type, $rt_s(756));
+    kji_Intrinsics_checkNotNullParameter($type, $rt_s(754));
     $$this$getOrPut$iv = $this.$upgradeCache;
     $answer$iv = ju_LinkedHashMap_get($$this$getOrPut$iv, $type);
     if ($answer$iv === null) {
@@ -30645,12 +30561,12 @@ cvs_SaveManager_upgradeStacks = ($this, $type) => {
         var$5 = $type.$name;
         ju_Locale_$callClinit();
         var$6 = ju_Locale_ROOT;
-        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(757));
+        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(755));
         $answer$iv = jl_String_toLowerCase(var$5, var$6);
-        kji_Intrinsics_checkNotNullExpressionValue($answer$iv, $rt_s(758));
+        kji_Intrinsics_checkNotNullExpressionValue($answer$iv, $rt_s(756));
         var$6 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$6);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(759)), $answer$iv);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(757)), $answer$iv);
         var$6 = jl_AbstractStringBuilder_toString(var$6);
         $answer$iv = jl_Integer_valueOf(kr_RangesKt___RangesKt_coerceAtLeast0(cgxgtbw_WebPreferences_getInteger(var$4, var$6, 0), 0));
         ju_LinkedHashMap_put($$this$getOrPut$iv, $type, $answer$iv);
@@ -30659,7 +30575,7 @@ cvs_SaveManager_upgradeStacks = ($this, $type) => {
 },
 cvs_SaveManager_runPowerStacks = ($this, $type) => {
     let $$this$getOrPut$iv, $answer$iv, var$4, var$5, var$6;
-    kji_Intrinsics_checkNotNullParameter($type, $rt_s(756));
+    kji_Intrinsics_checkNotNullParameter($type, $rt_s(754));
     $$this$getOrPut$iv = $this.$runPowerCache;
     $answer$iv = ju_LinkedHashMap_get($$this$getOrPut$iv, $type);
     if ($answer$iv === null) {
@@ -30667,12 +30583,12 @@ cvs_SaveManager_runPowerStacks = ($this, $type) => {
         var$5 = $type.$name;
         ju_Locale_$callClinit();
         var$6 = ju_Locale_ROOT;
-        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(757));
+        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(755));
         $answer$iv = jl_String_toLowerCase(var$5, var$6);
-        kji_Intrinsics_checkNotNullExpressionValue($answer$iv, $rt_s(758));
+        kji_Intrinsics_checkNotNullExpressionValue($answer$iv, $rt_s(756));
         var$6 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$6);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(760)), $answer$iv);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(758)), $answer$iv);
         var$6 = jl_AbstractStringBuilder_toString(var$6);
         $answer$iv = jl_Integer_valueOf(kr_RangesKt___RangesKt_coerceAtLeast0(cgxgtbw_WebPreferences_getInteger(var$4, var$6, 0), 0));
         ju_LinkedHashMap_put($$this$getOrPut$iv, $type, $answer$iv);
@@ -30681,7 +30597,7 @@ cvs_SaveManager_runPowerStacks = ($this, $type) => {
 },
 cvs_SaveManager_setRunPower = ($this, $type, $value) => {
     let $safe, var$4, var$5, var$6;
-    kji_Intrinsics_checkNotNullParameter($type, $rt_s(756));
+    kji_Intrinsics_checkNotNullParameter($type, $rt_s(754));
     cvs_PowerType_$callClinit();
     $safe = kr_RangesKt___RangesKt_coerceIn0($value, 0, $type !== cvs_PowerType_SPECIAL ? 2147483647 : 7);
     var$4 = $this.$runPowerCache;
@@ -30691,19 +30607,19 @@ cvs_SaveManager_setRunPower = ($this, $type, $value) => {
     var$5 = $type.$name;
     ju_Locale_$callClinit();
     var$6 = ju_Locale_ROOT;
-    kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(757));
+    kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(755));
     $type = jl_String_toLowerCase(var$5, var$6);
-    kji_Intrinsics_checkNotNullExpressionValue($type, $rt_s(758));
+    kji_Intrinsics_checkNotNullExpressionValue($type, $rt_s(756));
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(760)), $type);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(758)), $type);
     $type = jl_AbstractStringBuilder_toString(var$5);
     cgxgtbw_WebPreferences_putInteger(var$4, $type, $safe);
     $this.$runPowersDirty = 1;
 },
 cvs_SaveManager_setRunPowerSeconds = ($this, $type, $seconds) => {
     let $safe, var$4, var$5, var$6;
-    kji_Intrinsics_checkNotNullParameter($type, $rt_s(756));
+    kji_Intrinsics_checkNotNullParameter($type, $rt_s(754));
     $safe = kr_RangesKt___RangesKt_coerceAtLeast($seconds, 0.0);
     var$4 = $this.$runPowerSecondsCache;
     var$5 = jl_Float_valueOf($safe);
@@ -30712,19 +30628,19 @@ cvs_SaveManager_setRunPowerSeconds = ($this, $type, $seconds) => {
     var$5 = $type.$name;
     ju_Locale_$callClinit();
     var$6 = ju_Locale_ROOT;
-    kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(757));
+    kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(755));
     var$6 = jl_String_toLowerCase(var$5, var$6);
-    kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(758));
+    kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(756));
     $type = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($type);
-    jl_StringBuilder_append(jl_StringBuilder_append($type, $rt_s(761)), var$6);
+    jl_StringBuilder_append(jl_StringBuilder_append($type, $rt_s(759)), var$6);
     $type = jl_AbstractStringBuilder_toString($type);
     cbgu_ObjectMap_put(var$4.$values4, $type, jl_Float_valueOf($safe));
     $this.$runPowersDirty = 1;
 },
 cvs_SaveManager_runPowerEnabled = ($this, $type) => {
     let $$this$getOrPut$iv, $answer$iv, var$4, var$5, var$6;
-    kji_Intrinsics_checkNotNullParameter($type, $rt_s(756));
+    kji_Intrinsics_checkNotNullParameter($type, $rt_s(754));
     $$this$getOrPut$iv = $this.$runPowerEnabledCache;
     $answer$iv = ju_LinkedHashMap_get($$this$getOrPut$iv, $type);
     if ($answer$iv === null) {
@@ -30732,21 +30648,21 @@ cvs_SaveManager_runPowerEnabled = ($this, $type) => {
         var$5 = $type.$name;
         ju_Locale_$callClinit();
         var$6 = ju_Locale_ROOT;
-        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(757));
+        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(755));
         $answer$iv = jl_String_toLowerCase(var$5, var$6);
-        kji_Intrinsics_checkNotNullExpressionValue($answer$iv, $rt_s(758));
+        kji_Intrinsics_checkNotNullExpressionValue($answer$iv, $rt_s(756));
         var$6 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$6);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(762)), $answer$iv);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(760)), $answer$iv);
         var$6 = jl_AbstractStringBuilder_toString(var$6);
         $answer$iv = jl_Boolean_valueOf(cgxgtbw_WebPreferences_getBoolean(var$4, var$6, 1));
         ju_LinkedHashMap_put($$this$getOrPut$iv, $type, $answer$iv);
     }
-    return $answer$iv.$value1;
+    return $answer$iv.$value0;
 },
 cvs_SaveManager_setRunPowerEnabled = ($this, $type, $enabled) => {
     let var$3, var$4, var$5;
-    kji_Intrinsics_checkNotNullParameter($type, $rt_s(756));
+    kji_Intrinsics_checkNotNullParameter($type, $rt_s(754));
     var$3 = $this.$runPowerEnabledCache;
     var$4 = jl_Boolean_valueOf($enabled);
     ju_LinkedHashMap_put(var$3, $type, var$4);
@@ -30754,19 +30670,19 @@ cvs_SaveManager_setRunPowerEnabled = ($this, $type, $enabled) => {
     var$4 = $type.$name;
     ju_Locale_$callClinit();
     var$5 = ju_Locale_ROOT;
-    kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(757));
+    kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(755));
     $type = jl_String_toLowerCase(var$4, var$5);
-    kji_Intrinsics_checkNotNullExpressionValue($type, $rt_s(758));
+    kji_Intrinsics_checkNotNullExpressionValue($type, $rt_s(756));
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(762)), $type);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(760)), $type);
     $type = jl_AbstractStringBuilder_toString(var$4);
     cgxgtbw_WebPreferences_putBoolean(var$3, $type, $enabled);
     $this.$runPowersDirty = 1;
 },
 cvs_SaveManager_clearRunPower = ($this, $type) => {
     let var$2, var$3, var$4, var$5;
-    kji_Intrinsics_checkNotNullParameter($type, $rt_s(756));
+    kji_Intrinsics_checkNotNullParameter($type, $rt_s(754));
     var$2 = $this.$runPowerCache;
     var$3 = jl_Integer_valueOf(0);
     ju_LinkedHashMap_put(var$2, $type, var$3);
@@ -30780,34 +30696,34 @@ cvs_SaveManager_clearRunPower = ($this, $type) => {
     var$4 = $type.$name;
     ju_Locale_$callClinit();
     var$5 = ju_Locale_ROOT;
-    kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(757));
+    kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(755));
     var$2 = jl_String_toLowerCase(var$4, var$5);
-    kji_Intrinsics_checkNotNullExpressionValue(var$2, $rt_s(758));
+    kji_Intrinsics_checkNotNullExpressionValue(var$2, $rt_s(756));
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(760)), var$2);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(758)), var$2);
     var$5 = jl_AbstractStringBuilder_toString(var$5);
     cgxgtbw_WebPreferences_remove(var$3, var$5);
     var$2 = $this.$prefs;
     var$3 = $type.$name;
     var$5 = ju_Locale_ROOT;
-    kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(757));
+    kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(755));
     var$5 = jl_String_toLowerCase(var$3, var$5);
-    kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(758));
+    kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(756));
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(761)), var$5);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(759)), var$5);
     var$3 = jl_AbstractStringBuilder_toString(var$4);
     cgxgtbw_WebPreferences_remove(var$2, var$3);
     var$2 = $this.$prefs;
     var$5 = $type.$name;
     $type = ju_Locale_ROOT;
-    kji_Intrinsics_checkNotNullExpressionValue($type, $rt_s(757));
+    kji_Intrinsics_checkNotNullExpressionValue($type, $rt_s(755));
     $type = jl_String_toLowerCase(var$5, $type);
-    kji_Intrinsics_checkNotNullExpressionValue($type, $rt_s(758));
+    kji_Intrinsics_checkNotNullExpressionValue($type, $rt_s(756));
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(762)), $type);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(760)), $type);
     $type = jl_AbstractStringBuilder_toString(var$3);
     cgxgtbw_WebPreferences_remove(var$2, $type);
     $this.$runPowersDirty = 1;
@@ -30832,39 +30748,39 @@ cvs_SaveManager_clearRunPowers = $this => {
         var$7 = $element$iv.$name;
         ju_Locale_$callClinit();
         var$8 = ju_Locale_ROOT;
-        kji_Intrinsics_checkNotNullExpressionValue(var$8, $rt_s(757));
+        kji_Intrinsics_checkNotNullExpressionValue(var$8, $rt_s(755));
         var$5 = jl_String_toLowerCase(var$7, var$8);
-        kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(758));
+        kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(756));
         var$8 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$8);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(760)), var$5);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(758)), var$5);
         var$8 = jl_AbstractStringBuilder_toString(var$8);
         cgxgtbw_WebPreferences_remove(var$6, var$8);
         var$5 = $this.$prefs;
         var$7 = $element$iv.$name;
         var$6 = ju_Locale_ROOT;
-        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(757));
+        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(755));
         var$6 = jl_String_toLowerCase(var$7, var$6);
-        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(758));
+        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(756));
         var$8 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$8);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(761)), var$6);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(759)), var$6);
         var$6 = jl_AbstractStringBuilder_toString(var$8);
         cgxgtbw_WebPreferences_remove(var$5, var$6);
         var$5 = $this.$prefs;
         var$7 = $element$iv.$name;
         var$6 = ju_Locale_ROOT;
-        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(757));
+        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(755));
         var$6 = jl_String_toLowerCase(var$7, var$6);
-        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(758));
+        kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(756));
         var$8 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$8);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(762)), var$6);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(760)), var$6);
         var$6 = jl_AbstractStringBuilder_toString(var$8);
         cgxgtbw_WebPreferences_remove(var$5, var$6);
         var$2 = var$2 + 1 | 0;
     }
-    cgxgtbw_WebPreferences_putInteger($this.$prefs, $rt_s(750), 10);
+    cgxgtbw_WebPreferences_putInteger($this.$prefs, $rt_s(748), 10);
     $this.$runPowersDirty = 0;
     cgxgtbw_WebPreferences_flush($this.$prefs);
 },
@@ -30899,7 +30815,7 @@ cvs_SaveManager_flushPending = $this => {
 cvs_SaveManager_registerRun = ($this, $score, $creditsEarned, $stageIndex, $victory) => {
     let var$5;
     if ($score > cvs_SaveManager_getHighScore($this))
-        cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger($this.$prefs, $rt_s(739), $score));
+        cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger($this.$prefs, $rt_s(737), $score));
     cvs_SaveManager_addCoins($this, $creditsEarned);
     if ($victory) {
         cvs_CampaignCatalog_$callClinit();
@@ -30907,11 +30823,11 @@ cvs_SaveManager_registerRun = ($this, $score, $creditsEarned, $stageIndex, $vict
             $creditsEarned = jl_Math_max0(cvs_SaveManager_getUnlockedStage($this), $stageIndex + 1 | 0);
             var$5 = $this.$prefs;
             $creditsEarned = kr_RangesKt___RangesKt_coerceIn0($creditsEarned, 0, kc_CollectionsKt__CollectionsKt_getLastIndex(cvs_CampaignCatalog_getStages(cvs_CampaignCatalog_INSTANCE)));
-            cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger(var$5, $rt_s(742), $creditsEarned));
+            cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putInteger(var$5, $rt_s(740), $creditsEarned));
         }
     }
-    cgxgtbw_WebPreferences_putInteger($this.$prefs, $rt_s(763), $score);
-    cgxgtbw_WebPreferences_putInteger($this.$prefs, $rt_s(764), $stageIndex);
+    cgxgtbw_WebPreferences_putInteger($this.$prefs, $rt_s(761), $score);
+    cgxgtbw_WebPreferences_putInteger($this.$prefs, $rt_s(762), $stageIndex);
     cgxgtbw_WebPreferences_flush($this.$prefs);
     $this.$upgradesDirty = 0;
     $this.$runPowersDirty = 0;
@@ -30929,7 +30845,7 @@ let cvs_AudioManager__init_0 = ($this, $save) => {
     kji_Intrinsics_checkNotNullParameter($save, $rt_s(195));
     $this.$save = $save;
     $this.$sounds = ju_LinkedHashMap__init_();
-    $save = (kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(765), $rt_s(766), $rt_s(767), $rt_s(768), $rt_s(769), $rt_s(770), $rt_s(771)]))).$iterator0();
+    $save = (kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(763), $rt_s(764), $rt_s(765), $rt_s(766), $rt_s(767), $rt_s(768), $rt_s(769)]))).$iterator0();
     while ($save.$hasNext()) {
         $key = $save.$next();
         a: {
@@ -30966,7 +30882,7 @@ cvs_AudioManager_audioFile = ($this, $name) => {
     $ogg = cbg_Gdx_files;
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(772)), $name), $rt_s(773));
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(770)), $name), $rt_s(771));
     var$3 = jl_AbstractStringBuilder_toString(var$3);
     $ogg = cgxgtbw_WebFiles_internal($ogg, var$3);
     if (cgxgtbw_WebFileHandle_exists($ogg))
@@ -30975,16 +30891,16 @@ cvs_AudioManager_audioFile = ($this, $name) => {
         $ogg = cbg_Gdx_files;
         var$3 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$3);
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(772)), $name), $rt_s(774));
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(770)), $name), $rt_s(772));
         $name = jl_AbstractStringBuilder_toString(var$3);
         $ogg = cgxgtbw_WebFiles_internal($ogg, $name);
-        kji_Intrinsics_checkNotNullExpressionValue($ogg, $rt_s(775));
+        kji_Intrinsics_checkNotNullExpressionValue($ogg, $rt_s(773));
     }
     return $ogg;
 },
 cvs_AudioManager_play = ($this, $name, $volume, $pitch) => {
     let var$4, var$5;
-    kji_Intrinsics_checkNotNullParameter($name, $rt_s(776));
+    kji_Intrinsics_checkNotNullParameter($name, $rt_s(774));
     if (!cvs_SaveManager_getSfxEnabled($this.$save))
         return;
     $name = ju_LinkedHashMap_get($this.$sounds, $name);
@@ -31008,7 +30924,7 @@ cvs_AudioManager_play$default = (var$1, var$2, var$3, var$4, var$5, var$6) => {
 },
 cvs_AudioManager_playMusic = ($this, $name) => {
     let $$this$playMusic_u24lambda_u240, var$3, $$je;
-    kji_Intrinsics_checkNotNullParameter($name, $rt_s(776));
+    kji_Intrinsics_checkNotNullParameter($name, $rt_s(774));
     if (!cvs_SaveManager_getMusicEnabled($this.$save)) {
         cvs_AudioManager_stopMusic($this);
         return;
@@ -31135,7 +31051,7 @@ cbggg_SpriteBatch__init_ = ($this, $size, $defaultShader) => {
         $defaultShader = new jl_IllegalArgumentException;
         $vertexDataType = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($vertexDataType);
-        jl_AbstractStringBuilder_append($vertexDataType, $rt_s(777));
+        jl_AbstractStringBuilder_append($vertexDataType, $rt_s(775));
         jl_RuntimeException__init_($defaultShader, jl_AbstractStringBuilder_toString(jl_StringBuilder_append0($vertexDataType, $size)));
         $rt_throw($defaultShader);
     }
@@ -31154,7 +31070,7 @@ cbggg_SpriteBatch__init_ = ($this, $size, $defaultShader) => {
             var$5 = new cbgg_Mesh;
             var$6 = $size * 4 | 0;
             var$7 = $size * 6 | 0;
-            $indices = $rt_wrapArray(cbgg_VertexAttribute, [cbgg_VertexAttribute__init_(1, 2, $rt_s(778)), cbgg_VertexAttribute__init_(4, 4, $rt_s(779)), cbgg_VertexAttribute__init_(16, 2, $rt_s(780))]);
+            $indices = $rt_wrapArray(cbgg_VertexAttribute, [cbgg_VertexAttribute__init_(1, 2, $rt_s(776)), cbgg_VertexAttribute__init_(4, 4, $rt_s(777)), cbgg_VertexAttribute__init_(16, 2, $rt_s(778))]);
             cbgg_Mesh_$callClinit();
             $vertexDataType = cbgg_VertexAttributes__init_($indices);
             var$5.$autoBind = 1;
@@ -31250,13 +31166,13 @@ cbggg_SpriteBatch__init_2 = (var_0, var_1) => {
 cbggg_SpriteBatch_createDefaultShader = () => {
     let $shader, $vertexShader, $fragmentShader;
     cbggg_SpriteBatch_$callClinit();
-    $shader = cbggg_ShaderProgram__init_($rt_s(781), $rt_s(782));
+    $shader = cbggg_ShaderProgram__init_($rt_s(779), $rt_s(780));
     if ($shader.$isCompiled)
         return $shader;
     $vertexShader = new jl_IllegalArgumentException;
     $fragmentShader = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($fragmentShader);
-    jl_AbstractStringBuilder_append($fragmentShader, $rt_s(783));
+    jl_AbstractStringBuilder_append($fragmentShader, $rt_s(781));
     jl_AbstractStringBuilder_append($fragmentShader, cbggg_ShaderProgram_getLog($shader));
     jl_RuntimeException__init_($vertexShader, jl_AbstractStringBuilder_toString($fragmentShader));
     $rt_throw($vertexShader);
@@ -31265,7 +31181,7 @@ cbggg_SpriteBatch_begin = $this => {
     let var$1, var$2;
     if ($this.$drawing) {
         var$1 = new jl_IllegalStateException;
-        jl_RuntimeException__init_(var$1, $rt_s(784));
+        jl_RuntimeException__init_(var$1, $rt_s(782));
         $rt_throw(var$1);
     }
     $this.$renderCalls = 0;
@@ -31282,7 +31198,7 @@ cbggg_SpriteBatch_end = $this => {
     let var$1, $gl;
     if (!$this.$drawing) {
         var$1 = new jl_IllegalStateException;
-        jl_RuntimeException__init_(var$1, $rt_s(785));
+        jl_RuntimeException__init_(var$1, $rt_s(783));
         $rt_throw(var$1);
     }
     if ($this.$idx > 0)
@@ -31312,7 +31228,7 @@ cbggg_SpriteBatch_draw3 = ($this, $texture, $x, $y, $originX, $originY, $width, 
     let $vertices, var$18, $worldOriginX, $worldOriginY, $x2, $y4, $x4, $y3, $x1, $y1, $y2, $x3, $cos, $sin, $u, $v, $u2, $v2, $color, $idx;
     if (!$this.$drawing) {
         $texture = new jl_IllegalStateException;
-        jl_RuntimeException__init_($texture, $rt_s(786));
+        jl_RuntimeException__init_($texture, $rt_s(784));
         $rt_throw($texture);
     }
     $vertices = $this.$vertices0;
@@ -31411,7 +31327,7 @@ cbggg_SpriteBatch_draw = ($this, $texture, $x, $y, $width, $height) => {
     let $vertices, var$7, $fx2, $fy2, $color, $idx;
     if (!$this.$drawing) {
         $texture = new jl_IllegalStateException;
-        jl_RuntimeException__init_($texture, $rt_s(786));
+        jl_RuntimeException__init_($texture, $rt_s(784));
         $rt_throw($texture);
     }
     $vertices = $this.$vertices0;
@@ -31453,7 +31369,7 @@ cbggg_SpriteBatch_draw2 = ($this, $texture, $spriteVertices, $offset, $count) =>
     let $verticesLength, $copyCount;
     if (!$this.$drawing) {
         $texture = new jl_IllegalStateException;
-        jl_RuntimeException__init_($texture, $rt_s(786));
+        jl_RuntimeException__init_($texture, $rt_s(784));
         $rt_throw($texture);
     }
     $verticesLength = $this.$vertices0.data.length;
@@ -31484,7 +31400,7 @@ cbggg_SpriteBatch_draw0 = ($this, $region, $x, $y, $width, $height) => {
     let $vertices, $texture, var$8, $fx2, $fy2, $u, $v, $u2, $v2, $color, $idx;
     if (!$this.$drawing) {
         $region = new jl_IllegalStateException;
-        jl_RuntimeException__init_($region, $rt_s(786));
+        jl_RuntimeException__init_($region, $rt_s(784));
         $rt_throw($region);
     }
     $vertices = $this.$vertices0;
@@ -31531,7 +31447,7 @@ cbggg_SpriteBatch_draw1 = ($this, $region, $x, $y, $originX, $originY, $width, $
     let $vertices, $texture, var$13, $worldOriginX, $worldOriginY, $x2, $y4, $x4, $y3, $x1, $y1, $y2, $x3, $cos, $sin, $u, $v, $u2, $v2, $color, $idx;
     if (!$this.$drawing) {
         $region = new jl_IllegalStateException;
-        jl_RuntimeException__init_($region, $rt_s(786));
+        jl_RuntimeException__init_($region, $rt_s(784));
         $rt_throw($region);
     }
     $vertices = $this.$vertices0;
@@ -31676,11 +31592,11 @@ cbggg_SpriteBatch_setupMatrices = $this => {
     cbgm_Matrix4_mul0(cbgm_Matrix4_set($this.$combinedMatrix0, $this.$projectionMatrix), $this.$transformMatrix0);
     var$1 = $this.$customShader;
     if (var$1 !== null) {
-        var$1.$setUniformMatrix($rt_s(787), $this.$combinedMatrix0);
-        $this.$customShader.$setUniformi($rt_s(788), 0);
+        var$1.$setUniformMatrix($rt_s(785), $this.$combinedMatrix0);
+        $this.$customShader.$setUniformi($rt_s(786), 0);
     } else {
-        cbggg_ShaderProgram_setUniformMatrix($this.$shader, $rt_s(787), $this.$combinedMatrix0);
-        cbggg_ShaderProgram_setUniformi($this.$shader, $rt_s(788), 0);
+        cbggg_ShaderProgram_setUniformMatrix($this.$shader, $rt_s(785), $this.$combinedMatrix0);
+        cbggg_ShaderProgram_setUniformi($this.$shader, $rt_s(786), 0);
     }
 },
 cbggg_SpriteBatch_switchTexture = ($this, $texture) => {
@@ -31719,72 +31635,72 @@ let cbggg_ShapeRenderer__init_0 = $this => {
     var$1 = new cbggg_ImmediateModeRenderer20;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_AbstractStringBuilder_append(var$2, $rt_s(789));
+    jl_AbstractStringBuilder_append(var$2, $rt_s(787));
     jl_AbstractStringBuilder_append(var$2, $rt_s(66));
-    jl_AbstractStringBuilder_append(var$2, $rt_s(790));
+    jl_AbstractStringBuilder_append(var$2, $rt_s(788));
     var$2 = jl_AbstractStringBuilder_toString(var$2);
     var$3 = 0;
     while (var$3 < 0) {
         var$4 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$4);
         jl_AbstractStringBuilder_append(var$4, var$2);
-        jl_AbstractStringBuilder_append(var$4, $rt_s(791));
+        jl_AbstractStringBuilder_append(var$4, $rt_s(789));
         var$4 = jl_StringBuilder_append0(var$4, var$3);
-        jl_AbstractStringBuilder_append(var$4, $rt_s(792));
+        jl_AbstractStringBuilder_append(var$4, $rt_s(790));
         var$2 = jl_AbstractStringBuilder_toString(var$4);
         var$3 = var$3 + 1 | 0;
     }
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
     jl_AbstractStringBuilder_append(var$4, var$2);
-    jl_AbstractStringBuilder_append(var$4, $rt_s(793));
-    jl_AbstractStringBuilder_append(var$4, $rt_s(794));
+    jl_AbstractStringBuilder_append(var$4, $rt_s(791));
+    jl_AbstractStringBuilder_append(var$4, $rt_s(792));
     var$2 = jl_AbstractStringBuilder_toString(var$4);
     var$3 = 0;
     while (var$3 < 0) {
         var$4 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$4);
         jl_AbstractStringBuilder_append(var$4, var$2);
-        jl_AbstractStringBuilder_append(var$4, $rt_s(795));
+        jl_AbstractStringBuilder_append(var$4, $rt_s(793));
         var$4 = jl_StringBuilder_append0(var$4, var$3);
-        jl_AbstractStringBuilder_append(var$4, $rt_s(792));
+        jl_AbstractStringBuilder_append(var$4, $rt_s(790));
         var$2 = jl_AbstractStringBuilder_toString(var$4);
         var$3 = var$3 + 1 | 0;
     }
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
     jl_AbstractStringBuilder_append(var$4, var$2);
-    jl_AbstractStringBuilder_append(var$4, $rt_s(796));
+    jl_AbstractStringBuilder_append(var$4, $rt_s(794));
     var$2 = jl_AbstractStringBuilder_toString(var$4);
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
     jl_AbstractStringBuilder_append(var$4, var$2);
-    jl_AbstractStringBuilder_append(var$4, $rt_s(797));
+    jl_AbstractStringBuilder_append(var$4, $rt_s(795));
     var$4 = jl_AbstractStringBuilder_toString(var$4);
     var$3 = 0;
     while (var$3 < 0) {
         var$2 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$2);
         jl_AbstractStringBuilder_append(var$2, var$4);
-        jl_AbstractStringBuilder_append(var$2, $rt_s(798));
+        jl_AbstractStringBuilder_append(var$2, $rt_s(796));
         var$4 = jl_StringBuilder_append0(var$2, var$3);
-        jl_AbstractStringBuilder_append(var$4, $rt_s(799));
-        jl_AbstractStringBuilder_append(var$4, $rt_s(800));
+        jl_AbstractStringBuilder_append(var$4, $rt_s(797));
+        jl_AbstractStringBuilder_append(var$4, $rt_s(798));
         var$4 = jl_StringBuilder_append0(var$4, var$3);
-        jl_AbstractStringBuilder_append(var$4, $rt_s(792));
+        jl_AbstractStringBuilder_append(var$4, $rt_s(790));
         var$4 = jl_AbstractStringBuilder_toString(var$4);
         var$3 = var$3 + 1 | 0;
     }
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
     jl_AbstractStringBuilder_append(var$2, var$4);
-    jl_AbstractStringBuilder_append(var$2, $rt_s(801));
+    jl_AbstractStringBuilder_append(var$2, $rt_s(799));
     var$5 = cbggg_ShaderProgram__init_(jl_AbstractStringBuilder_toString(var$2), cbggg_ImmediateModeRenderer20_createFragmentShader(0, 1, 0));
     if (!var$5.$isCompiled) {
         var$1 = new cbgu_GdxRuntimeException;
         var$4 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$4);
-        jl_AbstractStringBuilder_append(var$4, $rt_s(783));
+        jl_AbstractStringBuilder_append(var$4, $rt_s(781));
         jl_AbstractStringBuilder_append(var$4, cbggg_ShaderProgram_getLog(var$5));
         jl_RuntimeException__init_(var$1, jl_AbstractStringBuilder_toString(var$4));
         $rt_throw(var$1);
@@ -31819,14 +31735,14 @@ cbggg_ShapeRenderer_begin0 = $this => {
         return;
     }
     var$1 = new jl_IllegalStateException;
-    jl_RuntimeException__init_(var$1, $rt_s(802));
+    jl_RuntimeException__init_(var$1, $rt_s(800));
     $rt_throw(var$1);
 },
 cbggg_ShapeRenderer_begin = ($this, $type) => {
     let var$2, var$3;
     if ($this.$shapeType !== null) {
         $type = new jl_IllegalStateException;
-        jl_RuntimeException__init_($type, $rt_s(803));
+        jl_RuntimeException__init_($type, $rt_s(801));
         $rt_throw($type);
     }
     $this.$shapeType = $type;
@@ -31849,7 +31765,7 @@ cbggg_ShapeRenderer_set = ($this, $type) => {
         return;
     if (var$2 === null) {
         $type = new jl_IllegalStateException;
-        jl_RuntimeException__init_($type, $rt_s(804));
+        jl_RuntimeException__init_($type, $rt_s(802));
         $rt_throw($type);
     }
     if ($this.$autoShapeType) {
@@ -31858,7 +31774,7 @@ cbggg_ShapeRenderer_set = ($this, $type) => {
         return;
     }
     var$2 = new jl_IllegalStateException;
-    jl_RuntimeException__init_(var$2, $rt_s(805));
+    jl_RuntimeException__init_(var$2, $rt_s(803));
     $rt_throw(var$2);
 },
 cbggg_ShapeRenderer_line = ($this, $x, $y, $x2, $y2) => {
@@ -32227,7 +32143,7 @@ cbggg_ShapeRenderer_arc = ($this, $x, $y, $radius, $start, $degrees, $segments) 
     let var$7, $colorBits, $theta, $cos, $sin, $cx, $cy, var$14, $i, $i_0;
     if ($segments <= 0) {
         var$7 = new jl_IllegalArgumentException;
-        jl_RuntimeException__init_(var$7, $rt_s(806));
+        jl_RuntimeException__init_(var$7, $rt_s(804));
         $rt_throw(var$7);
     }
     $colorBits = cbgg_Color_toFloatBits($this.$color1);
@@ -32313,7 +32229,7 @@ cbggg_ShapeRenderer_circle0 = ($this, $x, $y, $radius, $segments) => {
     let var$5, $colorBits, $angle, $cos, $sin, $cy, var$11, $i, var$13, var$14;
     if ($segments <= 0) {
         var$5 = new jl_IllegalArgumentException;
-        jl_RuntimeException__init_(var$5, $rt_s(806));
+        jl_RuntimeException__init_(var$5, $rt_s(804));
         $rt_throw(var$5);
     }
     $colorBits = cbgg_Color_toFloatBits($this.$color1);
@@ -32393,7 +32309,7 @@ cbggg_ShapeRenderer_ellipse0 = ($this, $x, $y, $width, $height, $segments) => {
     let var$6, $colorBits, $angle, $cx, $cy, $i, var$12, $i_0;
     if ($segments <= 0) {
         var$6 = new jl_IllegalArgumentException;
-        jl_RuntimeException__init_(var$6, $rt_s(806));
+        jl_RuntimeException__init_(var$6, $rt_s(804));
         $rt_throw(var$6);
     }
     a: {
@@ -32453,7 +32369,7 @@ cbggg_ShapeRenderer_check = ($this, $preferred, $other, $newVertices) => {
     $type = $this.$shapeType;
     if ($type === null) {
         $preferred = new jl_IllegalStateException;
-        jl_RuntimeException__init_($preferred, $rt_s(804));
+        jl_RuntimeException__init_($preferred, $rt_s(802));
         $rt_throw($preferred);
     }
     if (!($type !== $preferred && $type !== $other)) {
@@ -32473,20 +32389,20 @@ cbggg_ShapeRenderer_check = ($this, $preferred, $other, $newVertices) => {
                 $other = new jl_IllegalStateException;
                 $type = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($type);
-                jl_AbstractStringBuilder_append($type, $rt_s(807));
+                jl_AbstractStringBuilder_append($type, $rt_s(805));
                 $preferred = jl_StringBuilder_append($type, $preferred);
-                jl_AbstractStringBuilder_append($preferred, $rt_s(808));
+                jl_AbstractStringBuilder_append($preferred, $rt_s(806));
                 jl_RuntimeException__init_($other, jl_AbstractStringBuilder_toString($preferred));
                 $rt_throw($other);
             }
             var$5 = new jl_IllegalStateException;
             $type = new jl_StringBuilder;
             jl_AbstractStringBuilder__init_($type);
-            jl_AbstractStringBuilder_append($type, $rt_s(807));
+            jl_AbstractStringBuilder_append($type, $rt_s(805));
             $preferred = jl_StringBuilder_append($type, $preferred);
-            jl_AbstractStringBuilder_append($preferred, $rt_s(809));
+            jl_AbstractStringBuilder_append($preferred, $rt_s(807));
             $preferred = jl_StringBuilder_append($preferred, $other);
-            jl_AbstractStringBuilder_append($preferred, $rt_s(808));
+            jl_AbstractStringBuilder_append($preferred, $rt_s(806));
             jl_RuntimeException__init_(var$5, jl_AbstractStringBuilder_toString($preferred));
             $rt_throw(var$5);
         }
@@ -32499,7 +32415,7 @@ cbggg_ShapeRenderer_end = $this => {
     var$1 = $this.$renderer;
     if (var$1.$numVertices) {
         cbggg_ShaderProgram_bind(var$1.$shader0);
-        cbggg_ShaderProgram_setUniformMatrix(var$1.$shader0, $rt_s(810), var$1.$projModelView);
+        cbggg_ShaderProgram_setUniformMatrix(var$1.$shader0, $rt_s(808), var$1.$projModelView);
         var$2 = 0;
         while (var$2 < var$1.$numTexCoords) {
             cbggg_ShaderProgram_setUniformi(var$1.$shader0, var$1.$shaderUniformNames.data[var$2], var$2);
@@ -32538,18 +32454,18 @@ function cvs_LocalizationManager() {
 }
 let cvs_LocalizationManager_getIndex = $this => {
     let $saved, var$2, $dev, $auto;
-    $saved = cgxgtbw_WebPreferences_getInteger($this.$save0.$prefs, $rt_s(753), (-1));
+    $saved = cgxgtbw_WebPreferences_getInteger($this.$save0.$prefs, $rt_s(751), (-1));
     if ($saved >= 0) {
         cvs_Langs_$callClinit();
         return kr_RangesKt___RangesKt_coerceIn0($saved, 0, kc_CollectionsKt__CollectionsKt_getLastIndex(cvs_Langs_getALL(cvs_Langs_INSTANCE)));
     }
     ju_Locale_$callClinit();
     var$2 = ju_Locale_defaultLocale.$languageCode;
-    kji_Intrinsics_checkNotNullExpressionValue(var$2, $rt_s(811));
+    kji_Intrinsics_checkNotNullExpressionValue(var$2, $rt_s(809));
     $dev = ju_Locale_ROOT;
-    kji_Intrinsics_checkNotNullExpressionValue($dev, $rt_s(757));
+    kji_Intrinsics_checkNotNullExpressionValue($dev, $rt_s(755));
     $dev = jl_String_toLowerCase(var$2, $dev);
-    kji_Intrinsics_checkNotNullExpressionValue($dev, $rt_s(758));
+    kji_Intrinsics_checkNotNullExpressionValue($dev, $rt_s(756));
     cvs_Langs_$callClinit();
     $auto = (cvs_Langs_getCODES(cvs_Langs_INSTANCE)).$indexOf4($dev);
     if ($auto < 0)
@@ -32562,7 +32478,7 @@ cvs_LocalizationManager_getName = $this => {
 },
 cvs_LocalizationManager_get = ($this, $key) => {
     let var$2, var$3;
-    kji_Intrinsics_checkNotNullParameter($key, $rt_s(812));
+    kji_Intrinsics_checkNotNullParameter($key, $rt_s(810));
     cvs_Langs_$callClinit();
     var$2 = ju_LinkedHashMap_get((cvs_Langs_getALL(cvs_Langs_INSTANCE)).$get(cvs_LocalizationManager_getIndex($this)), $key);
     if (var$2 === null) {
@@ -32570,9 +32486,9 @@ cvs_LocalizationManager_get = ($this, $key) => {
         if (var$2 === null) {
             ju_Locale_$callClinit();
             var$3 = ju_Locale_ROOT;
-            kji_Intrinsics_checkNotNullExpressionValue(var$3, $rt_s(757));
+            kji_Intrinsics_checkNotNullExpressionValue(var$3, $rt_s(755));
             var$2 = jl_String_toUpperCase($key, var$3);
-            kji_Intrinsics_checkNotNullExpressionValue(var$2, $rt_s(813));
+            kji_Intrinsics_checkNotNullExpressionValue(var$2, $rt_s(811));
         }
     }
     return var$2;
@@ -32605,13 +32521,13 @@ cbgg_Texture$TextureFilter__init_ = (var_0, var_1, var_2) => {
 },
 cbgg_Texture$TextureFilter__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbgg_Texture$TextureFilter_Nearest = cbgg_Texture$TextureFilter__init_($rt_s(814), 0, 9728);
-    cbgg_Texture$TextureFilter_Linear = cbgg_Texture$TextureFilter__init_($rt_s(815), 1, 9729);
-    cbgg_Texture$TextureFilter_MipMap = cbgg_Texture$TextureFilter__init_($rt_s(816), 2, 9987);
-    cbgg_Texture$TextureFilter_MipMapNearestNearest = cbgg_Texture$TextureFilter__init_($rt_s(817), 3, 9984);
-    cbgg_Texture$TextureFilter_MipMapLinearNearest = cbgg_Texture$TextureFilter__init_($rt_s(818), 4, 9985);
-    cbgg_Texture$TextureFilter_MipMapNearestLinear = cbgg_Texture$TextureFilter__init_($rt_s(819), 5, 9986);
-    var$1 = cbgg_Texture$TextureFilter__init_($rt_s(820), 6, 9987);
+    cbgg_Texture$TextureFilter_Nearest = cbgg_Texture$TextureFilter__init_($rt_s(812), 0, 9728);
+    cbgg_Texture$TextureFilter_Linear = cbgg_Texture$TextureFilter__init_($rt_s(813), 1, 9729);
+    cbgg_Texture$TextureFilter_MipMap = cbgg_Texture$TextureFilter__init_($rt_s(814), 2, 9987);
+    cbgg_Texture$TextureFilter_MipMapNearestNearest = cbgg_Texture$TextureFilter__init_($rt_s(815), 3, 9984);
+    cbgg_Texture$TextureFilter_MipMapLinearNearest = cbgg_Texture$TextureFilter__init_($rt_s(816), 4, 9985);
+    cbgg_Texture$TextureFilter_MipMapNearestLinear = cbgg_Texture$TextureFilter__init_($rt_s(817), 5, 9986);
+    var$1 = cbgg_Texture$TextureFilter__init_($rt_s(818), 6, 9987);
     cbgg_Texture$TextureFilter_MipMapLinearLinear = var$1;
     var$2 = $rt_createArray(cbgg_Texture$TextureFilter, 7);
     var$3 = var$2.data;
@@ -32683,13 +32599,13 @@ cvs_BaseScreen_world = ($this, $screenX, $screenY) => {
     var$4 = $this.$touch;
     var$3 = var$3;
     cbgg_Camera_unproject(var$3.$camera0, var$4, var$3.$screenX, var$3.$screenY, var$3.$screenWidth, var$3.$screenHeight);
-    kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(821));
+    kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(819));
     return var$4;
 },
 cvs_BaseScreen_drawCentered = ($this, $text, $y, $font, $color) => {
     kji_Intrinsics_checkNotNullParameter($text, $rt_s(187));
     kji_Intrinsics_checkNotNullParameter($font, $rt_s(177));
-    kji_Intrinsics_checkNotNullParameter($color, $rt_s(822));
+    kji_Intrinsics_checkNotNullParameter($color, $rt_s(820));
     cbggg_SpriteBatch_begin(cvs_SkyVanguardGame_getBatch($this.$game));
     cbggg_BitmapFont_setColor($font, $color);
     $color = $this.$layout0;
@@ -32701,7 +32617,7 @@ cvs_BaseScreen_drawCentered = ($this, $text, $y, $font, $color) => {
 cvs_BaseScreen_drawCentered$default = (var$1, var$2, var$3, var$4, var$5, var$6, var$7) => {
     if (var$7 !== null) {
         var$1 = new jl_UnsupportedOperationException;
-        jl_RuntimeException__init_(var$1, $rt_s(823));
+        jl_RuntimeException__init_(var$1, $rt_s(821));
         $rt_throw(var$1);
     }
     if (var$6 & 4)
@@ -32709,14 +32625,14 @@ cvs_BaseScreen_drawCentered$default = (var$1, var$2, var$3, var$4, var$5, var$6,
     if (var$6 & 8) {
         cbgg_Color_$callClinit();
         var$5 = cbgg_Color_WHITE;
-        kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(824));
+        kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(822));
     }
     cvs_BaseScreen_drawCentered(var$1, var$2, var$3, var$4, var$5);
 },
 cvs_BaseScreen_drawLabel = ($this, $text, $x, $y, $font, $color) => {
     kji_Intrinsics_checkNotNullParameter($text, $rt_s(187));
     kji_Intrinsics_checkNotNullParameter($font, $rt_s(177));
-    kji_Intrinsics_checkNotNullParameter($color, $rt_s(822));
+    kji_Intrinsics_checkNotNullParameter($color, $rt_s(820));
     cbggg_SpriteBatch_begin(cvs_SkyVanguardGame_getBatch($this.$game));
     cbggg_BitmapFont_setColor($font, $color);
     cbggg_BitmapFont_draw($font, cvs_SkyVanguardGame_getBatch($this.$game), $text, $x, $y);
@@ -32726,7 +32642,7 @@ cvs_BaseScreen_drawTracked = ($this, $text, $centerX, $y, $font, $color, $tracki
     let $advances, $total, $$this$forEachIndexed$iv, $index$iv, $index$iv_0, $item$iv, var$13, $glyph, var$15;
     kji_Intrinsics_checkNotNullParameter($text, $rt_s(187));
     kji_Intrinsics_checkNotNullParameter($font, $rt_s(177));
-    kji_Intrinsics_checkNotNullParameter($color, $rt_s(822));
+    kji_Intrinsics_checkNotNullParameter($color, $rt_s(820));
     cbggg_SpriteBatch_begin(cvs_SkyVanguardGame_getBatch($this.$game));
     cbggg_BitmapFont_setColor($font, $color);
     $advances = $rt_createFloatArray($text.$nativeString.length).data;
@@ -32764,7 +32680,7 @@ cvs_BaseScreen_drawTracked = ($this, $text, $centerX, $y, $font, $color, $tracki
 },
 cvs_BaseScreen_drawButton = ($this, $rect, $text, $active) => {
     let $accent, $font, var$6, var$7, $fill;
-    kji_Intrinsics_checkNotNullParameter($rect, $rt_s(825));
+    kji_Intrinsics_checkNotNullParameter($rect, $rt_s(823));
     kji_Intrinsics_checkNotNullParameter($text, $rt_s(187));
     $accent = !$active ? cvs_BaseScreenKt_getNEON_CYAN() : cvs_BaseScreenKt_getNEON_MAGENTA();
     cvs_BaseScreenKt_neonPanel$default($this, $rect, $accent, !$active ? cvs_BaseScreenKt_getPANEL_FILL() : cvs_BaseScreenKt_getPANEL_FILL_MAGENTA(), 24.0, 3.0, 4, !$active ? 0.07500000298023224 : 0.11999999731779099, 0.0, 128, null);
@@ -32790,7 +32706,7 @@ cvs_BaseScreen_drawButton = ($this, $rect, $text, $active) => {
 cvs_BaseScreen_drawButton$default = (var$1, var$2, var$3, var$4, var$5, var$6) => {
     if (var$6 !== null) {
         var$1 = new jl_UnsupportedOperationException;
-        jl_RuntimeException__init_(var$1, $rt_s(826));
+        jl_RuntimeException__init_(var$1, $rt_s(824));
         $rt_throw(var$1);
     }
     if (var$5 & 4)
@@ -32828,12 +32744,12 @@ let cvs_MainMenuScreen__init_0 = ($this, $game) => {
     cvs_BaseScreen__init_($this, $game);
     var$2 = $rt_createArray(cvs_MainMenuScreen$NeonButton, 6);
     var$3 = var$2.data;
-    var$3[0] = cvs_MainMenuScreen$NeonButton__init_1(0, cbgm_Rectangle__init_(222.0, 1074.0, 636.0, 130.0), $rt_s(827), $rt_s(828), 1);
-    var$3[1] = cvs_MainMenuScreen$NeonButton__init_(1, cbgm_Rectangle__init_(222.0, 922.0, 636.0, 130.0), $rt_s(829), $rt_s(830), 0, 16, null);
-    var$3[2] = cvs_MainMenuScreen$NeonButton__init_(2, cbgm_Rectangle__init_(222.0, 770.0, 636.0, 130.0), $rt_s(831), $rt_s(832), 0, 16, null);
-    var$3[3] = cvs_MainMenuScreen$NeonButton__init_(3, cbgm_Rectangle__init_(222.0, 618.0, 636.0, 130.0), $rt_s(833), $rt_s(834), 0, 16, null);
-    var$3[4] = cvs_MainMenuScreen$NeonButton__init_(4, cbgm_Rectangle__init_(222.0, 466.0, 636.0, 130.0), $rt_s(835), $rt_s(836), 0, 16, null);
-    var$3[5] = cvs_MainMenuScreen$NeonButton__init_(5, cbgm_Rectangle__init_(222.0, 314.0, 636.0, 130.0), $rt_s(837), $rt_s(838), 0, 16, null);
+    var$3[0] = cvs_MainMenuScreen$NeonButton__init_1(0, cbgm_Rectangle__init_(222.0, 1074.0, 636.0, 130.0), $rt_s(825), $rt_s(826), 1);
+    var$3[1] = cvs_MainMenuScreen$NeonButton__init_(1, cbgm_Rectangle__init_(222.0, 922.0, 636.0, 130.0), $rt_s(827), $rt_s(828), 0, 16, null);
+    var$3[2] = cvs_MainMenuScreen$NeonButton__init_(2, cbgm_Rectangle__init_(222.0, 770.0, 636.0, 130.0), $rt_s(829), $rt_s(830), 0, 16, null);
+    var$3[3] = cvs_MainMenuScreen$NeonButton__init_(3, cbgm_Rectangle__init_(222.0, 618.0, 636.0, 130.0), $rt_s(831), $rt_s(832), 0, 16, null);
+    var$3[4] = cvs_MainMenuScreen$NeonButton__init_(4, cbgm_Rectangle__init_(222.0, 466.0, 636.0, 130.0), $rt_s(833), $rt_s(834), 0, 16, null);
+    var$3[5] = cvs_MainMenuScreen$NeonButton__init_(5, cbgm_Rectangle__init_(222.0, 314.0, 636.0, 130.0), $rt_s(835), $rt_s(836), 0, 16, null);
     $this.$buttons = kc_CollectionsKt__CollectionsKt_listOf(var$2);
     $this.$titlePanel = cbgm_Rectangle__init_(90.0, 1373.0, 558.0, 232.0);
     $this.$shipPanel = cbgm_Rectangle__init_(648.0, 1290.0, 336.0, 408.0);
@@ -32873,19 +32789,19 @@ cvs_MainMenuScreen__init_ = var_0 => {
 },
 cvs_MainMenuScreen_show = $this => {
     let var$1, var$2, var$3;
-    cvs_AudioManager_playMusic(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(839));
+    cvs_AudioManager_playMusic(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(837));
     if (!cvs_SaveManager_getAdsRemoved(cvs_SkyVanguardGame_getSaveManager($this.$game))) {
         var$1 = new cvs_MainMenuScreen$show$lambda$_1_0;
-        var$1.$_05 = $this;
-        kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(840));
+        var$1.$_06 = $this;
+        kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(838));
         var$2 = jl_Boolean_valueOf(0);
         var$1 = var$1;
         var$2 = var$2;
-        var$1 = var$1.$_05;
-        if (var$2.$value1) {
+        var$1 = var$1.$_06;
+        if (var$2.$value0) {
             var$2 = cbg_Gdx_app;
             var$3 = new cvs_MainMenuScreen$show$lambda$0$lambda$_27_0;
-            var$3.$_011 = var$1;
+            var$3.$_013 = var$1;
             cgxgtbw_WebApplication_postRunnable(var$2, var$3);
         }
         k_Unit_$callClinit();
@@ -32904,7 +32820,7 @@ cvs_MainMenuScreen_render = ($this, $delta) => {
         return;
     }
     $$this$forEach$iv = $this.$buttons;
-    kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(839));
     $$this$forEach$iv = kr_IntRange__init_(0, $$this$forEach$iv.$size() - 1 | 0);
     $element$iv = new kr_IntProgressionIterator;
     var$4 = $$this$forEach$iv.$first5;
@@ -32958,7 +32874,7 @@ cvs_MainMenuScreen_render = ($this, $delta) => {
                             switch (var$4) {
                                 case 0:
                                     $this.$warpTime = 0.0;
-                                    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.8999999761581421, 1.0499999523162842);
+                                    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(766), 0.8999999761581421, 1.0499999523162842);
                                     if (cvs_SaveManager_getVibration(cvs_SkyVanguardGame_getSaveManager($this.$game)))
                                         cgxgtbw_WebInput_vibrate(cbg_Gdx_input, 60);
                                     break a;
@@ -33064,12 +32980,12 @@ cvs_MainMenuScreen_drawClickSparks = $this => {
 },
 cvs_MainMenuScreen_requestRemoveAds = $this => {
     if (cvs_SaveManager_getAdsRemoved(cvs_SkyVanguardGame_getSaveManager($this.$game))) {
-        cvs_MainMenuScreen_setRemoveAdsMessage($this, $rt_s(842));
+        cvs_MainMenuScreen_setRemoveAdsMessage($this, $rt_s(840));
         return;
     }
     if ($this.$removeAdsBusy)
         return;
-    cvs_MainMenuScreen_setRemoveAdsMessage($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(843)));
+    cvs_MainMenuScreen_setRemoveAdsMessage($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(841)));
 },
 cvs_MainMenuScreen_setRemoveAdsMessage = ($this, $text) => {
     $this.$removeAdsMessage = $text;
@@ -33085,12 +33001,12 @@ cvs_MainMenuScreen_updateGamepad = $this => {
     if (cvs_GamepadInput_getJustDown($this.$game.$gamepad)) {
         var$1 = $this.$focusedId;
         $this.$focusedId = var$1 < 0 ? 0 : (var$1 + 1 | 0) % $this.$buttons.$size() | 0;
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.4000000059604645, 1.2000000476837158);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.4000000059604645, 1.2000000476837158);
     }
     if (cvs_GamepadInput_getJustUp($this.$game.$gamepad)) {
         var$1 = $this.$focusedId;
         $this.$focusedId = var$1 < 0 ? 0 : ((var$1 - 1 | 0) + $this.$buttons.$size() | 0) % $this.$buttons.$size() | 0;
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.4000000059604645, 1.2000000476837158);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.4000000059604645, 1.2000000476837158);
     }
     if (cvs_GamepadInput_getJustA($this.$game.$gamepad)) {
         var$1 = $this.$focusedId;
@@ -33101,7 +33017,7 @@ cvs_MainMenuScreen_updateGamepad = $this => {
             $this.$transitionTimer = 0.12999999523162842;
             $this.$pressVelocity.data[var$1] = 245.0;
             cvs_MainMenuScreen_spawnClickSparks($this, $this.$buttons.$get(var$1));
-            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.800000011920929, 0.9200000166893005);
+            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.800000011920929, 0.9200000166893005);
         }
     }
 },
@@ -33117,10 +33033,10 @@ cvs_MainMenuScreen_drawHeader = $this => {
     var$3 = cvs_SkyVanguardGame_getFont($this.$game);
     cbgg_Color_$callClinit();
     var$6 = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(824));
-    cvs_BaseScreen_drawTracked($this, $rt_s(844), $dx, $dy, var$3, var$6, 9.0);
+    kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(822));
+    cvs_BaseScreen_drawTracked($this, $rt_s(842), $dx, $dy, var$3, var$6, 9.0);
     var$3 = $this.$titlePanel;
-    cvs_BaseScreen_drawTracked($this, $rt_s(845), var$3.$x + var$3.$width0 / 2.0, var$3.$y + 82.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.3400000035762787, 0.8500000238418579, 1.0), 4.0);
+    cvs_BaseScreen_drawTracked($this, $rt_s(843), var$3.$x + var$3.$width0 / 2.0, var$3.$y + 82.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.3400000035762787, 0.8500000238418579, 1.0), 4.0);
     cvs_BaseScreenKt_beginBlended$default(cvs_SkyVanguardGame_getShapes($this.$game), null, 1, null);
     var$3 = $this.$titlePanel;
     $dx = var$3.$x + 18.0;
@@ -33249,13 +33165,13 @@ cvs_MainMenuScreen_drawNeonButton = ($this, $button) => {
             case 0:
                 break;
             case 1:
-                $titleKey = $rt_s(846);
+                $titleKey = $rt_s(844);
                 break a;
             case 2:
-                $titleKey = $rt_s(847);
+                $titleKey = $rt_s(845);
                 break a;
             case 3:
-                $titleKey = $rt_s(848);
+                $titleKey = $rt_s(846);
                 break a;
             case 4:
                 $titleKey = $rt_s(194);
@@ -33264,11 +33180,11 @@ cvs_MainMenuScreen_drawNeonButton = ($this, $button) => {
                 $titleKey = $rt_s(56);
                 break a;
         }
-        $titleKey = $rt_s(849);
+        $titleKey = $rt_s(847);
     }
-    $title = !$purchased ? cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $titleKey) : cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(850));
+    $title = !$purchased ? cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $titleKey) : cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(848));
     if ($purchased)
-        $subtitle = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(851));
+        $subtitle = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(849));
     else if (cvs_MainMenuScreen$NeonButton_getId($button) == 3 && $this.$removeAdsMessageTimer > 0.0)
         $subtitle = $this.$removeAdsMessage;
     else {
@@ -33278,22 +33194,22 @@ cvs_MainMenuScreen_drawNeonButton = ($this, $button) => {
                 case 0:
                     break;
                 case 1:
-                    $button = $rt_s(852);
+                    $button = $rt_s(850);
                     break b;
                 case 2:
-                    $button = $rt_s(853);
+                    $button = $rt_s(851);
                     break b;
                 case 3:
-                    $button = $rt_s(854);
+                    $button = $rt_s(852);
                     break b;
                 case 4:
-                    $button = $rt_s(855);
+                    $button = $rt_s(853);
                     break b;
                 default:
-                    $button = $rt_s(856);
+                    $button = $rt_s(854);
                     break b;
             }
-            $button = $rt_s(857);
+            $button = $rt_s(855);
         }
         $subtitle = cvs_LocalizationManager_get($accent, $button);
     }
@@ -33443,12 +33359,12 @@ cvs_MainMenuScreen_drawFooter = $this => {
     $pilotLabel = $pilotLabel;
     ju_Locale_$callClinit();
     $pilotLabel = jl_String_toUpperCase($pilotLabel, ju_Locale_ROOT);
-    kji_Intrinsics_checkNotNullExpressionValue($pilotLabel, $rt_s(813));
-    cvs_BaseScreen_drawLabel($this, $rt_s(858), $left.$x + 96.0, $left.$y + 88.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.3499999940395355, 0.9200000166893005, 1.0, 1.0));
-    cvs_BaseScreen_drawLabel($this, $rt_s(859), $left.$x + 96.0, $left.$y + 48.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.2800000011920929, 0.699999988079071, 0.8999999761581421, 1.0));
-    cvs_BaseScreen_drawLabel($this, $rt_s(860), $right.$x + 112.0, $right.$y + 88.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.3499999940395355, 0.9200000166893005, 1.0, 1.0));
+    kji_Intrinsics_checkNotNullExpressionValue($pilotLabel, $rt_s(811));
+    cvs_BaseScreen_drawLabel($this, $rt_s(856), $left.$x + 96.0, $left.$y + 88.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.3499999940395355, 0.9200000166893005, 1.0, 1.0));
+    cvs_BaseScreen_drawLabel($this, $rt_s(857), $left.$x + 96.0, $left.$y + 48.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.2800000011920929, 0.699999988079071, 0.8999999761581421, 1.0));
+    cvs_BaseScreen_drawLabel($this, $rt_s(858), $right.$x + 112.0, $right.$y + 88.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.3499999940395355, 0.9200000166893005, 1.0, 1.0));
     cvs_BaseScreen_drawLabel($this, $pilotLabel, $right.$x + 112.0, $right.$y + 48.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.4000000059604645, 0.8700000047683716, 1.0));
-    cvs_BaseScreen_drawCentered($this, $rt_s(861), 76.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.20000000298023224, 0.41999998688697815, 0.6200000047683716, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(859), 76.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.20000000298023224, 0.41999998688697815, 0.6200000047683716, 1.0));
 },
 cvs_MainMenuScreen_shortPilotName = ($this, $full) => {
     let var$2, var$3, var$4, $parts, var$6, var$7, var$8, var$9, var$10;
@@ -33457,8 +33373,8 @@ cvs_MainMenuScreen_shortPilotName = ($this, $full) => {
         var$3 = $rt_createArray(jl_String, 1);
         var$4 = var$3.data;
         var$4[0] = $rt_s(7);
-        kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(841));
-        kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(862));
+        kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(839));
+        kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(860));
         if (var$4.length == 1) {
             $parts = var$4[0];
             if (!($parts.$nativeString.length ? 0 : 1)) {
@@ -33487,16 +33403,16 @@ cvs_MainMenuScreen_shortPilotName = ($this, $full) => {
         $parts = kc_ArraysKt___ArraysJvmKt_asList(var$3);
         var$8 = new kt_DelimitedRangesSequence;
         var$9 = new kt_StringsKt__StringsKt$rangesDelimitedBy$StringsKt__StringsKt$lambda$_144_0;
-        var$9.$_03 = $parts;
+        var$9.$_04 = $parts;
         var$9.$_10 = 0;
-        kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(863));
-        kji_Intrinsics_checkNotNullParameter(var$9, $rt_s(864));
+        kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(861));
+        kji_Intrinsics_checkNotNullParameter(var$9, $rt_s(862));
         var$8.$input = var$2;
         var$8.$startIndex0 = 0;
         var$8.$limit1 = 0;
         var$8.$getNextMatch = var$9;
         var$8 = var$8;
-        kji_Intrinsics_checkNotNullParameter(var$8, $rt_s(841));
+        kji_Intrinsics_checkNotNullParameter(var$8, $rt_s(839));
         $parts = new ks_SequencesKt___SequencesKt$asIterable$$inlined$Iterable$1;
         $parts.$$this_asIterable$inlined = var$8;
         var$8 = $parts;
@@ -33522,12 +33438,12 @@ cvs_MainMenuScreen_shortPilotName = ($this, $full) => {
             if (!var$9.$nextState)
                 break;
             var$10 = var$9.$nextItem;
-            kji_Intrinsics_checkNotNull0(var$10, $rt_s(865));
+            kji_Intrinsics_checkNotNull0(var$10, $rt_s(863));
             var$9.$nextItem = null;
             var$9.$nextState = (-1);
             var$8 = var$10;
-            kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(841));
-            kji_Intrinsics_checkNotNullParameter(var$8, $rt_s(866));
+            kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(839));
+            kji_Intrinsics_checkNotNullParameter(var$8, $rt_s(864));
             var$7 = (jl_Integer_valueOf(var$8.$first5)).$value;
             var$6 = (jl_Integer_valueOf(var$8.$last)).$value + 1 | 0;
             var$10 = jl_String_substring(var$2, var$7, var$6);
@@ -33540,16 +33456,16 @@ cvs_MainMenuScreen_shortPilotName = ($this, $full) => {
     if ($parts.$size() < 2) {
         ju_Locale_$callClinit();
         $full = jl_String_toUpperCase($full, ju_Locale_ROOT);
-        kji_Intrinsics_checkNotNullExpressionValue($full, $rt_s(813));
+        kji_Intrinsics_checkNotNullExpressionValue($full, $rt_s(811));
     } else {
         $full = $parts.$get(0);
         ju_Locale_$callClinit();
         $full = jl_String_toUpperCase($full, ju_Locale_ROOT);
-        kji_Intrinsics_checkNotNullExpressionValue($full, $rt_s(813));
+        kji_Intrinsics_checkNotNullExpressionValue($full, $rt_s(811));
         $parts = jl_String_valueOf1(kt_StringsKt___StringsKt_first($parts.$get(1)));
-        kji_Intrinsics_checkNotNull0($parts, $rt_s(867));
+        kji_Intrinsics_checkNotNull0($parts, $rt_s(865));
         $parts = jl_String_toUpperCase($parts, ju_Locale_ROOT);
-        kji_Intrinsics_checkNotNullExpressionValue($parts, $rt_s(813));
+        kji_Intrinsics_checkNotNullExpressionValue($parts, $rt_s(811));
         var$2 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$2);
         jl_StringBuilder_append3(jl_StringBuilder_append(jl_StringBuilder_append3(jl_StringBuilder_append(var$2, $full), 32), $parts), 46);
@@ -34057,14 +33973,14 @@ let cgxgtbwa_AssetDownloadImpl$2_handleEvent$exported$0 = (var$1, var$2) => {
     var$2 = var$1.$val$url;
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(280)), var$2);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(278)), var$2);
     jl_AbstractStringBuilder_toString(var$3);
     if (var$1.$this$028.$showLogs) {
         var$2 = jl_System_out();
         var$3 = var$1.$val$url;
         var$4 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$4);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(868)), var$3);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(866)), var$3);
         var$3 = jl_AbstractStringBuilder_toString(var$4);
         otcic_JsConsolePrintStream_println(var$2, var$3);
     }
@@ -34074,25 +33990,25 @@ let cgxgtbwa_AssetDownloadImpl$2_handleEvent$exported$0 = (var$1, var$2) => {
 };
 function cgxgtbwa_AssetDownloadImpl$loadScript$lambda$_2_0() {
     let a = this; jl_Object.call(a);
-    a.$_031 = null;
-    a.$_111 = null;
+    a.$_033 = null;
+    a.$_112 = null;
     a.$_24 = null;
 }
 let cgxgtbwa_AssetDownloadImpl$loadScript$lambda$_2_0_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4;
     var$1 = var$1;
-    var$2 = var$1.$_031;
-    var$3 = var$1.$_111;
+    var$2 = var$1.$_033;
+    var$3 = var$1.$_112;
     var$1 = var$1.$_24;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(280)), var$3);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(278)), var$3);
     jl_AbstractStringBuilder_toString(var$4);
     if (var$2.$showLogs) {
         var$2 = jl_System_err();
         var$4 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$4);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(869)), var$3);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(867)), var$3);
         var$4 = jl_AbstractStringBuilder_toString(var$4);
         otcic_JsConsolePrintStream_println(var$2, var$4);
     }
@@ -34108,19 +34024,95 @@ let cgxgtbwfi_IndexedDBFileData_create$js_body$_5 = (var$1, var$2) => {
 };
 function cgxgtbwft_LocalDBStorage$putFile$lambda$_2_0() {
     jl_Object.call(this);
-    this.$_017 = null;
+    this.$_019 = null;
 }
 let cgxgtbwft_LocalDBStorage$putFile$lambda$_2_0_handleEvent$exported$0 = var$1 => {
     let var$2, var$3;
-    var$1 = var$1.$_017;
+    var$1 = var$1.$_019;
     var$2 = jl_System_err();
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(870)), var$1);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(868)), var$1);
     var$1 = jl_AbstractStringBuilder_toString(var$3);
     otcic_JsConsolePrintStream_println(var$2, var$1);
 },
 cbga_Sound = $rt_classWithoutFields(0),
+kr_RangesKt__RangesKt = $rt_classWithoutFields(),
+kr_RangesKt___RangesKt = $rt_classWithoutFields(kr_RangesKt__RangesKt),
+kr_RangesKt___RangesKt_downTo = ($$this$downTo, $to) => {
+    kr_IntProgression_$callClinit();
+    return kr_IntProgression__init_0($$this$downTo, $to, (-1));
+},
+kr_RangesKt___RangesKt_coerceAtLeast0 = ($$this$coerceAtLeast, $minimumValue) => {
+    if ($$this$coerceAtLeast < $minimumValue)
+        $$this$coerceAtLeast = $minimumValue;
+    return $$this$coerceAtLeast;
+},
+kr_RangesKt___RangesKt_coerceAtLeast1 = ($$this$coerceAtLeast, $minimumValue) => {
+    if (Long_lt($$this$coerceAtLeast, $minimumValue))
+        $$this$coerceAtLeast = $minimumValue;
+    return $$this$coerceAtLeast;
+},
+kr_RangesKt___RangesKt_coerceAtLeast = ($$this$coerceAtLeast, $minimumValue) => {
+    if ($$this$coerceAtLeast < $minimumValue)
+        $$this$coerceAtLeast = $minimumValue;
+    return $$this$coerceAtLeast;
+},
+kr_RangesKt___RangesKt_coerceAtMost = ($$this$coerceAtMost, $maximumValue) => {
+    if ($$this$coerceAtMost > $maximumValue)
+        $$this$coerceAtMost = $maximumValue;
+    return $$this$coerceAtMost;
+},
+kr_RangesKt___RangesKt_coerceAtMost1 = ($$this$coerceAtMost, $maximumValue) => {
+    if (Long_gt($$this$coerceAtMost, $maximumValue))
+        $$this$coerceAtMost = $maximumValue;
+    return $$this$coerceAtMost;
+},
+kr_RangesKt___RangesKt_coerceAtMost0 = ($$this$coerceAtMost, $maximumValue) => {
+    if ($$this$coerceAtMost > $maximumValue)
+        $$this$coerceAtMost = $maximumValue;
+    return $$this$coerceAtMost;
+},
+kr_RangesKt___RangesKt_coerceIn0 = ($$this$coerceIn, $minimumValue, $maximumValue) => {
+    let var$4, var$5;
+    if ($minimumValue <= $maximumValue) {
+        if ($$this$coerceIn < $minimumValue)
+            return $minimumValue;
+        if ($$this$coerceIn <= $maximumValue)
+            return $$this$coerceIn;
+        return $maximumValue;
+    }
+    var$4 = new jl_IllegalArgumentException;
+    var$5 = new jl_StringBuilder;
+    jl_AbstractStringBuilder__init_(var$5);
+    jl_AbstractStringBuilder_append(var$5, $rt_s(869));
+    var$5 = jl_StringBuilder_append0(var$5, $maximumValue);
+    jl_AbstractStringBuilder_append(var$5, $rt_s(870));
+    var$5 = jl_StringBuilder_append0(var$5, $minimumValue);
+    jl_AbstractStringBuilder_append0(var$5, 46);
+    jl_RuntimeException__init_(var$4, jl_AbstractStringBuilder_toString(var$5));
+    $rt_throw(var$4);
+},
+kr_RangesKt___RangesKt_coerceIn = ($$this$coerceIn, $minimumValue, $maximumValue) => {
+    let var$4, var$5;
+    if (!($minimumValue > $maximumValue)) {
+        if ($$this$coerceIn < $minimumValue)
+            return $minimumValue;
+        if (!($$this$coerceIn > $maximumValue))
+            return $$this$coerceIn;
+        return $maximumValue;
+    }
+    var$4 = new jl_IllegalArgumentException;
+    var$5 = new jl_StringBuilder;
+    jl_AbstractStringBuilder__init_(var$5);
+    jl_AbstractStringBuilder_append(var$5, $rt_s(869));
+    var$5 = jl_StringBuilder_append1(var$5, $maximumValue);
+    jl_AbstractStringBuilder_append(var$5, $rt_s(870));
+    var$5 = jl_StringBuilder_append1(var$5, $minimumValue);
+    jl_AbstractStringBuilder_append0(var$5, 46);
+    jl_RuntimeException__init_(var$4, jl_AbstractStringBuilder_toString(var$5));
+    $rt_throw(var$4);
+},
 k_Result = $rt_classWithoutFields(),
 k_Result_Companion = null,
 k_Result_$callClinit = () => {
@@ -34233,7 +34225,7 @@ cvs_Langs_charsFor = ($this, $index) => {
     $$this$forEach$iv_0 = $rt_s(66);
     $n = $rt_s(871);
     $element$iv = null;
-    kji_Intrinsics_checkNotNullParameter($set, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($set, $rt_s(839));
     kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(872));
     kji_Intrinsics_checkNotNullParameter($v, $rt_s(873));
     kji_Intrinsics_checkNotNullParameter($$this$forEach$iv_0, $rt_s(874));
@@ -34241,7 +34233,7 @@ cvs_Langs_charsFor = ($this, $index) => {
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
     var$4 = var$4;
-    kji_Intrinsics_checkNotNullParameter($set, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($set, $rt_s(839));
     kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(876));
     kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(872));
     kji_Intrinsics_checkNotNullParameter($v, $rt_s(873));
@@ -34256,7 +34248,7 @@ cvs_Langs_charsFor = ($this, $index) => {
         $index = $index + 1 | 0;
         if ($index > 1)
             jl_AbstractStringBuilder_append1($n, $$this$forEach$iv);
-        kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(841));
+        kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(839));
         if ($element$iv !== null)
             jl_AbstractStringBuilder_append1($n, $element$iv.$invoke(var$9));
         else if (var$9 !== null ? $rt_isInstance(var$9, jl_CharSequence) : 1)
@@ -34277,24 +34269,24 @@ cvs_Langs__clinit_ = () => {
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(898));
-    var$2[1] = k_TuplesKt_to($rt_s(849), $rt_s(827));
-    var$2[2] = k_TuplesKt_to($rt_s(846), $rt_s(829));
-    var$2[3] = k_TuplesKt_to($rt_s(847), $rt_s(831));
-    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(835));
-    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(837));
+    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(825));
+    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(829));
+    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(833));
+    var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(835));
     var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(900));
     var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(902));
     var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(904));
     var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(906));
-    var$2[10] = k_TuplesKt_to($rt_s(839), $rt_s(907));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(907));
     var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(909));
     var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(911));
     var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(913));
     var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(915));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(917));
-    var$2[16] = k_TuplesKt_to($rt_s(771), $rt_s(918));
-    var$2[17] = k_TuplesKt_to($rt_s(768), $rt_s(919));
-    var$2[18] = k_TuplesKt_to($rt_s(748), $rt_s(920));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(918));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(919));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(920));
     var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(922));
     var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(900));
     var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(925));
@@ -34308,7 +34300,7 @@ cvs_Langs__clinit_ = () => {
     var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(941));
     var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(943));
     var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(945));
-    var$2[32] = k_TuplesKt_to($rt_s(744), $rt_s(946));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(946));
     var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(948));
     var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(950));
     var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(952));
@@ -34316,13 +34308,13 @@ cvs_Langs__clinit_ = () => {
     var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(956));
     var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(958));
     var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(960));
-    var$2[40] = k_TuplesKt_to($rt_s(753), $rt_s(961));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(961));
     var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(963));
     var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(965));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(967));
     var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(969));
-    var$2[45] = k_TuplesKt_to($rt_s(848), $rt_s(833));
-    var$2[46] = k_TuplesKt_to($rt_s(850), $rt_s(970));
+    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(831));
+    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(970));
     var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(972));
     var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(974));
     var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(976));
@@ -34348,31 +34340,31 @@ cvs_Langs__clinit_ = () => {
     var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1016));
     var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1018));
     var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1020));
-    var$2[72] = k_TuplesKt_to($rt_s(851), $rt_s(1021));
+    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1021));
     var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1023));
     var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1025));
     cvs_Langs_pt = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1026));
-    var$2[1] = k_TuplesKt_to($rt_s(849), $rt_s(1027));
-    var$2[2] = k_TuplesKt_to($rt_s(846), $rt_s(829));
-    var$2[3] = k_TuplesKt_to($rt_s(847), $rt_s(1028));
+    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1027));
+    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1028));
     var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1029));
     var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1030));
     var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1031));
     var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1032));
     var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1033));
     var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1034));
-    var$2[10] = k_TuplesKt_to($rt_s(839), $rt_s(1035));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1035));
     var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1036));
     var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1037));
     var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1038));
     var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1039));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(917));
-    var$2[16] = k_TuplesKt_to($rt_s(771), $rt_s(1040));
-    var$2[17] = k_TuplesKt_to($rt_s(768), $rt_s(1041));
-    var$2[18] = k_TuplesKt_to($rt_s(748), $rt_s(1042));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1040));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1041));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1042));
     var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1043));
     var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1031));
     var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1044));
@@ -34386,7 +34378,7 @@ cvs_Langs__clinit_ = () => {
     var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1052));
     var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1053));
     var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1054));
-    var$2[32] = k_TuplesKt_to($rt_s(744), $rt_s(1055));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1055));
     var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1056));
     var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1057));
     var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1058));
@@ -34394,13 +34386,13 @@ cvs_Langs__clinit_ = () => {
     var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1060));
     var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1061));
     var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1062));
-    var$2[40] = k_TuplesKt_to($rt_s(753), $rt_s(1063));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1063));
     var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1064));
     var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1065));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(967));
     var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1066));
-    var$2[45] = k_TuplesKt_to($rt_s(848), $rt_s(1067));
-    var$2[46] = k_TuplesKt_to($rt_s(850), $rt_s(1068));
+    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1067));
+    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1068));
     var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1069));
     var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1070));
     var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1071));
@@ -34426,31 +34418,31 @@ cvs_Langs__clinit_ = () => {
     var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1091));
     var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1092));
     var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1093));
-    var$2[72] = k_TuplesKt_to($rt_s(851), $rt_s(1094));
+    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1094));
     var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1095));
     var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1096));
     cvs_Langs_en = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1097));
-    var$2[1] = k_TuplesKt_to($rt_s(849), $rt_s(1098));
-    var$2[2] = k_TuplesKt_to($rt_s(846), $rt_s(829));
-    var$2[3] = k_TuplesKt_to($rt_s(847), $rt_s(1099));
-    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(835));
+    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1098));
+    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1099));
+    var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(833));
     var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1100));
     var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(900));
     var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1101));
     var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(904));
     var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(906));
-    var$2[10] = k_TuplesKt_to($rt_s(839), $rt_s(1102));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1102));
     var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1103));
     var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1104));
     var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1105));
     var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1106));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(917));
-    var$2[16] = k_TuplesKt_to($rt_s(771), $rt_s(918));
-    var$2[17] = k_TuplesKt_to($rt_s(768), $rt_s(919));
-    var$2[18] = k_TuplesKt_to($rt_s(748), $rt_s(1107));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(918));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(919));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1107));
     var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1108));
     var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(900));
     var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1109));
@@ -34464,7 +34456,7 @@ cvs_Langs__clinit_ = () => {
     var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1117));
     var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(943));
     var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1118));
-    var$2[32] = k_TuplesKt_to($rt_s(744), $rt_s(1119));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1119));
     var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1120));
     var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1121));
     var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1122));
@@ -34472,13 +34464,13 @@ cvs_Langs__clinit_ = () => {
     var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1124));
     var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(958));
     var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1125));
-    var$2[40] = k_TuplesKt_to($rt_s(753), $rt_s(961));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(961));
     var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1126));
     var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1127));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1128));
     var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1129));
-    var$2[45] = k_TuplesKt_to($rt_s(848), $rt_s(1130));
-    var$2[46] = k_TuplesKt_to($rt_s(850), $rt_s(1131));
+    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1130));
+    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1131));
     var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(972));
     var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1132));
     var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1133));
@@ -34504,31 +34496,31 @@ cvs_Langs__clinit_ = () => {
     var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1150));
     var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1151));
     var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1152));
-    var$2[72] = k_TuplesKt_to($rt_s(851), $rt_s(1021));
+    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1021));
     var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1153));
     var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1154));
     cvs_Langs_es = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1155));
-    var$2[1] = k_TuplesKt_to($rt_s(849), $rt_s(1156));
-    var$2[2] = k_TuplesKt_to($rt_s(846), $rt_s(829));
-    var$2[3] = k_TuplesKt_to($rt_s(847), $rt_s(1157));
+    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1156));
+    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1157));
     var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1029));
     var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1158));
     var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1031));
     var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1159));
     var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1160));
     var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1161));
-    var$2[10] = k_TuplesKt_to($rt_s(839), $rt_s(1162));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1162));
     var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1163));
     var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1164));
     var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1165));
     var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1166));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(917));
-    var$2[16] = k_TuplesKt_to($rt_s(771), $rt_s(1167));
-    var$2[17] = k_TuplesKt_to($rt_s(768), $rt_s(1168));
-    var$2[18] = k_TuplesKt_to($rt_s(748), $rt_s(1169));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1167));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1168));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1169));
     var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1170));
     var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1031));
     var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1171));
@@ -34542,7 +34534,7 @@ cvs_Langs__clinit_ = () => {
     var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1179));
     var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1180));
     var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1181));
-    var$2[32] = k_TuplesKt_to($rt_s(744), $rt_s(1055));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1055));
     var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1182));
     var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1183));
     var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1184));
@@ -34550,13 +34542,13 @@ cvs_Langs__clinit_ = () => {
     var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1186));
     var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1187));
     var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1188));
-    var$2[40] = k_TuplesKt_to($rt_s(753), $rt_s(1189));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1189));
     var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1190));
     var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1191));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(967));
     var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1192));
-    var$2[45] = k_TuplesKt_to($rt_s(848), $rt_s(1193));
-    var$2[46] = k_TuplesKt_to($rt_s(850), $rt_s(1194));
+    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1193));
+    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1194));
     var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1195));
     var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1196));
     var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1197));
@@ -34582,31 +34574,31 @@ cvs_Langs__clinit_ = () => {
     var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1216));
     var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1217));
     var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1218));
-    var$2[72] = k_TuplesKt_to($rt_s(851), $rt_s(1219));
+    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1219));
     var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1220));
     var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1221));
     cvs_Langs_de = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1222));
-    var$2[1] = k_TuplesKt_to($rt_s(849), $rt_s(1223));
-    var$2[2] = k_TuplesKt_to($rt_s(846), $rt_s(829));
-    var$2[3] = k_TuplesKt_to($rt_s(847), $rt_s(1224));
+    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1223));
+    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1224));
     var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1225));
     var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1226));
     var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1227));
     var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1159));
     var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1228));
     var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1229));
-    var$2[10] = k_TuplesKt_to($rt_s(839), $rt_s(907));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(907));
     var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1230));
     var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1231));
     var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1038));
     var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1232));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(917));
-    var$2[16] = k_TuplesKt_to($rt_s(771), $rt_s(1233));
-    var$2[17] = k_TuplesKt_to($rt_s(768), $rt_s(1234));
-    var$2[18] = k_TuplesKt_to($rt_s(748), $rt_s(1235));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1233));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1234));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1235));
     var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1236));
     var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1227));
     var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1109));
@@ -34620,7 +34612,7 @@ cvs_Langs__clinit_ = () => {
     var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1244));
     var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1245));
     var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1246));
-    var$2[32] = k_TuplesKt_to($rt_s(744), $rt_s(1055));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1055));
     var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1247));
     var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1248));
     var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1249));
@@ -34628,13 +34620,13 @@ cvs_Langs__clinit_ = () => {
     var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1251));
     var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1252));
     var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1253));
-    var$2[40] = k_TuplesKt_to($rt_s(753), $rt_s(1254));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1254));
     var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1255));
     var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1256));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1257));
     var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1258));
-    var$2[45] = k_TuplesKt_to($rt_s(848), $rt_s(1259));
-    var$2[46] = k_TuplesKt_to($rt_s(850), $rt_s(1260));
+    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1259));
+    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1260));
     var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1261));
     var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1262));
     var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1263));
@@ -34660,31 +34652,31 @@ cvs_Langs__clinit_ = () => {
     var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1280));
     var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1281));
     var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1282));
-    var$2[72] = k_TuplesKt_to($rt_s(851), $rt_s(1283));
+    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1283));
     var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1284));
     var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1285));
     cvs_Langs_fr = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1286));
-    var$2[1] = k_TuplesKt_to($rt_s(849), $rt_s(1287));
-    var$2[2] = k_TuplesKt_to($rt_s(846), $rt_s(829));
-    var$2[3] = k_TuplesKt_to($rt_s(847), $rt_s(1288));
+    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1287));
+    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1288));
     var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1289));
     var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1290));
     var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1291));
     var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1101));
     var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1292));
     var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1293));
-    var$2[10] = k_TuplesKt_to($rt_s(839), $rt_s(1294));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1294));
     var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1295));
     var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1296));
     var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1297));
     var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1232));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(917));
-    var$2[16] = k_TuplesKt_to($rt_s(771), $rt_s(1298));
-    var$2[17] = k_TuplesKt_to($rt_s(768), $rt_s(1299));
-    var$2[18] = k_TuplesKt_to($rt_s(748), $rt_s(1300));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1298));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1299));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1300));
     var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1108));
     var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1291));
     var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1301));
@@ -34698,7 +34690,7 @@ cvs_Langs__clinit_ = () => {
     var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1309));
     var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1310));
     var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1311));
-    var$2[32] = k_TuplesKt_to($rt_s(744), $rt_s(1312));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1312));
     var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1313));
     var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1314));
     var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1315));
@@ -34706,13 +34698,13 @@ cvs_Langs__clinit_ = () => {
     var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1317));
     var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1318));
     var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1319));
-    var$2[40] = k_TuplesKt_to($rt_s(753), $rt_s(1320));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1320));
     var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1321));
     var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1322));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1323));
     var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1324));
-    var$2[45] = k_TuplesKt_to($rt_s(848), $rt_s(1325));
-    var$2[46] = k_TuplesKt_to($rt_s(850), $rt_s(1326));
+    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1325));
+    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1326));
     var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1327));
     var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1328));
     var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1329));
@@ -34738,31 +34730,31 @@ cvs_Langs__clinit_ = () => {
     var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1345));
     var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1346));
     var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1347));
-    var$2[72] = k_TuplesKt_to($rt_s(851), $rt_s(1348));
+    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1348));
     var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1349));
     var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1350));
     cvs_Langs_it = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1351));
-    var$2[1] = k_TuplesKt_to($rt_s(849), $rt_s(1352));
-    var$2[2] = k_TuplesKt_to($rt_s(846), $rt_s(829));
-    var$2[3] = k_TuplesKt_to($rt_s(847), $rt_s(1353));
+    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1352));
+    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1353));
     var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1354));
     var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1355));
     var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1031));
     var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1356));
     var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1357));
     var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1358));
-    var$2[10] = k_TuplesKt_to($rt_s(839), $rt_s(1359));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1359));
     var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1360));
     var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1361));
     var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1362));
     var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1363));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(1364));
-    var$2[16] = k_TuplesKt_to($rt_s(771), $rt_s(1365));
-    var$2[17] = k_TuplesKt_to($rt_s(768), $rt_s(1366));
-    var$2[18] = k_TuplesKt_to($rt_s(748), $rt_s(1367));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1365));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1366));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1367));
     var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1170));
     var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1031));
     var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1044));
@@ -34776,7 +34768,7 @@ cvs_Langs__clinit_ = () => {
     var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1375));
     var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1180));
     var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1376));
-    var$2[32] = k_TuplesKt_to($rt_s(744), $rt_s(1377));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1377));
     var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1378));
     var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1379));
     var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1380));
@@ -34784,13 +34776,13 @@ cvs_Langs__clinit_ = () => {
     var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1382));
     var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1383));
     var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1384));
-    var$2[40] = k_TuplesKt_to($rt_s(753), $rt_s(1385));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1385));
     var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1386));
     var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1387));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(967));
     var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1388));
-    var$2[45] = k_TuplesKt_to($rt_s(848), $rt_s(1389));
-    var$2[46] = k_TuplesKt_to($rt_s(850), $rt_s(1390));
+    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1389));
+    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1390));
     var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1391));
     var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1392));
     var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1393));
@@ -34816,31 +34808,31 @@ cvs_Langs__clinit_ = () => {
     var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1411));
     var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1412));
     var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1413));
-    var$2[72] = k_TuplesKt_to($rt_s(851), $rt_s(1414));
+    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1414));
     var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1415));
     var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1416));
     cvs_Langs_id = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1417));
-    var$2[1] = k_TuplesKt_to($rt_s(849), $rt_s(1418));
-    var$2[2] = k_TuplesKt_to($rt_s(846), $rt_s(829));
-    var$2[3] = k_TuplesKt_to($rt_s(847), $rt_s(1419));
+    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1418));
+    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(827));
+    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1419));
     var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1420));
     var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1421));
     var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1422));
     var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1423));
     var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1424));
     var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1425));
-    var$2[10] = k_TuplesKt_to($rt_s(839), $rt_s(1426));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1426));
     var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1427));
     var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1428));
     var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1429));
     var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1363));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(1364));
-    var$2[16] = k_TuplesKt_to($rt_s(771), $rt_s(1430));
-    var$2[17] = k_TuplesKt_to($rt_s(768), $rt_s(1431));
-    var$2[18] = k_TuplesKt_to($rt_s(748), $rt_s(1432));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1430));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1431));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1432));
     var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1433));
     var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1422));
     var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1109));
@@ -34854,7 +34846,7 @@ cvs_Langs__clinit_ = () => {
     var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1441));
     var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1442));
     var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1443));
-    var$2[32] = k_TuplesKt_to($rt_s(744), $rt_s(1444));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1444));
     var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1445));
     var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1446));
     var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1447));
@@ -34862,13 +34854,13 @@ cvs_Langs__clinit_ = () => {
     var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1449));
     var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1450));
     var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1451));
-    var$2[40] = k_TuplesKt_to($rt_s(753), $rt_s(1452));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1452));
     var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1386));
     var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1453));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1454));
     var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1455));
-    var$2[45] = k_TuplesKt_to($rt_s(848), $rt_s(1456));
-    var$2[46] = k_TuplesKt_to($rt_s(850), $rt_s(1457));
+    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1456));
+    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1457));
     var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1458));
     var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1459));
     var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1460));
@@ -34894,31 +34886,31 @@ cvs_Langs__clinit_ = () => {
     var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1480));
     var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1481));
     var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1482));
-    var$2[72] = k_TuplesKt_to($rt_s(851), $rt_s(1483));
+    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1483));
     var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1484));
     var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1485));
     cvs_Langs_tr = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1486));
-    var$2[1] = k_TuplesKt_to($rt_s(849), $rt_s(1487));
-    var$2[2] = k_TuplesKt_to($rt_s(846), $rt_s(1488));
-    var$2[3] = k_TuplesKt_to($rt_s(847), $rt_s(1489));
+    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1487));
+    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(1488));
+    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1489));
     var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1490));
     var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1491));
     var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1492));
     var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1493));
     var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1494));
     var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1495));
-    var$2[10] = k_TuplesKt_to($rt_s(839), $rt_s(1496));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1496));
     var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1497));
     var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1498));
     var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1499));
     var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1500));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(1501));
-    var$2[16] = k_TuplesKt_to($rt_s(771), $rt_s(1502));
-    var$2[17] = k_TuplesKt_to($rt_s(768), $rt_s(1503));
-    var$2[18] = k_TuplesKt_to($rt_s(748), $rt_s(1504));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1502));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1503));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1504));
     var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1505));
     var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1492));
     var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1506));
@@ -34932,7 +34924,7 @@ cvs_Langs__clinit_ = () => {
     var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1514));
     var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1515));
     var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1516));
-    var$2[32] = k_TuplesKt_to($rt_s(744), $rt_s(1517));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1517));
     var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1518));
     var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1519));
     var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1520));
@@ -34940,13 +34932,13 @@ cvs_Langs__clinit_ = () => {
     var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1522));
     var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1523));
     var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1524));
-    var$2[40] = k_TuplesKt_to($rt_s(753), $rt_s(1525));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1525));
     var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1526));
     var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1527));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1528));
     var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1529));
-    var$2[45] = k_TuplesKt_to($rt_s(848), $rt_s(1530));
-    var$2[46] = k_TuplesKt_to($rt_s(850), $rt_s(1531));
+    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1530));
+    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1531));
     var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1532));
     var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1533));
     var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1534));
@@ -34972,31 +34964,31 @@ cvs_Langs__clinit_ = () => {
     var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1553));
     var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1554));
     var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1555));
-    var$2[72] = k_TuplesKt_to($rt_s(851), $rt_s(1556));
+    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1556));
     var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1557));
     var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1558));
     cvs_Langs_ru = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 75);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(897), $rt_s(1559));
-    var$2[1] = k_TuplesKt_to($rt_s(849), $rt_s(1560));
-    var$2[2] = k_TuplesKt_to($rt_s(846), $rt_s(1561));
-    var$2[3] = k_TuplesKt_to($rt_s(847), $rt_s(1562));
+    var$2[1] = k_TuplesKt_to($rt_s(847), $rt_s(1560));
+    var$2[2] = k_TuplesKt_to($rt_s(844), $rt_s(1561));
+    var$2[3] = k_TuplesKt_to($rt_s(845), $rt_s(1562));
     var$2[4] = k_TuplesKt_to($rt_s(194), $rt_s(1563));
     var$2[5] = k_TuplesKt_to($rt_s(56), $rt_s(1564));
     var$2[6] = k_TuplesKt_to($rt_s(899), $rt_s(1565));
     var$2[7] = k_TuplesKt_to($rt_s(901), $rt_s(1566));
     var$2[8] = k_TuplesKt_to($rt_s(903), $rt_s(1567));
     var$2[9] = k_TuplesKt_to($rt_s(905), $rt_s(1568));
-    var$2[10] = k_TuplesKt_to($rt_s(839), $rt_s(1569));
+    var$2[10] = k_TuplesKt_to($rt_s(837), $rt_s(1569));
     var$2[11] = k_TuplesKt_to($rt_s(908), $rt_s(1570));
     var$2[12] = k_TuplesKt_to($rt_s(910), $rt_s(1571));
     var$2[13] = k_TuplesKt_to($rt_s(912), $rt_s(1572));
     var$2[14] = k_TuplesKt_to($rt_s(914), $rt_s(1573));
     var$2[15] = k_TuplesKt_to($rt_s(916), $rt_s(1574));
-    var$2[16] = k_TuplesKt_to($rt_s(771), $rt_s(1575));
-    var$2[17] = k_TuplesKt_to($rt_s(768), $rt_s(1576));
-    var$2[18] = k_TuplesKt_to($rt_s(748), $rt_s(1577));
+    var$2[16] = k_TuplesKt_to($rt_s(769), $rt_s(1575));
+    var$2[17] = k_TuplesKt_to($rt_s(766), $rt_s(1576));
+    var$2[18] = k_TuplesKt_to($rt_s(746), $rt_s(1577));
     var$2[19] = k_TuplesKt_to($rt_s(921), $rt_s(1578));
     var$2[20] = k_TuplesKt_to($rt_s(923), $rt_s(1565));
     var$2[21] = k_TuplesKt_to($rt_s(924), $rt_s(1579));
@@ -35010,7 +35002,7 @@ cvs_Langs__clinit_ = () => {
     var$2[29] = k_TuplesKt_to($rt_s(940), $rt_s(1587));
     var$2[30] = k_TuplesKt_to($rt_s(942), $rt_s(1588));
     var$2[31] = k_TuplesKt_to($rt_s(944), $rt_s(1589));
-    var$2[32] = k_TuplesKt_to($rt_s(744), $rt_s(1590));
+    var$2[32] = k_TuplesKt_to($rt_s(742), $rt_s(1590));
     var$2[33] = k_TuplesKt_to($rt_s(947), $rt_s(1591));
     var$2[34] = k_TuplesKt_to($rt_s(949), $rt_s(1592));
     var$2[35] = k_TuplesKt_to($rt_s(951), $rt_s(1593));
@@ -35018,13 +35010,13 @@ cvs_Langs__clinit_ = () => {
     var$2[37] = k_TuplesKt_to($rt_s(955), $rt_s(1595));
     var$2[38] = k_TuplesKt_to($rt_s(957), $rt_s(1596));
     var$2[39] = k_TuplesKt_to($rt_s(959), $rt_s(1597));
-    var$2[40] = k_TuplesKt_to($rt_s(753), $rt_s(1598));
+    var$2[40] = k_TuplesKt_to($rt_s(751), $rt_s(1598));
     var$2[41] = k_TuplesKt_to($rt_s(962), $rt_s(1599));
     var$2[42] = k_TuplesKt_to($rt_s(964), $rt_s(1600));
     var$2[43] = k_TuplesKt_to($rt_s(966), $rt_s(1601));
     var$2[44] = k_TuplesKt_to($rt_s(968), $rt_s(1602));
-    var$2[45] = k_TuplesKt_to($rt_s(848), $rt_s(1603));
-    var$2[46] = k_TuplesKt_to($rt_s(850), $rt_s(1604));
+    var$2[45] = k_TuplesKt_to($rt_s(846), $rt_s(1603));
+    var$2[46] = k_TuplesKt_to($rt_s(848), $rt_s(1604));
     var$2[47] = k_TuplesKt_to($rt_s(971), $rt_s(1605));
     var$2[48] = k_TuplesKt_to($rt_s(973), $rt_s(1606));
     var$2[49] = k_TuplesKt_to($rt_s(975), $rt_s(1607));
@@ -35050,19 +35042,19 @@ cvs_Langs__clinit_ = () => {
     var$2[69] = k_TuplesKt_to($rt_s(1015), $rt_s(1626));
     var$2[70] = k_TuplesKt_to($rt_s(1017), $rt_s(1627));
     var$2[71] = k_TuplesKt_to($rt_s(1019), $rt_s(1628));
-    var$2[72] = k_TuplesKt_to($rt_s(851), $rt_s(1629));
+    var$2[72] = k_TuplesKt_to($rt_s(849), $rt_s(1629));
     var$2[73] = k_TuplesKt_to($rt_s(1022), $rt_s(1630));
     var$2[74] = k_TuplesKt_to($rt_s(1024), $rt_s(1631));
     cvs_Langs_ja = kc_MapsKt__MapsKt_mapOf(var$1);
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(1633));
-    var$2[1] = k_TuplesKt_to($rt_s(857), $rt_s(828));
-    var$2[2] = k_TuplesKt_to($rt_s(852), $rt_s(830));
-    var$2[3] = k_TuplesKt_to($rt_s(853), $rt_s(832));
-    var$2[4] = k_TuplesKt_to($rt_s(854), $rt_s(834));
-    var$2[5] = k_TuplesKt_to($rt_s(855), $rt_s(836));
-    var$2[6] = k_TuplesKt_to($rt_s(856), $rt_s(838));
+    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(826));
+    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(828));
+    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(830));
+    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(832));
+    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(834));
+    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(836));
     var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(1635));
     var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(1637));
     var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(1639));
@@ -35093,7 +35085,7 @@ cvs_Langs__clinit_ = () => {
     var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(1687));
     var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1689));
     var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(1691));
-    var$2[37] = k_TuplesKt_to($rt_s(751), $rt_s(1692));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1692));
     var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(1694));
     var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(1696));
     var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1698));
@@ -35108,7 +35100,7 @@ cvs_Langs__clinit_ = () => {
     var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1715));
     var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1716));
     var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(1718));
-    var$2[52] = k_TuplesKt_to($rt_s(843), $rt_s(1719));
+    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(1719));
     var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(1721));
     var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(1723));
     var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(1725));
@@ -35124,12 +35116,12 @@ cvs_Langs__clinit_ = () => {
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(1742));
-    var$2[1] = k_TuplesKt_to($rt_s(857), $rt_s(1743));
-    var$2[2] = k_TuplesKt_to($rt_s(852), $rt_s(1744));
-    var$2[3] = k_TuplesKt_to($rt_s(853), $rt_s(1745));
-    var$2[4] = k_TuplesKt_to($rt_s(854), $rt_s(1746));
-    var$2[5] = k_TuplesKt_to($rt_s(855), $rt_s(1747));
-    var$2[6] = k_TuplesKt_to($rt_s(856), $rt_s(1748));
+    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(1743));
+    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(1744));
+    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(1745));
+    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(1746));
+    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(1747));
+    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(1748));
     var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(1749));
     var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(1750));
     var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(1751));
@@ -35160,7 +35152,7 @@ cvs_Langs__clinit_ = () => {
     var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(1774));
     var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1775));
     var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(1776));
-    var$2[37] = k_TuplesKt_to($rt_s(751), $rt_s(1777));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1777));
     var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(1778));
     var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(1779));
     var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1780));
@@ -35175,7 +35167,7 @@ cvs_Langs__clinit_ = () => {
     var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1788));
     var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1789));
     var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(1790));
-    var$2[52] = k_TuplesKt_to($rt_s(843), $rt_s(1791));
+    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(1791));
     var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(1792));
     var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(1793));
     var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(1794));
@@ -35191,12 +35183,12 @@ cvs_Langs__clinit_ = () => {
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(1803));
-    var$2[1] = k_TuplesKt_to($rt_s(857), $rt_s(1804));
-    var$2[2] = k_TuplesKt_to($rt_s(852), $rt_s(1805));
-    var$2[3] = k_TuplesKt_to($rt_s(853), $rt_s(1806));
-    var$2[4] = k_TuplesKt_to($rt_s(854), $rt_s(1807));
-    var$2[5] = k_TuplesKt_to($rt_s(855), $rt_s(1808));
-    var$2[6] = k_TuplesKt_to($rt_s(856), $rt_s(1809));
+    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(1804));
+    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(1805));
+    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(1806));
+    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(1807));
+    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(1808));
+    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(1809));
     var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(1810));
     var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(1811));
     var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(1812));
@@ -35227,7 +35219,7 @@ cvs_Langs__clinit_ = () => {
     var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(1833));
     var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1689));
     var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(1834));
-    var$2[37] = k_TuplesKt_to($rt_s(751), $rt_s(1835));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1835));
     var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(1836));
     var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(1696));
     var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1837));
@@ -35242,7 +35234,7 @@ cvs_Langs__clinit_ = () => {
     var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1843));
     var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1844));
     var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(1845));
-    var$2[52] = k_TuplesKt_to($rt_s(843), $rt_s(1846));
+    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(1846));
     var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(1847));
     var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(1848));
     var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(1849));
@@ -35258,12 +35250,12 @@ cvs_Langs__clinit_ = () => {
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(1858));
-    var$2[1] = k_TuplesKt_to($rt_s(857), $rt_s(1859));
-    var$2[2] = k_TuplesKt_to($rt_s(852), $rt_s(1860));
-    var$2[3] = k_TuplesKt_to($rt_s(853), $rt_s(1861));
-    var$2[4] = k_TuplesKt_to($rt_s(854), $rt_s(1862));
-    var$2[5] = k_TuplesKt_to($rt_s(855), $rt_s(1863));
-    var$2[6] = k_TuplesKt_to($rt_s(856), $rt_s(1864));
+    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(1859));
+    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(1860));
+    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(1861));
+    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(1862));
+    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(1863));
+    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(1864));
     var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(1865));
     var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(1866));
     var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(1867));
@@ -35294,7 +35286,7 @@ cvs_Langs__clinit_ = () => {
     var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(1888));
     var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1889));
     var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(1890));
-    var$2[37] = k_TuplesKt_to($rt_s(751), $rt_s(1891));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1891));
     var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(1892));
     var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(1893));
     var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1184));
@@ -35309,7 +35301,7 @@ cvs_Langs__clinit_ = () => {
     var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1901));
     var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1902));
     var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(1903));
-    var$2[52] = k_TuplesKt_to($rt_s(843), $rt_s(1904));
+    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(1904));
     var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(1905));
     var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(1906));
     var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(1907));
@@ -35325,12 +35317,12 @@ cvs_Langs__clinit_ = () => {
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(1916));
-    var$2[1] = k_TuplesKt_to($rt_s(857), $rt_s(1917));
-    var$2[2] = k_TuplesKt_to($rt_s(852), $rt_s(1918));
-    var$2[3] = k_TuplesKt_to($rt_s(853), $rt_s(1919));
-    var$2[4] = k_TuplesKt_to($rt_s(854), $rt_s(1920));
-    var$2[5] = k_TuplesKt_to($rt_s(855), $rt_s(1921));
-    var$2[6] = k_TuplesKt_to($rt_s(856), $rt_s(1922));
+    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(1917));
+    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(1918));
+    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(1919));
+    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(1920));
+    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(1921));
+    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(1922));
     var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(1923));
     var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(1924));
     var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(1925));
@@ -35361,7 +35353,7 @@ cvs_Langs__clinit_ = () => {
     var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(1947));
     var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1889));
     var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(1948));
-    var$2[37] = k_TuplesKt_to($rt_s(751), $rt_s(1949));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(1949));
     var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(1950));
     var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(1951));
     var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1249));
@@ -35376,7 +35368,7 @@ cvs_Langs__clinit_ = () => {
     var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(1959));
     var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(1960));
     var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(1961));
-    var$2[52] = k_TuplesKt_to($rt_s(843), $rt_s(1962));
+    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(1962));
     var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(1963));
     var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(1964));
     var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(1965));
@@ -35392,12 +35384,12 @@ cvs_Langs__clinit_ = () => {
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(1974));
-    var$2[1] = k_TuplesKt_to($rt_s(857), $rt_s(1975));
-    var$2[2] = k_TuplesKt_to($rt_s(852), $rt_s(1976));
-    var$2[3] = k_TuplesKt_to($rt_s(853), $rt_s(1977));
-    var$2[4] = k_TuplesKt_to($rt_s(854), $rt_s(1978));
-    var$2[5] = k_TuplesKt_to($rt_s(855), $rt_s(1979));
-    var$2[6] = k_TuplesKt_to($rt_s(856), $rt_s(1980));
+    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(1975));
+    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(1976));
+    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(1977));
+    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(1978));
+    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(1979));
+    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(1980));
     var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(1981));
     var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(1982));
     var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(1983));
@@ -35428,7 +35420,7 @@ cvs_Langs__clinit_ = () => {
     var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(2004));
     var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1689));
     var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(2005));
-    var$2[37] = k_TuplesKt_to($rt_s(751), $rt_s(2006));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2006));
     var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(2007));
     var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(2008));
     var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(2009));
@@ -35443,7 +35435,7 @@ cvs_Langs__clinit_ = () => {
     var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2015));
     var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2016));
     var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(2017));
-    var$2[52] = k_TuplesKt_to($rt_s(843), $rt_s(2018));
+    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(2018));
     var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(2019));
     var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(2020));
     var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(2021));
@@ -35459,12 +35451,12 @@ cvs_Langs__clinit_ = () => {
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(2030));
-    var$2[1] = k_TuplesKt_to($rt_s(857), $rt_s(2031));
-    var$2[2] = k_TuplesKt_to($rt_s(852), $rt_s(2032));
-    var$2[3] = k_TuplesKt_to($rt_s(853), $rt_s(2033));
-    var$2[4] = k_TuplesKt_to($rt_s(854), $rt_s(2034));
-    var$2[5] = k_TuplesKt_to($rt_s(855), $rt_s(2035));
-    var$2[6] = k_TuplesKt_to($rt_s(856), $rt_s(2036));
+    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(2031));
+    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(2032));
+    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(2033));
+    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(2034));
+    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(2035));
+    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(2036));
     var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(2037));
     var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(2038));
     var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(2039));
@@ -35495,7 +35487,7 @@ cvs_Langs__clinit_ = () => {
     var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(2060));
     var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(2061));
     var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(2062));
-    var$2[37] = k_TuplesKt_to($rt_s(751), $rt_s(2063));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2063));
     var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(2064));
     var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(2065));
     var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1380));
@@ -35510,7 +35502,7 @@ cvs_Langs__clinit_ = () => {
     var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2073));
     var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2074));
     var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(2075));
-    var$2[52] = k_TuplesKt_to($rt_s(843), $rt_s(2076));
+    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(2076));
     var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(2077));
     var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(2078));
     var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(2079));
@@ -35526,12 +35518,12 @@ cvs_Langs__clinit_ = () => {
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(2088));
-    var$2[1] = k_TuplesKt_to($rt_s(857), $rt_s(2089));
-    var$2[2] = k_TuplesKt_to($rt_s(852), $rt_s(2090));
-    var$2[3] = k_TuplesKt_to($rt_s(853), $rt_s(2091));
-    var$2[4] = k_TuplesKt_to($rt_s(854), $rt_s(2092));
-    var$2[5] = k_TuplesKt_to($rt_s(855), $rt_s(2093));
-    var$2[6] = k_TuplesKt_to($rt_s(856), $rt_s(2094));
+    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(2089));
+    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(2090));
+    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(2091));
+    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(2092));
+    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(2093));
+    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(2094));
     var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(2095));
     var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(2096));
     var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(2097));
@@ -35562,7 +35554,7 @@ cvs_Langs__clinit_ = () => {
     var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(2120));
     var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(1689));
     var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(2121));
-    var$2[37] = k_TuplesKt_to($rt_s(751), $rt_s(2122));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2122));
     var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(2123));
     var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(2124));
     var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1447));
@@ -35577,7 +35569,7 @@ cvs_Langs__clinit_ = () => {
     var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2132));
     var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2133));
     var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(2134));
-    var$2[52] = k_TuplesKt_to($rt_s(843), $rt_s(2135));
+    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(2135));
     var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(2136));
     var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(2137));
     var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(2138));
@@ -35593,12 +35585,12 @@ cvs_Langs__clinit_ = () => {
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(2147));
-    var$2[1] = k_TuplesKt_to($rt_s(857), $rt_s(2148));
-    var$2[2] = k_TuplesKt_to($rt_s(852), $rt_s(2149));
-    var$2[3] = k_TuplesKt_to($rt_s(853), $rt_s(2150));
-    var$2[4] = k_TuplesKt_to($rt_s(854), $rt_s(2151));
-    var$2[5] = k_TuplesKt_to($rt_s(855), $rt_s(2152));
-    var$2[6] = k_TuplesKt_to($rt_s(856), $rt_s(2153));
+    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(2148));
+    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(2149));
+    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(2150));
+    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(2151));
+    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(2152));
+    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(2153));
     var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(2154));
     var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(2155));
     var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(2156));
@@ -35629,7 +35621,7 @@ cvs_Langs__clinit_ = () => {
     var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(2180));
     var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(2181));
     var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(2182));
-    var$2[37] = k_TuplesKt_to($rt_s(751), $rt_s(2183));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2183));
     var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(2184));
     var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(2185));
     var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(1520));
@@ -35644,7 +35636,7 @@ cvs_Langs__clinit_ = () => {
     var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2194));
     var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2195));
     var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(2196));
-    var$2[52] = k_TuplesKt_to($rt_s(843), $rt_s(2197));
+    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(2197));
     var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(2198));
     var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(2199));
     var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(2200));
@@ -35660,12 +35652,12 @@ cvs_Langs__clinit_ = () => {
     var$1 = $rt_createArray(k_Pair, 64);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to($rt_s(1632), $rt_s(2209));
-    var$2[1] = k_TuplesKt_to($rt_s(857), $rt_s(2210));
-    var$2[2] = k_TuplesKt_to($rt_s(852), $rt_s(2211));
-    var$2[3] = k_TuplesKt_to($rt_s(853), $rt_s(2212));
-    var$2[4] = k_TuplesKt_to($rt_s(854), $rt_s(2213));
-    var$2[5] = k_TuplesKt_to($rt_s(855), $rt_s(2214));
-    var$2[6] = k_TuplesKt_to($rt_s(856), $rt_s(2215));
+    var$2[1] = k_TuplesKt_to($rt_s(855), $rt_s(2210));
+    var$2[2] = k_TuplesKt_to($rt_s(850), $rt_s(2211));
+    var$2[3] = k_TuplesKt_to($rt_s(851), $rt_s(2212));
+    var$2[4] = k_TuplesKt_to($rt_s(852), $rt_s(2213));
+    var$2[5] = k_TuplesKt_to($rt_s(853), $rt_s(2214));
+    var$2[6] = k_TuplesKt_to($rt_s(854), $rt_s(2215));
     var$2[7] = k_TuplesKt_to($rt_s(1634), $rt_s(2216));
     var$2[8] = k_TuplesKt_to($rt_s(1636), $rt_s(2217));
     var$2[9] = k_TuplesKt_to($rt_s(1638), $rt_s(2218));
@@ -35696,7 +35688,7 @@ cvs_Langs__clinit_ = () => {
     var$2[34] = k_TuplesKt_to($rt_s(1686), $rt_s(2241));
     var$2[35] = k_TuplesKt_to($rt_s(1688), $rt_s(2242));
     var$2[36] = k_TuplesKt_to($rt_s(1690), $rt_s(2243));
-    var$2[37] = k_TuplesKt_to($rt_s(751), $rt_s(2244));
+    var$2[37] = k_TuplesKt_to($rt_s(749), $rt_s(2244));
     var$2[38] = k_TuplesKt_to($rt_s(1693), $rt_s(2245));
     var$2[39] = k_TuplesKt_to($rt_s(1695), $rt_s(2246));
     var$2[40] = k_TuplesKt_to($rt_s(1697), $rt_s(2247));
@@ -35711,7 +35703,7 @@ cvs_Langs__clinit_ = () => {
     var$2[49] = k_TuplesKt_to($rt_s(84), $rt_s(2256));
     var$2[50] = k_TuplesKt_to($rt_s(85), $rt_s(2257));
     var$2[51] = k_TuplesKt_to($rt_s(1717), $rt_s(2258));
-    var$2[52] = k_TuplesKt_to($rt_s(843), $rt_s(2259));
+    var$2[52] = k_TuplesKt_to($rt_s(841), $rt_s(2259));
     var$2[53] = k_TuplesKt_to($rt_s(1720), $rt_s(2260));
     var$2[54] = k_TuplesKt_to($rt_s(1722), $rt_s(2261));
     var$2[55] = k_TuplesKt_to($rt_s(1724), $rt_s(2262));
@@ -35768,13 +35760,13 @@ kc_CollectionsKt__CollectionsKt_listOf = $elements => {
     return var$2.length <= 0 ? kc_CollectionsKt__CollectionsKt_emptyList() : kc_ArraysKt___ArraysJvmKt_asList($elements);
 },
 kc_CollectionsKt__CollectionsKt_getLastIndex = $$this$lastIndex => {
-    kji_Intrinsics_checkNotNullParameter($$this$lastIndex, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$lastIndex, $rt_s(839));
     return $$this$lastIndex.$size() - 1 | 0;
 },
 kc_CollectionsKt__CollectionsKt_optimizeReadOnlyList = $$this$optimizeReadOnlyList => {
     let var$2;
     a: {
-        kji_Intrinsics_checkNotNullParameter($$this$optimizeReadOnlyList, $rt_s(841));
+        kji_Intrinsics_checkNotNullParameter($$this$optimizeReadOnlyList, $rt_s(839));
         var$2 = $$this$optimizeReadOnlyList;
         switch (var$2.$size2) {
             case 0:
@@ -35815,7 +35807,7 @@ function cvs_MainMenuScreen$NeonButton() {
     a.$magenta = 0;
 }
 let cvs_MainMenuScreen$NeonButton__init_0 = ($this, $id, $rect, $title, $subtitle, $magenta) => {
-    kji_Intrinsics_checkNotNullParameter($rect, $rt_s(825));
+    kji_Intrinsics_checkNotNullParameter($rect, $rt_s(823));
     kji_Intrinsics_checkNotNullParameter($title, $rt_s(2275));
     kji_Intrinsics_checkNotNullParameter($subtitle, $rt_s(2276));
     $this.$id1 = $id;
@@ -36091,7 +36083,7 @@ let cgxgtbwa_AssetLoadImpl$4_handleEvent$exported$0 = (var$1, var$2) => {
     var$3 = var$1.$val$name;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(473)), var$3);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(471)), var$3);
     jl_AbstractStringBuilder_toString(var$4);
     var$5 = cgxgtbwdt_TypedArrays_toByteArray(new Int8Array(var$2.target.result));
     var$2 = cgxgtbwf_FileData__init_0(var$1.$val$name, var$5);
@@ -36481,7 +36473,7 @@ ju_LinkedHashSet__init_ = () => {
 },
 kc_CollectionsKt__IterablesKt = $rt_classWithoutFields(kc_CollectionsKt__CollectionsKt),
 kc_CollectionsKt__IterablesKt_collectionSizeOrDefault = ($$this$collectionSizeOrDefault, $default) => {
-    kji_Intrinsics_checkNotNullParameter($$this$collectionSizeOrDefault, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$collectionSizeOrDefault, $rt_s(839));
     if ($rt_isInstance($$this$collectionSizeOrDefault, ju_Collection))
         $default = $$this$collectionSizeOrDefault.$size();
     return $default;
@@ -36492,7 +36484,7 @@ kc_CollectionsKt__MutableCollectionsJVMKt = $rt_classWithoutFields(kc_Collection
 kc_CollectionsKt__MutableCollectionsKt = $rt_classWithoutFields(kc_CollectionsKt__MutableCollectionsJVMKt),
 kc_CollectionsKt__MutableCollectionsKt_addAll = ($$this$addAll, $elements) => {
     let $result, var$4, $item;
-    kji_Intrinsics_checkNotNullParameter($$this$addAll, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$addAll, $rt_s(839));
     kji_Intrinsics_checkNotNullParameter($elements, $rt_s(2273));
     if ($rt_isInstance($elements, ju_Collection)) {
         $elements = $elements;
@@ -36513,7 +36505,7 @@ kc_CollectionsKt___CollectionsJvmKt = $rt_classWithoutFields(kc_CollectionsKt__R
 kc_CollectionsKt___CollectionsKt = $rt_classWithoutFields(kc_CollectionsKt___CollectionsJvmKt),
 kc_CollectionsKt___CollectionsKt_first = $$this$first => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($$this$first, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$first, $rt_s(839));
     if (!ju_AbstractCollection_isEmpty($$this$first))
         return ju_ArrayList_get($$this$first, 0);
     var$2 = new ju_NoSuchElementException;
@@ -36521,7 +36513,7 @@ kc_CollectionsKt___CollectionsKt_first = $$this$first => {
     $rt_throw(var$2);
 },
 kc_CollectionsKt___CollectionsKt_firstOrNull = $$this$firstOrNull => {
-    kji_Intrinsics_checkNotNullParameter($$this$firstOrNull, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$firstOrNull, $rt_s(839));
     if ($rt_isInstance($$this$firstOrNull, ju_List)) {
         $$this$firstOrNull = $$this$firstOrNull;
         if ($$this$firstOrNull.$isEmpty())
@@ -36534,7 +36526,7 @@ kc_CollectionsKt___CollectionsKt_firstOrNull = $$this$firstOrNull => {
     return null;
 },
 kc_CollectionsKt___CollectionsKt_lastOrNull = $$this$lastOrNull => {
-    kji_Intrinsics_checkNotNullParameter($$this$lastOrNull, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$lastOrNull, $rt_s(839));
     if (ju_AbstractCollection_isEmpty($$this$lastOrNull))
         $$this$lastOrNull = null;
     else {
@@ -36544,7 +36536,7 @@ kc_CollectionsKt___CollectionsKt_lastOrNull = $$this$lastOrNull => {
     return $$this$lastOrNull;
 },
 kc_CollectionsKt___CollectionsKt_toCollection = ($$this$toCollection, $destination) => {
-    kji_Intrinsics_checkNotNullParameter($$this$toCollection, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$toCollection, $rt_s(839));
     kji_Intrinsics_checkNotNullParameter($destination, $rt_s(2309));
     $$this$toCollection = $$this$toCollection.$iterator0();
     while ($$this$toCollection.$hasNext()) {
@@ -36554,10 +36546,10 @@ kc_CollectionsKt___CollectionsKt_toCollection = ($$this$toCollection, $destinati
 },
 kc_CollectionsKt___CollectionsKt_toList = $$this$toList => {
     let var$2, var$3;
-    kji_Intrinsics_checkNotNullParameter($$this$toList, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$toList, $rt_s(839));
     var$2 = $rt_isInstance($$this$toList, ju_Collection);
     if (!var$2) {
-        kji_Intrinsics_checkNotNullParameter($$this$toList, $rt_s(841));
+        kji_Intrinsics_checkNotNullParameter($$this$toList, $rt_s(839));
         return kc_CollectionsKt__CollectionsKt_optimizeReadOnlyList(var$2 ? kc_CollectionsKt___CollectionsKt_toMutableList($$this$toList) : kc_CollectionsKt___CollectionsKt_toCollection($$this$toList, ju_ArrayList__init_()));
     }
     a: {
@@ -36578,7 +36570,7 @@ kc_CollectionsKt___CollectionsKt_toList = $$this$toList => {
 },
 kc_CollectionsKt___CollectionsKt_toMutableList = $$this$toMutableList => {
     let var$2, var$3, var$4, var$5;
-    kji_Intrinsics_checkNotNullParameter($$this$toMutableList, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$toMutableList, $rt_s(839));
     var$2 = ju_ArrayList__init_0($$this$toMutableList.$size());
     $$this$toMutableList = $$this$toMutableList.$iterator0();
     var$3 = 0;
@@ -36599,7 +36591,7 @@ kc_ArraysKt__ArraysKt = $rt_classWithoutFields(kc_ArraysKt__ArraysJVMKt),
 kc_ArraysKt___ArraysJvmKt = $rt_classWithoutFields(kc_ArraysKt__ArraysKt),
 kc_ArraysKt___ArraysJvmKt_asList = $$this$asList => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($$this$asList, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$asList, $rt_s(839));
     ju_Objects_requireNonNull($$this$asList);
     var$2 = new ju_Arrays$ArrayAsList;
     var$2.$array5 = $$this$asList;
@@ -36628,7 +36620,7 @@ cbgf_FileHandle_readBytes = $this => {
             return var$2;
         }
         try {
-            $rt_throw(cbgu_GdxRuntimeException__init_0(jl_StringBuilder_toString(jl_StringBuilder_append(jl_StringBuilder_append4(jl_StringBuilder__init_(), $rt_s(2311)), $this)), $ex));
+            $rt_throw(cbgu_GdxRuntimeException__init_1(jl_StringBuilder_toString(jl_StringBuilder_append(jl_StringBuilder_append4(jl_StringBuilder__init_(), $rt_s(2311)), $this)), $ex));
         } catch ($$e) {
             $$je = $rt_wrapException($$e);
             var$4 = $$je;
@@ -37344,17 +37336,17 @@ let cbggg_ImmediateModeRenderer20__init_ = ($this, $maxVertices, $hasNormals, $h
     $this.$numTexCoords = $numTexCoords;
     $this.$shader0 = $shader;
     $shader = cbgu_Array__init_();
-    cbgu_Array_add($shader, cbgg_VertexAttribute__init_(1, 3, $rt_s(778)));
+    cbgu_Array_add($shader, cbgg_VertexAttribute__init_(1, 3, $rt_s(776)));
     if ($hasNormals)
         cbgu_Array_add($shader, cbgg_VertexAttribute__init_(8, 3, $rt_s(2320)));
     if ($hasColors)
-        cbgu_Array_add($shader, cbgg_VertexAttribute__init_(4, 4, $rt_s(779)));
+        cbgu_Array_add($shader, cbgg_VertexAttribute__init_(4, 4, $rt_s(777)));
     $hasNormals = 0;
     while ($hasNormals < $numTexCoords) {
         var$6 = new cbgg_VertexAttribute;
         var$7 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$7);
-        jl_AbstractStringBuilder_append(var$7, $rt_s(800));
+        jl_AbstractStringBuilder_append(var$7, $rt_s(798));
         cbgg_VertexAttribute__init_0(var$6, 16, 2, jl_AbstractStringBuilder_toString(jl_StringBuilder_append0(var$7, $hasNormals)));
         cbgu_Array_add($shader, var$6);
         $hasNormals = $hasNormals + 1 | 0;
@@ -37426,7 +37418,7 @@ cbggg_ImmediateModeRenderer20_createFragmentShader = ($hasNormals, $hasColors, $
         var$5 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$5);
         jl_AbstractStringBuilder_append(var$5, $shader);
-        jl_AbstractStringBuilder_append(var$5, $rt_s(794));
+        jl_AbstractStringBuilder_append(var$5, $rt_s(792));
         $shader = jl_AbstractStringBuilder_toString(var$5);
     }
     $i = 0;
@@ -37434,16 +37426,16 @@ cbggg_ImmediateModeRenderer20_createFragmentShader = ($hasNormals, $hasColors, $
         var$5 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$5);
         jl_AbstractStringBuilder_append(var$5, $shader);
-        jl_AbstractStringBuilder_append(var$5, $rt_s(795));
+        jl_AbstractStringBuilder_append(var$5, $rt_s(793));
         $shader = jl_StringBuilder_append0(var$5, $i);
-        jl_AbstractStringBuilder_append($shader, $rt_s(792));
+        jl_AbstractStringBuilder_append($shader, $rt_s(790));
         var$5 = jl_AbstractStringBuilder_toString($shader);
         $shader = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($shader);
         jl_AbstractStringBuilder_append($shader, var$5);
         jl_AbstractStringBuilder_append($shader, $rt_s(2323));
         $shader = jl_StringBuilder_append0($shader, $i);
-        jl_AbstractStringBuilder_append($shader, $rt_s(792));
+        jl_AbstractStringBuilder_append($shader, $rt_s(790));
         $shader = jl_AbstractStringBuilder_toString($shader);
         $i = $i + 1 | 0;
     }
@@ -37517,9 +37509,9 @@ kc_MapsKt__MapsKt_mapOf = $pairs => {
         var$4 = var$4;
     } else {
         var$4 = ju_LinkedHashMap__init_0(kc_MapsKt__MapsJVMKt_mapCapacity(var$3));
-        kji_Intrinsics_checkNotNullParameter($pairs, $rt_s(841));
+        kji_Intrinsics_checkNotNullParameter($pairs, $rt_s(839));
         kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(2309));
-        kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(841));
+        kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(839));
         kji_Intrinsics_checkNotNullParameter($pairs, $rt_s(2332));
         var$5 = 0;
         while (var$5 < var$3) {
@@ -37534,7 +37526,7 @@ kc_MapsKt__MapsKt_mapOf = $pairs => {
 },
 kc_MapsKt__MapsKt_plus = ($$this$plus, $map) => {
     let var$3, var$4;
-    kji_Intrinsics_checkNotNullParameter($$this$plus, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$plus, $rt_s(839));
     kji_Intrinsics_checkNotNullParameter($map, $rt_s(2334));
     var$3 = new ju_LinkedHashMap;
     ju_HashMap__init_1(var$3);
@@ -40116,7 +40108,7 @@ cbgg_Pixmap$Format_toGdx2DPixmapFormat = $format => {
 },
 cbgg_Pixmap$Format__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbgg_Pixmap$Format_Alpha = cbgg_Pixmap$Format__init_($rt_s(513), 0);
+    cbgg_Pixmap$Format_Alpha = cbgg_Pixmap$Format__init_($rt_s(511), 0);
     cbgg_Pixmap$Format_Intensity = cbgg_Pixmap$Format__init_($rt_s(2374), 1);
     cbgg_Pixmap$Format_LuminanceAlpha = cbgg_Pixmap$Format__init_($rt_s(2375), 2);
     cbgg_Pixmap$Format_RGB565 = cbgg_Pixmap$Format__init_($rt_s(2376), 3);
@@ -40963,7 +40955,7 @@ let cgxgtbw_WebFileHandle__init_ = ($this, $teaFiles, $fileName, $type) => {
         jl_RuntimeException__init_($teaFiles, jl_AbstractStringBuilder_toString($type));
         $rt_throw($teaFiles);
     }
-    $fileName = jl_String_replace($fileName, $rt_s(292), $rt_s(18));
+    $fileName = jl_String_replace($fileName, $rt_s(290), $rt_s(18));
     if (jl_String_endsWith($fileName, $rt_s(18)))
         $fileName = jl_String_substring($fileName, 0, $fileName.$nativeString.length - 1 | 0);
     $this.$file = $fileName;
@@ -41009,6 +41001,76 @@ cgxgtbw_WebFileHandle_read = $this => {
     jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2384)), var$3), $rt_s(2385)), var$4), 41);
     jl_RuntimeException__init_($input, jl_AbstractStringBuilder_toString(var$5));
     $rt_throw($input);
+},
+cgxgtbw_WebFileHandle_write = ($this, $append, $bufferSize) => {
+    let var$3, var$4, var$5;
+    var$3 = cgxgtbw_WebFiles_getFileDB($this.$teaFiles, $this.$type0);
+    var$4 = ji_ByteArrayOutputStream__init_0(jl_Math_max0(512, jl_Math_min($bufferSize, 8192)));
+    var$5 = new cgxgtbwf_FileDB$1;
+    var$5.$this$027 = var$3;
+    var$5.$val$buffer = var$4;
+    var$5.$val$file = $this;
+    var$5.$val$append = $append;
+    var$5.$val$bufferSize = $bufferSize;
+    return var$5;
+},
+cgxgtbw_WebFileHandle_writeBytes = ($this, $bytes, $append) => {
+    let var$3, $ex, var$5, $output, var$7, var$8, $$je;
+    var$3 = $this.$type0;
+    cbg_Files$FileType_$callClinit();
+    if (var$3 === cbg_Files$FileType_Classpath) {
+        $ex = new cbgu_GdxRuntimeException;
+        var$3 = $this.$file;
+        var$5 = new jl_StringBuilder;
+        jl_AbstractStringBuilder__init_(var$5);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2386)), var$3);
+        jl_RuntimeException__init_($ex, jl_AbstractStringBuilder_toString(var$5));
+        $rt_throw($ex);
+    }
+    if (var$3 === cbg_Files$FileType_Internal) {
+        $ex = new cbgu_GdxRuntimeException;
+        var$3 = $this.$file;
+        var$5 = new jl_StringBuilder;
+        jl_AbstractStringBuilder__init_(var$5);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2387)), var$3);
+        jl_RuntimeException__init_($ex, jl_AbstractStringBuilder_toString(var$5));
+        $rt_throw($ex);
+    }
+    $output = cgxgtbw_WebFileHandle_write($this, $append, 4096);
+    a: {
+        b: {
+            try {
+                cgxgtbwf_FileDB$1_write($output, $bytes);
+            } catch ($$e) {
+                $$je = $rt_wrapException($$e);
+                if ($$je instanceof ji_IOException) {
+                    $ex = $$je;
+                    break b;
+                } else{
+                    $ex = $$je;
+                    break a;
+                }
+            }
+            cbgu_StreamUtils_closeQuietly($output);
+            return;
+        }
+        try {
+            var$3 = new cbgu_GdxRuntimeException;
+            var$5 = $this.$file;
+            var$7 = jl_String_valueOf($this.$type0);
+            var$8 = jl_StringBuilder__init_();
+            jl_StringBuilder_append3(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(2388)), var$5), $rt_s(2385)), var$7), 41);
+            cbgu_GdxRuntimeException__init_0(var$3, jl_StringBuilder_toString(var$8), $ex);
+            $rt_throw(var$3);
+        } catch ($$e) {
+            $$je = $rt_wrapException($$e);
+            $ex = $$je;
+            break a;
+
+        }
+    }
+    cbgu_StreamUtils_closeQuietly($output);
+    $rt_throw($ex);
 },
 cgxgtbw_WebFileHandle_child = ($this, $name) => {
     let var$2, var$3, var$4, var$5, var$6;
@@ -41087,11 +41149,11 @@ cbg_Files$FileType__init_ = (var_0, var_1) => {
 },
 cbg_Files$FileType__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbg_Files$FileType_Classpath = cbg_Files$FileType__init_($rt_s(2386), 0);
-    cbg_Files$FileType_Internal = cbg_Files$FileType__init_($rt_s(2387), 1);
-    cbg_Files$FileType_External = cbg_Files$FileType__init_($rt_s(2388), 2);
-    cbg_Files$FileType_Absolute = cbg_Files$FileType__init_($rt_s(2389), 3);
-    var$1 = cbg_Files$FileType__init_($rt_s(2390), 4);
+    cbg_Files$FileType_Classpath = cbg_Files$FileType__init_($rt_s(2389), 0);
+    cbg_Files$FileType_Internal = cbg_Files$FileType__init_($rt_s(2390), 1);
+    cbg_Files$FileType_External = cbg_Files$FileType__init_($rt_s(2391), 2);
+    cbg_Files$FileType_Absolute = cbg_Files$FileType__init_($rt_s(2392), 3);
+    var$1 = cbg_Files$FileType__init_($rt_s(2393), 4);
     cbg_Files$FileType_Local = var$1;
     var$2 = $rt_createArray(cbg_Files$FileType, 5);
     var$3 = var$2.data;
@@ -41116,13 +41178,13 @@ function cgxgtbw_WebPreferences() {
 }
 let cgxgtbw_WebPreferences_toObject = ($this, $key, $value) => {
     let var$3;
-    if (!jl_String_endsWith($key, $rt_s(2391))) {
-        if (jl_String_endsWith($key, $rt_s(2392))) {
+    if (!jl_String_endsWith($key, $rt_s(2394))) {
+        if (jl_String_endsWith($key, $rt_s(2395))) {
             jl_Integer_$callClinit();
             return jl_Integer_valueOf(jl_Integer_parseInt0($value, 10));
         }
-        if (!jl_String_endsWith($key, $rt_s(2393))) {
-            if (!jl_String_endsWith($key, $rt_s(2394)))
+        if (!jl_String_endsWith($key, $rt_s(2396))) {
+            if (!jl_String_endsWith($key, $rt_s(2397)))
                 return $value;
             jl_Float_$callClinit();
             return jl_Float_valueOf(jl_Float_parseFloat($value));
@@ -41233,7 +41295,7 @@ cgxgtbw_WebPreferences_flush = $this => {
         return;
     }
     $key = new cbgu_GdxRuntimeException;
-    jl_RuntimeException__init_($key, $rt_s(2395));
+    jl_RuntimeException__init_($key, $rt_s(2398));
     $rt_throw($key);
 },
 cgxgtbw_WebPreferences_putBoolean = ($this, $key, $val) => {
@@ -41252,7 +41314,7 @@ cgxgtbw_WebPreferences_getBoolean = ($this, $key, $defValue) => {
     let $res;
     $res = cbgu_ObjectMap_get($this.$values4, $key);
     if ($res !== null)
-        $defValue = $res.$value1;
+        $defValue = $res.$value0;
     return $defValue;
 },
 cgxgtbw_WebPreferences_getInteger = ($this, $key, $defValue) => {
@@ -41929,7 +41991,7 @@ jnci_UTF8Charset_$callClinit = () => {
 jnci_UTF8Charset_newDecoder = $this => {
     let var$1, var$2;
     var$1 = new jnci_UTF8Decoder;
-    var$1.$replacement = $rt_s(2396);
+    var$1.$replacement = $rt_s(2399);
     jnc_CodingErrorAction_$callClinit();
     var$2 = jnc_CodingErrorAction_REPORT;
     var$1.$malformedAction = var$2;
@@ -41962,7 +42024,7 @@ jnci_UTF8Charset_newEncoder = $this => {
         return var$1;
     }
     var$4 = new jl_IllegalArgumentException;
-    jl_RuntimeException__init_(var$4, $rt_s(2397));
+    jl_RuntimeException__init_(var$4, $rt_s(2400));
     $rt_throw(var$4);
 },
 jnci_UTF8Charset__clinit_ = () => {
@@ -41971,14 +42033,14 @@ jnci_UTF8Charset__clinit_ = () => {
     jnci_UTF8Charset_$callClinit();
     var$2 = $rt_createArray(jl_String, 0);
     var$3 = var$2.data;
-    jnc_Charset_checkCanonicalName($rt_s(2398));
+    jnc_Charset_checkCanonicalName($rt_s(2401));
     var$4 = var$3.length;
     var$5 = 0;
     while (var$5 < var$4) {
         jnc_Charset_checkCanonicalName(var$3[var$5]);
         var$5 = var$5 + 1 | 0;
     }
-    var$1.$canonicalName = $rt_s(2398);
+    var$1.$canonicalName = $rt_s(2401);
     var$1.$aliases = var$2.$clone0();
     jnci_UTF8Charset_INSTANCE = var$1;
 },
@@ -42195,7 +42257,7 @@ jn_DoubleBuffer_put = ($this, $src) => {
 };
 function jl_Boolean() {
     jl_Object.call(this);
-    this.$value1 = 0;
+    this.$value0 = 0;
 }
 let jl_Boolean_TRUE = null,
 jl_Boolean_FALSE = null,
@@ -42206,7 +42268,7 @@ jl_Boolean_$callClinit = () => {
 },
 jl_Boolean__init_0 = ($this, $value) => {
     jl_Boolean_$callClinit();
-    $this.$value1 = $value;
+    $this.$value0 = $value;
 },
 jl_Boolean__init_ = var_0 => {
     let var_1 = new jl_Boolean();
@@ -42219,12 +42281,12 @@ jl_Boolean_valueOf = $value => {
 },
 jl_Boolean_toString = $this => {
     let var$1;
-    var$1 = $this.$value1;
+    var$1 = $this.$value0;
     jl_Boolean_$callClinit();
     return !var$1 ? $rt_s(119) : $rt_s(120);
 },
 jl_Boolean_hashCode0 = $this => {
-    return jl_Boolean_hashCode($this.$value1);
+    return jl_Boolean_hashCode($this.$value0);
 },
 jl_Boolean_hashCode = $value => {
     jl_Boolean_$callClinit();
@@ -42233,13 +42295,13 @@ jl_Boolean_hashCode = $value => {
 jl_Boolean_equals = ($this, $obj) => {
     if ($this === $obj)
         return 1;
-    return $obj instanceof jl_Boolean && $obj.$value1 == $this.$value1 ? 1 : 0;
+    return $obj instanceof jl_Boolean && $obj.$value0 == $this.$value0 ? 1 : 0;
 },
 jl_Boolean_compareTo = ($this, var$1) => {
     let var$2, var$3;
     var$1 = var$1;
-    var$2 = $this.$value1;
-    var$3 = var$1.$value1;
+    var$2 = $this.$value0;
+    var$3 = var$1.$value0;
     jl_Boolean_$callClinit();
     return var$2 == var$3 ? 0 : !var$2 ? (-1) : 1;
 },
@@ -42269,9 +42331,9 @@ jnc_CodingErrorAction__init_ = var_0 => {
     return var_1;
 },
 jnc_CodingErrorAction__clinit_ = () => {
-    jnc_CodingErrorAction_IGNORE = jnc_CodingErrorAction__init_($rt_s(2399));
-    jnc_CodingErrorAction_REPLACE = jnc_CodingErrorAction__init_($rt_s(2400));
-    jnc_CodingErrorAction_REPORT = jnc_CodingErrorAction__init_($rt_s(2401));
+    jnc_CodingErrorAction_IGNORE = jnc_CodingErrorAction__init_($rt_s(2402));
+    jnc_CodingErrorAction_REPLACE = jnc_CodingErrorAction__init_($rt_s(2403));
+    jnc_CodingErrorAction_REPORT = jnc_CodingErrorAction__init_($rt_s(2404));
 };
 function jnc_CharsetDecoder() {
     let a = this; jl_Object.call(a);
@@ -42290,7 +42352,7 @@ let jnc_CharsetDecoder_onMalformedInput = ($this, $newAction) => {
         return $this;
     }
     var$2 = new jl_IllegalArgumentException;
-    jl_RuntimeException__init_(var$2, $rt_s(2402));
+    jl_RuntimeException__init_(var$2, $rt_s(2405));
     $rt_throw(var$2);
 },
 jnc_CharsetDecoder_onUnmappableCharacter = ($this, $newAction) => {
@@ -42300,7 +42362,7 @@ jnc_CharsetDecoder_onUnmappableCharacter = ($this, $newAction) => {
         return $this;
     }
     var$2 = new jl_IllegalArgumentException;
-    jl_RuntimeException__init_(var$2, $rt_s(2402));
+    jl_RuntimeException__init_(var$2, $rt_s(2405));
     $rt_throw(var$2);
 },
 jnc_CharsetDecoder_decode = ($this, $in, $out, $endOfInput) => {
@@ -42439,8 +42501,8 @@ cbgg_TextureData$TextureDataType__init_ = (var_0, var_1) => {
 },
 cbgg_TextureData$TextureDataType__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbgg_TextureData$TextureDataType_Pixmap = cbgg_TextureData$TextureDataType__init_($rt_s(2403), 0);
-    var$1 = cbgg_TextureData$TextureDataType__init_($rt_s(2404), 1);
+    cbgg_TextureData$TextureDataType_Pixmap = cbgg_TextureData$TextureDataType__init_($rt_s(2406), 0);
+    var$1 = cbgg_TextureData$TextureDataType__init_($rt_s(2407), 1);
     cbgg_TextureData$TextureDataType_Custom = var$1;
     var$2 = $rt_createArray(cbgg_TextureData$TextureDataType, 2);
     var$3 = var$2.data;
@@ -42460,7 +42522,7 @@ cbggg_MipMapGenerator_generateMipMapCPU = ($target, $pixmap, $textureWidth, $tex
     cbg_Gdx_gl.$glTexImage2D($target, 0, cbgg_Pixmap_getGLInternalFormat($pixmap), cbgg_Pixmap_getWidth($pixmap), cbgg_Pixmap_getHeight($pixmap), 0, cbgg_Pixmap_getGLFormat($pixmap), cbgg_Pixmap_getGLType($pixmap), cbgg_Pixmap_getPixels($pixmap));
     if (cbg_Gdx_gl20 === null && $textureWidth != $textureHeight) {
         $pixmap = new cbgu_GdxRuntimeException;
-        jl_RuntimeException__init_($pixmap, $rt_s(2405));
+        jl_RuntimeException__init_($pixmap, $rt_s(2408));
         $rt_throw($pixmap);
     }
     $width = cbgg_Pixmap_getWidth($pixmap) / 2 | 0;
@@ -42895,7 +42957,7 @@ let jnc_MalformedInputException_getMessage = $this => {
     var$1 = $this.$length5;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(2406)), var$1);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(2409)), var$1);
     return jl_AbstractStringBuilder_toString(var$2);
 };
 function jnc_UnmappableCharacterException() {
@@ -42907,7 +42969,7 @@ let jnc_UnmappableCharacterException_getMessage = $this => {
     var$1 = $this.$length6;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(2407)), var$1);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(2410)), var$1);
     return jl_AbstractStringBuilder_toString(var$2);
 };
 function ju_LinkedHashMapValues() {
@@ -42955,7 +43017,7 @@ let cvs_MainMenuScreen$show$2_touchDown = ($this, $screenX, $screenY, $pointer, 
     $screenX = $p.$pressedId;
     if ($screenX >= 0) {
         $p.$pressVelocity.data[$screenX] = (-115.0);
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(770), 0.44999998807907104, 1.159999966621399);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.44999998807907104, 1.159999966621399);
         if (cvs_SaveManager_getVibration(cvs_SkyVanguardGame_getSaveManager($this.$this$02.$game)))
             cgxgtbw_WebInput_vibrate(cbg_Gdx_input, 28);
     }
@@ -42989,7 +43051,7 @@ cvs_MainMenuScreen$show$2_touchUp = ($this, $screenX, $screenY, $pointer, $butto
         $p.$transitionTimer = 0.12999999523162842;
         $p.$pressVelocity.data[$id] = 245.0;
         cvs_MainMenuScreen_spawnClickSparks($p, $p.$buttons.$get($id));
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$this$02.$game), $rt_s(770), 0.800000011920929, 0.9200000166893005);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$this$02.$game), $rt_s(768), 0.800000011920929, 0.9200000166893005);
         if (cvs_SaveManager_getVibration(cvs_SkyVanguardGame_getSaveManager($this.$this$02.$game)))
             cgxgtbw_WebInput_vibrate(cbg_Gdx_input, 45);
         return 1;
@@ -43000,7 +43062,7 @@ k_Function = $rt_classWithoutFields(0),
 kjf_Function1 = $rt_classWithoutFields(0);
 function cvs_MainMenuScreen$show$lambda$_1_0() {
     jl_Object.call(this);
-    this.$_05 = null;
+    this.$_06 = null;
 }
 function cgxgtbwa_AssetType() {
     jl_Enum.call(this);
@@ -43025,8 +43087,8 @@ cgxgtbwa_AssetType__init_ = (var_0, var_1, var_2) => {
 },
 cgxgtbwa_AssetType__clinit_ = () => {
     let var$1, var$2, var$3;
-    cgxgtbwa_AssetType_Binary = cgxgtbwa_AssetType__init_($rt_s(2408), 0, $rt_s(2391));
-    var$1 = cgxgtbwa_AssetType__init_($rt_s(2409), 1, $rt_s(542));
+    cgxgtbwa_AssetType_Binary = cgxgtbwa_AssetType__init_($rt_s(2411), 0, $rt_s(2394));
+    var$1 = cgxgtbwa_AssetType__init_($rt_s(2412), 1, $rt_s(540));
     cgxgtbwa_AssetType_Directory = var$1;
     var$2 = $rt_createArray(cgxgtbwa_AssetType, 2);
     var$3 = var$2.data;
@@ -43048,9 +43110,9 @@ cvs_MenuScreensKt_$callClinit = () => {
 cvs_MenuScreensKt_drawVideoBackdrop = ($$this$drawVideoBackdrop, $time, $accent, $accent2) => {
     let $shapes, $i, $blink, $y, $k, $bx, $gx, $gy, var$13, $magenta, $speed, $px, $py, $pulse, $c, $r, $scanY;
     cvs_MenuScreensKt_$callClinit();
-    kji_Intrinsics_checkNotNullParameter($$this$drawVideoBackdrop, $rt_s(841));
-    kji_Intrinsics_checkNotNullParameter($accent, $rt_s(2410));
-    kji_Intrinsics_checkNotNullParameter($accent2, $rt_s(2411));
+    kji_Intrinsics_checkNotNullParameter($$this$drawVideoBackdrop, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($accent, $rt_s(2413));
+    kji_Intrinsics_checkNotNullParameter($accent2, $rt_s(2414));
     $shapes = cvs_SkyVanguardGame_getShapes(cvs_BaseScreen_getGame($$this$drawVideoBackdrop));
     cvs_BaseScreenKt_beginBlended$default($shapes, null, 1, null);
     $i = 0;
@@ -43148,8 +43210,8 @@ cvs_MenuScreensKt_drawVideoBackdrop$default = (var$1, var$2, var$3, var$4, var$5
 cvs_MenuScreensKt_drawPilotAircraft = ($$this$drawPilotAircraft, $x, $y, $scale, $aircraft, $damageFlash, $recoil) => {
     let $t, $shiftedY, $size, $tint, $shapes, var$13, $nozzleOffset, $flameTop, var$16, var$17, var$18, var$19, var$20, $nx, $flicker, $len;
     cvs_MenuScreensKt_$callClinit();
-    kji_Intrinsics_checkNotNullParameter($$this$drawPilotAircraft, $rt_s(841));
-    kji_Intrinsics_checkNotNullParameter($aircraft, $rt_s(2412));
+    kji_Intrinsics_checkNotNullParameter($$this$drawPilotAircraft, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($aircraft, $rt_s(2415));
     $t = cvs_MenuScreensKt_shipFlamePhase + cbg_Gdx_graphics.$deltaTime;
     cvs_MenuScreensKt_shipFlamePhase = $t;
     $shiftedY = $y - $recoil * 16.0;
@@ -43305,7 +43367,7 @@ let cvs_MainMenuScreen$ClickSpark_toString = $this => {
     var$6 = $this.$magenta0;
     var$7 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$7);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(var$7, $rt_s(2413)), var$1), $rt_s(2414)), var$2), $rt_s(2415)), var$3), $rt_s(2416)), var$4), $rt_s(2417)), var$5), $rt_s(2281)), var$6), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(var$7, $rt_s(2416)), var$1), $rt_s(2417)), var$2), $rt_s(2418)), var$3), $rt_s(2419)), var$4), $rt_s(2420)), var$5), $rt_s(2281)), var$6), 41);
     return jl_AbstractStringBuilder_toString(var$7);
 },
 cvs_MainMenuScreen$ClickSpark_hashCode = $this => {
@@ -43353,11 +43415,11 @@ cvs_AircraftCatalog__clinit_ = () => {
     var$3 = var$2.data;
     var$1 = new cvs_AircraftDefinition;
     cvs_WeaponStyle_$callClinit();
-    cvs_AircraftDefinition__init_0(var$1, 0, $rt_s(2418), $rt_s(2419), $rt_s(2420), cvs_WeaponStyle_RAPID, $rt_s(2421), $rt_s(2422), $rt_s(2423), 76, 92, 62, 94, cbgg_Color__init_(0.07999999821186066, 0.7200000286102295, 0.36000001430511475, 1.0), cbgg_Color__init_(1.0, 0.8600000143051147, 0.11999999731779099, 1.0));
+    cvs_AircraftDefinition__init_0(var$1, 0, $rt_s(2421), $rt_s(2422), $rt_s(2423), cvs_WeaponStyle_RAPID, $rt_s(2424), $rt_s(2425), $rt_s(2426), 76, 92, 62, 94, cbgg_Color__init_(0.07999999821186066, 0.7200000286102295, 0.36000001430511475, 1.0), cbgg_Color__init_(1.0, 0.8600000143051147, 0.11999999731779099, 1.0));
     var$3[0] = var$1;
-    var$3[1] = cvs_AircraftDefinition__init_(1, $rt_s(2424), $rt_s(2425), $rt_s(2426), cvs_WeaponStyle_HEAVY, $rt_s(2427), $rt_s(2428), $rt_s(2429), 96, 62, 96, 68, cbgg_Color__init_(0.6200000047683716, 0.11999999731779099, 0.1599999964237213, 1.0), cbgg_Color__init_(0.8999999761581421, 0.9200000166893005, 1.0, 1.0));
-    var$3[2] = cvs_AircraftDefinition__init_(2, $rt_s(2430), $rt_s(2431), $rt_s(2432), cvs_WeaponStyle_GATLING, $rt_s(2433), $rt_s(2434), $rt_s(2435), 86, 82, 78, 84, cbgg_Color__init_(0.10000000149011612, 0.30000001192092896, 0.7400000095367432, 1.0), cbgg_Color__init_(0.949999988079071, 0.25, 0.20000000298023224, 1.0));
-    var$3[3] = cvs_AircraftDefinition__init_(3, $rt_s(2436), $rt_s(2437), $rt_s(2438), cvs_WeaponStyle_LASER, $rt_s(2439), $rt_s(2440), $rt_s(2441), 84, 98, 58, 98, cbgg_Color__init_(0.699999988079071, 0.07999999821186066, 0.2199999988079071, 1.0), cbgg_Color__init_(0.11999999731779099, 0.8999999761581421, 1.0, 1.0));
+    var$3[1] = cvs_AircraftDefinition__init_(1, $rt_s(2427), $rt_s(2428), $rt_s(2429), cvs_WeaponStyle_HEAVY, $rt_s(2430), $rt_s(2431), $rt_s(2432), 96, 62, 96, 68, cbgg_Color__init_(0.6200000047683716, 0.11999999731779099, 0.1599999964237213, 1.0), cbgg_Color__init_(0.8999999761581421, 0.9200000166893005, 1.0, 1.0));
+    var$3[2] = cvs_AircraftDefinition__init_(2, $rt_s(2433), $rt_s(2434), $rt_s(2435), cvs_WeaponStyle_GATLING, $rt_s(2436), $rt_s(2437), $rt_s(2438), 86, 82, 78, 84, cbgg_Color__init_(0.10000000149011612, 0.30000001192092896, 0.7400000095367432, 1.0), cbgg_Color__init_(0.949999988079071, 0.25, 0.20000000298023224, 1.0));
+    var$3[3] = cvs_AircraftDefinition__init_(3, $rt_s(2439), $rt_s(2440), $rt_s(2441), cvs_WeaponStyle_LASER, $rt_s(2442), $rt_s(2443), $rt_s(2444), 84, 98, 58, 98, cbgg_Color__init_(0.699999988079071, 0.07999999821186066, 0.2199999988079071, 1.0), cbgg_Color__init_(0.11999999731779099, 0.8999999761581421, 1.0, 1.0));
     cvs_AircraftCatalog_aircraft = kc_CollectionsKt__CollectionsKt_listOf(var$2);
 },
 cvs_BaseScreenKt = $rt_classWithoutFields(),
@@ -43387,8 +43449,8 @@ cvs_BaseScreenKt_getPANEL_FILL_MAGENTA = () => {
 },
 cvs_BaseScreenKt_beginBlended = ($$this$beginBlended, $type) => {
     cvs_BaseScreenKt_$callClinit();
-    kji_Intrinsics_checkNotNullParameter($$this$beginBlended, $rt_s(841));
-    kji_Intrinsics_checkNotNullParameter($type, $rt_s(756));
+    kji_Intrinsics_checkNotNullParameter($$this$beginBlended, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($type, $rt_s(754));
     cbg_Gdx_gl.$glEnable(3042);
     cbg_Gdx_gl.$glBlendFunc(770, 771);
     cbggg_ShapeRenderer_begin($$this$beginBlended, $type);
@@ -43404,7 +43466,7 @@ cvs_BaseScreenKt_beginBlended$default = (var$1, var$2, var$3, var$4) => {
 cvs_BaseScreenKt_roundRectFilled = ($$this$roundRectFilled, $x, $y, $w, $h, $r) => {
     let $rr, var$8, var$9;
     cvs_BaseScreenKt_$callClinit();
-    kji_Intrinsics_checkNotNullParameter($$this$roundRectFilled, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$roundRectFilled, $rt_s(839));
     $rr = kr_RangesKt___RangesKt_coerceAtLeast(jl_Math_min0($r, jl_Math_min0($w / 2.0, $h / 2.0)), 0.5);
     var$8 = $x + $rr;
     $r = 2.0 * $rr;
@@ -43423,10 +43485,10 @@ cvs_BaseScreenKt_roundRectFilled = ($$this$roundRectFilled, $x, $y, $w, $h, $r) 
 cvs_BaseScreenKt_neonPanel = ($$this$neonPanel, $rect, $accent, $fill, $radius, $border, $k, $glowAlpha, $pulse) => {
     let $shapes, var$11, var$12, $e, var$14, var$15, var$16;
     cvs_BaseScreenKt_$callClinit();
-    kji_Intrinsics_checkNotNullParameter($$this$neonPanel, $rt_s(841));
-    kji_Intrinsics_checkNotNullParameter($rect, $rt_s(825));
-    kji_Intrinsics_checkNotNullParameter($accent, $rt_s(2410));
-    kji_Intrinsics_checkNotNullParameter($fill, $rt_s(2442));
+    kji_Intrinsics_checkNotNullParameter($$this$neonPanel, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($rect, $rt_s(823));
+    kji_Intrinsics_checkNotNullParameter($accent, $rt_s(2413));
+    kji_Intrinsics_checkNotNullParameter($fill, $rt_s(2445));
     $shapes = cvs_SkyVanguardGame_getShapes($$this$neonPanel.$game);
     cvs_BaseScreenKt_beginBlended$default($shapes, null, 1, null);
     var$11 = $glowAlpha * $pulse;
@@ -43471,9 +43533,9 @@ cvs_BaseScreenKt_neonPanel$default = (var$1, var$2, var$3, var$4, var$5, var$6, 
 cvs_BaseScreenKt_panelTicks = ($$this$panelTicks, $rect, $accent, $alpha) => {
     let $shapes;
     cvs_BaseScreenKt_$callClinit();
-    kji_Intrinsics_checkNotNullParameter($$this$panelTicks, $rt_s(841));
-    kji_Intrinsics_checkNotNullParameter($rect, $rt_s(825));
-    kji_Intrinsics_checkNotNullParameter($accent, $rt_s(2410));
+    kji_Intrinsics_checkNotNullParameter($$this$panelTicks, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($rect, $rt_s(823));
+    kji_Intrinsics_checkNotNullParameter($accent, $rt_s(2413));
     $shapes = cvs_SkyVanguardGame_getShapes($$this$panelTicks.$game);
     cvs_BaseScreenKt_beginBlended$default($shapes, null, 1, null);
     cbggg_ShapeRenderer_setColor($shapes, cbgg_Color__init_($accent.$r, $accent.$g, $accent.$b, $alpha));
@@ -43512,9 +43574,9 @@ cbggg_ShapeRenderer$ShapeType__init_ = (var_0, var_1, var_2) => {
 },
 cbggg_ShapeRenderer$ShapeType__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbggg_ShapeRenderer$ShapeType_Point = cbggg_ShapeRenderer$ShapeType__init_($rt_s(2443), 0, 0);
-    cbggg_ShapeRenderer$ShapeType_Line = cbggg_ShapeRenderer$ShapeType__init_($rt_s(2444), 1, 1);
-    var$1 = cbggg_ShapeRenderer$ShapeType__init_($rt_s(2445), 2, 4);
+    cbggg_ShapeRenderer$ShapeType_Point = cbggg_ShapeRenderer$ShapeType__init_($rt_s(2446), 0, 0);
+    cbggg_ShapeRenderer$ShapeType_Line = cbggg_ShapeRenderer$ShapeType__init_($rt_s(2447), 1, 1);
+    var$1 = cbggg_ShapeRenderer$ShapeType__init_($rt_s(2448), 2, 4);
     cbggg_ShapeRenderer$ShapeType_Filled = var$1;
     var$2 = $rt_createArray(cbggg_ShapeRenderer$ShapeType, 3);
     var$3 = var$2.data;
@@ -43534,14 +43596,14 @@ kt_StringsKt__StringsJVMKt = $rt_classWithoutFields(kt_StringsKt__StringNumberCo
 kt_StringsKt__StringsJVMKt_startsWith$default = (var$1, var$2, var$3, var$4, var$5) => {
     if (var$4 & 2)
         var$3 = 0;
-    kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(839));
     kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(873));
     return !var$3 ? jl_String_startsWith(var$1, var$2) : kt_StringsKt__StringsJVMKt_regionMatches(var$1, 0, var$2, 0, var$2.$nativeString.length, var$3);
 },
 kt_StringsKt__StringsJVMKt_regionMatches = ($$this$regionMatches, $thisOffset, $other, $otherOffset, $length, $ignoreCase) => {
     let var$7, var$8;
-    kji_Intrinsics_checkNotNullParameter($$this$regionMatches, $rt_s(841));
-    kji_Intrinsics_checkNotNullParameter($other, $rt_s(2446));
+    kji_Intrinsics_checkNotNullParameter($$this$regionMatches, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($other, $rt_s(2449));
     if ($ignoreCase)
         $thisOffset = jl_String_regionMatches($$this$regionMatches, $ignoreCase, $thisOffset, $other, $otherOffset, $length);
     else
@@ -43569,7 +43631,7 @@ kt_StringsKt__StringsJVMKt_regionMatches = ($$this$regionMatches, $thisOffset, $
 kt_StringsKt__StringsKt = $rt_classWithoutFields(kt_StringsKt__StringsJVMKt),
 kt_StringsKt__StringsKt_trim = $$this$trim => {
     let $startIndex$iv, $endIndex$iv, $startFound$iv, $index$iv, $match$iv;
-    kji_Intrinsics_checkNotNullParameter($$this$trim, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$trim, $rt_s(839));
     $startIndex$iv = 0;
     $$this$trim = $$this$trim;
     $endIndex$iv = $$this$trim.$nativeString.length - 1 | 0;
@@ -43597,16 +43659,16 @@ kt_StringsKt__StringsKt_trim = $$this$trim => {
 },
 kt_StringsKt__StringsKt_padStart = ($$this$padStart, $length, $padChar) => {
     let var$4, var$5, var$6;
-    kji_Intrinsics_checkNotNullParameter($$this$padStart, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$padStart, $rt_s(839));
     $$this$padStart = $$this$padStart;
-    kji_Intrinsics_checkNotNullParameter($$this$padStart, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$padStart, $rt_s(839));
     if ($length < 0) {
         $$this$padStart = new jl_IllegalArgumentException;
         var$4 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$4);
-        jl_AbstractStringBuilder_append(var$4, $rt_s(2447));
+        jl_AbstractStringBuilder_append(var$4, $rt_s(2450));
         var$4 = jl_StringBuilder_append0(var$4, $length);
-        jl_AbstractStringBuilder_append(var$4, $rt_s(2448));
+        jl_AbstractStringBuilder_append(var$4, $rt_s(2451));
         jl_RuntimeException__init_($$this$padStart, jl_AbstractStringBuilder_toString(var$4));
         $rt_throw($$this$padStart);
     }
@@ -43634,7 +43696,7 @@ kt_StringsKt__StringsKt_padStart = ($$this$padStart, $length, $padChar) => {
 },
 kt_StringsKt__StringsKt_isBlank = $$this$isBlank => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($$this$isBlank, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$isBlank, $rt_s(839));
     var$2 = 0;
     $$this$isBlank = $$this$isBlank;
     a: {
@@ -43650,13 +43712,13 @@ kt_StringsKt__StringsKt_isBlank = $$this$isBlank => {
     return var$2;
 },
 kt_StringsKt__StringsKt_getLastIndex = $$this$lastIndex => {
-    kji_Intrinsics_checkNotNullParameter($$this$lastIndex, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$lastIndex, $rt_s(839));
     return $$this$lastIndex.$nativeString.length - 1 | 0;
 },
 kt_StringsKt__StringsKt_regionMatchesImpl = ($$this$regionMatchesImpl, $thisOffset, $other, $otherOffset, $length, $ignoreCase) => {
-    let $index, var$8, var$9, var$10;
-    kji_Intrinsics_checkNotNullParameter($$this$regionMatchesImpl, $rt_s(841));
-    kji_Intrinsics_checkNotNullParameter($other, $rt_s(2446));
+    let $index;
+    kji_Intrinsics_checkNotNullParameter($$this$regionMatchesImpl, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($other, $rt_s(2449));
     if ($otherOffset >= 0 && $thisOffset >= 0) {
         $$this$regionMatchesImpl = $$this$regionMatchesImpl;
         if ($thisOffset <= ($$this$regionMatchesImpl.$nativeString.length - $length | 0)) {
@@ -43664,18 +43726,7 @@ kt_StringsKt__StringsKt_regionMatchesImpl = ($$this$regionMatchesImpl, $thisOffs
             if ($otherOffset <= ($other.$nativeString.length - $length | 0)) {
                 $index = 0;
                 while ($index < $length) {
-                    var$8 = jl_String_charAt($$this$regionMatchesImpl, $thisOffset + $index | 0);
-                    var$9 = jl_String_charAt($other, $otherOffset + $index | 0);
-                    if (var$8 == var$9)
-                        var$8 = 1;
-                    else if (!$ignoreCase)
-                        var$8 = 0;
-                    else {
-                        var$10 = jl_Character_toUpperCase(var$8);
-                        var$9 = jl_Character_toUpperCase(var$9);
-                        var$8 = var$10 != var$9 && jl_Character_toLowerCase(var$10) != jl_Character_toLowerCase(var$9) ? 0 : 1;
-                    }
-                    if (!var$8)
+                    if (!kt_CharsKt__CharKt_equals(jl_String_charAt($$this$regionMatchesImpl, $thisOffset + $index | 0), jl_String_charAt($other, $otherOffset + $index | 0), $ignoreCase))
                         return 0;
                     $index = $index + 1 | 0;
                 }
@@ -43732,10 +43783,10 @@ kt_StringsKt__StringsKt_findAnyOf$StringsKt__StringsKt = ($$this$findAnyOf, $str
     if (!$ignoreCase && ju_Arrays$ArrayAsList_size($strings) == 1) {
         a: {
             $string = $strings;
-            kji_Intrinsics_checkNotNullParameter($string, $rt_s(841));
+            kji_Intrinsics_checkNotNullParameter($string, $rt_s(839));
             if ($rt_isInstance($string, ju_List)) {
                 $strings = $string;
-                kji_Intrinsics_checkNotNullParameter($strings, $rt_s(841));
+                kji_Intrinsics_checkNotNullParameter($strings, $rt_s(839));
                 $strings = $strings;
                 switch (ju_Arrays$ArrayAsList_size($strings)) {
                     case 0:
@@ -43745,7 +43796,7 @@ kt_StringsKt__StringsKt_findAnyOf$StringsKt__StringsKt = ($$this$findAnyOf, $str
                         break a;
                     default:
                         $$this$findAnyOf = new jl_IllegalArgumentException;
-                        jl_RuntimeException__init_($$this$findAnyOf, $rt_s(2449));
+                        jl_RuntimeException__init_($$this$findAnyOf, $rt_s(2452));
                         $rt_throw($$this$findAnyOf);
                 }
                 $strings = new ju_NoSuchElementException;
@@ -43755,13 +43806,13 @@ kt_StringsKt__StringsKt_findAnyOf$StringsKt__StringsKt = ($$this$findAnyOf, $str
             $string = ju_AbstractList_iterator($string);
             if (!ju_AbstractList$1_hasNext($string)) {
                 $$this$findAnyOf = new ju_NoSuchElementException;
-                jl_RuntimeException__init_($$this$findAnyOf, $rt_s(2450));
+                jl_RuntimeException__init_($$this$findAnyOf, $rt_s(2453));
                 $rt_throw($$this$findAnyOf);
             }
             $strings = ju_AbstractList$1_next($string);
             if (ju_AbstractList$1_hasNext($string)) {
                 $strings = new jl_IllegalArgumentException;
-                jl_RuntimeException__init_($strings, $rt_s(2451));
+                jl_RuntimeException__init_($strings, $rt_s(2454));
                 $rt_throw($strings);
             }
         }
@@ -43769,8 +43820,8 @@ kt_StringsKt__StringsKt_findAnyOf$StringsKt__StringsKt = ($$this$findAnyOf, $str
         if (!$last)
             $index = kt_StringsKt__StringsKt_indexOf($$this$findAnyOf, $string, $startIndex, 0);
         else {
-            kji_Intrinsics_checkNotNullParameter($$this$findAnyOf, $rt_s(841));
-            kji_Intrinsics_checkNotNullParameter($string, $rt_s(222));
+            kji_Intrinsics_checkNotNullParameter($$this$findAnyOf, $rt_s(839));
+            kji_Intrinsics_checkNotNullParameter($string, $rt_s(220));
             $index = $$this$findAnyOf instanceof jl_String ? jl_String_lastIndexOf1($$this$findAnyOf, $string, $startIndex) : kt_StringsKt__StringsKt_indexOf$StringsKt__StringsKt($$this$findAnyOf, $string, $startIndex, 0, 0, 1);
         }
         return $index < 0 ? null : k_TuplesKt_to(jl_Integer_valueOf($index), $string);
@@ -43849,9 +43900,78 @@ kt_StringsKt__StringsKt_findAnyOf$StringsKt__StringsKt = ($$this$findAnyOf, $str
     }
     return null;
 },
+kt_StringsKt__StringsKt_indexOf$default = (var$1, var$2, var$3, var$4, var$5, var$6) => {
+    let var$7, var$8, var$9, var$10;
+    if (var$5 & 2)
+        var$3 = 0;
+    if (var$5 & 4)
+        var$4 = 0;
+    kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(839));
+    if (!var$4 && var$1 instanceof jl_String)
+        var$3 = jl_String_indexOf(var$1, var$2, var$3);
+    else
+        a: {
+            var$7 = $rt_createCharArray(1);
+            var$8 = var$7.data;
+            var$8[0] = var$2;
+            kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(839));
+            kji_Intrinsics_checkNotNullParameter(var$7, $rt_s(2455));
+            if (!var$4) {
+                var$2 = var$8.length;
+                if (var$2 == 1 && var$1 instanceof jl_String) {
+                    kji_Intrinsics_checkNotNullParameter(var$7, $rt_s(839));
+                    switch (var$2) {
+                        case 0:
+                            break;
+                        case 1:
+                            var$2 = var$8[0];
+                            var$3 = jl_String_indexOf(var$1, var$2, var$3);
+                            break a;
+                        default:
+                            var$1 = new jl_IllegalArgumentException;
+                            jl_RuntimeException__init_(var$1, $rt_s(2456));
+                            $rt_throw(var$1);
+                    }
+                    var$6 = new ju_NoSuchElementException;
+                    jl_RuntimeException__init_(var$6, $rt_s(100));
+                    $rt_throw(var$6);
+                }
+            }
+            b: {
+                var$3 = kr_RangesKt___RangesKt_coerceAtLeast0(var$3, 0);
+                var$5 = kt_StringsKt__StringsKt_getLastIndex(var$1);
+                if (var$3 <= var$5) {
+                    var$1 = var$1;
+                    var$9 = var$8.length;
+                    while (true) {
+                        var$2 = jl_String_charAt(var$1, var$3);
+                        var$10 = 0;
+                        c: {
+                            while (var$10 < var$9) {
+                                if (kt_CharsKt__CharKt_equals(var$8[var$10], var$2, var$4)) {
+                                    var$2 = 1;
+                                    break c;
+                                }
+                                var$10 = var$10 + 1 | 0;
+                            }
+                            var$2 = 0;
+                        }
+                        if (var$2)
+                            break;
+                        if (var$3 == var$5)
+                            break b;
+                        var$3 = var$3 + 1 | 0;
+                    }
+                    break a;
+                }
+            }
+            var$3 = (-1);
+        }
+    return var$3;
+},
 kt_StringsKt__StringsKt_indexOf = ($$this$indexOf, $string, $startIndex, $ignoreCase) => {
-    kji_Intrinsics_checkNotNullParameter($$this$indexOf, $rt_s(841));
-    kji_Intrinsics_checkNotNullParameter($string, $rt_s(222));
+    kji_Intrinsics_checkNotNullParameter($$this$indexOf, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($string, $rt_s(220));
     return !$ignoreCase && $$this$indexOf instanceof jl_String ? jl_String_indexOf1($$this$indexOf, $string, $startIndex) : kt_StringsKt__StringsKt_indexOf$StringsKt__StringsKt($$this$indexOf, $string, $startIndex, $$this$indexOf.$nativeString.length, $ignoreCase, 0);
 },
 kt_StringsKt__StringsKt_requireNonNegativeLimit = $limit => {
@@ -43860,7 +43980,7 @@ kt_StringsKt__StringsKt_requireNonNegativeLimit = $limit => {
         return;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_AbstractStringBuilder_append(var$2, $rt_s(2452));
+    jl_AbstractStringBuilder_append(var$2, $rt_s(2457));
     var$3 = jl_AbstractStringBuilder_toString(jl_StringBuilder_append0(var$2, $limit));
     var$2 = new jl_IllegalArgumentException;
     jl_RuntimeException__init_(var$2, var$3);
@@ -43884,15 +44004,15 @@ function cvs_AircraftDefinition() {
     a.$accentColor = null;
 }
 let cvs_AircraftDefinition__init_0 = ($this, $id, $country, $pilot, $name, $weaponStyle, $primary, $special, $passive, $power, $speed, $defense, $control, $bodyColor, $accentColor) => {
-    kji_Intrinsics_checkNotNullParameter($country, $rt_s(2453));
+    kji_Intrinsics_checkNotNullParameter($country, $rt_s(2458));
     kji_Intrinsics_checkNotNullParameter($pilot, $rt_s(899));
-    kji_Intrinsics_checkNotNullParameter($name, $rt_s(776));
-    kji_Intrinsics_checkNotNullParameter($weaponStyle, $rt_s(2454));
-    kji_Intrinsics_checkNotNullParameter($primary, $rt_s(2455));
-    kji_Intrinsics_checkNotNullParameter($special, $rt_s(768));
+    kji_Intrinsics_checkNotNullParameter($name, $rt_s(774));
+    kji_Intrinsics_checkNotNullParameter($weaponStyle, $rt_s(2459));
+    kji_Intrinsics_checkNotNullParameter($primary, $rt_s(2460));
+    kji_Intrinsics_checkNotNullParameter($special, $rt_s(766));
     kji_Intrinsics_checkNotNullParameter($passive, $rt_s(1647));
-    kji_Intrinsics_checkNotNullParameter($bodyColor, $rt_s(2456));
-    kji_Intrinsics_checkNotNullParameter($accentColor, $rt_s(2457));
+    kji_Intrinsics_checkNotNullParameter($bodyColor, $rt_s(2461));
+    kji_Intrinsics_checkNotNullParameter($accentColor, $rt_s(2462));
     $this.$id0 = $id;
     $this.$country1 = $country;
     $this.$pilot = $pilot;
@@ -43971,7 +44091,7 @@ cvs_AircraftDefinition_toString = $this => {
     var$15 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$15);
     jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$15,
-    $rt_s(2458)), var$1), $rt_s(2459)), var$2), $rt_s(2460)), var$3), $rt_s(2461)), var$4), $rt_s(2462)), var$5), $rt_s(2463)), var$6), $rt_s(2464)), var$7), $rt_s(2465)), var$8), $rt_s(2466)), var$9), $rt_s(2283)), var$10), $rt_s(2467)), var$11), $rt_s(2468)), var$12), $rt_s(2469)), var$13), $rt_s(2470)), var$14), 41);
+    $rt_s(2463)), var$1), $rt_s(2464)), var$2), $rt_s(2465)), var$3), $rt_s(2466)), var$4), $rt_s(2467)), var$5), $rt_s(2468)), var$6), $rt_s(2469)), var$7), $rt_s(2470)), var$8), $rt_s(2471)), var$9), $rt_s(2283)), var$10), $rt_s(2472)), var$11), $rt_s(2473)), var$12), $rt_s(2474)), var$13), $rt_s(2475)), var$14), 41);
     return jl_AbstractStringBuilder_toString(var$15);
 },
 cvs_AircraftDefinition_hashCode = $this => {
@@ -44073,9 +44193,9 @@ cbggg_PixmapPacker_pack0 = ($this, $name, $image) => {
         if ($this.$disposed0)
             return null;
         if ($name !== null && cbggg_PixmapPacker_getRect($this, $name) !== null)
-            $rt_throw(cbgu_GdxRuntimeException__init_(jl_StringBuilder_toString(jl_StringBuilder_append4(jl_StringBuilder_append4(jl_StringBuilder__init_(), $rt_s(2471)), $name))));
+            $rt_throw(cbgu_GdxRuntimeException__init_(jl_StringBuilder_toString(jl_StringBuilder_append4(jl_StringBuilder_append4(jl_StringBuilder__init_(), $rt_s(2476)), $name))));
         $pixmapToDispose = null;
-        if ($name !== null && jl_String_endsWith($name, $rt_s(2472))) {
+        if ($name !== null && jl_String_endsWith($name, $rt_s(2477))) {
             $rect = cbggg_PixmapPacker$PixmapPackerRectangle__init_(0, 0, cbgg_Pixmap_getWidth($image) - 2 | 0, cbgg_Pixmap_getHeight($image) - 2 | 0);
             var$5 = cbgg_Pixmap__init_(cbgg_Pixmap_getWidth($image) - 2 | 0, cbgg_Pixmap_getHeight($image) - 2 | 0, cbgg_Pixmap_getFormat($image));
             cbgg_Pixmap$Blending_$callClinit();
@@ -44084,7 +44204,7 @@ cbggg_PixmapPacker_pack0 = ($this, $name, $image) => {
             $rect.$splits = var$6;
             $rect.$pads = cbggg_PixmapPacker_getPads($this, $image, var$6);
             cbgg_Pixmap_drawPixmap1(var$5, $image, 0, 0, 1, 1, cbgg_Pixmap_getWidth($image) - 1 | 0, cbgg_Pixmap_getHeight($image) - 1 | 0);
-            $name = (jl_String_split($name, $rt_s(478))).data[0];
+            $name = (jl_String_split($name, $rt_s(476))).data[0];
             $pixmapToDispose = var$5;
         } else if (!$this.$stripWhitespaceX && !$this.$stripWhitespaceY) {
             $rect = cbggg_PixmapPacker$PixmapPackerRectangle__init_(0, 0, cbgg_Pixmap_getWidth($image), cbgg_Pixmap_getHeight($image));
@@ -44218,8 +44338,8 @@ cbggg_PixmapPacker_pack0 = ($this, $name, $image) => {
             return $rect;
         }
         if ($name === null)
-            $rt_throw(cbgu_GdxRuntimeException__init_($rt_s(2473)));
-        $rt_throw(cbgu_GdxRuntimeException__init_(jl_StringBuilder_toString(jl_StringBuilder_append4(jl_StringBuilder_append4(jl_StringBuilder__init_(), $rt_s(2474)), $name))));
+            $rt_throw(cbgu_GdxRuntimeException__init_($rt_s(2478)));
+        $rt_throw(cbgu_GdxRuntimeException__init_(jl_StringBuilder_toString(jl_StringBuilder_append4(jl_StringBuilder_append4(jl_StringBuilder__init_(), $rt_s(2479)), $name))));
     } finally {
         jl_Object_monitorExitSync($this);
     }
@@ -44403,7 +44523,7 @@ cbggg_PixmapPacker_getSplitPoint = ($this, $raster, $startX, $y, $startPoint, $x
             var$13 = new jl_StringBuilder;
             jl_AbstractStringBuilder__init_(var$13);
             var$13 = jl_StringBuilder_append0(var$13, $startX);
-            jl_AbstractStringBuilder_append(var$13, $rt_s(2475));
+            jl_AbstractStringBuilder_append(var$13, $rt_s(2480));
             var$13 = jl_StringBuilder_append0(var$13, $y);
             jl_AbstractStringBuilder_append(var$13, $rt_s(7));
             var$13 = jl_StringBuilder_append(var$13, $rgba);
@@ -44416,7 +44536,7 @@ cbggg_PixmapPacker_getSplitPoint = ($this, $raster, $startX, $y, $startPoint, $x
     return $next;
 },
 cbggg_PixmapPacker__clinit_ = () => {
-    cbggg_PixmapPacker_indexPattern = jur_Pattern_compile($rt_s(2476));
+    cbggg_PixmapPacker_indexPattern = jur_Pattern_compile($rt_s(2481));
 },
 cbgm_Interpolation = $rt_classWithoutFields(),
 cbgm_Interpolation_linear = null,
@@ -44613,7 +44733,7 @@ kr_IntProgression__init_ = ($this, $start, $endInclusive, $step) => {
     kr_IntProgression_$callClinit();
     if (!$step) {
         var$4 = new jl_IllegalArgumentException;
-        jl_RuntimeException__init_(var$4, $rt_s(2477));
+        jl_RuntimeException__init_(var$4, $rt_s(2482));
         $rt_throw(var$4);
     }
     if ($step != (-2147483648)) {
@@ -44623,7 +44743,7 @@ kr_IntProgression__init_ = ($this, $start, $endInclusive, $step) => {
         return;
     }
     var$4 = new jl_IllegalArgumentException;
-    jl_RuntimeException__init_(var$4, $rt_s(2478));
+    jl_RuntimeException__init_(var$4, $rt_s(2483));
     $rt_throw(var$4);
 },
 kr_IntProgression__init_0 = (var_0, var_1, var_2) => {
@@ -44714,9 +44834,9 @@ cbgc_Controllers_getControllers = () => {
         var$3 = cbgc_Controllers_managers.$size6;
         var$4 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$4);
-        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2479)), var$3), $rt_s(2480));
+        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2484)), var$3), $rt_s(2485));
         var$4 = jl_AbstractStringBuilder_toString(var$4);
-        cgxgtbw_WebApplication_log(var$1, $rt_s(2481), var$4);
+        cgxgtbw_WebApplication_log(var$1, $rt_s(2486), var$4);
     }
     return (cbgu_ObjectMap_get(cbgc_Controllers_managers, cbg_Gdx_app)).$controllers;
 },
@@ -44752,16 +44872,16 @@ cvs_CampaignMapScreen_render = ($this, $delta) => {
     $stage = cvs_SkyVanguardGame_getFont($this.$game);
     cbgg_Color_$callClinit();
     var$6 = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(822));
     cvs_BaseScreen_drawTracked($this, $item$iv, 540.0, 1770.0, $stage, var$6, 7.0);
     cvs_BaseScreen_drawCentered($this, $country.$subtitle, 1690.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.30000001192092896, 0.8999999761581421, 1.0, 1.0));
     $index$iv = $country.$difficultyScale * 100.0 | 0;
     $$this$forEachIndexed$iv = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($$this$forEachIndexed$iv);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append($$this$forEachIndexed$iv, $rt_s(2482)), $index$iv), 37);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append($$this$forEachIndexed$iv, $rt_s(2487)), $index$iv), 37);
     cvs_BaseScreen_drawCentered($this, jl_AbstractStringBuilder_toString($$this$forEachIndexed$iv), 1615.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.6200000047683716, 0.2199999988079071, 1.0));
-    cvs_BaseScreen_drawButton$default(var$2, $this.$previous1, $rt_s(2483), 0, 4, null);
-    cvs_BaseScreen_drawButton$default(var$2, $this.$next6, $rt_s(2484), 0, 4, null);
+    cvs_BaseScreen_drawButton$default(var$2, $this.$previous1, $rt_s(2488), 0, 4, null);
+    cvs_BaseScreen_drawButton$default(var$2, $this.$next6, $rt_s(2489), 0, 4, null);
     $$this$forEachIndexed$iv = $country.$stages;
     $index$iv = 0;
     $country = ju_AbstractList_iterator($$this$forEachIndexed$iv);
@@ -44777,12 +44897,12 @@ cvs_CampaignMapScreen_render = ($this, $delta) => {
     $index$iv = cvs_SaveManager_getUnlockedStage(cvs_SkyVanguardGame_getSaveManager($this.$game)) + 1 | 0;
     $$this$forEachIndexed$iv = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($$this$forEachIndexed$iv);
-    jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append($$this$forEachIndexed$iv, $rt_s(2485)), $index$iv), $rt_s(2486));
+    jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append($$this$forEachIndexed$iv, $rt_s(2490)), $index$iv), $rt_s(2491));
     cvs_BaseScreen_drawCentered($this, jl_AbstractStringBuilder_toString($$this$forEachIndexed$iv), 300.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.699999988079071, 0.8600000143051147, 1.0, 1.0));
     cvs_BaseScreen_drawButton$default(var$2, $this.$back2, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(928)), 0, 4, null);
     cvs_GamepadInput_poll($this.$game.$gamepad);
     if (cvs_GamepadInput_getJustB($this.$game.$gamepad)) {
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.0, 0.0, 6, null);
         cvs_SkyVanguardGame_openMainMenu($this.$game);
     }
 },
@@ -44793,7 +44913,7 @@ cvs_CampaignMapScreen_drawStageCard = ($this, $rect, $stage) => {
     var$4 = $stage.$phase;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$5, $rt_s(2487)), var$4);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$5, $rt_s(2492)), var$4);
     var$6 = jl_AbstractStringBuilder_toString(var$5);
     var$7 = $rect.$x + 24.0;
     var$8 = $rect.$y + $rect.$height0 - 35.0;
@@ -44811,18 +44931,18 @@ cvs_CampaignMapScreen_drawStageCard = ($this, $rect, $stage) => {
     var$9 = cvs_SkyVanguardGame_getSmallFont($this.$game);
     cbgg_Color_$callClinit();
     var$6 = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(822));
     cvs_BaseScreen_drawLabel($this, var$5, var$7, var$8, var$9, var$6);
     if ($unlocked) {
         var$6 = $stage.$subBoss;
         var$5 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$5);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2488)), var$6);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2493)), var$6);
         cvs_BaseScreen_drawLabel($this, jl_AbstractStringBuilder_toString(var$5), $rect.$x + 24.0, $rect.$y + 80.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.75, 0.8199999928474426, 0.9200000166893005, 1.0));
         var$9 = $stage.$boss0;
         $stage = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($stage);
-        jl_StringBuilder_append(jl_StringBuilder_append($stage, $rt_s(2489)), var$9);
+        jl_StringBuilder_append(jl_StringBuilder_append($stage, $rt_s(2494)), var$9);
         cvs_BaseScreen_drawLabel($this, jl_AbstractStringBuilder_toString($stage), $rect.$x + 24.0, $rect.$y + 36.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.6200000047683716, 0.2199999988079071, 1.0));
     }
 };
@@ -44855,22 +44975,22 @@ cvs_HangarScreen_render = ($this, $delta) => {
     cvs_MenuScreensKt_drawVideoBackdrop$default(var$2, $this.$time3, null, null, 6, null);
     cvs_AircraftCatalog_$callClinit();
     $aircraft = cvs_AircraftCatalog_get(cvs_AircraftCatalog_INSTANCE, $this.$aircraftIndex);
-    $selectLabel = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(846));
+    $selectLabel = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(844));
     $item$iv = cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this));
     cbgg_Color_$callClinit();
     $rect = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue($rect, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue($rect, $rt_s(822));
     cvs_BaseScreen_drawTracked($this, $selectLabel, 540.0, 1810.0, $item$iv, $rect, 8.0);
     cvs_BaseScreen_drawCentered($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1634)), 1736.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.41999998688697815, 0.9399999976158142, 1.0, 1.0));
     cvs_BaseScreen_drawCentered($this, cvs_AircraftDefinition_getName($aircraft), 1676.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cvs_AircraftDefinition_getAccentColor($aircraft));
     $$this$forEachIndexed$iv = cvs_AircraftDefinition_getPilot($aircraft);
     $selectLabel = cvs_AircraftDefinition_getCountry($aircraft);
     $item$iv = jl_StringBuilder__init_();
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($item$iv, $$this$forEachIndexed$iv), $rt_s(2490)), $selectLabel);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($item$iv, $$this$forEachIndexed$iv), $rt_s(2495)), $selectLabel);
     $rect = jl_StringBuilder_toString($item$iv);
     $$this$forEachIndexed$iv = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
     $selectLabel = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue($selectLabel, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue($selectLabel, $rt_s(822));
     cvs_BaseScreen_drawCentered($this, $rect, 1626.0, $$this$forEachIndexed$iv, $selectLabel);
     cvs_MenuScreensKt_access$drawTechPanel(var$2, cbgm_Rectangle__init_(80.0, 560.0, 500.0, 1000.0), cvs_AircraftDefinition_getAccentColor($aircraft), 1);
     cvs_MenuScreensKt_drawPilotAircraft$default(var$2, 330.0, 1280.0 + jl_Math_sin($this.$time3 * 1.7000000476837158) * 14.0, 2.6500000953674316, $aircraft, 0, 0.0, 48, null);
@@ -44885,8 +45005,8 @@ cvs_HangarScreen_render = ($this, $delta) => {
         cvs_HangarScreen_drawAircraftTile($this, $item$iv, cvs_AircraftCatalog_get(cvs_AircraftCatalog_INSTANCE, $index$iv), $index$iv != $this.$aircraftIndex ? 0 : 1);
         $index$iv = $owned;
     }
-    cvs_BaseScreen_drawButton$default(var$2, $this.$previous2, $rt_s(2483), 0, 4, null);
-    cvs_BaseScreen_drawButton$default(var$2, $this.$next5, $rt_s(2484), 0, 4, null);
+    cvs_BaseScreen_drawButton$default(var$2, $this.$previous2, $rt_s(2488), 0, 4, null);
+    cvs_BaseScreen_drawButton$default(var$2, $this.$next5, $rt_s(2489), 0, 4, null);
     cvs_HangarScreen_drawStat($this, $rt_s(996), cvs_AircraftDefinition_getPower($aircraft), 330.0, 960.0, cvs_AircraftDefinition_getAccentColor($aircraft));
     cvs_HangarScreen_drawStat($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1640)), cvs_AircraftDefinition_getSpeed($aircraft), 330.0, 845.0, cvs_AircraftDefinition_getAccentColor($aircraft));
     cvs_HangarScreen_drawStat($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1642)), cvs_AircraftDefinition_getDefense($aircraft), 330.0, 730.0, cvs_AircraftDefinition_getAccentColor($aircraft));
@@ -44898,16 +45018,16 @@ cvs_HangarScreen_render = ($this, $delta) => {
     $rect = jl_StringBuilder_toString($item$iv);
     $$this$forEachIndexed$iv = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
     $selectLabel = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue($selectLabel, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue($selectLabel, $rt_s(822));
     cvs_BaseScreen_drawLabel($this, $rect, 118.0, 542.0, $$this$forEachIndexed$iv, $selectLabel);
-    $$this$forEachIndexed$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(768));
+    $$this$forEachIndexed$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(766));
     $selectLabel = cvs_AircraftDefinition_getSpecial($aircraft);
     $item$iv = jl_StringBuilder__init_();
     jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($item$iv, $$this$forEachIndexed$iv), $rt_s(68)), $selectLabel);
     $rect = jl_StringBuilder_toString($item$iv);
     $$this$forEachIndexed$iv = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
     $selectLabel = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue($selectLabel, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue($selectLabel, $rt_s(822));
     cvs_BaseScreen_drawLabel($this, $rect, 118.0, 496.0, $$this$forEachIndexed$iv, $selectLabel);
     $$this$forEachIndexed$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1647));
     $aircraft = cvs_AircraftDefinition_getPassive($aircraft);
@@ -44927,7 +45047,7 @@ cvs_HangarScreen_render = ($this, $delta) => {
     cvs_BaseScreen_drawButton$default(var$2, $this.$shop, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(979)), 0, 4, null);
     $index$iv = cvs_SaveManager_totalRunPowerStacks(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this)));
     $$this$forEachIndexed$iv = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append($$this$forEachIndexed$iv, $rt_s(2491)), $index$iv);
+    jl_StringBuilder_append0(jl_StringBuilder_append($$this$forEachIndexed$iv, $rt_s(2496)), $index$iv);
     cvs_BaseScreen_drawLabel($this, jl_StringBuilder_toString($$this$forEachIndexed$iv), 660.0, 520.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.8199999928474426, 0.25, 1.0));
     $aircraft = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(973));
     $index$iv = cvs_SaveManager_getCredits(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this)));
@@ -44944,7 +45064,7 @@ cvs_HangarScreen_render = ($this, $delta) => {
     cvs_BaseScreen_drawButton$default(var$2, $this.$back3, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(928)), 0, 4, null);
     cvs_GamepadInput_poll(cvs_SkyVanguardGame_getGamepad(cvs_BaseScreen_getGame($this)));
     if (cvs_GamepadInput_getJustB(cvs_SkyVanguardGame_getGamepad(cvs_BaseScreen_getGame($this)))) {
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this)), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this)), $rt_s(768), 0.0, 0.0, 6, null);
         cvs_SkyVanguardGame_openMainMenu(cvs_BaseScreen_getGame($this));
     }
 },
@@ -45004,41 +45124,41 @@ let cvs_SettingsScreen__init_0 = ($this, $game) => {
     var$4 = new cvs_SettingsScreen$Toggle;
     var$5 = cbgm_Rectangle__init_(170.0, 1348.0, 740.0, 100.0);
     var$6 = new cvs_SettingsScreen$_init_$lambda$_0_0;
-    var$6.$_019 = $game;
+    var$6.$_021 = $game;
     var$7 = new cvs_SettingsScreen$_init_$lambda$_0_1;
-    var$7.$_010 = $game;
+    var$7.$_012 = $game;
     cvs_SettingsScreen$Toggle__init_(var$4, $rt_s(942), var$5, var$6, var$7);
     var$3[0] = var$4;
     var$4 = new cvs_SettingsScreen$Toggle;
     var$5 = cbgm_Rectangle__init_(170.0, 1226.0, 740.0, 100.0);
     var$6 = new cvs_SettingsScreen$_init_$lambda$_0_2;
-    var$6.$_046 = $game;
+    var$6.$_048 = $game;
     var$7 = new cvs_SettingsScreen$_init_$lambda$_0_3;
-    var$7.$_048 = $game;
+    var$7.$_051 = $game;
     cvs_SettingsScreen$Toggle__init_(var$4, $rt_s(944), var$5, var$6, var$7);
     var$3[1] = var$4;
     var$4 = new cvs_SettingsScreen$Toggle;
     var$5 = cbgm_Rectangle__init_(170.0, 1104.0, 740.0, 100.0);
     var$6 = new cvs_SettingsScreen$_init_$lambda$_0_4;
-    var$6.$_037 = $game;
+    var$6.$_039 = $game;
     var$7 = new cvs_SettingsScreen$_init_$lambda$_0_5;
-    var$7.$_013 = $game;
-    cvs_SettingsScreen$Toggle__init_(var$4, $rt_s(744), var$5, var$6, var$7);
+    var$7.$_015 = $game;
+    cvs_SettingsScreen$Toggle__init_(var$4, $rt_s(742), var$5, var$6, var$7);
     var$3[2] = var$4;
     var$4 = new cvs_SettingsScreen$Toggle;
     var$5 = cbgm_Rectangle__init_(170.0, 982.0, 740.0, 100.0);
     var$6 = new cvs_SettingsScreen$_init_$lambda$_0_6;
-    var$6.$_00 = $game;
+    var$6.$_01 = $game;
     var$7 = new cvs_SettingsScreen$_init_$lambda$_0_7;
-    var$7.$_08 = $game;
+    var$7.$_010 = $game;
     cvs_SettingsScreen$Toggle__init_(var$4, $rt_s(947), var$5, var$6, var$7);
     var$3[3] = var$4;
     var$5 = new cvs_SettingsScreen$Toggle;
     var$7 = cbgm_Rectangle__init_(170.0, 860.0, 740.0, 100.0);
     var$4 = new cvs_SettingsScreen$_init_$lambda$_0_8;
-    var$4.$_054 = $game;
+    var$4.$_057 = $game;
     var$8 = new cvs_SettingsScreen$_init_$lambda$_0_9;
-    var$8.$_028 = $game;
+    var$8.$_030 = $game;
     cvs_SettingsScreen$Toggle__init_(var$5, $rt_s(949), var$7, var$4, var$8);
     var$3[4] = var$5;
     $this.$toggles = kc_CollectionsKt__CollectionsKt_listOf(var$2);
@@ -45070,11 +45190,11 @@ cvs_SettingsScreen_render = ($this, $delta) => {
     cvs_BaseScreen_clear($this, 0.004000000189989805, 0.012000000104308128, 0.029999999329447746);
     var$3 = $this;
     cvs_MenuScreensKt_drawVideoBackdrop$default(var$3, $this.$time4, null, null, 6, null);
-    $$this$forEach$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(847));
+    $$this$forEach$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(845));
     $element$iv = cvs_SkyVanguardGame_getFont($this.$game);
     cbgg_Color_$callClinit();
     $it = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue($it, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue($it, $rt_s(822));
     cvs_BaseScreen_drawTracked($this, $$this$forEach$iv, 540.0, 1810.0, $element$iv, $it, 7.0);
     $pilotLabel = cvs_SaveManager_getPilotName(cvs_SkyVanguardGame_getSaveManager($this.$game));
     if (kt_StringsKt__StringsKt_isBlank($pilotLabel))
@@ -45082,23 +45202,23 @@ cvs_SettingsScreen_render = ($this, $delta) => {
     $pilotLabel = $pilotLabel;
     ju_Locale_$callClinit();
     $pilotLabel = jl_String_toUpperCase($pilotLabel, ju_Locale_ROOT);
-    kji_Intrinsics_checkNotNullExpressionValue($pilotLabel, $rt_s(813));
+    kji_Intrinsics_checkNotNullExpressionValue($pilotLabel, $rt_s(811));
     $$this$forEach$iv = $this.$nameButton;
     $element$iv = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($element$iv);
-    jl_StringBuilder_append(jl_StringBuilder_append($element$iv, $rt_s(2492)), $pilotLabel);
+    jl_StringBuilder_append(jl_StringBuilder_append($element$iv, $rt_s(2497)), $pilotLabel);
     cvs_BaseScreen_drawButton$default(var$3, $$this$forEach$iv, jl_AbstractStringBuilder_toString($element$iv), 0, 4, null);
-    cvs_BaseScreen_drawButton$default(var$3, $this.$photoButton, $this.$game.$pilotPhoto === null ? $rt_s(2493) : $rt_s(2494), 0, 4, null);
+    cvs_BaseScreen_drawButton$default(var$3, $this.$photoButton, $this.$game.$pilotPhoto === null ? $rt_s(2498) : $rt_s(2499), 0, 4, null);
     $pilotLabel = $this.$toggles.$iterator0();
     while ($pilotLabel.$hasNext()) {
         $it = $pilotLabel.$next();
-        var$8 = ($it.$getter.$invoke0()).$value1;
+        var$8 = ($it.$getter.$invoke0()).$value0;
         var$9 = $it.$rect3;
         $$this$forEach$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $it.$key0);
         $element$iv = !var$8 ? $rt_s(1789) : $rt_s(1788);
         $it = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($it);
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($it, $$this$forEach$iv), $rt_s(2495)), $element$iv);
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($it, $$this$forEach$iv), $rt_s(2500)), $element$iv);
         cvs_BaseScreen_drawButton($this, var$9, jl_AbstractStringBuilder_toString($it), var$8);
     }
     a: {
@@ -45114,7 +45234,7 @@ cvs_SettingsScreen_render = ($this, $delta) => {
                 var$10 = $rt_s(1712);
                 break a;
             default:
-                var$10 = $rt_s(2496);
+                var$10 = $rt_s(2501);
                 break a;
         }
         var$10 = $rt_s(1708);
@@ -45127,7 +45247,7 @@ cvs_SettingsScreen_render = ($this, $delta) => {
     b: {
         cvs_BaseScreen_drawButton($this, $$this$forEach$iv, $element$iv, var$8);
         $pilotLabel = $this.$difficulty;
-        $$this$forEach$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(748));
+        $$this$forEach$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(746));
         switch (cvs_SaveManager_getDifficulty(cvs_SkyVanguardGame_getSaveManager($this.$game))) {
             case 0:
                 break;
@@ -45155,7 +45275,7 @@ cvs_SettingsScreen_render = ($this, $delta) => {
     jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($it, $$this$forEach$iv), $rt_s(68)), $element$iv);
     cvs_BaseScreen_drawButton$default(var$3, $pilotLabel, jl_AbstractStringBuilder_toString($it), 0, 4, null);
     $pilotLabel = $this.$language;
-    $$this$forEach$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(753));
+    $$this$forEach$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(751));
     $element$iv = cvs_LocalizationManager_getName(cvs_SkyVanguardGame_getText($this.$game));
     $it = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($it);
@@ -45167,7 +45287,7 @@ cvs_SettingsScreen_render = ($this, $delta) => {
     cvs_BaseScreen_drawButton$default(var$3, $this.$back, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(928)), 0, 4, null);
     cvs_GamepadInput_poll(cvs_SkyVanguardGame_getGamepad(cvs_BaseScreen_getGame($this)));
     if (cvs_GamepadInput_getJustB(cvs_SkyVanguardGame_getGamepad(cvs_BaseScreen_getGame($this)))) {
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this)), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this)), $rt_s(768), 0.0, 0.0, 6, null);
         cvs_SkyVanguardGame_openMainMenu(cvs_BaseScreen_getGame($this));
     }
 },
@@ -45188,16 +45308,6 @@ cvs_SettingsScreen_controlName = $this => {
     }
     return var$1;
 },
-cvs_SettingsScreen_pickPhoto$lambda$0 = ($this$0, $ok) => {
-    let var$3, var$4;
-    var$3 = cbg_Gdx_app;
-    var$4 = new cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0;
-    var$4.$_016 = $ok;
-    var$4.$_15 = $this$0;
-    cgxgtbw_WebApplication_postRunnable(var$3, var$4);
-    k_Unit_$callClinit();
-    return k_Unit_INSTANCE;
-},
 cvs_SettingsScreen_access$getLanguage$p = $$this => {
     return $$this.$language;
 },
@@ -45209,7 +45319,7 @@ cvs_SettingsScreen_access$getBack$p = $$this => {
 };
 function cvs_MainMenuScreen$requestRemoveAds$lambda$_8_0() {
     jl_Object.call(this);
-    this.$_060 = null;
+    this.$_064 = null;
 }
 function cvs_CreditsScreen() {
     let a = this; cvs_BaseScreen.call(a);
@@ -45244,18 +45354,18 @@ cvs_CreditsScreen_render = ($this, $delta) => {
     var$4 = cvs_SkyVanguardGame_getFont($this.$game);
     cbgg_Color_$callClinit();
     var$5 = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(822));
     cvs_BaseScreen_drawTracked($this, var$3, 540.0, 1780.0, var$4, var$5, 7.0);
-    cvs_BaseScreen_drawCentered($this, $rt_s(2497), 1500.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.30000001192092896, 0.8999999761581421, 1.0, 1.0));
-    cvs_BaseScreen_drawCentered$default(var$2, $rt_s(2498), 1370.0, cvs_SkyVanguardGame_getSmallFont($this.$game), null, 8, null);
-    cvs_BaseScreen_drawCentered$default(var$2, $rt_s(2499), 1260.0, cvs_SkyVanguardGame_getSmallFont($this.$game), null, 8, null);
-    cvs_BaseScreen_drawCentered$default(var$2, $rt_s(2500), 1150.0, cvs_SkyVanguardGame_getSmallFont($this.$game), null, 8, null);
-    cvs_BaseScreen_drawCentered($this, $rt_s(2501), 1040.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.699999988079071, 0.8500000238418579, 1.0, 1.0));
-    cvs_BaseScreen_drawCentered($this, $rt_s(2502), 930.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.25, 0.8500000238418579, 1.0, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(2502), 1500.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.30000001192092896, 0.8999999761581421, 1.0, 1.0));
+    cvs_BaseScreen_drawCentered$default(var$2, $rt_s(2503), 1370.0, cvs_SkyVanguardGame_getSmallFont($this.$game), null, 8, null);
+    cvs_BaseScreen_drawCentered$default(var$2, $rt_s(2504), 1260.0, cvs_SkyVanguardGame_getSmallFont($this.$game), null, 8, null);
+    cvs_BaseScreen_drawCentered$default(var$2, $rt_s(2505), 1150.0, cvs_SkyVanguardGame_getSmallFont($this.$game), null, 8, null);
+    cvs_BaseScreen_drawCentered($this, $rt_s(2506), 1040.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.699999988079071, 0.8500000238418579, 1.0, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(2507), 930.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.25, 0.8500000238418579, 1.0, 1.0));
     cvs_BaseScreen_drawButton$default(var$2, $this.$back0, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(928)), 0, 4, null);
     cvs_GamepadInput_poll($this.$game.$gamepad);
     if (cvs_GamepadInput_getJustB($this.$game.$gamepad)) {
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.0, 0.0, 6, null);
         cvs_SkyVanguardGame_openMainMenu($this.$game);
     }
 },
@@ -45267,12 +45377,12 @@ kt_StringsKt___StringsJvmKt = $rt_classWithoutFields(kt_StringsKt__StringsKt),
 kt_StringsKt___StringsKt = $rt_classWithoutFields(kt_StringsKt___StringsJvmKt),
 kt_StringsKt___StringsKt_first = $$this$first => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($$this$first, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$first, $rt_s(839));
     $$this$first = $$this$first;
     if (!($$this$first.$nativeString.length ? 0 : 1))
         return jl_String_charAt($$this$first, 0);
     var$2 = new ju_NoSuchElementException;
-    jl_RuntimeException__init_(var$2, $rt_s(2503));
+    jl_RuntimeException__init_(var$2, $rt_s(2508));
     $rt_throw(var$2);
 };
 function cbgu_SnapshotArray() {
@@ -45375,7 +45485,7 @@ let jnc_CharsetEncoder_onMalformedInput = ($this, $newAction) => {
         return $this;
     }
     var$2 = new jl_IllegalArgumentException;
-    jl_RuntimeException__init_(var$2, $rt_s(2504));
+    jl_RuntimeException__init_(var$2, $rt_s(2509));
     $rt_throw(var$2);
 },
 jnc_CharsetEncoder_onUnmappableCharacter = ($this, $newAction) => {
@@ -45385,7 +45495,7 @@ jnc_CharsetEncoder_onUnmappableCharacter = ($this, $newAction) => {
         return $this;
     }
     var$2 = new jl_IllegalArgumentException;
-    jl_RuntimeException__init_(var$2, $rt_s(2504));
+    jl_RuntimeException__init_(var$2, $rt_s(2509));
     $rt_throw(var$2);
 },
 jnc_CharsetEncoder_encode = ($this, $in, $out, $endOfInput) => {
@@ -45518,9 +45628,9 @@ cvs_WeaponStyle__init_ = (var_0, var_1) => {
 },
 cvs_WeaponStyle__clinit_ = () => {
     let var$1, var$2, var$3;
-    cvs_WeaponStyle_RAPID = cvs_WeaponStyle__init_($rt_s(2505), 0);
-    cvs_WeaponStyle_HEAVY = cvs_WeaponStyle__init_($rt_s(2506), 1);
-    cvs_WeaponStyle_GATLING = cvs_WeaponStyle__init_($rt_s(2507), 2);
+    cvs_WeaponStyle_RAPID = cvs_WeaponStyle__init_($rt_s(2510), 0);
+    cvs_WeaponStyle_HEAVY = cvs_WeaponStyle__init_($rt_s(2511), 1);
+    cvs_WeaponStyle_GATLING = cvs_WeaponStyle__init_($rt_s(2512), 2);
     var$1 = cvs_WeaponStyle__init_($rt_s(1662), 3);
     cvs_WeaponStyle_LASER = var$1;
     var$2 = $rt_createArray(cvs_WeaponStyle, 4);
@@ -45569,12 +45679,12 @@ cvs_CampaignCatalog_country = ($this, $index, $name, $subtitle, $scale, $seeds) 
         var$16 = $seed.$boss1;
         var$17 = $seed.$sprite;
         var$18 = $scale * (1.0 + $index$iv$iv * 0.08500000089406967);
-        kji_Intrinsics_checkNotNullParameter($name, $rt_s(2453));
-        kji_Intrinsics_checkNotNullParameter($$this$mapIndexed$iv, $rt_s(776));
-        kji_Intrinsics_checkNotNullParameter($item$iv$iv, $rt_s(2508));
-        kji_Intrinsics_checkNotNullParameter(var$15, $rt_s(2509));
+        kji_Intrinsics_checkNotNullParameter($name, $rt_s(2458));
+        kji_Intrinsics_checkNotNullParameter($$this$mapIndexed$iv, $rt_s(774));
+        kji_Intrinsics_checkNotNullParameter($item$iv$iv, $rt_s(2513));
+        kji_Intrinsics_checkNotNullParameter(var$15, $rt_s(2514));
         kji_Intrinsics_checkNotNullParameter(var$16, $rt_s(934));
-        kji_Intrinsics_checkNotNullParameter(var$17, $rt_s(2510));
+        kji_Intrinsics_checkNotNullParameter(var$17, $rt_s(2515));
         var$13.$globalIndex = var$14;
         var$13.$countryIndex = $index;
         var$13.$phase = var$11;
@@ -45590,9 +45700,9 @@ cvs_CampaignCatalog_country = ($this, $index, $name, $subtitle, $scale, $seeds) 
     }
     $seeds = $destination$iv$iv;
     $destination$iv$iv = new cvs_CountryCampaign;
-    kji_Intrinsics_checkNotNullParameter($name, $rt_s(776));
+    kji_Intrinsics_checkNotNullParameter($name, $rt_s(774));
     kji_Intrinsics_checkNotNullParameter($subtitle, $rt_s(2276));
-    kji_Intrinsics_checkNotNullParameter($seeds, $rt_s(2511));
+    kji_Intrinsics_checkNotNullParameter($seeds, $rt_s(2516));
     $destination$iv$iv.$name3 = $name;
     $destination$iv$iv.$subtitle = $subtitle;
     $destination$iv$iv.$difficultyScale = $scale;
@@ -45622,53 +45732,53 @@ cvs_CampaignCatalog__clinit_ = () => {
     var$3 = var$2.data;
     var$4 = $rt_createArray(cvs_CampaignCatalog$StageSeed, 6);
     var$5 = var$4.data;
-    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2512), $rt_s(2513), $rt_s(2514), $rt_s(2515), $rt_s(2516));
-    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2517), $rt_s(2518), $rt_s(2519), $rt_s(2520), $rt_s(2521));
-    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2522), $rt_s(2523), $rt_s(2524), $rt_s(2525), $rt_s(2526));
-    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2527), $rt_s(2528), $rt_s(2529), $rt_s(2530), $rt_s(2521));
-    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2531), $rt_s(2532), $rt_s(2533), $rt_s(2534), $rt_s(2516));
-    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2535), $rt_s(2536), $rt_s(2537), $rt_s(2538), $rt_s(2539));
-    var$3[0] = cvs_CampaignCatalog_country($$this$flatMap$iv, 0, $rt_s(2418), $rt_s(2540), 1.0, kc_CollectionsKt__CollectionsKt_listOf(var$4));
+    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2517), $rt_s(2518), $rt_s(2519), $rt_s(2520), $rt_s(2521));
+    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2522), $rt_s(2523), $rt_s(2524), $rt_s(2525), $rt_s(2526));
+    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2527), $rt_s(2528), $rt_s(2529), $rt_s(2530), $rt_s(2531));
+    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2532), $rt_s(2533), $rt_s(2534), $rt_s(2535), $rt_s(2526));
+    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2536), $rt_s(2537), $rt_s(2538), $rt_s(2539), $rt_s(2521));
+    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2540), $rt_s(2541), $rt_s(2542), $rt_s(2543), $rt_s(2544));
+    var$3[0] = cvs_CampaignCatalog_country($$this$flatMap$iv, 0, $rt_s(2421), $rt_s(2545), 1.0, kc_CollectionsKt__CollectionsKt_listOf(var$4));
     $$this$flatMap$iv = cvs_CampaignCatalog_INSTANCE;
     var$4 = $rt_createArray(cvs_CampaignCatalog$StageSeed, 6);
     var$5 = var$4.data;
-    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2541), $rt_s(2542), $rt_s(2543), $rt_s(2544), $rt_s(2545));
-    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2546), $rt_s(2547), $rt_s(2548), $rt_s(2549), $rt_s(2516));
-    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2550), $rt_s(2551), $rt_s(2552), $rt_s(2553), $rt_s(2521));
-    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2554), $rt_s(2555), $rt_s(2556), $rt_s(2557), $rt_s(2526));
-    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2558), $rt_s(2559), $rt_s(2560), $rt_s(2561), $rt_s(2539));
-    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2562), $rt_s(2563), $rt_s(2564), $rt_s(2565), $rt_s(2521));
-    var$3[1] = cvs_CampaignCatalog_country($$this$flatMap$iv, 1, $rt_s(2430), $rt_s(2566), 1.25, kc_CollectionsKt__CollectionsKt_listOf(var$4));
+    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2546), $rt_s(2547), $rt_s(2548), $rt_s(2549), $rt_s(2550));
+    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2551), $rt_s(2552), $rt_s(2553), $rt_s(2554), $rt_s(2521));
+    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2555), $rt_s(2556), $rt_s(2557), $rt_s(2558), $rt_s(2526));
+    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2559), $rt_s(2560), $rt_s(2561), $rt_s(2562), $rt_s(2531));
+    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2563), $rt_s(2564), $rt_s(2565), $rt_s(2566), $rt_s(2544));
+    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2567), $rt_s(2568), $rt_s(2569), $rt_s(2570), $rt_s(2526));
+    var$3[1] = cvs_CampaignCatalog_country($$this$flatMap$iv, 1, $rt_s(2433), $rt_s(2571), 1.25, kc_CollectionsKt__CollectionsKt_listOf(var$4));
     $$this$flatMap$iv = cvs_CampaignCatalog_INSTANCE;
     var$4 = $rt_createArray(cvs_CampaignCatalog$StageSeed, 6);
     var$5 = var$4.data;
-    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2567), $rt_s(2568), $rt_s(2569), $rt_s(2570), $rt_s(2539));
-    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2571), $rt_s(2572), $rt_s(2573), $rt_s(2574), $rt_s(2516));
-    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2575), $rt_s(2576), $rt_s(2577), $rt_s(2578), $rt_s(2521));
-    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2579), $rt_s(2580), $rt_s(2581), $rt_s(2582), $rt_s(2521));
-    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2583), $rt_s(2584), $rt_s(2585), $rt_s(2586), $rt_s(2526));
-    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2587), $rt_s(2588), $rt_s(2589), $rt_s(2590), $rt_s(2539));
-    var$3[2] = cvs_CampaignCatalog_country($$this$flatMap$iv, 2, $rt_s(2436), $rt_s(2591), 1.5199999809265137, kc_CollectionsKt__CollectionsKt_listOf(var$4));
+    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2572), $rt_s(2573), $rt_s(2574), $rt_s(2575), $rt_s(2544));
+    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2576), $rt_s(2577), $rt_s(2578), $rt_s(2579), $rt_s(2521));
+    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2580), $rt_s(2581), $rt_s(2582), $rt_s(2583), $rt_s(2526));
+    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2584), $rt_s(2585), $rt_s(2586), $rt_s(2587), $rt_s(2526));
+    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2588), $rt_s(2589), $rt_s(2590), $rt_s(2591), $rt_s(2531));
+    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2592), $rt_s(2593), $rt_s(2594), $rt_s(2595), $rt_s(2544));
+    var$3[2] = cvs_CampaignCatalog_country($$this$flatMap$iv, 2, $rt_s(2439), $rt_s(2596), 1.5199999809265137, kc_CollectionsKt__CollectionsKt_listOf(var$4));
     $$this$flatMap$iv = cvs_CampaignCatalog_INSTANCE;
     var$4 = $rt_createArray(cvs_CampaignCatalog$StageSeed, 6);
     var$5 = var$4.data;
-    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2592), $rt_s(2593), $rt_s(2594), $rt_s(2595), $rt_s(2545));
-    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2596), $rt_s(2597), $rt_s(2598), $rt_s(2599), $rt_s(2600));
-    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2601), $rt_s(2602), $rt_s(2603), $rt_s(2604), $rt_s(2521));
-    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2605), $rt_s(2606), $rt_s(2607), $rt_s(2608), $rt_s(2526));
-    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2609), $rt_s(2610), $rt_s(2611), $rt_s(2612), $rt_s(2539));
-    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2613), $rt_s(2614), $rt_s(2615), $rt_s(2616), $rt_s(2521));
-    var$3[3] = cvs_CampaignCatalog_country($$this$flatMap$iv, 3, $rt_s(2424), $rt_s(2617), 1.8200000524520874, kc_CollectionsKt__CollectionsKt_listOf(var$4));
+    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2597), $rt_s(2598), $rt_s(2599), $rt_s(2600), $rt_s(2550));
+    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2601), $rt_s(2602), $rt_s(2603), $rt_s(2604), $rt_s(2605));
+    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2606), $rt_s(2607), $rt_s(2608), $rt_s(2609), $rt_s(2526));
+    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2610), $rt_s(2611), $rt_s(2612), $rt_s(2613), $rt_s(2531));
+    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2614), $rt_s(2615), $rt_s(2616), $rt_s(2617), $rt_s(2544));
+    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2618), $rt_s(2619), $rt_s(2620), $rt_s(2621), $rt_s(2526));
+    var$3[3] = cvs_CampaignCatalog_country($$this$flatMap$iv, 3, $rt_s(2427), $rt_s(2622), 1.8200000524520874, kc_CollectionsKt__CollectionsKt_listOf(var$4));
     $$this$flatMap$iv = cvs_CampaignCatalog_INSTANCE;
     var$4 = $rt_createArray(cvs_CampaignCatalog$StageSeed, 6);
     var$5 = var$4.data;
-    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2618), $rt_s(2619), $rt_s(2620), $rt_s(2621), $rt_s(2516));
-    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2622), $rt_s(2623), $rt_s(2624), $rt_s(2625), $rt_s(2600));
-    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2626), $rt_s(2627), $rt_s(2628), $rt_s(2629), $rt_s(2526));
-    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2630), $rt_s(2631), $rt_s(2632), $rt_s(2633), $rt_s(2521));
-    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2634), $rt_s(2635), $rt_s(2636), $rt_s(2637), $rt_s(2539));
-    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2638), $rt_s(2639), $rt_s(2640), $rt_s(2641), $rt_s(2521));
-    var$3[4] = cvs_CampaignCatalog_country($$this$flatMap$iv, 4, $rt_s(2642), $rt_s(2643), 2.180000066757202, kc_CollectionsKt__CollectionsKt_listOf(var$4));
+    var$5[0] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2623), $rt_s(2624), $rt_s(2625), $rt_s(2626), $rt_s(2521));
+    var$5[1] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2627), $rt_s(2628), $rt_s(2629), $rt_s(2630), $rt_s(2605));
+    var$5[2] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2631), $rt_s(2632), $rt_s(2633), $rt_s(2634), $rt_s(2531));
+    var$5[3] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2635), $rt_s(2636), $rt_s(2637), $rt_s(2638), $rt_s(2526));
+    var$5[4] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2639), $rt_s(2640), $rt_s(2641), $rt_s(2642), $rt_s(2544));
+    var$5[5] = cvs_CampaignCatalog$StageSeed__init_($rt_s(2643), $rt_s(2644), $rt_s(2645), $rt_s(2646), $rt_s(2526));
+    var$3[4] = cvs_CampaignCatalog_country($$this$flatMap$iv, 4, $rt_s(2647), $rt_s(2648), 2.180000066757202, kc_CollectionsKt__CollectionsKt_listOf(var$4));
     $$this$flatMap$iv = kc_CollectionsKt__CollectionsKt_listOf(var$2);
     cvs_CampaignCatalog_countries = $$this$flatMap$iv;
     $$this$flatMap$iv = $$this$flatMap$iv;
@@ -45687,10 +45797,10 @@ function cvs_SettingsScreen$Toggle() {
     a.$setter = null;
 }
 let cvs_SettingsScreen$Toggle__init_ = ($this, $key, $rect, $getter, $setter) => {
-    kji_Intrinsics_checkNotNullParameter($key, $rt_s(812));
-    kji_Intrinsics_checkNotNullParameter($rect, $rt_s(825));
-    kji_Intrinsics_checkNotNullParameter($getter, $rt_s(2644));
-    kji_Intrinsics_checkNotNullParameter($setter, $rt_s(2645));
+    kji_Intrinsics_checkNotNullParameter($key, $rt_s(810));
+    kji_Intrinsics_checkNotNullParameter($rect, $rt_s(823));
+    kji_Intrinsics_checkNotNullParameter($getter, $rt_s(2649));
+    kji_Intrinsics_checkNotNullParameter($setter, $rt_s(2650));
     $this.$key0 = $key;
     $this.$rect3 = $rect;
     $this.$getter = $getter;
@@ -45709,7 +45819,7 @@ cvs_SettingsScreen$Toggle_toString = $this => {
     var$4 = $this.$setter;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2646)), var$1), $rt_s(2278)), var$2), $rt_s(2647)), var$3), $rt_s(2648)), var$4), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2651)), var$1), $rt_s(2278)), var$2), $rt_s(2652)), var$3), $rt_s(2653)), var$4), 41);
     return jl_AbstractStringBuilder_toString(var$5);
 },
 cvs_SettingsScreen$Toggle_hashCode = $this => {
@@ -45734,21 +45844,21 @@ cvs_SettingsScreen$Toggle_equals = ($this, $other) => {
 kjf_Function0 = $rt_classWithoutFields(0);
 function cvs_SettingsScreen$_init_$lambda$_0_0() {
     jl_Object.call(this);
-    this.$_019 = null;
+    this.$_021 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_0_invoke = var$0 => {
-    return jl_Boolean_valueOf(cvs_SaveManager_getMusicEnabled(cvs_SkyVanguardGame_getSaveManager(var$0.$_019)));
+    return jl_Boolean_valueOf(cvs_SaveManager_getMusicEnabled(cvs_SkyVanguardGame_getSaveManager(var$0.$_021)));
 };
 function cvs_SettingsScreen$_init_$lambda$_0_1() {
     jl_Object.call(this);
-    this.$_010 = null;
+    this.$_012 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_1_invoke = (var$0, var$1) => {
     let var$2, var$3;
     var$1 = var$1;
-    var$2 = var$0.$_010;
-    var$3 = var$1.$value1;
-    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(746), var$3));
+    var$2 = var$0.$_012;
+    var$3 = var$1.$value0;
+    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(744), var$3));
     var$1 = cvs_SkyVanguardGame_getAudioManager(var$2);
     if (!cvs_SaveManager_getMusicEnabled(var$1.$save))
         cvs_AudioManager_stopMusic(var$1);
@@ -45762,81 +45872,81 @@ let cvs_SettingsScreen$_init_$lambda$_0_1_invoke = (var$0, var$1) => {
 };
 function cvs_SettingsScreen$_init_$lambda$_0_2() {
     jl_Object.call(this);
-    this.$_046 = null;
+    this.$_048 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_2_invoke = var$0 => {
-    return jl_Boolean_valueOf(cvs_SaveManager_getSfxEnabled(cvs_SkyVanguardGame_getSaveManager(var$0.$_046)));
+    return jl_Boolean_valueOf(cvs_SaveManager_getSfxEnabled(cvs_SkyVanguardGame_getSaveManager(var$0.$_048)));
 };
 function cvs_SettingsScreen$_init_$lambda$_0_3() {
     jl_Object.call(this);
-    this.$_048 = null;
+    this.$_051 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_3_invoke = (var$0, var$1) => {
     let var$2, var$3;
     var$1 = var$1;
-    var$2 = var$0.$_048;
-    var$3 = var$1.$value1;
-    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(747), var$3));
+    var$2 = var$0.$_051;
+    var$3 = var$1.$value0;
+    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(745), var$3));
     k_Unit_$callClinit();
     return k_Unit_INSTANCE;
 };
 function cvs_SettingsScreen$_init_$lambda$_0_4() {
     jl_Object.call(this);
-    this.$_037 = null;
+    this.$_039 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_4_invoke = var$0 => {
-    return jl_Boolean_valueOf(cvs_SaveManager_getVibration(cvs_SkyVanguardGame_getSaveManager(var$0.$_037)));
+    return jl_Boolean_valueOf(cvs_SaveManager_getVibration(cvs_SkyVanguardGame_getSaveManager(var$0.$_039)));
 };
 function cvs_SettingsScreen$_init_$lambda$_0_5() {
     jl_Object.call(this);
-    this.$_013 = null;
+    this.$_015 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_5_invoke = (var$0, var$1) => {
     let var$2, var$3;
     var$1 = var$1;
-    var$2 = var$0.$_013;
-    var$3 = var$1.$value1;
-    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(744), var$3));
+    var$2 = var$0.$_015;
+    var$3 = var$1.$value0;
+    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(742), var$3));
     k_Unit_$callClinit();
     return k_Unit_INSTANCE;
 };
 function cvs_SettingsScreen$_init_$lambda$_0_6() {
     jl_Object.call(this);
-    this.$_00 = null;
+    this.$_01 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_6_invoke = var$0 => {
-    return jl_Boolean_valueOf(cvs_SaveManager_getReducedFlash(cvs_SkyVanguardGame_getSaveManager(var$0.$_00)));
+    return jl_Boolean_valueOf(cvs_SaveManager_getReducedFlash(cvs_SkyVanguardGame_getSaveManager(var$0.$_01)));
 };
 function cvs_SettingsScreen$_init_$lambda$_0_7() {
     jl_Object.call(this);
-    this.$_08 = null;
+    this.$_010 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_7_invoke = (var$0, var$1) => {
     let var$2, var$3;
     var$1 = var$1;
-    var$2 = var$0.$_08;
-    var$3 = var$1.$value1;
-    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(743), var$3));
+    var$2 = var$0.$_010;
+    var$3 = var$1.$value0;
+    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(741), var$3));
     k_Unit_$callClinit();
     return k_Unit_INSTANCE;
 };
 function cvs_SettingsScreen$_init_$lambda$_0_8() {
     jl_Object.call(this);
-    this.$_054 = null;
+    this.$_057 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_8_invoke = var$0 => {
-    return jl_Boolean_valueOf(cvs_SaveManager_getShowHitbox(cvs_SkyVanguardGame_getSaveManager(var$0.$_054)));
+    return jl_Boolean_valueOf(cvs_SaveManager_getShowHitbox(cvs_SkyVanguardGame_getSaveManager(var$0.$_057)));
 };
 function cvs_SettingsScreen$_init_$lambda$_0_9() {
     jl_Object.call(this);
-    this.$_028 = null;
+    this.$_030 = null;
 }
 let cvs_SettingsScreen$_init_$lambda$_0_9_invoke = (var$0, var$1) => {
     let var$2, var$3;
     var$1 = var$1;
-    var$2 = var$0.$_028;
-    var$3 = var$1.$value1;
-    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(745), var$3));
+    var$2 = var$0.$_030;
+    var$3 = var$1.$value0;
+    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean((cvs_SkyVanguardGame_getSaveManager(var$2)).$prefs, $rt_s(743), var$3));
     k_Unit_$callClinit();
     return k_Unit_INSTANCE;
 },
@@ -45877,7 +45987,7 @@ cbgu_DelayedRemovalArray_end = $this => {
     $n = $this.$iterating;
     if (!$n) {
         var$2 = new jl_IllegalStateException;
-        jl_RuntimeException__init_(var$2, $rt_s(2649));
+        jl_RuntimeException__init_(var$2, $rt_s(2654));
         $rt_throw(var$2);
     }
     $i = $n - 1 | 0;
@@ -45932,7 +46042,7 @@ cbgu_DelayedRemovalArray_removeIndex = ($this, $index) => {
                         var$6 = new jl_IndexOutOfBoundsException;
                         var$7 = new jl_StringBuilder;
                         jl_AbstractStringBuilder__init_(var$7);
-                        jl_AbstractStringBuilder_append(var$7, $rt_s(2650));
+                        jl_AbstractStringBuilder_append(var$7, $rt_s(2655));
                         var$7 = jl_StringBuilder_append0(var$7, var$2);
                         jl_AbstractStringBuilder_append(var$7, $rt_s(137));
                         jl_RuntimeException__init_(var$6, jl_AbstractStringBuilder_toString(jl_StringBuilder_append0(var$7, var$5.$size1)));
@@ -46112,7 +46222,7 @@ let cbgm_Interpolation$BounceOut__init_ = ($this, $bounces) => {
     var$5 = new jl_IllegalArgumentException;
     var$6 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$6);
-    jl_AbstractStringBuilder_append(var$6, $rt_s(2651));
+    jl_AbstractStringBuilder_append(var$6, $rt_s(2656));
     jl_RuntimeException__init_(var$5, jl_AbstractStringBuilder_toString(jl_StringBuilder_append0(var$6, $bounces)));
     $rt_throw(var$5);
 },
@@ -46139,7 +46249,7 @@ ki_ProgressionUtilKt_getProgressionLastElement = ($start, $end, $step) => {
     if ($step <= 0) {
         if ($step >= 0) {
             var$4 = new jl_IllegalArgumentException;
-            jl_RuntimeException__init_(var$4, $rt_s(2652));
+            jl_RuntimeException__init_(var$4, $rt_s(2657));
             $rt_throw(var$4);
         }
         if ($start > $end)
@@ -46221,7 +46331,7 @@ cbgct_TeavmControllers_handleGamepadConnect = ($this, $gamepad) => {
     $gamepad = cbgct_TeavmControllers_getGamepad(cbgct_TeavmControllers_getInstance(), var$4);
     var$3.$axes = $rt_createFloatArray((otji_JS_unwrapDoubleArray($gamepad.axes)).data.length);
     var$3.$buttonCount = (otji_JS_unwrapArray($rt_cls(otji_JSWrapper), $gamepad.buttons)).data.length;
-    var$3.$standardMapping = jl_String_equals($rt_str($gamepad.mapping), $rt_s(2653));
+    var$3.$standardMapping = jl_String_equals($rt_str($gamepad.mapping), $rt_s(2658));
     cbgu_IntMap_put($this.$controllerMap, var$2, var$3);
     $gamepad = $this.$eventQueue;
     jl_Object_monitorEnterSync($gamepad);
@@ -46270,7 +46380,7 @@ kc_ArraysKt___ArraysKt = $rt_classWithoutFields(kc_ArraysKt___ArraysJvmKt),
 kc_ArraysKt___ArraysKt_getLastIndex = $$this$lastIndex => {
     let var$2;
     var$2 = $$this$lastIndex.data;
-    kji_Intrinsics_checkNotNullParameter($$this$lastIndex, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$lastIndex, $rt_s(839));
     return var$2.length - 1 | 0;
 },
 ks_SequencesKt__SequenceBuilderKt = $rt_classWithoutFields(),
@@ -46305,10 +46415,10 @@ cbgct_TeavmControllers$InstanceHolder__clinit_ = () => {
     if (!(!!!navigator.getGamepads ? 1 : 0)) {
         var$3 = window;
         var$4 = new cbgct_TeavmControllers$nativeInit$lambda$_9_0;
-        var$4.$_045 = var$1;
+        var$4.$_047 = var$1;
         var$3.addEventListener("gamepadconnected", otji_JS_function(otji_JSWrapper_unwrap(var$4), "handleEvent"));
         var$4 = new cbgct_TeavmControllers$nativeInit$lambda$_9_1;
-        var$4.$_04 = var$1;
+        var$4.$_05 = var$1;
         var$3.addEventListener("gamepaddisconnected", otji_JS_function(otji_JSWrapper_unwrap(var$4), "handleEvent"));
         var$5 = (otji_JS_unwrapArray($rt_cls(otji_JSWrapper), navigator.getGamepads())).data;
         var$6 = var$5.length;
@@ -46337,9 +46447,9 @@ cbgct_TeavmControllers$InstanceHolder__clinit_ = () => {
 ke_EnumEntriesKt = $rt_classWithoutFields(),
 ke_EnumEntriesKt_enumEntries = $entries => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($entries, $rt_s(2654));
+    kji_Intrinsics_checkNotNullParameter($entries, $rt_s(2659));
     var$2 = new ke_EnumEntriesList;
-    kji_Intrinsics_checkNotNullParameter($entries, $rt_s(2654));
+    kji_Intrinsics_checkNotNullParameter($entries, $rt_s(2659));
     kc_AbstractList_$callClinit();
     var$2.$entries = $entries;
     return var$2;
@@ -46362,7 +46472,7 @@ cvs_CountryCampaign_toString = $this => {
     var$4 = $this.$stages;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2655)), var$1), $rt_s(2280)), var$2), $rt_s(2656)), var$3), $rt_s(2657)), var$4), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2660)), var$1), $rt_s(2280)), var$2), $rt_s(2661)), var$3), $rt_s(2662)), var$4), 41);
     return jl_AbstractStringBuilder_toString(var$5);
 },
 cvs_CountryCampaign_hashCode = $this => {
@@ -46393,11 +46503,11 @@ function cvs_CampaignCatalog$StageSeed() {
     a.$sprite = null;
 }
 let cvs_CampaignCatalog$StageSeed__init_0 = ($this, $name, $environment, $subBoss, $boss, $sprite) => {
-    kji_Intrinsics_checkNotNullParameter($name, $rt_s(776));
-    kji_Intrinsics_checkNotNullParameter($environment, $rt_s(2508));
-    kji_Intrinsics_checkNotNullParameter($subBoss, $rt_s(2509));
+    kji_Intrinsics_checkNotNullParameter($name, $rt_s(774));
+    kji_Intrinsics_checkNotNullParameter($environment, $rt_s(2513));
+    kji_Intrinsics_checkNotNullParameter($subBoss, $rt_s(2514));
     kji_Intrinsics_checkNotNullParameter($boss, $rt_s(934));
-    kji_Intrinsics_checkNotNullParameter($sprite, $rt_s(2658));
+    kji_Intrinsics_checkNotNullParameter($sprite, $rt_s(2663));
     $this.$name2 = $name;
     $this.$environment = $environment;
     $this.$subBoss0 = $subBoss;
@@ -46418,7 +46528,7 @@ cvs_CampaignCatalog$StageSeed_toString = $this => {
     var$5 = $this.$sprite;
     var$6 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$6);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(2659)), var$1), $rt_s(2660)), var$2), $rt_s(2661)), var$3), $rt_s(2662)), var$4), $rt_s(2663)), var$5), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(2664)), var$1), $rt_s(2665)), var$2), $rt_s(2666)), var$3), $rt_s(2667)), var$4), $rt_s(2668)), var$5), 41);
     return jl_AbstractStringBuilder_toString(var$6);
 },
 cvs_CampaignCatalog$StageSeed_hashCode = $this => {
@@ -46501,7 +46611,7 @@ cvs_StageDefinition_toString = $this => {
     var$11 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$11);
     jl_AbstractStringBuilder_append0(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$11,
-    $rt_s(2664)), var$1), $rt_s(2665)), var$2), $rt_s(2284)), var$3), $rt_s(2459)), var$4), $rt_s(2461)), var$5), $rt_s(2660)), var$6), $rt_s(2661)), var$7), $rt_s(2662)), var$8), $rt_s(2666)), var$9), $rt_s(2656)), var$10), 41);
+    $rt_s(2669)), var$1), $rt_s(2670)), var$2), $rt_s(2284)), var$3), $rt_s(2464)), var$4), $rt_s(2466)), var$5), $rt_s(2665)), var$6), $rt_s(2666)), var$7), $rt_s(2667)), var$8), $rt_s(2671)), var$9), $rt_s(2661)), var$10), 41);
     return jl_AbstractStringBuilder_toString(var$11);
 },
 cvs_StageDefinition_hashCode = $this => {
@@ -46549,7 +46659,7 @@ function kt_DelimitedRangesSequence() {
 let kjf_Function2 = $rt_classWithoutFields(0);
 function kt_StringsKt__StringsKt$rangesDelimitedBy$StringsKt__StringsKt$lambda$_144_0() {
     let a = this; jl_Object.call(a);
-    a.$_03 = null;
+    a.$_04 = null;
     a.$_10 = 0;
 }
 function ju_TemplateCollections$SingleElementList() {
@@ -46750,7 +46860,17 @@ cbgc_AbstractControllerManager$ManageCurrentControllerListener_axisMoved = ($thi
     return 0;
 },
 kc_AbstractList$Companion = $rt_classWithoutFields(),
-kt_CharsKt__CharKt = $rt_classWithoutFields(kt_CharsKt__CharJVMKt);
+kt_CharsKt__CharKt = $rt_classWithoutFields(kt_CharsKt__CharJVMKt),
+kt_CharsKt__CharKt_equals = ($$this$equals, $other, $ignoreCase) => {
+    let $thisUpper, $otherUpper;
+    if ($$this$equals == $other)
+        return 1;
+    if (!$ignoreCase)
+        return 0;
+    $thisUpper = jl_Character_toUpperCase($$this$equals);
+    $otherUpper = jl_Character_toUpperCase($other);
+    return $thisUpper != $otherUpper && jl_Character_toLowerCase($thisUpper) != jl_Character_toLowerCase($otherUpper) ? 0 : 1;
+};
 function jnci_BufferedDecoder$Controller() {
     let a = this; jl_Object.call(a);
     a.$in0 = null;
@@ -46802,7 +46922,7 @@ ju_LinkedHashMapIterator_makeNext = $this => {
 ju_LinkedHashMapIterator$ValueIterator = $rt_classWithoutFields(ju_LinkedHashMapIterator),
 ju_LinkedHashMapIterator$ValueIterator_next = $this => {
     ju_LinkedHashMapIterator_makeNext($this);
-    return $this.$currentEntry0.$value0;
+    return $this.$currentEntry0.$value1;
 };
 function ju_HashMap$AbstractMapIterator() {
     let a = this; jl_Object.call(a);
@@ -47092,13 +47212,13 @@ let cvs_CampaignMapScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer,
     if (cbgm_Rectangle_contains($this.$this$05.$previous1, $p.$x0, $p.$y0)) {
         $p = $this.$this$05;
         $p.$countryIndex0 = (($p.$countryIndex0 - 1 | 0) + 5 | 0) % 5 | 0;
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.0, 0.0, 6, null);
     } else if (cbgm_Rectangle_contains($this.$this$05.$next6, $p.$x0, $p.$y0)) {
         $p = $this.$this$05;
         $p.$countryIndex0 = ($p.$countryIndex0 + 1 | 0) % 5 | 0;
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.0, 0.0, 6, null);
     } else if (cbgm_Rectangle_contains($this.$this$05.$back2, $p.$x0, $p.$y0)) {
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$05.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$05.$game), $rt_s(768), 0.0, 0.0, 6, null);
         cvs_SkyVanguardGame_openMainMenu($this.$this$05.$game);
     } else {
         var$6 = $this.$this$05;
@@ -47113,7 +47233,7 @@ let cvs_CampaignMapScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer,
             $rect = $item$iv;
             $stage = (var$6.$countryIndex0 * 6 | 0) + $index$iv | 0;
             if (cbgm_Rectangle_contains($rect, $p.$x0, $p.$y0) && $stage <= cvs_SaveManager_getUnlockedStage(cvs_SkyVanguardGame_getSaveManager(var$6.$game))) {
-                cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(var$6.$game), $rt_s(770), 0.0, 0.0, 6, null);
+                cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(var$6.$game), $rt_s(768), 0.0, 0.0, 6, null);
                 cvs_SkyVanguardGame_startStage$default(var$6.$game, $stage, 0, 2, null);
                 return 1;
             }
@@ -47132,19 +47252,19 @@ let cvs_HangarScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $but
     if (cbgm_Rectangle_contains($this.$this$01.$previous2, $p.$x0, $p.$y0)) {
         $p = $this.$this$01;
         $p.$aircraftIndex = (($p.$aircraftIndex - 1 | 0) + 4 | 0) % 4 | 0;
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.0, 0.0, 6, null);
     } else if (cbgm_Rectangle_contains($this.$this$01.$next5, $p.$x0, $p.$y0)) {
         $p = $this.$this$01;
         $p.$aircraftIndex = ($p.$aircraftIndex + 1 | 0) % 4 | 0;
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.0, 0.0, 6, null);
     } else if (!cbgm_Rectangle_contains($this.$this$01.$select, $p.$x0, $p.$y0)) {
         if (cbgm_Rectangle_contains($this.$this$01.$shop, $p.$x0, $p.$y0)) {
-            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$01.$game), $rt_s(770), 0.0, 0.0, 6, null);
+            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$01.$game), $rt_s(768), 0.0, 0.0, 6, null);
             var$6 = $this.$this$01.$game;
             $p = cvs_ShopScreen__init_(var$6);
             cbg_Game_setScreen(var$6, $p);
         } else if (cbgm_Rectangle_contains($this.$this$01.$back3, $p.$x0, $p.$y0)) {
-            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$01.$game), $rt_s(770), 0.0, 0.0, 6, null);
+            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$01.$game), $rt_s(768), 0.0, 0.0, 6, null);
             cvs_SkyVanguardGame_openMainMenu($this.$this$01.$game);
         } else {
             var$6 = $this.$this$01;
@@ -47158,7 +47278,7 @@ let cvs_HangarScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $but
                     kc_CollectionsKt__CollectionsKt_throwIndexOverflow();
                 if (cbgm_Rectangle_contains($item$iv, $p.$x0, $p.$y0)) {
                     var$6.$aircraftIndex = $index$iv;
-                    cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(var$6.$game), $rt_s(770), 0.0, 0.0, 6, null);
+                    cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(var$6.$game), $rt_s(768), 0.0, 0.0, 6, null);
                     return 1;
                 }
                 $index$iv = $screenX;
@@ -47166,7 +47286,7 @@ let cvs_HangarScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $but
         }
     } else if (cvs_SaveManager_isAircraftOwned(cvs_SkyVanguardGame_getSaveManager($this.$this$01.$game), $this.$this$01.$aircraftIndex)) {
         cvs_SaveManager_setSelectedAircraft(cvs_SkyVanguardGame_getSaveManager($this.$this$01.$game), $this.$this$01.$aircraftIndex);
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$01.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$01.$game), $rt_s(768), 0.0, 0.0, 6, null);
     } else {
         $p = cvs_SkyVanguardGame_getSaveManager($this.$this$01.$game);
         $screenY = $this.$this$01.$aircraftIndex;
@@ -47178,7 +47298,7 @@ let cvs_HangarScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $but
             $p = $p.$prefs;
             var$6 = new jl_StringBuilder;
             jl_AbstractStringBuilder__init_(var$6);
-            jl_StringBuilder_append0(jl_StringBuilder_append(var$6, $rt_s(740)), $screenY);
+            jl_StringBuilder_append0(jl_StringBuilder_append(var$6, $rt_s(738)), $screenY);
             var$6 = jl_AbstractStringBuilder_toString(var$6);
             cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putBoolean($p, var$6, 1));
             $screenX = 1;
@@ -47188,14 +47308,14 @@ let cvs_HangarScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $but
             $p.$hangarMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($p.$game), $rt_s(975));
             $p = $this.$this$01;
             $p.$hangarMessageTimer = 2.4000000953674316;
-            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(770), 0.6000000238418579, 0.7200000286102295);
+            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.6000000238418579, 0.7200000286102295);
         } else {
             cvs_SaveManager_setSelectedAircraft(cvs_SkyVanguardGame_getSaveManager($this.$this$01.$game), $this.$this$01.$aircraftIndex);
             $p = $this.$this$01;
             $p.$hangarMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($p.$game), $rt_s(977));
             $p = $this.$this$01;
             $p.$hangarMessageTimer = 2.4000000953674316;
-            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(767), 1.0, 1.149999976158142);
+            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(765), 1.0, 1.149999976158142);
         }
     }
     return 1;
@@ -47224,13 +47344,13 @@ let cvs_SettingsScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $b
     $$this$firstOrNull$iv = $element$iv;
     if ($$this$firstOrNull$iv !== null) {
         $p = $this.$this$0;
-        $$this$firstOrNull$iv.$setter.$invoke(jl_Boolean_valueOf(($$this$firstOrNull$iv.$getter.$invoke0()).$value1 ? 0 : 1));
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        $$this$firstOrNull$iv.$setter.$invoke(jl_Boolean_valueOf(($$this$firstOrNull$iv.$getter.$invoke0()).$value0 ? 0 : 1));
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.0, 0.0, 6, null);
         return 1;
     }
     b: {
         if (cbgm_Rectangle_contains($this.$this$0.$nameButton, $p.$x0, $p.$y0)) {
-            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$0.$game), $rt_s(770), 0.0, 0.0, 6, null);
+            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$0.$game), $rt_s(768), 0.0, 0.0, 6, null);
             $p = $this.$this$0;
             $$this$firstOrNull$iv = cbg_Gdx_input;
             $element$iv = new cvs_SettingsScreen$editPilotName$1;
@@ -47239,36 +47359,38 @@ let cvs_SettingsScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $b
             var$8 = cvs_SaveManager_getPilotName(cvs_SkyVanguardGame_getSaveManager($p.$game));
             $$this$firstOrNull$iv = $$this$firstOrNull$iv;
             cbg_Input$OnscreenKeyboardType_$callClinit();
-            cgxgtbw_WebInput_getTextInput($$this$firstOrNull$iv, $element$iv, $rt_s(1692), var$8, $rt_s(2667), cbg_Input$OnscreenKeyboardType_Default);
+            cgxgtbw_WebInput_getTextInput($$this$firstOrNull$iv, $element$iv, $rt_s(1692), var$8, $rt_s(2672), cbg_Input$OnscreenKeyboardType_Default);
             break b;
         }
         if (cbgm_Rectangle_contains($this.$this$0.$photoButton, $p.$x0, $p.$y0)) {
-            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$0.$game), $rt_s(770), 0.0, 0.0, 6, null);
+            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$0.$game), $rt_s(768), 0.0, 0.0, 6, null);
             $p = $this.$this$0;
-            $p.$statusMessage = $rt_s(2668);
+            $p.$statusMessage = $rt_s(2673);
             $p.$statusTimer = 3.0;
+            $element$iv = $p.$game.$platform;
             $$this$firstOrNull$iv = new cvs_SettingsScreen$pickPhoto$lambda$_2_0;
-            $$this$firstOrNull$iv.$_032 = $p;
-            kji_Intrinsics_checkNotNullParameter($$this$firstOrNull$iv, $rt_s(840));
-            $p = jl_Boolean_valueOf(0);
-            $$this$firstOrNull$iv = $$this$firstOrNull$iv;
-            $p = $p;
-            cvs_SettingsScreen_pickPhoto$lambda$0($$this$firstOrNull$iv.$_032, $p.$value1);
+            $$this$firstOrNull$iv.$_034 = $p;
+            $p = $element$iv;
+            kji_Intrinsics_checkNotNullParameter($$this$firstOrNull$iv, $rt_s(838));
+            $element$iv = new cvsw_WebPlatformServices$pickPilotPhoto$lambda$_5_0;
+            $element$iv.$_059 = $p;
+            $element$iv.$_15 = $$this$firstOrNull$iv;
+            cvsw_WebLauncherKt_abrirSeletorDeFoto$js_body$_3(otji_JS_function(otji_JSWrapper_unwrap($element$iv), "recebeu"));
             break b;
         }
         if (cbgm_Rectangle_contains($this.$this$0.$graphics0, $p.$x0, $p.$y0)) {
             cvs_SaveManager_setGraphicsQuality(cvs_SkyVanguardGame_getSaveManager($this.$this$0.$game), (cvs_SaveManager_getGraphicsQuality(cvs_SkyVanguardGame_getSaveManager($this.$this$0.$game)) + 1 | 0) % 4 | 0);
-            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$0.$game), $rt_s(770), 0.0, 0.0, 6, null);
+            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$0.$game), $rt_s(768), 0.0, 0.0, 6, null);
             break b;
         }
         if (cbgm_Rectangle_contains($this.$this$0.$difficulty, $p.$x0, $p.$y0)) {
-            cvs_SaveManager_setDifficulty(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this.$this$0)), (cvs_SaveManager_getDifficulty(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this.$this$0))) + 1 | 0) % 4 | 0);
-            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(770), 0.0, 0.0, 6, null);
+            cvs_SaveManager_setDifficulty(cvs_SkyVanguardGame_getSaveManager($this.$this$0.$game), (cvs_SaveManager_getDifficulty(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this.$this$0))) + 1 | 0) % 4 | 0);
+            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(768), 0.0, 0.0, 6, null);
             break b;
         }
         if (cbgm_Rectangle_contains($this.$this$0.$controls, $p.$x0, $p.$y0)) {
             cvs_SaveManager_setControlMode(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this.$this$0)), (cvs_SaveManager_getControlMode(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this.$this$0))) + 1 | 0) % 3 | 0);
-            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(770), 0.0, 0.0, 6, null);
+            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(768), 0.0, 0.0, 6, null);
             break b;
         }
         if (cbgm_Rectangle_contains(cvs_SettingsScreen_access$getLanguage$p($this.$this$0), $p.$x0, $p.$y0)) {
@@ -47277,17 +47399,17 @@ let cvs_SettingsScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $b
             cvs_Langs_$callClinit();
             cvs_SaveManager_setLanguage($p, $screenX % (cvs_Langs_getCODES(cvs_Langs_INSTANCE)).$size() | 0);
             cvs_SkyVanguardGame_reloadFonts(cvs_BaseScreen_getGame($this.$this$0));
-            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(770), 0.0, 0.0, 6, null);
+            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(768), 0.0, 0.0, 6, null);
             break b;
         }
         if (cbgm_Rectangle_contains(cvs_SettingsScreen_access$getPrivacy$p($this.$this$0), $p.$x0, $p.$y0)) {
-            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(770), 0.0, 0.0, 6, null);
-            cvsw_WebPlatformServices_openUrl(cvs_SkyVanguardGame_getPlatform(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(2669));
+            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(768), 0.0, 0.0, 6, null);
+            cvsw_WebPlatformServices_openUrl(cvs_SkyVanguardGame_getPlatform(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(2674));
             break b;
         }
         if (!cbgm_Rectangle_contains(cvs_SettingsScreen_access$getBack$p($this.$this$0), $p.$x0, $p.$y0))
             break b;
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this.$this$0)), $rt_s(768), 0.0, 0.0, 6, null);
         cvs_SkyVanguardGame_openMainMenu(cvs_BaseScreen_getGame($this.$this$0));
     }
     return 1;
@@ -47300,7 +47422,7 @@ let cvs_CreditsScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $bu
     let $p;
     $p = cvs_BaseScreen_world($this.$this$012, $screenX, $screenY);
     if (cbgm_Rectangle_contains($this.$this$012.$back0, $p.$x0, $p.$y0)) {
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$012.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$012.$game), $rt_s(768), 0.0, 0.0, 6, null);
         cvs_SkyVanguardGame_openMainMenu($this.$this$012.$game);
     }
     return 1;
@@ -47463,17 +47585,17 @@ jnci_UTF8Encoder_arrayEncode = ($this, $inArray, $inPos, $inSize, $outArray, $ou
 };
 function cbgct_TeavmControllers$nativeInit$lambda$_9_0() {
     jl_Object.call(this);
-    this.$_045 = null;
+    this.$_047 = null;
 }
 let cbgct_TeavmControllers$nativeInit$lambda$_9_0_handleEvent$exported$0 = (var$1, var$2) => {
-    cbgct_TeavmControllers_handleGamepadConnect(var$1.$_045, var$2.gamepad);
+    cbgct_TeavmControllers_handleGamepadConnect(var$1.$_047, var$2.gamepad);
 };
 function cbgct_TeavmControllers$nativeInit$lambda$_9_1() {
     jl_Object.call(this);
-    this.$_04 = null;
+    this.$_05 = null;
 }
 let cbgct_TeavmControllers$nativeInit$lambda$_9_1_handleEvent$exported$0 = (var$1, var$2) => {
-    cbgct_TeavmControllers_handleGamepadDisconnect(var$1.$_04, var$2.gamepad);
+    cbgct_TeavmControllers_handleGamepadDisconnect(var$1.$_05, var$2.gamepad);
 };
 function cbgct_TeavmControllers$2() {
     jl_Object.call(this);
@@ -47958,7 +48080,7 @@ cbggg_PixmapTextureData_isPrepared = $this => {
 cbggg_PixmapTextureData_prepare = $this => {
     let var$1;
     var$1 = new cbgu_GdxRuntimeException;
-    jl_RuntimeException__init_(var$1, $rt_s(2670));
+    jl_RuntimeException__init_(var$1, $rt_s(2675));
     $rt_throw(var$1);
 },
 cbgm_MathUtils$Sin = $rt_classWithoutFields(),
@@ -48024,27 +48146,27 @@ cvs_PowerType_values = () => {
 },
 cvs_PowerType__clinit_ = () => {
     let var$1, var$2, var$3;
-    cvs_PowerType_ENERGY = cvs_PowerType__init_($rt_s(2671), 0);
-    cvs_PowerType_FIRE_RATE = cvs_PowerType__init_($rt_s(2672), 1);
+    cvs_PowerType_ENERGY = cvs_PowerType__init_($rt_s(2676), 0);
+    cvs_PowerType_FIRE_RATE = cvs_PowerType__init_($rt_s(2677), 1);
     cvs_PowerType_SPREAD = cvs_PowerType__init_($rt_s(1759), 2);
     cvs_PowerType_MISSILE = cvs_PowerType__init_($rt_s(1084), 3);
     cvs_PowerType_LASER = cvs_PowerType__init_($rt_s(1662), 4);
     cvs_PowerType_SHIELD = cvs_PowerType__init_($rt_s(1040), 5);
     cvs_PowerType_SPECIAL = cvs_PowerType__init_($rt_s(1041), 6);
-    cvs_PowerType_MULTIPLIER = cvs_PowerType__init_($rt_s(2673), 7);
-    cvs_PowerType_DRONE = cvs_PowerType__init_($rt_s(2674), 8);
-    cvs_PowerType_MAGNET = cvs_PowerType__init_($rt_s(2675), 9);
+    cvs_PowerType_MULTIPLIER = cvs_PowerType__init_($rt_s(2678), 7);
+    cvs_PowerType_DRONE = cvs_PowerType__init_($rt_s(2679), 8);
+    cvs_PowerType_MAGNET = cvs_PowerType__init_($rt_s(2680), 9);
     cvs_PowerType_CRITICAL = cvs_PowerType__init_($rt_s(1765), 10);
-    cvs_PowerType_CHAIN = cvs_PowerType__init_($rt_s(2676), 11);
+    cvs_PowerType_CHAIN = cvs_PowerType__init_($rt_s(2681), 11);
     cvs_PowerType_ARMOR = cvs_PowerType__init_($rt_s(1077), 12);
-    cvs_PowerType_REGEN = cvs_PowerType__init_($rt_s(2677), 13);
-    cvs_PowerType_PHOENIX = cvs_PowerType__init_($rt_s(2678), 14);
-    cvs_PowerType_ORBITAL = cvs_PowerType__init_($rt_s(2679), 15);
-    cvs_PowerType_TIME_CORE = cvs_PowerType__init_($rt_s(2680), 16);
-    cvs_PowerType_BLACK_HOLE = cvs_PowerType__init_($rt_s(2681), 17);
-    cvs_PowerType_BERSERK = cvs_PowerType__init_($rt_s(2682), 18);
-    cvs_PowerType_REFLECTOR = cvs_PowerType__init_($rt_s(2683), 19);
-    var$1 = cvs_PowerType__init_($rt_s(2684), 20);
+    cvs_PowerType_REGEN = cvs_PowerType__init_($rt_s(2682), 13);
+    cvs_PowerType_PHOENIX = cvs_PowerType__init_($rt_s(2683), 14);
+    cvs_PowerType_ORBITAL = cvs_PowerType__init_($rt_s(2684), 15);
+    cvs_PowerType_TIME_CORE = cvs_PowerType__init_($rt_s(2685), 16);
+    cvs_PowerType_BLACK_HOLE = cvs_PowerType__init_($rt_s(2686), 17);
+    cvs_PowerType_BERSERK = cvs_PowerType__init_($rt_s(2687), 18);
+    cvs_PowerType_REFLECTOR = cvs_PowerType__init_($rt_s(2688), 19);
+    var$1 = cvs_PowerType__init_($rt_s(2689), 20);
     cvs_PowerType_CLONE = var$1;
     var$2 = $rt_createArray(cvs_PowerType, 21);
     var$3 = var$2.data;
@@ -48086,75 +48208,67 @@ function cgxgtbwa_AssetLoadImpl$6() {
     a.$this$06 = null;
 }
 let cgxgtbwa_AssetLoadImpl$6_onSuccess = ($this, $url, $result) => {
-    let $ex, var$4, $data, $byteArray, var$7, var$8, var$9, var$10, var$11, var$12, var$13, $$je;
+    let $output, var$4, $ex, $byteArray, var$7, var$8, var$9, $data, var$11, var$12, $$je;
     ju_HashSet_remove($this.$this$06.$assetDownloading, $this.$val$assetPath);
     ju_HashSet_remove($this.$this$06.$assetFailed, $this.$val$assetPath);
-    $ex = $this.$val$assetPath;
+    $output = $this.$val$assetPath;
     var$4 = $result === null ? (-1) : $result.$data15.length;
-    $data = new jl_StringBuilder;
-    jl_AbstractStringBuilder__init_($data);
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($data, $rt_s(313)), $ex), $rt_s(250)), $url), $rt_s(279)), var$4);
-    jl_AbstractStringBuilder_toString($data);
-    $url = $this.$val$assetPath;
     $ex = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($ex);
-    jl_StringBuilder_append(jl_StringBuilder_append($ex, $rt_s(2685)), $url);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($ex, $rt_s(311)), $output), $rt_s(248)), $url), $rt_s(277)), var$4);
     jl_AbstractStringBuilder_toString($ex);
+    $url = $this.$val$assetPath;
+    $output = new jl_StringBuilder;
+    jl_AbstractStringBuilder__init_($output);
+    jl_StringBuilder_append(jl_StringBuilder_append($output, $rt_s(2690)), $url);
+    jl_AbstractStringBuilder_toString($output);
     $byteArray = cgxgtbwdt_TypedArrays_toByteArray($result.$data15);
-    $url = $this.$val$fileHandle;
-    $result = cgxgtbw_WebFiles_getFileDB($url.$teaFiles, $url.$type0);
-    $ex = ji_ByteArrayOutputStream__init_0(jl_Math_max0(512, jl_Math_min(4096, 8192)));
-    var$7 = new cgxgtbwf_FileDB$1;
-    var$7.$this$027 = $result;
-    var$7.$val$buffer = $ex;
-    var$7.$val$file = $url;
-    var$7.$val$append = 0;
-    var$7.$val$bufferSize = 4096;
+    $output = cgxgtbw_WebFileHandle_write($this.$val$fileHandle, 0, 4096);
     a: {
         try {
-            var$8 = $byteArray.data;
+            var$7 = $byteArray.data;
             $url = $this.$this$06;
             $ex = $this.$val$assetPath;
-            var$4 = var$8.length;
-            $data = jl_StringBuilder__init_();
-            jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($data, $rt_s(2686)), $ex), $rt_s(279)), var$4);
-            cgxgtbwa_AssetLoadImpl_log($url, $rt_s(2687), jl_StringBuilder_toString($data));
-            cgxgtbwf_FileDB$1_write(var$7, $byteArray);
+            var$4 = var$7.length;
+            var$8 = jl_StringBuilder__init_();
+            jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$8, $rt_s(2691)), $ex), $rt_s(277)), var$4);
+            cgxgtbwa_AssetLoadImpl_log($url, $rt_s(2692), jl_StringBuilder_toString(var$8));
+            cgxgtbwf_FileDB$1_write($output, $byteArray);
             break a;
         } catch ($$e) {
             $$je = $rt_wrapException($$e);
             if ($$je instanceof ji_IOException) {
                 $ex = $$je;
-                $url = $this.$this$06;
-                $result = $this.$val$assetPath;
-                var$9 = jl_String_valueOf($ex);
-                var$10 = jl_StringBuilder__init_();
-                jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$10, $rt_s(2688)), $result), $rt_s(271)), var$9);
-                cgxgtbwa_AssetLoadImpl_log($url, $rt_s(2687), jl_StringBuilder_toString(var$10));
-                $url = new cbgu_GdxRuntimeException;
-                $result = jl_String_valueOf($this.$val$fileHandle);
-                $data = jl_String_valueOf(cgxgtbw_WebFileHandle_type($this.$val$fileHandle));
-                var$11 = jl_StringBuilder__init_();
-                jl_StringBuilder_append3(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$11, $rt_s(2689)), $result), $rt_s(2385)), $data), 41);
-                cbgu_GdxRuntimeException__init_1($url, jl_StringBuilder_toString(var$11), $ex);
-                $rt_throw($url);
+                $result = $this.$this$06;
+                $url = $this.$val$assetPath;
+                var$8 = jl_String_valueOf($ex);
+                var$9 = jl_StringBuilder__init_();
+                jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$9, $rt_s(2693)), $url), $rt_s(269)), var$8);
+                cgxgtbwa_AssetLoadImpl_log($result, $rt_s(2692), jl_StringBuilder_toString(var$9));
+                var$8 = new cbgu_GdxRuntimeException;
+                $data = jl_String_valueOf($this.$val$fileHandle);
+                var$9 = jl_String_valueOf(cgxgtbw_WebFileHandle_type($this.$val$fileHandle));
+                $url = jl_StringBuilder__init_();
+                jl_StringBuilder_append3(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($url, $rt_s(2388)), $data), $rt_s(2385)), var$9), 41);
+                cbgu_GdxRuntimeException__init_0(var$8, jl_StringBuilder_toString($url), $ex);
+                $rt_throw(var$8);
             } else{
                 $url = $$je;
-                cbgu_StreamUtils_closeQuietly(var$7);
+                cbgu_StreamUtils_closeQuietly($output);
                 $result = $this.$val$assetPath;
-                $ex = new jl_StringBuilder;
-                jl_AbstractStringBuilder__init_($ex);
-                jl_StringBuilder_append(jl_StringBuilder_append($ex, $rt_s(2690)), $result);
-                jl_AbstractStringBuilder_toString($ex);
+                $output = new jl_StringBuilder;
+                jl_AbstractStringBuilder__init_($output);
+                jl_StringBuilder_append(jl_StringBuilder_append($output, $rt_s(2694)), $result);
+                jl_AbstractStringBuilder_toString($output);
                 $rt_throw($url);
             }
         }
     }
-    cbgu_StreamUtils_closeQuietly(var$7);
+    cbgu_StreamUtils_closeQuietly($output);
     $url = $this.$val$assetPath;
     $result = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($result);
-    jl_StringBuilder_append(jl_StringBuilder_append($result, $rt_s(2690)), $url);
+    jl_StringBuilder_append(jl_StringBuilder_append($result, $rt_s(2694)), $url);
     jl_AbstractStringBuilder_toString($result);
     $url = $this.$val$listener1;
     if ($url !== null) {
@@ -48162,51 +48276,51 @@ let cgxgtbwa_AssetLoadImpl$6_onSuccess = ($this, $url, $result) => {
         cgxgtbw_WebPreloadApplicationListener_subtractQueue($url.$this$025);
         $url = $url.$this$025;
         cgxgtbw_WebPreloadApplicationListener_addQueue($url);
-        $ex = $url.$assetLoader;
+        $output = $url.$assetLoader;
         $result = new cgxgtbw_WebPreloadApplicationListener$2;
         $result.$this$022 = $url;
-        $url = $ex;
+        $url = $output;
         $byteArray = (cgxgtbwa_TeaAssetManifest_getAssets()).data;
         var$4 = $byteArray.length;
         $url.$assetTotal = var$4;
-        var$12 = 0;
-        while (var$12 < var$4) {
-            $ex = $byteArray[var$12];
-            $data = new jl_StringBuilder;
-            jl_AbstractStringBuilder__init_($data);
-            jl_StringBuilder_append(jl_StringBuilder_append($data, $rt_s(2691)), $ex);
-            jl_AbstractStringBuilder_toString($data);
-            var$8 = (jl_String_split($ex, $rt_s(241))).data;
-            var$13 = var$8.length;
-            if (var$13 != 5) {
+        var$11 = 0;
+        while (var$11 < var$4) {
+            $output = $byteArray[var$11];
+            $ex = new jl_StringBuilder;
+            jl_AbstractStringBuilder__init_($ex);
+            jl_StringBuilder_append(jl_StringBuilder_append($ex, $rt_s(2695)), $output);
+            jl_AbstractStringBuilder_toString($ex);
+            var$7 = (jl_String_split($output, $rt_s(239))).data;
+            var$12 = var$7.length;
+            if (var$12 != 5) {
                 $url = new cbgu_GdxRuntimeException;
                 $result = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($result);
-                $data = jl_StringBuilder_append0(jl_StringBuilder_append($result, $rt_s(2692)), var$13);
-                jl_AbstractStringBuilder_append0($data, 32);
-                jl_StringBuilder_append($data, $ex);
+                $ex = jl_StringBuilder_append0(jl_StringBuilder_append($result, $rt_s(2696)), var$12);
+                jl_AbstractStringBuilder_append0($ex, 32);
+                jl_StringBuilder_append($ex, $output);
                 jl_RuntimeException__init_($url, jl_AbstractStringBuilder_toString($result));
                 $rt_throw($url);
             }
-            $ex = var$8[0];
-            $data = var$8[1];
-            var$7 = jl_String_trim(var$8[2]);
-            var$13 = jl_String_equals(var$8[4], $rt_s(2693));
-            var$7 = jl_String_trim(var$7);
-            if (!jl_String_isEmpty(var$7)) {
+            $output = var$7[0];
+            $ex = var$7[1];
+            $data = jl_String_trim(var$7[2]);
+            var$12 = jl_String_equals(var$7[4], $rt_s(2697));
+            $data = jl_String_trim($data);
+            if (!jl_String_isEmpty($data)) {
                 cbg_Files$FileType_$callClinit();
-                var$11 = cbg_Files$FileType_Internal;
-                if (jl_String_equals($ex, $rt_s(2694)))
-                    var$11 = cbg_Files$FileType_Classpath;
-                else if (jl_String_equals($ex, $rt_s(2393)))
-                    var$11 = cbg_Files$FileType_Local;
+                var$8 = cbg_Files$FileType_Internal;
+                if (jl_String_equals($output, $rt_s(2698)))
+                    var$8 = cbg_Files$FileType_Classpath;
+                else if (jl_String_equals($output, $rt_s(2396)))
+                    var$8 = cbg_Files$FileType_Local;
                 cgxgtbwa_AssetType_$callClinit();
                 var$9 = cgxgtbwa_AssetType_Binary;
-                if (jl_String_equals($data, $rt_s(542)))
+                if (jl_String_equals($ex, $rt_s(540)))
                     var$9 = cgxgtbwa_AssetType_Directory;
-                cgxgtbwa_AssetLoadImpl_addAssetToQueue($url, var$7, var$9, var$11, null, var$13);
+                cgxgtbwa_AssetLoadImpl_addAssetToQueue($url, $data, var$9, var$8, null, var$12);
             }
-            var$12 = var$12 + 1 | 0;
+            var$11 = var$11 + 1 | 0;
         }
         $result = $result;
         cgxgtbw_WebPreloadApplicationListener_subtractQueue($result.$this$022);
@@ -48321,10 +48435,10 @@ let kt_DelimitedRangesSequence$iterator$1_calcNext = $this => {
                     var$5 = var$5;
                     var$6 = var$6;
                     $match = $match;
-                    var$7 = var$5.$_03;
+                    var$7 = var$5.$_04;
                     $index = var$5.$_10;
                     var$8 = $match.$value;
-                    kji_Intrinsics_checkNotNullParameter(var$6, $rt_s(2695));
+                    kji_Intrinsics_checkNotNullParameter(var$6, $rt_s(2699));
                     $match = kt_StringsKt__StringsKt_findAnyOf$StringsKt__StringsKt(var$6, var$7, var$8, $index, 0);
                     $match = $match === null ? null : k_TuplesKt_to($match.$first4, jl_Integer_valueOf($match.$second.$nativeString.length));
                     if ($match === null) {
@@ -48526,12 +48640,12 @@ cbgu_Justify_matchChar = ($this, $ch) => {
 cbgu_Justify__clinit_ = () => {
     let var$1, var$2, var$3;
     cbgu_Justify_None = cbgu_Justify__init_($rt_s(44), 0);
-    cbgu_Justify_ParagraphBySpace = cbgu_Justify__init_($rt_s(2696), 1);
-    cbgu_Justify_ParagraphByGlyph = cbgu_Justify__init_($rt_s(2697), 2);
-    cbgu_Justify_WrappedLinesBySpace = cbgu_Justify__init_($rt_s(2698), 3);
-    cbgu_Justify_WrappedLinesByGlyph = cbgu_Justify__init_($rt_s(2699), 4);
-    cbgu_Justify_AllLinesBySpace = cbgu_Justify__init_($rt_s(2700), 5);
-    var$1 = cbgu_Justify__init_($rt_s(2701), 6);
+    cbgu_Justify_ParagraphBySpace = cbgu_Justify__init_($rt_s(2700), 1);
+    cbgu_Justify_ParagraphByGlyph = cbgu_Justify__init_($rt_s(2701), 2);
+    cbgu_Justify_WrappedLinesBySpace = cbgu_Justify__init_($rt_s(2702), 3);
+    cbgu_Justify_WrappedLinesByGlyph = cbgu_Justify__init_($rt_s(2703), 4);
+    cbgu_Justify_AllLinesBySpace = cbgu_Justify__init_($rt_s(2704), 5);
+    var$1 = cbgu_Justify__init_($rt_s(2705), 6);
     cbgu_Justify_AllLinesByGlyph = var$1;
     var$2 = $rt_createArray(cbgu_Justify, 7);
     var$3 = var$2.data;
@@ -48704,13 +48818,13 @@ let cgxgtbwa_AssetDownloadImpl$1_onFailure = ($this, $url) => {
     let var$2, var$3, var$4;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(280)), $url);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(278)), $url);
     jl_AbstractStringBuilder_toString(var$2);
     if ($this.$this$019.$showLogs) {
         var$2 = jl_System_err();
         var$3 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$3);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2702)), $url);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2706)), $url);
         var$3 = jl_AbstractStringBuilder_toString(var$3);
         otcic_JsConsolePrintStream_println(var$2, var$3);
     }
@@ -48722,12 +48836,12 @@ let cgxgtbwa_AssetDownloadImpl$1_onFailure = ($this, $url) => {
         var$3 = var$2.$val$assetPath;
         var$4 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$4);
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(313)), var$3), $rt_s(250)), $url);
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(311)), var$3), $rt_s(248)), $url);
         jl_AbstractStringBuilder_toString(var$4);
         $url = var$2.$val$assetPath;
         var$3 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$3);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2703)), $url);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2707)), $url);
         jl_AbstractStringBuilder_toString(var$3);
         cgxgtbwa_AssetLoadImpl_downloadMultiAssets(var$2.$this$06);
     }
@@ -48738,13 +48852,13 @@ cgxgtbwa_AssetDownloadImpl$1_onSuccess = ($this, var$1, var$2) => {
     var$3 = var$2 === null ? 0 : 1;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(280)), var$1), $rt_s(2704)), var$3);
+    jl_StringBuilder_append2(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(278)), var$1), $rt_s(2708)), var$3);
     jl_AbstractStringBuilder_toString(var$4);
     if ($this.$this$019.$showLogs) {
         var$5 = jl_System_out();
         var$6 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$6);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(2705)), var$1);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$6, $rt_s(2709)), var$1);
         var$4 = jl_AbstractStringBuilder_toString(var$6);
         otcic_JsConsolePrintStream_println(var$5, var$4);
     }
@@ -48786,8 +48900,8 @@ cbggg_HdpiMode__init_ = (var_0, var_1) => {
 },
 cbggg_HdpiMode__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbggg_HdpiMode_Logical = cbggg_HdpiMode__init_($rt_s(2706), 0);
-    var$1 = cbggg_HdpiMode__init_($rt_s(2707), 1);
+    cbggg_HdpiMode_Logical = cbggg_HdpiMode__init_($rt_s(2710), 0);
+    var$1 = cbggg_HdpiMode__init_($rt_s(2711), 1);
     cbggg_HdpiMode_Pixels = var$1;
     var$2 = $rt_createArray(cbggg_HdpiMode, 2);
     var$3 = var$2.data;
@@ -48817,7 +48931,7 @@ cbgggf_FreeType$Glyph_toBitmap = ($this, $renderMode) => {
     $renderMode = Module._c_FreeType_getLastErrorCode();
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2708)), $renderMode);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2712)), $renderMode);
     jl_RuntimeException__init_(var$3, jl_AbstractStringBuilder_toString(var$4));
     $rt_throw(var$3);
 },
@@ -48825,7 +48939,7 @@ cbgggf_FreeType$Glyph_getBitmap = $this => {
     let var$1;
     if (!$this.$rendered) {
         var$1 = new cbgu_GdxRuntimeException;
-        jl_RuntimeException__init_(var$1, $rt_s(2709));
+        jl_RuntimeException__init_(var$1, $rt_s(2713));
         $rt_throw(var$1);
     }
     var$1 = new cbgggf_FreeType$Bitmap;
@@ -48837,7 +48951,7 @@ cbgggf_FreeType$Glyph_getLeft = $this => {
     if ($this.$rendered)
         return Module._c_Glyph_getLeft($this.$address);
     var$1 = new cbgu_GdxRuntimeException;
-    jl_RuntimeException__init_(var$1, $rt_s(2709));
+    jl_RuntimeException__init_(var$1, $rt_s(2713));
     $rt_throw(var$1);
 },
 cbgggf_FreeType$Glyph_getTop = $this => {
@@ -48845,7 +48959,7 @@ cbgggf_FreeType$Glyph_getTop = $this => {
     if ($this.$rendered)
         return Module._c_Glyph_getTop($this.$address);
     var$1 = new cbgu_GdxRuntimeException;
-    jl_RuntimeException__init_(var$1, $rt_s(2709));
+    jl_RuntimeException__init_(var$1, $rt_s(2713));
     $rt_throw(var$1);
 },
 cbgggf_FreeType$Bitmap = $rt_classWithoutFields(cbgggf_FreeType$Pointer),
@@ -49068,8 +49182,8 @@ cvs_ShopScreen_render = ($this, $delta) => {
     $rect = cvs_SkyVanguardGame_getFont($this.$game);
     cbgg_Color_$callClinit();
     var$5 = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(824));
-    cvs_BaseScreen_drawTracked($this, $rt_s(2710), 540.0, 1810.0, $rect, var$5, 8.0);
+    kji_Intrinsics_checkNotNullExpressionValue(var$5, $rt_s(822));
+    cvs_BaseScreen_drawTracked($this, $rt_s(2714), 540.0, 1810.0, $rect, var$5, 8.0);
     cvs_BaseScreen_drawCentered($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1636)), 1735.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.44999998807907104, 0.9399999976158142, 1.0, 1.0));
     $$this$forEachIndexed$iv = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(973));
     $index$iv = (cvs_SkyVanguardGame_getSaveManager($this.$game)).$creditsCache;
@@ -49093,7 +49207,7 @@ cvs_ShopScreen_render = ($this, $delta) => {
     cvs_BaseScreen_drawButton$default(var$3, $this.$back1, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1638)), 0, 4, null);
     cvs_GamepadInput_poll($this.$game.$gamepad);
     if (cvs_GamepadInput_getJustB($this.$game.$gamepad)) {
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.0, 0.0, 6, null);
         cvs_SkyVanguardGame_openHangar($this.$game);
     }
 },
@@ -49111,7 +49225,7 @@ cvs_ShopScreen_drawOffer = ($this, $rect, $offer) => {
     var$11 = cvs_SkyVanguardGame_getSmallFont($this.$game);
     cbgg_Color_$callClinit();
     var$12 = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue(var$12, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue(var$12, $rt_s(822));
     cvs_BaseScreen_drawLabel($this, var$8, var$9, var$10, var$11, var$12);
     var$8 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(981));
     $affordable = cvs_ShopScreen_allowedMax($this);
@@ -49128,7 +49242,7 @@ cvs_ShopScreen_drawOffer = ($this, $rect, $offer) => {
     var$8 = cvs_ShopScreen_offerKey($this, var$8);
     var$11 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$11);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$11, var$8), $rt_s(2711));
+    jl_StringBuilder_append(jl_StringBuilder_append(var$11, var$8), $rt_s(2715));
     cvs_BaseScreen_drawLabel($this, cvs_LocalizationManager_get($offer, jl_AbstractStringBuilder_toString(var$11)), $rect.$x + 24.0, $rect.$y + 118.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.7200000286102295, 0.8399999737739563, 0.9399999976158142, 1.0));
     if ($capped)
         $offer = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(983));
@@ -49150,14 +49264,14 @@ cvs_ShopScreen_drawOffer = ($this, $rect, $offer) => {
 otjb_TimerHandler = $rt_classWithoutFields(0);
 function cgxgtbwa_AssetDownloadImpl$loadBinary$lambda$_3_0() {
     let a = this; jl_Object.call(a);
-    a.$_035 = null;
-    a.$_113 = null;
+    a.$_037 = null;
+    a.$_114 = null;
     a.$_26 = null;
     a.$_34 = 0;
 }
 let cgxgtbwa_AssetDownloadImpl$loadBinary$lambda$_3_0_onTimer$exported$0 = var$1 => {
     var$1 = var$1;
-    cgxgtbwa_AssetDownloadImpl_loadBinaryInternally(var$1.$_035, 1, var$1.$_113, var$1.$_26, var$1.$_34);
+    cgxgtbwa_AssetDownloadImpl_loadBinaryInternally(var$1.$_037, 1, var$1.$_114, var$1.$_26, var$1.$_34);
 };
 function cvs_GameplayScreen() {
     let a = this; cvs_BaseScreen.call(a);
@@ -49369,11 +49483,11 @@ let cvs_GameplayScreen__init_0 = ($this, $game, $stageIndex) => {
     $this.$superMissileRegion$delegate = k_LazyKt__LazyJVMKt_lazy(cvs_GameplayScreen$_init_$lambda$_0_1__init_($game));
     var$3 = $rt_createArray(ju_List, 5);
     var$6 = var$3.data;
-    var$6[0] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2712), $rt_s(2713), $rt_s(2714), $rt_s(2715), $rt_s(2716), $rt_s(2717)]));
-    var$6[1] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2718), $rt_s(2719), $rt_s(2720), $rt_s(2721), $rt_s(2722), $rt_s(2723)]));
-    var$6[2] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2724), $rt_s(2725), $rt_s(2726), $rt_s(2727), $rt_s(2728), $rt_s(2729)]));
-    var$6[3] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2730), $rt_s(2731), $rt_s(2732), $rt_s(2733), $rt_s(2734), $rt_s(2735)]));
-    var$6[4] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2736), $rt_s(2737), $rt_s(2738), $rt_s(2739), $rt_s(2740), $rt_s(2741)]));
+    var$6[0] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2716), $rt_s(2717), $rt_s(2718), $rt_s(2719), $rt_s(2720), $rt_s(2721)]));
+    var$6[1] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2722), $rt_s(2723), $rt_s(2724), $rt_s(2725), $rt_s(2726), $rt_s(2727)]));
+    var$6[2] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2728), $rt_s(2729), $rt_s(2730), $rt_s(2731), $rt_s(2732), $rt_s(2733)]));
+    var$6[3] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2734), $rt_s(2735), $rt_s(2736), $rt_s(2737), $rt_s(2738), $rt_s(2739)]));
+    var$6[4] = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2740), $rt_s(2741), $rt_s(2742), $rt_s(2743), $rt_s(2744), $rt_s(2745)]));
     $this.$stageBackgrounds = kc_CollectionsKt__CollectionsKt_listOf(var$3);
     $this.$firePointer = (-1);
     $this.$fireButton = cbgm_Rectangle__init_(828.0, 300.0, 190.0, 190.0);
@@ -49532,7 +49646,7 @@ cvs_GameplayScreen_show = $this => {
     var$4 = $this.$stage0.$countryIndex;
     var$3 = (0 > var$4 ? 0 : var$4 >= var$3.$size() ? 0 : 1) ? var$3.$get(var$4) : kc_CollectionsKt__CollectionsKt_emptyList();
     var$5 = $this.$stage0.$phase - 1 | 0;
-    var$3 = (0 > var$5 ? 0 : var$5 >= var$3.$size() ? 0 : 1) ? var$3.$get(var$5) : $rt_s(2712);
+    var$3 = (0 > var$5 ? 0 : var$5 >= var$3.$size() ? 0 : 1) ? var$3.$get(var$5) : $rt_s(2716);
     cbgg_Texture__init_0(var$1, cgxgtbw_WebFiles_internal($lastCountry, var$3));
     cbgg_Texture$TextureFilter_$callClinit();
     $lastCountry = cbgg_Texture$TextureFilter_Linear;
@@ -49553,15 +49667,15 @@ cvs_GameplayScreen_show = $this => {
     $this.$playerLifePercent = 100.0;
     $this.$lives = 3;
     cvs_GameplayScreen_setShield($this, $this.$shieldMax);
-    $lastCountry = cgxgtbw_WebPreferences_getString((cvs_SkyVanguardGame_getSaveManager($this.$game)).$prefs, $rt_s(2742), $rt_s(66));
-    kji_Intrinsics_checkNotNullExpressionValue($lastCountry, $rt_s(752));
+    $lastCountry = cgxgtbw_WebPreferences_getString((cvs_SkyVanguardGame_getSaveManager($this.$game)).$prefs, $rt_s(2746), $rt_s(66));
+    kji_Intrinsics_checkNotNullExpressionValue($lastCountry, $rt_s(750));
     var$5 = $lastCountry.$nativeString.length <= 0 ? 0 : 1;
     if (var$5 && !kji_Intrinsics_areEqual($lastCountry, $this.$stage0.$country0))
         $this.$fireRateStacks = kr_RangesKt___RangesKt_coerceAtLeast0($this.$fireRateStacks / 2 | 0, 0);
     var$1 = cvs_SkyVanguardGame_getSaveManager($this.$game);
     var$3 = $this.$stage0.$country0;
-    kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(2453));
-    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putString(var$1.$prefs, $rt_s(2742), var$3));
+    kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(2458));
+    cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putString(var$1.$prefs, $rt_s(2746), var$3));
     cvs_GameplayScreen_recomputePowerState($this);
     if ($this.$game.$pendingRewardMessage.$nativeString.length <= 0 ? 0 : 1) {
         $lastCountry = $this.$game;
@@ -49572,7 +49686,7 @@ cvs_GameplayScreen_show = $this => {
     var$5 = ($this.$stage0.$globalIndex % 15 | 0) + 1 | 0;
     var$1 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$1);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$1, $rt_s(2743)), var$5);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$1, $rt_s(2747)), var$5);
     $lastCountry = jl_AbstractStringBuilder_toString(var$1);
     cvs_AudioManager_playMusic(cvs_SkyVanguardGame_getAudioManager($this.$game), $lastCountry);
     var$1 = cbg_Gdx_input;
@@ -49781,7 +49895,7 @@ cvs_GameplayScreen_update = ($this, $dt) => {
         jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($it, $$this$none$iv), $rt_s(68)), $element$iv);
         $this.$warningText = jl_StringBuilder_toString($it);
         $this.$bossWarningTimer = 3.200000047683716;
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this)), $rt_s(769), 0.8999999761581421, 0.0, 4, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this)), $rt_s(767), 0.8999999761581421, 0.0, 4, null);
     }
     if ($this.$bossWarned && $this.$bossWarningTimer <= 0.0 && !cvs_BossState_getActive($this.$boss) && !cvs_BossState_getDefeated($this.$boss) && $bossGateOpen) {
         cvs_GameplayScreen_clearHordeForBoss($this);
@@ -49846,7 +49960,7 @@ cvs_GameplayScreen_handleKeyboard = ($this, $dt) => {
         $this.$paused = var$4;
         if (!var$4)
             $this.$pauseMessage = $rt_s(66);
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.0, 0.0, 6, null);
     }
     if ($this.$adOfferActive) {
         if (cvs_GamepadInput_getJustA($this.$game.$gamepad))
@@ -49926,100 +50040,90 @@ cvs_GameplayScreen_loadEnemyVisuals = $this => {
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-18.0)), jl_Float_valueOf(44.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(18.0), jl_Float_valueOf(44.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2744), $rt_s(2745), 126.0, 126.0, 180.0, 42.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2748), $rt_s(2749), 126.0, 126.0, 180.0, 42.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-58.0)), jl_Float_valueOf(45.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(58.0), jl_Float_valueOf(45.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2539), $rt_s(2746), 220.0, 176.0, 180.0, 76.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2544), $rt_s(2750), 220.0, 176.0, 180.0, 76.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-36.0)), jl_Float_valueOf((-8.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(36.0), jl_Float_valueOf((-8.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2747), $rt_s(2748), 116.0, 116.0, 0.0, 40.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2751), $rt_s(2752), 116.0, 116.0, 0.0, 40.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf((-45.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2749), $rt_s(2750), 132.0, 132.0, 0.0, 56.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2753), $rt_s(2754), 132.0, 132.0, 0.0, 56.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf(72.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2545), $rt_s(2751), 128.0, 176.0, 180.0, 60.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2550), $rt_s(2755), 128.0, 176.0, 180.0, 60.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-28.0)), jl_Float_valueOf((-42.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(28.0), jl_Float_valueOf((-42.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2526), $rt_s(2752), 132.0, 132.0, 0.0, 58.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2531), $rt_s(2756), 132.0, 132.0, 0.0, 58.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf(52.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2521), $rt_s(2753), 132.0, 132.0, 180.0, 54.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2526), $rt_s(2757), 132.0, 132.0, 180.0, 54.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(45.0), jl_Float_valueOf(0.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2754), $rt_s(2755), 132.0, 132.0, (-90.0), 54.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2758), $rt_s(2759), 132.0, 132.0, (-90.0), 54.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-26.0)), jl_Float_valueOf(90.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(26.0), jl_Float_valueOf(90.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2516), $rt_s(2756), 118.0, 232.0, 180.0, 76.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2521), $rt_s(2760), 118.0, 232.0, 180.0, 76.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-24.0)), jl_Float_valueOf((-36.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(24.0), jl_Float_valueOf((-36.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2757), $rt_s(2758), 132.0, 132.0, 0.0, 58.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2761), $rt_s(2762), 132.0, 132.0, 0.0, 58.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-18.0)), jl_Float_valueOf(78.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(18.0), jl_Float_valueOf(78.0));
-    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2600), $rt_s(2759), 96.0, 202.0, 180.0, 62.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$add($this, $rt_s(2605), $rt_s(2763), 96.0, 202.0, 180.0, 62.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-18.0)), jl_Float_valueOf(44.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(18.0), jl_Float_valueOf(44.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2760), $rt_s(2761), 126.0, 126.0, 180.0, 42.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2764), $rt_s(2765), 126.0, 126.0, 180.0, 42.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-18.0)), jl_Float_valueOf(44.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(18.0), jl_Float_valueOf(44.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2762), $rt_s(2763), 126.0, 126.0, 180.0, 42.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2766), $rt_s(2767), 126.0, 126.0, 180.0, 42.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-34.0)), jl_Float_valueOf(30.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(34.0), jl_Float_valueOf(30.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2764), $rt_s(2765), 116.0, 116.0, 180.0, 40.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2768), $rt_s(2769), 116.0, 116.0, 180.0, 40.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-58.0)), jl_Float_valueOf(45.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(58.0), jl_Float_valueOf(45.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2766), $rt_s(2767), 220.0, 176.0, 180.0, 76.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2770), $rt_s(2771), 220.0, 176.0, 180.0, 76.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf(72.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2768), $rt_s(2769), 132.0, 176.0, 180.0, 60.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2772), $rt_s(2773), 132.0, 176.0, 180.0, 60.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-22.0)), jl_Float_valueOf((-44.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(22.0), jl_Float_valueOf((-44.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2770), $rt_s(2771), 136.0, 136.0, 0.0, 46.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2774), $rt_s(2775), 136.0, 136.0, 0.0, 46.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-56.0)), jl_Float_valueOf(44.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(56.0), jl_Float_valueOf(44.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2772), $rt_s(2773), 196.0, 147.0, 180.0, 66.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2776), $rt_s(2777), 196.0, 147.0, 180.0, 66.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-24.0)), jl_Float_valueOf((-44.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(24.0), jl_Float_valueOf((-44.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2774), $rt_s(2775), 148.0, 148.0, 0.0, 50.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2778), $rt_s(2779), 148.0, 148.0, 0.0, 50.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf((-34.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2776), $rt_s(2777), 156.0, 85.0, 0.0, 46.0, var$1);
-    var$1 = $rt_createArray(k_Pair, 2);
-    var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-46.0)), jl_Float_valueOf((-52.0)));
-    var$2[1] = k_TuplesKt_to(jl_Float_valueOf(46.0), jl_Float_valueOf((-52.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2778), $rt_s(2779), 210.0, 158.0, 0.0, 74.0, var$1);
-    var$1 = $rt_createArray(k_Pair, 2);
-    var$2 = var$1.data;
-    var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-46.0)), jl_Float_valueOf(52.0));
-    var$2[1] = k_TuplesKt_to(jl_Float_valueOf(46.0), jl_Float_valueOf(52.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2780), $rt_s(2781), 210.0, 158.0, 180.0, 74.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2780), $rt_s(2781), 156.0, 85.0, 0.0, 46.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-46.0)), jl_Float_valueOf((-52.0)));
@@ -50027,26 +50131,36 @@ cvs_GameplayScreen_loadEnemyVisuals = $this => {
     cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2782), $rt_s(2783), 210.0, 158.0, 0.0, 74.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
+    var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-46.0)), jl_Float_valueOf(52.0));
+    var$2[1] = k_TuplesKt_to(jl_Float_valueOf(46.0), jl_Float_valueOf(52.0));
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2784), $rt_s(2785), 210.0, 158.0, 180.0, 74.0, var$1);
+    var$1 = $rt_createArray(k_Pair, 2);
+    var$2 = var$1.data;
+    var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-46.0)), jl_Float_valueOf((-52.0)));
+    var$2[1] = k_TuplesKt_to(jl_Float_valueOf(46.0), jl_Float_valueOf((-52.0)));
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2786), $rt_s(2787), 210.0, 158.0, 0.0, 74.0, var$1);
+    var$1 = $rt_createArray(k_Pair, 2);
+    var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-40.0)), jl_Float_valueOf((-48.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(40.0), jl_Float_valueOf((-48.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2784), $rt_s(2785), 210.0, 158.0, 0.0, 72.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2788), $rt_s(2789), 210.0, 158.0, 0.0, 72.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-38.0)), jl_Float_valueOf((-56.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(38.0), jl_Float_valueOf((-56.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2786), $rt_s(2787), 180.0, 180.0, 0.0, 70.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2790), $rt_s(2791), 180.0, 180.0, 0.0, 70.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-34.0)), jl_Float_valueOf(58.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(34.0), jl_Float_valueOf(58.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2788), $rt_s(2789), 176.0, 176.0, 180.0, 68.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2792), $rt_s(2793), 176.0, 176.0, 180.0, 68.0, var$1);
     $i = 0;
     while ($i < 4) {
         var$4 = jl_StringBuilder__init_();
-        jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2790)), $i);
+        jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2794)), $i);
         var$5 = jl_StringBuilder_toString(var$4);
         var$4 = jl_StringBuilder__init_();
-        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2791)), $i), $rt_s(198));
+        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2795)), $i), $rt_s(198));
         var$6 = jl_StringBuilder_toString(var$4);
         var$1 = $rt_createArray(k_Pair, 1);
         var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf((-52.0)));
@@ -50056,10 +50170,10 @@ cvs_GameplayScreen_loadEnemyVisuals = $this => {
     $i = 4;
     while ($i < 7) {
         var$4 = jl_StringBuilder__init_();
-        jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2790)), $i);
+        jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2794)), $i);
         var$5 = jl_StringBuilder_toString(var$4);
         var$4 = jl_StringBuilder__init_();
-        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2791)), $i), $rt_s(198));
+        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(var$4, $rt_s(2795)), $i), $rt_s(198));
         var$6 = jl_StringBuilder_toString(var$4);
         var$1 = $rt_createArray(k_Pair, 1);
         var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf((-34.0)));
@@ -50070,43 +50184,43 @@ cvs_GameplayScreen_loadEnemyVisuals = $this => {
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-50.0)), jl_Float_valueOf((-50.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(50.0), jl_Float_valueOf((-50.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2792), $rt_s(2793), 212.0, 159.0, 0.0, 78.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2796), $rt_s(2797), 212.0, 159.0, 0.0, 78.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf((-62.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2794), $rt_s(2795), 190.0, 190.0, 0.0, 76.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2798), $rt_s(2799), 190.0, 190.0, 0.0, 76.0, var$1);
     var$1 = $rt_createArray(k_Pair, 1);
     var$1.data[0] = k_TuplesKt_to(jl_Float_valueOf(0.0), jl_Float_valueOf((-42.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2796), $rt_s(2797), 212.0, 115.0, 0.0, 74.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2800), $rt_s(2801), 212.0, 115.0, 0.0, 74.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-70.0)), jl_Float_valueOf(96.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(70.0), jl_Float_valueOf(96.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2798), $rt_s(2799), 268.0, 268.0, 180.0, 122.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2802), $rt_s(2803), 268.0, 268.0, 180.0, 122.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-80.0)), jl_Float_valueOf(82.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(80.0), jl_Float_valueOf(82.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2800), $rt_s(2801), 300.0, 225.0, 180.0, 124.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2804), $rt_s(2805), 300.0, 225.0, 180.0, 124.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-76.0)), jl_Float_valueOf((-92.0)));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(76.0), jl_Float_valueOf((-92.0)));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2802), $rt_s(2803), 280.0, 280.0, 0.0, 128.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2806), $rt_s(2807), 280.0, 280.0, 0.0, 128.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-70.0)), jl_Float_valueOf(96.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(70.0), jl_Float_valueOf(96.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2804), $rt_s(2805), 268.0, 268.0, 180.0, 122.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2808), $rt_s(2809), 268.0, 268.0, 180.0, 122.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-72.0)), jl_Float_valueOf(96.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(72.0), jl_Float_valueOf(96.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2806), $rt_s(2807), 272.0, 272.0, 180.0, 124.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2810), $rt_s(2811), 272.0, 272.0, 180.0, 124.0, var$1);
     var$1 = $rt_createArray(k_Pair, 2);
     var$2 = var$1.data;
     var$2[0] = k_TuplesKt_to(jl_Float_valueOf((-72.0)), jl_Float_valueOf(96.0));
     var$2[1] = k_TuplesKt_to(jl_Float_valueOf(72.0), jl_Float_valueOf(96.0));
-    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2808), $rt_s(2809), 272.0, 272.0, 180.0, 124.0, var$1);
+    cvs_GameplayScreen_loadEnemyVisuals$addOptional($this, $rt_s(2812), $rt_s(2813), 272.0, 272.0, 180.0, 124.0, var$1);
 },
 cvs_GameplayScreen_lifeBarColor = ($this, $ratio) => {
     return $ratio > 0.6600000262260437 ? cbgg_Color__init_(0.25, 0.949999988079071, 0.41999998688697815, 1.0) : $ratio > 0.41999998688697815 ? cbgg_Color__init_(1.0, 0.8500000238418579, 0.15000000596046448, 1.0) : !($ratio > 0.20000000298023224) ? cbgg_Color__init_(1.0, 0.2199999988079071, 0.18000000715255737, 1.0) : cbgg_Color__init_(1.0, 0.44999998807907104, 0.10000000149011612, 1.0);
@@ -50139,7 +50253,7 @@ cvs_GameplayScreen_breakBossShield = $this => {
     var$1 = $this.$boss;
     cvs_GameplayScreen_spawnExplosion($this, var$1.$x3, var$1.$y3, 30);
     $this.$flashTimer = jl_Math_max($this.$flashTimer, 0.18000000715255737);
-    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(771), 1.0, 0.6000000238418579);
+    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(769), 1.0, 0.6000000238418579);
     $this.$warningText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1009));
     $this.$bossWarningTimer = 1.600000023841858;
 },
@@ -50154,7 +50268,7 @@ cvs_GameplayScreen_renewBossShield = ($this, $seconds, $fraction) => {
     $this.$bossFightTime = 0.0;
     $this.$warningText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1019));
     $this.$bossWarningTimer = 1.7999999523162842;
-    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(771), 0.8999999761581421, 1.100000023841858);
+    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(769), 0.8999999761581421, 1.100000023841858);
 },
 cvs_GameplayScreen_updateSonicWaves = ($this, $dt) => {
     let var$2, var$3, $w, var$5, $prev, $b, $e, $d, $iter;
@@ -50283,25 +50397,25 @@ cvs_GameplayScreen_variantsFor = ($this, $type) => {
         cvs_GameplayScreen$WhenMappings_$callClinit();
         switch (cvs_GameplayScreen$WhenMappings_$EnumSwitchMapping$1.data[$type.$ordinal0]) {
             case 1:
-                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2744), $rt_s(2770), $rt_s(2776)]));
+                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2748), $rt_s(2774), $rt_s(2780)]));
                 break a;
             case 2:
-                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2744), $rt_s(2747), $rt_s(2770), $rt_s(2774)]));
+                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2748), $rt_s(2751), $rt_s(2774), $rt_s(2778)]));
                 break a;
             case 3:
-                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2539), $rt_s(2516), $rt_s(2772), $rt_s(2778), $rt_s(2780), $rt_s(2782), $rt_s(2784)]));
+                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2544), $rt_s(2521), $rt_s(2776), $rt_s(2782), $rt_s(2784), $rt_s(2786), $rt_s(2788)]));
                 break a;
             case 4:
-                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2747), $rt_s(2776), $rt_s(2774)]));
+                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2751), $rt_s(2780), $rt_s(2778)]));
                 break a;
             case 5:
-                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2749), $rt_s(2545), $rt_s(2526), $rt_s(2521), $rt_s(2757), $rt_s(2600), $rt_s(2810), $rt_s(2811), $rt_s(2812), $rt_s(2813), $rt_s(2814), $rt_s(2815), $rt_s(2816), $rt_s(2792), $rt_s(2794), $rt_s(2796), $rt_s(2786), $rt_s(2788)]));
+                $base = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2753), $rt_s(2550), $rt_s(2531), $rt_s(2526), $rt_s(2761), $rt_s(2605), $rt_s(2814), $rt_s(2815), $rt_s(2816), $rt_s(2817), $rt_s(2818), $rt_s(2819), $rt_s(2820), $rt_s(2796), $rt_s(2798), $rt_s(2800), $rt_s(2790), $rt_s(2792)]));
                 break a;
             case 6:
                 var$3 = ($this.$stage0.$globalIndex + 3 | 0) % 6 | 0;
                 $base = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($base);
-                jl_StringBuilder_append0(jl_StringBuilder_append($base, $rt_s(2817)), var$3);
+                jl_StringBuilder_append0(jl_StringBuilder_append($base, $rt_s(2821)), var$3);
                 $base = kc_CollectionsKt__CollectionsJVMKt_listOf(jl_AbstractStringBuilder_toString($base));
                 break a;
             default:
@@ -50313,19 +50427,19 @@ cvs_GameplayScreen_variantsFor = ($this, $type) => {
     b: {
         switch (cvs_GameplayScreen$WhenMappings_$EnumSwitchMapping$1.data[$type.$ordinal0]) {
             case 1:
-                $reserved = $rt_s(2760);
-                break b;
-            case 2:
-                $reserved = $rt_s(2762);
-                break b;
-            case 3:
-                $reserved = $rt_s(2766);
-                break b;
-            case 4:
                 $reserved = $rt_s(2764);
                 break b;
-            case 5:
+            case 2:
+                $reserved = $rt_s(2766);
+                break b;
+            case 3:
+                $reserved = $rt_s(2770);
+                break b;
+            case 4:
                 $reserved = $rt_s(2768);
+                break b;
+            case 5:
+                $reserved = $rt_s(2772);
                 break b;
             case 6:
                 $reserved = null;
@@ -50338,7 +50452,7 @@ cvs_GameplayScreen_variantsFor = ($this, $type) => {
     }
     if ($reserved !== null && ju_HashMap_containsKey($this.$enemyVisuals, $reserved)) {
         $type = $base;
-        kji_Intrinsics_checkNotNullParameter($type, $rt_s(841));
+        kji_Intrinsics_checkNotNullParameter($type, $rt_s(839));
         $base = ju_ArrayList__init_0($type.$size() + 1 | 0);
         ju_AbstractCollection_addAll($base, $type);
         ju_ArrayList_add($base, $reserved);
@@ -50444,7 +50558,7 @@ cvs_GameplayScreen_unlockedPowerTypes = $this => {
         b: {
             var$1 = cvs_PowerType_values();
             var$2 = var$1.data;
-            kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(841));
+            kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(839));
             var$4 = var$2.length;
             switch (var$4) {
                 case 0:
@@ -50454,7 +50568,7 @@ cvs_GameplayScreen_unlockedPowerTypes = $this => {
                     break b;
                 default:
                     var$1 = ju_Arrays_copyOf0(var$1, var$4);
-                    kji_Intrinsics_checkNotNullExpressionValue(var$1, $rt_s(2818));
+                    kji_Intrinsics_checkNotNullExpressionValue(var$1, $rt_s(2822));
                     var$3 = kc_ArraysKt___ArraysJvmKt_asList(var$1);
                     break b;
             }
@@ -50491,7 +50605,7 @@ cvs_GameplayScreen_loadRunPowers = $this => {
             $count = cvs_SaveManager_runPowerStacks(cvs_SkyVanguardGame_getSaveManager($this.$game), $element$iv);
             if ($count > 0) {
                 var$6 = cvs_SkyVanguardGame_getSaveManager($this.$game);
-                kji_Intrinsics_checkNotNullParameter($element$iv, $rt_s(756));
+                kji_Intrinsics_checkNotNullParameter($element$iv, $rt_s(754));
                 var$7 = var$6.$runPowerSecondsCache;
                 var$8 = ju_LinkedHashMap_get(var$7, $element$iv);
                 if (var$8 === null) {
@@ -50499,12 +50613,12 @@ cvs_GameplayScreen_loadRunPowers = $this => {
                     var$9 = $element$iv.$name;
                     ju_Locale_$callClinit();
                     var$10 = ju_Locale_ROOT;
-                    kji_Intrinsics_checkNotNullExpressionValue(var$10, $rt_s(757));
+                    kji_Intrinsics_checkNotNullExpressionValue(var$10, $rt_s(755));
                     var$8 = jl_String_toLowerCase(var$9, var$10);
-                    kji_Intrinsics_checkNotNullExpressionValue(var$8, $rt_s(758));
+                    kji_Intrinsics_checkNotNullExpressionValue(var$8, $rt_s(756));
                     var$10 = new jl_StringBuilder;
                     jl_AbstractStringBuilder__init_(var$10);
-                    jl_StringBuilder_append(jl_StringBuilder_append(var$10, $rt_s(761)), var$8);
+                    jl_StringBuilder_append(jl_StringBuilder_append(var$10, $rt_s(759)), var$8);
                     var$10 = jl_AbstractStringBuilder_toString(var$10);
                     var$11 = 0.0;
                     var$8 = cbgu_ObjectMap_get(var$6.$values4, var$10);
@@ -50590,7 +50704,7 @@ cvs_GameplayScreen_saveRunPowerState = $this => {
 },
 cvs_GameplayScreen_isPowerEnabled = ($this, $type) => {
     $type = ju_LinkedHashMap_get($this.$powerEnabled, $type);
-    return $type === null ? 0 : $type.$value1;
+    return $type === null ? 0 : $type.$value0;
 },
 cvs_GameplayScreen_totalEnabledPowerStacks = $this => {
     let var$1, var$2, var$3, var$4, var$5;
@@ -50656,71 +50770,71 @@ cvs_GameplayScreen_powerShortLabel = ($this, $type) => {
             case 1:
                 break;
             case 2:
-                $type = $rt_s(2819);
-                break a;
-            case 3:
-                $type = $rt_s(2820);
-                break a;
-            case 4:
-                $type = $rt_s(2821);
-                break a;
-            case 5:
-                $type = $rt_s(2822);
-                break a;
-            case 6:
                 $type = $rt_s(2823);
                 break a;
-            case 7:
+            case 3:
                 $type = $rt_s(2824);
                 break a;
-            case 8:
+            case 4:
                 $type = $rt_s(2825);
                 break a;
-            case 9:
+            case 5:
                 $type = $rt_s(2826);
                 break a;
-            case 10:
+            case 6:
                 $type = $rt_s(2827);
                 break a;
-            case 11:
+            case 7:
                 $type = $rt_s(2828);
                 break a;
-            case 12:
+            case 8:
                 $type = $rt_s(2829);
                 break a;
-            case 13:
+            case 9:
                 $type = $rt_s(2830);
                 break a;
-            case 14:
+            case 10:
                 $type = $rt_s(2831);
                 break a;
-            case 15:
+            case 11:
                 $type = $rt_s(2832);
                 break a;
-            case 16:
+            case 12:
                 $type = $rt_s(2833);
                 break a;
-            case 17:
+            case 13:
                 $type = $rt_s(2834);
                 break a;
-            case 18:
+            case 14:
                 $type = $rt_s(2835);
                 break a;
-            case 19:
+            case 15:
                 $type = $rt_s(2836);
                 break a;
-            case 20:
+            case 16:
                 $type = $rt_s(2837);
                 break a;
-            case 21:
+            case 17:
                 $type = $rt_s(2838);
+                break a;
+            case 18:
+                $type = $rt_s(2839);
+                break a;
+            case 19:
+                $type = $rt_s(2840);
+                break a;
+            case 20:
+                $type = $rt_s(2841);
+                break a;
+            case 21:
+                $type = $rt_s(2842);
                 break a;
             default:
                 $type = new k_NoWhenBranchMatchedException;
                 jl_Exception__init_($type);
                 $rt_throw($type);
         }
-        $type = $rt_s(2839);
+        $type = $rt_s(2843);
     }
     return $type;
 },
@@ -50773,7 +50887,7 @@ cvs_GameplayScreen_updatePowerDurations = ($this, $dt) => {
             $this.$armorPoints = 0;
         if ($type_0 === cvs_PowerType_PHOENIX)
             $this.$phoenixCharges = 0;
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.3499999940395355, 0.699999988079071);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.3499999940395355, 0.699999988079071);
     }
 },
 cvs_GameplayScreen_updateOverloadState = $this => {
@@ -50788,7 +50902,7 @@ cvs_GameplayScreen_updateOverloadState = $this => {
         }
         $this.$warningText = $rt_s(1735);
         $this.$bossWarningTimer = jl_Math_max($this.$bossWarningTimer, 2.4000000953674316);
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(769), 0.7200000286102295, 1.2999999523162842);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(767), 0.7200000286102295, 1.2999999523162842);
     } else if (!cvs_GameplayScreen_getOverloadActive($this))
         $this.$overloadWasActive = 0;
 },
@@ -50857,13 +50971,13 @@ cvs_GameplayScreen_muzzlePositions = ($this, $enemy, $limit) => {
     cvs_EnemyType_$callClinit();
     $scale = $destination$iv$iv !== cvs_EnemyType_MINIBOSS ? 1.0 : 1.850000023841858;
     $$this$map$iv = $visual.$muzzles;
-    kji_Intrinsics_checkNotNullParameter($$this$map$iv, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$map$iv, $rt_s(839));
     if (!($limit < 0 ? 0 : 1)) {
         $enemy = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_($enemy);
-        jl_AbstractStringBuilder_append($enemy, $rt_s(2840));
+        jl_AbstractStringBuilder_append($enemy, $rt_s(2844));
         $enemy = jl_StringBuilder_append0($enemy, $limit);
-        jl_AbstractStringBuilder_append($enemy, $rt_s(2448));
+        jl_AbstractStringBuilder_append($enemy, $rt_s(2451));
         $visual = jl_AbstractStringBuilder_toString($enemy);
         $enemy = new jl_IllegalArgumentException;
         jl_RuntimeException__init_($enemy, $visual);
@@ -50879,14 +50993,14 @@ cvs_GameplayScreen_muzzlePositions = ($this, $enemy, $limit) => {
                     break a;
                 }
                 if ($limit == 1) {
-                    kji_Intrinsics_checkNotNullParameter($$this$map$iv, $rt_s(841));
+                    kji_Intrinsics_checkNotNullParameter($$this$map$iv, $rt_s(839));
                     if ($rt_isInstance($$this$map$iv, ju_List))
                         $visual = kc_CollectionsKt___CollectionsKt_first($$this$map$iv);
                     else {
                         $visual = ju_AbstractList_iterator($$this$map$iv);
                         if (!ju_AbstractList$1_hasNext($visual)) {
                             $visual = new ju_NoSuchElementException;
-                            jl_RuntimeException__init_($visual, $rt_s(2450));
+                            jl_RuntimeException__init_($visual, $rt_s(2453));
                             $rt_throw($visual);
                         }
                         $visual = ju_AbstractList$1_next($visual);
@@ -51002,14 +51116,14 @@ cvs_GameplayScreen_drawEnemySprites = $this => {
         var$6 = $e.$spriteKey;
         $visual = ju_LinkedHashMap_get($visual, var$6);
         if ($visual !== null) {
-            $scale = kt_StringsKt__StringsJVMKt_startsWith$default($this.$boss.$spriteKey, $rt_s(2817), 0, 2, null) ? 1.850000023841858 + $this.$stage0.$countryIndex * 0.11999999731779099 : !kji_Intrinsics_areEqual($this.$boss.$spriteKey, $rt_s(2516)) && !kji_Intrinsics_areEqual($this.$boss.$spriteKey, $rt_s(2600)) ? (!kji_Intrinsics_areEqual($this.$boss.$spriteKey, $rt_s(2539)) ? 2.3499999046325684 : 2.0) : 2.25;
+            $scale = kt_StringsKt__StringsJVMKt_startsWith$default($this.$boss.$spriteKey, $rt_s(2821), 0, 2, null) ? 1.850000023841858 + $this.$stage0.$countryIndex * 0.11999999731779099 : !kji_Intrinsics_areEqual($this.$boss.$spriteKey, $rt_s(2521)) && !kji_Intrinsics_areEqual($this.$boss.$spriteKey, $rt_s(2605)) ? (!kji_Intrinsics_areEqual($this.$boss.$spriteKey, $rt_s(2544)) ? 2.3499999046325684 : 2.0) : 2.25;
             $e = cvs_SkyVanguardGame_getBatch($this.$game);
             var$6 = $this.$boss;
             var$7 = var$6.$maxHp0;
             var$7 = var$7 <= 0.0 ? 1.0 : kr_RangesKt___RangesKt_coerceIn(var$6.$hp0 / var$7, 0.0, 1.0);
             if (var$7 > 0.6600000262260437) {
                 var$3 = cbgg_Color_WHITE;
-                kji_Intrinsics_checkNotNullExpressionValue(var$3, $rt_s(824));
+                kji_Intrinsics_checkNotNullExpressionValue(var$3, $rt_s(822));
             } else {
                 var$6 = cvs_GameplayScreen_lifeBarColor($this, var$7);
                 var$8 = var$7 > 0.41999998688697815 ? 5.0 : !(var$7 > 0.20000000298023224) ? 16.0 : 9.0;
@@ -51061,7 +51175,7 @@ cvs_GameplayScreen_updateReinforcements = ($this, $dt) => {
                                 var$8 = $order.$pattern1;
                                 switch (jl_String_hashCode(var$8)) {
                                     case -1364013995:
-                                        if (jl_String_equals(var$8, $rt_s(2841))) {
+                                        if (jl_String_equals(var$8, $rt_s(2845))) {
                                             $dt = 540.0 + cbgm_MathUtils_sin(var$4 * 0.7099999785423279) * 250.0;
                                             break b;
                                         }
@@ -51069,19 +51183,19 @@ cvs_GameplayScreen_updateReinforcements = ($this, $dt) => {
                                     case -895684237:
                                         break;
                                     case 116630:
-                                        if (jl_String_equals(var$8, $rt_s(2842))) {
+                                        if (jl_String_equals(var$8, $rt_s(2846))) {
                                             $dt = 540.0 + ($lane - 5.5) * 82.0;
                                             break b;
                                         }
                                         break c;
                                     case 3530381:
-                                        if (jl_String_equals(var$8, $rt_s(2843))) {
+                                        if (jl_String_equals(var$8, $rt_s(2847))) {
                                             $dt = 90.0 + ((var$4 * 137 | 0) % 900 | 0);
                                             break b;
                                         }
                                         break c;
                                     case 94935104:
-                                        if (jl_String_equals(var$8, $rt_s(2844))) {
+                                        if (jl_String_equals(var$8, $rt_s(2848))) {
                                             if (var$4 % 2 | 0) {
                                                 $dt = 990.0 - (var$4 % 7 | 0) * 58.0;
                                                 break b;
@@ -51091,7 +51205,7 @@ cvs_GameplayScreen_updateReinforcements = ($this, $dt) => {
                                         }
                                         break c;
                                     case 949721053:
-                                        if (jl_String_equals(var$8, $rt_s(2845))) {
+                                        if (jl_String_equals(var$8, $rt_s(2849))) {
                                             $dt = 80.0 + (var$4 % 9 | 0) * 115.0;
                                             break b;
                                         }
@@ -51099,7 +51213,7 @@ cvs_GameplayScreen_updateReinforcements = ($this, $dt) => {
                                     default:
                                         break c;
                                 }
-                                if (jl_String_equals(var$8, $rt_s(2846))) {
+                                if (jl_String_equals(var$8, $rt_s(2850))) {
                                     $dt = 70.0 + ((var$4 * 193 | 0) % 940 | 0);
                                     break b;
                                 }
@@ -51134,7 +51248,7 @@ cvs_GameplayScreen_updateSuperPowers = ($this, $dt) => {
         $recovered = 1 + ((jl_Math_sqrt($recovered) | 0) / 3 | 0) | 0;
         cvs_GameplayScreen_setShield($this, $this.$shieldValue + $recovered | 0);
         $this.$regenTimer = kr_RangesKt___RangesKt_coerceAtLeast(12.0 / (1.0 + jl_Math_sqrt($this.$regenStacks) * 0.2199999988079071), 2.200000047683716);
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(771), 0.3499999940395355, 1.350000023841858);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(769), 0.3499999940395355, 1.350000023841858);
     }
     $recovered = $this.$orbitalStacks;
     if ($recovered > 0 && $this.$orbitalTimer <= 0.0) {
@@ -51197,7 +51311,7 @@ cvs_GameplayScreen_triggerBlackHole = ($this, $collected) => {
     }
     $this.$flashTimer = jl_Math_max($this.$flashTimer, !$collected ? 0.1599999964237213 : 0.3199999928474426);
     $this.$shakeTimer = jl_Math_max($this.$shakeTimer, !$collected ? 0.23999999463558197 : 0.5199999809265137);
-    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), !$collected ? 0.550000011920929 : 1.0, 0.5799999833106995);
+    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(766), !$collected ? 0.550000011920929 : 1.0, 0.5799999833106995);
 },
 cvs_GameplayScreen_loadStage = $this => {
     let $patterns, $pressure, var$3, var$4, $types, $gi, $waveCount, $gap, $miniBossWave, var$10, var$11, var$12, $type, $$this$sortBy$iv, $count, var$16, var$17, var$18, var$19, var$20, var$21, var$22;
@@ -51205,7 +51319,7 @@ cvs_GameplayScreen_loadStage = $this => {
     $patterns = $this.$stage0;
     $pressure = $patterns.$countryIndex + (($patterns.$phase - 1 | 0) / 2 | 0) | 0;
     $this.$bossTime = $this.$forcedBossTime;
-    $patterns = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2847), $rt_s(2842), $rt_s(2844), $rt_s(2845), $rt_s(2843), $rt_s(2846)]));
+    $patterns = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2851), $rt_s(2846), $rt_s(2848), $rt_s(2849), $rt_s(2847), $rt_s(2850)]));
     var$3 = $rt_createArray(cvs_EnemyType, 5);
     var$4 = var$3.data;
     cvs_EnemyType_$callClinit();
@@ -51226,7 +51340,7 @@ cvs_GameplayScreen_loadStage = $this => {
     while (var$10 < $waveCount) {
         if (var$10 == $miniBossWave) {
             $type = $this.$waves;
-            $$this$sortBy$iv = cvs_WaveEvent__init_(var$12, cvs_EnemyType_MINIBOSS, 1, $rt_s(2841));
+            $$this$sortBy$iv = cvs_WaveEvent__init_(var$12, cvs_EnemyType_MINIBOSS, 1, $rt_s(2845));
             ju_ArrayList_add($type, $$this$sortBy$iv);
             var$12 = var$12 + $gap;
         } else {
@@ -51244,8 +51358,8 @@ cvs_GameplayScreen_loadStage = $this => {
     $types = $$this$sortBy$iv;
     if ($types.$size2 > 1) {
         $patterns = new cvs_GameplayScreen$loadStage$$inlined$sortBy$1;
-        kji_Intrinsics_checkNotNullParameter($$this$sortBy$iv, $rt_s(841));
-        kji_Intrinsics_checkNotNullParameter($patterns, $rt_s(2848));
+        kji_Intrinsics_checkNotNullParameter($$this$sortBy$iv, $rt_s(839));
+        kji_Intrinsics_checkNotNullParameter($patterns, $rt_s(2852));
         if ($types.$size2 > 1) {
             ju_Collections_$callClinit();
             if ($patterns === null)
@@ -51346,7 +51460,7 @@ cvs_GameplayScreen_loadStage = $this => {
 },
 cvs_GameplayScreen_spawnPostSubBossWave = $this => {
     let $patterns, var$2, var$3, $types, $type, $count, var$7, $pressure, var$9, $pattern;
-    $patterns = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2847), $rt_s(2842), $rt_s(2844), $rt_s(2845), $rt_s(2843), $rt_s(2846)]));
+    $patterns = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2851), $rt_s(2846), $rt_s(2848), $rt_s(2849), $rt_s(2847), $rt_s(2850)]));
     var$2 = $rt_createArray(cvs_EnemyType, 5);
     var$3 = var$2.data;
     cvs_EnemyType_$callClinit();
@@ -51381,7 +51495,7 @@ cvs_GameplayScreen_spawnWave = ($this, $event) => {
         jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $event), $rt_s(68)), var$3);
         $this.$warningText = jl_AbstractStringBuilder_toString(var$4);
         $this.$bossWarningTimer = 2.5999999046325684;
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(769), 0.7200000286102295, 1.149999976158142);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(767), 0.7200000286102295, 1.149999976158142);
         cvs_GameplayScreen_spawnEnemy($this, cvs_EnemyType_MINIBOSS, 540.0, 2100.0);
         $this.$logicalEnemiesScheduled = Long_add($this.$logicalEnemiesScheduled, Long_fromInt(1));
         $this.$logicalEnemiesSpawned = Long_add($this.$logicalEnemiesSpawned, Long_fromInt(1));
@@ -51395,8 +51509,8 @@ cvs_GameplayScreen_spawnWave = ($this, $event) => {
     var$2 = new cvs_GameplayScreen$ReinforcementOrder;
     var$8 = $event.$type3;
     var$3 = $event.$pattern2;
-    kji_Intrinsics_checkNotNullParameter(var$8, $rt_s(756));
-    kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(2849));
+    kji_Intrinsics_checkNotNullParameter(var$8, $rt_s(754));
+    kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(2853));
     var$2.$type7 = var$8;
     var$2.$pattern1 = var$3;
     var$2.$remaining0 = $hordeCount;
@@ -51517,7 +51631,7 @@ cvs_GameplayScreen_spawnBoss = $this => {
     var$5 = $this.$stage0.$globalIndex % 6 | 0;
     var$6 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$6);
-    jl_StringBuilder_append0(jl_StringBuilder_append(var$6, $rt_s(2817)), var$5);
+    jl_StringBuilder_append0(jl_StringBuilder_append(var$6, $rt_s(2821)), var$5);
     var$7 = jl_AbstractStringBuilder_toString(var$6);
     kji_Intrinsics_checkNotNullParameter(var$7, $rt_s(188));
     var$4.$spriteKey = var$7;
@@ -51727,7 +51841,7 @@ cvs_GameplayScreen_shootPlayer = $this => {
         }
         $by = 0.7200000286102295;
     }
-    cvs_AudioManager_play(var$5, $rt_s(765), 0.1599999964237213, $by);
+    cvs_AudioManager_play(var$5, $rt_s(763), 0.1599999964237213, $by);
 },
 cvs_GameplayScreen_updateBossLockOn = ($this, $dt) => {
     let $speed, $ang, $b, $volley, var$6, var$7, var$8, var$9, $spread, $a, var$12;
@@ -51739,7 +51853,7 @@ cvs_GameplayScreen_updateBossLockOn = ($this, $dt) => {
             $this.$bossAiming = 1.399999976158142;
             $this.$bossAimX = $this.$playerX;
             $this.$bossAimY = $this.$playerY;
-            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(769), 0.5, 1.5);
+            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(767), 0.5, 1.5);
         }
         return;
     }
@@ -51779,7 +51893,7 @@ cvs_GameplayScreen_updateBossLockOn = ($this, $dt) => {
             ju_ArrayList_add($this.$enemyBullets, $b);
             var$7 = var$7 + 1 | 0;
         }
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(766), 0.6000000238418579, 1.2999999523162842);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(764), 0.6000000238418579, 1.2999999523162842);
         $this.$warningText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1013));
         $this.$bossWarningTimer = 1.2000000476837158;
         $this.$bossLockTimer = 4.199999809265137 - $this.$stage0.$countryIndex * 0.3499999940395355;
@@ -51863,7 +51977,7 @@ cvs_GameplayScreen_fireMissileManual = $this => {
         cvs_GameplayScreen_spawnPlayerBullet$default($this, $this.$playerX + 60.0, $this.$playerY + 20.0, 60.0, 820.0, $dmg, 12.0, cvs_BulletKind_MISSILE, 0, 5.5, 128, null);
         if ($this.$lockOn)
             cvs_GameplayScreen_redirectToLock($this, $start);
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(765), 0.3499999940395355, 0.699999988079071);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(763), 0.3499999940395355, 0.699999988079071);
         return;
     }
 },
@@ -51896,9 +52010,9 @@ cvs_GameplayScreen_upgradeUp = $this => {
     $$this$firstOrNull$iv = cvs_GameplayScreen_powerShortLabel($this, $candidate);
     $candidate = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($candidate);
-    jl_StringBuilder_append(jl_StringBuilder_append($candidate, $$this$firstOrNull$iv), $rt_s(2850));
+    jl_StringBuilder_append(jl_StringBuilder_append($candidate, $$this$firstOrNull$iv), $rt_s(2854));
     $this.$pauseMessage = jl_AbstractStringBuilder_toString($candidate);
-    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(767), 0.800000011920929, 1.149999976158142);
+    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(765), 0.800000011920929, 1.149999976158142);
 },
 cvs_GameplayScreen_upgradeDown = $this => {
     let $$this$lastOrNull$iv, $iterator$iv, $element$iv, $it, $candidate;
@@ -51930,9 +52044,9 @@ cvs_GameplayScreen_upgradeDown = $this => {
     $$this$lastOrNull$iv = cvs_GameplayScreen_powerShortLabel($this, $candidate);
     $iterator$iv = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_($iterator$iv);
-    jl_StringBuilder_append(jl_StringBuilder_append($iterator$iv, $$this$lastOrNull$iv), $rt_s(2851));
+    jl_StringBuilder_append(jl_StringBuilder_append($iterator$iv, $$this$lastOrNull$iv), $rt_s(2855));
     $this.$pauseMessage = jl_AbstractStringBuilder_toString($iterator$iv);
-    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.699999988079071, 0.800000011920929);
+    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.699999988079071, 0.800000011920929);
 },
 cvs_GameplayScreen_addSpreadShots = ($this, $lanes, $damage, $kind) => {
     let $total, $i, var$6, $centered, $vx, var$9, var$10, var$11;
@@ -52157,7 +52271,7 @@ cvs_GameplayScreen_updateEnemies = ($this, $dt) => {
                         ju_ArrayList_remove($this.$enemies, var$2);
                         cbgu_Pool_free($this.$enemyPool, $e);
                     }
-                } else if (!kt_StringsKt__StringsJVMKt_startsWith$default(cvs_Enemy_getVariant($e), $rt_s(2852), 0, 2, null) && !kt_StringsKt__StringsJVMKt_startsWith$default(cvs_Enemy_getVariant($e), $rt_s(2853), 0, 2, null)) {
+                } else if (!kt_StringsKt__StringsJVMKt_startsWith$default(cvs_Enemy_getVariant($e), $rt_s(2856), 0, 2, null) && !kt_StringsKt__StringsJVMKt_startsWith$default(cvs_Enemy_getVariant($e), $rt_s(2857), 0, 2, null)) {
                     d: {
                         e: {
                             f: {
@@ -52388,11 +52502,11 @@ cvs_GameplayScreen_updateBoss = ($this, $dt) => {
         $floorPercent = cvs_BossState_getCurrentLifeLayer($this.$boss);
         $pattern = cvs_BossState_getLifeLayers($this.$boss);
         var$2 = jl_StringBuilder__init_();
-        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append3(jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(2854)), $floorPercent), 47), $pattern), $rt_s(2855));
+        jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append3(jl_StringBuilder_append0(jl_StringBuilder_append(var$2, $rt_s(2858)), $floorPercent), 47), $pattern), $rt_s(2859));
         $this.$warningText = jl_StringBuilder_toString(var$2);
         $this.$bossWarningTimer = jl_Math_max($this.$bossWarningTimer, 1.7999999523162842);
         $this.$shakeTimer = jl_Math_max($this.$shakeTimer, 0.44999998807907104);
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this)), $rt_s(769), 0.800000011920929, 0.8199999928474426 + cvs_BossState_getPhase($this.$boss) * 0.11999999731779099);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(cvs_BaseScreen_getGame($this)), $rt_s(767), 0.800000011920929, 0.8199999928474426 + cvs_BossState_getPhase($this.$boss) * 0.11999999731779099);
     }
     $pattern = (cvs_StageDefinition_getCountryIndex($this.$stage0) + cvs_StageDefinition_getPhase($this.$stage0) | 0) % 4 | 0;
     $movementSpeed = 0.6800000071525574 + cvs_BossState_getPhase($this.$boss) * 0.12999999523162842 + cvs_StageDefinition_getCountryIndex($this.$stage0) * 0.03999999910593033;
@@ -52714,13 +52828,13 @@ cvs_GameplayScreen_collectCoinPickup = ($this, $coin) => {
     $this.$coinsEarnedInStage = var$2 + var$3 | 0;
     cvs_GameplayScreen_addScore($this, 25 * var$3 | 0);
     var$3 = $coin.$value5;
-    $coin = var$3 <= 1 ? $rt_s(66) : $rt_s(541);
+    $coin = var$3 <= 1 ? $rt_s(66) : $rt_s(539);
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
     jl_AbstractStringBuilder_append0(var$4, 43);
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(var$4, var$3), $rt_s(2856)), $coin);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(var$4, var$3), $rt_s(2860)), $coin);
     $this.$pauseMessage = jl_AbstractStringBuilder_toString(var$4);
-    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(767), 0.2800000011920929, 1.4500000476837158);
+    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(765), 0.2800000011920929, 1.4500000476837158);
 },
 cvs_GameplayScreen_updateParticles = ($this, $dt) => {
     let var$2, var$3, var$4, $p, var$6, var$7, var$8;
@@ -52995,7 +53109,7 @@ cvs_GameplayScreen_enemyDestroyed = ($this, $e) => {
     $type = cvs_SkyVanguardGame_getAudioManager($this.$game);
     $item$iv = $e.$type1;
     $$this$forEachIndexed$iv = cvs_EnemyType_MINIBOSS;
-    cvs_AudioManager_play($type, $rt_s(766), $item$iv !== $$this$forEachIndexed$iv ? 0.3199999928474426 : 0.8999999761581421, $item$iv !== $$this$forEachIndexed$iv ? 1.0 : 0.699999988079071);
+    cvs_AudioManager_play($type, $rt_s(764), $item$iv !== $$this$forEachIndexed$iv ? 0.3199999928474426 : 0.8999999761581421, $item$iv !== $$this$forEachIndexed$iv ? 1.0 : 0.699999988079071);
     if ($e.$type1 === cvs_EnemyType_MINIBOSS) {
         $type = ju_ArrayList__init_0(4);
         $earlyStage = 0;
@@ -53062,7 +53176,7 @@ cvs_GameplayScreen_randomPowerType = $this => {
         var$4[5] = cvs_PowerType_REFLECTOR;
         var$4[6] = cvs_PowerType_CLONE;
         kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(2273));
-        kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(841));
+        kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(839));
         $weight = var$4.length;
         switch ($weight) {
             case 0:
@@ -53073,13 +53187,13 @@ cvs_GameplayScreen_randomPowerType = $this => {
                 var$6 = new ju_TemplateCollections$SingleElementSet;
                 jl_Object__init_(var$6);
                 var$6.$element = $previous;
-                kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(2857));
+                kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(2861));
                 break a;
             default:
                 $previous = new ju_LinkedHashSet;
                 ju_HashSet__init_($previous, ju_LinkedHashMap__init_0(kc_MapsKt__MapsJVMKt_mapCapacity($weight)));
                 $previous = $previous;
-                kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(841));
+                kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(839));
                 kji_Intrinsics_checkNotNullParameter($previous, $rt_s(2309));
                 var$7 = 0;
                 while (var$7 < $weight) {
@@ -53168,7 +53282,7 @@ cvs_GameplayScreen_collectPower = ($this, $type) => {
         $next = $this.$specials;
         if ($next >= 10) {
             cvs_GameplayScreen_addScore($this, 500);
-            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(767), 0.550000011920929, 1.2200000286102295);
+            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(765), 0.550000011920929, 1.2200000286102295);
             return;
         }
         $this.$specials = $next + 1 | 0;
@@ -53242,7 +53356,7 @@ cvs_GameplayScreen_collectPower = ($this, $type) => {
         }
     }
     cvs_GameplayScreen_addScore($this, 250 + (cvs_GameplayScreen_phasePowerCount($this, $type) * 12 | 0) | 0);
-    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(767), 0.699999988079071, 1.0499999523162842);
+    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(765), 0.699999988079071, 1.0499999523162842);
 },
 cvs_GameplayScreen_shopLabel = ($this, $index) => {
     let var$2, var$3;
@@ -53415,7 +53529,7 @@ cvs_GameplayScreen_activateSpecial = $this => {
                 }
                 $x = 0.8999999761581421;
             }
-            cvs_AudioManager_play($b, $rt_s(768), 1.0, $x);
+            cvs_AudioManager_play($b, $rt_s(766), 1.0, $x);
             return;
         }
     }
@@ -53428,7 +53542,7 @@ cvs_GameplayScreen_activateDefense = $this => {
             $this.$defenseCharges = var$1 + (-1) | 0;
             $this.$defenseTimer = 5.0;
             $this.$invincibleTimer = 5.0;
-            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(771), 0.8999999761581421, 1.0);
+            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(769), 0.8999999761581421, 1.0);
             return;
         }
     }
@@ -53486,19 +53600,19 @@ cvs_GameplayScreen_damagePlayer = ($this, $damageScale) => {
         if ($phoenixRevive > 0) {
             $this.$armorPoints = $phoenixRevive + (-1) | 0;
             $this.$invincibleTimer = 0.6499999761581421;
-            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(771), 0.6000000238418579, 0.6200000047683716);
+            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(769), 0.6000000238418579, 0.6200000047683716);
             return;
         }
         var$3 = $this.$shieldValue;
         if (var$3 > 0) {
             cvs_GameplayScreen_setShield($this, kr_RangesKt___RangesKt_coerceAtLeast0(var$3 - kr_RangesKt___RangesKt_coerceAtLeast0($damageScale | 0, 1) | 0, 0));
             $this.$invincibleTimer = 1.399999976158142;
-            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(771), 0.8500000238418579, 0.800000011920929);
+            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(769), 0.8500000238418579, 0.800000011920929);
             return;
         }
         $this.$playerLifePercent = $this.$playerLifePercent - $this.$playerLifeStep * $damageScale;
         $this.$invincibleTimer = 1.0 + $this.$aircraft.$defense / 220.0;
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(771), 0.5, 1.1799999475479126);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(769), 0.5, 1.1799999475479126);
         if ($this.$playerLifePercent > 0.0)
             return;
         $phoenixRevive = $this.$lives + (-1) | 0;
@@ -53510,7 +53624,7 @@ cvs_GameplayScreen_damagePlayer = ($this, $damageScale) => {
         var$6 = $this.$lives;
         var$7 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$7);
-        $bullet = jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$7, $bullet), $rt_s(2475)), var$5);
+        $bullet = jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$7, $bullet), $rt_s(2480)), var$5);
         jl_AbstractStringBuilder_append0($bullet, 32);
         jl_StringBuilder_append0($bullet, var$6);
         $this.$rewardToastText = jl_AbstractStringBuilder_toString(var$7);
@@ -53519,32 +53633,36 @@ cvs_GameplayScreen_damagePlayer = ($this, $damageScale) => {
         cvs_GameplayScreen_setShield($this, $this.$shieldMax);
         $this.$invincibleTimer = 3.0 + $this.$aircraft.$defense / 100.0;
         cvs_GameplayScreen_spawnExplosion($this, $this.$playerX, $this.$playerY, 34);
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(766), 1.0, 0.6499999761581421);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(764), 1.0, 0.6499999761581421);
         if (cvs_SaveManager_getVibration(cvs_SkyVanguardGame_getSaveManager($this.$game)))
             cgxgtbw_WebInput_vibrate(cbg_Gdx_input, 180);
-        if ($this.$lives <= 0) {
-            if (!$phoenixRevive)
+        if ($this.$lives > 0) {
+            if (cvsw_WebPlatformServices_getRewardedAdAvailable($this.$game.$platform))
+                cvs_GameplayScreen_openAdOffer($this, 0);
+        } else if (!$phoenixRevive) {
+            if (!cvsw_WebPlatformServices_getRewardedAdAvailable($this.$game.$platform))
                 cvs_GameplayScreen_endMission($this, 0);
-            else {
-                $this.$lives = 1;
-                cvs_GameplayScreen_setShield($this, $this.$shieldMax);
-                $this.$playerLifePercent = 100.0;
-                $this.$invincibleTimer = 7.0;
-                $this.$defenseTimer = jl_Math_max($this.$defenseTimer, 5.0);
-                var$5 = ju_AbstractList_iterator($this.$enemyBullets);
-                while (ju_AbstractList$1_hasNext(var$5)) {
-                    (ju_AbstractList$1_next(var$5)).$active0 = 0;
-                }
-                var$6 = 0;
-                while (var$6 < 70) {
-                    $a = cbgm_MathUtils_random(0.0, 6.2831854820251465);
-                    $speed = cbgm_MathUtils_random(160.0, 760.0);
-                    cvs_GameplayScreen_spawnParticle($this, $this.$playerX, $this.$playerY, cbgm_MathUtils_cos($a) * $speed, cbgm_MathUtils_sin($a) * $speed, cbgm_MathUtils_random(0.5, 1.2000000476837158), cbgm_MathUtils_random(12.0, 34.0), 2);
-                    var$6 = var$6 + 1 | 0;
-                }
-                $this.$flashTimer = 0.44999998807907104;
-                cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 1.0, 1.25);
+            else
+                cvs_GameplayScreen_openAdOffer($this, 1);
+        } else {
+            $this.$lives = 1;
+            cvs_GameplayScreen_setShield($this, $this.$shieldMax);
+            $this.$playerLifePercent = 100.0;
+            $this.$invincibleTimer = 7.0;
+            $this.$defenseTimer = jl_Math_max($this.$defenseTimer, 5.0);
+            var$5 = ju_AbstractList_iterator($this.$enemyBullets);
+            while (ju_AbstractList$1_hasNext(var$5)) {
+                (ju_AbstractList$1_next(var$5)).$active0 = 0;
             }
+            var$6 = 0;
+            while (var$6 < 70) {
+                $a = cbgm_MathUtils_random(0.0, 6.2831854820251465);
+                $speed = cbgm_MathUtils_random(160.0, 760.0);
+                cvs_GameplayScreen_spawnParticle($this, $this.$playerX, $this.$playerY, cbgm_MathUtils_cos($a) * $speed, cbgm_MathUtils_sin($a) * $speed, cbgm_MathUtils_random(0.5, 1.2000000476837158), cbgm_MathUtils_random(12.0, 34.0), 2);
+                var$6 = var$6 + 1 | 0;
+            }
+            $this.$flashTimer = 0.44999998807907104;
+            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(766), 1.0, 1.25);
         }
         return;
     }
@@ -53563,30 +53681,22 @@ cvs_GameplayScreen_openAdOffer = ($this, $lastChance) => {
     $this.$bossWarningTimer = 0.0;
 },
 cvs_GameplayScreen_acceptAdOffer = $this => {
-    let var$1, var$2, var$3, var$4;
+    let var$1, var$2;
     if ($this.$adOfferBusy)
         return;
     $this.$adOfferBusy = 1;
-    cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.0, 0.0, 6, null);
+    cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.0, 0.0, 6, null);
     var$1 = new cvs_GameplayScreen$acceptAdOffer$lambda$_120_0;
-    var$1.$_033 = $this;
-    kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(840));
-    var$2 = jl_Boolean_valueOf(0);
-    var$1 = var$1;
-    var$2 = var$2;
-    var$1 = var$1.$_033;
-    var$3 = var$2.$value1;
-    var$2 = cbg_Gdx_app;
-    var$4 = new cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0;
-    var$4.$_030 = var$1;
-    var$4.$_110 = var$3;
-    cgxgtbw_WebApplication_postRunnable(var$2, var$4);
-    k_Unit_$callClinit();
+    var$1.$_035 = $this;
+    kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(838));
+    var$2 = new cvsw_WebPlatformServices$showRewardedAd$lambda$_2_0;
+    var$2.$_08 = var$1;
+    cvsw_WebLauncherKt_access$mostrarAnuncioPremiado($rt_s(2862), var$2);
 },
 cvs_GameplayScreen_declineAdOffer = $this => {
     if ($this.$adOfferBusy)
         return;
-    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.699999988079071, 0.8500000238418579);
+    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.699999988079071, 0.8500000238418579);
     $this.$adOfferActive = 0;
     $this.$paused = 0;
     $this.$pauseMessage = $rt_s(66);
@@ -53607,18 +53717,18 @@ cvs_GameplayScreen_drawAdOffer = $this => {
     $panel = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1732));
     var$3 = cvs_SkyVanguardGame_getFont($this.$game);
     var$4 = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(822));
     cvs_BaseScreen_drawTracked($this, $panel, 540.0, 1216.0, var$3, var$4, 3.0);
-    cvs_BaseScreen_drawCentered($this, !$this.$adOfferIsLastChance ? $rt_s(2858) : $rt_s(1731), 1140.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.5, 0.4000000059604645, 1.0));
+    cvs_BaseScreen_drawCentered($this, !$this.$adOfferIsLastChance ? $rt_s(2863) : $rt_s(1731), 1140.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.5, 0.4000000059604645, 1.0));
     cvs_BaseScreen_drawCentered($this, $rt_s(1727), 1080.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.75, 0.8799999952316284, 1.0, 1.0));
-    cvs_BaseScreen_drawTracked($this, $rt_s(2859), 540.0, 1000.0, cvs_SkyVanguardGame_getFont($this.$game), cbgg_Color__init_(1.0, 0.8500000238418579, 0.25, 1.0), 3.0);
+    cvs_BaseScreen_drawTracked($this, $rt_s(2864), 540.0, 1000.0, cvs_SkyVanguardGame_getFont($this.$game), cbgg_Color__init_(1.0, 0.8500000238418579, 0.25, 1.0), 3.0);
     if ($this.$adOfferBusy)
         cvs_BaseScreen_drawCentered($this, $rt_s(1725), 840.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.4000000059604645, 0.949999988079071, 1.0, 1.0));
     else {
         cvs_BaseScreen_drawButton($this, $this.$adWatchButton, $rt_s(1023), 1);
         cvs_BaseScreen_drawButton$default(var$2, $this.$adSkipButton, !$this.$adOfferIsLastChance ? $rt_s(1729) : $rt_s(1677), 0, 4, null);
     }
-    cvs_BaseScreen_drawCentered($this, $rt_s(2860), 700.0, cvs_SkyVanguardGame_getTinyFont($this.$game), cbgg_Color__init_(0.550000011920929, 0.699999988079071, 0.8500000238418579, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(2865), 700.0, cvs_SkyVanguardGame_getTinyFont($this.$game), cbgg_Color__init_(0.550000011920929, 0.699999988079071, 0.8500000238418579, 1.0));
 },
 cvs_GameplayScreen_destroyBossPart = ($this, $x, $y) => {
     let var$3;
@@ -53629,7 +53739,7 @@ cvs_GameplayScreen_destroyBossPart = ($this, $x, $y) => {
     $this.$comboTimer = 4.0;
     cvs_GameplayScreen_spawnExplosion($this, $x, $y, 35);
     $this.$shakeTimer = 0.3199999928474426;
-    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(766), 0.8999999761581421, 0.7200000286102295);
+    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(764), 0.8999999761581421, 0.7200000286102295);
 },
 cvs_GameplayScreen_defeatBoss = $this => {
     let var$1, var$2, $angle, $ox, $oy;
@@ -53660,7 +53770,7 @@ cvs_GameplayScreen_defeatBoss = $this => {
     $this.$victoryFlightTimer = 0.0;
     $this.$victoryFlightCenterReached = 0;
     $this.$draggingPointer = (-1);
-    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(766), 1.0, 0.550000011920929);
+    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(764), 1.0, 0.550000011920929);
 },
 cvs_GameplayScreen_endMission = ($this, $victory) => {
     if ($this.$missionEnded)
@@ -53694,7 +53804,7 @@ cvs_GameplayScreen_addScore = ($this, $base) => {
         cvs_SaveManager_addCoins(cvs_SkyVanguardGame_getSaveManager($this.$game), $ganhos);
         cvs_SaveManager_flushPending(cvs_SkyVanguardGame_getSaveManager($this.$game));
         $this.$coinBonusFlash = 1.399999976158142;
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(767), 0.44999998807907104, 1.5);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(765), 0.44999998807907104, 1.5);
     }
 },
 cvs_GameplayScreen_spawnHit = ($this, $x, $y) => {
@@ -54101,71 +54211,71 @@ cvs_GameplayScreen_drawPowerLabels = $this => {
                 case 1:
                     break;
                 case 2:
-                    $letter = $rt_s(2861);
-                    break a;
-                case 3:
-                    $letter = $rt_s(2862);
-                    break a;
-                case 4:
-                    $letter = $rt_s(2863);
-                    break a;
-                case 5:
-                    $letter = $rt_s(2864);
-                    break a;
-                case 6:
-                    $letter = $rt_s(2865);
-                    break a;
-                case 7:
                     $letter = $rt_s(2866);
                     break a;
-                case 8:
+                case 3:
                     $letter = $rt_s(2867);
                     break a;
-                case 9:
-                    $letter = $rt_s(543);
-                    break a;
-                case 10:
+                case 4:
                     $letter = $rt_s(2868);
                     break a;
-                case 11:
+                case 5:
                     $letter = $rt_s(2869);
                     break a;
-                case 12:
+                case 6:
                     $letter = $rt_s(2870);
                     break a;
-                case 13:
+                case 7:
                     $letter = $rt_s(2871);
                     break a;
-                case 14:
+                case 8:
                     $letter = $rt_s(2872);
                     break a;
-                case 15:
+                case 9:
+                    $letter = $rt_s(541);
+                    break a;
+                case 10:
                     $letter = $rt_s(2873);
                     break a;
-                case 16:
+                case 11:
                     $letter = $rt_s(2874);
                     break a;
-                case 17:
+                case 12:
                     $letter = $rt_s(2875);
                     break a;
-                case 18:
-                    $letter = $rt_s(676);
-                    break a;
-                case 19:
+                case 13:
                     $letter = $rt_s(2876);
                     break a;
-                case 20:
+                case 14:
                     $letter = $rt_s(2877);
                     break a;
-                case 21:
+                case 15:
                     $letter = $rt_s(2878);
+                    break a;
+                case 16:
+                    $letter = $rt_s(2879);
+                    break a;
+                case 17:
+                    $letter = $rt_s(2880);
+                    break a;
+                case 18:
+                    $letter = $rt_s(674);
+                    break a;
+                case 19:
+                    $letter = $rt_s(2881);
+                    break a;
+                case 20:
+                    $letter = $rt_s(2882);
+                    break a;
+                case 21:
+                    $letter = $rt_s(2883);
                     break a;
                 default:
                     $power = new k_NoWhenBranchMatchedException;
                     jl_Exception__init_($power);
                     $rt_throw($power);
             }
-            $letter = $rt_s(2879);
+            $letter = $rt_s(2884);
         }
         var$5 = $this.$layout0;
         var$1 = cvs_SkyVanguardGame_getSmallFont($this.$game);
@@ -54189,7 +54299,7 @@ cvs_GameplayScreen_drawCoinLabels = $this => {
     while (ju_AbstractList$1_hasNext(var$1)) {
         $coin = ju_AbstractList$1_next(var$1);
         var$3 = $coin.$value5;
-        $label = var$3 <= 1 ? $rt_s(2869) : jl_String_valueOf0(var$3);
+        $label = var$3 <= 1 ? $rt_s(2874) : jl_String_valueOf0(var$3);
         var$5 = $this.$layout0;
         var$6 = cvs_SkyVanguardGame_getSmallFont($this.$game);
         $label = $label;
@@ -54222,7 +54332,7 @@ cvs_GameplayScreen_formatNumber = ($this, $n) => {
         $index$iv = var$8;
     }
     $s = jl_AbstractStringBuilder_toString($sb);
-    kji_Intrinsics_checkNotNullExpressionValue($s, $rt_s(2880));
+    kji_Intrinsics_checkNotNullExpressionValue($s, $rt_s(2885));
     return $s;
 },
 cvs_GameplayScreen_detonateSuperWave = ($this, $x, $y, $damage) => {
@@ -54246,7 +54356,7 @@ cvs_GameplayScreen_detonateSuperWave = ($this, $x, $y, $damage) => {
     cvs_GameplayScreen_spawnExplosion($this, $x, $y, 40);
     $this.$flashTimer = jl_Math_max($this.$flashTimer, 0.14000000059604645);
     $this.$shakeTimer = jl_Math_max($this.$shakeTimer, 0.2199999988079071);
-    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(766), 0.7200000286102295, 0.8999999761581421);
+    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(764), 0.7200000286102295, 0.8999999761581421);
 },
 cvs_GameplayScreen_drawMissiles = $this => {
     let $$this$none$iv, var$2, $b, $element$iv, $ang, $region, $s, var$8, var$9;
@@ -54343,7 +54453,7 @@ cvs_GameplayScreen_drawRewardToast = $this => {
     cbggg_ShapeRenderer_setColor(cvs_SkyVanguardGame_getShapes($this.$game), cbgg_Color__init_(1.0, 0.8399999737739563, 0.20000000298023224, 0.25 * $alpha));
     cvs_BaseScreenKt_roundRectFilled(cvs_SkyVanguardGame_getShapes($this.$game), 206.0, 1624.0, 668.0, 104.0, 24.0);
     cbggg_ShapeRenderer_end(cvs_SkyVanguardGame_getShapes($this.$game));
-    cvs_BaseScreen_drawCentered($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(851)), 1694.0, cvs_SkyVanguardGame_getTinyFont($this.$game), cbgg_Color__init_(0.550000011920929, 0.8500000238418579, 1.0, $alpha));
+    cvs_BaseScreen_drawCentered($this, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(849)), 1694.0, cvs_SkyVanguardGame_getTinyFont($this.$game), cbgg_Color__init_(0.550000011920929, 0.8500000238418579, 1.0, $alpha));
     cvs_BaseScreen_drawCentered($this, $this.$rewardToastText, 1652.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(1.0, 0.8999999761581421, 0.4000000059604645, $alpha));
 },
 cvs_GameplayScreen_drawHud = $this => {
@@ -54475,7 +54585,7 @@ cvs_GameplayScreen_drawHud = $this => {
     var$21 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(989));
     var$14 = $this.$lives;
     $lifeCol = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append($lifeCol, var$21), $rt_s(2881)), var$14);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append($lifeCol, var$21), $rt_s(2886)), var$14);
     cbggg_BitmapFont_draw($label, $shieldCol, jl_StringBuilder_toString($lifeCol), 42.0 + kr_RangesKt___RangesKt_coerceIn0($this.$lives, 0, 6) * 34.0 + 8.0, $pipY + 20.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.550000011920929, 0.8799999952316284, 1.0, 0.8500000238418579));
     var$21 = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
@@ -54483,11 +54593,11 @@ cvs_GameplayScreen_drawHud = $this => {
     $shieldCol = cvs_StageDefinition_getCountry($this.$stage0);
     ju_Locale_$callClinit();
     $shieldCol = jl_String_toUpperCase($shieldCol, ju_Locale_ROOT);
-    kji_Intrinsics_checkNotNullExpressionValue($shieldCol, $rt_s(813));
+    kji_Intrinsics_checkNotNullExpressionValue($shieldCol, $rt_s(811));
     $lifeCol = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(997));
     var$14 = cvs_StageDefinition_getPhase($this.$stage0);
     $label2 = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append3(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($label2, $shieldCol), $rt_s(2882)), $lifeCol), 32), var$14);
+    jl_StringBuilder_append0(jl_StringBuilder_append3(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append($label2, $shieldCol), $rt_s(2887)), $lifeCol), 32), var$14);
     cbggg_BitmapFont_draw(var$21, $label, jl_StringBuilder_toString($label2), 36.0, 1902.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cbgg_Color_WHITE);
     cbggg_BitmapFont_draw(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)), cvs_GameplayScreen_formatNumber($this, jl_Integer_valueOf($this.$score)), 36.0, 1866.0);
@@ -54496,7 +54606,7 @@ cvs_GameplayScreen_drawHud = $this => {
     var$21 = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
     var$14 = $this.$combo;
     $label = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append($label, $rt_s(2883)), var$14);
+    jl_StringBuilder_append0(jl_StringBuilder_append($label, $rt_s(2888)), var$14);
     cbggg_BitmapFont_draw($accent, var$21, jl_StringBuilder_toString($label), 36.0, 1804.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.800000011920929, 0.8600000143051147, 0.949999988079071, 0.800000011920929));
     $accent = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
@@ -54529,7 +54639,7 @@ cvs_GameplayScreen_drawHud = $this => {
     $accent = cvs_GameplayScreen_formatNumber($this, jl_Integer_valueOf(cvs_SaveManager_getCredits(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this)))));
     $seconds = $this.$coinsEarnedInStage;
     var$21 = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$21, $accent), $rt_s(2884)), $seconds);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$21, $accent), $rt_s(2889)), $seconds);
     $label = jl_StringBuilder_toString(var$21);
     $accent = cvs_BaseScreen_getLayout($this);
     var$21 = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
@@ -54568,7 +54678,7 @@ cvs_GameplayScreen_drawHud = $this => {
                 $accent = cvs_StageDefinition_getBoss($this.$stage0);
                 $seconds = $sFrac * 100.0 | 0;
                 var$21 = jl_StringBuilder__init_();
-                jl_StringBuilder_append3(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$21, $accent), $rt_s(2885)), $seconds), 37);
+                jl_StringBuilder_append3(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$21, $accent), $rt_s(2890)), $seconds), 37);
                 $label2 = jl_StringBuilder_toString(var$21);
                 $accent = cvs_BaseScreen_getLayout($this);
                 var$21 = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
@@ -54623,8 +54733,8 @@ cvs_GameplayScreen_drawControls = $this => {
     cbggg_ShapeRenderer_end(cvs_SkyVanguardGame_getShapes(cvs_BaseScreen_getGame($this)));
     cbggg_SpriteBatch_begin(cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)));
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 1.0, 1.0, $this.$specials <= 0 ? 0.44999998807907104 : 1.0));
-    cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), $rt_s(2866));
-    cbggg_BitmapFont_draw(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)), $rt_s(2866), $sx - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $sy + (cvs_BaseScreen_getLayout($this)).$height4 / 2.0 + 12.0);
+    cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), $rt_s(2871));
+    cbggg_BitmapFont_draw(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)), $rt_s(2871), $sx - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $sy + (cvs_BaseScreen_getLayout($this)).$height4 / 2.0 + 12.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 1.0, 1.0, $this.$specials <= 0 ? 0.4000000059604645 : 0.8999999761581421));
     $specialColor = cvs_BaseScreen_getLayout($this);
     $defenseColor = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
@@ -54639,8 +54749,8 @@ cvs_GameplayScreen_drawControls = $this => {
     jl_StringBuilder_append0(jl_StringBuilder_append3(var$11, 120), var$13);
     cbggg_BitmapFont_draw($specialColor, $defenseColor, jl_StringBuilder_toString(var$11), $sx - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $sy - 22.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 1.0, 1.0, $this.$defenseCharges <= 0 ? 0.44999998807907104 : 1.0));
-    cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), $rt_s(543));
-    cbggg_BitmapFont_draw(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)), $rt_s(543), $dx - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $dy + (cvs_BaseScreen_getLayout($this)).$height4 / 2.0 + 12.0);
+    cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), $rt_s(541));
+    cbggg_BitmapFont_draw(cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this)), cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)), $rt_s(541), $dx - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $dy + (cvs_BaseScreen_getLayout($this)).$height4 / 2.0 + 12.0);
     cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 1.0, 1.0, $this.$defenseCharges <= 0 ? 0.4000000059604645 : 0.8999999761581421));
     $specialColor = cvs_BaseScreen_getLayout($this);
     $defenseColor = cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this));
@@ -54731,17 +54841,17 @@ cvs_GameplayScreen_drawExtraControls = $this => {
         $fc = $this.$missileButton;
         cbggg_BitmapFont_draw($lockLabel, var$6, var$7, var$4, $fc.$y + $fc.$height0 / 2.0 + (cvs_BaseScreen_getLayout($this)).$height4 / 2.0);
         cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.6000000238418579, 1.0, 0.75, 0.949999988079071));
-        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), $rt_s(2886));
+        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), $rt_s(2891));
         $lockLabel = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
         $fc = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
-        var$6 = $rt_s(2886);
+        var$6 = $rt_s(2891);
         var$7 = $this.$upgradeUpButton;
         cbggg_BitmapFont_draw($lockLabel, $fc, var$6, var$7.$x + var$7.$width0 / 2.0 - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $this.$upgradeUpButton.$y + 70.0);
         cbggg_BitmapFont_setColor(cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.6000000238418579, 0.6499999761581421, 0.949999988079071));
-        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), $rt_s(2887));
+        cbggg_GlyphLayout_setText(cvs_BaseScreen_getLayout($this), cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), $rt_s(2892));
         $lockLabel = cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this));
         $fc = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
-        var$6 = $rt_s(2887);
+        var$6 = $rt_s(2892);
         var$7 = $this.$upgradeDownButton;
         cbggg_BitmapFont_draw($lockLabel, $fc, var$6, var$7.$x + var$7.$width0 / 2.0 - (cvs_BaseScreen_getLayout($this)).$width2 / 2.0, $this.$upgradeDownButton.$y + 70.0);
     }
@@ -54912,7 +55022,7 @@ cvs_GameplayScreen_drawBossWarning = $this => {
     var$1 = $this.$warningText;
     var$2 = cvs_SkyVanguardGame_getFont($this.$game);
     var$3 = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue(var$3, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue(var$3, $rt_s(822));
     cvs_BaseScreen_drawTracked($this, var$1, 540.0, 985.0, var$2, var$3, 6.0);
 },
 cvs_GameplayScreen_drawFlash = $this => {
@@ -54935,13 +55045,13 @@ cvs_GameplayScreen_drawPauseOverlay = $this => {
     $c = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(901));
     $type = cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this));
     $rect = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue($rect, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue($rect, $rt_s(822));
     cvs_BaseScreen_drawTracked($this, $c, 540.0, 1850.0, $type, $rect, 8.0);
     $collected = cvs_GameplayScreen_formatNumber($this, jl_Integer_valueOf(cvs_SaveManager_getCredits(cvs_SkyVanguardGame_getSaveManager(cvs_BaseScreen_getGame($this)))));
     $c = jl_StringBuilder__init_();
-    jl_StringBuilder_append(jl_StringBuilder_append($c, $rt_s(2888)), $collected);
+    jl_StringBuilder_append(jl_StringBuilder_append($c, $rt_s(2893)), $collected);
     cvs_BaseScreen_drawCentered($this, jl_StringBuilder_toString($c), 1775.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.8600000143051147, 0.25, 1.0));
-    cvs_BaseScreen_drawCentered($this, $rt_s(2889), 1700.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.6200000047683716, 0.8999999761581421, 1.0, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(2894), 1700.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.6200000047683716, 0.8999999761581421, 1.0, 1.0));
     $collected = cvs_GameplayScreen_visibleCollectedPowers($this);
     cvs_BaseScreenKt_beginBlended$default(cvs_SkyVanguardGame_getShapes(cvs_BaseScreen_getGame($this)), null, 1, null);
     $collected = ju_AbstractList_iterator($collected);
@@ -54986,7 +55096,7 @@ cvs_GameplayScreen_drawPauseOverlay = $this => {
         $accent = cvs_GameplayScreen_powerDurationLabel($this, $type);
         $type = !cvs_GameplayScreen_isPowerEnabled($this, $type) ? $rt_s(1789) : $rt_s(1788);
         var$14 = jl_StringBuilder__init_();
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$14, $offer), $rt_s(2890)), $columns), $rt_s(2490)), $accent), $rt_s(2490)), $type);
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$14, $offer), $rt_s(2895)), $columns), $rt_s(2495)), $accent), $rt_s(2495)), $type);
         cbggg_BitmapFont_draw($c, $rect_0, jl_StringBuilder_toString(var$14), $rect.$x + 14.0, $rect.$y + 37.0);
     }
     cbggg_SpriteBatch_end(cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)));
@@ -55039,17 +55149,17 @@ cvs_GameplayScreen_drawPauseOverlay = $this => {
         $type = cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this));
         $columns = cvs_GameplayScreen$ShopOffer_getCost($offer);
         $rect_0 = jl_StringBuilder__init_();
-        jl_StringBuilder_append(jl_StringBuilder_append0($rect_0, $columns), $rt_s(2891));
+        jl_StringBuilder_append(jl_StringBuilder_append0($rect_0, $columns), $rt_s(2896));
         cbggg_BitmapFont_draw($c, $type, jl_StringBuilder_toString($rect_0), $rect.$x + 16.0, $rect.$y + 28.0);
     }
     cbggg_SpriteBatch_end(cvs_SkyVanguardGame_getBatch(cvs_BaseScreen_getGame($this)));
     if (jl_String_length($this.$pauseMessage) <= 0 ? 0 : 1)
         cvs_BaseScreen_drawCentered($this, $this.$pauseMessage, 650.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(1.0, 0.47999998927116394, 0.20000000298023224, 1.0));
-    cvs_BaseScreen_drawCentered($this, $rt_s(2892), 570.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.7200000286102295, 0.8399999737739563, 0.9399999976158142, 1.0));
+    cvs_BaseScreen_drawCentered($this, $rt_s(2897), 570.0, cvs_SkyVanguardGame_getTinyFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.7200000286102295, 0.8399999737739563, 0.9399999976158142, 1.0));
     cvs_BaseScreen_drawButton($this, $this.$continueButton, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(903)), 1);
     $collected = $this;
     cvs_BaseScreen_drawButton$default($collected, $this.$restartButton, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(905)), 0, 4, null);
-    cvs_BaseScreen_drawButton$default($collected, $this.$menuButton, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(839)), 0, 4, null);
+    cvs_BaseScreen_drawButton$default($collected, $this.$menuButton, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(837)), 0, 4, null);
 },
 cvs_GameplayScreen_handlePauseTap = ($this, $x, $y) => {
     let var$3, var$4, $type, $index, $rect, var$8, var$9;
@@ -55062,21 +55172,21 @@ cvs_GameplayScreen_handlePauseTap = ($this, $x, $y) => {
             while (ju_LinkedHashMapIterator_hasNext(var$4)) {
                 $type = ju_LinkedHashMapIterator$EntryIterator_next(var$3);
                 $index = $type.$key.$intValue();
-                if (!cbgm_Rectangle_contains($type.$value0, $x, $y))
+                if (!cbgm_Rectangle_contains($type.$value1, $x, $y))
                     continue;
                 else {
                     var$3 = $this.$shopOffers;
-                    kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(841));
+                    kji_Intrinsics_checkNotNullParameter(var$3, $rt_s(839));
                     var$3 = !(0 > $index ? 0 : $index >= var$3.$size() ? 0 : 1) ? null : var$3.$get($index);
                     if (var$3 !== null) {
                         $type = var$3.$power1;
                         cvs_PowerType_$callClinit();
                         if ($type === cvs_PowerType_SPECIAL && $this.$specials >= 10) {
                             $this.$pauseMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(1690));
-                            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.5, 0.7200000286102295);
+                            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.5, 0.7200000286102295);
                         } else if (!cvs_SaveManager_spendCoins(cvs_SkyVanguardGame_getSaveManager($this.$game), var$3.$cost)) {
                             $this.$pauseMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(975));
-                            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.5, 0.7200000286102295);
+                            cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.5, 0.7200000286102295);
                         } else {
                             $rect = cvs_GameplayScreen_unlockedPowerTypes($this);
                             $type = ju_ArrayList__init_();
@@ -55098,7 +55208,7 @@ cvs_GameplayScreen_handlePauseTap = ($this, $x, $y) => {
                             var$3 = cvs_GameplayScreen_powerShortLabel($this, var$3);
                             $rect = new jl_StringBuilder;
                             jl_AbstractStringBuilder__init_($rect);
-                            jl_StringBuilder_append(jl_StringBuilder_append($rect, var$3), $rt_s(2893));
+                            jl_StringBuilder_append(jl_StringBuilder_append($rect, var$3), $rt_s(2898));
                             $this.$pauseMessage = jl_AbstractStringBuilder_toString($rect);
                             cvs_SaveManager_flushPending(cvs_SkyVanguardGame_getSaveManager($this.$game));
                         }
@@ -55109,19 +55219,19 @@ cvs_GameplayScreen_handlePauseTap = ($this, $x, $y) => {
             if (cbgm_Rectangle_contains($this.$continueButton, $x, $y)) {
                 $this.$paused = 0;
                 $this.$pauseMessage = $rt_s(66);
-                cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.0, 0.0, 6, null);
+                cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.0, 0.0, 6, null);
             } else if (cbgm_Rectangle_contains($this.$restartButton, $x, $y)) {
-                cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.0, 0.0, 6, null);
+                cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.0, 0.0, 6, null);
                 cvs_SkyVanguardGame_startStage$default($this.$game, $this.$stageIndex0, 0, 2, null);
             } else if (cbgm_Rectangle_contains($this.$menuButton, $x, $y)) {
-                cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.0, 0.0, 6, null);
+                cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.0, 0.0, 6, null);
                 cvs_SkyVanguardGame_openCampaign($this.$game);
             }
             return;
         }
         $rect = ju_LinkedHashMapIterator$EntryIterator_next(var$3);
         $type = $rect.$key;
-        if (!cbgm_Rectangle_contains($rect.$value0, $x, $y))
+        if (!cbgm_Rectangle_contains($rect.$value1, $x, $y))
             continue;
         else
             break;
@@ -55139,7 +55249,7 @@ cvs_GameplayScreen_handlePauseTap = ($this, $x, $y) => {
     jl_AbstractStringBuilder_append0(var$3, 32);
     jl_StringBuilder_append(var$3, $rect);
     $this.$pauseMessage = jl_AbstractStringBuilder_toString(var$4);
-    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.699999988079071, !cvs_GameplayScreen_isPowerEnabled($this, $type) ? 0.8999999761581421 : 1.100000023841858);
+    cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.699999988079071, !cvs_GameplayScreen_isPowerEnabled($this, $type) ? 0.8999999761581421 : 1.100000023841858);
 },
 cvs_GameplayScreen_pause = $this => {
     cvs_GameplayScreen_saveRunPowerState($this);
@@ -55202,8 +55312,8 @@ cvs_GameplayScreen_dispose = $this => {
         ju_ArrayList_add($element$iv, var$5);
     }
     $$this$forEach$iv = $element$iv;
-    kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(841));
-    kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(841));
+    kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(839));
+    kji_Intrinsics_checkNotNullParameter($$this$forEach$iv, $rt_s(839));
     if (!$rt_isInstance($$this$forEach$iv, ju_Collection))
         $$this$forEach$iv = kc_CollectionsKt___CollectionsKt_toCollection($$this$forEach$iv, ju_LinkedHashSet__init_());
     else {
@@ -55318,8 +55428,8 @@ function cvs_ShopScreen$Offer() {
 }
 let cvs_ShopScreen$Offer__init_0 = ($this, $power, $name, $description, $baseCost) => {
     kji_Intrinsics_checkNotNullParameter($power, $rt_s(995));
-    kji_Intrinsics_checkNotNullParameter($name, $rt_s(776));
-    kji_Intrinsics_checkNotNullParameter($description, $rt_s(2894));
+    kji_Intrinsics_checkNotNullParameter($name, $rt_s(774));
+    kji_Intrinsics_checkNotNullParameter($description, $rt_s(2899));
     $this.$power = $power;
     $this.$name4 = $name;
     $this.$description = $description;
@@ -55338,7 +55448,7 @@ cvs_ShopScreen$Offer_toString = $this => {
     var$4 = $this.$baseCost;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2895)), var$1), $rt_s(2461)), var$2), $rt_s(2896)), var$3), $rt_s(2897)), var$4), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(2900)), var$1), $rt_s(2466)), var$2), $rt_s(2901)), var$3), $rt_s(2902)), var$4), 41);
     return jl_AbstractStringBuilder_toString(var$5);
 },
 cvs_ShopScreen$Offer_hashCode = $this => {
@@ -55371,37 +55481,37 @@ function cvs_SettingsScreen$editPilotName$1() {
 }
 function cvs_SettingsScreen$pickPhoto$lambda$_2_0() {
     jl_Object.call(this);
-    this.$_032 = null;
+    this.$_034 = null;
 }
 function cvs_MainMenuScreen$show$lambda$0$lambda$_27_0() {
     jl_Object.call(this);
-    this.$_011 = null;
+    this.$_013 = null;
 }
 let cvs_MainMenuScreen$show$lambda$0$lambda$_27_0_run = var$0 => {
-    cvs_SaveManager_setAdsRemoved(cvs_SkyVanguardGame_getSaveManager(var$0.$_011.$game), 1);
+    cvs_SaveManager_setAdsRemoved(cvs_SkyVanguardGame_getSaveManager(var$0.$_013.$game), 1);
 };
 function cvs_MainMenuScreen$requestRemoveAds$lambda$0$lambda$_29_0() {
     let a = this; jl_Object.call(a);
-    a.$_057 = null;
-    a.$_123 = 0;
+    a.$_061 = null;
+    a.$_125 = 0;
 }
 let cvs_MainMenuScreen$requestRemoveAds$lambda$0$lambda$_29_0_run = var$0 => {
     let var$1, var$2;
-    var$1 = var$0.$_057;
-    var$2 = var$0.$_123;
+    var$1 = var$0.$_061;
+    var$2 = var$0.$_125;
     var$1.$removeAdsBusy = 0;
     if (!var$2)
         cvs_MainMenuScreen_setRemoveAdsMessage(var$1, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$1.$game), $rt_s(1720)));
     else {
         cvs_SaveManager_setAdsRemoved(cvs_SkyVanguardGame_getSaveManager(var$1.$game), 1);
         cvs_MainMenuScreen_setRemoveAdsMessage(var$1, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$1.$game), $rt_s(1722)));
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$1.$game), $rt_s(767), 1.0, 1.100000023841858);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$1.$game), $rt_s(765), 1.0, 1.100000023841858);
     }
 },
 otja_XMLHttpRequest = $rt_classWithoutFields();
 function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_0() {
     let a = this; jl_Object.call(a);
-    a.$_014 = null;
+    a.$_016 = null;
     a.$_13 = null;
     a.$_22 = 0;
     a.$_32 = null;
@@ -55411,7 +55521,7 @@ function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_0() {
 let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_0_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7;
     var$1 = var$1;
-    var$2 = var$1.$_014;
+    var$2 = var$1.$_016;
     var$3 = var$1.$_13;
     var$4 = var$1.$_22;
     var$5 = var$1.$_32;
@@ -55419,14 +55529,14 @@ let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_0_handleEvent$expo
     var$7 = var$1.$_50;
     var$1 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$1);
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(280)), var$3), $rt_s(257)), var$4);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(278)), var$3), $rt_s(255)), var$4);
     jl_AbstractStringBuilder_toString(var$1);
     if (cgxgtbwa_AssetDownloadImpl_trySettle(var$2, var$5))
         cgxgtbwa_AssetDownloadImpl_retryOrFail(var$2, var$6, var$3, var$7, var$4);
 };
 function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_1() {
     let a = this; jl_Object.call(a);
-    a.$_01 = null;
+    a.$_02 = null;
     a.$_1 = null;
     a.$_2 = 0;
     a.$_3 = null;
@@ -55436,7 +55546,7 @@ function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_1() {
 let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_1_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7;
     var$1 = var$1;
-    var$2 = var$1.$_01;
+    var$2 = var$1.$_02;
     var$3 = var$1.$_1;
     var$4 = var$1.$_2;
     var$5 = var$1.$_3;
@@ -55444,15 +55554,15 @@ let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_1_handleEvent$expo
     var$7 = var$1.$_5;
     var$1 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$1);
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(280)), var$3), $rt_s(257)), var$4);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(278)), var$3), $rt_s(255)), var$4);
     jl_AbstractStringBuilder_toString(var$1);
     if (cgxgtbwa_AssetDownloadImpl_trySettle(var$2, var$5))
         cgxgtbwa_AssetDownloadImpl_retryOrFail(var$2, var$6, var$3, var$7, var$4);
 };
 function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_2() {
     let a = this; jl_Object.call(a);
-    a.$_050 = null;
-    a.$_120 = null;
+    a.$_053 = null;
+    a.$_122 = null;
     a.$_211 = 0;
     a.$_37 = null;
     a.$_44 = 0;
@@ -55461,23 +55571,23 @@ function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_2() {
 let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_2_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7;
     var$1 = var$1;
-    var$2 = var$1.$_050;
-    var$3 = var$1.$_120;
+    var$2 = var$1.$_053;
+    var$3 = var$1.$_122;
     var$4 = var$1.$_211;
     var$5 = var$1.$_37;
     var$6 = var$1.$_44;
     var$7 = var$1.$_53;
     var$1 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$1);
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(280)), var$3), $rt_s(257)), var$4);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(278)), var$3), $rt_s(255)), var$4);
     jl_AbstractStringBuilder_toString(var$1);
     if (cgxgtbwa_AssetDownloadImpl_trySettle(var$2, var$5))
         cgxgtbwa_AssetDownloadImpl_retryOrFail(var$2, var$6, var$3, var$7, var$4);
 };
 function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_3() {
     let a = this; jl_Object.call(a);
-    a.$_038 = null;
-    a.$_115 = null;
+    a.$_040 = null;
+    a.$_116 = null;
     a.$_27 = null;
     a.$_35 = 0;
     a.$_42 = null;
@@ -55486,8 +55596,8 @@ function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_3() {
 }
 function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_4() {
     let a = this; jl_Object.call(a);
-    a.$_027 = null;
-    a.$_18 = null;
+    a.$_029 = null;
+    a.$_19 = null;
     a.$_23 = null;
     a.$_33 = 0;
     a.$_41 = null;
@@ -55497,8 +55607,8 @@ function cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_4() {
 let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_4_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7, var$8, var$9;
     var$1 = var$1;
-    var$2 = var$1.$_027;
-    var$3 = var$1.$_18;
+    var$2 = var$1.$_029;
+    var$3 = var$1.$_19;
     var$4 = var$1.$_23;
     var$5 = var$1.$_33;
     var$6 = var$1.$_41;
@@ -55507,14 +55617,14 @@ let cgxgtbwa_AssetDownloadImpl$loadBinaryInternally$lambda$_4_4_handleEvent$expo
     var$9 = var$4.readyState;
     var$1 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$1);
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(280)), var$3), $rt_s(273)), var$9), $rt_s(257)), var$5);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(278)), var$3), $rt_s(271)), var$9), $rt_s(255)), var$5);
     jl_AbstractStringBuilder_toString(var$1);
     if (var$4.readyState == 4 && cgxgtbwa_AssetDownloadImpl_trySettle(var$2, var$6))
         cgxgtbwa_AssetDownloadImpl_handleTerminalStatus(var$2, var$7, var$3, var$8, var$5, var$4);
     else if (var$4.readyState == 4) {
         var$1 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$1);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(2898)), var$3), $rt_s(257)), var$5);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(2903)), var$3), $rt_s(255)), var$5);
         jl_AbstractStringBuilder_toString(var$1);
     }
 },
@@ -55652,7 +55762,7 @@ let cvs_BossState__init_0 = $this => {
     $this.$leftTurretHp = 650.0;
     $this.$rightTurretHp = 650.0;
     $this.$phase1 = 1;
-    $this.$spriteKey = $rt_s(2516);
+    $this.$spriteKey = $rt_s(2521);
 },
 cvs_BossState__init_ = () => {
     let var_0 = new cvs_BossState();
@@ -55750,7 +55860,7 @@ function cvs_GameplayScreen$ShopOffer() {
     a.$cost = 0;
 }
 let cvs_GameplayScreen$ShopOffer__init_0 = ($this, $label, $power, $cost) => {
-    kji_Intrinsics_checkNotNullParameter($label, $rt_s(2899));
+    kji_Intrinsics_checkNotNullParameter($label, $rt_s(2904));
     $this.$label = $label;
     $this.$power1 = $power;
     $this.$cost = $cost;
@@ -55773,7 +55883,7 @@ cvs_GameplayScreen$ShopOffer_toString = $this => {
     var$3 = $this.$cost;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(2900)), var$1), $rt_s(2466)), var$2), $rt_s(2901)), var$3), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(2905)), var$1), $rt_s(2471)), var$2), $rt_s(2906)), var$3), 41);
     return jl_AbstractStringBuilder_toString(var$4);
 },
 cvs_GameplayScreen$ShopOffer_hashCode = $this => {
@@ -55801,10 +55911,10 @@ cvs_GameplayScreen$ShopOffer_equals = ($this, $other) => {
 };
 function cvs_GameplayScreen$_init_$lambda$_0_0() {
     jl_Object.call(this);
-    this.$_026 = null;
+    this.$_028 = null;
 }
 let cvs_GameplayScreen$_init_$lambda$_0_0__init_0 = (var$0, var$1) => {
-    var$0.$_026 = var$1;
+    var$0.$_028 = var$1;
 },
 cvs_GameplayScreen$_init_$lambda$_0_0__init_ = var_0 => {
     let var_1 = new cvs_GameplayScreen$_init_$lambda$_0_0();
@@ -55813,15 +55923,15 @@ cvs_GameplayScreen$_init_$lambda$_0_0__init_ = var_0 => {
 },
 cvs_GameplayScreen$_init_$lambda$_0_0_invoke = var$0 => {
     let var$1;
-    var$1 = var$0.$_026;
+    var$1 = var$0.$_028;
     return cbggg_TextureRegion__init_(cvs_SkyVanguardGame_getMissileTexture(var$1));
 },
 k_LazyKt__LazyJVMKt = $rt_classWithoutFields(),
 k_LazyKt__LazyJVMKt_lazy = $initializer => {
     let var$2;
-    kji_Intrinsics_checkNotNullParameter($initializer, $rt_s(2902));
+    kji_Intrinsics_checkNotNullParameter($initializer, $rt_s(2907));
     var$2 = new k_SynchronizedLazyImpl;
-    kji_Intrinsics_checkNotNullParameter($initializer, $rt_s(2902));
+    kji_Intrinsics_checkNotNullParameter($initializer, $rt_s(2907));
     var$2.$initializer = $initializer;
     k_UNINITIALIZED_VALUE_$callClinit();
     var$2.$_value = k_UNINITIALIZED_VALUE_INSTANCE;
@@ -55830,10 +55940,10 @@ k_LazyKt__LazyJVMKt_lazy = $initializer => {
 };
 function cvs_GameplayScreen$_init_$lambda$_0_1() {
     jl_Object.call(this);
-    this.$_044 = null;
+    this.$_046 = null;
 }
 let cvs_GameplayScreen$_init_$lambda$_0_1__init_0 = (var$0, var$1) => {
-    var$0.$_044 = var$1;
+    var$0.$_046 = var$1;
 },
 cvs_GameplayScreen$_init_$lambda$_0_1__init_ = var_0 => {
     let var_1 = new cvs_GameplayScreen$_init_$lambda$_0_1();
@@ -55842,23 +55952,23 @@ cvs_GameplayScreen$_init_$lambda$_0_1__init_ = var_0 => {
 },
 cvs_GameplayScreen$_init_$lambda$_0_1_invoke = var$0 => {
     let var$1;
-    var$1 = var$0.$_044;
+    var$1 = var$0.$_046;
     return cbggg_TextureRegion__init_(cvs_SkyVanguardGame_getSuperMissileTexture(var$1));
 };
 function otja_XMLHttpRequest$onComplete$lambda$_23_0() {
     let a = this; jl_Object.call(a);
-    a.$_042 = null;
-    a.$_117 = null;
+    a.$_044 = null;
+    a.$_118 = null;
 }
 let otja_XMLHttpRequest$onComplete$lambda$_23_0_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7, var$8, var$9, var$10;
     var$1 = var$1;
-    var$2 = var$1.$_042;
-    var$1 = var$1.$_117;
+    var$2 = var$1.$_044;
+    var$1 = var$1.$_118;
     if (var$2.readyState == 4) {
         var$1 = var$1;
-        var$2 = var$1.$_038;
-        var$3 = var$1.$_115;
+        var$2 = var$1.$_040;
+        var$3 = var$1.$_116;
         var$4 = var$1.$_27;
         var$5 = var$1.$_35;
         var$6 = var$1.$_42;
@@ -55868,7 +55978,7 @@ let otja_XMLHttpRequest$onComplete$lambda$_23_0_handleEvent$exported$0 = (var$1,
         var$10 = var$4.status;
         var$1 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$1);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(280)), var$3), $rt_s(273)), var$9), $rt_s(2903)), var$10), $rt_s(257)), var$5);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$1, $rt_s(278)), var$3), $rt_s(271)), var$9), $rt_s(2908)), var$10), $rt_s(255)), var$5);
         jl_AbstractStringBuilder_toString(var$1);
         if (cgxgtbwa_AssetDownloadImpl_trySettle(var$2, var$6))
             cgxgtbwa_AssetDownloadImpl_handleTerminalStatus(var$2, var$7, var$3, var$8, var$5, var$4);
@@ -55876,21 +55986,21 @@ let otja_XMLHttpRequest$onComplete$lambda$_23_0_handleEvent$exported$0 = (var$1,
 };
 function cgxgtbwa_AssetDownloadImpl$setOnProgress$lambda$_8_0() {
     let a = this; jl_Object.call(a);
-    a.$_059 = null;
-    a.$_121 = null;
+    a.$_063 = null;
+    a.$_123 = null;
     a.$_212 = null;
 }
 let cgxgtbwa_AssetDownloadImpl$setOnProgress$lambda$_8_0_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7;
     var$1 = var$1;
-    var$3 = var$1.$_121;
+    var$3 = var$1.$_123;
     var$1 = var$1.$_212;
     var$4 = var$2.loaded;
     var$5 = var$2.total;
     var$6 = var$5 <= 0 ? (-1.0) : var$4 / var$5;
     var$2 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$2);
-    var$3 = jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(280)), var$3), $rt_s(2904)), var$4), $rt_s(2905)), var$5), $rt_s(2906));
+    var$3 = jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$2, $rt_s(278)), var$3), $rt_s(2909)), var$4), $rt_s(2910)), var$5), $rt_s(2911));
     var$7 = var$3.$length2;
     jl_AbstractStringBuilder_insert3(var$3, var$7, var$6);
     jl_AbstractStringBuilder_toString(var$2);
@@ -55899,21 +56009,21 @@ let cgxgtbwa_AssetDownloadImpl$setOnProgress$lambda$_8_0_handleEvent$exported$0 
         var$2 = var$1.$val$url0;
         var$3 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$3);
-        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(280)), var$2), $rt_s(2904)), var$4), $rt_s(2905)), var$5);
+        jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(278)), var$2), $rt_s(2909)), var$4), $rt_s(2910)), var$5);
         jl_AbstractStringBuilder_toString(var$3);
     }
 };
 function cgxgtbwa_AssetDownloadImpl$retryOrFail$lambda$_6_0() {
     let a = this; jl_Object.call(a);
-    a.$_049 = null;
-    a.$_119 = 0;
+    a.$_052 = null;
+    a.$_121 = 0;
     a.$_210 = null;
     a.$_36 = null;
     a.$_43 = 0;
 }
 let cgxgtbwa_AssetDownloadImpl$retryOrFail$lambda$_6_0_onTimer$exported$0 = var$1 => {
     var$1 = var$1;
-    cgxgtbwa_AssetDownloadImpl_loadBinary(var$1.$_049, var$1.$_119, var$1.$_210, var$1.$_36, var$1.$_43);
+    cgxgtbwa_AssetDownloadImpl_loadBinary(var$1.$_052, var$1.$_121, var$1.$_210, var$1.$_36, var$1.$_43);
 },
 k_Lazy = $rt_classWithoutFields(0);
 function k_SynchronizedLazyImpl() {
@@ -56058,7 +56168,7 @@ cbgu_FloatArray_addAll1 = ($this, $array, $offset, $length) => {
     var$4 = new jl_IllegalArgumentException;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append(var$5, $rt_s(2907));
+    jl_AbstractStringBuilder_append(var$5, $rt_s(2912));
     var$5 = jl_StringBuilder_append0(var$5, $offset);
     jl_AbstractStringBuilder_append(var$5, $rt_s(133));
     var$5 = jl_StringBuilder_append0(var$5, $length);
@@ -56171,7 +56281,7 @@ let cvs_ShopScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $butto
     let $p, var$6, $$this$forEachIndexed$iv, $index$iv, $item$iv, $offer, $level, $cost, $rect, var$14;
     $p = cvs_BaseScreen_world($this.$this$010, $screenX, $screenY);
     if (cbgm_Rectangle_contains($this.$this$010.$back1, $p.$x0, $p.$y0)) {
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$010.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$010.$game), $rt_s(768), 0.0, 0.0, 6, null);
         cvs_SkyVanguardGame_openHangar($this.$this$010.$game);
         return 1;
     }
@@ -56190,14 +56300,14 @@ let cvs_ShopScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $butto
             $cost = ($offer.$baseCost + ($level * 8 | 0) | 0) * 0.699999988079071 | 0;
             if ($level >= cvs_ShopScreen_allowedMax(var$6)) {
                 var$6.$message = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$6.$game), $rt_s(1672));
-                cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$6.$game), $rt_s(770), 0.699999988079071, 0.7200000286102295);
+                cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$6.$game), $rt_s(768), 0.699999988079071, 0.7200000286102295);
             } else if (!cvs_SaveManager_spendCoins(cvs_SkyVanguardGame_getSaveManager(var$6.$game), $cost)) {
                 var$6.$message = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$6.$game), $rt_s(975));
-                cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$6.$game), $rt_s(770), 0.699999988079071, 0.75);
+                cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$6.$game), $rt_s(768), 0.699999988079071, 0.75);
             } else {
                 $p = cvs_SkyVanguardGame_getSaveManager(var$6.$game);
                 $rect = $offer.$power;
-                kji_Intrinsics_checkNotNullParameter($rect, $rt_s(756));
+                kji_Intrinsics_checkNotNullParameter($rect, $rt_s(754));
                 $screenX = Long_lo((kr_RangesKt___RangesKt_coerceAtMost1(Long_add(Long_fromInt(cvs_SaveManager_upgradeStacks($p, $rect)), Long_fromInt(kr_RangesKt___RangesKt_coerceAtLeast0(1, 0))), Long_fromInt(2147483647))));
                 $$this$forEachIndexed$iv = $p.$upgradeCache;
                 $item$iv = jl_Integer_valueOf($screenX);
@@ -56206,12 +56316,12 @@ let cvs_ShopScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $butto
                 var$14 = $rect.$name;
                 ju_Locale_$callClinit();
                 $item$iv = ju_Locale_ROOT;
-                kji_Intrinsics_checkNotNullExpressionValue($item$iv, $rt_s(757));
+                kji_Intrinsics_checkNotNullExpressionValue($item$iv, $rt_s(755));
                 $item$iv = jl_String_toLowerCase(var$14, $item$iv);
-                kji_Intrinsics_checkNotNullExpressionValue($item$iv, $rt_s(758));
+                kji_Intrinsics_checkNotNullExpressionValue($item$iv, $rt_s(756));
                 $rect = new jl_StringBuilder;
                 jl_AbstractStringBuilder__init_($rect);
-                jl_StringBuilder_append(jl_StringBuilder_append($rect, $rt_s(759)), $item$iv);
+                jl_StringBuilder_append(jl_StringBuilder_append($rect, $rt_s(757)), $item$iv);
                 $item$iv = jl_AbstractStringBuilder_toString($rect);
                 cgxgtbw_WebPreferences_putInteger($$this$forEachIndexed$iv, $item$iv, $screenX);
                 $p.$upgradesDirty = 1;
@@ -56228,7 +56338,7 @@ let cvs_ShopScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $butto
                 var$6.$message = jl_AbstractStringBuilder_toString($$this$forEachIndexed$iv);
                 if (cvs_SaveManager_getVibration(cvs_SkyVanguardGame_getSaveManager(var$6.$game)))
                     cgxgtbw_WebInput_vibrate(cbg_Gdx_input, 45);
-                cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$6.$game), $rt_s(770), 0.8999999761581421, 1.159999966621399);
+                cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$6.$game), $rt_s(768), 0.8999999761581421, 1.159999966621399);
             }
             var$6.$messageTimer = 2.200000047683716;
             return 1;
@@ -56239,15 +56349,15 @@ let cvs_ShopScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $butto
 };
 function cgxgtbwft_LocalDBStorage$removeFile$lambda$_3_0() {
     jl_Object.call(this);
-    this.$_021 = null;
+    this.$_023 = null;
 }
 let cgxgtbwft_LocalDBStorage$removeFile$lambda$_3_0_handleEvent$exported$0 = var$1 => {
     let var$2, var$3;
-    var$1 = var$1.$_021;
+    var$1 = var$1.$_023;
     var$2 = jl_System_err();
     var$3 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$3);
-    jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2908)), var$1);
+    jl_StringBuilder_append(jl_StringBuilder_append(var$3, $rt_s(2913)), var$1);
     var$1 = jl_AbstractStringBuilder_toString(var$3);
     otcic_JsConsolePrintStream_println(var$2, var$1);
 };
@@ -56600,7 +56710,7 @@ let cvs_GameplayScreen$show$2_touchDown = ($this, $screenX, $screenY, $pointer, 
     if (cbgm_Rectangle_contains(var$6.$pauseButton, $p.$x0, $p.$y0)) {
         $p = $this.$this$00;
         $p.$paused = 1;
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.0, 0.0, 6, null);
         return 1;
     }
     if (cbgm_Rectangle_contains($this.$this$00.$specialButton, $p.$x0, $p.$y0)) {
@@ -56619,7 +56729,7 @@ let cvs_GameplayScreen$show$2_touchDown = ($this, $screenX, $screenY, $pointer, 
             $p.$lockOn = 0;
             $p.$aimingMode = 0;
         }
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(770), 0.800000011920929, !$this.$this$00.$aimingMode ? 0.800000011920929 : 1.2999999523162842);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(768), 0.800000011920929, !$this.$this$00.$aimingMode ? 0.800000011920929 : 1.2999999523162842);
         return 1;
     }
     var$6 = $this.$this$00;
@@ -56627,7 +56737,7 @@ let cvs_GameplayScreen$show$2_touchDown = ($this, $screenX, $screenY, $pointer, 
         cvs_GameplayScreen_lockAtPoint(var$6, $p.$x0, $p.$y0);
         $p = $this.$this$00;
         $p.$aimingMode = 0;
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(767), 0.699999988079071, 1.399999976158142);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager($p.$game), $rt_s(765), 0.699999988079071, 1.399999976158142);
         return 1;
     }
     if (cvs_GameplayScreen_getControlMode(var$6) == 2) {
@@ -56725,12 +56835,12 @@ cbg_Input$OnscreenKeyboardType__init_ = (var_0, var_1) => {
 },
 cbg_Input$OnscreenKeyboardType__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbg_Input$OnscreenKeyboardType_Default = cbg_Input$OnscreenKeyboardType__init_($rt_s(2909), 0);
-    cbg_Input$OnscreenKeyboardType_NumberPad = cbg_Input$OnscreenKeyboardType__init_($rt_s(2910), 1);
-    cbg_Input$OnscreenKeyboardType_PhonePad = cbg_Input$OnscreenKeyboardType__init_($rt_s(2911), 2);
-    cbg_Input$OnscreenKeyboardType_Email = cbg_Input$OnscreenKeyboardType__init_($rt_s(2912), 3);
-    cbg_Input$OnscreenKeyboardType_Password = cbg_Input$OnscreenKeyboardType__init_($rt_s(2913), 4);
-    var$1 = cbg_Input$OnscreenKeyboardType__init_($rt_s(2914), 5);
+    cbg_Input$OnscreenKeyboardType_Default = cbg_Input$OnscreenKeyboardType__init_($rt_s(2914), 0);
+    cbg_Input$OnscreenKeyboardType_NumberPad = cbg_Input$OnscreenKeyboardType__init_($rt_s(2915), 1);
+    cbg_Input$OnscreenKeyboardType_PhonePad = cbg_Input$OnscreenKeyboardType__init_($rt_s(2916), 2);
+    cbg_Input$OnscreenKeyboardType_Email = cbg_Input$OnscreenKeyboardType__init_($rt_s(2917), 3);
+    cbg_Input$OnscreenKeyboardType_Password = cbg_Input$OnscreenKeyboardType__init_($rt_s(2918), 4);
+    var$1 = cbg_Input$OnscreenKeyboardType__init_($rt_s(2919), 5);
     cbg_Input$OnscreenKeyboardType_URI = var$1;
     var$2 = $rt_createArray(cbg_Input$OnscreenKeyboardType, 6);
     var$3 = var$2.data;
@@ -56741,6 +56851,216 @@ cbg_Input$OnscreenKeyboardType__clinit_ = () => {
     var$3[4] = cbg_Input$OnscreenKeyboardType_Password;
     var$3[5] = var$1;
     cbg_Input$OnscreenKeyboardType_$VALUES = var$2;
+},
+cvsw_RetornoDaFoto = $rt_classWithoutFields(0);
+function cvsw_WebPlatformServices$pickPilotPhoto$lambda$_5_0() {
+    let a = this; jl_Object.call(a);
+    a.$_059 = null;
+    a.$_15 = null;
+}
+let cvsw_WebPlatformServices$pickPilotPhoto$lambda$_5_0_recebeu$exported$0 = (var$1, var$2) => {
+    let var$3, var$4, var$5, $$je;
+    var$2 = $rt_str(var$2);
+    var$1 = var$1.$_15;
+    if (var$2 === null)
+        var$3 = null;
+    else {
+        a: {
+            try {
+                var$2 = k_Result_constructor_impl(cvsw_WebLauncherKt_access$decodificaBase64(var$2));
+                break a;
+            } catch ($$e) {
+                $$je = $rt_wrapException($$e);
+                if ($$je instanceof jl_Throwable) {
+                    var$2 = $$je;
+                    var$2 = k_ResultKt_createFailure(var$2);
+                    break a;
+                } else {
+                    throw $$e;
+                }
+            }
+        }
+        if (k_Result_isFailure_impl(var$2))
+            var$2 = null;
+        var$3 = var$2;
+    }
+    b: {
+        if (var$3 !== null) {
+            c: {
+                try {
+                    cgxgtbw_WebFileHandle_writeBytes(cgxgtbw_WebFiles_local(cbg_Gdx_files, $rt_s(189)), var$3, 0);
+                    k_Unit_$callClinit();
+                    var$2 = k_Result_constructor_impl(k_Unit_INSTANCE);
+                    break c;
+                } catch ($$e) {
+                    $$je = $rt_wrapException($$e);
+                    if ($$je instanceof jl_Throwable) {
+                        var$2 = $$je;
+                        var$2 = k_ResultKt_createFailure(var$2);
+                        break c;
+                    } else {
+                        throw $$e;
+                    }
+                }
+            }
+            if (var$2 instanceof k_Result$Failure ? 0 : 1) {
+                var$4 = 1;
+                break b;
+            }
+        }
+        var$4 = 0;
+    }
+    var$2 = jl_Boolean_valueOf(var$4);
+    var$1 = var$1;
+    var$2 = var$2;
+    var$1 = var$1.$_034;
+    var$4 = var$2.$value0;
+    var$2 = cbg_Gdx_app;
+    var$5 = new cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0;
+    var$5.$_018 = var$4;
+    var$5.$_16 = var$1;
+    cgxgtbw_WebApplication_postRunnable(var$2, var$5);
+    k_Unit_$callClinit();
+},
+cvsw_WebLauncherKt = $rt_classWithoutFields(),
+cvsw_WebLauncherKt_access$mostrarAnuncioPremiado = ($nome, $aoTerminar) => {
+    let var$3, var$4, var$5, $$je;
+    var$3 = $rt_createBooleanArray(1);
+    var$4 = var$3.data;
+    var$4[0] = 0;
+    a: {
+        try {
+            var$5 = cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0__init_(var$3, $aoTerminar);
+            cvsw_WebLauncherKt_mostrarAnuncioPremiadoJs$js_body$_1($rt_ustr($nome), otji_JS_function(otji_JSWrapper_unwrap(var$5), "recebeu"));
+            k_Unit_$callClinit();
+            $nome = k_Result_constructor_impl(k_Unit_INSTANCE);
+            break a;
+        } catch ($$e) {
+            $$je = $rt_wrapException($$e);
+            if ($$je instanceof jl_Throwable) {
+                $nome = $$je;
+                $nome = k_ResultKt_createFailure($nome);
+                k_Result_$callClinit();
+                break a;
+            } else {
+                throw $$e;
+            }
+        }
+    }
+    k_Result_$callClinit();
+    $nome = !($nome instanceof k_Result$Failure) ? null : $nome.$exception;
+    if ($nome !== null && !var$4[0]) {
+        var$4[0] = 1;
+        $aoTerminar.$invoke(jl_Boolean_valueOf(0));
+    }
+},
+cvsw_WebLauncherKt_access$decodificaBase64 = $texto => {
+    let var$2, var$3, var$4, var$5, var$6, var$7, var$8, var$9, var$10, var$11, var$12, var$13, var$14;
+    $texto = $texto;
+    var$2 = new jl_StringBuilder;
+    jl_AbstractStringBuilder__init_(var$2);
+    var$2 = var$2;
+    var$3 = 0;
+    var$4 = $texto;
+    var$5 = var$4.$nativeString.length;
+    while (var$3 < var$5) {
+        var$6 = jl_String_charAt(var$4, var$3);
+        if (kt_StringsKt__StringsKt_indexOf$default($rt_s(2920), var$6, 0, 0, 6, null) < 0 ? 0 : 1)
+            jl_AbstractStringBuilder_append0(var$2, var$6);
+        var$3 = var$3 + 1 | 0;
+    }
+    var$7 = jl_AbstractStringBuilder_toString(var$2);
+    var$8 = $rt_createByteArray((var$7.$nativeString.length * 3 | 0) / 4 | 0);
+    var$9 = var$8.data;
+    var$10 = 0;
+    var$5 = 0;
+    var$11 = 0;
+    var$12 = 0;
+    var$13 = var$7.$nativeString.length;
+    while (var$12 < var$13) {
+        var$14 = jl_String_charAt(var$7, var$12);
+        var$3 = kt_StringsKt__StringsKt_indexOf$default($rt_s(2920), var$14, 0, 0, 6, null);
+        if (var$3 >= 0) {
+            var$10 = var$10 << 6 | var$3;
+            var$5 = var$5 + 6 | 0;
+            if (var$5 >= 8) {
+                var$5 = var$5 + (-8) | 0;
+                var$3 = var$11 + 1 | 0;
+                var$9[var$11] = (var$10 >> var$5 & 255) << 24 >> 24;
+                var$11 = var$3;
+            }
+        }
+        var$12 = var$12 + 1 | 0;
+    }
+    if (var$11 != var$9.length) {
+        var$8 = ju_Arrays_copyOf(var$8, var$11);
+        kji_Intrinsics_checkNotNullExpressionValue(var$8, $rt_s(2822));
+    }
+    return var$8;
+},
+cvsw_WebLauncherKt_mostrarAnuncioPremiadoJs$js_body$_1 = (var$1, var$2) => {
+    if (typeof window.adBreak !== 'function') {
+        var$2.recebeu(false);
+        return;
+    }
+    var assistiu = false;
+    window.adBreak({ type : 'reward', name : var$1, beforeReward : function(mostrarAnuncio) {
+        mostrarAnuncio();
+    }, adViewed : function() {
+        assistiu = true;
+    }, adDismissed : function() {
+        assistiu = false;
+    }, afterAd : function() {
+    }, adBreakDone : function(info) {
+        var status = info && info.breakStatus;
+        if (status === 'viewed' || status === 'dismissed') {
+            window.__h5Frustradas = 0;
+        } else {
+            window.__h5Frustradas = (window.__h5Frustradas || 0) + 1;
+            if (window.__h5Frustradas >= 2) {
+                window.__h5SemAnuncio = true;
+            }
+        }
+        var$2.recebeu(assistiu);
+    } });
+},
+cvsw_WebLauncherKt_abrirSeletorDeFoto$js_body$_3 = var$1 => {
+    var entrada = document.createElement('input');
+    entrada.type = 'file';
+    entrada.accept = 'image/*';
+    entrada.style.display = 'none';
+    document.body.appendChild(entrada);
+    var encerra = function(valor) {
+        if (entrada.parentNode) {
+            entrada.parentNode.removeChild(entrada);
+        }
+        var$1.recebeu(valor);
+    };
+    entrada.onchange = function() {
+        var arquivo = entrada.files && entrada.files[0];
+        if (!arquivo) {
+            encerra(null);
+            return;
+        }
+        var endereco = URL.createObjectURL(arquivo);
+        var imagem = new Image();
+        imagem.onload = function() {
+            var lado = 512;
+            var escala = Math.min(1, lado / Math.max(imagem.width, imagem.height));
+            var tela = document.createElement('canvas');
+            tela.width = Math.max(1, Math.round(imagem.width * escala));
+            tela.height = Math.max(1, Math.round(imagem.height * escala));
+            (tela.getContext('2d')).drawImage(imagem, 0, 0, tela.width, tela.height);
+            URL.revokeObjectURL(endereco);
+            encerra(((tela.toDataURL('image/png')).split(','))[1]);
+        };
+        imagem.onerror = function() {
+            URL.revokeObjectURL(endereco);
+            encerra(null);
+        };
+        imagem.src = endereco;
+    };
+    entrada.click();
 },
 cgxgtbwwh_Howl = $rt_classWithoutFields(),
 cgxgtbwwh_Howl_create$js_body$_1 = var$1 => {
@@ -56768,9 +57088,9 @@ cbggg_GlyphLayout$WrapState__init_ = (var_0, var_1) => {
 },
 cbggg_GlyphLayout$WrapState__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbggg_GlyphLayout$WrapState_notWrapped = cbggg_GlyphLayout$WrapState__init_($rt_s(2915), 0);
-    cbggg_GlyphLayout$WrapState_wrapped = cbggg_GlyphLayout$WrapState__init_($rt_s(2916), 1);
-    var$1 = cbggg_GlyphLayout$WrapState__init_($rt_s(2917), 2);
+    cbggg_GlyphLayout$WrapState_notWrapped = cbggg_GlyphLayout$WrapState__init_($rt_s(2921), 0);
+    cbggg_GlyphLayout$WrapState_wrapped = cbggg_GlyphLayout$WrapState__init_($rt_s(2922), 1);
+    var$1 = cbggg_GlyphLayout$WrapState__init_($rt_s(2923), 2);
     cbggg_GlyphLayout$WrapState_lastWrapped = var$1;
     var$2 = $rt_createArray(cbggg_GlyphLayout$WrapState, 3);
     var$3 = var$2.data;
@@ -56791,41 +57111,41 @@ cbgg_Colors_reset = () => {
     cbgu_ObjectMap_clear(cbgg_Colors_map);
     var$1 = cbgg_Colors_map;
     cbgg_Color_$callClinit();
-    cbgu_ObjectMap_put(var$1, $rt_s(2918), cbgg_Color_CLEAR);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2919), cbgg_Color_CLEAR_WHITE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2920), cbgg_Color_BLACK);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(824), cbgg_Color_WHITE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2921), cbgg_Color_LIGHT_GRAY);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2922), cbgg_Color_GRAY);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2923), cbgg_Color_DARK_GRAY);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2924), cbgg_Color_BLUE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2925), cbgg_Color_NAVY);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2926), cbgg_Color_ROYAL);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2927), cbgg_Color_SLATE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2928), cbgg_Color_SKY);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2929), cbgg_Color_CYAN);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2930), cbgg_Color_TEAL);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2931), cbgg_Color_GREEN);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2932), cbgg_Color_CHARTREUSE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2933), cbgg_Color_LIME);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2934), cbgg_Color_FOREST);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2935), cbgg_Color_OLIVE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2936), cbgg_Color_YELLOW);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2937), cbgg_Color_GOLD);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2938), cbgg_Color_GOLDENROD);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2939), cbgg_Color_ORANGE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2940), cbgg_Color_BROWN);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2941), cbgg_Color_TAN);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2942), cbgg_Color_FIREBRICK);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2943), cbgg_Color_RED);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2944), cbgg_Color_SCARLET);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2945), cbgg_Color_CORAL);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2946), cbgg_Color_SALMON);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2947), cbgg_Color_PINK);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2948), cbgg_Color_MAGENTA);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2949), cbgg_Color_PURPLE);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2950), cbgg_Color_VIOLET);
-    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2951), cbgg_Color_MAROON);
+    cbgu_ObjectMap_put(var$1, $rt_s(2924), cbgg_Color_CLEAR);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2925), cbgg_Color_CLEAR_WHITE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2926), cbgg_Color_BLACK);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(822), cbgg_Color_WHITE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2927), cbgg_Color_LIGHT_GRAY);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2928), cbgg_Color_GRAY);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2929), cbgg_Color_DARK_GRAY);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2930), cbgg_Color_BLUE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2931), cbgg_Color_NAVY);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2932), cbgg_Color_ROYAL);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2933), cbgg_Color_SLATE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2934), cbgg_Color_SKY);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2935), cbgg_Color_CYAN);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2936), cbgg_Color_TEAL);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2937), cbgg_Color_GREEN);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2938), cbgg_Color_CHARTREUSE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2939), cbgg_Color_LIME);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2940), cbgg_Color_FOREST);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2941), cbgg_Color_OLIVE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2942), cbgg_Color_YELLOW);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2943), cbgg_Color_GOLD);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2944), cbgg_Color_GOLDENROD);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2945), cbgg_Color_ORANGE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2946), cbgg_Color_BROWN);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2947), cbgg_Color_TAN);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2948), cbgg_Color_FIREBRICK);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2949), cbgg_Color_RED);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2950), cbgg_Color_SCARLET);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2951), cbgg_Color_CORAL);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2952), cbgg_Color_SALMON);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2953), cbgg_Color_PINK);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2954), cbgg_Color_MAGENTA);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2955), cbgg_Color_PURPLE);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2956), cbgg_Color_VIOLET);
+    cbgu_ObjectMap_put(cbgg_Colors_map, $rt_s(2957), cbgg_Color_MAROON);
 },
 cbgg_Colors__clinit_ = () => {
     cbgg_Colors_map = cbgu_ObjectMap__init_();
@@ -56882,8 +57202,8 @@ function cvs_GameplayScreen$EnemyVisual() {
     a.$muzzles = null;
 }
 let cvs_GameplayScreen$EnemyVisual__init_0 = ($this, $texture, $width, $height, $rotation, $collisionRadius, $muzzles) => {
-    kji_Intrinsics_checkNotNullParameter($texture, $rt_s(2952));
-    kji_Intrinsics_checkNotNullParameter($muzzles, $rt_s(2953));
+    kji_Intrinsics_checkNotNullParameter($texture, $rt_s(2958));
+    kji_Intrinsics_checkNotNullParameter($muzzles, $rt_s(2959));
     $this.$texture0 = $texture;
     $this.$width5 = $width;
     $this.$height5 = $height;
@@ -56906,7 +57226,7 @@ cvs_GameplayScreen$EnemyVisual_toString = $this => {
     var$6 = $this.$muzzles;
     var$7 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$7);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$7, $rt_s(2954)), var$1), $rt_s(2955)), var$2), $rt_s(2956)), var$3), $rt_s(2957)), var$4), $rt_s(2958)), var$5), $rt_s(2959)), var$6), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$7, $rt_s(2960)), var$1), $rt_s(2961)), var$2), $rt_s(2962)), var$3), $rt_s(2963)), var$4), $rt_s(2964)), var$5), $rt_s(2965)), var$6), 41);
     return jl_AbstractStringBuilder_toString(var$7);
 },
 cvs_GameplayScreen$EnemyVisual_hashCode = $this => {
@@ -56956,12 +57276,12 @@ cvs_EnemyType__init_ = (var_0, var_1) => {
 },
 cvs_EnemyType__clinit_ = () => {
     let var$1, var$2, var$3;
-    cvs_EnemyType_SCOUT = cvs_EnemyType__init_($rt_s(2960), 0);
-    cvs_EnemyType_STRIKER = cvs_EnemyType__init_($rt_s(2961), 1);
-    cvs_EnemyType_BOMBER = cvs_EnemyType__init_($rt_s(2962), 2);
-    cvs_EnemyType_DRONE = cvs_EnemyType__init_($rt_s(2674), 3);
-    cvs_EnemyType_TANK = cvs_EnemyType__init_($rt_s(2963), 4);
-    var$1 = cvs_EnemyType__init_($rt_s(2964), 5);
+    cvs_EnemyType_SCOUT = cvs_EnemyType__init_($rt_s(2966), 0);
+    cvs_EnemyType_STRIKER = cvs_EnemyType__init_($rt_s(2967), 1);
+    cvs_EnemyType_BOMBER = cvs_EnemyType__init_($rt_s(2968), 2);
+    cvs_EnemyType_DRONE = cvs_EnemyType__init_($rt_s(2679), 3);
+    cvs_EnemyType_TANK = cvs_EnemyType__init_($rt_s(2969), 4);
+    var$1 = cvs_EnemyType__init_($rt_s(2970), 5);
     cvs_EnemyType_MINIBOSS = var$1;
     var$2 = $rt_createArray(cvs_EnemyType, 6);
     var$3 = var$2.data;
@@ -56982,8 +57302,8 @@ function cvs_WaveEvent() {
     a.$pattern2 = null;
 }
 let cvs_WaveEvent__init_0 = ($this, $time, $type, $count, $pattern) => {
-    kji_Intrinsics_checkNotNullParameter($type, $rt_s(756));
-    kji_Intrinsics_checkNotNullParameter($pattern, $rt_s(2849));
+    kji_Intrinsics_checkNotNullParameter($type, $rt_s(754));
+    kji_Intrinsics_checkNotNullParameter($pattern, $rt_s(2853));
     $this.$time0 = $time;
     $this.$type3 = $type;
     $this.$count0 = $count;
@@ -57005,7 +57325,7 @@ cvs_WaveEvent_toString = $this => {
     var$4 = $this.$pattern2;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(var$5, $rt_s(2965)), var$1), $rt_s(249)), var$2), $rt_s(2966)), var$3), $rt_s(2967)), var$4), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(var$5, $rt_s(2971)), var$1), $rt_s(247)), var$2), $rt_s(2972)), var$3), $rt_s(2973)), var$4), 41);
     return jl_AbstractStringBuilder_toString(var$5);
 },
 cvs_WaveEvent_hashCode = $this => {
@@ -57074,7 +57394,7 @@ cvs_ResultsScreen__init_ = (var_0, var_1, var_2, var_3, var_4, var_5) => {
 },
 cvs_ResultsScreen_show = $this => {
     let var$1, var$2;
-    cvs_AudioManager_playMusic(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(839));
+    cvs_AudioManager_playMusic(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(837));
     $this.$adBusy = 0;
     $this.$adLoadingText = $rt_s(66);
     var$1 = cbg_Gdx_input;
@@ -57096,12 +57416,12 @@ cvs_ResultsScreen_render = ($this, $delta) => {
     var$6 = var$4.$phase;
     var$4 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$4);
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$4, var$5), $rt_s(2968)), var$6);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$4, var$5), $rt_s(2974)), var$6);
     cvs_BaseScreen_drawCentered($this, jl_AbstractStringBuilder_toString(var$4), 1600.0, cvs_SkyVanguardGame_getSmallFont($this.$game), cbgg_Color__init_(0.3499999940395355, 0.8999999761581421, 1.0, 1.0));
     var$7 = $this.$stage4.$name0;
     var$5 = cvs_SkyVanguardGame_getSmallFont($this.$game);
     var$4 = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(822));
     cvs_BaseScreen_drawCentered($this, var$7, 1544.0, var$5, var$4);
     cvs_BaseScreenKt_neonPanel$default(var$2, cbgm_Rectangle__init_(160.0, 840.0, 760.0, 600.0), $accent, cvs_BaseScreenKt_getPANEL_FILL(), 30.0, 2.5999999046325684, 4, 0.07000000029802322, 0.0, 128, null);
     var$5 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($this.$game), $rt_s(912));
@@ -57119,7 +57439,7 @@ cvs_ResultsScreen_render = ($this, $delta) => {
     var$5 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(1738));
     var$6 = $this.$bestCombo0;
     var$4 = jl_StringBuilder__init_();
-    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$4, var$5), $rt_s(2969)), var$6);
+    jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(var$4, var$5), $rt_s(2975)), var$6);
     cvs_BaseScreen_drawCentered$default(var$2, jl_StringBuilder_toString(var$4), 1216.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), null, 8, null);
     var$5 = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(940));
     var$6 = $this.$earned;
@@ -57139,7 +57459,7 @@ cvs_ResultsScreen_render = ($this, $delta) => {
     var$8 = jl_StringBuilder_toString($accent);
     var$5 = cvs_SkyVanguardGame_getFont(cvs_BaseScreen_getGame($this));
     var$4 = cbgg_Color_WHITE;
-    kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(824));
+    kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(822));
     cvs_BaseScreen_drawTracked($this, var$8, 540.0, 950.0, var$5, var$4, 6.0);
     if ($this.$adBusy)
         cvs_BaseScreen_drawCentered($this, $this.$adLoadingText, 620.0, cvs_SkyVanguardGame_getSmallFont(cvs_BaseScreen_getGame($this)), cbgg_Color__init_(0.550000011920929, 0.8500000238418579, 1.0, 1.0));
@@ -57151,17 +57471,17 @@ cvs_ResultsScreen_render = ($this, $delta) => {
                 cvs_BaseScreen_drawButton($this, $this.$nextStage, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(955)), 1);
         }
         cvs_BaseScreen_drawButton$default(var$2, $this.$retry, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(905)), 0, 4, null);
-        cvs_BaseScreen_drawButton$default(var$2, $this.$campaign, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(849)), 0, 4, null);
+        cvs_BaseScreen_drawButton$default(var$2, $this.$campaign, cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(cvs_BaseScreen_getGame($this)), $rt_s(847)), 0, 4, null);
     }
 },
 cvs_ResultsScreen_grade = $this => {
     let var$1, var$2, var$3;
     if (!$this.$victory)
-        var$1 = $rt_s(543);
+        var$1 = $rt_s(541);
     else {
         var$2 = $this.$score0;
         var$3 = $this.$stageIndex;
-        var$1 = var$2 >= (140000 + (var$3 * 3500 | 0) | 0) ? $rt_s(541) : var$2 >= (90000 + (var$3 * 2500 | 0) | 0) ? $rt_s(2862) : var$2 < (55000 + (var$3 * 1600 | 0) | 0) ? $rt_s(2869) : $rt_s(2866);
+        var$1 = var$2 >= (140000 + (var$3 * 3500 | 0) | 0) ? $rt_s(539) : var$2 >= (90000 + (var$3 * 2500 | 0) | 0) ? $rt_s(2867) : var$2 < (55000 + (var$3 * 1600 | 0) | 0) ? $rt_s(2874) : $rt_s(2871);
     }
     return var$1;
 };
@@ -57184,7 +57504,7 @@ function cvs_EndingScreen() {
 }
 let cvs_EndingScreen__init_ = ($this, $game, $aircraftId, $onDone) => {
     kji_Intrinsics_checkNotNullParameter($game, $rt_s(212));
-    kji_Intrinsics_checkNotNullParameter($onDone, $rt_s(2970));
+    kji_Intrinsics_checkNotNullParameter($onDone, $rt_s(2976));
     cvs_BaseScreen__init_($this, $game);
     $this.$aircraftId = $aircraftId;
     $this.$onDone = $onDone;
@@ -57197,7 +57517,7 @@ let cvs_EndingScreen__init_ = ($this, $game, $aircraftId, $onDone) => {
     $game = $game;
     ju_Locale_$callClinit();
     $onDone = jl_String_toUpperCase($game, ju_Locale_ROOT);
-    kji_Intrinsics_checkNotNullExpressionValue($onDone, $rt_s(813));
+    kji_Intrinsics_checkNotNullExpressionValue($onDone, $rt_s(811));
     $this.$pilotName = $onDone;
     $this.$skipButton = cbgm_Rectangle__init_(830.0, 60.0, 210.0, 92.0);
     $this.$foeTextures = ju_ArrayList__init_();
@@ -57224,13 +57544,13 @@ cvs_EndingScreen_show = $this => {
         var$1.$processor = var$2;
         switch ($this.$aircraftId) {
             case 0:
-                var$2 = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2971), $rt_s(2972)]));
+                var$2 = kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(2977), $rt_s(2978)]));
                 break a;
             case 1:
             case 2:
                 break;
             case 3:
-                var$2 = kc_CollectionsKt__CollectionsJVMKt_listOf($rt_s(2973));
+                var$2 = kc_CollectionsKt__CollectionsJVMKt_listOf($rt_s(2979));
                 break a;
             default:
         }
@@ -57243,18 +57563,18 @@ cvs_EndingScreen_show = $this => {
         var$3 = var$2.$next();
         var$4 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$4);
-        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(2974)), var$3), $rt_s(2975));
+        jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$4, $rt_s(2980)), var$3), $rt_s(2981));
         var$4 = jl_AbstractStringBuilder_toString(var$4);
         ju_ArrayList_add(var$1, var$4);
     }
     var$1 = var$1;
     var$2 = new cvs_EndingScreen$show$lambda$_2_0;
-    var$2.$_052 = $this;
-    kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(2976));
-    kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(2977));
-    var$2 = var$2.$_052;
+    var$2.$_055 = $this;
+    kji_Intrinsics_checkNotNullParameter(var$1, $rt_s(2982));
+    kji_Intrinsics_checkNotNullParameter(var$2, $rt_s(2983));
+    var$2 = var$2.$_055;
     var$2.$phase2 = 1;
-    cvs_AudioManager_playMusic(cvs_SkyVanguardGame_getAudioManager(var$2.$game), $rt_s(839));
+    cvs_AudioManager_playMusic(cvs_SkyVanguardGame_getAudioManager(var$2.$game), $rt_s(837));
     k_Unit_$callClinit();
 },
 cvs_EndingScreen_loadFoe = ($this, $path, $name, $desc) => {
@@ -57286,9 +57606,9 @@ cvs_EndingScreen_loadFoe = ($this, $path, $name, $desc) => {
     ju_ArrayList_add($this.$foeTextures, $tex);
     var$4 = $this.$rows;
     var$6 = new cvs_EndingScreen$FoeRow;
-    kji_Intrinsics_checkNotNullParameter($tex, $rt_s(2978));
-    kji_Intrinsics_checkNotNullParameter($name, $rt_s(776));
-    kji_Intrinsics_checkNotNullParameter($desc, $rt_s(2979));
+    kji_Intrinsics_checkNotNullParameter($tex, $rt_s(2984));
+    kji_Intrinsics_checkNotNullParameter($name, $rt_s(774));
+    kji_Intrinsics_checkNotNullParameter($desc, $rt_s(2985));
     cvs_EndingScreen$Row__init_(var$6, 310.0, null);
     var$6.$tex = $tex;
     var$6.$name7 = $name;
@@ -57312,17 +57632,17 @@ cvs_EndingScreen_buildRows = $this => {
     var$7 = $this.$pilotName;
     var$8 = cvs_AircraftDefinition_getName($this.$aircraft0);
     var$9 = jl_StringBuilder__init_();
-    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$9, var$7), $rt_s(2882)), var$8);
+    jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$9, var$7), $rt_s(2887)), var$8);
     cvs_EndingScreen$LineRow__init_0($line, jl_StringBuilder_toString(var$9), 1, $gold);
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
-    $line = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(2980), $rt_s(2981)), 0, $soft);
+    $line = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(2986), $rt_s(2987)), 0, $soft);
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
     $line = cvs_EndingScreen$Gap__init_(70.0);
     ju_ArrayList_add($it, $line);
     var$7 = $this.$rows;
-    var$8 = cvs_EndingScreen$TitleRow__init_(cvs_EndingScreen_s($this, $rt_s(2982), $rt_s(1036)), cbgg_Color__init_(0.25, 1.0, 0.6499999761581421, 1.0));
+    var$8 = cvs_EndingScreen$TitleRow__init_(cvs_EndingScreen_s($this, $rt_s(2988), $rt_s(1036)), cbgg_Color__init_(0.25, 1.0, 0.6499999761581421, 1.0));
     ju_ArrayList_add(var$7, var$8);
     $it = $this.$rows;
     $line = cvs_EndingScreen$Gap__init_(30.0);
@@ -57340,59 +57660,59 @@ cvs_EndingScreen_buildRows = $this => {
     $line = cvs_EndingScreen$Gap__init_(80.0);
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
-    $line = cvs_EndingScreen$HeadRow__init_(cvs_EndingScreen_s($this, $rt_s(2983), $rt_s(2984)));
+    $line = cvs_EndingScreen$HeadRow__init_(cvs_EndingScreen_s($this, $rt_s(2989), $rt_s(2990)));
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
     $line = cvs_EndingScreen$Gap__init_(20.0);
     ju_ArrayList_add($it, $line);
-    cvs_EndingScreen_loadFoe($this, $rt_s(2799), $rt_s(2985), cvs_EndingScreen_s($this, $rt_s(2986), $rt_s(2987)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2801), $rt_s(2988), cvs_EndingScreen_s($this, $rt_s(2989), $rt_s(2990)));
     cvs_EndingScreen_loadFoe($this, $rt_s(2803), $rt_s(2991), cvs_EndingScreen_s($this, $rt_s(2992), $rt_s(2993)));
     cvs_EndingScreen_loadFoe($this, $rt_s(2805), $rt_s(2994), cvs_EndingScreen_s($this, $rt_s(2995), $rt_s(2996)));
     cvs_EndingScreen_loadFoe($this, $rt_s(2807), $rt_s(2997), cvs_EndingScreen_s($this, $rt_s(2998), $rt_s(2999)));
     cvs_EndingScreen_loadFoe($this, $rt_s(2809), $rt_s(3000), cvs_EndingScreen_s($this, $rt_s(3001), $rt_s(3002)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2771), $rt_s(3003), cvs_EndingScreen_s($this, $rt_s(3004), $rt_s(3005)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2773), $rt_s(3006), cvs_EndingScreen_s($this, $rt_s(3007), $rt_s(3008)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2811), $rt_s(3003), cvs_EndingScreen_s($this, $rt_s(3004), $rt_s(3005)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2813), $rt_s(3006), cvs_EndingScreen_s($this, $rt_s(3007), $rt_s(3008)));
     cvs_EndingScreen_loadFoe($this, $rt_s(2775), $rt_s(3009), cvs_EndingScreen_s($this, $rt_s(3010), $rt_s(3011)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(3012), $rt_s(3013), cvs_EndingScreen_s($this, $rt_s(3014), $rt_s(3015)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2779), $rt_s(3016), cvs_EndingScreen_s($this, $rt_s(3017), $rt_s(3018)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2793), $rt_s(3019), cvs_EndingScreen_s($this, $rt_s(3020), $rt_s(3021)));
-    cvs_EndingScreen_loadFoe($this, $rt_s(2777), $rt_s(3022), cvs_EndingScreen_s($this, $rt_s(3023), $rt_s(3024)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2777), $rt_s(3012), cvs_EndingScreen_s($this, $rt_s(3013), $rt_s(3014)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2779), $rt_s(3015), cvs_EndingScreen_s($this, $rt_s(3016), $rt_s(3017)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(3018), $rt_s(3019), cvs_EndingScreen_s($this, $rt_s(3020), $rt_s(3021)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2783), $rt_s(3022), cvs_EndingScreen_s($this, $rt_s(3023), $rt_s(3024)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2797), $rt_s(3025), cvs_EndingScreen_s($this, $rt_s(3026), $rt_s(3027)));
+    cvs_EndingScreen_loadFoe($this, $rt_s(2781), $rt_s(3028), cvs_EndingScreen_s($this, $rt_s(3029), $rt_s(3030)));
     $it = $this.$rows;
     $line = cvs_EndingScreen$Gap__init_(70.0);
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
-    $line = cvs_EndingScreen$HeadRow__init_(cvs_EndingScreen_s($this, $rt_s(3025), $rt_s(3026)));
+    $line = cvs_EndingScreen$HeadRow__init_(cvs_EndingScreen_s($this, $rt_s(3031), $rt_s(3032)));
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
     $line = cvs_EndingScreen$Gap__init_(10.0);
     ju_ArrayList_add($it, $line);
     $it = $this.$rows;
-    $line = cvs_EndingScreen$LineRow__init_($rt_s(2497), 1, $cyan);
+    $line = cvs_EndingScreen$LineRow__init_($rt_s(2502), 1, $cyan);
     ju_ArrayList_add($it, $line);
     $cyan = $this.$rows;
     $it = new cvs_EndingScreen$LineRow;
-    $line = cvs_EndingScreen_s($this, $rt_s(2498), $rt_s(3027));
+    $line = cvs_EndingScreen_s($this, $rt_s(2503), $rt_s(3033));
     kji_Intrinsics_checkNotNull($white);
     cvs_EndingScreen$LineRow__init_0($it, $line, 0, $white);
     ju_ArrayList_add($cyan, $it);
     $cyan = $this.$rows;
-    $it = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(3028), $rt_s(3029)), 0, $soft);
+    $it = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(3034), $rt_s(3035)), 0, $soft);
     ju_ArrayList_add($cyan, $it);
     $cyan = $this.$rows;
-    $it = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(3030), $rt_s(3031)), 0, $soft);
+    $it = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(3036), $rt_s(3037)), 0, $soft);
     ju_ArrayList_add($cyan, $it);
     $cyan = $this.$rows;
     $it = cvs_EndingScreen$Gap__init_(70.0);
     ju_ArrayList_add($cyan, $it);
     $cyan = $this.$rows;
-    var$7 = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(3032), $rt_s(3033)), 1, $gold);
+    var$7 = cvs_EndingScreen$LineRow__init_(cvs_EndingScreen_s($this, $rt_s(3038), $rt_s(3039)), 1, $gold);
     ju_ArrayList_add($cyan, var$7);
     $cyan = $this.$rows;
     $gold = cvs_EndingScreen$Gap__init_(40.0);
     ju_ArrayList_add($cyan, $gold);
     $cyan = $this.$rows;
-    $gold = cvs_EndingScreen$TitleRow__init_(cvs_EndingScreen_s($this, $rt_s(3034), $rt_s(3035)), $white);
+    $gold = cvs_EndingScreen$TitleRow__init_(cvs_EndingScreen_s($this, $rt_s(3040), $rt_s(3041)), $white);
     ju_ArrayList_add($cyan, $gold);
     $cyan = $this.$rows;
     $gold = cvs_EndingScreen$Gap__init_(160.0);
@@ -57406,7 +57726,7 @@ cvs_EndingScreen_buildRows = $this => {
     $this.$totalHeight = var$10;
 },
 cvs_EndingScreen_story = $this => {
-    return !$this.$pt ? kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(3036), $rt_s(3037), $rt_s(3038), $rt_s(3039)])) : kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(3040), $rt_s(3041), $rt_s(3042), $rt_s(3043)]));
+    return !$this.$pt ? kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(3042), $rt_s(3043), $rt_s(3044), $rt_s(3045)])) : kc_CollectionsKt__CollectionsKt_listOf($rt_wrapArray(jl_String, [$rt_s(3046), $rt_s(3047), $rt_s(3048), $rt_s(3049)]));
 },
 cvs_EndingScreen_render = ($this, $delta) => {
     let var$2, $virtualY, var$4, $row, $topY;
@@ -57426,12 +57746,12 @@ cvs_EndingScreen_render = ($this, $delta) => {
             cvs_EndingScreen_drawRow($this, $row, $topY);
         $virtualY = $virtualY + $row.$h;
     }
-    cvs_BaseScreen_drawButton$default(var$2, $this.$skipButton, cvs_EndingScreen_s($this, $rt_s(3044), $rt_s(3045)), 0, 4, null);
+    cvs_BaseScreen_drawButton$default(var$2, $this.$skipButton, cvs_EndingScreen_s($this, $rt_s(3050), $rt_s(3051)), 0, 4, null);
     if ($this.$scroll > $this.$totalHeight + 1920.0 + 40.0)
         cvs_EndingScreen_finish($this);
     cvs_GamepadInput_poll($this.$game.$gamepad);
     if (cvs_GamepadInput_getJustB($this.$game.$gamepad)) {
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$game), $rt_s(768), 0.0, 0.0, 6, null);
         cvs_EndingScreen_finish($this);
     }
 },
@@ -57470,7 +57790,7 @@ cvs_EndingScreen_drawRow = ($this, $row, $topY) => {
             var$10 = $topY - 218.0;
             var$3 = cvs_SkyVanguardGame_getSmallFont($this.$game);
             var$6 = cbgg_Color_WHITE;
-            kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(824));
+            kji_Intrinsics_checkNotNullExpressionValue(var$6, $rt_s(822));
             cvs_BaseScreen_drawCentered($this, var$9, var$10, var$3, var$6);
             cvs_BaseScreen_drawCentered($this, var$5.$desc, $topY - 262.0, cvs_SkyVanguardGame_getTinyFont($this.$game), cbgg_Color__init_(0.7200000286102295, 0.8600000143051147, 1.0, 1.0));
         }
@@ -57482,8 +57802,8 @@ cvs_EndingScreen_finish = $this => {
         return;
     $this.$finished0 = 1;
     var$1 = $this.$onDone;
-    var$2 = var$1.$_023;
-    var$3 = var$1.$_17;
+    var$2 = var$1.$_025;
+    var$3 = var$1.$_18;
     var$4 = var$2.$game;
     var$1 = cvs_ResultsScreen__init_(var$4, var$2.$stageIndex0, var$2.$score, var$2.$bestCombo, var$3, var$2.$missionVictory);
     cbg_Game_setScreen(var$4, var$1);
@@ -57510,12 +57830,12 @@ cvs_EndingScreen_dispose = $this => {
 };
 function cvs_GameplayScreen$update$lambda$_25_0() {
     let a = this; jl_Object.call(a);
-    a.$_023 = null;
-    a.$_17 = 0;
+    a.$_025 = null;
+    a.$_18 = 0;
 }
 let cvs_GameplayScreen$update$lambda$_25_0__init_ = (var$0, var$1, var$2) => {
-    var$0.$_023 = var$1;
-    var$0.$_17 = var$2;
+    var$0.$_025 = var$1;
+    var$0.$_18 = var$2;
 },
 cvs_GameplayScreen$update$lambda$_25_0__init_0 = (var_0, var_1) => {
     let var_2 = new cvs_GameplayScreen$update$lambda$_25_0();
@@ -57617,9 +57937,9 @@ cvs_BulletKind__init_ = (var_0, var_1) => {
 },
 cvs_BulletKind__clinit_ = () => {
     let var$1, var$2, var$3;
-    cvs_BulletKind_CANNON = cvs_BulletKind__init_($rt_s(3046), 0);
-    cvs_BulletKind_PLASMA = cvs_BulletKind__init_($rt_s(3047), 1);
-    cvs_BulletKind_TRACER = cvs_BulletKind__init_($rt_s(3048), 2);
+    cvs_BulletKind_CANNON = cvs_BulletKind__init_($rt_s(3052), 0);
+    cvs_BulletKind_PLASMA = cvs_BulletKind__init_($rt_s(3053), 1);
+    cvs_BulletKind_TRACER = cvs_BulletKind__init_($rt_s(3054), 2);
     cvs_BulletKind_LASER = cvs_BulletKind__init_($rt_s(1662), 3);
     var$1 = cvs_BulletKind__init_($rt_s(1084), 4);
     cvs_BulletKind_MISSILE = var$1;
@@ -57662,7 +57982,7 @@ cvs_GameplayScreen$SonicWave_toString = $this => {
     var$5 = $this.$damage;
     var$6 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$6);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(var$6, $rt_s(3049)), var$1), $rt_s(3050)), var$2), $rt_s(3051)), var$3), $rt_s(3052)), var$4), $rt_s(3053)), var$5), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(jl_StringBuilder_append1(jl_StringBuilder_append(var$6, $rt_s(3055)), var$1), $rt_s(3056)), var$2), $rt_s(3057)), var$3), $rt_s(3058)), var$4), $rt_s(3059)), var$5), 41);
     return jl_AbstractStringBuilder_toString(var$6);
 },
 cvs_GameplayScreen$SonicWave_hashCode = $this => {
@@ -57706,7 +58026,7 @@ cbgu_Justify$1__clinit_ = () => {
 };
 function cvs_GameplayScreen$acceptAdOffer$lambda$_120_0() {
     jl_Object.call(this);
-    this.$_033 = null;
+    this.$_035 = null;
 }
 function cvs_GameplayScreen$ReinforcementOrder() {
     let a = this; jl_Object.call(a);
@@ -57723,7 +58043,7 @@ let cvs_GameplayScreen$ReinforcementOrder_toString = $this => {
     var$4 = $this.$serial;
     var$5 = new jl_StringBuilder;
     jl_AbstractStringBuilder__init_(var$5);
-    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(3054)), var$1), $rt_s(2967)), var$2), $rt_s(3055)), var$3), $rt_s(3056)), var$4), 41);
+    jl_AbstractStringBuilder_append0(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append0(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(3060)), var$1), $rt_s(2973)), var$2), $rt_s(3061)), var$3), $rt_s(3062)), var$4), 41);
     return jl_AbstractStringBuilder_toString(var$5);
 },
 cvs_GameplayScreen$ReinforcementOrder_hashCode = $this => {
@@ -57872,10 +58192,10 @@ cgxgtbw_WebInput$1_run = $this => {
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_0() {
     jl_Object.call(this);
-    this.$_022 = null;
+    this.$_024 = null;
 }
 let cgxgtbw_WebInput$getTextInput$lambda$_69_0__init_ = (var$0, var$1) => {
-    var$0.$_022 = var$1;
+    var$0.$_024 = var$1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_0__init_0 = var_0 => {
     let var_1 = new cgxgtbw_WebInput$getTextInput$lambda$_69_0();
@@ -57883,17 +58203,17 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_0__init_0 = var_0 => {
     return var_1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_0_handleEvent$exported$0 = (var$1, var$2) => {
-    cgxgtbw_WebInput$1_run(var$1.$_022);
+    cgxgtbw_WebInput$1_run(var$1.$_024);
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_1() {
     let a = this; jl_Object.call(a);
-    a.$_034 = null;
-    a.$_112 = null;
+    a.$_036 = null;
+    a.$_113 = null;
     a.$_25 = null;
 }
 let cgxgtbw_WebInput$getTextInput$lambda$_69_1__init_ = (var$0, var$1, var$2, var$3) => {
-    var$0.$_034 = var$1;
-    var$0.$_112 = var$2;
+    var$0.$_036 = var$1;
+    var$0.$_113 = var$2;
     var$0.$_25 = var$3;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_1__init_0 = (var_0, var_1, var_2) => {
@@ -57904,8 +58224,8 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_1__init_0 = (var_0, var_1, var_2) => {
 cgxgtbw_WebInput$getTextInput$lambda$_69_1_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4;
     var$1 = var$1;
-    var$3 = var$1.$_034;
-    var$4 = var$1.$_112;
+    var$3 = var$1.$_036;
+    var$4 = var$1.$_113;
     var$1 = var$1.$_25;
     if (var$2.target === var$3)
         cgxgtbw_WebInput$1_run(var$1);
@@ -57935,10 +58255,10 @@ cgxgtbw_WebInput$2__clinit_ = () => {
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_2() {
     jl_Object.call(this);
-    this.$_041 = null;
+    this.$_043 = null;
 }
 let cgxgtbw_WebInput$getTextInput$lambda$_69_2__init_0 = (var$0, var$1) => {
-    var$0.$_041 = var$1;
+    var$0.$_043 = var$1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_2__init_ = var_0 => {
     let var_1 = new cgxgtbw_WebInput$getTextInput$lambda$_69_2();
@@ -57946,20 +58266,20 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_2__init_ = var_0 => {
     return var_1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_2_handleEvent$exported$0 = (var$1, var$2) => {
-    var$1 = var$1.$_041;
+    var$1 = var$1.$_043;
     var$2 = "";
     var$1.value = var$2;
     var$1.focus();
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_3() {
     let a = this; jl_Object.call(a);
-    a.$_053 = null;
-    a.$_122 = null;
+    a.$_056 = null;
+    a.$_124 = null;
     a.$_213 = null;
 }
 let cgxgtbw_WebInput$getTextInput$lambda$_69_3__init_ = (var$0, var$1, var$2, var$3) => {
-    var$0.$_053 = var$1;
-    var$0.$_122 = var$2;
+    var$0.$_056 = var$1;
+    var$0.$_124 = var$2;
     var$0.$_213 = var$3;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_3__init_0 = (var_0, var_1, var_2) => {
@@ -57969,15 +58289,15 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_3__init_0 = (var_0, var_1, var_2) => {
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_3_run = var$0 => {
     let var$1, var$2, var$3, var$4, var$5;
-    var$1 = var$0.$_053;
-    var$2 = var$0.$_122;
+    var$1 = var$0.$_056;
+    var$2 = var$0.$_124;
     var$3 = var$0.$_213;
     var$4 = $rt_str(var$1.value);
     if (jl_String_isEmpty(var$4)) {
         var$1.style.setProperty("border-color", "red");
         var$1.style.setProperty("animation", "shake 0.5s");
         var$2 = new cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0;
-        var$2.$_012 = var$1;
+        var$2.$_014 = var$1;
         setTimeout(otji_JS_function(otji_JSWrapper_unwrap(var$2), "onTimer"), 1000);
     } else {
         cgxgtbw_WebInput$1_run(var$2);
@@ -57985,13 +58305,13 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_3_run = var$0 => {
             var$1 = var$3;
             kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(187));
             var$2 = cvs_SkyVanguardGame_getSaveManager(var$1.$this$014.$game);
-            kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(3057));
+            kji_Intrinsics_checkNotNullParameter(var$4, $rt_s(3063));
             var$2 = var$2.$prefs;
             var$5 = kt_StringsKt__StringsKt_trim(var$4);
-            kji_Intrinsics_checkNotNullParameter(var$5, $rt_s(841));
+            kji_Intrinsics_checkNotNullParameter(var$5, $rt_s(839));
             var$4 = jl_String_substring(var$5, 0, kr_RangesKt___RangesKt_coerceAtMost(16, var$5.$nativeString.length));
-            kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(3058));
-            cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putString(var$2, $rt_s(751), var$4));
+            kji_Intrinsics_checkNotNullExpressionValue(var$4, $rt_s(3064));
+            cgxgtbw_WebPreferences_flush(cgxgtbw_WebPreferences_putString(var$2, $rt_s(749), var$4));
             var$3 = var$1.$this$014;
             var$3.$statusMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$3.$game), $rt_s(1699));
             var$1.$this$014.$statusTimer = 2.5;
@@ -58000,13 +58320,13 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_3_run = var$0 => {
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_4() {
     let a = this; jl_Object.call(a);
-    a.$_07 = null;
+    a.$_09 = null;
     a.$_12 = null;
     a.$_21 = null;
     a.$_31 = null;
 }
 let cgxgtbw_WebInput$getTextInput$lambda$_69_4__init_0 = (var$0, var$1, var$2, var$3, var$4) => {
-    var$0.$_07 = var$1;
+    var$0.$_09 = var$1;
     var$0.$_12 = var$2;
     var$0.$_21 = var$3;
     var$0.$_31 = var$4;
@@ -58019,13 +58339,13 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_4__init_ = (var_0, var_1, var_2, var_3)
 cgxgtbw_WebInput$getTextInput$lambda$_69_4_handleEvent$exported$0 = (var$1, var$2) => {
     let var$3, var$4, var$5, var$6, var$7, var$8;
     var$1 = var$1;
-    var$3 = var$1.$_07;
+    var$3 = var$1.$_09;
     var$4 = var$1.$_12;
     var$5 = var$1.$_21;
     var$1 = var$1.$_31;
-    if (jl_String_equals($rt_s(410), $rt_str(var$2.key)))
+    if (jl_String_equals($rt_s(408), $rt_str(var$2.key)))
         cgxgtbw_WebInput$getTextInput$lambda$_69_3_run(var$3);
-    else if (jl_String_equals($rt_s(349), $rt_str(var$2.key))) {
+    else if (jl_String_equals($rt_s(347), $rt_str(var$2.key))) {
         var$1 = $rt_str(var$4.value);
         if (var$1 !== null && !jl_String_isEmpty(var$1)) {
             var$5 = var$4;
@@ -58047,15 +58367,15 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_4_handleEvent$exported$0 = (var$1, var$
                 var$2.preventDefault();
             }
         }
-    } else if (jl_String_equals($rt_s(443), $rt_str(var$2.key)))
+    } else if (jl_String_equals($rt_s(441), $rt_str(var$2.key)))
         cgxgtbw_WebInput$1_run(var$5);
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_5() {
     jl_Object.call(this);
-    this.$_018 = null;
+    this.$_020 = null;
 }
 let cgxgtbw_WebInput$getTextInput$lambda$_69_5__init_ = (var$0, var$1) => {
-    var$0.$_018 = var$1;
+    var$0.$_020 = var$1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_5__init_0 = var_0 => {
     let var_1 = new cgxgtbw_WebInput$getTextInput$lambda$_69_5();
@@ -58063,14 +58383,14 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_5__init_0 = var_0 => {
     return var_1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_5_handleEvent$exported$0 = (var$1, var$2) => {
-    cgxgtbw_WebInput$getTextInput$lambda$_69_3_run(var$1.$_018);
+    cgxgtbw_WebInput$getTextInput$lambda$_69_3_run(var$1.$_020);
 };
 function cgxgtbw_WebInput$getTextInput$lambda$_69_6() {
     jl_Object.call(this);
-    this.$_029 = null;
+    this.$_031 = null;
 }
 let cgxgtbw_WebInput$getTextInput$lambda$_69_6__init_0 = (var$0, var$1) => {
-    var$0.$_029 = var$1;
+    var$0.$_031 = var$1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_6__init_ = var_0 => {
     let var_1 = new cgxgtbw_WebInput$getTextInput$lambda$_69_6();
@@ -58078,7 +58398,7 @@ cgxgtbw_WebInput$getTextInput$lambda$_69_6__init_ = var_0 => {
     return var_1;
 },
 cgxgtbw_WebInput$getTextInput$lambda$_69_6_onTimer$exported$0 = var$1 => {
-    var$1.$_029.focus();
+    var$1.$_031.focus();
 };
 function cvs_ResultsScreen$show$1() {
     cbg_InputAdapter.call(this);
@@ -58100,18 +58420,18 @@ let cvs_ResultsScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $bu
                     break b;
             }
             if (cbgm_Rectangle_contains($this.$this$03.$retry, $p.$x0, $p.$y0)) {
-                cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$03.$game), $rt_s(770), 0.0, 0.0, 6, null);
+                cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$03.$game), $rt_s(768), 0.0, 0.0, 6, null);
                 $p = $this.$this$03;
                 cvs_SkyVanguardGame_startStage$default($p.$game, $p.$stageIndex, 0, 2, null);
                 break a;
             }
             if (!cbgm_Rectangle_contains($this.$this$03.$campaign, $p.$x0, $p.$y0))
                 break a;
-            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$03.$game), $rt_s(770), 0.0, 0.0, 6, null);
+            cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$03.$game), $rt_s(768), 0.0, 0.0, 6, null);
             cvs_SkyVanguardGame_openCampaign($this.$this$03.$game);
             break a;
         }
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$03.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$03.$game), $rt_s(768), 0.0, 0.0, 6, null);
         $p = $this.$this$03;
         if (!$p.$adBusy) {
             if (cvs_SaveManager_getAdsRemoved(cvs_SkyVanguardGame_getSaveManager($p.$game)))
@@ -58120,20 +58440,11 @@ let cvs_ResultsScreen$show$1_touchUp = ($this, $screenX, $screenY, $pointer, $bu
                 $p.$adBusy = 1;
                 $p.$adLoadingText = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText($p.$game), $rt_s(1724));
                 var$6 = new cvs_ResultsScreen$goToNextStageWithAd$lambda$_2_0;
-                var$6.$_024 = $p;
-                kji_Intrinsics_checkNotNullParameter(var$6, $rt_s(840));
-                $p = jl_Boolean_valueOf(0);
-                var$6 = var$6;
-                $p = $p;
-                var$6 = var$6.$_024;
-                $screenX = $p.$value1;
-                $p = cbg_Gdx_app;
-                var$7 = new cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0;
-                jl_Object__init_(var$7);
-                var$7.$_036 = $screenX;
-                var$7.$_114 = var$6;
-                cgxgtbw_WebApplication_postRunnable($p, var$7);
-                k_Unit_$callClinit();
+                var$6.$_026 = $p;
+                kji_Intrinsics_checkNotNullParameter(var$6, $rt_s(838));
+                var$7 = new cvsw_WebPlatformServices$showInterstitialAd$lambda$_3_0;
+                var$7.$_00 = var$6;
+                cvsw_WebLauncherKt_access$mostrarAnuncioPremiado($rt_s(3065), var$7);
             }
         }
     }
@@ -58152,7 +58463,7 @@ let cvs_EndingScreen$show$1_touchDown = ($this, $x, $y, $pointer, $button) => {
     if (!cbgm_Rectangle_contains($this.$this$07.$skipButton, $p.$x0, $p.$y0))
         $this.$this$07.$fast = 1;
     else {
-        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$07.$game), $rt_s(770), 0.0, 0.0, 6, null);
+        cvs_AudioManager_play$default(cvs_SkyVanguardGame_getAudioManager($this.$this$07.$game), $rt_s(768), 0.0, 0.0, 6, null);
         cvs_EndingScreen_finish($this.$this$07);
     }
     return 1;
@@ -58163,7 +58474,7 @@ cvs_EndingScreen$show$1_touchUp = ($this, $x, $y, $pointer, $button) => {
 };
 function cvs_EndingScreen$show$lambda$_2_0() {
     jl_Object.call(this);
-    this.$_052 = null;
+    this.$_055 = null;
 }
 function cvs_EndingScreen$Row() {
     jl_Object.call(this);
@@ -58174,6 +58485,27 @@ let cvs_EndingScreen$Row_getH = $this => {
 },
 cvs_EndingScreen$Row__init_ = ($this, $h, $$constructor_marker) => {
     $this.$h = $h;
+};
+function cvsw_WebPlatformServices$showRewardedAd$lambda$_2_0() {
+    jl_Object.call(this);
+    this.$_08 = null;
+}
+let cvsw_WebPlatformServices$showRewardedAd$lambda$_2_0_invoke = (var$0, var$1) => {
+    let var$2, var$3, var$4;
+    var$1 = var$1;
+    var$2 = var$0.$_08;
+    var$1 = jl_Boolean_valueOf(var$1.$value0);
+    var$2 = var$2;
+    var$1 = var$1;
+    var$2 = var$2.$_035;
+    var$3 = var$1.$value0;
+    var$1 = cbg_Gdx_app;
+    var$4 = new cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0;
+    var$4.$_032 = var$2;
+    var$4.$_111 = var$3;
+    cgxgtbw_WebApplication_postRunnable(var$1, var$4);
+    k_Unit_$callClinit();
+    return k_Unit_INSTANCE;
 },
 kc_ComparisonsKt__ComparisonsKt = $rt_classWithoutFields(),
 cbgur_ClassReflection = $rt_classWithoutFields();
@@ -58221,7 +58553,7 @@ function cvs_EndingScreen$LineRow() {
 }
 let cvs_EndingScreen$LineRow__init_0 = ($this, $text, $big, $color) => {
     kji_Intrinsics_checkNotNullParameter($text, $rt_s(187));
-    kji_Intrinsics_checkNotNullParameter($color, $rt_s(822));
+    kji_Intrinsics_checkNotNullParameter($color, $rt_s(820));
     cvs_EndingScreen$Row__init_($this, !$big ? 52.0 : 66.0, null);
     $this.$text = $text;
     $this.$big = $big;
@@ -58239,7 +58571,7 @@ function cvs_EndingScreen$TitleRow() {
 }
 let cvs_EndingScreen$TitleRow__init_0 = ($this, $text, $color) => {
     kji_Intrinsics_checkNotNullParameter($text, $rt_s(187));
-    kji_Intrinsics_checkNotNullParameter($color, $rt_s(822));
+    kji_Intrinsics_checkNotNullParameter($color, $rt_s(820));
     cvs_EndingScreen$Row__init_($this, 150.0, null);
     $this.$text1 = $text;
     $this.$color11 = $color;
@@ -58289,9 +58621,9 @@ cbg_Input$VibrationType__init_ = (var_0, var_1) => {
 },
 cbg_Input$VibrationType__clinit_ = () => {
     let var$1, var$2, var$3;
-    cbg_Input$VibrationType_LIGHT = cbg_Input$VibrationType__init_($rt_s(3059), 0);
+    cbg_Input$VibrationType_LIGHT = cbg_Input$VibrationType__init_($rt_s(3066), 0);
     cbg_Input$VibrationType_MEDIUM = cbg_Input$VibrationType__init_($rt_s(1786), 1);
-    var$1 = cbg_Input$VibrationType__init_($rt_s(2506), 2);
+    var$1 = cbg_Input$VibrationType__init_($rt_s(2511), 2);
     cbg_Input$VibrationType_HEAVY = var$1;
     var$2 = $rt_createArray(cbg_Input$VibrationType, 3);
     var$3 = var$2.data;
@@ -58299,22 +58631,32 @@ cbg_Input$VibrationType__clinit_ = () => {
     var$3[1] = cbg_Input$VibrationType_MEDIUM;
     var$3[2] = var$1;
     cbg_Input$VibrationType_$VALUES = var$2;
-};
-function cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0() {
+},
+cvsw_RetornoDoAnuncio = $rt_classWithoutFields(0);
+function cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0() {
     let a = this; jl_Object.call(a);
-    a.$_016 = 0;
-    a.$_15 = null;
+    a.$_049 = null;
+    a.$_119 = null;
 }
-let cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0_run = var$0 => {
-    let var$1, var$2;
-    var$1 = var$0.$_016;
-    var$2 = var$0.$_15;
-    if (var$1) {
-        cvs_SkyVanguardGame_reloadPilotPhoto(var$2.$game);
-        var$2.$statusMessage = $rt_s(3060);
-    } else
-        var$2.$statusMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$2.$game), $rt_s(1703));
-    var$2.$statusTimer = 2.5;
+let cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0__init_0 = (var$0, var$1, var$2) => {
+    var$0.$_049 = var$1;
+    var$0.$_119 = var$2;
+},
+cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0__init_ = (var_0, var_1) => {
+    let var_2 = new cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0();
+    cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0__init_0(var_2, var_0, var_1);
+    return var_2;
+},
+cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0_recebeu$exported$0 = (var$1, var$2) => {
+    let var$3, var$4;
+    var$3 = var$2 ? 1 : 0;
+    var$1 = var$1;
+    var$4 = var$1.$_049.data;
+    var$1 = var$1.$_119;
+    if (!var$4[0]) {
+        var$4[0] = 1;
+        var$1.$invoke(jl_Boolean_valueOf(var$3));
+    }
 };
 function cbggg_PixmapPacker$GuillotineStrategy$GuillotinePage() {
     cbggg_PixmapPacker$Page.call(this);
@@ -58561,32 +58903,23 @@ otcit_DoubleAnalyzer__clinit_ = () => {
 };
 function cvs_ResultsScreen$goToNextStageWithAd$lambda$_2_0() {
     jl_Object.call(this);
-    this.$_024 = null;
+    this.$_026 = null;
 }
-function cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0() {
+function cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0() {
     let a = this; jl_Object.call(a);
-    a.$_030 = null;
-    a.$_110 = 0;
+    a.$_018 = 0;
+    a.$_16 = null;
 }
-let cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0_run = var$0 => {
+let cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0_run = var$0 => {
     let var$1, var$2;
-    var$1 = var$0.$_030;
-    var$2 = var$0.$_110;
-    var$1.$adOfferBusy = 0;
-    var$1.$adOfferActive = 0;
-    var$1.$paused = 0;
-    var$1.$pauseMessage = $rt_s(66);
-    var$1.$flashTimer = 0.0;
-    var$1.$shakeTimer = 0.0;
-    var$1.$playerDamageFlash = 0.0;
-    if (var$2) {
-        var$1.$lives = var$1.$lives + 1 | 0;
-        var$1.$specials = kr_RangesKt___RangesKt_coerceAtMost(var$1.$specials + 2 | 0, 10);
-        cvs_SaveManager_setRunBombs(cvs_SkyVanguardGame_getSaveManager(var$1.$game), var$1.$specials);
-        var$1.$invincibleTimer = jl_Math_max(var$1.$invincibleTimer, 3.0);
-        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$1.$game), $rt_s(767), 1.0, 1.1200000047683716);
-    } else if (var$1.$adOfferIsLastChance)
-        cvs_GameplayScreen_endMission(var$1, 0);
+    var$1 = var$0.$_018;
+    var$2 = var$0.$_16;
+    if (var$1) {
+        cvs_SkyVanguardGame_reloadPilotPhoto(var$2.$game);
+        var$2.$statusMessage = $rt_s(3067);
+    } else
+        var$2.$statusMessage = cvs_LocalizationManager_get(cvs_SkyVanguardGame_getText(var$2.$game), $rt_s(1703));
+    var$2.$statusTimer = 2.5;
 };
 function jn_CharBufferOverDataView() {
     let a = this; jn_CharBufferImpl.call(a);
@@ -58837,6 +59170,27 @@ jl_Byte__clinit_ = () => {
     }
     jl_Byte_byteCache = var$1;
 };
+function cvsw_WebPlatformServices$showInterstitialAd$lambda$_3_0() {
+    jl_Object.call(this);
+    this.$_00 = null;
+}
+let cvsw_WebPlatformServices$showInterstitialAd$lambda$_3_0_invoke = (var$0, var$1) => {
+    let var$2, var$3, var$4;
+    var$1 = var$1;
+    var$2 = var$0.$_00;
+    var$1 = jl_Boolean_valueOf(var$1.$value0);
+    var$2 = var$2;
+    var$1 = var$1;
+    var$2 = var$2.$_026;
+    var$3 = var$1.$value0;
+    var$1 = cbg_Gdx_app;
+    var$4 = new cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0;
+    var$4.$_038 = var$3;
+    var$4.$_115 = var$2;
+    cgxgtbw_WebApplication_postRunnable(var$1, var$4);
+    k_Unit_$callClinit();
+    return k_Unit_INSTANCE;
+};
 function cbggg_PixmapPacker$Page$1() {
     cbgg_Texture.call(this);
     this.$this$033 = null;
@@ -58847,12 +59201,37 @@ let cbggg_PixmapPacker$Page$1_dispose = $this => {
 };
 function cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0() {
     jl_Object.call(this);
-    this.$_012 = null;
+    this.$_014 = null;
 }
 let cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0_onTimer$exported$0 = var$1 => {
-    var$1 = var$1.$_012;
+    var$1 = var$1.$_014;
     var$1.style.removeProperty("border-color");
     var$1.style.removeProperty("animation");
+};
+function cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0() {
+    let a = this; jl_Object.call(a);
+    a.$_032 = null;
+    a.$_111 = 0;
+}
+let cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0_run = var$0 => {
+    let var$1, var$2;
+    var$1 = var$0.$_032;
+    var$2 = var$0.$_111;
+    var$1.$adOfferBusy = 0;
+    var$1.$adOfferActive = 0;
+    var$1.$paused = 0;
+    var$1.$pauseMessage = $rt_s(66);
+    var$1.$flashTimer = 0.0;
+    var$1.$shakeTimer = 0.0;
+    var$1.$playerDamageFlash = 0.0;
+    if (var$2) {
+        var$1.$lives = var$1.$lives + 1 | 0;
+        var$1.$specials = kr_RangesKt___RangesKt_coerceAtMost(var$1.$specials + 2 | 0, 10);
+        cvs_SaveManager_setRunBombs(cvs_SkyVanguardGame_getSaveManager(var$1.$game), var$1.$specials);
+        var$1.$invincibleTimer = jl_Math_max(var$1.$invincibleTimer, 3.0);
+        cvs_AudioManager_play(cvs_SkyVanguardGame_getAudioManager(var$1.$game), $rt_s(765), 1.0, 1.1200000047683716);
+    } else if (var$1.$adOfferIsLastChance)
+        cvs_GameplayScreen_endMission(var$1, 0);
 };
 function cgxgtbwf_FileDB$1() {
     let a = this; ji_OutputStream.call(a);
@@ -58881,13 +59260,13 @@ cgxgtbwf_FileDB$1_close = $this => {
 };
 function cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0() {
     let a = this; jl_Object.call(a);
-    a.$_036 = 0;
-    a.$_114 = null;
+    a.$_038 = 0;
+    a.$_115 = null;
 }
 let cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run = var$0 => {
     let var$1, var$2, var$3, var$4, var$5, var$6, var$7, var$8, var$9, var$10, var$11;
-    var$1 = var$0.$_036;
-    var$2 = var$0.$_114;
+    var$1 = var$0.$_038;
+    var$2 = var$0.$_115;
     if (var$1) {
         cvs_SaveManager_addCoins(cvs_SkyVanguardGame_getSaveManager(var$2.$game), 500);
         var$3 = $rt_createArray(cvs_PowerType, 6);
@@ -58901,7 +59280,7 @@ let cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run = var$0 => {
         var$4[5] = cvs_PowerType_DRONE;
         var$5 = cvs_GameplayScreenKt_access$sorteia(kc_CollectionsKt__CollectionsKt_listOf(var$3));
         var$6 = cvs_SkyVanguardGame_getSaveManager(var$2.$game);
-        kji_Intrinsics_checkNotNullParameter(var$5, $rt_s(756));
+        kji_Intrinsics_checkNotNullParameter(var$5, $rt_s(754));
         var$7 = var$5 !== cvs_PowerType_SPECIAL ? 2147483647 : 7;
         a: {
             var$1 = Long_lo((kr_RangesKt___RangesKt_coerceAtMost1(Long_add(Long_fromInt(cvs_SaveManager_runPowerStacks(var$6, var$5)), Long_fromInt(kr_RangesKt___RangesKt_coerceAtLeast0(1, 0))), Long_fromInt(var$7))));
@@ -58912,12 +59291,12 @@ let cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run = var$0 => {
             var$10 = var$5.$name;
             ju_Locale_$callClinit();
             var$9 = ju_Locale_ROOT;
-            kji_Intrinsics_checkNotNullExpressionValue(var$9, $rt_s(757));
+            kji_Intrinsics_checkNotNullExpressionValue(var$9, $rt_s(755));
             var$9 = jl_String_toLowerCase(var$10, var$9);
-            kji_Intrinsics_checkNotNullExpressionValue(var$9, $rt_s(758));
+            kji_Intrinsics_checkNotNullExpressionValue(var$9, $rt_s(756));
             var$11 = new jl_StringBuilder;
             jl_AbstractStringBuilder__init_(var$11);
-            jl_StringBuilder_append(jl_StringBuilder_append(var$11, $rt_s(760)), var$9);
+            jl_StringBuilder_append(jl_StringBuilder_append(var$11, $rt_s(758)), var$9);
             var$9 = jl_AbstractStringBuilder_toString(var$11);
             cgxgtbw_WebPreferences_putInteger(var$8, var$9, var$1);
             var$6.$runPowersDirty = 1;
@@ -58927,34 +59306,38 @@ let cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run = var$0 => {
                 case 1:
                     break;
                 case 2:
-                    var$8 = $rt_s(3061);
+                    var$8 = $rt_s(3068);
                     break a;
                 case 3:
-                    var$8 = $rt_s(3062);
+                    var$8 = $rt_s(3069);
                     break a;
                 case 4:
-                    var$8 = $rt_s(3063);
+                    var$8 = $rt_s(3070);
                     break a;
                 case 5:
                     var$8 = $rt_s(988);
                     break a;
                 case 6:
-                    var$8 = $rt_s(2674);
+                    var$8 = $rt_s(2679);
                     break a;
                 default:
-                    var$8 = $rt_s(3064);
+                    var$8 = $rt_s(3071);
                     break a;
             }
             var$8 = $rt_s(918);
         }
         var$5 = new jl_StringBuilder;
         jl_AbstractStringBuilder__init_(var$5);
-        jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(3065)), var$8);
+        jl_StringBuilder_append(jl_StringBuilder_append(var$5, $rt_s(3072)), var$8);
         cvs_SkyVanguardGame_setPendingRewardMessage(var$9, jl_AbstractStringBuilder_toString(var$5));
     }
     cvs_SkyVanguardGame_startStage(var$2.$game, var$2.$stageIndex + 1 | 0, 1);
-},
-cvs_ResultsScreen$WhenMappings = $rt_classWithoutFields(),
+};
+function cgxgtbw_WebPreloadApplicationListener$2() {
+    jl_Object.call(this);
+    this.$this$022 = null;
+}
+let cvs_ResultsScreen$WhenMappings = $rt_classWithoutFields(),
 cvs_ResultsScreen$WhenMappings_$EnumSwitchMapping$0 = null,
 cvs_ResultsScreen$WhenMappings_$callClinit = () => {
     cvs_ResultsScreen$WhenMappings_$callClinit = $rt_eraseClinit(cvs_ResultsScreen$WhenMappings);
@@ -58971,22 +59354,18 @@ cvs_ResultsScreen$WhenMappings__clinit_ = () => {
     var$2[cvs_PowerType_ARMOR.$ordinal0] = 5;
     var$2[cvs_PowerType_DRONE.$ordinal0] = 6;
     cvs_ResultsScreen$WhenMappings_$EnumSwitchMapping$0 = var$1;
-};
-function cgxgtbw_WebPreloadApplicationListener$2() {
-    jl_Object.call(this);
-    this.$this$022 = null;
-}
-let cgxgtbwa_TeaAssetManifest = $rt_classWithoutFields(),
+},
+cgxgtbwa_TeaAssetManifest = $rt_classWithoutFields(),
 cgxgtbwa_TeaAssetManifest_getAssets = () => {
-    return $rt_wrapArray(jl_String, [$rt_s(3066), $rt_s(3067), $rt_s(3068), $rt_s(3069), $rt_s(3070), $rt_s(3071), $rt_s(3072), $rt_s(3073), $rt_s(3074), $rt_s(3075), $rt_s(3076), $rt_s(3077), $rt_s(3078), $rt_s(3079), $rt_s(3080), $rt_s(3081), $rt_s(3082), $rt_s(3083), $rt_s(3084), $rt_s(3085), $rt_s(3086), $rt_s(3087), $rt_s(3088), $rt_s(3089), $rt_s(3090), $rt_s(3091), $rt_s(3092), $rt_s(3093), $rt_s(3094), $rt_s(3095), $rt_s(3096), $rt_s(3097), $rt_s(3098), $rt_s(3099), $rt_s(3100), $rt_s(3101), $rt_s(3102),
-    $rt_s(3103), $rt_s(3104), $rt_s(3105), $rt_s(3106), $rt_s(3107), $rt_s(3108), $rt_s(3109), $rt_s(3110), $rt_s(3111), $rt_s(3112), $rt_s(3113), $rt_s(3114), $rt_s(3115), $rt_s(3116), $rt_s(3117), $rt_s(3118), $rt_s(3119), $rt_s(3120), $rt_s(3121), $rt_s(3122), $rt_s(3123), $rt_s(3124), $rt_s(3125), $rt_s(3126), $rt_s(3127), $rt_s(3128), $rt_s(3129), $rt_s(3130), $rt_s(3131), $rt_s(3132), $rt_s(3133), $rt_s(3134), $rt_s(3135), $rt_s(3136), $rt_s(3137), $rt_s(3138), $rt_s(3139), $rt_s(3140), $rt_s(3141), $rt_s(3142),
-    $rt_s(3143), $rt_s(3144), $rt_s(3145), $rt_s(3146), $rt_s(3147), $rt_s(3148), $rt_s(3149), $rt_s(3150), $rt_s(3151), $rt_s(3152), $rt_s(3153), $rt_s(3154), $rt_s(3155), $rt_s(3156), $rt_s(3157), $rt_s(3158), $rt_s(3159), $rt_s(3160), $rt_s(3161), $rt_s(3162), $rt_s(3163), $rt_s(3164), $rt_s(3165), $rt_s(3166), $rt_s(3167), $rt_s(3168), $rt_s(3169), $rt_s(3170), $rt_s(3171), $rt_s(3172), $rt_s(3173), $rt_s(3174), $rt_s(3175), $rt_s(3176), $rt_s(3177), $rt_s(3178), $rt_s(3179), $rt_s(3180), $rt_s(3181), $rt_s(3182),
-    $rt_s(3183), $rt_s(3184), $rt_s(3185), $rt_s(3186), $rt_s(3187), $rt_s(3188), $rt_s(3189), $rt_s(3190), $rt_s(3191), $rt_s(3192), $rt_s(3193), $rt_s(3194)]);
+    return $rt_wrapArray(jl_String, [$rt_s(3073), $rt_s(3074), $rt_s(3075), $rt_s(3076), $rt_s(3077), $rt_s(3078), $rt_s(3079), $rt_s(3080), $rt_s(3081), $rt_s(3082), $rt_s(3083), $rt_s(3084), $rt_s(3085), $rt_s(3086), $rt_s(3087), $rt_s(3088), $rt_s(3089), $rt_s(3090), $rt_s(3091), $rt_s(3092), $rt_s(3093), $rt_s(3094), $rt_s(3095), $rt_s(3096), $rt_s(3097), $rt_s(3098), $rt_s(3099), $rt_s(3100), $rt_s(3101), $rt_s(3102), $rt_s(3103), $rt_s(3104), $rt_s(3105), $rt_s(3106), $rt_s(3107), $rt_s(3108), $rt_s(3109),
+    $rt_s(3110), $rt_s(3111), $rt_s(3112), $rt_s(3113), $rt_s(3114), $rt_s(3115), $rt_s(3116), $rt_s(3117), $rt_s(3118), $rt_s(3119), $rt_s(3120), $rt_s(3121), $rt_s(3122), $rt_s(3123), $rt_s(3124), $rt_s(3125), $rt_s(3126), $rt_s(3127), $rt_s(3128), $rt_s(3129), $rt_s(3130), $rt_s(3131), $rt_s(3132), $rt_s(3133), $rt_s(3134), $rt_s(3135), $rt_s(3136), $rt_s(3137), $rt_s(3138), $rt_s(3139), $rt_s(3140), $rt_s(3141), $rt_s(3142), $rt_s(3143), $rt_s(3144), $rt_s(3145), $rt_s(3146), $rt_s(3147), $rt_s(3148), $rt_s(3149),
+    $rt_s(3150), $rt_s(3151), $rt_s(3152), $rt_s(3153), $rt_s(3154), $rt_s(3155), $rt_s(3156), $rt_s(3157), $rt_s(3158), $rt_s(3159), $rt_s(3160), $rt_s(3161), $rt_s(3162), $rt_s(3163), $rt_s(3164), $rt_s(3165), $rt_s(3166), $rt_s(3167), $rt_s(3168), $rt_s(3169), $rt_s(3170), $rt_s(3171), $rt_s(3172), $rt_s(3173), $rt_s(3174), $rt_s(3175), $rt_s(3176), $rt_s(3177), $rt_s(3178), $rt_s(3179), $rt_s(3180), $rt_s(3181), $rt_s(3182), $rt_s(3183), $rt_s(3184), $rt_s(3185), $rt_s(3186), $rt_s(3187), $rt_s(3188), $rt_s(3189),
+    $rt_s(3190), $rt_s(3191), $rt_s(3192), $rt_s(3193), $rt_s(3194), $rt_s(3195), $rt_s(3196), $rt_s(3197), $rt_s(3198), $rt_s(3199), $rt_s(3200), $rt_s(3201)]);
 };
-$rt_packages([-1, "com", 0, "github", 1, "xpenatan", 2, "gdx", 3, "teavm", 4, "backends", 5, "web", 6, "assetloader", 6, "dom", 8, "impl", 6, "webaudio", 10, "howler", 6, "filesystem", 12, "types", 0, "badlogic", 14, "gdx", 15, "utils", 15, "scenes", 17, "scene2d", 18, "ui", 18, "utils", 18, "actions", 15, "controllers", 22, "teavm", 15, "math", 15, "graphics", 25, "glutils", 25, "g2d", 27, "freetype", 0, "vieiramarketing", 29, "skyvanguard", -1, "java", 31, "util", 32, "regex", 31, "nio", 34, "charset", 31,
-"io", 31, "lang", -1, "org", 38, "teavm", 39, "jso", 40, "impl", 40, "ajax", 39, "classlib", 43, "impl", 44, "unicode", -1, "kotlin", 46, "jvm", 47, "internal", 46, "collections"
+$rt_packages([-1, "com", 0, "github", 1, "xpenatan", 2, "gdx", 3, "teavm", 4, "backends", 5, "web", 6, "assetloader", 6, "dom", 8, "impl", 6, "webaudio", 10, "howler", 6, "filesystem", 12, "types", 0, "badlogic", 14, "gdx", 15, "utils", 15, "scenes", 17, "scene2d", 18, "ui", 18, "utils", 18, "actions", 15, "controllers", 22, "teavm", 15, "math", 15, "graphics", 25, "glutils", 25, "g2d", 27, "freetype", 0, "vieiramarketing", 29, "skyvanguard", 30, "web", -1, "java", 32, "util", 33, "regex", 32, "nio", 35, "charset",
+32, "io", 32, "lang", -1, "org", 39, "teavm", 40, "jso", 41, "impl", 41, "ajax", 40, "classlib", 44, "impl", 45, "unicode", -1, "kotlin", 47, "jvm", 48, "internal", 47, "collections"
 ]);
-$rt_metadata([jl_Object, "Object", 37, 0, [], 1, 0, 0, ["$hashCode", $rt_wrapFunction0(jl_Object_hashCode), "$equals", $rt_wrapFunction1(jl_Object_equals), "$toString", $rt_wrapFunction0(jl_Object_toString)],
+$rt_metadata([jl_Object, "Object", 38, 0, [], 1, 0, 0, ["$hashCode", $rt_wrapFunction0(jl_Object_hashCode), "$equals", $rt_wrapFunction1(jl_Object_equals), "$toString", $rt_wrapFunction0(jl_Object_toString)],
 cbgggf_FreeTypeFontGenerator$1, 0, jl_Object, [], 32768, 0, () => cbgggf_FreeTypeFontGenerator$1_$callClinit(), 0,
 cbggg_BitmapFont$BitmapFontData, 0, jl_Object, [], 1, 0, 0, ["$getGlyph", $rt_wrapFunction1(cbggg_BitmapFont$BitmapFontData_getGlyph), "$getGlyphs", function(var_1, var_2, var_3, var_4, var_5) { cbggg_BitmapFont$BitmapFontData_getGlyphs(this, var_1, var_2, var_3, var_4, var_5); }],
 cbgu_Disposable, 0, jl_Object, [], 1537, 0, 0, 0,
@@ -58996,7 +59375,7 @@ cbgggf_FreeTypeFontGenerator, 0, jl_Object, [cbgu_Disposable], 1, 0, () => cbggg
 cbgggf_FreeTypeFontGenerator$GlyphAndBitmap, 0, jl_Object, [], 1, 0, 0, 0,
 jl_Comparable, 0, jl_Object, [], 1537, 0, 0, 0,
 ji_Serializable, 0, jl_Object, [], 1537, 0, 0, 0,
-jl_Enum, "Enum", 37, jl_Object, [jl_Comparable, ji_Serializable], 1025, 0, 0, ["$toString", $rt_wrapFunction0(jl_Enum_toString), "$equals", $rt_wrapFunction1(jl_Enum_equals), "$hashCode", $rt_wrapFunction0(jl_Enum_hashCode), "$compareTo", $rt_wrapFunction1(jl_Enum_compareTo)],
+jl_Enum, "Enum", 38, jl_Object, [jl_Comparable, ji_Serializable], 1025, 0, 0, ["$toString", $rt_wrapFunction0(jl_Enum_toString), "$equals", $rt_wrapFunction1(jl_Enum_equals), "$hashCode", $rt_wrapFunction0(jl_Enum_hashCode), "$compareTo", $rt_wrapFunction1(jl_Enum_compareTo)],
 cbgggf_FreeTypeFontGenerator$Hinting, "FreeTypeFontGenerator$Hinting", 28, jl_Enum, [], 65553, 0, () => cbgggf_FreeTypeFontGenerator$Hinting_$callClinit(), 0,
 cbg_InputProcessor, 0, jl_Object, [], 1537, 0, 0, 0,
 cbg_InputAdapter, 0, jl_Object, [cbg_InputProcessor], 1, 0, 0, ["$keyDown", $rt_wrapFunction1(cbg_InputAdapter_keyDown), "$touchDown", $rt_wrapFunction4(cbg_InputAdapter_touchDown), "$touchDragged", $rt_wrapFunction3(cbg_InputAdapter_touchDragged)],
@@ -59266,24 +59645,24 @@ cbgu_LongMap$Entries, 0, cbgu_LongMap$MapIterator, [jl_Iterable, ju_Iterator], 1
 cbgu_ObjectFloatMap, 0, jl_Object, [jl_Iterable], 1, 0, 0, 0,
 cbgu_ArrayMap$Entries, 0, jl_Object, [jl_Iterable, ju_Iterator], 1, 0, 0, 0,
 jl_CharSequence, 0, jl_Object, [], 1537, 0, 0, 0,
-jl_String, "String", 37, jl_Object, [ji_Serializable, jl_Comparable, jl_CharSequence], 17, 0, () => jl_String_$callClinit(), ["$toString", $rt_wrapFunction0(jl_String_toString), "$equals", $rt_wrapFunction1(jl_String_equals), "$hashCode", $rt_wrapFunction0(jl_String_hashCode), "$compareTo", $rt_wrapFunction1(jl_String_compareTo)],
+jl_String, "String", 38, jl_Object, [ji_Serializable, jl_Comparable, jl_CharSequence], 17, 0, () => jl_String_$callClinit(), ["$toString", $rt_wrapFunction0(jl_String_toString), "$equals", $rt_wrapFunction1(jl_String_equals), "$hashCode", $rt_wrapFunction0(jl_String_hashCode), "$compareTo", $rt_wrapFunction1(jl_String_compareTo)],
 jlr_AnnotatedElement, 0, jl_Object, [], 1537, 0, 0, 0,
 jlr_GenericDeclaration, 0, jl_Object, [jlr_AnnotatedElement], 1537, 0, 0, 0,
 jlr_Type, 0, jl_Object, [], 1537, 0, 0, 0,
-jl_Class, "Class", 37, jl_Object, [jlr_GenericDeclaration, jlr_Type], 17, 0, 0, ["$toString", $rt_wrapFunction0(jl_Class_toString)],
+jl_Class, "Class", 38, jl_Object, [jlr_GenericDeclaration, jlr_Type], 17, 0, 0, ["$toString", $rt_wrapFunction0(jl_Class_toString)],
 jl_Number, 0, jl_Object, [ji_Serializable], 1025, 0, 0, 0,
-jl_Integer, "Integer", 37, jl_Number, [jl_Comparable], 1, 0, () => jl_Integer_$callClinit(), ["$intValue", $rt_wrapFunction0(jl_Integer_intValue), "$floatValue", $rt_wrapFunction0(jl_Integer_floatValue), "$toString", $rt_wrapFunction0(jl_Integer_toString0), "$hashCode", $rt_wrapFunction0(jl_Integer_hashCode), "$equals", $rt_wrapFunction1(jl_Integer_equals), "$compareTo", $rt_wrapFunction1(jl_Integer_compareTo)],
+jl_Integer, "Integer", 38, jl_Number, [jl_Comparable], 1, 0, () => jl_Integer_$callClinit(), ["$intValue", $rt_wrapFunction0(jl_Integer_intValue), "$floatValue", $rt_wrapFunction0(jl_Integer_floatValue), "$toString", $rt_wrapFunction0(jl_Integer_toString0), "$hashCode", $rt_wrapFunction0(jl_Integer_hashCode), "$equals", $rt_wrapFunction1(jl_Integer_equals), "$compareTo", $rt_wrapFunction1(jl_Integer_compareTo)],
 jl_AbstractStringBuilder, 0, jl_Object, [ji_Serializable, jl_CharSequence], 0, 0, 0, ["$ensureCapacity", $rt_wrapFunction1(jl_AbstractStringBuilder_ensureCapacity), "$toString", $rt_wrapFunction0(jl_AbstractStringBuilder_toString)],
 jl_Appendable, 0, jl_Object, [], 1537, 0, 0, 0,
 jl_StringBuilder, 0, jl_AbstractStringBuilder, [jl_Appendable], 1, 0, 0, ["$insert3", $rt_wrapFunction4(jl_StringBuilder_insert0), "$append8", $rt_wrapFunction3(jl_StringBuilder_append6), "$insert2", $rt_wrapFunction4(jl_StringBuilder_insert2), "$append7", $rt_wrapFunction3(jl_StringBuilder_append5), "$toString", $rt_wrapFunction0(jl_StringBuilder_toString), "$ensureCapacity", $rt_wrapFunction1(jl_StringBuilder_ensureCapacity), "$insert1", $rt_wrapFunction2(jl_StringBuilder_insert1), "$insert", $rt_wrapFunction2(jl_StringBuilder_insert)],
 jl_Throwable, 0, jl_Object, [], 1, 0, 0, ["$getMessage", $rt_wrapFunction0(jl_Throwable_getMessage), "$toString", $rt_wrapFunction0(jl_Throwable_toString)],
 jl_Exception, 0, jl_Throwable, [], 1, 0, 0, 0,
-jl_RuntimeException, "RuntimeException", 37, jl_Exception, [], 1, [0,0,0], 0, 0,
+jl_RuntimeException, "RuntimeException", 38, jl_Exception, [], 1, [0,0,0], 0, 0,
 otrr_ReflectionInfo, 0, jl_Object, [], 1025, 0, 0, 0,
 otrr_ClassInfo, 0, otrr_ReflectionInfo, [], 17, 0, 0, 0,
 otr_StringInfo, 0, otrr_ReflectionInfo, [], 17, 0, 0, 0,
 cvsw_WebLauncher, 0, jl_Object, [], 17, 0, () => cvsw_WebLauncher_$callClinit(), 0,
-jl_ClassCastException, "ClassCastException", 37, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jl_ClassCastException, "ClassCastException", 38, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
 otp_Platform, 0, jl_Object, [], 17, 0, 0, 0,
 otji_JS, 0, jl_Object, [], 17, 0, 0, 0,
 otci_IntegerUtil, 0, jl_Object, [], 17, 0, 0, 0,
@@ -59295,7 +59674,7 @@ cbgu_DefaultPool, "DefaultPool", 16, cbgu_Pool, [], 1, 0, 0, ["$newObject", $rt_
 cbgu_DefaultPool$PoolSupplier, 0, jl_Object, [], 1537, 0, 0, 0,
 cbgssu_Table$DebugRect$_clinit_$lambda$_1_0, 0, jl_Object, [cbgu_DefaultPool$PoolSupplier], 1, 0, 0, ["$get6", $rt_wrapFunction0(cbgssu_Table$DebugRect$_clinit_$lambda$_1_0_get)],
 cbggg_GlyphLayout, "GlyphLayout", 27, jl_Object, [cbgu_Pool$Poolable], 1, [0,0,0], () => cbggg_GlyphLayout_$callClinit(), ["$reset", $rt_wrapFunction0(cbggg_GlyphLayout_reset), "$toString", $rt_wrapFunction0(cbggg_GlyphLayout_toString)],
-jl_Float, "Float", 37, jl_Number, [jl_Comparable], 1, 0, () => jl_Float_$callClinit(), ["$intValue", $rt_wrapFunction0(jl_Float_intValue), "$floatValue", $rt_wrapFunction0(jl_Float_floatValue), "$toString", $rt_wrapFunction0(jl_Float_toString), "$equals", $rt_wrapFunction1(jl_Float_equals), "$hashCode", $rt_wrapFunction0(jl_Float_hashCode0), "$compareTo", $rt_wrapFunction1(jl_Float_compareTo)],
+jl_Float, "Float", 38, jl_Number, [jl_Comparable], 1, 0, () => jl_Float_$callClinit(), ["$intValue", $rt_wrapFunction0(jl_Float_intValue), "$floatValue", $rt_wrapFunction0(jl_Float_floatValue), "$toString", $rt_wrapFunction0(jl_Float_toString), "$equals", $rt_wrapFunction1(jl_Float_equals), "$hashCode", $rt_wrapFunction0(jl_Float_hashCode0), "$compareTo", $rt_wrapFunction1(jl_Float_compareTo)],
 cbgu_PoolManager, 0, jl_Object, [], 1, 0, 0, 0,
 cbgssa_Actions$_clinit_$lambda$_77_0, 0, jl_Object, [cbgu_DefaultPool$PoolSupplier], 1, 0, 0, ["$get6", $rt_wrapFunction0(cbgssa_Actions$_clinit_$lambda$_77_0_get)],
 cbgssa_Actions$_clinit_$lambda$_77_1, 0, jl_Object, [cbgu_DefaultPool$PoolSupplier], 1, 0, 0, ["$get6", $rt_wrapFunction0(cbgssa_Actions$_clinit_$lambda$_77_1_get)],
@@ -59330,9 +59709,9 @@ cbgss_Actor$_clinit_$lambda$_109_2, 0, jl_Object, [cbgu_DefaultPool$PoolSupplier
 cbgss_Actor$_clinit_$lambda$_109_3, 0, jl_Object, [cbgu_DefaultPool$PoolSupplier], 1, 0, 0, ["$get6", $rt_wrapFunction0(cbgss_Actor$_clinit_$lambda$_109_3_get)],
 cgxgtbwu_WebNavigator, 0, jl_Object, [], 1, 0, 0, 0,
 cbgm_Vector3, 0, jl_Object, [ji_Serializable, cbgm_Vector], 1, 0, () => cbgm_Vector3_$callClinit(), 0,
-kji_Intrinsics, "Intrinsics", 48, jl_Object, [], 1, 0, 0, 0,
+kji_Intrinsics, "Intrinsics", 49, jl_Object, [], 1, 0, 0, 0,
 cgxgtbw_WebApplicationConfiguration, 0, jl_Object, [], 1, 0, 0, 0,
-k_Pair, "Pair", 46, jl_Object, [ji_Serializable], 17, 0, 0, ["$toString", $rt_wrapFunction0(k_Pair_toString), "$hashCode", $rt_wrapFunction0(k_Pair_hashCode), "$equals", $rt_wrapFunction1(k_Pair_equals)],
+k_Pair, "Pair", 47, jl_Object, [ji_Serializable], 17, 0, 0, ["$toString", $rt_wrapFunction0(k_Pair_toString), "$hashCode", $rt_wrapFunction0(k_Pair_hashCode), "$equals", $rt_wrapFunction1(k_Pair_equals)],
 cgxgtbw_WebAssetPreloadListener, 0, jl_Object, [], 1537, 0, 0, 0,
 cvsw_WebLauncher$main$lambda$_2_0, 0, jl_Object, [cgxgtbw_WebAssetPreloadListener], 1, 0, 0, 0,
 cbg_Application, 0, jl_Object, [], 1537, 0, 0, 0,
@@ -59344,38 +59723,36 @@ cvs_PlatformServices, 0, jl_Object, [], 1537, 0, 0, 0,
 cvsw_WebPlatformServices, 0, jl_Object, [cvs_PlatformServices], 17, 0, 0, 0,
 ju_Comparator, 0, jl_Object, [], 1537, 0, 0, 0,
 jl_String$_clinit_$lambda$_118_0, 0, jl_Object, [ju_Comparator], 1, 0, 0, 0,
-jl_Character, "Character", 37, jl_Object, [jl_Comparable], 1, 0, () => jl_Character_$callClinit(), ["$toString", $rt_wrapFunction0(jl_Character_toString0), "$equals", $rt_wrapFunction1(jl_Character_equals), "$hashCode", $rt_wrapFunction0(jl_Character_hashCode), "$compareTo", $rt_wrapFunction1(jl_Character_compareTo)],
+jl_Character, "Character", 38, jl_Object, [jl_Comparable], 1, 0, () => jl_Character_$callClinit(), ["$toString", $rt_wrapFunction0(jl_Character_toString0), "$equals", $rt_wrapFunction1(jl_Character_equals), "$hashCode", $rt_wrapFunction0(jl_Character_hashCode), "$compareTo", $rt_wrapFunction1(jl_Character_compareTo)],
 cbgu_IntArray, "IntArray", 16, jl_Object, [], 1, 0, 0, ["$hashCode", $rt_wrapFunction0(cbgu_IntArray_hashCode), "$equals", $rt_wrapFunction1(cbgu_IntArray_equals), "$toString", $rt_wrapFunction0(cbgu_IntArray_toString)],
 cbgu_ArraySupplier, 0, jl_Object, [], 1537, 0, () => cbgu_ArraySupplier_$callClinit(), 0,
 cgxgtbwu_WebBaseUrlProvider, 0, jl_Object, [], 1537, 0, 0, 0,
 cgxgtbwu_WebDefaultBaseUrlProvider, 0, jl_Object, [cgxgtbwu_WebBaseUrlProvider], 1, 0, 0, 0,
-jl_Math, 0, jl_Object, [], 17, 0, 0, 0,
-kr_RangesKt__RangesKt, 0, jl_Object, [], 0, 0, 0, 0,
-kr_RangesKt___RangesKt, 0, kr_RangesKt__RangesKt, [], 0, 0, 0, 0,
 cvs_GamepadInput, 0, jl_Object, [], 17, 0, 0, 0,
 ju_Objects, 0, jl_Object, [], 17, 0, 0, 0,
-otji_JSWrapper, "JSWrapper", 41, jl_Object, [], 17, 0, 0, ["$hashCode", $rt_wrapFunction0(otji_JSWrapper_hashCode), "$equals", $rt_wrapFunction1(otji_JSWrapper_equals), "$toString", $rt_wrapFunction0(otji_JSWrapper_toString)],
+otji_JSWrapper, "JSWrapper", 42, jl_Object, [], 17, 0, 0, ["$hashCode", $rt_wrapFunction0(otji_JSWrapper_hashCode), "$equals", $rt_wrapFunction1(otji_JSWrapper_equals), "$toString", $rt_wrapFunction0(otji_JSWrapper_toString)],
 jl_Cloneable, 0, jl_Object, [], 1537, 0, 0, 0,
-jl_CloneNotSupportedException, "CloneNotSupportedException", 37, jl_Exception, [], 1, [0,0,0], 0, 0,
+jl_CloneNotSupportedException, "CloneNotSupportedException", 38, jl_Exception, [], 1, [0,0,0], 0, 0,
 cbggg_GlyphLayout$_clinit_$lambda$_20_0, 0, jl_Object, [cbgu_DefaultPool$PoolSupplier], 1, 0, 0, ["$get6", $rt_wrapFunction0(cbggg_GlyphLayout$_clinit_$lambda$_20_0_get)],
-jl_IndexOutOfBoundsException, "IndexOutOfBoundsException", 37, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
-jl_StringIndexOutOfBoundsException, "StringIndexOutOfBoundsException", 37, jl_IndexOutOfBoundsException, [], 1, [0,0,0], 0, 0,
+jl_IndexOutOfBoundsException, "IndexOutOfBoundsException", 38, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jl_StringIndexOutOfBoundsException, "StringIndexOutOfBoundsException", 38, jl_IndexOutOfBoundsException, [], 1, [0,0,0], 0, 0,
 cbgm_Matrix4, 0, jl_Object, [ji_Serializable], 1, 0, () => cbgm_Matrix4_$callClinit(), 0,
-jl_NullPointerException, "NullPointerException", 37, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jl_NullPointerException, "NullPointerException", 38, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
 ju_Map, 0, jl_Object, [], 1537, 0, 0, 0,
 ju_AbstractMap, 0, jl_Object, [ju_Map], 1025, 0, 0, ["$put0", $rt_wrapFunction2(ju_AbstractMap_put), "$equals", $rt_wrapFunction1(ju_AbstractMap_equals), "$hashCode", $rt_wrapFunction0(ju_AbstractMap_hashCode), "$toString", $rt_wrapFunction0(ju_AbstractMap_toString)],
 ju_HashMap, 0, ju_AbstractMap, [jl_Cloneable, ji_Serializable], 1, 0, 0, ["$newElementArray", $rt_wrapFunction1(ju_HashMap_newElementArray), "$isEmpty", $rt_wrapFunction0(ju_HashMap_isEmpty), "$keySet", $rt_wrapFunction0(ju_HashMap_keySet), "$put0", $rt_wrapFunction2(ju_HashMap_put), "$remove3", $rt_wrapFunction1(ju_HashMap_remove), "$size", $rt_wrapFunction0(ju_HashMap_size)],
 ju_SequencedMap, 0, jl_Object, [ju_Map], 1537, 0, 0, 0,
-ju_LinkedHashMap, "LinkedHashMap", 32, ju_HashMap, [ju_SequencedMap], 1, 0, 0, ["$newElementArray", $rt_wrapFunction1(ju_LinkedHashMap_newElementArray), "$put0", $rt_wrapFunction2(ju_LinkedHashMap_put), "$entrySet", $rt_wrapFunction0(ju_LinkedHashMap_entrySet), "$keySet", $rt_wrapFunction0(ju_LinkedHashMap_keySet), "$remove3", $rt_wrapFunction1(ju_LinkedHashMap_remove)],
+ju_LinkedHashMap, "LinkedHashMap", 33, ju_HashMap, [ju_SequencedMap], 1, 0, 0, ["$newElementArray", $rt_wrapFunction1(ju_LinkedHashMap_newElementArray), "$put0", $rt_wrapFunction2(ju_LinkedHashMap_put), "$entrySet", $rt_wrapFunction0(ju_LinkedHashMap_entrySet), "$keySet", $rt_wrapFunction0(ju_LinkedHashMap_keySet), "$remove3", $rt_wrapFunction1(ju_LinkedHashMap_remove)],
 cgxgtbw_WebApplication$AppState, "WebApplication$AppState", 6, jl_Enum, [], 65553, 0, () => cgxgtbw_WebApplication$AppState_$callClinit(), 0,
 otj_JSObject, 0, jl_Object, [], 1537, 0, 0, 0,
 otjb_AnimationFrameCallback, 0, jl_Object, [otj_JSObject], 1537, 0, 0, 0,
 cgxgtbwdi_WebWindow, "WebWindow", 9, jl_Object, [otjb_AnimationFrameCallback], 1, 0, () => cgxgtbwdi_WebWindow_$callClinit(), 0,
-jl_IllegalArgumentException, "IllegalArgumentException", 37, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
-jl_Long, "Long", 37, jl_Number, [jl_Comparable], 1, 0, () => jl_Long_$callClinit(), ["$intValue", $rt_wrapFunction0(jl_Long_intValue), "$toString", $rt_wrapFunction0(jl_Long_toString), "$hashCode", $rt_wrapFunction0(jl_Long_hashCode), "$equals", $rt_wrapFunction1(jl_Long_equals), "$compareTo", $rt_wrapFunction1(jl_Long_compareTo)],
+jl_IllegalArgumentException, "IllegalArgumentException", 38, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jl_Long, "Long", 38, jl_Number, [jl_Comparable], 1, 0, () => jl_Long_$callClinit(), ["$intValue", $rt_wrapFunction0(jl_Long_intValue), "$toString", $rt_wrapFunction0(jl_Long_toString), "$hashCode", $rt_wrapFunction0(jl_Long_hashCode), "$equals", $rt_wrapFunction1(jl_Long_equals), "$compareTo", $rt_wrapFunction1(jl_Long_compareTo)],
 cbgu_ArraySupplier$_clinit_$lambda$_3_0, 0, jl_Object, [cbgu_ArraySupplier], 1, 0, 0, ["$get", $rt_wrapFunction1(cbgu_ArraySupplier$_clinit_$lambda$_3_0_get)],
 jl_Thread, 0, jl_Object, [jl_Runnable], 1, 0, () => jl_Thread_$callClinit(), 0,
 jl_StackTraceElement, 0, jl_Object, [ji_Serializable], 17, 0, 0, 0,
+jl_Math, 0, jl_Object, [], 17, 0, 0, 0,
 cbgm_MathUtils, 0, jl_Object, [], 17, 0, () => cbgm_MathUtils_$callClinit(), 0,
 cbgm_Quaternion, 0, jl_Object, [ji_Serializable], 1, 0, () => cbgm_Quaternion_$callClinit(), 0,
 ju_Arrays, 0, jl_Object, [], 1, 0, 0, 0,
@@ -59386,11 +59763,11 @@ jlr_Array, 0, jl_Object, [], 17, 0, 0, 0,
 jur_RandomGenerator, 0, jl_Object, [], 1537, 0, 0, 0,
 ju_Random, 0, jl_Object, [jur_RandomGenerator, ji_Serializable], 1, 0, 0, ["$setSeed", $rt_wrapFunction1(ju_Random_setSeed)],
 cbgm_RandomXS128, 0, ju_Random, [], 1, 0, 0, ["$setSeed", $rt_wrapFunction1(cbgm_RandomXS128_setSeed)],
-jl_NegativeArraySizeException, "NegativeArraySizeException", 37, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
-cbgu_NumberUtils, 0, jl_Object, [], 17, 0, 0, 0]);
-$rt_metadata([cgxgtbwa_WebWebAgent, 0, jl_Object, [], 1, 0, 0, 0,
-cgxgtbwa_AssetDownloader, 0, jl_Object, [], 1537, 0, 0, 0,
-cgxgtbwa_AssetDownloadImpl, 0, jl_Object, [cgxgtbwa_AssetDownloader], 1, 0, 0, 0,
+jl_NegativeArraySizeException, "NegativeArraySizeException", 38, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+cbgu_NumberUtils, 0, jl_Object, [], 17, 0, 0, 0,
+cgxgtbwa_WebWebAgent, 0, jl_Object, [], 1, 0, 0, 0,
+cgxgtbwa_AssetDownloader, 0, jl_Object, [], 1537, 0, 0, 0]);
+$rt_metadata([cgxgtbwa_AssetDownloadImpl, 0, jl_Object, [cgxgtbwa_AssetDownloader], 1, 0, 0, 0,
 cgxgtbwa_AssetInstance, 0, jl_Object, [], 1, 0, 0, 0,
 cgxgtbwa_AssetLoader, 0, jl_Object, [], 1537, 0, 0, 0,
 cgxgtbwa_AssetLoadImpl, 0, jl_Object, [cgxgtbwa_AssetLoader], 1, 0, 0, 0,
@@ -59420,13 +59797,13 @@ cbg_ApplicationAdapter, 0, jl_Object, [cbg_ApplicationListener], 1025, 0, 0, ["$
 cgxgtbw_WebPreloadApplicationListener, 0, cbg_ApplicationAdapter, [], 1, 0, 0, ["$create", $rt_wrapFunction0(cgxgtbw_WebPreloadApplicationListener_create), "$render1", $rt_wrapFunction0(cgxgtbw_WebPreloadApplicationListener_render), "$resize4", $rt_wrapFunction2(cgxgtbw_WebPreloadApplicationListener_resize), "$dispose", $rt_wrapFunction0(cgxgtbw_WebPreloadApplicationListener_dispose)],
 ju_Map$Entry, 0, jl_Object, [], 1537, 0, 0, 0,
 ju_MapEntry, 0, jl_Object, [ju_Map$Entry, jl_Cloneable], 0, 0, 0, ["$equals", $rt_wrapFunction1(ju_MapEntry_equals), "$hashCode", $rt_wrapFunction0(ju_MapEntry_hashCode), "$toString", $rt_wrapFunction0(ju_MapEntry_toString)],
-ju_HashMap$HashEntry, "HashMap$HashEntry", 32, ju_MapEntry, [], 0, 0, 0, 0,
-ju_LinkedHashMap$LinkedHashMapEntry, "LinkedHashMap$LinkedHashMapEntry", 32, ju_HashMap$HashEntry, [], 16, 0, 0, 0,
+ju_HashMap$HashEntry, "HashMap$HashEntry", 33, ju_MapEntry, [], 0, 0, 0, 0,
+ju_LinkedHashMap$LinkedHashMapEntry, "LinkedHashMap$LinkedHashMapEntry", 33, ju_HashMap$HashEntry, [], 16, 0, 0, 0,
 ju_Collection, 0, jl_Object, [jl_Iterable], 1537, 0, 0, 0,
 ju_AbstractCollection, 0, jl_Object, [ju_Collection], 1025, 0, 0, ["$isEmpty", $rt_wrapFunction0(ju_AbstractCollection_isEmpty), "$contains0", $rt_wrapFunction1(ju_AbstractCollection_contains), "$toString", $rt_wrapFunction0(ju_AbstractCollection_toString)],
 ju_Set, 0, jl_Object, [ju_Collection], 1537, 0, 0, 0,
 ju_AbstractSet, 0, ju_AbstractCollection, [ju_Set], 1025, 0, 0, ["$equals", $rt_wrapFunction1(ju_AbstractSet_equals), "$hashCode", $rt_wrapFunction0(ju_AbstractSet_hashCode)],
-ju_HashSet, "HashSet", 32, ju_AbstractSet, [jl_Cloneable, ji_Serializable], 1, 0, 0, ["$add3", $rt_wrapFunction1(ju_HashSet_add), "$contains0", $rt_wrapFunction1(ju_HashSet_contains), "$iterator0", $rt_wrapFunction0(ju_HashSet_iterator), "$size", $rt_wrapFunction0(ju_HashSet_size)],
+ju_HashSet, "HashSet", 33, ju_AbstractSet, [jl_Cloneable, ji_Serializable], 1, 0, 0, ["$add3", $rt_wrapFunction1(ju_HashSet_add), "$contains0", $rt_wrapFunction1(ju_HashSet_contains), "$iterator0", $rt_wrapFunction0(ju_HashSet_iterator), "$size", $rt_wrapFunction0(ju_HashSet_size)],
 cgxgtbwu_KeyCodes, 0, jl_Object, [], 1, 0, () => cgxgtbwu_KeyCodes_$callClinit(), 0,
 cgxgtbwf_FileDB, 0, jl_Object, [], 1025, 0, 0, 0,
 cgxgtbwf_MemoryFileStorage, 0, cgxgtbwf_FileDB, [], 1, 0, 0, ["$putFile", $rt_wrapFunction2(cgxgtbwf_MemoryFileStorage_putFile), "$removeFile", $rt_wrapFunction1(cgxgtbwf_MemoryFileStorage_removeFile)],
@@ -59437,10 +59814,10 @@ cgxgtbw_WebPermissions$TeaPermissionResult, 0, jl_Object, [otj_JSObject], 1537, 
 cgxgtbw_WebClipboard$ClipboardWriteHandler, "WebClipboard$ClipboardWriteHandler", 6, jl_Object, [cgxgtbw_WebPermissions$TeaPermissionResult], 0, 0, 0, 0,
 cgxgtbw_WebClipboard$_init_$lambda$_0_0, "WebClipboard$<init>$lambda$_0_0", 6, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
 cgxgtbw_WebClipboard$_init_$lambda$_0_1, "WebClipboard$<init>$lambda$_0_1", 6, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
-cgxgtbw_WebClipboard$_init_$lambda$_0_2, "WebClipboard$<init>$lambda$_0_2", 6, jl_Object, [otjde_EventListener], 1, 0, 0, 0]);
-$rt_metadata([cgxgtbwc_TeaWebRuntimeConfig, 0, jl_Object, [], 17, 0, 0, 0,
-cgxgtbw_WebPreloadApplicationListener$Step, 0, jl_Enum, [], 65552, 0, () => cgxgtbw_WebPreloadApplicationListener$Step_$callClinit(), 0,
-ju_Dictionary, 0, jl_Object, [], 1025, 0, 0, 0,
+cgxgtbw_WebClipboard$_init_$lambda$_0_2, "WebClipboard$<init>$lambda$_0_2", 6, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
+cgxgtbwc_TeaWebRuntimeConfig, 0, jl_Object, [], 17, 0, 0, 0,
+cgxgtbw_WebPreloadApplicationListener$Step, 0, jl_Enum, [], 65552, 0, () => cgxgtbw_WebPreloadApplicationListener$Step_$callClinit(), 0]);
+$rt_metadata([ju_Dictionary, 0, jl_Object, [], 1025, 0, 0, 0,
 ju_Hashtable, 0, ju_Dictionary, [ju_Map, jl_Cloneable, ji_Serializable], 1, 0, () => ju_Hashtable_$callClinit(), 0,
 ju_Properties, 0, ju_Hashtable, [], 1, 0, 0, 0,
 otrf_VirtualFileSystemProvider, 0, jl_Object, [], 17, 0, 0, 0,
@@ -59455,7 +59832,7 @@ otrfm_InMemoryVirtualFileSystem, 0, jl_Object, [otrf_VirtualFileSystem], 1, 0, 0
 ju_Enumeration, 0, jl_Object, [], 1537, 0, 0, 0,
 ju_Hashtable$1, 0, jl_Object, [ju_Enumeration], 0, 0, 0, 0,
 ju_Hashtable$2, 0, jl_Object, [ju_Iterator], 0, 0, 0, 0,
-jl_IllegalStateException, "IllegalStateException", 37, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jl_IllegalStateException, "IllegalStateException", 38, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
 otrfm_AbstractInMemoryVirtualFile, 0, jl_Object, [], 1025, 0, 0, 0,
 otrfm_InMemoryVirtualDirectory, 0, otrfm_AbstractInMemoryVirtualFile, [], 1, 0, 0, 0,
 ju_Hashtable$Entry, 0, ju_MapEntry, [], 0, 0, 0, 0,
@@ -59464,8 +59841,8 @@ otji_JSWrapper$Helper, 0, jl_Object, [], 0, 0, () => otji_JSWrapper$Helper_$call
 otjc_JSUndefined, 0, jl_Object, [otj_JSObject], 1, 0, 0, 0,
 otjc_JSWeakRef, 0, jl_Object, [otj_JSObject], 1025, 0, 0, 0,
 otji_JSWrapper$Helper$FinalizationRegistryConsumer, 0, jl_Object, [otj_JSObject], 1536, 0, 0, 0,
-otji_JSWrapper$Helper$_clinit_$lambda$_3_0, "JSWrapper$Helper$<clinit>$lambda$_3_0", 41, jl_Object, [otji_JSWrapper$Helper$FinalizationRegistryConsumer], 1, 0, 0, 0,
-otji_JSWrapper$Helper$_clinit_$lambda$_3_1, "JSWrapper$Helper$<clinit>$lambda$_3_1", 41, jl_Object, [otji_JSWrapper$Helper$FinalizationRegistryConsumer], 1, 0, 0, 0,
+otji_JSWrapper$Helper$_clinit_$lambda$_3_0, "JSWrapper$Helper$<clinit>$lambda$_3_0", 42, jl_Object, [otji_JSWrapper$Helper$FinalizationRegistryConsumer], 1, 0, 0, 0,
+otji_JSWrapper$Helper$_clinit_$lambda$_3_1, "JSWrapper$Helper$<clinit>$lambda$_3_1", 42, jl_Object, [otji_JSWrapper$Helper$FinalizationRegistryConsumer], 1, 0, 0, 0,
 cbg_LifecycleListener, 0, jl_Object, [], 1537, 0, 0, 0,
 cbgu_GdxRuntimeException, "GdxRuntimeException", 16, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
 cgxgtbw_WebGLGraphics, 0, cgxgtbw_WebGraphics, [], 1, 0, 0, 0,
@@ -59477,7 +59854,7 @@ cgxgtbw_WebApplication$6, 0, jl_Object, [cgxgtbwa_AssetLoaderListener], 0, 0, 0,
 cgxgtbw_WebApplication$7, 0, jl_Object, [cgxgtbwa_AssetLoaderListener], 0, 0, 0, ["$onFailure", $rt_wrapFunction1(cgxgtbwa_AssetLoaderListener_onFailure), "$onSuccess", $rt_wrapFunction2(cgxgtbw_WebApplication$7_onSuccess)],
 cbgu_TimeUtils, 0, jl_Object, [], 17, 0, 0, 0,
 jl_Object$Monitor, 0, jl_Object, [], 0, 0, 0, 0,
-jl_IllegalMonitorStateException, "IllegalMonitorStateException", 37, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jl_IllegalMonitorStateException, "IllegalMonitorStateException", 38, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
 otjw_WebGLContextAttributes, 0, jl_Object, [otj_JSObject], 1025, 0, 0, 0,
 cbgg_GL20, 0, jl_Object, [], 1537, 0, 0, 0,
 cgxgtbw_WebGL20, "WebGL20", 6, jl_Object, [cbgg_GL20], 1, 0, 0, ["$glAttachShader", $rt_wrapFunction2(cgxgtbw_WebGL20_glAttachShader), "$glBindBuffer", $rt_wrapFunction2(cgxgtbw_WebGL20_glBindBuffer), "$glBindTexture", $rt_wrapFunction2(cgxgtbw_WebGL20_glBindTexture), "$glBlendFunc", $rt_wrapFunction2(cgxgtbw_WebGL20_glBlendFunc), "$glBlendFuncSeparate", $rt_wrapFunction4(cgxgtbw_WebGL20_glBlendFuncSeparate), "$glBufferData", $rt_wrapFunction4(cgxgtbw_WebGL20_glBufferData), "$glBufferSubData", $rt_wrapFunction4(cgxgtbw_WebGL20_glBufferSubData),
@@ -59502,8 +59879,8 @@ var_5, var_6) { cgxgtbw_WebGL30Debug_glVertexAttribPointer(this, var_1, var_2, v
 cbggg_GLVersion, 0, jl_Object, [], 1, 0, 0, 0,
 cbg_Application$ApplicationType, 0, jl_Enum, [], 65553, 0, () => cbg_Application$ApplicationType_$callClinit(), 0,
 cgxgtbw_WebGraphics$FullscreenChanged, 0, jl_Object, [otj_JSObject], 1537, 0, 0, 0,
-cgxgtbw_WebGLGraphics$1, "WebGLGraphics$1", 6, jl_Object, [cgxgtbw_WebGraphics$FullscreenChanged], 0, 0, 0, 0]);
-$rt_metadata([cgxgtbw_WebGL20Debug, "WebGL20Debug", 6, cgxgtbw_WebGL20, [], 1, 0, 0, ["$glBindTexture", $rt_wrapFunction2(cgxgtbw_WebGL20Debug_glBindTexture), "$glBlendFunc", $rt_wrapFunction2(cgxgtbw_WebGL20Debug_glBlendFunc), "$glClear", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glClear), "$glClearColor", $rt_wrapFunction4(cgxgtbw_WebGL20Debug_glClearColor), "$glDepthMask", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glDepthMask), "$glDisable", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glDisable), "$glDrawArrays", $rt_wrapFunction3(cgxgtbw_WebGL20Debug_glDrawArrays),
+cgxgtbw_WebGLGraphics$1, "WebGLGraphics$1", 6, jl_Object, [cgxgtbw_WebGraphics$FullscreenChanged], 0, 0, 0, 0,
+cgxgtbw_WebGL20Debug, "WebGL20Debug", 6, cgxgtbw_WebGL20, [], 1, 0, 0, ["$glBindTexture", $rt_wrapFunction2(cgxgtbw_WebGL20Debug_glBindTexture), "$glBlendFunc", $rt_wrapFunction2(cgxgtbw_WebGL20Debug_glBlendFunc), "$glClear", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glClear), "$glClearColor", $rt_wrapFunction4(cgxgtbw_WebGL20Debug_glClearColor), "$glDepthMask", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glDepthMask), "$glDisable", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glDisable), "$glDrawArrays", $rt_wrapFunction3(cgxgtbw_WebGL20Debug_glDrawArrays),
 "$glDrawElements", $rt_wrapFunction4(cgxgtbw_WebGL20Debug_glDrawElements), "$glEnable", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glEnable), "$glGetString", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glGetString), "$glPixelStorei", $rt_wrapFunction2(cgxgtbw_WebGL20Debug_glPixelStorei), "$glScissor", $rt_wrapFunction4(cgxgtbw_WebGL20Debug_glScissor), "$glTexImage2D", function(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) { cgxgtbw_WebGL20Debug_glTexImage2D(this, var_1, var_2, var_3, var_4, var_5, var_6,
 var_7, var_8, var_9); }, "$glTexParameterf", $rt_wrapFunction3(cgxgtbw_WebGL20Debug_glTexParameterf), "$glTexSubImage2D", function(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) { cgxgtbw_WebGL20Debug_glTexSubImage2D(this, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9); }, "$glViewport", $rt_wrapFunction4(cgxgtbw_WebGL20Debug_glViewport), "$glAttachShader", $rt_wrapFunction2(cgxgtbw_WebGL20Debug_glAttachShader), "$glBindBuffer", $rt_wrapFunction2(cgxgtbw_WebGL20Debug_glBindBuffer),
 "$glBlendFuncSeparate", $rt_wrapFunction4(cgxgtbw_WebGL20Debug_glBlendFuncSeparate), "$glBufferData", $rt_wrapFunction4(cgxgtbw_WebGL20Debug_glBufferData), "$glBufferSubData", $rt_wrapFunction4(cgxgtbw_WebGL20Debug_glBufferSubData), "$glCompileShader", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glCompileShader), "$glCreateProgram", $rt_wrapFunction0(cgxgtbw_WebGL20Debug_glCreateProgram), "$glCreateShader", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glCreateShader), "$glDeleteProgram", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glDeleteProgram),
@@ -59511,8 +59888,8 @@ var_7, var_8, var_9); }, "$glTexParameterf", $rt_wrapFunction3(cgxgtbw_WebGL20De
 $rt_wrapFunction4(cgxgtbw_WebGL20Debug_glGetActiveUniform), "$glGetAttribLocation", $rt_wrapFunction2(cgxgtbw_WebGL20Debug_glGetAttribLocation), "$glGetFloatv", $rt_wrapFunction2(cgxgtbw_WebGL20Debug_glGetFloatv), "$glGetProgramiv", $rt_wrapFunction3(cgxgtbw_WebGL20Debug_glGetProgramiv), "$glGetProgramInfoLog", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glGetProgramInfoLog), "$glGetShaderiv", $rt_wrapFunction3(cgxgtbw_WebGL20Debug_glGetShaderiv), "$glGetShaderInfoLog", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glGetShaderInfoLog),
 "$glGetUniformLocation", $rt_wrapFunction2(cgxgtbw_WebGL20Debug_glGetUniformLocation), "$glLinkProgram", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glLinkProgram), "$glShaderSource", $rt_wrapFunction2(cgxgtbw_WebGL20Debug_glShaderSource), "$glTexParameteri", $rt_wrapFunction3(cgxgtbw_WebGL20Debug_glTexParameteri), "$glUniform1i", $rt_wrapFunction2(cgxgtbw_WebGL20Debug_glUniform1i), "$glUseProgram", $rt_wrapFunction1(cgxgtbw_WebGL20Debug_glUseProgram), "$glVertexAttribPointer", function(var_1, var_2, var_3, var_4,
 var_5, var_6) { cgxgtbw_WebGL20Debug_glVertexAttribPointer(this, var_1, var_2, var_3, var_4, var_5, var_6); }],
-otp_PlatformRunnable, 0, jl_Object, [], 1537, 0, 0, 0,
-jl_Object$monitorExit$lambda$_8_1, 0, jl_Object, [otp_PlatformRunnable], 1, 0, 0, 0,
+otp_PlatformRunnable, 0, jl_Object, [], 1537, 0, 0, 0]);
+$rt_metadata([jl_Object$monitorExit$lambda$_8_1, 0, jl_Object, [otp_PlatformRunnable], 1, 0, 0, 0,
 otji_IDBObjectStoreParameters, 0, jl_Object, [otj_JSObject], 1025, 0, 0, 0,
 cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_0, "LocalDBStorage$readAllFilesAsync$lambda$_4_0", 13, jl_Object, [otji_EventHandler], 1, 0, 0, 0,
 cgxgtbwft_LocalDBStorage$readAllFilesAsync$lambda$_4_1, "LocalDBStorage$readAllFilesAsync$lambda$_4_1", 13, jl_Object, [otji_EventHandler], 1, 0, 0, 0,
@@ -59532,7 +59909,7 @@ jur_MatchResult, 0, jl_Object, [], 1537, 0, 0, 0,
 jur_Matcher, 0, jl_Object, [jur_MatchResult], 17, 0, 0, 0,
 jnc_Charset, 0, jl_Object, [jl_Comparable], 1025, 0, 0, 0,
 jur_MatchResultImpl, 0, jl_Object, [jur_MatchResult], 0, 0, 0, 0,
-jl_NumberFormatException, "NumberFormatException", 37, jl_IllegalArgumentException, [], 1, [0,0,0], 0, 0,
+jl_NumberFormatException, "NumberFormatException", 38, jl_IllegalArgumentException, [], 1, [0,0,0], 0, 0,
 oti_AsyncCallback, 0, jl_Object, [], 1537, 0, 0, 0,
 otpp_AsyncCallbackWrapper, 0, jl_Object, [oti_AsyncCallback], 0, 0, 0, ["$complete", $rt_wrapFunction1(otpp_AsyncCallbackWrapper_complete), "$error", $rt_wrapFunction1(otpp_AsyncCallbackWrapper_error)],
 jl_Object$monitorEnterWait$lambda$_6_0, 0, jl_Object, [otp_PlatformRunnable], 1, 0, 0, 0,
@@ -59542,95 +59919,95 @@ ju_Deque, 0, jl_Object, [ju_Queue, ju_SequencedCollection], 1537, 0, 0, 0,
 ju_ArrayDeque, 0, ju_AbstractCollection, [ju_Deque, jl_Cloneable, ji_Serializable], 1, 0, 0, 0,
 jur_AbstractSet, 0, jl_Object, [], 1024, 0, () => jur_AbstractSet_$callClinit(), ["$find0", $rt_wrapFunction3(jur_AbstractSet_find), "$findBack", $rt_wrapFunction4(jur_AbstractSet_findBack), "$getType1", $rt_wrapFunction0(jur_AbstractSet_getType), "$toString", $rt_wrapFunction0(jur_AbstractSet_toString), "$setNext", $rt_wrapFunction1(jur_AbstractSet_setNext), "$first1", $rt_wrapFunction1(jur_AbstractSet_first), "$processBackRefReplacement", $rt_wrapFunction0(jur_AbstractSet_processBackRefReplacement), "$processSecondPass",
 $rt_wrapFunction0(jur_AbstractSet_processSecondPass)],
-jur_FSet, "FSet", 33, jur_AbstractSet, [], 0, 0, () => jur_FSet_$callClinit(), ["$matches", $rt_wrapFunction3(jur_FSet_matches), "$getName", $rt_wrapFunction0(jur_FSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_FSet_hasConsumed)],
+jur_FSet, "FSet", 34, jur_AbstractSet, [], 0, 0, () => jur_FSet_$callClinit(), ["$matches", $rt_wrapFunction3(jur_FSet_matches), "$getName", $rt_wrapFunction0(jur_FSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_FSet_hasConsumed)],
 jur_Lexer, 0, jl_Object, [], 0, 0, 0, 0,
-jur_PatternSyntaxException, "PatternSyntaxException", 33, jl_IllegalArgumentException, [], 1, [0,0,0], 0, ["$getMessage", $rt_wrapFunction0(jur_PatternSyntaxException_getMessage)],
+jur_PatternSyntaxException, "PatternSyntaxException", 34, jl_IllegalArgumentException, [], 1, [0,0,0], 0, ["$getMessage", $rt_wrapFunction0(jur_PatternSyntaxException_getMessage)],
 ju_List, 0, jl_Object, [ju_SequencedCollection], 1537, 0, 0, 0,
 ju_AbstractList, 0, ju_AbstractCollection, [ju_List], 1025, 0, 0, ["$iterator0", $rt_wrapFunction0(ju_AbstractList_iterator), "$remove2", $rt_wrapFunction1(ju_AbstractList_remove), "$indexOf4", $rt_wrapFunction1(ju_AbstractList_indexOf), "$listIterator", $rt_wrapFunction1(ju_AbstractList_listIterator), "$hashCode", $rt_wrapFunction0(ju_AbstractList_hashCode), "$equals", $rt_wrapFunction1(ju_AbstractList_equals)],
 ju_RandomAccess, 0, jl_Object, [], 1537, 0, 0, 0,
-ju_ArrayList, "ArrayList", 32, ju_AbstractList, [jl_Cloneable, ji_Serializable, ju_RandomAccess], 1, 0, 0, ["$get", $rt_wrapFunction1(ju_ArrayList_get), "$size", $rt_wrapFunction0(ju_ArrayList_size), "$add3", $rt_wrapFunction1(ju_ArrayList_add), "$remove2", $rt_wrapFunction1(ju_ArrayList_remove), "$toString", $rt_wrapFunction0(ju_ArrayList_toString)],
-jur_NonCapFSet, "NonCapFSet", 33, jur_FSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_NonCapFSet_matches), "$getName", $rt_wrapFunction0(jur_NonCapFSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_NonCapFSet_hasConsumed)],
-jur_AheadFSet, "AheadFSet", 33, jur_FSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_AheadFSet_matches), "$getName", $rt_wrapFunction0(jur_AheadFSet_getName)],
-jur_BehindFSet, "BehindFSet", 33, jur_FSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_BehindFSet_matches), "$getName", $rt_wrapFunction0(jur_BehindFSet_getName)],
-jur_AtomicFSet, "AtomicFSet", 33, jur_FSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_AtomicFSet_matches), "$getName", $rt_wrapFunction0(jur_AtomicFSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_AtomicFSet_hasConsumed)],
-jur_FinalSet, "FinalSet", 33, jur_FSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_FinalSet_matches), "$getName", $rt_wrapFunction0(jur_FinalSet_getName)],
+ju_ArrayList, "ArrayList", 33, ju_AbstractList, [jl_Cloneable, ji_Serializable, ju_RandomAccess], 1, 0, 0, ["$get", $rt_wrapFunction1(ju_ArrayList_get), "$size", $rt_wrapFunction0(ju_ArrayList_size), "$add3", $rt_wrapFunction1(ju_ArrayList_add), "$remove2", $rt_wrapFunction1(ju_ArrayList_remove), "$toString", $rt_wrapFunction0(ju_ArrayList_toString)],
+jur_NonCapFSet, "NonCapFSet", 34, jur_FSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_NonCapFSet_matches), "$getName", $rt_wrapFunction0(jur_NonCapFSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_NonCapFSet_hasConsumed)],
+jur_AheadFSet, "AheadFSet", 34, jur_FSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_AheadFSet_matches), "$getName", $rt_wrapFunction0(jur_AheadFSet_getName)],
+jur_BehindFSet, "BehindFSet", 34, jur_FSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_BehindFSet_matches), "$getName", $rt_wrapFunction0(jur_BehindFSet_getName)],
+jur_AtomicFSet, "AtomicFSet", 34, jur_FSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_AtomicFSet_matches), "$getName", $rt_wrapFunction0(jur_AtomicFSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_AtomicFSet_hasConsumed)],
+jur_FinalSet, "FinalSet", 34, jur_FSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_FinalSet_matches), "$getName", $rt_wrapFunction0(jur_FinalSet_getName)],
 jur_LeafSet, 0, jur_AbstractSet, [], 1024, 0, 0, ["$matches", $rt_wrapFunction3(jur_LeafSet_matches), "$charCount", $rt_wrapFunction0(jur_LeafSet_charCount), "$hasConsumed", $rt_wrapFunction1(jur_LeafSet_hasConsumed)],
-jur_EmptySet, "EmptySet", 33, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_EmptySet_accepts), "$find0", $rt_wrapFunction3(jur_EmptySet_find), "$findBack", $rt_wrapFunction4(jur_EmptySet_findBack), "$getName", $rt_wrapFunction0(jur_EmptySet_getName), "$hasConsumed", $rt_wrapFunction1(jur_EmptySet_hasConsumed)],
-jur_JointSet, "JointSet", 33, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_JointSet_matches), "$setNext", $rt_wrapFunction1(jur_JointSet_setNext), "$getName", $rt_wrapFunction0(jur_JointSet_getName), "$first1", $rt_wrapFunction1(jur_JointSet_first), "$hasConsumed", $rt_wrapFunction1(jur_JointSet_hasConsumed), "$processSecondPass", $rt_wrapFunction0(jur_JointSet_processSecondPass)],
-jur_NonCapJointSet, "NonCapJointSet", 33, jur_JointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_NonCapJointSet_matches), "$getName", $rt_wrapFunction0(jur_NonCapJointSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_NonCapJointSet_hasConsumed)],
-jur_AtomicJointSet, "AtomicJointSet", 33, jur_NonCapJointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_AtomicJointSet_matches), "$setNext", $rt_wrapFunction1(jur_AtomicJointSet_setNext), "$getName", $rt_wrapFunction0(jur_AtomicJointSet_getName)],
-jur_PositiveLookAhead, "PositiveLookAhead", 33, jur_AtomicJointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PositiveLookAhead_matches), "$hasConsumed", $rt_wrapFunction1(jur_PositiveLookAhead_hasConsumed), "$getName", $rt_wrapFunction0(jur_PositiveLookAhead_getName)],
-jur_NegativeLookAhead, "NegativeLookAhead", 33, jur_AtomicJointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_NegativeLookAhead_matches), "$hasConsumed", $rt_wrapFunction1(jur_NegativeLookAhead_hasConsumed), "$getName", $rt_wrapFunction0(jur_NegativeLookAhead_getName)]]);
-$rt_metadata([jur_PositiveLookBehind, "PositiveLookBehind", 33, jur_AtomicJointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PositiveLookBehind_matches), "$hasConsumed", $rt_wrapFunction1(jur_PositiveLookBehind_hasConsumed), "$getName", $rt_wrapFunction0(jur_PositiveLookBehind_getName)],
-jur_NegativeLookBehind, "NegativeLookBehind", 33, jur_AtomicJointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_NegativeLookBehind_matches), "$hasConsumed", $rt_wrapFunction1(jur_NegativeLookBehind_hasConsumed), "$getName", $rt_wrapFunction0(jur_NegativeLookBehind_getName)],
-jur_SingleSet, "SingleSet", 33, jur_JointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_SingleSet_matches), "$find0", $rt_wrapFunction3(jur_SingleSet_find), "$findBack", $rt_wrapFunction4(jur_SingleSet_findBack), "$first1", $rt_wrapFunction1(jur_SingleSet_first), "$processBackRefReplacement", $rt_wrapFunction0(jur_SingleSet_processBackRefReplacement), "$processSecondPass", $rt_wrapFunction0(jur_SingleSet_processSecondPass)],
+jur_EmptySet, "EmptySet", 34, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_EmptySet_accepts), "$find0", $rt_wrapFunction3(jur_EmptySet_find), "$findBack", $rt_wrapFunction4(jur_EmptySet_findBack), "$getName", $rt_wrapFunction0(jur_EmptySet_getName), "$hasConsumed", $rt_wrapFunction1(jur_EmptySet_hasConsumed)],
+jur_JointSet, "JointSet", 34, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_JointSet_matches), "$setNext", $rt_wrapFunction1(jur_JointSet_setNext), "$getName", $rt_wrapFunction0(jur_JointSet_getName), "$first1", $rt_wrapFunction1(jur_JointSet_first), "$hasConsumed", $rt_wrapFunction1(jur_JointSet_hasConsumed), "$processSecondPass", $rt_wrapFunction0(jur_JointSet_processSecondPass)],
+jur_NonCapJointSet, "NonCapJointSet", 34, jur_JointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_NonCapJointSet_matches), "$getName", $rt_wrapFunction0(jur_NonCapJointSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_NonCapJointSet_hasConsumed)],
+jur_AtomicJointSet, "AtomicJointSet", 34, jur_NonCapJointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_AtomicJointSet_matches), "$setNext", $rt_wrapFunction1(jur_AtomicJointSet_setNext), "$getName", $rt_wrapFunction0(jur_AtomicJointSet_getName)],
+jur_PositiveLookAhead, "PositiveLookAhead", 34, jur_AtomicJointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PositiveLookAhead_matches), "$hasConsumed", $rt_wrapFunction1(jur_PositiveLookAhead_hasConsumed), "$getName", $rt_wrapFunction0(jur_PositiveLookAhead_getName)],
+jur_NegativeLookAhead, "NegativeLookAhead", 34, jur_AtomicJointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_NegativeLookAhead_matches), "$hasConsumed", $rt_wrapFunction1(jur_NegativeLookAhead_hasConsumed), "$getName", $rt_wrapFunction0(jur_NegativeLookAhead_getName)],
+jur_PositiveLookBehind, "PositiveLookBehind", 34, jur_AtomicJointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PositiveLookBehind_matches), "$hasConsumed", $rt_wrapFunction1(jur_PositiveLookBehind_hasConsumed), "$getName", $rt_wrapFunction0(jur_PositiveLookBehind_getName)],
+jur_NegativeLookBehind, "NegativeLookBehind", 34, jur_AtomicJointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_NegativeLookBehind_matches), "$hasConsumed", $rt_wrapFunction1(jur_NegativeLookBehind_hasConsumed), "$getName", $rt_wrapFunction0(jur_NegativeLookBehind_getName)]]);
+$rt_metadata([jur_SingleSet, "SingleSet", 34, jur_JointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_SingleSet_matches), "$find0", $rt_wrapFunction3(jur_SingleSet_find), "$findBack", $rt_wrapFunction4(jur_SingleSet_findBack), "$first1", $rt_wrapFunction1(jur_SingleSet_first), "$processBackRefReplacement", $rt_wrapFunction0(jur_SingleSet_processBackRefReplacement), "$processSecondPass", $rt_wrapFunction0(jur_SingleSet_processSecondPass)],
 ju_Collections, 0, jl_Object, [], 17, 0, () => ju_Collections_$callClinit(), 0,
-jl_ArrayStoreException, "ArrayStoreException", 37, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jl_ArrayStoreException, "ArrayStoreException", 38, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
 jur_SpecialToken, 0, jl_Object, [], 1024, 0, 0, 0,
 jur_AbstractCharClass, 0, jur_SpecialToken, [], 1024, 0, () => jur_AbstractCharClass_$callClinit(), ["$getBits", $rt_wrapFunction0(jur_AbstractCharClass_getBits), "$getLowHighSurrogates", $rt_wrapFunction0(jur_AbstractCharClass_getLowHighSurrogates), "$getInstance1", $rt_wrapFunction0(jur_AbstractCharClass_getInstance), "$hasUCI", $rt_wrapFunction0(jur_AbstractCharClass_hasUCI)],
-ju_MissingResourceException, "MissingResourceException", 32, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
-jur_CharClass, "CharClass", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass_contains), "$getBits", $rt_wrapFunction0(jur_CharClass_getBits), "$getLowHighSurrogates", $rt_wrapFunction0(jur_CharClass_getLowHighSurrogates), "$getInstance1", $rt_wrapFunction0(jur_CharClass_getInstance), "$toString", $rt_wrapFunction0(jur_CharClass_toString), "$hasUCI", $rt_wrapFunction0(jur_CharClass_hasUCI)],
+ju_MissingResourceException, "MissingResourceException", 33, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jur_CharClass, "CharClass", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass_contains), "$getBits", $rt_wrapFunction0(jur_CharClass_getBits), "$getLowHighSurrogates", $rt_wrapFunction0(jur_CharClass_getLowHighSurrogates), "$getInstance1", $rt_wrapFunction0(jur_CharClass_getInstance), "$toString", $rt_wrapFunction0(jur_CharClass_toString), "$hasUCI", $rt_wrapFunction0(jur_CharClass_hasUCI)],
 jur_QuantifierSet, 0, jur_AbstractSet, [], 1024, 0, 0, ["$first1", $rt_wrapFunction1(jur_QuantifierSet_first), "$hasConsumed", $rt_wrapFunction1(jur_QuantifierSet_hasConsumed), "$processSecondPass", $rt_wrapFunction0(jur_QuantifierSet_processSecondPass)],
-jur_LeafQuantifierSet, "LeafQuantifierSet", 33, jur_QuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_LeafQuantifierSet_matches), "$getName", $rt_wrapFunction0(jur_LeafQuantifierSet_getName)],
-jur_CompositeQuantifierSet, "CompositeQuantifierSet", 33, jur_LeafQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_CompositeQuantifierSet_matches), "$getName", $rt_wrapFunction0(jur_CompositeQuantifierSet_getName)],
-jur_GroupQuantifierSet, "GroupQuantifierSet", 33, jur_QuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_GroupQuantifierSet_matches), "$getName", $rt_wrapFunction0(jur_GroupQuantifierSet_getName)],
-jur_AltQuantifierSet, "AltQuantifierSet", 33, jur_LeafQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_AltQuantifierSet_matches), "$setNext", $rt_wrapFunction1(jur_AltQuantifierSet_setNext)],
-jur_UnifiedQuantifierSet, "UnifiedQuantifierSet", 33, jur_LeafQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_UnifiedQuantifierSet_matches), "$find0", $rt_wrapFunction3(jur_UnifiedQuantifierSet_find)],
+jur_LeafQuantifierSet, "LeafQuantifierSet", 34, jur_QuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_LeafQuantifierSet_matches), "$getName", $rt_wrapFunction0(jur_LeafQuantifierSet_getName)],
+jur_CompositeQuantifierSet, "CompositeQuantifierSet", 34, jur_LeafQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_CompositeQuantifierSet_matches), "$getName", $rt_wrapFunction0(jur_CompositeQuantifierSet_getName)],
+jur_GroupQuantifierSet, "GroupQuantifierSet", 34, jur_QuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_GroupQuantifierSet_matches), "$getName", $rt_wrapFunction0(jur_GroupQuantifierSet_getName)],
+jur_AltQuantifierSet, "AltQuantifierSet", 34, jur_LeafQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_AltQuantifierSet_matches), "$setNext", $rt_wrapFunction1(jur_AltQuantifierSet_setNext)],
+jur_UnifiedQuantifierSet, "UnifiedQuantifierSet", 34, jur_LeafQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_UnifiedQuantifierSet_matches), "$find0", $rt_wrapFunction3(jur_UnifiedQuantifierSet_find)],
 ju_Collections$13, 0, ju_AbstractMap, [], 0, 0, 0, 0,
 jur_AbstractCharClass$PredefinedCharacterClasses, 0, jl_Object, [], 16, 0, () => jur_AbstractCharClass$PredefinedCharacterClasses_$callClinit(), 0,
 jur_AbstractCharClass$LazyCharClass, 0, jl_Object, [], 1024, 0, 0, 0,
-jur_Quantifier, "Quantifier", 33, jur_SpecialToken, [jl_Cloneable], 0, 0, 0, ["$toString", $rt_wrapFunction0(jur_Quantifier_toString)],
-jur_FSet$PossessiveFSet, "FSet$PossessiveFSet", 33, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_FSet$PossessiveFSet_matches), "$getName", $rt_wrapFunction0(jur_FSet$PossessiveFSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_FSet$PossessiveFSet_hasConsumed)],
+jur_Quantifier, "Quantifier", 34, jur_SpecialToken, [jl_Cloneable], 0, 0, 0, ["$toString", $rt_wrapFunction0(jur_Quantifier_toString)],
+jur_FSet$PossessiveFSet, "FSet$PossessiveFSet", 34, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_FSet$PossessiveFSet_matches), "$getName", $rt_wrapFunction0(jur_FSet$PossessiveFSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_FSet$PossessiveFSet_hasConsumed)],
 ju_BitSet, 0, jl_Object, [jl_Cloneable, ji_Serializable], 1, 0, 0, 0,
-jur_LowHighSurrogateRangeSet, "LowHighSurrogateRangeSet", 33, jur_JointSet, [], 0, 0, 0, ["$getName", $rt_wrapFunction0(jur_LowHighSurrogateRangeSet_getName)],
-jur_CompositeRangeSet, "CompositeRangeSet", 33, jur_JointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_CompositeRangeSet_matches), "$setNext", $rt_wrapFunction1(jur_CompositeRangeSet_setNext), "$getName", $rt_wrapFunction0(jur_CompositeRangeSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_CompositeRangeSet_hasConsumed), "$first1", $rt_wrapFunction1(jur_CompositeRangeSet_first)],
-jur_SupplRangeSet, "SupplRangeSet", 33, jur_JointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_SupplRangeSet_matches), "$getName", $rt_wrapFunction0(jur_SupplRangeSet_getName), "$contains1", $rt_wrapFunction1(jur_SupplRangeSet_contains), "$first1", $rt_wrapFunction1(jur_SupplRangeSet_first), "$setNext", $rt_wrapFunction1(jur_SupplRangeSet_setNext), "$hasConsumed", $rt_wrapFunction1(jur_SupplRangeSet_hasConsumed)],
-jur_UCISupplRangeSet, "UCISupplRangeSet", 33, jur_SupplRangeSet, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_UCISupplRangeSet_contains), "$getName", $rt_wrapFunction0(jur_UCISupplRangeSet_getName)],
-jur_UCIRangeSet, "UCIRangeSet", 33, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_UCIRangeSet_accepts), "$getName", $rt_wrapFunction0(jur_UCIRangeSet_getName)],
-jur_RangeSet, "RangeSet", 33, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_RangeSet_accepts), "$getName", $rt_wrapFunction0(jur_RangeSet_getName), "$first1", $rt_wrapFunction1(jur_RangeSet_first)],
-jur_HangulDecomposedCharSet, "HangulDecomposedCharSet", 33, jur_JointSet, [], 0, 0, 0, ["$setNext", $rt_wrapFunction1(jur_HangulDecomposedCharSet_setNext), "$getName", $rt_wrapFunction0(jur_HangulDecomposedCharSet_getName), "$matches", $rt_wrapFunction3(jur_HangulDecomposedCharSet_matches), "$first1", $rt_wrapFunction1(jur_HangulDecomposedCharSet_first), "$hasConsumed", $rt_wrapFunction1(jur_HangulDecomposedCharSet_hasConsumed)],
-jur_CharSet, "CharSet", 33, jur_LeafSet, [], 0, 0, 0, ["$charCount", $rt_wrapFunction0(jur_CharSet_charCount), "$accepts", $rt_wrapFunction2(jur_CharSet_accepts), "$find0", $rt_wrapFunction3(jur_CharSet_find), "$findBack", $rt_wrapFunction4(jur_CharSet_findBack), "$getName", $rt_wrapFunction0(jur_CharSet_getName), "$first1", $rt_wrapFunction1(jur_CharSet_first)],
-jur_UCICharSet, "UCICharSet", 33, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_UCICharSet_accepts), "$getName", $rt_wrapFunction0(jur_UCICharSet_getName)],
-jur_CICharSet, "CICharSet", 33, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_CICharSet_accepts), "$getName", $rt_wrapFunction0(jur_CICharSet_getName)],
-jur_DecomposedCharSet, "DecomposedCharSet", 33, jur_JointSet, [], 0, 0, 0, ["$setNext", $rt_wrapFunction1(jur_DecomposedCharSet_setNext), "$matches", $rt_wrapFunction3(jur_DecomposedCharSet_matches), "$getName", $rt_wrapFunction0(jur_DecomposedCharSet_getName), "$first1", $rt_wrapFunction1(jur_DecomposedCharSet_first), "$hasConsumed", $rt_wrapFunction1(jur_DecomposedCharSet_hasConsumed)],
-jur_UCIDecomposedCharSet, "UCIDecomposedCharSet", 33, jur_DecomposedCharSet, [], 0, 0, 0, 0,
-jur_CIDecomposedCharSet, "CIDecomposedCharSet", 33, jur_DecomposedCharSet, [], 0, 0, 0, 0,
-jur_PossessiveGroupQuantifierSet, "PossessiveGroupQuantifierSet", 33, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PossessiveGroupQuantifierSet_matches)],
-jur_PosPlusGroupQuantifierSet, "PosPlusGroupQuantifierSet", 33, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PosPlusGroupQuantifierSet_matches)],
-jur_AltGroupQuantifierSet, "AltGroupQuantifierSet", 33, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_AltGroupQuantifierSet_matches), "$setNext", $rt_wrapFunction1(jur_AltGroupQuantifierSet_setNext)],
-jur_PosAltGroupQuantifierSet, "PosAltGroupQuantifierSet", 33, jur_AltGroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PosAltGroupQuantifierSet_matches), "$setNext", $rt_wrapFunction1(jur_PosAltGroupQuantifierSet_setNext)],
-jur_CompositeGroupQuantifierSet, "CompositeGroupQuantifierSet", 33, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_CompositeGroupQuantifierSet_matches), "$getName", $rt_wrapFunction0(jur_CompositeGroupQuantifierSet_getName)],
-jur_PosCompositeGroupQuantifierSet, "PosCompositeGroupQuantifierSet", 33, jur_CompositeGroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PosCompositeGroupQuantifierSet_matches)],
-jur_ReluctantGroupQuantifierSet, "ReluctantGroupQuantifierSet", 33, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_ReluctantGroupQuantifierSet_matches)],
-jur_RelAltGroupQuantifierSet, "RelAltGroupQuantifierSet", 33, jur_AltGroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_RelAltGroupQuantifierSet_matches)],
-jur_RelCompositeGroupQuantifierSet, "RelCompositeGroupQuantifierSet", 33, jur_CompositeGroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_RelCompositeGroupQuantifierSet_matches)],
-jur_DotAllQuantifierSet, "DotAllQuantifierSet", 33, jur_QuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_DotAllQuantifierSet_matches), "$find0", $rt_wrapFunction3(jur_DotAllQuantifierSet_find), "$getName", $rt_wrapFunction0(jur_DotAllQuantifierSet_getName)],
-jur_DotQuantifierSet, "DotQuantifierSet", 33, jur_QuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_DotQuantifierSet_matches), "$find0", $rt_wrapFunction3(jur_DotQuantifierSet_find), "$getName", $rt_wrapFunction0(jur_DotQuantifierSet_getName)],
+jur_LowHighSurrogateRangeSet, "LowHighSurrogateRangeSet", 34, jur_JointSet, [], 0, 0, 0, ["$getName", $rt_wrapFunction0(jur_LowHighSurrogateRangeSet_getName)],
+jur_CompositeRangeSet, "CompositeRangeSet", 34, jur_JointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_CompositeRangeSet_matches), "$setNext", $rt_wrapFunction1(jur_CompositeRangeSet_setNext), "$getName", $rt_wrapFunction0(jur_CompositeRangeSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_CompositeRangeSet_hasConsumed), "$first1", $rt_wrapFunction1(jur_CompositeRangeSet_first)],
+jur_SupplRangeSet, "SupplRangeSet", 34, jur_JointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_SupplRangeSet_matches), "$getName", $rt_wrapFunction0(jur_SupplRangeSet_getName), "$contains1", $rt_wrapFunction1(jur_SupplRangeSet_contains), "$first1", $rt_wrapFunction1(jur_SupplRangeSet_first), "$setNext", $rt_wrapFunction1(jur_SupplRangeSet_setNext), "$hasConsumed", $rt_wrapFunction1(jur_SupplRangeSet_hasConsumed)],
+jur_UCISupplRangeSet, "UCISupplRangeSet", 34, jur_SupplRangeSet, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_UCISupplRangeSet_contains), "$getName", $rt_wrapFunction0(jur_UCISupplRangeSet_getName)],
+jur_UCIRangeSet, "UCIRangeSet", 34, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_UCIRangeSet_accepts), "$getName", $rt_wrapFunction0(jur_UCIRangeSet_getName)],
+jur_RangeSet, "RangeSet", 34, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_RangeSet_accepts), "$getName", $rt_wrapFunction0(jur_RangeSet_getName), "$first1", $rt_wrapFunction1(jur_RangeSet_first)],
+jur_HangulDecomposedCharSet, "HangulDecomposedCharSet", 34, jur_JointSet, [], 0, 0, 0, ["$setNext", $rt_wrapFunction1(jur_HangulDecomposedCharSet_setNext), "$getName", $rt_wrapFunction0(jur_HangulDecomposedCharSet_getName), "$matches", $rt_wrapFunction3(jur_HangulDecomposedCharSet_matches), "$first1", $rt_wrapFunction1(jur_HangulDecomposedCharSet_first), "$hasConsumed", $rt_wrapFunction1(jur_HangulDecomposedCharSet_hasConsumed)],
+jur_CharSet, "CharSet", 34, jur_LeafSet, [], 0, 0, 0, ["$charCount", $rt_wrapFunction0(jur_CharSet_charCount), "$accepts", $rt_wrapFunction2(jur_CharSet_accepts), "$find0", $rt_wrapFunction3(jur_CharSet_find), "$findBack", $rt_wrapFunction4(jur_CharSet_findBack), "$getName", $rt_wrapFunction0(jur_CharSet_getName), "$first1", $rt_wrapFunction1(jur_CharSet_first)],
+jur_UCICharSet, "UCICharSet", 34, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_UCICharSet_accepts), "$getName", $rt_wrapFunction0(jur_UCICharSet_getName)],
+jur_CICharSet, "CICharSet", 34, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_CICharSet_accepts), "$getName", $rt_wrapFunction0(jur_CICharSet_getName)],
+jur_DecomposedCharSet, "DecomposedCharSet", 34, jur_JointSet, [], 0, 0, 0, ["$setNext", $rt_wrapFunction1(jur_DecomposedCharSet_setNext), "$matches", $rt_wrapFunction3(jur_DecomposedCharSet_matches), "$getName", $rt_wrapFunction0(jur_DecomposedCharSet_getName), "$first1", $rt_wrapFunction1(jur_DecomposedCharSet_first), "$hasConsumed", $rt_wrapFunction1(jur_DecomposedCharSet_hasConsumed)],
+jur_UCIDecomposedCharSet, "UCIDecomposedCharSet", 34, jur_DecomposedCharSet, [], 0, 0, 0, 0,
+jur_CIDecomposedCharSet, "CIDecomposedCharSet", 34, jur_DecomposedCharSet, [], 0, 0, 0, 0,
+jur_PossessiveGroupQuantifierSet, "PossessiveGroupQuantifierSet", 34, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PossessiveGroupQuantifierSet_matches)],
+jur_PosPlusGroupQuantifierSet, "PosPlusGroupQuantifierSet", 34, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PosPlusGroupQuantifierSet_matches)],
+jur_AltGroupQuantifierSet, "AltGroupQuantifierSet", 34, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_AltGroupQuantifierSet_matches), "$setNext", $rt_wrapFunction1(jur_AltGroupQuantifierSet_setNext)],
+jur_PosAltGroupQuantifierSet, "PosAltGroupQuantifierSet", 34, jur_AltGroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PosAltGroupQuantifierSet_matches), "$setNext", $rt_wrapFunction1(jur_PosAltGroupQuantifierSet_setNext)],
+jur_CompositeGroupQuantifierSet, "CompositeGroupQuantifierSet", 34, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_CompositeGroupQuantifierSet_matches), "$getName", $rt_wrapFunction0(jur_CompositeGroupQuantifierSet_getName)],
+jur_PosCompositeGroupQuantifierSet, "PosCompositeGroupQuantifierSet", 34, jur_CompositeGroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PosCompositeGroupQuantifierSet_matches)],
+jur_ReluctantGroupQuantifierSet, "ReluctantGroupQuantifierSet", 34, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_ReluctantGroupQuantifierSet_matches)],
+jur_RelAltGroupQuantifierSet, "RelAltGroupQuantifierSet", 34, jur_AltGroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_RelAltGroupQuantifierSet_matches)],
+jur_RelCompositeGroupQuantifierSet, "RelCompositeGroupQuantifierSet", 34, jur_CompositeGroupQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_RelCompositeGroupQuantifierSet_matches)],
+jur_DotAllQuantifierSet, "DotAllQuantifierSet", 34, jur_QuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_DotAllQuantifierSet_matches), "$find0", $rt_wrapFunction3(jur_DotAllQuantifierSet_find), "$getName", $rt_wrapFunction0(jur_DotAllQuantifierSet_getName)],
+jur_DotQuantifierSet, "DotQuantifierSet", 34, jur_QuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_DotQuantifierSet_matches), "$find0", $rt_wrapFunction3(jur_DotQuantifierSet_find), "$getName", $rt_wrapFunction0(jur_DotQuantifierSet_getName)],
 jur_AbstractLineTerminator, 0, jl_Object, [], 1024, 0, 0, 0,
-jur_PossessiveQuantifierSet, "PossessiveQuantifierSet", 33, jur_LeafQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PossessiveQuantifierSet_matches)],
-jur_PossessiveAltQuantifierSet, "PossessiveAltQuantifierSet", 33, jur_AltQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PossessiveAltQuantifierSet_matches)],
-jur_PossessiveCompositeQuantifierSet, "PossessiveCompositeQuantifierSet", 33, jur_CompositeQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PossessiveCompositeQuantifierSet_matches)],
-jur_ReluctantQuantifierSet, "ReluctantQuantifierSet", 33, jur_LeafQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_ReluctantQuantifierSet_matches)]]);
-$rt_metadata([jur_ReluctantAltQuantifierSet, "ReluctantAltQuantifierSet", 33, jur_AltQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_ReluctantAltQuantifierSet_matches)],
-jur_ReluctantCompositeQuantifierSet, "ReluctantCompositeQuantifierSet", 33, jur_CompositeQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_ReluctantCompositeQuantifierSet_matches)],
-jur_SOLSet, "SOLSet", 33, jur_AbstractSet, [], 16, 0, 0, ["$matches", $rt_wrapFunction3(jur_SOLSet_matches), "$hasConsumed", $rt_wrapFunction1(jur_SOLSet_hasConsumed), "$getName", $rt_wrapFunction0(jur_SOLSet_getName)],
-jur_WordBoundary, "WordBoundary", 33, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_WordBoundary_matches), "$hasConsumed", $rt_wrapFunction1(jur_WordBoundary_hasConsumed), "$getName", $rt_wrapFunction0(jur_WordBoundary_getName)],
-jur_PreviousMatch, "PreviousMatch", 33, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PreviousMatch_matches), "$hasConsumed", $rt_wrapFunction1(jur_PreviousMatch_hasConsumed), "$getName", $rt_wrapFunction0(jur_PreviousMatch_getName)],
-jur_EOLSet, "EOLSet", 33, jur_AbstractSet, [], 16, 0, 0, ["$matches", $rt_wrapFunction3(jur_EOLSet_matches), "$hasConsumed", $rt_wrapFunction1(jur_EOLSet_hasConsumed), "$getName", $rt_wrapFunction0(jur_EOLSet_getName)],
-jur_EOISet, "EOISet", 33, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_EOISet_matches), "$hasConsumed", $rt_wrapFunction1(jur_EOISet_hasConsumed), "$getName", $rt_wrapFunction0(jur_EOISet_getName)],
-jur_MultiLineSOLSet, "MultiLineSOLSet", 33, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_MultiLineSOLSet_matches), "$hasConsumed", $rt_wrapFunction1(jur_MultiLineSOLSet_hasConsumed), "$getName", $rt_wrapFunction0(jur_MultiLineSOLSet_getName)],
-jur_DotAllSet, "DotAllSet", 33, jur_JointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_DotAllSet_matches), "$getName", $rt_wrapFunction0(jur_DotAllSet_getName), "$setNext", $rt_wrapFunction1(jur_DotAllSet_setNext), "$getType1", $rt_wrapFunction0(jur_DotAllSet_getType), "$hasConsumed", $rt_wrapFunction1(jur_DotAllSet_hasConsumed)],
-jur_DotSet, "DotSet", 33, jur_JointSet, [], 16, 0, 0, ["$matches", $rt_wrapFunction3(jur_DotSet_matches), "$getName", $rt_wrapFunction0(jur_DotSet_getName), "$setNext", $rt_wrapFunction1(jur_DotSet_setNext), "$getType1", $rt_wrapFunction0(jur_DotSet_getType), "$hasConsumed", $rt_wrapFunction1(jur_DotSet_hasConsumed)],
-jur_UEOLSet, "UEOLSet", 33, jur_AbstractSet, [], 16, 0, 0, ["$matches", $rt_wrapFunction3(jur_UEOLSet_matches), "$hasConsumed", $rt_wrapFunction1(jur_UEOLSet_hasConsumed), "$getName", $rt_wrapFunction0(jur_UEOLSet_getName)],
-jur_UMultiLineEOLSet, "UMultiLineEOLSet", 33, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_UMultiLineEOLSet_matches), "$hasConsumed", $rt_wrapFunction1(jur_UMultiLineEOLSet_hasConsumed), "$getName", $rt_wrapFunction0(jur_UMultiLineEOLSet_getName)],
-jur_MultiLineEOLSet, "MultiLineEOLSet", 33, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_MultiLineEOLSet_matches), "$hasConsumed", $rt_wrapFunction1(jur_MultiLineEOLSet_hasConsumed), "$getName", $rt_wrapFunction0(jur_MultiLineEOLSet_getName)],
-jur_CIBackReferenceSet, "CIBackReferenceSet", 33, jur_JointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_CIBackReferenceSet_matches), "$setNext", $rt_wrapFunction1(jur_CIBackReferenceSet_setNext), "$getName", $rt_wrapFunction0(jur_CIBackReferenceSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_CIBackReferenceSet_hasConsumed)],
-jur_BackReferenceSet, "BackReferenceSet", 33, jur_CIBackReferenceSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_BackReferenceSet_matches), "$find0", $rt_wrapFunction3(jur_BackReferenceSet_find), "$findBack", $rt_wrapFunction4(jur_BackReferenceSet_findBack), "$first1", $rt_wrapFunction1(jur_BackReferenceSet_first), "$getName", $rt_wrapFunction0(jur_BackReferenceSet_getName)],
-jur_UCIBackReferenceSet, "UCIBackReferenceSet", 33, jur_CIBackReferenceSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_UCIBackReferenceSet_matches), "$getName", $rt_wrapFunction0(jur_UCIBackReferenceSet_getName)],
+jur_PossessiveQuantifierSet, "PossessiveQuantifierSet", 34, jur_LeafQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PossessiveQuantifierSet_matches)],
+jur_PossessiveAltQuantifierSet, "PossessiveAltQuantifierSet", 34, jur_AltQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PossessiveAltQuantifierSet_matches)],
+jur_PossessiveCompositeQuantifierSet, "PossessiveCompositeQuantifierSet", 34, jur_CompositeQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PossessiveCompositeQuantifierSet_matches)],
+jur_ReluctantQuantifierSet, "ReluctantQuantifierSet", 34, jur_LeafQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_ReluctantQuantifierSet_matches)],
+jur_ReluctantAltQuantifierSet, "ReluctantAltQuantifierSet", 34, jur_AltQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_ReluctantAltQuantifierSet_matches)],
+jur_ReluctantCompositeQuantifierSet, "ReluctantCompositeQuantifierSet", 34, jur_CompositeQuantifierSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_ReluctantCompositeQuantifierSet_matches)]]);
+$rt_metadata([jur_SOLSet, "SOLSet", 34, jur_AbstractSet, [], 16, 0, 0, ["$matches", $rt_wrapFunction3(jur_SOLSet_matches), "$hasConsumed", $rt_wrapFunction1(jur_SOLSet_hasConsumed), "$getName", $rt_wrapFunction0(jur_SOLSet_getName)],
+jur_WordBoundary, "WordBoundary", 34, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_WordBoundary_matches), "$hasConsumed", $rt_wrapFunction1(jur_WordBoundary_hasConsumed), "$getName", $rt_wrapFunction0(jur_WordBoundary_getName)],
+jur_PreviousMatch, "PreviousMatch", 34, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_PreviousMatch_matches), "$hasConsumed", $rt_wrapFunction1(jur_PreviousMatch_hasConsumed), "$getName", $rt_wrapFunction0(jur_PreviousMatch_getName)],
+jur_EOLSet, "EOLSet", 34, jur_AbstractSet, [], 16, 0, 0, ["$matches", $rt_wrapFunction3(jur_EOLSet_matches), "$hasConsumed", $rt_wrapFunction1(jur_EOLSet_hasConsumed), "$getName", $rt_wrapFunction0(jur_EOLSet_getName)],
+jur_EOISet, "EOISet", 34, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_EOISet_matches), "$hasConsumed", $rt_wrapFunction1(jur_EOISet_hasConsumed), "$getName", $rt_wrapFunction0(jur_EOISet_getName)],
+jur_MultiLineSOLSet, "MultiLineSOLSet", 34, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_MultiLineSOLSet_matches), "$hasConsumed", $rt_wrapFunction1(jur_MultiLineSOLSet_hasConsumed), "$getName", $rt_wrapFunction0(jur_MultiLineSOLSet_getName)],
+jur_DotAllSet, "DotAllSet", 34, jur_JointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_DotAllSet_matches), "$getName", $rt_wrapFunction0(jur_DotAllSet_getName), "$setNext", $rt_wrapFunction1(jur_DotAllSet_setNext), "$getType1", $rt_wrapFunction0(jur_DotAllSet_getType), "$hasConsumed", $rt_wrapFunction1(jur_DotAllSet_hasConsumed)],
+jur_DotSet, "DotSet", 34, jur_JointSet, [], 16, 0, 0, ["$matches", $rt_wrapFunction3(jur_DotSet_matches), "$getName", $rt_wrapFunction0(jur_DotSet_getName), "$setNext", $rt_wrapFunction1(jur_DotSet_setNext), "$getType1", $rt_wrapFunction0(jur_DotSet_getType), "$hasConsumed", $rt_wrapFunction1(jur_DotSet_hasConsumed)],
+jur_UEOLSet, "UEOLSet", 34, jur_AbstractSet, [], 16, 0, 0, ["$matches", $rt_wrapFunction3(jur_UEOLSet_matches), "$hasConsumed", $rt_wrapFunction1(jur_UEOLSet_hasConsumed), "$getName", $rt_wrapFunction0(jur_UEOLSet_getName)],
+jur_UMultiLineEOLSet, "UMultiLineEOLSet", 34, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_UMultiLineEOLSet_matches), "$hasConsumed", $rt_wrapFunction1(jur_UMultiLineEOLSet_hasConsumed), "$getName", $rt_wrapFunction0(jur_UMultiLineEOLSet_getName)],
+jur_MultiLineEOLSet, "MultiLineEOLSet", 34, jur_AbstractSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_MultiLineEOLSet_matches), "$hasConsumed", $rt_wrapFunction1(jur_MultiLineEOLSet_hasConsumed), "$getName", $rt_wrapFunction0(jur_MultiLineEOLSet_getName)],
+jur_CIBackReferenceSet, "CIBackReferenceSet", 34, jur_JointSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_CIBackReferenceSet_matches), "$setNext", $rt_wrapFunction1(jur_CIBackReferenceSet_setNext), "$getName", $rt_wrapFunction0(jur_CIBackReferenceSet_getName), "$hasConsumed", $rt_wrapFunction1(jur_CIBackReferenceSet_hasConsumed)],
+jur_BackReferenceSet, "BackReferenceSet", 34, jur_CIBackReferenceSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_BackReferenceSet_matches), "$find0", $rt_wrapFunction3(jur_BackReferenceSet_find), "$findBack", $rt_wrapFunction4(jur_BackReferenceSet_findBack), "$first1", $rt_wrapFunction1(jur_BackReferenceSet_first), "$getName", $rt_wrapFunction0(jur_BackReferenceSet_getName)],
+jur_UCIBackReferenceSet, "UCIBackReferenceSet", 34, jur_CIBackReferenceSet, [], 0, 0, 0, ["$matches", $rt_wrapFunction3(jur_UCIBackReferenceSet_matches), "$getName", $rt_wrapFunction0(jur_UCIBackReferenceSet_getName)],
 jl_StringBuffer, 0, jl_AbstractStringBuilder, [jl_Appendable], 1, 0, 0, ["$insert3", $rt_wrapFunction4(jl_StringBuffer_insert), "$append8", $rt_wrapFunction3(jl_StringBuffer_append), "$insert2", $rt_wrapFunction4(jl_StringBuffer_insert1), "$append7", $rt_wrapFunction3(jl_StringBuffer_append0), "$ensureCapacity", $rt_wrapFunction1(jl_StringBuffer_ensureCapacity), "$insert1", $rt_wrapFunction2(jl_StringBuffer_insert2), "$insert", $rt_wrapFunction2(jl_StringBuffer_insert0)],
-jur_SequenceSet, "SequenceSet", 33, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_SequenceSet_accepts), "$find0", $rt_wrapFunction3(jur_SequenceSet_find), "$findBack", $rt_wrapFunction4(jur_SequenceSet_findBack), "$getName", $rt_wrapFunction0(jur_SequenceSet_getName), "$first1", $rt_wrapFunction1(jur_SequenceSet_first)],
-jur_UCISequenceSet, "UCISequenceSet", 33, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_UCISequenceSet_accepts), "$getName", $rt_wrapFunction0(jur_UCISequenceSet_getName)],
-jur_CISequenceSet, "CISequenceSet", 33, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_CISequenceSet_accepts), "$getName", $rt_wrapFunction0(jur_CISequenceSet_getName)],
+jur_SequenceSet, "SequenceSet", 34, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_SequenceSet_accepts), "$find0", $rt_wrapFunction3(jur_SequenceSet_find), "$findBack", $rt_wrapFunction4(jur_SequenceSet_findBack), "$getName", $rt_wrapFunction0(jur_SequenceSet_getName), "$first1", $rt_wrapFunction1(jur_SequenceSet_first)],
+jur_UCISequenceSet, "UCISequenceSet", 34, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_UCISequenceSet_accepts), "$getName", $rt_wrapFunction0(jur_UCISequenceSet_getName)],
+jur_CISequenceSet, "CISequenceSet", 34, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_CISequenceSet_accepts), "$getName", $rt_wrapFunction0(jur_CISequenceSet_getName)],
 ju_TemplateCollections$AbstractImmutableSet, 0, ju_AbstractSet, [], 1024, 0, 0, 0,
 ju_Collections$1, 0, ju_TemplateCollections$AbstractImmutableSet, [], 0, 0, 0, 0,
 ju_TemplateCollections$AbstractImmutableMap, 0, ju_AbstractMap, [], 1024, 0, 0, ["$put0", $rt_wrapFunction2(ju_TemplateCollections$AbstractImmutableMap_put)],
@@ -59641,10 +60018,10 @@ ju_Collections$4, 0, jl_Object, [ju_Iterator], 0, 0, 0, 0,
 ju_ListIterator, 0, jl_Object, [ju_Iterator], 1537, 0, 0, 0,
 ju_Collections$5, 0, jl_Object, [ju_ListIterator], 0, 0, 0, 0,
 ju_Collections$_clinit_$lambda$_59_0, 0, jl_Object, [ju_Comparator], 1, 0, 0, 0,
-jur_UCISupplCharSet, "UCISupplCharSet", 33, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_UCISupplCharSet_accepts), "$getName", $rt_wrapFunction0(jur_UCISupplCharSet_getName)],
-jur_LowSurrogateCharSet, "LowSurrogateCharSet", 33, jur_JointSet, [], 0, 0, 0, ["$setNext", $rt_wrapFunction1(jur_LowSurrogateCharSet_setNext), "$matches", $rt_wrapFunction3(jur_LowSurrogateCharSet_matches), "$find0", $rt_wrapFunction3(jur_LowSurrogateCharSet_find), "$findBack", $rt_wrapFunction4(jur_LowSurrogateCharSet_findBack), "$getName", $rt_wrapFunction0(jur_LowSurrogateCharSet_getName), "$first1", $rt_wrapFunction1(jur_LowSurrogateCharSet_first), "$hasConsumed", $rt_wrapFunction1(jur_LowSurrogateCharSet_hasConsumed)],
-jur_HighSurrogateCharSet, "HighSurrogateCharSet", 33, jur_JointSet, [], 0, 0, 0, ["$setNext", $rt_wrapFunction1(jur_HighSurrogateCharSet_setNext), "$matches", $rt_wrapFunction3(jur_HighSurrogateCharSet_matches), "$find0", $rt_wrapFunction3(jur_HighSurrogateCharSet_find), "$findBack", $rt_wrapFunction4(jur_HighSurrogateCharSet_findBack), "$getName", $rt_wrapFunction0(jur_HighSurrogateCharSet_getName), "$first1", $rt_wrapFunction1(jur_HighSurrogateCharSet_first), "$hasConsumed", $rt_wrapFunction1(jur_HighSurrogateCharSet_hasConsumed)],
-jur_SupplCharSet, "SupplCharSet", 33, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_SupplCharSet_accepts), "$find0", $rt_wrapFunction3(jur_SupplCharSet_find), "$findBack", $rt_wrapFunction4(jur_SupplCharSet_findBack), "$getName", $rt_wrapFunction0(jur_SupplCharSet_getName), "$first1", $rt_wrapFunction1(jur_SupplCharSet_first)],
+jur_UCISupplCharSet, "UCISupplCharSet", 34, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_UCISupplCharSet_accepts), "$getName", $rt_wrapFunction0(jur_UCISupplCharSet_getName)],
+jur_LowSurrogateCharSet, "LowSurrogateCharSet", 34, jur_JointSet, [], 0, 0, 0, ["$setNext", $rt_wrapFunction1(jur_LowSurrogateCharSet_setNext), "$matches", $rt_wrapFunction3(jur_LowSurrogateCharSet_matches), "$find0", $rt_wrapFunction3(jur_LowSurrogateCharSet_find), "$findBack", $rt_wrapFunction4(jur_LowSurrogateCharSet_findBack), "$getName", $rt_wrapFunction0(jur_LowSurrogateCharSet_getName), "$first1", $rt_wrapFunction1(jur_LowSurrogateCharSet_first), "$hasConsumed", $rt_wrapFunction1(jur_LowSurrogateCharSet_hasConsumed)],
+jur_HighSurrogateCharSet, "HighSurrogateCharSet", 34, jur_JointSet, [], 0, 0, 0, ["$setNext", $rt_wrapFunction1(jur_HighSurrogateCharSet_setNext), "$matches", $rt_wrapFunction3(jur_HighSurrogateCharSet_matches), "$find0", $rt_wrapFunction3(jur_HighSurrogateCharSet_find), "$findBack", $rt_wrapFunction4(jur_HighSurrogateCharSet_findBack), "$getName", $rt_wrapFunction0(jur_HighSurrogateCharSet_getName), "$first1", $rt_wrapFunction1(jur_HighSurrogateCharSet_first), "$hasConsumed", $rt_wrapFunction1(jur_HighSurrogateCharSet_hasConsumed)],
+jur_SupplCharSet, "SupplCharSet", 34, jur_LeafSet, [], 0, 0, 0, ["$accepts", $rt_wrapFunction2(jur_SupplCharSet_accepts), "$find0", $rt_wrapFunction3(jur_SupplCharSet_find), "$findBack", $rt_wrapFunction4(jur_SupplCharSet_findBack), "$getName", $rt_wrapFunction0(jur_SupplCharSet_getName), "$first1", $rt_wrapFunction1(jur_SupplCharSet_first)],
 jur_AbstractLineTerminator$1, 0, jur_AbstractLineTerminator, [], 0, 0, 0, ["$isLineTerminator", $rt_wrapFunction1(jur_AbstractLineTerminator$1_isLineTerminator), "$isAfterLineTerminator", $rt_wrapFunction2(jur_AbstractLineTerminator$1_isAfterLineTerminator)],
 jur_AbstractLineTerminator$2, 0, jur_AbstractLineTerminator, [], 0, 0, 0, ["$isLineTerminator", $rt_wrapFunction1(jur_AbstractLineTerminator$2_isLineTerminator), "$isAfterLineTerminator", $rt_wrapFunction2(jur_AbstractLineTerminator$2_isAfterLineTerminator)],
 jur_SequenceSet$IntHash, 0, jl_Object, [], 0, 0, 0, 0,
@@ -59660,10 +60037,10 @@ jur_AbstractCharClass$LazyGraph, 0, jur_AbstractCharClass$LazyAlnum, [], 0, 0, 0
 jur_AbstractCharClass$LazyPrint, 0, jur_AbstractCharClass$LazyGraph, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyPrint_computeValue)],
 jur_AbstractCharClass$LazyBlank, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyBlank_computeValue)],
 jur_AbstractCharClass$LazyCntrl, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyCntrl_computeValue)],
-jur_AbstractCharClass$LazyXDigit, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyXDigit_computeValue)]]);
-$rt_metadata([jur_AbstractCharClass$LazyJavaLowerCase, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyJavaLowerCase_computeValue)],
-jur_AbstractCharClass$LazyJavaUpperCase, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyJavaUpperCase_computeValue)],
-jur_AbstractCharClass$LazyJavaWhitespace, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyJavaWhitespace_computeValue)],
+jur_AbstractCharClass$LazyXDigit, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyXDigit_computeValue)],
+jur_AbstractCharClass$LazyJavaLowerCase, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyJavaLowerCase_computeValue)],
+jur_AbstractCharClass$LazyJavaUpperCase, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyJavaUpperCase_computeValue)]]);
+$rt_metadata([jur_AbstractCharClass$LazyJavaWhitespace, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyJavaWhitespace_computeValue)],
 jur_AbstractCharClass$LazyJavaMirrored, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyJavaMirrored_computeValue)],
 jur_AbstractCharClass$LazyJavaDefined, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyJavaDefined_computeValue)],
 jur_AbstractCharClass$LazyJavaDigit, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", $rt_wrapFunction0(jur_AbstractCharClass$LazyJavaDigit_computeValue)],
@@ -59689,15 +60066,15 @@ jur_IntHash, 0, jl_Object, [], 0, 0, 0, 0,
 otpp_ResourceAccessor, 0, jl_Object, [], 16, 0, 0, 0,
 otciu_UnicodeHelper, 0, jl_Object, [], 17, 0, 0, 0,
 otciu_CharMapping, 0, jl_Object, [], 1, 0, 0, 0,
-otciu_UnicodeHelper$Range, "UnicodeHelper$Range", 45, jl_Object, [], 1, 0, 0, 0,
+otciu_UnicodeHelper$Range, "UnicodeHelper$Range", 46, jl_Object, [], 1, 0, 0, 0,
 otci_CharFlow, 0, jl_Object, [], 1, 0, 0, 0,
 otci_Base46, 0, jl_Object, [], 17, 0, 0, 0,
 cgxgtbw_WebApplication$8, 0, jl_Object, [], 32768, 0, () => cgxgtbw_WebApplication$8_$callClinit(), 0,
-jl_UnsupportedOperationException, "UnsupportedOperationException", 37, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jl_UnsupportedOperationException, "UnsupportedOperationException", 38, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
 cbgu_Collections, 0, jl_Object, [], 1, 0, 0, 0,
-jur_AbstractCharClass$1, "AbstractCharClass$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$1_contains)],
-jur_AbstractCharClass$2, "AbstractCharClass$2", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$2_contains)],
-jur_CharClass$18, "CharClass$18", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$18_contains), "$toString", $rt_wrapFunction0(jur_CharClass$18_toString)],
+jur_AbstractCharClass$1, "AbstractCharClass$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$1_contains)],
+jur_AbstractCharClass$2, "AbstractCharClass$2", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$2_contains)],
+jur_CharClass$18, "CharClass$18", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$18_contains), "$toString", $rt_wrapFunction0(jur_CharClass$18_toString)],
 jur_CharClass$1, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$1_contains)],
 jur_CharClass$3, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$3_contains)],
 jur_CharClass$2, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$2_contains)],
@@ -59710,10 +60087,10 @@ jur_CharClass$8, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapF
 jur_CharClass$11, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$11_contains)],
 jur_CharClass$10, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$10_contains)],
 jur_CharClass$13, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$13_contains)],
-jur_CharClass$12, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$12_contains)]]);
-$rt_metadata([jur_CharClass$15, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$15_contains)],
-jur_CharClass$14, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$14_contains)],
-jur_CharClass$17, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$17_contains)],
+jur_CharClass$12, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$12_contains)],
+jur_CharClass$15, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$15_contains)],
+jur_CharClass$14, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$14_contains)]]);
+$rt_metadata([jur_CharClass$17, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$17_contains)],
 jur_CharClass$16, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_CharClass$16_contains)],
 otj_JSExceptions, 0, jl_Object, [], 17, 0, 0, 0,
 cbgg_GLTexture, 0, jl_Object, [cbgu_Disposable], 1025, 0, () => cbgg_GLTexture_$callClinit(), 0,
@@ -59732,7 +60109,7 @@ otjt_TypedArray, 0, otjt_ArrayBufferView, [], 1025, 0, 0, 0,
 otjt_Int8Array, 0, otjt_TypedArray, [], 1, 0, 0, 0,
 cgxgtbwf_FileData, "FileData", 12, jl_Object, [], 1, 0, 0, 0,
 otcic_JSStdoutPrintStream, 0, otcic_JsConsolePrintStream, [], 1, 0, 0, ["$print", $rt_wrapFunction1(otcic_JSStdoutPrintStream_print)],
-jur_Matcher$1, "Matcher$1", 33, jl_Object, [], 0, 0, 0, ["$toString", $rt_wrapFunction0(jur_Matcher$1_toString)],
+jur_Matcher$1, "Matcher$1", 34, jl_Object, [], 0, 0, 0, ["$toString", $rt_wrapFunction0(jur_Matcher$1_toString)],
 cvs_SaveManager, 0, jl_Object, [], 17, 0, 0, 0,
 cvs_AudioManager, 0, jl_Object, [], 17, 0, 0, 0,
 cbggg_Batch, 0, jl_Object, [cbgu_Disposable], 1537, 0, 0, 0,
@@ -59744,32 +60121,34 @@ cbg_Screen, 0, jl_Object, [cbgu_Disposable], 1537, 0, 0, 0,
 cbg_ScreenAdapter, 0, jl_Object, [cbg_Screen], 1, 0, 0, ["$hide", $rt_wrapFunction0(cbg_ScreenAdapter_hide), "$pause", $rt_wrapFunction0(cbg_ScreenAdapter_pause), "$dispose", $rt_wrapFunction0(cbg_ScreenAdapter_dispose)],
 cvs_BaseScreen, 0, cbg_ScreenAdapter, [], 1025, 0, 0, 0,
 cvs_MainMenuScreen, 0, cvs_BaseScreen, [], 17, 0, 0, ["$show", $rt_wrapFunction0(cvs_MainMenuScreen_show), "$render0", $rt_wrapFunction1(cvs_MainMenuScreen_render), "$hide", $rt_wrapFunction0(cvs_MainMenuScreen_hide)],
-jur_BackReferencedSingleSet, "BackReferencedSingleSet", 33, jur_SingleSet, [], 0, 0, 0, ["$find0", $rt_wrapFunction3(jur_BackReferencedSingleSet_find), "$findBack", $rt_wrapFunction4(jur_BackReferencedSingleSet_findBack), "$processBackRefReplacement", $rt_wrapFunction0(jur_BackReferencedSingleSet_processBackRefReplacement)],
-ju_NoSuchElementException, "NoSuchElementException", 32, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
-jur_AbstractCharClass$LazyJavaLowerCase$1, "AbstractCharClass$LazyJavaLowerCase$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaLowerCase$1_contains)],
-jur_AbstractCharClass$LazyJavaUpperCase$1, "AbstractCharClass$LazyJavaUpperCase$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaUpperCase$1_contains)],
-jur_AbstractCharClass$LazyJavaWhitespace$1, "AbstractCharClass$LazyJavaWhitespace$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaWhitespace$1_contains)],
-jur_AbstractCharClass$LazyJavaMirrored$1, "AbstractCharClass$LazyJavaMirrored$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaMirrored$1_contains)],
-jur_AbstractCharClass$LazyJavaDefined$1, "AbstractCharClass$LazyJavaDefined$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaDefined$1_contains)],
-jur_AbstractCharClass$LazyJavaDigit$1, "AbstractCharClass$LazyJavaDigit$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaDigit$1_contains)],
-jur_AbstractCharClass$LazyJavaIdentifierIgnorable$1, "AbstractCharClass$LazyJavaIdentifierIgnorable$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaIdentifierIgnorable$1_contains)],
-jur_AbstractCharClass$LazyJavaISOControl$1, "AbstractCharClass$LazyJavaISOControl$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaISOControl$1_contains)],
-jur_AbstractCharClass$LazyJavaJavaIdentifierPart$1, "AbstractCharClass$LazyJavaJavaIdentifierPart$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaJavaIdentifierPart$1_contains)],
-jur_AbstractCharClass$LazyJavaJavaIdentifierStart$1, "AbstractCharClass$LazyJavaJavaIdentifierStart$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaJavaIdentifierStart$1_contains)],
-jur_AbstractCharClass$LazyJavaLetter$1, "AbstractCharClass$LazyJavaLetter$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaLetter$1_contains)],
-jur_AbstractCharClass$LazyJavaLetterOrDigit$1, "AbstractCharClass$LazyJavaLetterOrDigit$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaLetterOrDigit$1_contains)],
-jur_AbstractCharClass$LazyJavaSpaceChar$1, "AbstractCharClass$LazyJavaSpaceChar$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaSpaceChar$1_contains)],
-jur_AbstractCharClass$LazyJavaTitleCase$1, "AbstractCharClass$LazyJavaTitleCase$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaTitleCase$1_contains)],
-jur_AbstractCharClass$LazyJavaUnicodeIdentifierPart$1, "AbstractCharClass$LazyJavaUnicodeIdentifierPart$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaUnicodeIdentifierPart$1_contains)]]);
-$rt_metadata([jur_AbstractCharClass$LazyJavaUnicodeIdentifierStart$1, "AbstractCharClass$LazyJavaUnicodeIdentifierStart$1", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaUnicodeIdentifierStart$1_contains)],
-jur_UnicodeCategory, "UnicodeCategory", 33, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_UnicodeCategory_contains)],
-jur_UnicodeCategoryScope, "UnicodeCategoryScope", 33, jur_UnicodeCategory, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_UnicodeCategoryScope_contains)],
+jur_BackReferencedSingleSet, "BackReferencedSingleSet", 34, jur_SingleSet, [], 0, 0, 0, ["$find0", $rt_wrapFunction3(jur_BackReferencedSingleSet_find), "$findBack", $rt_wrapFunction4(jur_BackReferencedSingleSet_findBack), "$processBackRefReplacement", $rt_wrapFunction0(jur_BackReferencedSingleSet_processBackRefReplacement)],
+ju_NoSuchElementException, "NoSuchElementException", 33, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jur_AbstractCharClass$LazyJavaLowerCase$1, "AbstractCharClass$LazyJavaLowerCase$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaLowerCase$1_contains)],
+jur_AbstractCharClass$LazyJavaUpperCase$1, "AbstractCharClass$LazyJavaUpperCase$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaUpperCase$1_contains)],
+jur_AbstractCharClass$LazyJavaWhitespace$1, "AbstractCharClass$LazyJavaWhitespace$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaWhitespace$1_contains)],
+jur_AbstractCharClass$LazyJavaMirrored$1, "AbstractCharClass$LazyJavaMirrored$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaMirrored$1_contains)],
+jur_AbstractCharClass$LazyJavaDefined$1, "AbstractCharClass$LazyJavaDefined$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaDefined$1_contains)],
+jur_AbstractCharClass$LazyJavaDigit$1, "AbstractCharClass$LazyJavaDigit$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaDigit$1_contains)],
+jur_AbstractCharClass$LazyJavaIdentifierIgnorable$1, "AbstractCharClass$LazyJavaIdentifierIgnorable$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaIdentifierIgnorable$1_contains)],
+jur_AbstractCharClass$LazyJavaISOControl$1, "AbstractCharClass$LazyJavaISOControl$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaISOControl$1_contains)],
+jur_AbstractCharClass$LazyJavaJavaIdentifierPart$1, "AbstractCharClass$LazyJavaJavaIdentifierPart$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaJavaIdentifierPart$1_contains)],
+jur_AbstractCharClass$LazyJavaJavaIdentifierStart$1, "AbstractCharClass$LazyJavaJavaIdentifierStart$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaJavaIdentifierStart$1_contains)],
+jur_AbstractCharClass$LazyJavaLetter$1, "AbstractCharClass$LazyJavaLetter$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaLetter$1_contains)],
+jur_AbstractCharClass$LazyJavaLetterOrDigit$1, "AbstractCharClass$LazyJavaLetterOrDigit$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaLetterOrDigit$1_contains)],
+jur_AbstractCharClass$LazyJavaSpaceChar$1, "AbstractCharClass$LazyJavaSpaceChar$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaSpaceChar$1_contains)],
+jur_AbstractCharClass$LazyJavaTitleCase$1, "AbstractCharClass$LazyJavaTitleCase$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaTitleCase$1_contains)],
+jur_AbstractCharClass$LazyJavaUnicodeIdentifierPart$1, "AbstractCharClass$LazyJavaUnicodeIdentifierPart$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaUnicodeIdentifierPart$1_contains)],
+jur_AbstractCharClass$LazyJavaUnicodeIdentifierStart$1, "AbstractCharClass$LazyJavaUnicodeIdentifierStart$1", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_AbstractCharClass$LazyJavaUnicodeIdentifierStart$1_contains)],
+jur_UnicodeCategory, "UnicodeCategory", 34, jur_AbstractCharClass, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_UnicodeCategory_contains)]]);
+$rt_metadata([jur_UnicodeCategoryScope, "UnicodeCategoryScope", 34, jur_UnicodeCategory, [], 0, 0, 0, ["$contains1", $rt_wrapFunction1(jur_UnicodeCategoryScope_contains)],
 ju_AbstractList$1, 0, jl_Object, [ju_Iterator], 0, 0, 0, ["$hasNext", $rt_wrapFunction0(ju_AbstractList$1_hasNext), "$next", $rt_wrapFunction0(ju_AbstractList$1_next)],
 cgxgtbwa_AssetDownloadImpl$2, "AssetDownloadImpl$2", 7, jl_Object, [otjde_EventListener], 0, 0, 0, 0,
 cgxgtbwa_AssetDownloadImpl$loadScript$lambda$_2_0, "AssetDownloadImpl$loadScript$lambda$_2_0", 7, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
 cgxgtbwfi_IndexedDBFileData, 0, jl_Object, [otj_JSObject], 1025, 0, 0, 0,
 cgxgtbwft_LocalDBStorage$putFile$lambda$_2_0, "LocalDBStorage$putFile$lambda$_2_0", 13, jl_Object, [otji_EventHandler], 1, 0, 0, 0,
 cbga_Sound, 0, jl_Object, [cbgu_Disposable], 1537, 0, 0, 0,
+kr_RangesKt__RangesKt, 0, jl_Object, [], 0, 0, 0, 0,
+kr_RangesKt___RangesKt, 0, kr_RangesKt__RangesKt, [], 0, 0, 0, 0,
 k_Result, 0, jl_Object, [ji_Serializable], 17, 0, () => k_Result_$callClinit(), 0,
 k_Triple, 0, jl_Object, [ji_Serializable], 17, 0, 0, 0,
 cvs_Langs, 0, jl_Object, [], 17, 0, () => cvs_Langs_$callClinit(), 0,
@@ -59792,7 +60171,7 @@ ju_Locale, 0, jl_Object, [jl_Cloneable, ji_Serializable], 17, 0, () => ju_Locale
 k_Result$Failure, 0, jl_Object, [ji_Serializable], 17, 0, 0, 0,
 cbggg_TextureRegion, "TextureRegion", 27, jl_Object, [], 1, 0, 0, 0,
 ju_SequencedSet, 0, jl_Object, [ju_SequencedCollection, ju_Set], 1537, 0, 0, 0,
-ju_LinkedHashSet, "LinkedHashSet", 32, ju_HashSet, [ju_SequencedSet, jl_Cloneable, ji_Serializable], 1, 0, 0, 0,
+ju_LinkedHashSet, "LinkedHashSet", 33, ju_HashSet, [ju_SequencedSet, jl_Cloneable, ji_Serializable], 1, 0, 0, 0,
 kc_CollectionsKt__IterablesKt, 0, kc_CollectionsKt__CollectionsKt, [], 0, 0, 0, 0,
 kc_CollectionsKt__IteratorsJVMKt, 0, kc_CollectionsKt__IterablesKt, [], 0, 0, 0, 0,
 kc_CollectionsKt__IteratorsKt, 0, kc_CollectionsKt__IteratorsJVMKt, [], 0, 0, 0, 0,
@@ -59812,7 +60191,7 @@ cbguv_Viewport, 0, jl_Object, [], 1025, 0, 0, 0,
 cbguv_ScalingViewport, 0, cbguv_Viewport, [], 1, 0, 0, ["$update0", $rt_wrapFunction3(cbguv_ScalingViewport_update)],
 cbguv_StretchViewport, 0, cbguv_ScalingViewport, [], 1, 0, 0, 0]);
 $rt_metadata([jur_IntArrHash, 0, jl_Object, [], 0, 0, 0, 0,
-k_UninitializedPropertyAccessException, "UninitializedPropertyAccessException", 46, jl_RuntimeException, [], 17, [0,0,0], 0, 0,
+k_UninitializedPropertyAccessException, "UninitializedPropertyAccessException", 47, jl_RuntimeException, [], 17, [0,0,0], 0, 0,
 cbgg_VertexAttributes, 0, jl_Object, [jl_Iterable, jl_Comparable], 17, 0, 0, 0,
 cbggg_ShaderProgram, "ShaderProgram", 26, jl_Object, [cbgu_Disposable], 1, 0, () => cbggg_ShaderProgram_$callClinit(), 0,
 cbggg_ImmediateModeRenderer, 0, jl_Object, [], 1537, 0, 0, 0,
@@ -59829,7 +60208,7 @@ cbggg_FileTextureData, "FileTextureData", 26, jl_Object, [cbgg_TextureData], 1, 
 cbggg_PixmapNativeInterface, 0, jl_Object, [], 1537, 0, 0, 0,
 cbgg_Pixmap, 0, jl_Object, [cbgu_Disposable, cbggg_PixmapNativeInterface], 1, 0, 0, 0,
 kjim_KMappedMarker, 0, jl_Object, [], 1537, 0, 0, 0,
-kc_EmptyList, "EmptyList", 49, jl_Object, [ju_List, ji_Serializable, ju_RandomAccess, kjim_KMappedMarker], 17, 0, () => kc_EmptyList_$callClinit(), ["$equals", $rt_wrapFunction1(kc_EmptyList_equals), "$hashCode", $rt_wrapFunction0(kc_EmptyList_hashCode), "$toString", $rt_wrapFunction0(kc_EmptyList_toString), "$isEmpty", $rt_wrapFunction0(kc_EmptyList_isEmpty), "$iterator0", $rt_wrapFunction0(kc_EmptyList_iterator), "$listIterator", $rt_wrapFunction1(kc_EmptyList_listIterator), "$size", $rt_wrapFunction0(kc_EmptyList_size),
+kc_EmptyList, "EmptyList", 50, jl_Object, [ju_List, ji_Serializable, ju_RandomAccess, kjim_KMappedMarker], 17, 0, () => kc_EmptyList_$callClinit(), ["$equals", $rt_wrapFunction1(kc_EmptyList_equals), "$hashCode", $rt_wrapFunction0(kc_EmptyList_hashCode), "$toString", $rt_wrapFunction0(kc_EmptyList_toString), "$isEmpty", $rt_wrapFunction0(kc_EmptyList_isEmpty), "$iterator0", $rt_wrapFunction0(kc_EmptyList_iterator), "$listIterator", $rt_wrapFunction1(kc_EmptyList_listIterator), "$size", $rt_wrapFunction0(kc_EmptyList_size),
 "$contains0", $rt_wrapFunction1(kc_EmptyList_contains), "$get", $rt_wrapFunction1(kc_EmptyList_get), "$indexOf4", $rt_wrapFunction1(kc_EmptyList_indexOf)],
 kc_ArraysUtilJVM, 0, jl_Object, [], 0, 0, 0, 0,
 cbgu_Scaling, 0, jl_Object, [], 1025, 0, () => cbgu_Scaling_$callClinit(), 0,
@@ -59867,7 +60246,7 @@ cbgggf_FreeType$Face, 0, cbgggf_FreeType$Pointer, [cbgu_Disposable], 1, 0, 0, 0,
 cbgggf_FreeType$GlyphSlot, 0, cbgggf_FreeType$Pointer, [], 1, 0, 0, 0]);
 $rt_metadata([cbggg_Gdx2DPixmapNative, 0, jl_Object, [cbgu_Disposable], 1, 0, 0, 0,
 cbgg_Texture$TextureWrap, 0, jl_Enum, [], 65553, 0, () => cbgg_Texture$TextureWrap_$callClinit(), 0,
-ju_Arrays$ArrayAsList, "Arrays$ArrayAsList", 32, ju_AbstractList, [ju_RandomAccess, ji_Serializable], 0, 0, 0, ["$get", $rt_wrapFunction1(ju_Arrays$ArrayAsList_get), "$size", $rt_wrapFunction0(ju_Arrays$ArrayAsList_size)],
+ju_Arrays$ArrayAsList, "Arrays$ArrayAsList", 33, ju_AbstractList, [ju_RandomAccess, ji_Serializable], 0, 0, 0, ["$get", $rt_wrapFunction1(ju_Arrays$ArrayAsList_get), "$size", $rt_wrapFunction0(ju_Arrays$ArrayAsList_size)],
 cbgm_Plane, 0, jl_Object, [ji_Serializable], 1, 0, 0, 0,
 cbgu_Scaling$1, 0, cbgu_Scaling, [], 0, 0, 0, 0,
 cbgu_Scaling$2, 0, cbgu_Scaling, [], 0, 0, 0, 0,
@@ -59882,29 +60261,29 @@ jn_ByteOrder, 0, jl_Object, [], 17, 0, () => jn_ByteOrder_$callClinit(), 0,
 jn_ByteBuffer, 0, jn_Buffer, [jl_Comparable], 1025, 0, 0, ["$toString", $rt_wrapFunction0(jn_ByteBuffer_toString), "$hashCode", $rt_wrapFunction0(jn_ByteBuffer_hashCode), "$equals", $rt_wrapFunction1(jn_ByteBuffer_equals), "$limit", $rt_wrapFunction1(jn_ByteBuffer_limit), "$position", $rt_wrapFunction1(jn_ByteBuffer_position), "$compareTo", $rt_wrapFunction1(jn_ByteBuffer_compareTo)],
 cbgg_Pixmap$Format, "Pixmap$Format", 25, jl_Enum, [], 65553, 0, () => cbgg_Pixmap$Format_$callClinit(), 0,
 jn_ArrayBufferViewProvider, 0, jl_Object, [], 1537, 0, 0, 0,
-jn_ByteBufferJsImpl, "ByteBufferJsImpl", 34, jn_ByteBuffer, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$capacityImpl", $rt_wrapFunction0(jn_ByteBufferJsImpl_capacityImpl), "$getArrayBufferView0", $rt_wrapFunction0(jn_ByteBufferJsImpl_getArrayBufferView)],
+jn_ByteBufferJsImpl, "ByteBufferJsImpl", 35, jn_ByteBuffer, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$capacityImpl", $rt_wrapFunction0(jn_ByteBufferJsImpl_capacityImpl), "$getArrayBufferView0", $rt_wrapFunction0(jn_ByteBufferJsImpl_getArrayBufferView)],
 jn_IntBufferImpl, 0, jn_IntBuffer, [], 1024, 0, 0, 0,
 jn_IntBufferOverTypedArray, 0, jn_IntBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_IntBufferOverTypedArray_readOnly), "$getElement", $rt_wrapFunction1(jn_IntBufferOverTypedArray_getElement), "$putElement", $rt_wrapFunction2(jn_IntBufferOverTypedArray_putElement), "$capacityImpl", $rt_wrapFunction0(jn_IntBufferOverTypedArray_capacityImpl), "$putImpl6", $rt_wrapFunction4(jn_IntBufferOverTypedArray_putImpl), "$putImpl5", $rt_wrapFunction4(jn_IntBufferOverTypedArray_putImpl0)],
 otjt_Int32Array, 0, otjt_TypedArray, [], 1, 0, 0, 0,
 jn_FloatBufferImpl, 0, jn_FloatBuffer, [], 1024, 0, 0, 0,
-jn_FloatBufferOverTypedArray, "FloatBufferOverTypedArray", 34, jn_FloatBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_FloatBufferOverTypedArray_readOnly), "$getElement0", $rt_wrapFunction1(jn_FloatBufferOverTypedArray_getElement), "$putElement0", $rt_wrapFunction2(jn_FloatBufferOverTypedArray_putElement), "$capacityImpl", $rt_wrapFunction0(jn_FloatBufferOverTypedArray_capacityImpl), "$putImpl2", $rt_wrapFunction4(jn_FloatBufferOverTypedArray_putImpl), "$putImpl1", $rt_wrapFunction4(jn_FloatBufferOverTypedArray_putImpl0),
+jn_FloatBufferOverTypedArray, "FloatBufferOverTypedArray", 35, jn_FloatBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_FloatBufferOverTypedArray_readOnly), "$getElement0", $rt_wrapFunction1(jn_FloatBufferOverTypedArray_getElement), "$putElement0", $rt_wrapFunction2(jn_FloatBufferOverTypedArray_putElement), "$capacityImpl", $rt_wrapFunction0(jn_FloatBufferOverTypedArray_capacityImpl), "$putImpl2", $rt_wrapFunction4(jn_FloatBufferOverTypedArray_putImpl), "$putImpl1", $rt_wrapFunction4(jn_FloatBufferOverTypedArray_putImpl0),
 "$getArrayBufferView0", $rt_wrapFunction0(jn_FloatBufferOverTypedArray_getArrayBufferView)],
 otjt_Float32Array, 0, otjt_TypedArray, [], 1, 0, 0, 0,
 jn_ShortBufferImpl, 0, jn_ShortBuffer, [], 1024, 0, 0, 0,
-jn_ShortBufferOverTypedArray, "ShortBufferOverTypedArray", 34, jn_ShortBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_ShortBufferOverTypedArray_readOnly), "$getElement1", $rt_wrapFunction1(jn_ShortBufferOverTypedArray_getElement), "$capacityImpl", $rt_wrapFunction0(jn_ShortBufferOverTypedArray_capacityImpl), "$putImpl4", $rt_wrapFunction4(jn_ShortBufferOverTypedArray_putImpl), "$putImpl3", $rt_wrapFunction4(jn_ShortBufferOverTypedArray_putImpl0), "$getArrayBufferView0",
+jn_ShortBufferOverTypedArray, "ShortBufferOverTypedArray", 35, jn_ShortBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_ShortBufferOverTypedArray_readOnly), "$getElement1", $rt_wrapFunction1(jn_ShortBufferOverTypedArray_getElement), "$capacityImpl", $rt_wrapFunction0(jn_ShortBufferOverTypedArray_capacityImpl), "$putImpl4", $rt_wrapFunction4(jn_ShortBufferOverTypedArray_putImpl), "$putImpl3", $rt_wrapFunction4(jn_ShortBufferOverTypedArray_putImpl0), "$getArrayBufferView0",
 $rt_wrapFunction0(jn_ShortBufferOverTypedArray_getArrayBufferView)],
 otjt_Int16Array, 0, otjt_TypedArray, [], 1, 0, 0, 0,
 jn_JSBufferHelper, 0, jl_Object, [], 17, 0, 0, 0,
 cbgu_StreamUtils, 0, jl_Object, [], 17, 0, () => cbgu_StreamUtils_$callClinit(), 0,
-ji_IOException, "IOException", 36, jl_Exception, [], 1, [0,0,0], 0, 0,
+ji_IOException, "IOException", 37, jl_Exception, [], 1, [0,0,0], 0, 0,
 kc_EmptyIterator, 0, jl_Object, [ju_ListIterator, kjim_KMappedMarker], 17, 0, () => kc_EmptyIterator_$callClinit(), ["$hasNext", $rt_wrapFunction0(kc_EmptyIterator_hasNext), "$hasPrevious", $rt_wrapFunction0(kc_EmptyIterator_hasPrevious), "$next", $rt_wrapFunction0(kc_EmptyIterator_next), "$previous", $rt_wrapFunction0(kc_EmptyIterator_previous)],
 jl_Void, 0, jl_Object, [], 17, 0, 0, 0,
-jn_FloatBufferOverDataView, "FloatBufferOverDataView", 34, jn_FloatBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_FloatBufferOverDataView_readOnly), "$getElement0", $rt_wrapFunction1(jn_FloatBufferOverDataView_getElement), "$putElement0", $rt_wrapFunction2(jn_FloatBufferOverDataView_putElement), "$putImpl1", $rt_wrapFunction4(jn_FloatBufferOverDataView_putImpl), "$putImpl2", $rt_wrapFunction4(jn_FloatBufferOverDataView_putImpl0), "$capacityImpl", $rt_wrapFunction0(jn_FloatBufferOverDataView_capacityImpl),
+jn_FloatBufferOverDataView, "FloatBufferOverDataView", 35, jn_FloatBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_FloatBufferOverDataView_readOnly), "$getElement0", $rt_wrapFunction1(jn_FloatBufferOverDataView_getElement), "$putElement0", $rt_wrapFunction2(jn_FloatBufferOverDataView_putElement), "$putImpl1", $rt_wrapFunction4(jn_FloatBufferOverDataView_putImpl), "$putImpl2", $rt_wrapFunction4(jn_FloatBufferOverDataView_putImpl0), "$capacityImpl", $rt_wrapFunction0(jn_FloatBufferOverDataView_capacityImpl),
 "$getArrayBufferView0", $rt_wrapFunction0(jn_FloatBufferOverDataView_getArrayBufferView)],
-jn_ShortBufferOverDataView, "ShortBufferOverDataView", 34, jn_ShortBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_ShortBufferOverDataView_readOnly), "$getElement1", $rt_wrapFunction1(jn_ShortBufferOverDataView_getElement), "$putImpl3", $rt_wrapFunction4(jn_ShortBufferOverDataView_putImpl), "$putImpl4", $rt_wrapFunction4(jn_ShortBufferOverDataView_putImpl0), "$capacityImpl", $rt_wrapFunction0(jn_ShortBufferOverDataView_capacityImpl), "$getArrayBufferView0", $rt_wrapFunction0(jn_ShortBufferOverDataView_getArrayBufferView)],
+jn_ShortBufferOverDataView, "ShortBufferOverDataView", 35, jn_ShortBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_ShortBufferOverDataView_readOnly), "$getElement1", $rt_wrapFunction1(jn_ShortBufferOverDataView_getElement), "$putImpl3", $rt_wrapFunction4(jn_ShortBufferOverDataView_putImpl), "$putImpl4", $rt_wrapFunction4(jn_ShortBufferOverDataView_putImpl0), "$capacityImpl", $rt_wrapFunction0(jn_ShortBufferOverDataView_capacityImpl), "$getArrayBufferView0", $rt_wrapFunction0(jn_ShortBufferOverDataView_getArrayBufferView)],
 jn_IntBufferOverDataView, 0, jn_IntBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_IntBufferOverDataView_readOnly), "$getElement", $rt_wrapFunction1(jn_IntBufferOverDataView_getElement), "$putElement", $rt_wrapFunction2(jn_IntBufferOverDataView_putElement), "$putImpl5", $rt_wrapFunction4(jn_IntBufferOverDataView_putImpl), "$putImpl6", $rt_wrapFunction4(jn_IntBufferOverDataView_putImpl0), "$capacityImpl", $rt_wrapFunction0(jn_IntBufferOverDataView_capacityImpl)],
-jn_ReadOnlyBufferException, "ReadOnlyBufferException", 34, jl_UnsupportedOperationException, [], 1, [0,0,0], 0, 0,
-jn_BufferUnderflowException, "BufferUnderflowException", 34, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jn_ReadOnlyBufferException, "ReadOnlyBufferException", 35, jl_UnsupportedOperationException, [], 1, [0,0,0], 0, 0,
+jn_BufferUnderflowException, "BufferUnderflowException", 35, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
 cgxgtbw_WebFileHandle, "WebFileHandle", 6, cbgf_FileHandle, [], 1, 0, 0, ["$toString", $rt_wrapFunction0(cgxgtbw_WebFileHandle_toString)],
 cbg_Files$FileType, "Files$FileType", 15, jl_Enum, [], 65553, 0, () => cbg_Files$FileType_$callClinit(), 0,
 cbg_Preferences, 0, jl_Object, [], 1537, 0, 0, 0,
@@ -59917,7 +60296,7 @@ ji_InputStreamReader, 0, ji_Reader, [], 1, 0, 0, 0,
 ju_StringTokenizer, 0, jl_Object, [ju_Enumeration], 1, 0, 0, 0,
 cbggg_BitmapFontCache, 0, jl_Object, [], 1, 0, () => cbggg_BitmapFontCache_$callClinit(), 0,
 otcin_Buffers, 0, jl_Object, [], 17, 0, 0, 0,
-ju_ConcurrentModificationException, "ConcurrentModificationException", 32, jl_RuntimeException, [], 1, [0,0,0], 0, 0]);
+ju_ConcurrentModificationException, "ConcurrentModificationException", 33, jl_RuntimeException, [], 1, [0,0,0], 0, 0]);
 $rt_metadata([ji_ByteArrayOutputStream, 0, ji_OutputStream, [], 1, 0, 0, 0,
 cbgu_StreamUtils$OptimizedByteArrayOutputStream, 0, ji_ByteArrayOutputStream, [], 1, 0, 0, 0,
 cgxgtbwf_HEXCoder, 0, jl_Object, [], 1, 0, () => cgxgtbwf_HEXCoder_$callClinit(), 0,
@@ -59928,7 +60307,7 @@ cbggg_BitmapFontCache$1, 0, cbgu_FlushablePool, [], 0, 0, 0, ["$newObject", $rt_
 jn_CharBuffer, 0, jn_Buffer, [jl_Comparable, jl_Appendable, jl_CharSequence, jl_Readable], 1025, 0, 0, 0,
 jn_LongBuffer, 0, jn_Buffer, [jl_Comparable], 1025, 0, 0, 0,
 jn_DoubleBuffer, 0, jn_Buffer, [jl_Comparable], 1025, 0, 0, 0,
-jl_Boolean, "Boolean", 37, jl_Object, [ji_Serializable, jl_Comparable], 1, 0, () => jl_Boolean_$callClinit(), ["$toString", $rt_wrapFunction0(jl_Boolean_toString), "$hashCode", $rt_wrapFunction0(jl_Boolean_hashCode0), "$equals", $rt_wrapFunction1(jl_Boolean_equals), "$compareTo", $rt_wrapFunction1(jl_Boolean_compareTo)],
+jl_Boolean, "Boolean", 38, jl_Object, [ji_Serializable, jl_Comparable], 1, 0, () => jl_Boolean_$callClinit(), ["$toString", $rt_wrapFunction0(jl_Boolean_toString), "$hashCode", $rt_wrapFunction0(jl_Boolean_hashCode0), "$equals", $rt_wrapFunction1(jl_Boolean_equals), "$compareTo", $rt_wrapFunction1(jl_Boolean_compareTo)],
 jnc_CodingErrorAction, 0, jl_Object, [], 1, 0, () => jnc_CodingErrorAction_$callClinit(), 0,
 jnc_CharsetDecoder, 0, jl_Object, [], 1025, 0, 0, 0,
 cbgg_TextureData$TextureDataType, 0, jl_Enum, [], 65553, 0, () => cbgg_TextureData$TextureDataType_$callClinit(), 0,
@@ -59939,20 +60318,20 @@ otjt_Uint8Array, 0, otjt_TypedArray, [], 1, 0, 0, 0,
 otjt_Uint16Array, 0, otjt_TypedArray, [], 1, 0, 0, 0,
 jnc_CharacterCodingException, 0, ji_IOException, [], 1, 0, 0, 0,
 jl_Error, 0, jl_Throwable, [], 1, 0, 0, 0,
-jl_AssertionError, "AssertionError", 37, jl_Error, [], 1, [0,0,0], 0, 0,
+jl_AssertionError, "AssertionError", 38, jl_Error, [], 1, [0,0,0], 0, 0,
 jn_CharBufferImpl, 0, jn_CharBuffer, [], 1024, 0, 0, 0,
 jn_CharBufferOverTypedArray, 0, jn_CharBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_CharBufferOverTypedArray_readOnly), "$getChar", $rt_wrapFunction1(jn_CharBufferOverTypedArray_getChar), "$capacityImpl", $rt_wrapFunction0(jn_CharBufferOverTypedArray_capacityImpl), "$putImpl7", $rt_wrapFunction4(jn_CharBufferOverTypedArray_putImpl)],
 jnc_CoderResult, 0, jl_Object, [], 1, 0, () => jnc_CoderResult_$callClinit(), 0,
-jnc_CoderMalfunctionError, "CoderMalfunctionError", 35, jl_Error, [], 1, [0,0,0], 0, 0,
-jnc_IllegalCharsetNameException, "IllegalCharsetNameException", 35, jl_IllegalArgumentException, [], 1, [0,0,0], 0, 0,
+jnc_CoderMalfunctionError, "CoderMalfunctionError", 36, jl_Error, [], 1, [0,0,0], 0, 0,
+jnc_IllegalCharsetNameException, "IllegalCharsetNameException", 36, jl_IllegalArgumentException, [], 1, [0,0,0], 0, 0,
 cgxgtbw_WebFileHandle$1, 0, jl_Object, [], 32768, 0, () => cgxgtbw_WebFileHandle$1_$callClinit(), 0,
 jnci_BufferedDecoder, 0, jnc_CharsetDecoder, [], 1025, 0, 0, 0,
 jnci_UTF8Decoder, 0, jnci_BufferedDecoder, [], 1, 0, 0, 0,
-jn_BufferOverflowException, "BufferOverflowException", 34, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
-jnc_BufferUnderflowException, "BufferUnderflowException", 35, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
-jnc_BufferOverflowException, "BufferOverflowException", 35, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
-jnc_MalformedInputException, "MalformedInputException", 35, jnc_CharacterCodingException, [], 1, [0,0,0], 0, ["$getMessage", $rt_wrapFunction0(jnc_MalformedInputException_getMessage)],
-jnc_UnmappableCharacterException, "UnmappableCharacterException", 35, jnc_CharacterCodingException, [], 1, [0,0,0], 0, ["$getMessage", $rt_wrapFunction0(jnc_UnmappableCharacterException_getMessage)],
+jn_BufferOverflowException, "BufferOverflowException", 35, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jnc_BufferUnderflowException, "BufferUnderflowException", 36, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jnc_BufferOverflowException, "BufferOverflowException", 36, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jnc_MalformedInputException, "MalformedInputException", 36, jnc_CharacterCodingException, [], 1, [0,0,0], 0, ["$getMessage", $rt_wrapFunction0(jnc_MalformedInputException_getMessage)],
+jnc_UnmappableCharacterException, "UnmappableCharacterException", 36, jnc_CharacterCodingException, [], 1, [0,0,0], 0, ["$getMessage", $rt_wrapFunction0(jnc_UnmappableCharacterException_getMessage)],
 ju_LinkedHashMapValues, 0, ju_AbstractCollection, [ju_SequencedCollection], 0, 0, 0, ["$size", $rt_wrapFunction0(ju_LinkedHashMapValues_size)],
 cvs_MainMenuScreen$show$2, 0, cbg_InputAdapter, [], 17, 0, 0, ["$touchDown", $rt_wrapFunction4(cvs_MainMenuScreen$show$2_touchDown), "$touchDragged", $rt_wrapFunction3(cvs_MainMenuScreen$show$2_touchDragged), "$touchUp", $rt_wrapFunction4(cvs_MainMenuScreen$show$2_touchUp)],
 k_Function, 0, jl_Object, [], 1537, 0, 0, 0,
@@ -60006,7 +60385,7 @@ cbgss_Stage$_init_$lambda$_2_1, 0, jl_Object, [cbgu_DefaultPool$PoolSupplier], 1
 cbgss_Stage$_init_$lambda$_2_2, 0, jl_Object, [cbgu_DefaultPool$PoolSupplier], 1, 0, 0, ["$get6", $rt_wrapFunction0(cbgss_Stage$_init_$lambda$_2_2_get)],
 cbgss_Stage$_init_$lambda$_2_3, 0, jl_Object, [cbgu_DefaultPool$PoolSupplier], 1, 0, 0, ["$get6", $rt_wrapFunction0(cbgss_Stage$_init_$lambda$_2_3_get)],
 jnc_CharsetEncoder, 0, jl_Object, [], 1025, 0, 0, 0,
-jl_ArithmeticException, "ArithmeticException", 37, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+jl_ArithmeticException, "ArithmeticException", 38, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
 cvs_WeaponStyle, "WeaponStyle", 30, jl_Enum, [], 65553, 0, () => cvs_WeaponStyle_$callClinit(), 0,
 cvs_CampaignCatalog, 0, jl_Object, [], 17, 0, () => cvs_CampaignCatalog_$callClinit(), 0,
 cvs_SettingsScreen$Toggle, "SettingsScreen$Toggle", 30, jl_Object, [], 16, 0, 0, ["$toString", $rt_wrapFunction0(cvs_SettingsScreen$Toggle_toString), "$hashCode", $rt_wrapFunction0(cvs_SettingsScreen$Toggle_hashCode), "$equals", $rt_wrapFunction1(cvs_SettingsScreen$Toggle_equals)],
@@ -60170,7 +60549,7 @@ cvs_GameplayScreen$ShopOffer, "GameplayScreen$ShopOffer", 30, jl_Object, [], 17,
 cvs_GameplayScreen$_init_$lambda$_0_0, 0, jl_Object, [kjf_Function0], 1, 0, 0, ["$invoke0", $rt_wrapFunction0(cvs_GameplayScreen$_init_$lambda$_0_0_invoke)],
 k_LazyKt__LazyJVMKt, 0, jl_Object, [], 0, 0, 0, 0]);
 $rt_metadata([cvs_GameplayScreen$_init_$lambda$_0_1, 0, jl_Object, [kjf_Function0], 1, 0, 0, ["$invoke0", $rt_wrapFunction0(cvs_GameplayScreen$_init_$lambda$_0_1_invoke)],
-otja_XMLHttpRequest$onComplete$lambda$_23_0, "XMLHttpRequest$onComplete$lambda$_23_0", 42, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
+otja_XMLHttpRequest$onComplete$lambda$_23_0, "XMLHttpRequest$onComplete$lambda$_23_0", 43, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
 cgxgtbwa_AssetDownloadImpl$setOnProgress$lambda$_8_0, "AssetDownloadImpl$setOnProgress$lambda$_8_0", 7, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
 cgxgtbwa_AssetDownloadImpl$retryOrFail$lambda$_6_0, "AssetDownloadImpl$retryOrFail$lambda$_6_0", 7, jl_Object, [otjb_TimerHandler], 1, 0, 0, 0,
 k_Lazy, 0, jl_Object, [], 1537, 0, 0, 0,
@@ -60192,6 +60571,9 @@ cvs_CoinPickup, "CoinPickup", 30, jl_Object, [cbgu_Pool$Poolable], 17, 0, 0, ["$
 cvs_Particle, "Particle", 30, jl_Object, [cbgu_Pool$Poolable], 17, 0, 0, ["$reset", $rt_wrapFunction0(cvs_Particle_reset)],
 cvs_GameplayScreen$show$2, 0, cbg_InputAdapter, [], 17, 0, 0, ["$touchDown", $rt_wrapFunction4(cvs_GameplayScreen$show$2_touchDown), "$touchDragged", $rt_wrapFunction3(cvs_GameplayScreen$show$2_touchDragged), "$touchUp", $rt_wrapFunction4(cvs_GameplayScreen$show$2_touchUp), "$keyDown", $rt_wrapFunction1(cvs_GameplayScreen$show$2_keyDown)],
 cbg_Input$OnscreenKeyboardType, "Input$OnscreenKeyboardType", 15, jl_Enum, [], 65553, 0, () => cbg_Input$OnscreenKeyboardType_$callClinit(), 0,
+cvsw_RetornoDaFoto, 0, jl_Object, [otj_JSObject], 1537, 0, 0, 0,
+cvsw_WebPlatformServices$pickPilotPhoto$lambda$_5_0, "WebPlatformServices$pickPilotPhoto$lambda$_5_0", 31, jl_Object, [cvsw_RetornoDaFoto], 1, 0, 0, 0,
+cvsw_WebLauncherKt, 0, jl_Object, [], 17, 0, 0, 0,
 cgxgtbwwh_Howl, 0, jl_Object, [otj_JSObject], 1, 0, 0, 0,
 cbggg_GlyphLayout$WrapState, "GlyphLayout$WrapState", 27, jl_Enum, [], 65553, 0, () => cbggg_GlyphLayout$WrapState_$callClinit(), 0,
 cbgg_Colors, 0, jl_Object, [], 17, 0, () => cbgg_Colors_$callClinit(), 0,
@@ -60204,7 +60586,7 @@ cvs_ResultsScreen, 0, cvs_BaseScreen, [], 17, 0, 0, ["$show", $rt_wrapFunction0(
 cvs_EndingScreen, 0, cvs_BaseScreen, [], 17, 0, 0, ["$show", $rt_wrapFunction0(cvs_EndingScreen_show), "$render0", $rt_wrapFunction1(cvs_EndingScreen_render), "$hide", $rt_wrapFunction0(cvs_EndingScreen_hide), "$dispose", $rt_wrapFunction0(cvs_EndingScreen_dispose)],
 cvs_GameplayScreen$update$lambda$_25_0, 0, jl_Object, [kjf_Function0], 1, 0, 0, 0,
 cvs_GameplayScreen$WhenMappings, 0, jl_Object, [], 32785, 0, () => cvs_GameplayScreen$WhenMappings_$callClinit(), 0,
-k_NoWhenBranchMatchedException, "NoWhenBranchMatchedException", 46, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
+k_NoWhenBranchMatchedException, "NoWhenBranchMatchedException", 47, jl_RuntimeException, [], 1, [0,0,0], 0, 0,
 cvs_BulletKind, "BulletKind", 30, jl_Enum, [], 65553, 0, () => cvs_BulletKind_$callClinit(), 0,
 cvs_GameplayScreen$SonicWave, "GameplayScreen$SonicWave", 30, jl_Object, [], 17, 0, 0, ["$toString", $rt_wrapFunction0(cvs_GameplayScreen$SonicWave_toString), "$hashCode", $rt_wrapFunction0(cvs_GameplayScreen$SonicWave_hashCode), "$equals", $rt_wrapFunction1(cvs_GameplayScreen$SonicWave_equals)],
 cbgu_Justify$1, 0, jl_Object, [], 32768, 0, () => cbgu_Justify$1_$callClinit(), 0,
@@ -60215,11 +60597,11 @@ cvs_ShopScreen$WhenMappings, 0, jl_Object, [], 32785, 0, () => cvs_ShopScreen$Wh
 ju_Comparator$NaturalOrder, 0, jl_Object, [ju_Comparator], 1, 0, () => ju_Comparator$NaturalOrder_$callClinit(), ["$compare1", $rt_wrapFunction2(ju_Comparator$NaturalOrder_compare)],
 cvs_GameplayScreenKt, 0, jl_Object, [], 17, 0, 0, 0,
 kc_SetsKt__SetsJVMKt, 0, jl_Object, [], 0, 0, 0, 0,
-kc_SetsKt__SetsKt, 0, kc_SetsKt__SetsJVMKt, [], 0, 0, 0, 0,
-ju_TemplateCollections$SingleElementSet, 0, ju_TemplateCollections$AbstractImmutableSet, [], 0, 0, 0, ["$contains0", $rt_wrapFunction1(ju_TemplateCollections$SingleElementSet_contains)],
+kc_SetsKt__SetsKt, 0, kc_SetsKt__SetsJVMKt, [], 0, 0, 0, 0]);
+$rt_metadata([ju_TemplateCollections$SingleElementSet, 0, ju_TemplateCollections$AbstractImmutableSet, [], 0, 0, 0, ["$contains0", $rt_wrapFunction1(ju_TemplateCollections$SingleElementSet_contains)],
 cbgct_WebMapping, 0, cbgc_ControllerMapping, [], 1, 0, 0, 0,
-ju_AbstractList$TListIteratorImpl, 0, jl_Object, [ju_ListIterator], 0, 0, 0, ["$hasPrevious", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_hasPrevious), "$previous", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_previous)]]);
-$rt_metadata([cgxgtbw_WebInput$1, 0, jl_Object, [jl_Runnable], 0, 0, 0, 0,
+ju_AbstractList$TListIteratorImpl, 0, jl_Object, [ju_ListIterator], 0, 0, 0, ["$hasPrevious", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_hasPrevious), "$previous", $rt_wrapFunction0(ju_AbstractList$TListIteratorImpl_previous)],
+cgxgtbw_WebInput$1, 0, jl_Object, [jl_Runnable], 0, 0, 0, 0,
 cgxgtbw_WebInput$getTextInput$lambda$_69_0, "WebInput$getTextInput$lambda$_69_0", 6, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
 cgxgtbw_WebInput$getTextInput$lambda$_69_1, "WebInput$getTextInput$lambda$_69_1", 6, jl_Object, [otjde_EventListener], 1, 0, 0, 0,
 cgxgtbw_WebInput$2, 0, jl_Object, [], 32768, 0, () => cgxgtbw_WebInput$2_$callClinit(), 0,
@@ -60232,6 +60614,7 @@ cvs_ResultsScreen$show$1, 0, cbg_InputAdapter, [], 17, 0, 0, ["$touchUp", $rt_wr
 cvs_EndingScreen$show$1, 0, cbg_InputAdapter, [], 17, 0, 0, ["$touchDown", $rt_wrapFunction4(cvs_EndingScreen$show$1_touchDown), "$touchUp", $rt_wrapFunction4(cvs_EndingScreen$show$1_touchUp)],
 cvs_EndingScreen$show$lambda$_2_0, 0, jl_Object, [kjf_Function0], 1, 0, 0, 0,
 cvs_EndingScreen$Row, 0, jl_Object, [], 1024, 0, 0, 0,
+cvsw_WebPlatformServices$showRewardedAd$lambda$_2_0, 0, jl_Object, [kjf_Function1], 1, 0, 0, ["$invoke", $rt_wrapFunction1(cvsw_WebPlatformServices$showRewardedAd$lambda$_2_0_invoke)],
 kc_ComparisonsKt__ComparisonsKt, 0, jl_Object, [], 0, 0, 0, 0,
 cbgur_ClassReflection, 0, jl_Object, [], 17, 0, 0, 0,
 cbggg_PixmapPacker$Bounds, 0, jl_Object, [], 1, 0, 0, 0,
@@ -60242,7 +60625,8 @@ cvs_EndingScreen$TitleRow, "EndingScreen$TitleRow", 30, cvs_EndingScreen$Row, []
 cvs_EndingScreen$HeadRow, "EndingScreen$HeadRow", 30, cvs_EndingScreen$Row, [], 16, 0, 0, 0,
 cvs_EndingScreen$FoeRow, "EndingScreen$FoeRow", 30, cvs_EndingScreen$Row, [], 16, 0, 0, 0,
 cbg_Input$VibrationType, "Input$VibrationType", 15, jl_Enum, [], 65553, 0, () => cbg_Input$VibrationType_$callClinit(), 0,
-cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0, "SettingsScreen$pickPhoto$lambda$0$lambda$_20_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0_run)],
+cvsw_RetornoDoAnuncio, 0, jl_Object, [otj_JSObject], 1537, 0, 0, 0,
+cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0, "WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0", 31, jl_Object, [cvsw_RetornoDoAnuncio], 1, 0, 0, 0,
 cbggg_PixmapPacker$GuillotineStrategy$GuillotinePage, "PixmapPacker$GuillotineStrategy$GuillotinePage", 27, cbggg_PixmapPacker$Page, [], 0, 0, 0, 0,
 cbggg_PixmapPacker$GuillotineStrategy$Node, 0, jl_Object, [], 16, 0, 0, 0,
 cbggg_PixmapPacker$SkylineStrategy$SkylinePage, "PixmapPacker$SkylineStrategy$SkylinePage", 27, cbggg_PixmapPacker$Page, [], 0, 0, 0, 0,
@@ -60250,7 +60634,7 @@ cbggg_PixmapPacker$SkylineStrategy$SkylinePage$Row, "PixmapPacker$SkylineStrateg
 jl_Double, 0, jl_Number, [jl_Comparable], 1, 0, () => jl_Double_$callClinit(), 0,
 otcit_DoubleAnalyzer, 0, jl_Object, [], 17, 0, () => otcit_DoubleAnalyzer_$callClinit(), 0,
 cvs_ResultsScreen$goToNextStageWithAd$lambda$_2_0, 0, jl_Object, [kjf_Function1], 1, 0, 0, 0,
-cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0, "GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0_run)],
+cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0, "SettingsScreen$pickPhoto$lambda$0$lambda$_20_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_SettingsScreen$pickPhoto$lambda$0$lambda$_20_0_run)],
 jn_CharBufferOverDataView, 0, jn_CharBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_CharBufferOverDataView_readOnly), "$getChar", $rt_wrapFunction1(jn_CharBufferOverDataView_getChar), "$putImpl7", $rt_wrapFunction4(jn_CharBufferOverDataView_putImpl)],
 jn_LongBufferImpl, 0, jn_LongBuffer, [], 1024, 0, 0, 0,
 jn_LongBufferOverDataView, 0, jn_LongBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_LongBufferOverDataView_readOnly), "$getElement2", $rt_wrapFunction1(jn_LongBufferOverDataView_getElement), "$putImpl8", $rt_wrapFunction4(jn_LongBufferOverDataView_putImpl)],
@@ -60259,12 +60643,14 @@ jn_DoubleBufferImpl, 0, jn_DoubleBuffer, [], 1024, 0, 0, 0,
 jn_DoubleBufferOverDataView, 0, jn_DoubleBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_DoubleBufferOverDataView_readOnly), "$getElement3", $rt_wrapFunction1(jn_DoubleBufferOverDataView_getElement), "$putImpl9", $rt_wrapFunction4(jn_DoubleBufferOverDataView_putImpl)],
 jn_DoubleBufferOverTypedArray, 0, jn_DoubleBufferImpl, [jn_ArrayBufferViewProvider], 0, 0, 0, ["$readOnly", $rt_wrapFunction0(jn_DoubleBufferOverTypedArray_readOnly), "$getElement3", $rt_wrapFunction1(jn_DoubleBufferOverTypedArray_getElement), "$putImpl9", $rt_wrapFunction4(jn_DoubleBufferOverTypedArray_putImpl)],
 jl_Byte, 0, jl_Number, [jl_Comparable], 1, 0, () => jl_Byte_$callClinit(), 0,
+cvsw_WebPlatformServices$showInterstitialAd$lambda$_3_0, 0, jl_Object, [kjf_Function1], 1, 0, 0, ["$invoke", $rt_wrapFunction1(cvsw_WebPlatformServices$showInterstitialAd$lambda$_3_0_invoke)],
 cbggg_PixmapPacker$Page$1, "PixmapPacker$Page$1", 27, cbgg_Texture, [], 0, 0, 0, ["$dispose", $rt_wrapFunction0(cbggg_PixmapPacker$Page$1_dispose)],
 cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0, "WebInput$lambda$getTextInput$4$lambda$_82_0", 6, jl_Object, [otjb_TimerHandler], 1, 0, 0, 0,
-cgxgtbwf_FileDB$1, 0, ji_OutputStream, [], 0, 0, 0, ["$close", $rt_wrapFunction0(cgxgtbwf_FileDB$1_close)],
-cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0, "ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run)],
-cvs_ResultsScreen$WhenMappings, 0, jl_Object, [], 32785, 0, () => cvs_ResultsScreen$WhenMappings_$callClinit(), 0,
+cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0, "GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_GameplayScreen$acceptAdOffer$lambda$0$lambda$_169_0_run)],
+cgxgtbwf_FileDB$1, 0, ji_OutputStream, [], 0, 0, 0, ["$close", $rt_wrapFunction0(cgxgtbwf_FileDB$1_close)]]);
+$rt_metadata([cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0, "ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0", 30, jl_Object, [jl_Runnable], 1, 0, 0, ["$run", $rt_wrapFunction0(cvs_ResultsScreen$goToNextStageWithAd$lambda$0$lambda$_8_0_run)],
 cgxgtbw_WebPreloadApplicationListener$2, 0, jl_Object, [cgxgtbwa_AssetLoaderListener], 0, 0, 0, ["$onFailure", $rt_wrapFunction1(cgxgtbwa_AssetLoaderListener_onFailure)],
+cvs_ResultsScreen$WhenMappings, 0, jl_Object, [], 32785, 0, () => cvs_ResultsScreen$WhenMappings_$callClinit(), 0,
 cgxgtbwa_TeaAssetManifest, 0, jl_Object, [], 1, 0, 0, 0]);
 let $rt_booleanArrayCls = $rt_arraycls($rt_booleancls),
 $rt_charArrayCls = $rt_arraycls($rt_charcls),
@@ -60282,110 +60668,111 @@ $rt_stringPool(["Can\'t enter monitor from another thread synchronously", "Alrea
 ", register using PoolManager#addPool(", "::new)", "Attempt to get pooled object with unknown class: ", "Attempt to free pooled object with unknown class: ", "lateinit property ", " has not been initialized", " must not be null", "Parameter specified as non-null is null: method ", ".", ", parameter ", "path=", "freetype.js", ", listener=false", "java.runtime.name", "userAgent", "os.name", "Windows", "OS X", "no OS", "showLogs=", ".html", "index.html", "index-wasm.html", "index-debug.html", "baseUrl=", ", maxMultiDownloadCount=",
 "pagehide", "resize", "%cFatal Error: ", "%cException ", "gdx.wasm.js", "howler.js", "WEB_SCRIPT_PATH", "WEB_ASSET_PATH", "batch", "shapes", "font", "smallFont", "tinyFont", "pilotOneTexture", "shipTextures", "droneTextures", "missileTexture", "superMissileTexture", "saveManager", "audioManager", "text", "<set-?>", "pilot_photo.png", "sky_vanguard_save", "pref:", "getPreferences(...)", "economy_version", "credits", "save", "sprites/player/pilot_1_brasil.png", "sprites/player/ship_", ".png", "sprites/player/drone_",
 "sprites/player/missile.png", "sprites/player/missile2.png", "fonts/noto_jp_bold.ttf", "fonts/rajdhani_bold.ttf", "fonts/noto_bold.ttf", "fonts/noto_jp_regular.ttf", "fonts/rajdhani_medium.ttf", "fonts/noto_regular.ttf", "ÁÂÃÀÄÉÊÈËÍÎÌÏÓÔÕÒÖÚÛÙÜÇÑáâãàäéêèëíîìïóôõòöúûùüçñºª°–—", "<get-first>(...)", "<get-second>(...)", "<get-third>(...)", "game", "SkyVanguard", "Aplicativo pausado", "\u0000ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890\"!`?\'.,;:()[]{}<>|/@\\^$€-%+=#_&~* ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ",
-"url", "Cannot coerce value to an empty range: maximum ", " is less than minimum ", "getControllers(...)", "object", "function", "string", "number", "undefined", "symbol", "bigint", "boolean", "(this Map)", "INIT", "APP_LOOP", "The value is too big for long type", "The value is too big for long type: ", "main", "n must be positive", "Either src or dest is null", "java.version", "21", "TeaVM", "file.separator", "path.separator", ":", "line.separator", "\n", "java.io.tmpdir", "/tmp", "java.vm.version", "user.home",
-"async=", ", type=", ", url=", ", listener=", "Loading asset: ", "unsupported type=", "Unsupported asset type ", "Loading script: ", "script appended url=", ", attempt=", "max attempts reached -> failure url=", "run sync loadBinaryInternally url=", "queue async dispatch via Window.setTimeout url=", "start async=", "error", "abort", "timeout", "readystatechange", "register progress listener for url=", "progress", "request.send url=", "loadBinaryInternally", "open/send threw url=", ", error=", "status=", ", readyState=",
-"retry transient status=", "notify failure terminal status=", "response is arraybuffer url=", "response is string url=", "notify success url=", ", bytes=", "url=", ", prevAttempt=", ", nextAttempt=", ", async=", "notify final failure url=", "schedule retry url=", "before=", "windowListener=", "result=", "assets/", "scripts/", "size=", "\\", "original=", ", fixed=", ", assetType=", ", fileType=", ", overwrite=", ", queueSize=", "found path=", ", index=", "not found path=", "skip already in queue path=", "skip already downloading path=",
-"skip existing path=", ", overwrite=false", "addAssetToQueue.added path=", "created directory path=", "directory path processed path=", "start maxMultiDownloadCount=", "iteration=", "dequeue path=", "downloadQueueAssets.beforeStart path=", "assetPath=", "load started assetPath=", "createAndStartDownload", "load threw assetPath=", "createAndStartDownload.catch path=", "skip duplicate in downloading path=", "skip queueEmpty=", ", downloadingFull=", "px", "mousedown", "mouseup", "mousemove", "wheel", "touchstart",
-"touchmove", "touchcancel", "touchend", "keydown", "keypress", "keyup", "CSS1Compat", "IndexedDB is not supported in this browser", "Type ", " is not supported", "hidden", "visible", "scaling cannot be null.", "(this Collection)", "Insert", "PageUp", "Period", "ControlRight", "ShiftLeft", "NumpadDivide", "Backquote", "Backslash", "Backspace", "NumpadMultiply", "MetaLeft", "ShiftRight", "NumLock", "Numpad0", "Numpad1", "Numpad2", "Numpad3", "Numpad4", "Numpad5", "Numpad6", "Numpad7", "Numpad8", "Numpad9", "NumpadAdd",
-"NumpadDecimal", "ControlLeft", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "End", "Tab", "Home", "KeyA", "KeyB", "KeyC", "KeyD", "KeyE", "KeyF", "KeyG", "KeyH", "KeyI", "KeyJ", "KeyK", "KeyL", "KeyM", "KeyN", "KeyO", "KeyP", "KeyQ", "KeyR", "KeyS", "KeyT", "KeyU", "KeyV", "KeyW", "KeyX", "KeyY", "KeyZ", "CapsLock", "Comma", "Enter", "Equal", "Minus", "Pause", "Quote", "Slash", "Space", "ArrowRight", "AltLeft", "MetaRight", "PageDown", "ArrowUp", "ArrowDown", "ArrowLeft", "NumpadSubtract",
-"BracketRight", "Semicolon", "PrintScreen", "NumpadEnter", "BracketLeft", "Delete", "Digit0", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "ScrollLock", "AltRight", "Escape", " REMOVE FOLDER: ", " REMOVE FILE: ", " Path: ", " Error: ", " CONTAINS FOLDER: ", " CONTAINS FILE: ", "./", " GET FOLDER: ", " GET FILE: ", " Size: ", " PUT FILE: ", " Bytes: ", "Cannot put an empty folder name", " PUT FOLDER: ", "PUT FOLDER DB: ", "PUT FILE DB: ", "REMOVE FILE DB: ", "PRELOAD_LOADING_ASSETS",
-"PRELOAD_ASSETS", "IndexedDB Error opening database: ", "GLVersion", "OpenGL ES (\\d(\\.\\d){0,2})", "WebGL (\\d(\\.\\d){0,2})", "(\\d(\\.\\d){0,2})", "filesLength=", "totalDraggedFiles=", "candidate=", "rejected=", "accepted=", "name=", "Gdx script failed to load", "glGetFloat not supported by WebGL backend", "GL error: ", "Invalid version string: ", "\\.", "Error parsing number: ", ", assuming: ", "libGDX GL", "Desktop", "HeadlessDesktop", "Applet", "WebGL", "iOS", "IndexedDB Error cursor", "OpenGL", "GLES",
-"NONE", "Patter is null", "fSet", "Name capturing group should start with letter", "Is", "In", "NonCapFSet", "AheadFSet", "BehindFSet", "AtomicFSet", "FinalSet", "<Empty set>", "JointSet", "NonCapJointSet", "PosLookaheadJointSet", "NegLookaheadJointSet", "PosBehindJointSet", "NegBehindJointSet", "<Quant>", "<GroupQuant>", "Lower", "Upper", "ASCII", "Alpha", "Digit", "Alnum", "Punct", "Graph", "Print", "Blank", "Cntrl", "XDigit", "javaLowerCase", "javaUpperCase", "javaWhitespace", "javaMirrored", "javaDefined",
-"javaDigit", "javaIdentifierIgnorable", "javaISOControl", "javaJavaIdentifierPart", "javaJavaIdentifierStart", "javaLetter", "javaLetterOrDigit", "javaSpaceChar", "javaTitleCase", "javaUnicodeIdentifierPart", "javaUnicodeIdentifierStart", "w", "W", "s", "S", "d", "D", "BasicLatin", "Latin-1Supplement", "LatinExtended-A", "LatinExtended-B", "IPAExtensions", "SpacingModifierLetters", "CombiningDiacriticalMarks", "Greek", "Cyrillic", "CyrillicSupplement", "Armenian", "Hebrew", "Arabic", "Syriac", "ArabicSupplement",
-"Thaana", "Devanagari", "Bengali", "Gurmukhi", "Gujarati", "Oriya", "Tamil", "Telugu", "Kannada", "Malayalam", "Sinhala", "Thai", "Lao", "Tibetan", "Myanmar", "Georgian", "HangulJamo", "Ethiopic", "EthiopicSupplement", "Cherokee", "UnifiedCanadianAboriginalSyllabics", "Ogham", "Runic", "Tagalog", "Hanunoo", "Buhid", "Tagbanwa", "Khmer", "Mongolian", "Limbu", "TaiLe", "NewTaiLue", "KhmerSymbols", "Buginese", "PhoneticExtensions", "PhoneticExtensionsSupplement", "CombiningDiacriticalMarksSupplement", "LatinExtendedAdditional",
-"GreekExtended", "GeneralPunctuation", "SuperscriptsandSubscripts", "CurrencySymbols", "CombiningMarksforSymbols", "LetterlikeSymbols", "NumberForms", "Arrows", "MathematicalOperators", "MiscellaneousTechnical", "ControlPictures", "OpticalCharacterRecognition", "EnclosedAlphanumerics", "BoxDrawing", "BlockElements", "GeometricShapes", "MiscellaneousSymbols", "Dingbats", "MiscellaneousMathematicalSymbols-A", "SupplementalArrows-A", "BraillePatterns", "SupplementalArrows-B", "MiscellaneousMathematicalSymbols-B",
-"SupplementalMathematicalOperators", "MiscellaneousSymbolsandArrows", "Glagolitic", "Coptic", "GeorgianSupplement", "Tifinagh", "EthiopicExtended", "SupplementalPunctuation", "CJKRadicalsSupplement", "KangxiRadicals", "IdeographicDescriptionCharacters", "CJKSymbolsandPunctuation", "Hiragana", "Katakana", "Bopomofo", "HangulCompatibilityJamo", "Kanbun", "BopomofoExtended", "CJKStrokes", "KatakanaPhoneticExtensions", "EnclosedCJKLettersandMonths", "CJKCompatibility", "CJKUnifiedIdeographsExtensionA", "YijingHexagramSymbols",
-"CJKUnifiedIdeographs", "YiSyllables", "YiRadicals", "ModifierToneLetters", "SylotiNagri", "HangulSyllables", "HighSurrogates", "HighPrivateUseSurrogates", "LowSurrogates", "PrivateUseArea", "CJKCompatibilityIdeographs", "AlphabeticPresentationForms", "ArabicPresentationForms-A", "VariationSelectors", "VerticalForms", "CombiningHalfMarks", "CJKCompatibilityForms", "SmallFormVariants", "ArabicPresentationForms-B", "HalfwidthandFullwidthForms", "Specials", "Cn", "IsL", "Lu", "Ll", "Lt", "Lm", "Lo", "IsM", "Mn",
-"Me", "Mc", "N", "Nd", "Nl", "No", "IsZ", "Zs", "Zl", "Zp", "IsC", "Cc", "Cf", "Co", "Cs", "IsP", "Pd", "Ps", "Pe", "Pc", "Po", "IsS", "Sm", "Sc", "Sk", "So", "Pi", "Pf", "posFSet", "^ ", "range:", "CompositeRangeSet:  <nonsurrogate> ", " <surrogate> ", "UCI range:", "decomposed Hangul syllable:", "UCI ", "CI ", "decomposed char:", "<DotAllQuant>", "<DotQuant>", "<SOL>", "WordBoundary", "PreviousMatch", "<EOL>", "EOI", "^", "DotAll", "<Unix MultiLine $>", "<MultiLine $>", "CI back reference: ", "back reference: ",
-"UCI back reference: ", "sequence: ", "UCI sequence: ", "CI sequence: ", "GL_EXT_texture_filter_anisotropic", "New data must have the same managed status as the old data", "GL_ARB_framebuffer_object", "GL_EXT_framebuffer_object", "com.badlogic.gdx.backends.lwjgl3.angle.Lwjgl3GLES20", "length=", "success", "failure reason=", "failure", "No support for buffer ", "high_score", "aircraft_owned_", "selected_aircraft", "unlocked_stage", "reduced_flash", "vibration", "show_hitbox", "music_enabled", "sfx_enabled", "difficulty",
-"graphics_quality", "run_bombs", "pilot_name", "getString(...)", "language", "control_mode", "ads_removed", "type", "ROOT", "toLowerCase(...)", "upgrade_", "run_power_", "run_power_seconds_", "run_power_enabled_", "last_score", "last_stage", "shot", "explosion", "powerup", "special", "boss_warning", "click", "shield", "audio/", ".ogg", ".wav", "internal(...)", "name", "Can\'t have more than 8191 sprites per batch: ", "a_position", "a_color", "a_texCoord0", "attribute vec4 a_position;\nattribute vec4 a_color;\nattribute vec2 a_texCoord0;\nuniform mat4 u_projTrans;\nvarying vec4 v_color;\nvarying vec2 v_texCoords;\n\nvoid main()\n{\n   v_color = a_color;\n   v_color.a = v_color.a * (255.0/254.0);\n   v_texCoords = a_texCoord0;\n   gl_Position =  u_projTrans * a_position;\n}\n",
+"url", "getControllers(...)", "object", "function", "string", "number", "undefined", "symbol", "bigint", "boolean", "(this Map)", "INIT", "APP_LOOP", "The value is too big for long type", "The value is too big for long type: ", "main", "n must be positive", "Either src or dest is null", "java.version", "21", "TeaVM", "file.separator", "path.separator", ":", "line.separator", "\n", "java.io.tmpdir", "/tmp", "java.vm.version", "user.home", "async=", ", type=", ", url=", ", listener=", "Loading asset: ", "unsupported type=",
+"Unsupported asset type ", "Loading script: ", "script appended url=", ", attempt=", "max attempts reached -> failure url=", "run sync loadBinaryInternally url=", "queue async dispatch via Window.setTimeout url=", "start async=", "error", "abort", "timeout", "readystatechange", "register progress listener for url=", "progress", "request.send url=", "loadBinaryInternally", "open/send threw url=", ", error=", "status=", ", readyState=", "retry transient status=", "notify failure terminal status=", "response is arraybuffer url=",
+"response is string url=", "notify success url=", ", bytes=", "url=", ", prevAttempt=", ", nextAttempt=", ", async=", "notify final failure url=", "schedule retry url=", "before=", "windowListener=", "result=", "assets/", "scripts/", "size=", "\\", "original=", ", fixed=", ", assetType=", ", fileType=", ", overwrite=", ", queueSize=", "found path=", ", index=", "not found path=", "skip already in queue path=", "skip already downloading path=", "skip existing path=", ", overwrite=false", "addAssetToQueue.added path=",
+"created directory path=", "directory path processed path=", "start maxMultiDownloadCount=", "iteration=", "dequeue path=", "downloadQueueAssets.beforeStart path=", "assetPath=", "load started assetPath=", "createAndStartDownload", "load threw assetPath=", "createAndStartDownload.catch path=", "skip duplicate in downloading path=", "skip queueEmpty=", ", downloadingFull=", "px", "mousedown", "mouseup", "mousemove", "wheel", "touchstart", "touchmove", "touchcancel", "touchend", "keydown", "keypress", "keyup",
+"CSS1Compat", "IndexedDB is not supported in this browser", "Type ", " is not supported", "hidden", "visible", "scaling cannot be null.", "(this Collection)", "Insert", "PageUp", "Period", "ControlRight", "ShiftLeft", "NumpadDivide", "Backquote", "Backslash", "Backspace", "NumpadMultiply", "MetaLeft", "ShiftRight", "NumLock", "Numpad0", "Numpad1", "Numpad2", "Numpad3", "Numpad4", "Numpad5", "Numpad6", "Numpad7", "Numpad8", "Numpad9", "NumpadAdd", "NumpadDecimal", "ControlLeft", "F1", "F2", "F3", "F4", "F5",
+"F6", "F7", "F8", "F9", "F10", "F11", "F12", "End", "Tab", "Home", "KeyA", "KeyB", "KeyC", "KeyD", "KeyE", "KeyF", "KeyG", "KeyH", "KeyI", "KeyJ", "KeyK", "KeyL", "KeyM", "KeyN", "KeyO", "KeyP", "KeyQ", "KeyR", "KeyS", "KeyT", "KeyU", "KeyV", "KeyW", "KeyX", "KeyY", "KeyZ", "CapsLock", "Comma", "Enter", "Equal", "Minus", "Pause", "Quote", "Slash", "Space", "ArrowRight", "AltLeft", "MetaRight", "PageDown", "ArrowUp", "ArrowDown", "ArrowLeft", "NumpadSubtract", "BracketRight", "Semicolon", "PrintScreen", "NumpadEnter",
+"BracketLeft", "Delete", "Digit0", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "ScrollLock", "AltRight", "Escape", " REMOVE FOLDER: ", " REMOVE FILE: ", " Path: ", " Error: ", " CONTAINS FOLDER: ", " CONTAINS FILE: ", "./", " GET FOLDER: ", " GET FILE: ", " Size: ", " PUT FILE: ", " Bytes: ", "Cannot put an empty folder name", " PUT FOLDER: ", "PUT FOLDER DB: ", "PUT FILE DB: ", "REMOVE FILE DB: ", "PRELOAD_LOADING_ASSETS", "PRELOAD_ASSETS", "IndexedDB Error opening database: ",
+"GLVersion", "OpenGL ES (\\d(\\.\\d){0,2})", "WebGL (\\d(\\.\\d){0,2})", "(\\d(\\.\\d){0,2})", "filesLength=", "totalDraggedFiles=", "candidate=", "rejected=", "accepted=", "name=", "Gdx script failed to load", "glGetFloat not supported by WebGL backend", "GL error: ", "Invalid version string: ", "\\.", "Error parsing number: ", ", assuming: ", "libGDX GL", "Desktop", "HeadlessDesktop", "Applet", "WebGL", "iOS", "IndexedDB Error cursor", "OpenGL", "GLES", "NONE", "Patter is null", "fSet", "Name capturing group should start with letter",
+"Is", "In", "NonCapFSet", "AheadFSet", "BehindFSet", "AtomicFSet", "FinalSet", "<Empty set>", "JointSet", "NonCapJointSet", "PosLookaheadJointSet", "NegLookaheadJointSet", "PosBehindJointSet", "NegBehindJointSet", "<Quant>", "<GroupQuant>", "Lower", "Upper", "ASCII", "Alpha", "Digit", "Alnum", "Punct", "Graph", "Print", "Blank", "Cntrl", "XDigit", "javaLowerCase", "javaUpperCase", "javaWhitespace", "javaMirrored", "javaDefined", "javaDigit", "javaIdentifierIgnorable", "javaISOControl", "javaJavaIdentifierPart",
+"javaJavaIdentifierStart", "javaLetter", "javaLetterOrDigit", "javaSpaceChar", "javaTitleCase", "javaUnicodeIdentifierPart", "javaUnicodeIdentifierStart", "w", "W", "s", "S", "d", "D", "BasicLatin", "Latin-1Supplement", "LatinExtended-A", "LatinExtended-B", "IPAExtensions", "SpacingModifierLetters", "CombiningDiacriticalMarks", "Greek", "Cyrillic", "CyrillicSupplement", "Armenian", "Hebrew", "Arabic", "Syriac", "ArabicSupplement", "Thaana", "Devanagari", "Bengali", "Gurmukhi", "Gujarati", "Oriya", "Tamil", "Telugu",
+"Kannada", "Malayalam", "Sinhala", "Thai", "Lao", "Tibetan", "Myanmar", "Georgian", "HangulJamo", "Ethiopic", "EthiopicSupplement", "Cherokee", "UnifiedCanadianAboriginalSyllabics", "Ogham", "Runic", "Tagalog", "Hanunoo", "Buhid", "Tagbanwa", "Khmer", "Mongolian", "Limbu", "TaiLe", "NewTaiLue", "KhmerSymbols", "Buginese", "PhoneticExtensions", "PhoneticExtensionsSupplement", "CombiningDiacriticalMarksSupplement", "LatinExtendedAdditional", "GreekExtended", "GeneralPunctuation", "SuperscriptsandSubscripts", "CurrencySymbols",
+"CombiningMarksforSymbols", "LetterlikeSymbols", "NumberForms", "Arrows", "MathematicalOperators", "MiscellaneousTechnical", "ControlPictures", "OpticalCharacterRecognition", "EnclosedAlphanumerics", "BoxDrawing", "BlockElements", "GeometricShapes", "MiscellaneousSymbols", "Dingbats", "MiscellaneousMathematicalSymbols-A", "SupplementalArrows-A", "BraillePatterns", "SupplementalArrows-B", "MiscellaneousMathematicalSymbols-B", "SupplementalMathematicalOperators", "MiscellaneousSymbolsandArrows", "Glagolitic",
+"Coptic", "GeorgianSupplement", "Tifinagh", "EthiopicExtended", "SupplementalPunctuation", "CJKRadicalsSupplement", "KangxiRadicals", "IdeographicDescriptionCharacters", "CJKSymbolsandPunctuation", "Hiragana", "Katakana", "Bopomofo", "HangulCompatibilityJamo", "Kanbun", "BopomofoExtended", "CJKStrokes", "KatakanaPhoneticExtensions", "EnclosedCJKLettersandMonths", "CJKCompatibility", "CJKUnifiedIdeographsExtensionA", "YijingHexagramSymbols", "CJKUnifiedIdeographs", "YiSyllables", "YiRadicals", "ModifierToneLetters",
+"SylotiNagri", "HangulSyllables", "HighSurrogates", "HighPrivateUseSurrogates", "LowSurrogates", "PrivateUseArea", "CJKCompatibilityIdeographs", "AlphabeticPresentationForms", "ArabicPresentationForms-A", "VariationSelectors", "VerticalForms", "CombiningHalfMarks", "CJKCompatibilityForms", "SmallFormVariants", "ArabicPresentationForms-B", "HalfwidthandFullwidthForms", "Specials", "Cn", "IsL", "Lu", "Ll", "Lt", "Lm", "Lo", "IsM", "Mn", "Me", "Mc", "N", "Nd", "Nl", "No", "IsZ", "Zs", "Zl", "Zp", "IsC", "Cc", "Cf",
+"Co", "Cs", "IsP", "Pd", "Ps", "Pe", "Pc", "Po", "IsS", "Sm", "Sc", "Sk", "So", "Pi", "Pf", "posFSet", "^ ", "range:", "CompositeRangeSet:  <nonsurrogate> ", " <surrogate> ", "UCI range:", "decomposed Hangul syllable:", "UCI ", "CI ", "decomposed char:", "<DotAllQuant>", "<DotQuant>", "<SOL>", "WordBoundary", "PreviousMatch", "<EOL>", "EOI", "^", "DotAll", "<Unix MultiLine $>", "<MultiLine $>", "CI back reference: ", "back reference: ", "UCI back reference: ", "sequence: ", "UCI sequence: ", "CI sequence: ",
+"GL_EXT_texture_filter_anisotropic", "New data must have the same managed status as the old data", "GL_ARB_framebuffer_object", "GL_EXT_framebuffer_object", "com.badlogic.gdx.backends.lwjgl3.angle.Lwjgl3GLES20", "length=", "success", "failure reason=", "failure", "No support for buffer ", "high_score", "aircraft_owned_", "selected_aircraft", "unlocked_stage", "reduced_flash", "vibration", "show_hitbox", "music_enabled", "sfx_enabled", "difficulty", "graphics_quality", "run_bombs", "pilot_name", "getString(...)",
+"language", "control_mode", "ads_removed", "type", "ROOT", "toLowerCase(...)", "upgrade_", "run_power_", "run_power_seconds_", "run_power_enabled_", "last_score", "last_stage", "shot", "explosion", "powerup", "special", "boss_warning", "click", "shield", "audio/", ".ogg", ".wav", "internal(...)", "name", "Can\'t have more than 8191 sprites per batch: ", "a_position", "a_color", "a_texCoord0", "attribute vec4 a_position;\nattribute vec4 a_color;\nattribute vec2 a_texCoord0;\nuniform mat4 u_projTrans;\nvarying vec4 v_color;\nvarying vec2 v_texCoords;\n\nvoid main()\n{\n   v_color = a_color;\n   v_color.a = v_color.a * (255.0/254.0);\n   v_texCoords = a_texCoord0;\n   gl_Position =  u_projTrans * a_position;\n}\n",
 "#ifdef GL_ES\n#define LOWP lowp\nprecision mediump float;\n#else\n#define LOWP \n#endif\nvarying LOWP vec4 v_color;\nvarying vec2 v_texCoords;\nuniform sampler2D u_texture;\nvoid main()\n{\n  gl_FragColor = v_color * texture2D(u_texture, v_texCoords);\n}", "Error compiling shader: ", "SpriteBatch.end must be called before begin.", "SpriteBatch.begin must be called before end.", "SpriteBatch.begin must be called before draw.", "u_projTrans", "u_texture", "attribute vec4 a_position;\n", "attribute vec4 a_color;\n",
 "attribute vec2 a_texCoord", ";\n", "uniform mat4 u_projModelView;\n", "varying vec4 v_col;\n", "varying vec2 v_tex", "void main() {\n   gl_Position = u_projModelView * a_position;\n", "   v_col = a_color;\n   v_col.a *= 255.0 / 254.0;\n", "   v_tex", " = ", "a_texCoord", "   gl_PointSize = 1.0;\n}\n", "autoShapeType must be true to use this method.", "Call end() before beginning a new shape batch.", "begin must be called first.", "autoShapeType must be enabled.", "segments must be > 0.", "Must call begin(ShapeType.",
 ").", ") or begin(ShapeType.", "u_projModelView", "getLanguage(...)", "key", "toUpperCase(...)", "Nearest", "Linear", "MipMap", "MipMapNearestNearest", "MipMapLinearNearest", "MipMapNearestLinear", "MipMapLinearLinear", "unproject(...)", "color", "Super calls with default arguments not supported in this target, function: drawCentered", "WHITE", "rect", "Super calls with default arguments not supported in this target, function: drawButton", "CAMPANHA", "INICIAR MISSÃO", "HANGAR", "SELECIONAR NAVE", "CONFIGURAÇÕES",
 "AJUSTES DO JOGO", "REMOVER ANÚNCIOS", "SEM ANÚNCIOS PARA SEMPRE", "CRÉDITOS", "EQUIPE E AGRADECIMENTOS", "SAIR", "SAIR DO JOGO", "menu", "onResult", "<this>", "ANÚNCIOS JÁ REMOVIDOS - OBRIGADO!", "store_unavailable", "SKY VANGUARD", "ARCADE STRIKE COMMAND", "hangar", "settings", "remove_ads", "campaign", "ads_off", "reward", "sub_hangar", "sub_settings", "sub_ads", "sub_credits", "sub_exit", "sub_campaign", "ONLINE", "V 1.0.37", "PILOTO ATIVO", "(C) 2026 SKY VANGUARD SYSTEMS", "delimiters", "input", "getNextMatch",
-"null cannot be cast to non-null type kotlin.ranges.IntRange", "range", "null cannot be cast to non-null type java.lang.String", "Script download success: ", "Script download failed: ", "IndexedDB Error putting file: ", "...", "separator", "prefix", "postfix", "truncated", "buffer", "pt", "en", "es", "de", "fr", "it", "id", "tr", "ru", "ja", "PORTUGUES", "ENGLISH", "ESPANOL", "DEUTSCH", "FRANCAIS", "ITALIANO", "INDONESIA", "TURKCE", "РУССКИЙ", "日本語", "play", "JOGAR", "pilot", "PILOTO", "pause", "PAUSADO", "resume",
-"CONTINUAR", "restart", "REINICIAR", "MENU PRINCIPAL", "victory", "MISSÃO CONCLUÍDA", "defeat", "AERONAVE ABATIDA", "score", "PONTUAÇÃO", "highscore", "RECORDE", "combo", "COMBO", "ESCUDO", "ESPECIAL", "DIFICULDADE", "recruit", "RECRUTA", "pilot_difficulty", "ace", "ÁS", "legend", "LENDA", "back", "VOLTAR", "privacy", "POLÍTICA DE PRIVACIDADE", "tap_drag", "ARRASTE PARA PILOTAR", "boss", "ALERTA DE CHEFE", "subboss", "SUBCHEFE", "grade", "CLASSIFICAÇÃO", "earned", "MOEDAS COLETADAS", "music", "MÚSICA", "sfx",
-"EFEITOS SONOROS", "VIBRAÇÃO", "flash", "REDUZIR FLASHES", "hitbox", "MOSTRAR COLISÃO", "select", "SELECIONAR", "selected", "SELECIONADA", "next", "PRÓXIMA FASE", "locked", "BLOQUEADA", "upgrades", "UPGRADES ACUMULADOS", "IDIOMA", "control", "CONTROLE", "ctrl_auto", "TIRO AUTOMÁTICO", "ctrl_pad", "GAMEPAD", "ctrl_touch", "BOTÕES NA TELA", "ANÚNCIOS OFF", "buy", "COMPRAR", "coins", "MOEDAS", "no_coins", "MOEDAS INSUFICIENTES", "bought", "AERONAVE ADQUIRIDA!", "upgrade_shop", "LOJA DE UPGRADES", "level", "NÍVEL",
-"max_now", "MÁXIMO POR AGORA", "life", "VIDA", "armor", "BLINDAGEM", "ships", "NAVES", "time", "TEMPO", "targets", "ALVOS", "power", "PODER", "stage", "FASE", "fire", "TIRO", "missile", "MÍSSIL", "aim", "MIRA", "aim_on", "MIRA ATIVA", "aim_tap", "TOQUE NO ALVO", "shield_broken", "ESCUDO DO CHEFE QUEBRADO!", "subboss_down", "SUBCHEFE ABATIDO!", "missile_warn", "MÍSSEIS TRAVADOS! DESVIE!", "ship_down", "NAVE ABATIDA!", "remaining", "RESTAM", "shield_renew", "ESCUDO REATIVADO!", "RECOMPENSA", "watch_ad", "ASSISTIR ANÚNCIO",
-"no_thanks", "AGORA NÃO", "PLAY", "CAMPAIGN", "SETTINGS", "CREDITS", "EXIT", "PILOT", "PAUSED", "RESUME", "RESTART", "MAIN MENU", "MISSION COMPLETE", "AIRCRAFT DOWN", "SCORE", "HIGH SCORE", "SHIELD", "SPECIAL", "DIFFICULTY", "RECRUIT", "ACE", "LEGEND", "BACK", "PRIVACY POLICY", "DRAG TO FLY", "BOSS WARNING", "SUB-BOSS", "GRADE", "COINS COLLECTED", "MUSIC", "SOUND EFFECTS", "VIBRATION", "REDUCE FLASHES", "SHOW HITBOX", "SELECT", "SELECTED", "NEXT STAGE", "LOCKED", "STACKED UPGRADES", "LANGUAGE", "CONTROLS", "AUTO FIRE",
-"ON-SCREEN BUTTONS", "REMOVE ADS", "ADS OFF", "BUY", "COINS", "NOT ENOUGH COINS", "AIRCRAFT PURCHASED!", "UPGRADE SHOP", "LEVEL", "MAX FOR NOW", "LIFE", "ARMOR", "SHIPS", "TIME", "TARGETS", "POWER", "STAGE", "FIRE", "MISSILE", "LOCK", "LOCK ON", "TAP TARGET", "BOSS SHIELD DOWN!", "SUB-BOSS DEFEATED!", "MISSILES LOCKED! DODGE!", "SHIP DOWN!", "LEFT", "SHIELD RESTORED!", "REWARD", "WATCH AD", "NOT NOW", "JUGAR", "CAMPAÑA", "AJUSTES", "SALIR", "PAUSA", "MENÚ PRINCIPAL", "MISIÓN COMPLETA", "NAVE DERRIBADA", "PUNTUACIÓN",
-"RÉCORD", "DIFICULTAD", "RECLUTA", "AS", "LEYENDA", "VOLVER", "POLÍTICA DE PRIVACIDAD", "ARRASTRA PARA VOLAR", "ALERTA DE JEFE", "SUBJEFE", "CALIFICACIÓN", "MONEDAS OBTENIDAS", "EFECTOS DE SONIDO", "VIBRACIÓN", "REDUCIR DESTELLOS", "MOSTRAR COLISIÓN", "SELECCIONAR", "SELECCIONADA", "SIGUIENTE FASE", "MEJORAS ACUMULADAS", "CONTROLES", "DISPARO AUTOMÁTICO", "MANDO", "BOTONES EN PANTALLA", "QUITAR ANUNCIOS", "SIN ANUNCIOS", "MONEDAS", "MONEDAS INSUFICIENTES", "¡NAVE ADQUIRIDA!", "TIENDA DE MEJORAS", "NIVEL", "MÁXIMO POR AHORA",
-"BLINDAJE", "TIEMPO", "OBJETIVOS", "POTENCIA", "DISPARO", "MISIL", "FIJAR", "FIJADO", "TOCA EL OBJETIVO", "¡ESCUDO DEL JEFE ROTO!", "¡SUBJEFE DERROTADO!", "¡MISILES FIJADOS! ¡ESQUIVA!", "¡NAVE DERRIBADA!", "QUEDAN", "¡ESCUDO RESTAURADO!", "VER ANUNCIO", "AHORA NO", "SPIELEN", "KAMPAGNE", "EINSTELLUNGEN", "BEENDEN", "PAUSE", "FORTSETZEN", "NEUSTART", "HAUPTMENÜ", "MISSION ERFÜLLT", "JÄGER ABGESCHOSSEN", "PUNKTE", "REKORD", "SCHILD", "SPEZIAL", "SCHWIERIGKEIT", "REKRUT", "ASS", "LEGENDE", "ZURÜCK", "DATENSCHUTZ",
-"ZIEHEN ZUM FLIEGEN", "BOSS-ALARM", "UNTERBOSS", "WERTUNG", "MÜNZEN GESAMMELT", "MUSIK", "SOUNDEFFEKTE", "BLITZE REDUZIEREN", "TREFFERZONE ZEIGEN", "WÄHLEN", "GEWÄHLT", "NÄCHSTE STUFE", "GESPERRT", "GESAMMELTE UPGRADES", "SPRACHE", "STEUERUNG", "AUTOMATISCH FEUERN", "BILDSCHIRMTASTEN", "WERBUNG ENTFERNEN", "KEINE WERBUNG", "KAUFEN", "MÜNZEN", "NICHT GENUG MÜNZEN", "JÄGER GEKAUFT!", "UPGRADE-SHOP", "STUFE", "MAXIMUM VORERST", "LEBEN", "PANZERUNG", "SCHIFFE", "ZEIT", "ZIELE", "STÄRKE", "FEUER", "RAKETE", "ZIEL",
-"ZIEL FIXIERT", "ZIEL ANTIPPEN", "BOSS-SCHILD ZERSTÖRT!", "UNTERBOSS BESIEGT!", "RAKETEN ERFASST! AUSWEICHEN!", "SCHIFF VERLOREN!", "ÜBRIG", "SCHILD WIEDERHERGESTELLT!", "BELOHNUNG", "WERBUNG ANSEHEN", "JETZT NICHT", "JOUER", "CAMPAGNE", "PARAMÈTRES", "CRÉDITS", "QUITTER", "PILOTE", "REPRENDRE", "RECOMMENCER", "MISSION ACCOMPLIE", "APPAREIL ABATTU", "RECORD", "BOUCLIER", "SPÉCIAL", "DIFFICULTÉ", "RECRUE", "LÉGENDE", "RETOUR", "CONFIDENTIALITÉ", "GLISSEZ POUR VOLER", "ALERTE BOSS", "SOUS-BOSS", "NOTE", "PIÈCES OBTENUES",
-"MUSIQUE", "EFFETS SONORES", "RÉDUIRE LES FLASHS", "AFFICHER COLLISION", "CHOISIR", "CHOISI", "NIVEAU SUIVANT", "VERROUILLÉ", "AMÉLIORATIONS CUMULÉES", "LANGUE", "COMMANDES", "TIR AUTOMATIQUE", "MANETTE", "BOUTONS À L\'ÉCRAN", "SUPPRIMER LES PUBS", "SANS PUBS", "ACHETER", "PIÈCES", "PIÈCES INSUFFISANTES", "APPAREIL ACHETÉ !", "BOUTIQUE D\'AMÉLIORATIONS", "NIVEAU", "MAXIMUM ACTUEL", "VIE", "BLINDAGE", "VAISSEAUX", "TEMPS", "CIBLES", "PUISSANCE", "TIR", "VERROU", "TOUCHEZ LA CIBLE", "BOUCLIER DU BOSS BRISÉ !",
-"SOUS-BOSS VAINCU !", "MISSILES VERROUILLÉS ! ESQUIVEZ !", "VAISSEAU PERDU !", "RESTANTS", "BOUCLIER RESTAURÉ !", "RÉCOMPENSE", "REGARDER LA PUB", "PAS MAINTENANT", "GIOCA", "CAMPAGNA", "IMPOSTAZIONI", "CREDITI", "ESCI", "PILOTA", "RIPRENDI", "RIAVVIA", "MENU PRINCIPALE", "MISSIONE COMPLETATA", "VELIVOLO ABBATTUTO", "PUNTEGGIO", "SCUDO", "SPECIALE", "DIFFICOLTÀ", "ASSO", "LEGGENDA", "INDIETRO", "PRIVACY", "TRASCINA PER VOLARE", "ALLARME BOSS", "SOTTO-BOSS", "VALUTAZIONE", "MONETE RACCOLTE", "MUSICA", "EFFETTI SONORI",
-"VIBRAZIONE", "RIDUCI I LAMPI", "MOSTRA COLLISIONE", "SELEZIONA", "SELEZIONATO", "LIVELLO SUCCESSIVO", "BLOCCATO", "POTENZIAMENTI ACCUMULATI", "LINGUA", "COMANDI", "FUOCO AUTOMATICO", "CONTROLLER", "PULSANTI A SCHERMO", "RIMUOVI ANNUNCI", "SENZA ANNUNCI", "ACQUISTA", "MONETE", "MONETE INSUFFICIENTI", "VELIVOLO ACQUISTATO!", "NEGOZIO POTENZIAMENTI", "LIVELLO", "MASSIMO PER ORA", "VITA", "CORAZZA", "NAVI", "BERSAGLI", "POTENZA", "FUOCO", "MIRA FISSA", "TOCCA IL BERSAGLIO", "SCUDO DEL BOSS DISTRUTTO!", "SOTTO-BOSS SCONFITTO!",
-"MISSILI AGGANCIATI! SCHIVA!", "NAVE ABBATTUTA!", "RIMASTE", "SCUDO RIPRISTINATO!", "RICOMPENSA", "GUARDA L\'ANNUNCIO", "NON ORA", "MAIN", "KAMPANYE", "PENGATURAN", "KREDIT", "KELUAR", "JEDA", "LANJUTKAN", "ULANGI", "MENU UTAMA", "MISI SELESAI", "PESAWAT JATUH", "SKOR", "REKOR", "KOMBO", "PERISAI", "SPESIAL", "KESULITAN", "LEGENDA", "KEMBALI", "KEBIJAKAN PRIVASI", "GESER UNTUK TERBANG", "PERINGATAN BOS", "SUB-BOS", "NILAI", "KOIN TERKUMPUL", "EFEK SUARA", "GETARAN", "KURANGI KILATAN", "TAMPILKAN TABRAKAN", "PILIH",
-"TERPILIH", "TAHAP BERIKUTNYA", "TERKUNCI", "PENINGKATAN TERKUMPUL", "BAHASA", "KONTROL", "TEMBAK OTOMATIS", "TOMBOL LAYAR", "HAPUS IKLAN", "TANPA IKLAN", "BELI", "KOIN", "KOIN TIDAK CUKUP", "PESAWAT DIBELI!", "TOKO PENINGKATAN", "MAKSIMAL SAAT INI", "NYAWA", "BAJA", "PESAWAT", "WAKTU", "TARGET", "KEKUATAN", "TAHAP", "TEMBAK", "RUDAL", "KUNCI", "SENTUH TARGET", "PERISAI BOS HANCUR!", "SUB-BOS DIKALAHKAN!", "RUDAL TERKUNCI! HINDARI!", "PESAWAT JATUH!", "SISA", "PERISAI PULIH!", "HADIAH", "TONTON IKLAN", "NANTI SAJA",
-"OYNA", "SEFER", "AYARLAR", "EMEĞI GEÇENLER", "ÇIKIŞ", "PİLOT", "DURAKLATILDI", "DEVAM ET", "YENIDEN BAŞLAT", "ANA MENÜ", "GÖREV TAMAMLANDI", "UÇAK DÜŞTÜ", "PUAN", "KALKAN", "ÖZEL", "ZORLUK", "ACEMİ", "EFSANE", "GERİ", "GİZLİLİK POLİTİKASI", "UÇMAK İÇİN SÜRÜKLE", "PATRON UYARISI", "ALT PATRON", "DERECE", "TOPLANAN PARA", "MÜZİK", "SES EFEKTLERİ", "TİTREŞİM", "PARLAMAYI AZALT", "ÇARPIŞMAYI GÖSTER", "SEÇ", "SEÇİLDİ", "SONRAKİ BÖLÜM", "KİLİTLİ", "BİRİKEN YÜKSELTMELER", "DİL", "OTOMATİK ATEŞ", "OYUN KOLU", "EKRAN TUŞLARI",
-"REKLAMLARI KALDIR", "REKLAMSIZ", "SATIN AL", "PARA", "YETERSİZ PARA", "UÇAK SATIN ALINDI!", "YÜKSELTME DÜKKANI", "SEVİYE", "ŞİMDİLİK AZAMİ", "CAN", "ZIRH", "UÇAKLAR", "SÜRE", "HEDEFLER", "GÜÇ", "BÖLÜM", "ATEŞ", "FÜZE", "KİLİT", "KİLİTLENDİ", "HEDEFE DOKUN", "PATRON KALKANI KIRILDI!", "ALT PATRON YENİLDİ!", "FÜZELER KİLİTLENDİ! KAÇIN!", "UÇAK DÜŞTÜ!", "KALAN", "KALKAN YENİLENDİ!", "ÖDÜL", "REKLAMI İZLE", "ŞİMDİ DEĞİL", "ИГРАТЬ", "КАМПАНИЯ", "АНГАР", "НАСТРОЙКИ", "АВТОРЫ", "ВЫХОД", "ПИЛОТ", "ПАУЗА", "ПРОДОЛЖИТЬ",
-"ЗАНОВО", "ГЛАВНОЕ МЕНЮ", "МИССИЯ ВЫПОЛНЕНА", "САМОЛЁТ СБИТ", "ОЧКИ", "РЕКОРД", "КОМБО", "ЩИТ", "СПЕЦИАЛЬНАЯ", "СЛОЖНОСТЬ", "НОВОБРАНЕЦ", "АС", "ЛЕГЕНДА", "НАЗАД", "КОНФИДЕНЦИАЛЬНОСТЬ", "ВЕДИТЕ ПАЛЬЦЕМ", "ТРЕВОГА: БОСС", "СУБ-БОСС", "ОЦЕНКА", "СОБРАНО МОНЕТ", "МУЗЫКА", "ЗВУКОВЫЕ ЭФФЕКТЫ", "ВИБРАЦИЯ", "МЕНЬШЕ ВСПЫШЕК", "ПОКАЗАТЬ ХИТБОКС", "ВЫБРАТЬ", "ВЫБРАНО", "СЛЕДУЮЩИЙ УРОВЕНЬ", "ЗАБЛОКИРОВАНО", "НАКОПЛЕННЫЕ УЛУЧШЕНИЯ", "ЯЗЫК", "УПРАВЛЕНИЕ", "АВТООГОНЬ", "ГЕЙМПАД", "КНОПКИ НА ЭКРАНЕ", "УБРАТЬ РЕКЛАМУ", "БЕЗ РЕКЛАМЫ",
-"КУПИТЬ", "МОНЕТЫ", "НЕ ХВАТАЕТ МОНЕТ", "САМОЛЁТ КУПЛЕН!", "МАГАЗИН УЛУЧШЕНИЙ", "УРОВЕНЬ", "МАКСИМУМ ПОКА", "ЖИЗНЬ", "БРОНЯ", "САМОЛЁТЫ", "ВРЕМЯ", "ЦЕЛИ", "МОЩЬ", "ОГОНЬ", "РАКЕТА", "ЗАХВАТ", "ЗАХВАЧЕНО", "КОСНИТЕСЬ ЦЕЛИ", "ЩИТ БОССА ПРОБИТ!", "СУБ-БОСС ПОВЕРЖЕН!", "РАКЕТЫ НАВЕДЕНЫ! УКЛОНЯЙСЯ!", "САМОЛЁТ ПОТЕРЯН!", "ОСТАЛОСЬ", "ЩИТ ВОССТАНОВЛЕН!", "НАГРАДА", "СМОТРЕТЬ РЕКЛАМУ", "НЕ СЕЙЧАС", "プレイ", "キャンペーン", "ハンガー", "設定", "クレジット", "終了", "パイロット", "一時停止", "再開", "やり直し", "メインメニュー", "ミッション達成", "機体撃墜", "スコア", "ハイスコア",
-"コンボ", "シールド", "スペシャル", "難易度", "新兵", "エース", "レジェンド", "戻る", "プライバシーポリシー", "ドラッグで操縦", "ボス警報", "中ボス", "評価", "獲得コイン", "音楽", "効果音", "振動", "点滅を減らす", "当たり判定表示", "選択", "選択中", "次のステージ", "ロック中", "強化の蓄積", "言語", "操作方法", "自動射撃", "ゲームパッド", "画面ボタン", "広告を削除", "広告なし", "購入", "コイン", "コインが足りません", "機体を購入しました!", "強化ショップ", "レベル", "現在の上限", "ライフ", "装甲", "機体", "時間", "目標", "パワー", "ステージ", "ショット", "ミサイル", "ロック", "目標をタップ", "ボスのシールド破壊!", "中ボス撃破!", "ミサイルロック! 回避せよ!", "機体喪失!", "残り", "シールド復活!", "報酬", "広告を見る", "今はいい", "default_aircraft", "PADRÃO DA AERONAVE",
-"aircraft_matrix", "MATRIZ TÁTICA DE AERONAVES", "perm_upgrades", "UPGRADES PERMANENTES", "back_hangar", "VOLTAR AO HANGAR", "speed", "VELOCIDADE", "defense", "DEFESA", "stat_control", "weapon", "ARMA", "passive", "PASSIVA", "up_firerate", "CADÊNCIA", "up_firerate_d", "Aumenta a frequência dos disparos", "up_spread", "DISPERSÃO", "up_spread_d", "Adiciona projéteis laterais", "up_missile", "MÍSSEIS", "up_missile_d", "Mísseis guiados mais fortes", "up_laser", "LASER", "up_laser_d", "Amplifica o feixe de energia",
-"up_armor", "up_armor_d", "Reduz o dano recebido", "up_crit", "CRÍTICO", "up_crit_d", "Eleva a chance de dano crítico", "limit_progress", "LIMITE ATUAL - AVANCE NA CAMPANHA", "shop_powerups", "LOJA DE POWER-UPS", "end_mission", "ENCERRAR MISSÃO", "off_damage", "DANO +20s", "off_rate", "CADÊNCIA +20s", "off_spread", "TIRO ABERTO +20s", "off_shield", "ESCUDO (7 TIROS)", "off_random", "PODER ALEATÓRIO", "off_bomb", "BOMBA", "bomb_limit", "BOMBAS NO LIMITE: 10", "NOME DO PILOTO", "pilot_photo", "FOTO DO PILOTO",
-"photo_set", "DEFINIDA", "photo_choose", "ESCOLHER", "name_updated", "NOME ATUALIZADO", "photo_updated", "FOTO ATUALIZADA", "photo_unchanged", "FOTO NÃO ALTERADA", "graphics", "QUALIDADE GRÁFICA", "gfx_low", "BAIXA", "gfx_med", "MÉDIA", "gfx_high", "ALTA", "gfx_ultra", "ULTRA", "ATIVADO", "DESATIVADO", "opening_store", "ABRINDO A LOJA...", "LOJA INDISPONÍVEL", "purchase_failed", "COMPRA NÃO CONCLUÍDA", "ads_removed_ok", "ANÚNCIOS REMOVIDOS - OBRIGADO!", "loading_ad", "CARREGANDO ANÚNCIO...", "watch_and_get",
-"ASSISTA A UM ANÚNCIO E RECEBA:", "continue_no_prize", "CONTINUAR SEM PRÊMIO", "last_aircraft", "SUA ÚLTIMA AERONAVE FOI ABATIDA!", "emergency", "REFORÇOS DE EMERGÊNCIA", "overload", "SOBRECARGA: INIMIGOS MULTIPLICADOS", "powers_kept", "PODERES MANTIDOS COM O TEMPO RESTANTE", "best_combo", "MELHOR COMBO", "total_coins", "MOEDAS TOTAIS", "AIRCRAFT DEFAULT", "START MISSION", "CHOOSE AIRCRAFT", "GAME OPTIONS", "NO ADS FOREVER", "TEAM AND THANKS", "QUIT GAME", "TACTICAL AIRCRAFT MATRIX", "PERMANENT UPGRADES", "BACK TO HANGAR",
-"SPEED", "DEFENSE", "HANDLING", "WEAPON", "PASSIVE", "FIRE RATE", "Increases shot frequency", "SPREAD", "Adds side projectiles", "MISSILES", "Stronger homing missiles", "Amplifies the energy beam", "Reduces damage taken", "CRITICAL", "Raises critical hit chance", "CURRENT LIMIT - ADVANCE THE CAMPAIGN", "POWER-UP SHOP", "END MISSION", "DAMAGE +20s", "FIRE RATE +20s", "SPREAD +20s", "SHIELD (7 HITS)", "RANDOM POWER", "BOMB", "BOMBS AT LIMIT: 10", "PILOT NAME", "PILOT PHOTO", "SET", "CHOOSE", "NAME UPDATED", "PHOTO UPDATED",
-"PHOTO UNCHANGED", "GRAPHICS QUALITY", "LOW", "MEDIUM", "HIGH", "ON", "OFF", "OPENING STORE...", "STORE UNAVAILABLE", "PURCHASE NOT COMPLETED", "ADS REMOVED - THANK YOU!", "LOADING AD...", "WATCH AN AD AND GET:", "CONTINUE WITHOUT PRIZE", "YOUR LAST AIRCRAFT WAS DOWNED!", "EMERGENCY REINFORCEMENTS", "OVERLOAD: ENEMIES MULTIPLIED", "POWERS KEPT WITH REMAINING TIME", "BEST COMBO", "TOTAL COINS", "PREDETERMINADO", "INICIAR MISIÓN", "ELEGIR NAVE", "OPCIONES DEL JUEGO", "SIN ANUNCIOS PARA SIEMPRE", "EQUIPO Y AGRADECIMIENTOS",
-"SALIR DEL JUEGO", "MATRIZ TÁCTICA DE NAVES", "MEJORAS PERMANENTES", "VOLVER AL HANGAR", "VELOCIDAD", "DEFENSA", "MANEJO", "PASIVA", "CADENCIA", "Aumenta la frecuencia de disparo", "DISPERSIÓN", "Añade proyectiles laterales", "MISILES", "Misiles guiados más fuertes", "LÁSER", "Amplifica el haz de energía", "Reduce el daño recibido", "Aumenta el daño crítico", "LÍMITE ACTUAL - AVANZA EN LA CAMPAÑA", "TERMINAR MISIÓN", "DAÑO +20s", "CADENCIA +20s", "DISPERSIÓN +20s", "ESCUDO (7 GOLPES)", "PODER ALEATORIO", "BOMBAS AL LÍMITE: 10",
-"NOMBRE DEL PILOTO", "FOTO DEL PILOTO", "ELEGIR", "NOMBRE ACTUALIZADO", "FOTO ACTUALIZADA", "FOTO SIN CAMBIOS", "CALIDAD GRÁFICA", "MEDIA", "ACTIVADO", "DESACTIVADO", "ABRIENDO TIENDA...", "TIENDA NO DISPONIBLE", "COMPRA NO COMPLETADA", "¡ANUNCIOS ELIMINADOS - GRACIAS!", "CARGANDO ANUNCIO...", "MIRA UN ANUNCIO Y RECIBE:", "CONTINUAR SIN PREMIO", "¡TU ÚLTIMA NAVE FUE DERRIBADA!", "REFUERZOS DE EMERGENCIA", "SOBRECARGA: ENEMIGOS MULTIPLICADOS", "PODERES CONSERVADOS CON EL TIEMPO RESTANTE", "MEJOR COMBO", "MONEDAS TOTALES",
-"STANDARD", "MISSION STARTEN", "JÄGER WÄHLEN", "SPIELOPTIONEN", "FÜR IMMER OHNE WERBUNG", "TEAM UND DANK", "SPIEL BEENDEN", "TAKTISCHE JÄGERMATRIX", "DAUERHAFTE UPGRADES", "ZURÜCK ZUM HANGAR", "VERTEIDIGUNG", "WAFFE", "PASSIV", "FEUERRATE", "Erhöht die Schussfrequenz", "STREUUNG", "Fügt seitliche Geschosse hinzu", "RAKETEN", "Stärkere Lenkraketen", "Verstärkt den Energiestrahl", "Verringert erlittenen Schaden", "KRITISCH", "Erhöht die kritische Trefferchance", "AKTUELLES LIMIT - KAMPAGNE FORTSETZEN", "POWER-UP-SHOP",
-"MISSION BEENDEN", "SCHADEN +20s", "FEUERRATE +20s", "STREUUNG +20s", "SCHILD (7 TREFFER)", "ZUFALLSKRAFT", "BOMBE", "BOMBEN AM LIMIT: 10", "PILOTENNAME", "PILOTENFOTO", "GESETZT", "NAME AKTUALISIERT", "FOTO AKTUALISIERT", "FOTO UNVERÄNDERT", "GRAFIKQUALITÄT", "NIEDRIG", "MITTEL", "HOCH", "AN", "AUS", "SHOP WIRD GEÖFFNET...", "SHOP NICHT VERFÜGBAR", "KAUF NICHT ABGESCHLOSSEN", "WERBUNG ENTFERNT - DANKE!", "WERBUNG WIRD GELADEN...", "WERBUNG ANSEHEN UND ERHALTEN:", "OHNE PREIS FORTFAHREN", "DEIN LETZTER JÄGER WURDE ZERSTÖRT!",
-"NOTVERSTÄRKUNG", "ÜBERLADUNG: GEGNER VERVIELFACHT", "KRÄFTE MIT RESTZEIT BEHALTEN", "BESTES COMBO", "MÜNZEN GESAMT", "PAR DÉFAUT", "LANCER LA MISSION", "CHOISIR L\'APPAREIL", "OPTIONS DU JEU", "SANS PUBS POUR TOUJOURS", "ÉQUIPE ET REMERCIEMENTS", "QUITTER LE JEU", "MATRICE TACTIQUE D\'APPAREILS", "AMÉLIORATIONS PERMANENTES", "RETOUR AU HANGAR", "VITESSE", "DÉFENSE", "MANIABILITÉ", "ARME", "PASSIF", "CADENCE", "Augmente la fréquence de tir", "DISPERSION", "Ajoute des projectiles latéraux", "Missiles guidés plus puissants",
-"Amplifie le faisceau d\'énergie", "Réduit les dégâts subis", "CRITIQUE", "Augmente les coups critiques", "LIMITE ACTUELLE - AVANCEZ DANS LA CAMPAGNE", "BOUTIQUE DE BONUS", "TERMINER LA MISSION", "DÉGÂTS +20s", "CADENCE +20s", "DISPERSION +20s", "BOUCLIER (7 COUPS)", "POUVOIR ALÉATOIRE", "BOMBES AU MAXIMUM : 10", "NOM DU PILOTE", "PHOTO DU PILOTE", "DÉFINIE", "NOM MIS À JOUR", "PHOTO MISE À JOUR", "PHOTO INCHANGÉE", "QUALITÉ GRAPHIQUE", "BASSE", "MOYENNE", "HAUTE", "ACTIVÉ", "DÉSACTIVÉ", "OUVERTURE DE LA BOUTIQUE...",
-"BOUTIQUE INDISPONIBLE", "ACHAT NON FINALISÉ", "PUBS SUPPRIMÉES - MERCI !", "CHARGEMENT DE LA PUB...", "REGARDEZ UNE PUB ET RECEVEZ :", "CONTINUER SANS PRIX", "VOTRE DERNIER APPAREIL EST TOMBÉ !", "RENFORTS D\'URGENCE", "SURCHARGE : ENNEMIS MULTIPLIÉS", "POUVOIRS CONSERVÉS AVEC LE TEMPS RESTANT", "MEILLEUR COMBO", "PIÈCES TOTALES", "PREDEFINITO", "AVVIA MISSIONE", "SCEGLI VELIVOLO", "OPZIONI DI GIOCO", "SENZA ANNUNCI PER SEMPRE", "TEAM E RINGRAZIAMENTI", "ESCI DAL GIOCO", "MATRICE TATTICA VELIVOLI", "POTENZIAMENTI PERMANENTI",
-"TORNA ALL\'HANGAR", "VELOCITÀ", "DIFESA", "MANEGGEVOLEZZA", "CADENZA", "Aumenta la frequenza di fuoco", "DISPERSIONE", "Aggiunge proiettili laterali", "MISSILI", "Missili guidati più potenti", "Amplifica il raggio di energia", "Riduce i danni subiti", "CRITICO", "Aumenta i colpi critici", "LIMITE ATTUALE - AVANZA NELLA CAMPAGNA", "NEGOZIO POWER-UP", "TERMINA MISSIONE", "DANNO +20s", "CADENZA +20s", "DISPERSIONE +20s", "SCUDO (7 COLPI)", "POTERE CASUALE", "BOMBE AL LIMITE: 10", "NOME DEL PILOTA", "FOTO DEL PILOTA",
-"IMPOSTATA", "SCEGLI", "NOME AGGIORNATO", "FOTO AGGIORNATA", "FOTO INVARIATA", "QUALITÀ GRAFICA", "BASSA", "ATTIVO", "DISATTIVO", "APERTURA NEGOZIO...", "NEGOZIO NON DISPONIBILE", "ACQUISTO NON COMPLETATO", "ANNUNCI RIMOSSI - GRAZIE!", "CARICAMENTO ANNUNCIO...", "GUARDA UN ANNUNCIO E RICEVI:", "CONTINUA SENZA PREMIO", "IL TUO ULTIMO VELIVOLO È CADUTO!", "RINFORZI DI EMERGENZA", "SOVRACCARICO: NEMICI MOLTIPLICATI", "POTERI MANTENUTI CON IL TEMPO RIMASTO", "COMBO MIGLIORE", "MONETE TOTALI", "BAWAAN", "MULAI MISI",
-"PILIH PESAWAT", "OPSI GAME", "BEBAS IKLAN SELAMANYA", "TIM DAN TERIMA KASIH", "KELUAR GAME", "MATRIKS TAKTIS PESAWAT", "PENINGKATAN PERMANEN", "KEMBALI KE HANGAR", "KECEPATAN", "PERTAHANAN", "KENDALI", "SENJATA", "PASIF", "KECEPATAN TEMBAK", "Menambah frekuensi tembakan", "SEBARAN", "Menambah proyektil samping", "Rudal pengejar lebih kuat", "Memperkuat sinar energi", "Mengurangi kerusakan diterima", "KRITIS", "Menambah peluang serangan kritis", "BATAS SAAT INI - LANJUTKAN KAMPANYE", "TOKO POWER-UP", "AKHIRI MISI",
-"TEMBAK +20s", "SEBARAN +20s", "PERISAI (7 TEMBAKAN)", "KEKUATAN ACAK", "BOM", "BOM MAKSIMAL: 10", "NAMA PILOT", "FOTO PILOT", "DIATUR", "NAMA DIPERBARUI", "FOTO DIPERBARUI", "FOTO TIDAK BERUBAH", "KUALITAS GRAFIS", "RENDAH", "SEDANG", "TINGGI", "AKTIF", "NONAKTIF", "MEMBUKA TOKO...", "TOKO TIDAK TERSEDIA", "PEMBELIAN GAGAL", "IKLAN DIHAPUS - TERIMA KASIH!", "MEMUAT IKLAN...", "TONTON IKLAN DAN DAPATKAN:", "LANJUT TANPA HADIAH", "PESAWAT TERAKHIRMU JATUH!", "BALA BANTUAN DARURAT", "KELEBIHAN: MUSUH BERLIPAT",
-"KEKUATAN DISIMPAN DENGAN SISA WAKTU", "KOMBO TERBAIK", "TOTAL KOIN", "VARSAYILAN", "GÖREVE BAŞLA", "UÇAK SEÇ", "OYUN SEÇENEKLERİ", "SONSUZA DEK REKLAMSIZ", "EKİP VE TEŞEKKÜRLER", "OYUNDAN ÇIK", "TAKTİK UÇAK MATRİSİ", "KALICI YÜKSELTMELER", "HANGARA DÖN", "HIZ", "SAVUNMA", "SİLAH", "PASİF", "ATEŞ HIZI", "Atış sıklığını artırır", "YAYILIM", "Yan mermiler ekler", "FÜZELER", "Daha güçlü güdümlü füzeler", "LAZER", "Enerji ışınını güçlendirir", "Alınan hasarı azaltır", "KRİTİK", "Kritik vuruş şansını artırır", "MEVCUT SINIR - SEFERDE İLERLE",
-"GÜÇLENDİRME DÜKKANI", "GÖREVİ BİTİR", "HASAR +20s", "ATEŞ HIZI +20s", "YAYILIM +20s", "KALKAN (7 VURUŞ)", "RASTGELE GÜÇ", "BOMBA SINIRDA: 10", "PİLOT ADI", "PİLOT FOTOĞRAFI", "AYARLANDI", "AD GÜNCELLENDİ", "FOTOĞRAF GÜNCELLENDİ", "FOTOĞRAF DEĞİŞMEDİ", "GRAFİK KALİTESİ", "DÜŞÜK", "ORTA", "YÜKSEK", "AÇIK", "KAPALI", "MAĞAZA AÇILIYOR...", "MAĞAZA KULLANILAMIYOR", "SATIN ALMA TAMAMLANMADI", "REKLAMLAR KALDIRILDI - TEŞEKKÜRLER!", "REKLAM YÜKLENİYOR...", "REKLAM İZLE VE KAZAN:", "ÖDÜLSÜZ DEVAM ET", "SON UÇAĞIN DÜŞTÜ!",
-"ACİL TAKVİYE", "AŞIRI YÜK: DÜŞMANLAR ÇOĞALDI", "GÜÇLER KALAN SÜREYLE KORUNDU", "EN İYİ KOMBO", "TOPLAM PARA", "ПО УМОЛЧАНИЮ", "НАЧАТЬ МИССИЮ", "ВЫБРАТЬ САМОЛЁТ", "НАСТРОЙКИ ИГРЫ", "НАВСЕГДА БЕЗ РЕКЛАМЫ", "КОМАНДА И БЛАГОДАРНОСТИ", "ВЫЙТИ ИЗ ИГРЫ", "ТАКТИЧЕСКАЯ МАТРИЦА", "ПОСТОЯННЫЕ УЛУЧШЕНИЯ", "НАЗАД В АНГАР", "СКОРОСТЬ", "ЗАЩИТА", "УПРАВЛЯЕМОСТЬ", "ОРУЖИЕ", "ПАССИВКА", "СКОРОСТРЕЛЬНОСТЬ", "Увеличивает частоту выстрелов", "РАЗБРОС", "Добавляет боковые снаряды", "РАКЕТЫ", "Более мощные самонаводящиеся ракеты",
-"ЛАЗЕР", "Усиливает энергетический луч", "Снижает получаемый урон", "КРИТ", "Повышает шанс критического удара", "ТЕКУЩИЙ ПРЕДЕЛ - ПРОДВИГАЙТЕСЬ ДАЛЬШЕ", "МАГАЗИН УСИЛЕНИЙ", "ЗАВЕРШИТЬ МИССИЮ", "УРОН +20с", "СКОРОСТРЕЛЬНОСТЬ +20с", "РАЗБРОС +20с", "ЩИТ (7 УДАРОВ)", "СЛУЧАЙНАЯ СИЛА", "БОМБА", "БОМБ МАКСИМУМ: 10", "ИМЯ ПИЛОТА", "ФОТО ПИЛОТА", "ЗАДАНО", "ИМЯ ОБНОВЛЕНО", "ФОТО ОБНОВЛЕНО", "ФОТО НЕ ИЗМЕНЕНО", "КАЧЕСТВО ГРАФИКИ", "НИЗКОЕ", "СРЕДНЕЕ", "ВЫСОКОЕ", "УЛЬТРА", "ВКЛ", "ВЫКЛ", "ОТКРЫТИЕ МАГАЗИНА...", "МАГАЗИН НЕДОСТУПЕН",
-"ПОКУПКА НЕ ЗАВЕРШЕНА", "РЕКЛАМА УБРАНА - СПАСИБО!", "ЗАГРУЗКА РЕКЛАМЫ...", "ПОСМОТРИТЕ РЕКЛАМУ И ПОЛУЧИТЕ:", "ПРОДОЛЖИТЬ БЕЗ НАГРАДЫ", "ВАШ ПОСЛЕДНИЙ САМОЛЁТ СБИТ!", "ЭКСТРЕННОЕ ПОДКРЕПЛЕНИЕ", "ПЕРЕГРУЗКА: ВРАГОВ БОЛЬШЕ", "СИЛЫ СОХРАНЕНЫ С ОСТАВШИМСЯ ВРЕМЕНЕМ", "ЛУЧШЕЕ КОМБО", "ВСЕГО МОНЕТ", "機体の既定", "ミッション開始", "機体を選ぶ", "ゲーム設定", "ずっと広告なし", "チームと感謝", "ゲーム終了", "戦術機体マトリクス", "恒久強化", "ハンガーに戻る", "速度", "防御", "操作性", "武器", "パッシブ", "連射速度", "射撃の頻度を上げる", "拡散", "側面の弾を追加する", "より強力な追尾ミサイル", "レーザー", "エネルギー光線を増幅する", "受けるダメージを減らす",
-"クリティカル", "会心の一撃の確率を上げる", "現在の上限 - キャンペーンを進めよう", "パワーアップ商店", "ミッション終了", "ダメージ +20秒", "連射 +20秒", "拡散 +20秒", "シールド (7発)", "ランダムパワー", "ボム", "ボム上限: 10", "パイロット名", "パイロット写真", "設定済み", "選ぶ", "名前を更新しました", "写真を更新しました", "写真は変更なし", "画質", "低", "中", "高", "ウルトラ", "オン", "オフ", "ストアを開いています...", "ストア利用不可", "購入は完了しませんでした", "広告を削除しました - ありがとう!", "広告を読み込み中...", "広告を見て入手:", "報酬なしで続行", "最後の機体が撃墜された!", "緊急増援", "オーバーロード: 敵が増加", "残り時間とともに強化を維持", "最高コンボ", "総コイン", "exception", "singletonList(...)", "elements", "Index overflow has happened.",
-"title", "subtitle", "NeonButton(id=", ", rect=", ", title=", ", subtitle=", ", magenta=", "Streak(angle=", ", speed=", ", phase=", ", thickness=", ", blueShift=", "VertexArray", "VertexBufferObject", "VertexBufferObjectSubData", "VertexBufferObjectWithVAO", "Mesh attempting to access memory outside of the index buffer (count: ", ", offset: ", ", max: ", "und", "CA", "zh", "CN", "FR", "DE", "IT", "JP", "ko", "KR", "TW", "GB", "US", "texture cannot be null.", "List is empty.", "destination", "asList(...)", "Error reading file: ",
-"attributes must be >= 1", "vertex shader must not be null", "fragment shader must not be null", "Fragment shader:\n", "Vertex shader\n", "An attempted fetch uniform from uncompiled shader \n", "No uniform with name \'", "\' in shader", "a_normal", "u_sampler", "#ifdef GL_ES\nprecision mediump float;\n#endif\n", "uniform sampler2D u_sampler", "void main() {\n   gl_FragColor = ", "vec4(1, 1, 1, 1)", "v_col", " * ", " texture2D(u_sampler", ",  v_tex", ") *", ";\n}", "pairs", "null cannot be cast to non-null type kotlin.collections.Map<K of kotlin.collections.MapsKt__MapsKt.emptyMap, V of kotlin.collections.MapsKt__MapsKt.emptyMap>",
-"map", "Already prepared", "Call prepare() before calling getPixmap()", "This TextureData implementation does not upload data itself", "File is null, it does not exist: ", "Pixmap already disposed!", "unknown format: ", "Unknown Gdx2DPixmap Format: ", "Index: ", "element", "Empty list doesn\'t contain element at index ", "No buffer allocated!", "IndexBufferObject cannot be used after it has been disposed.", "data must be a ByteBuffer or FloatBuffer", "dst must be a ByteBuffer", "Can\'t copy to a ", " instance",
-"Buffers must be of same type or ByteBuffer", "buffer not allocated with newUnsafeByteBuffer or already disposed", "Couldn\'t create FreeType stroker, FreeType error code: ", "SourceOver", "NearestNeighbour", "BiLinear", "New position ", " is outside of range [0;", "Couldn\'t get glyph, FreeType error code: ", "Can only free direct buffer", "MirroredRepeat", "ClampToEdge", "Repeat", "BIG_ENDIAN", "LITTLE_ENDIAN", "Capacity is negative: ", " is not set", " at ", "[ByteBuffer position=", ", limit=", ", capacity=",
-", mark ", "Unknown Format: ", "Intensity", "LuminanceAlpha", "RGB565", "RGBA4444", "RGB888", "RGBA8888", "Index ", "This buffer is not allocated in linear memory and does not wrap native JS buffer", "FileType \'", "\' Not supported in web backend", "File not found: ", " (", "Classpath", "Internal", "External", "Absolute", "Local", "b", "i", "l", "f", "Couldn\'t flush preferences", "�", "Replacement preconditions do not hold", "UTF-8", "IGNORE", "REPLACE", "REPORT", "newAction must be non-null", "Pixmap", "Custom",
-"texture width and height must be square when using mipmapping.", "Malformed input of length ", "Unmappable characters of length ", "Binary", "Directory", "accent", "accent2", "aircraft", "ClickSpark(x=", ", y=", ", vx=", ", vy=", ", life=", "BRASIL", "ARLEY VARGAS", "AURORA BR-01", "Canhões duplos de íons", "Tempestade do Cruzeiro", "Combo aumenta o dano", "RÚSSIA", "IRINA VOLKOV", "BURAN RX-7", "Canhão de plasma pesado", "Pulso Glacial", "Blindagem absorve impacto", "ESTADOS UNIDOS", "MASON COLE", "EAGLE AX-9",
-"Gatling com munição traçante", "Ataque Águia", "Mísseis procuram alvos", "JAPÃO", "AIKO TANAKA", "RAIJIN JX-4", "Lasers gêmeos de precisão", "Corte do Trovão", "Drones energizam o feixe", "fill", "Point", "Line", "Filled", "other", "Desired length ", " is less than zero.", "List has more than one element.", "Collection is empty.", "Collection has more than one element.", "Limit must be non-negative, but was ", "country", "weaponStyle", "primary", "bodyColor", "accentColor", "AircraftDefinition(id=", ", country=",
-", pilot=", ", name=", ", weaponStyle=", ", primary=", ", special=", ", passive=", ", power=", ", defense=", ", control=", ", bodyColor=", ", accentColor=", "Pixmap has already been packed with name: ", ".9", "Page size too small for pixmap.", "Page size too small for pixmap: ", "  ", "(.+)_(\\d+)$", "Step must be non-zero.", "Step must be greater than Int.MIN_VALUE to avoid overflow on negation.", "added manager for application, ", " managers active", "Controllers", "NÍVEL DE AMEAÇA: ", "<", ">", "PROGRESSO: ",
-"/30", "FASE ", "SUB: ", "CHEFE: ", " - ", "PODERES: ", "NOME DO PILOTO: ", "FOTO DO PILOTO: ESCOLHER", "FOTO DO PILOTO: DEFINIDA", "   ", "ULTRA / 4K", "SKY VANGUARD: GLOBAL ASSAULT", "CONCEITO E DIREÇÃO: MESTRE ARLEY", "CAMPANHA: 5 PAÍSES E 30 FASES", "4 PILOTOS E AERONAVES ORIGINAIS", "POWER-UPS TEMPORÁRIOS COM ATIVAÇÃO MANUAL", "SPRITES ORIENTADOS PARA O JOGADOR", "Char sequence is empty.", "Action must be non-null", "RAPID", "HEAVY", "GATLING", "environment", "subBoss", "bossSprite", "stages", "Costa do Rio",
-"Litoral futurista e ilhas defensivas", "Caça Jaguar", "Porta-aviões Trovão", "ship_top", "Amazônia Oculta", "Rios, tempestades e bases na floresta", "Drone Harpia", "Plataforma Curupira", "turret_top", "Cerrado de Aço", "Planícies, refinarias e comboios blindados", "Tanque Lobo-Guará", "Fortaleza Anhanguera", "tank_missile", "São Paulo Neon", "Megacidade noturna e corredores aéreos", "Esquadrão Falcão", "Torre Bandeirante", "Atlântico em Guerra", "Tempestade, navios e plataformas oceânicas", "Submarino Abissal",
-"Cruzador Iara", "Pantanal Ômega", "Pântanos militarizados e usinas móveis", "Colosso Jacaré", "Guardião Tupã", "bomber_gray", "Operação Cruzeiro", "Deserto de Nevada", "Bases secretas e cânions", "Interceptador Raptor", "Trem Blindado Liberty", "tank_top", "Costa da Califórnia", "Portos, pontes e frotas automatizadas", "Drone Seeker", "Cruzador Pacific", "Chicago de Ferro", "Arranha-céus e fábricas bélicas", "Torre Sentinel", "Aranha Mecânica Union", "Montanhas Rochosas", "Neve, radares e silos de mísseis",
-"Tanque Grizzly", "Fortaleza Eagle", "Nova York Sitiada", "Cidade em evacuação e enxames de drones", "Esquadrão Phantom", "Colosso Manhattan", "Pentágono ORION", "Complexo subterrâneo de comando", "Guardião Patriot", "Núcleo Liberty Prime", "Escudo Continental", "Tóquio Neon", "Chuva, trens e letreiros holográficos", "Caça Kitsune", "Mecha Shogun", "Baía de Osaka", "Portos automatizados e navios-drones", "Submarino Kappa", "Cruzador Yamabiko", "Monte Fuji", "Cinzas vulcânicas e laboratórios ocultos", "Drone Tengu",
-"Fortaleza Oni", "Kyoto Cibernética", "Templos tecnológicos e defesas laser", "Torre Ronin", "Dragão Mecânico", "Hokkaido Glacial", "Nevasca, bases e tanques de plasma", "Tanque Yuki", "Colosso Susanoo", "Elevador Orbital", "Ascensão da atmosfera até o espaço", "Guardião Amaterasu", "Raijin Omega", "Tempestade Raijin", "Sibéria Congelada", "Florestas nevadas e comboios pesados", "Tanque Volk", "Fortaleza Boreal", "Mar de Barents", "Gelo quebrado, submarinos e tempestades", "Submarino Moroz", "Leviatã Ártico",
-"sub_top", "Moscou Escarlate", "Defesas urbanas e canhões de energia", "Torre Kremlin", "Titã Moscóvia", "Urais Industriais", "Minas, fundições e trens de guerra", "Colosso Ural", "Forja Perun", "Cosmódromo Baikonur", "Foguetes, hangares e plataformas aéreas", "Interceptor Sputnik", "Cidadela Vostok", "Órbita Soviética", "Satélites armados e destroços espaciais", "Guardião Zarya", "Coração de Kosmos", "Inverno Vermelho", "Costa de Roma", "Ruínas costeiras e baterias automatizadas", "Caça Lupo", "Cruzador Roma",
-"Veneza Submersa", "Canais, tempestades e drones anfíbios", "Submarino Gondola", "Leviatã Adriático", "Alpes de Titânio", "Montanhas, túneis e fortalezas aéreas", "Tanque Alpino", "Colosso Dolomita", "Milão Mecânica", "Torres industriais e tráfego aéreo", "Torre Duomo", "Arquiteto Nero", "Vesúvio em Chamas", "Lava, cinzas e usinas geotérmicas", "Drone Vulcano", "Imperador Magma", "Fortaleza Mediterrânea", "Batalha final sobre o mar e a órbita", "Guardião Centurião", "ORION Imperator", "ITÁLIA", "Cerco Mediterrâneo",
-"getter", "setter", "Toggle(key=", ", getter=", ", setter=", "begin must be called before end.", "index can\'t be > size: ", "bounces cannot be < 2 or > 5: ", "Step is zero.", "standard", "entries", "CountryCampaign(name=", ", difficultyScale=", ", stages=", "sprite", "StageSeed(name=", ", environment=", ", subBoss=", ", boss=", ", sprite=", "StageDefinition(globalIndex=", ", countryIndex=", ", bossSprite=", "Digite seu nome de piloto", "ABRINDO GALERIA...", "https://sites.google.com/view/vanguardglobalassault",
-"prepare() must not be called on a PixmapTextureData instance as it is already prepared.", "ENERGY", "FIRE_RATE", "MULTIPLIER", "DRONE", "MAGNET", "CHAIN", "REGEN", "PHOENIX", "ORBITAL", "TIME_CORE", "BLACK_HOLE", "BERSERK", "REFLECTOR", "CLONE", "createDownloadListener.onSuccess.afterUpdate path=", "writing file path=", "createDownloadListener.onSuccess", "write error path=", "Error writing file: ", "write stream closed path=", "line=", "Invalid assets description. ", "1", "c", "$this$DelimitedRangesSequence",
-"ParagraphBySpace", "ParagraphByGlyph", "WrappedLinesBySpace", "WrappedLinesByGlyph", "AllLinesBySpace", "AllLinesByGlyph", "Asset download failed: ", "createDownloadListener.onFailure.afterUpdate path=", ", hasResult=", "Asset download success: ", "Logical", "Pixels", "Couldn\'t render glyph, FreeType error code: ", "Glyph is not yet rendered", "ARSENAL NEXUS", "_d", "backgrounds/stage_00.jpg", "backgrounds/stage_01.jpg", "backgrounds/stage_02.jpg", "backgrounds/stage_03.jpg", "backgrounds/stage_04.jpg", "backgrounds/stage_05.jpg",
-"backgrounds/stage_06.jpg", "backgrounds/stage_07.jpg", "backgrounds/stage_08.jpg", "backgrounds/stage_09.jpg", "backgrounds/stage_10.jpg", "backgrounds/stage_11.jpg", "backgrounds/stage_12.jpg", "backgrounds/stage_13.jpg", "backgrounds/stage_14.jpg", "backgrounds/stage_15.jpg", "backgrounds/stage_16.jpg", "backgrounds/stage_17.jpg", "backgrounds/stage_18.jpg", "backgrounds/stage_19.jpg", "backgrounds/stage_20.jpg", "backgrounds/stage_21.jpg", "backgrounds/stage_22.jpg", "backgrounds/stage_23.jpg", "backgrounds/stage_24.jpg",
-"backgrounds/stage_25.jpg", "backgrounds/stage_26.jpg", "backgrounds/stage_27.jpg", "backgrounds/stage_28.jpg", "backgrounds/stage_29.jpg", "lastCountry", "fase", "fighter_red", "sprites/enemies/fighter_red.png", "sprites/enemies/bomber_gray.png", "drone_blue", "sprites/enemies/drone_blue.png", "tank_front", "sprites/enemies/tank_front.png", "sprites/enemies/tank_top.png", "sprites/enemies/tank_missile.png", "sprites/enemies/turret_top.png", "turret_green", "sprites/enemies/turret_green.png", "sprites/enemies/ship_top.png",
-"sub_front", "sprites/enemies/sub_front.png", "sprites/enemies/sub_top.png", "scout_new", "sprites/enemies/scout_new.png", "striker_new", "sprites/enemies/striker_new.png", "drone_new", "sprites/enemies/drone_new.png", "bomber_new", "sprites/enemies/bomber_new.png", "tank_new", "sprites/enemies/tank_new.png", "e_jet", "sprites/enemies/e_jet.png", "e_gunship", "sprites/enemies/e_gunship.png", "e_heli", "sprites/enemies/e_heli.png", "e_pod", "sprites/enemies/e_pod.png", "e_ship_0", "sprites/enemies/e_ship_0.png",
-"e_ship_1", "sprites/enemies/e_ship_1.png", "e_ship_2", "sprites/enemies/e_ship_2.png", "e_ship_3", "sprites/enemies/e_ship_3.png", "e_ship_4", "sprites/enemies/e_ship_4.png", "e_ship_5", "sprites/enemies/e_ship_5.png", "e_tank_", "sprites/enemies/e_tank_", "e_base_0", "sprites/enemies/e_base_0.png", "e_base_1", "sprites/enemies/e_base_1.png", "e_base_2", "sprites/enemies/e_base_2.png", "boss_0", "sprites/enemies/boss_0.png", "boss_1", "sprites/enemies/boss_1.png", "boss_2", "sprites/enemies/boss_2.png", "boss_3",
-"sprites/enemies/boss_3.png", "boss_4", "sprites/enemies/boss_4.png", "boss_5", "sprites/enemies/boss_5.png", "e_tank_0", "e_tank_1", "e_tank_2", "e_tank_3", "e_tank_4", "e_tank_5", "e_tank_6", "boss_", "copyOf(...)", "ROF", "SPR", "MIS", "LAS", "SHD", "BMB", "MLT", "DRN", "MAG", "CRT", "CHN", "ARM", "REG", "PHX", "ORB", "TIM", "BLK", "BRK", "RFL", "CLN", "DMG", "Requested element count ", "center", "vee", "sine", "cross", "columns", "spread", "line", "comparator", "pattern", " ATIVADO", " DESLIGADO", "e_ship_",
-"e_base_", "NÚCLEO ", " — CHEFE ENFURECIDO", " MOEDA", "singleton(...)", "AERONAVE ABATIDA!", "+1 VIDA  E  +2 BOMBAS", "GAMEPAD: A = ASSISTIR   B = RECUSAR", "R", "A", "M", "L", "E", "B", "X", "I", "C", "T", "O", "G", "F", "Q", "H", "K", "V", "Z", "P", "toString(...)", " x", " — ", "COMBO x", "  +", "  -  ESCUDO ", "UP +", "UP -", "MOEDAS: ", "PODERES TEMPORÁRIOS — TOQUE PARA ATIVAR/DESATIVAR", " N", " MOEDAS", "PODER ATIVO CONSOME TEMPO. DESATIVADO PRESERVA OS SEGUNDOS.", " COMPRADO", "description", "Offer(power=",
-", description=", ", baseCost=", "DONE ignored because already settled url=", "label", "ShopOffer(label=", ", cost=", "initializer", ", status=", ", loaded=", ", total=", ", percent=", "offset + length must be <= size: ", "IndexedDB Error removing file: ", "Default", "NumberPad", "PhonePad", "Email", "Password", "URI", "notWrapped", "wrapped", "lastWrapped", "CLEAR", "CLEAR_WHITE", "BLACK", "LIGHT_GRAY", "GRAY", "DARK_GRAY", "BLUE", "NAVY", "ROYAL", "SLATE", "SKY", "CYAN", "TEAL", "GREEN", "CHARTREUSE", "LIME",
-"FOREST", "OLIVE", "YELLOW", "GOLD", "GOLDENROD", "ORANGE", "BROWN", "TAN", "FIREBRICK", "RED", "SCARLET", "CORAL", "SALMON", "PINK", "MAGENTA", "PURPLE", "VIOLET", "MAROON", "texture", "muzzles", "EnemyVisual(texture=", ", width=", ", height=", ", rotation=", ", collisionRadius=", ", muzzles=", "SCOUT", "STRIKER", "BOMBER", "TANK", "MINIBOSS", "WaveEvent(time=", ", count=", ", pattern=", " - FASE ", ": x", "onDone", "br_1", "br_2", "jp_full", "videos/end_", ".mp4", "assetPaths", "onFinished", "tex", "desc",
-"REGRESSA COMO HERÓI", "RETURNS A HERO", "MISSÃO CUMPRIDA", "GALERIA DE AMEAÇAS", "THREAT GALLERY", "GUARDIÃO TUPÃ", "Brasil · Chefe final", "Brazil · Final boss", "LIBERTY PRIME", "EUA · Chefe final", "USA · Final boss", "RAIJIN OMEGA", "Japão · Chefe final", "Japan · Final boss", "CORAÇÃO DE KOSMOS", "Rússia · Chefe final", "Russia · Final boss", "ORION IMPERATOR", "Itália · Chefe final", "Italy · Final boss", "MECHA SHOGUN", "Japão · Chefe intermediário", "Japan · Mid boss", "INTERCEPTOR VESPA", "Caça leve e veloz",
-"Fast light fighter", "GUNSHIP TROVÃO", "Nave de ataque pesada", "Heavy attack gunship", "HELICÓPTERO HARPIA", "Metralha em voo rasante", "Strafing helicopter", "sprites/enemies/e_tank_0.png", "TANQUE LOBO-GUARÁ", "Blindado de superfície", "Armored ground tank", "CORVETA ABISSO", "Navio lança-mísseis", "Missile warship", "BATERIA COSTEIRA", "Base fixa antiaérea", "Fixed AA emplacement", "POD SENTINELA", "Drone orbital vigia", "Orbital sentry drone", "EQUIPE", "STAFF", "CONCEPT & DIRECTION: MASTER ARLEY", "5 PAÍSES · 30 FASES · 4 AERONAVES",
-"5 NATIONS · 30 STAGES · 4 AIRCRAFT", "FEITO COM LIBGDX + KOTLIN", "BUILT WITH LIBGDX + KOTLIN", "OBRIGADO POR JOGAR, PILOTO.", "THANK YOU FOR PLAYING, PILOT.", "FIM", "THE END", "FIVE NATIONS. ONE UNITED FRONT.", "FROM THE COAST OF BRAZIL TO THE ORBIT OVER ITALY,", "THE SKY VANGUARD PILOTS BROKE THE ORION INVASION.", "THE SKIES ARE SILENT NOW — AND THEY ARE COMING HOME.", "CINCO NAÇÕES. UMA SÓ FRENTE DE BATALHA.", "DO LITORAL DO BRASIL ATÉ A ÓRBITA DA ITÁLIA,", "OS PILOTOS DA SKY VANGUARD DERRUBARAM A INVASÃO ORION.",
-"AGORA O CÉU ESTÁ EM SILÊNCIO — E ELES VOLTAM PARA CASA.", "PULAR", "SKIP", "CANNON", "PLASMA", "TRACER", "SonicWave(originX=", ", originY=", ", radius=", ", delay=", ", damage=", "ReinforcementOrder(type=", ", remaining=", ", serial=", "value", "substring(...)", "LIGHT", "FOTO DO PILOTO ATUALIZADA", "CADENCIA DE TIRO", "TIRO TRIPLO", "ENERGIA", "UPGRADE", "+500 MOEDAS  +  ", "i:b:/audio/boss_warning.wav:39734:1", "i:b:/audio/click.wav:3572:1", "i:b:/audio/explosion.wav:24298:1", "i:b:/audio/fase1.ogg:813393:1",
-"i:b:/audio/fase10.ogg:980900:1", "i:b:/audio/fase11.ogg:219592:1", "i:b:/audio/fase12.ogg:528733:1", "i:b:/audio/fase13.ogg:301534:1", "i:b:/audio/fase14.ogg:280632:1", "i:b:/audio/fase15.ogg:317800:1", "i:b:/audio/fase2.ogg:675440:1", "i:b:/audio/fase3.ogg:328609:1", "i:b:/audio/fase4.ogg:328609:1", "i:b:/audio/fase5.ogg:855034:1", "i:b:/audio/fase6.ogg:282945:1", "i:b:/audio/fase7.ogg:408356:1", "i:b:/audio/fase8.ogg:695377:1", "i:b:/audio/fase9.ogg:695377:1", "i:b:/audio/hangar.ogg:438896:1", "i:b:/audio/menu.ogg:1202324:1",
-"i:b:/audio/menu_music.wav:352844:1", "i:b:/audio/powerup.wav:11068:1", "i:b:/audio/shield.wav:22094:1", "i:b:/audio/shot.wav:3130:1", "i:b:/audio/special.wav:39734:1", "i:b:/audio/stage_music.wav:352844:1", "i:b:/audio/tela upgrade.ogg:697872:1", "i:b:/backgrounds/stage_00.jpg:532220:1", "i:b:/backgrounds/stage_01.jpg:485053:1", "i:b:/backgrounds/stage_02.jpg:426433:1", "i:b:/backgrounds/stage_03.jpg:437812:1", "i:b:/backgrounds/stage_04.jpg:413546:1", "i:b:/backgrounds/stage_05.jpg:566604:1", "i:b:/backgrounds/stage_06.jpg:474180:1",
-"i:b:/backgrounds/stage_07.jpg:532658:1", "i:b:/backgrounds/stage_08.jpg:492756:1", "i:b:/backgrounds/stage_09.jpg:578934:1", "i:b:/backgrounds/stage_10.jpg:530075:1", "i:b:/backgrounds/stage_11.jpg:540193:1", "i:b:/backgrounds/stage_12.jpg:408294:1", "i:b:/backgrounds/stage_13.jpg:454960:1", "i:b:/backgrounds/stage_14.jpg:389324:1", "i:b:/backgrounds/stage_15.jpg:439509:1", "i:b:/backgrounds/stage_16.jpg:472245:1", "i:b:/backgrounds/stage_17.jpg:556022:1", "i:b:/backgrounds/stage_18.jpg:445499:1", "i:b:/backgrounds/stage_19.jpg:556022:1",
-"i:b:/backgrounds/stage_20.jpg:506271:1", "i:b:/backgrounds/stage_21.jpg:574565:1", "i:b:/backgrounds/stage_22.jpg:455773:1", "i:b:/backgrounds/stage_23.jpg:545564:1", "i:b:/backgrounds/stage_24.jpg:532220:1", "i:b:/backgrounds/stage_25.jpg:454960:1", "i:b:/backgrounds/stage_26.jpg:578934:1", "i:b:/backgrounds/stage_27.jpg:509101:1", "i:b:/backgrounds/stage_28.jpg:389324:1", "i:b:/backgrounds/stage_29.jpg:437812:1", "i:b:/data/aircraft.json:1107:1", "i:b:/data/bosses.json:137:1", "i:b:/data/campaign_30_stages.json:7170:1",
-"i:b:/data/difficulty.json:210:1", "i:b:/data/enemies.json:344:1", "i:b:/data/pilots.json:542:1", "i:b:/data/upgrades.json:1087:1", "i:b:/fonts/noto_bold.ttf:27528:1", "i:b:/fonts/noto_jp_bold.ttf:120864:1", "i:b:/fonts/noto_jp_regular.ttf:119588:1", "i:b:/fonts/noto_regular.ttf:27572:1", "i:b:/fonts/OFL_rajdhani.txt:4373:1", "i:b:/fonts/rajdhani_bold.ttf:31776:1", "i:b:/fonts/rajdhani_medium.ttf:29480:1", "i:b:/menu_background_4k.png:317009:1", "i:b:/menu_main_hd.jpg:273772:1", "i:b:/sprites/enemies/bomber_gray.png:17750:1",
-"i:b:/sprites/enemies/boss_0.png:25871:1", "i:b:/sprites/enemies/boss_1.png:17494:1", "i:b:/sprites/enemies/boss_2.png:33211:1", "i:b:/sprites/enemies/boss_3.png:25895:1", "i:b:/sprites/enemies/boss_4.png:23717:1", "i:b:/sprites/enemies/boss_5.png:23328:1", "i:b:/sprites/enemies/drone_blue.png:15229:1", "i:b:/sprites/enemies/e_base_0.png:18018:1", "i:b:/sprites/enemies/e_base_1.png:24378:1", "i:b:/sprites/enemies/e_base_2.png:12784:1", "i:b:/sprites/enemies/e_gunship.png:17750:1", "i:b:/sprites/enemies/e_heli.png:19011:1",
-"i:b:/sprites/enemies/e_jet.png:27775:1", "i:b:/sprites/enemies/e_pod.png:15229:1", "i:b:/sprites/enemies/e_ship_0.png:13645:1", "i:b:/sprites/enemies/e_ship_1.png:8077:1", "i:b:/sprites/enemies/e_ship_2.png:15584:1", "i:b:/sprites/enemies/e_ship_3.png:14019:1", "i:b:/sprites/enemies/e_ship_4.png:12814:1", "i:b:/sprites/enemies/e_ship_5.png:8477:1", "i:b:/sprites/enemies/e_tank_0.png:16641:1", "i:b:/sprites/enemies/e_tank_1.png:23057:1", "i:b:/sprites/enemies/e_tank_2.png:22797:1", "i:b:/sprites/enemies/e_tank_3.png:20049:1",
-"i:b:/sprites/enemies/e_tank_4.png:11901:1", "i:b:/sprites/enemies/e_tank_5.png:7177:1", "i:b:/sprites/enemies/e_tank_6.png:13317:1", "i:b:/sprites/enemies/fighter_red.png:15476:1", "i:b:/sprites/enemies/ship_top.png:8077:1", "i:b:/sprites/enemies/sub_front.png:12814:1", "i:b:/sprites/enemies/sub_top.png:8477:1", "i:b:/sprites/enemies/tank_front.png:23057:1", "i:b:/sprites/enemies/tank_missile.png:20049:1", "i:b:/sprites/enemies/tank_top.png:22797:1", "i:b:/sprites/enemies/turret_green.png:12784:1", "i:b:/sprites/enemies/turret_top.png:24378:1",
-"i:b:/sprites/player/drone_0.png:16798:1", "i:b:/sprites/player/drone_1.png:15361:1", "i:b:/sprites/player/drone_2.png:13649:1", "i:b:/sprites/player/drone_3.png:15052:1", "i:b:/sprites/player/missile.png:5295:1", "i:b:/sprites/player/missile2.png:5242:1", "i:b:/sprites/player/pilot_1_brasil.png:16273:1", "i:b:/sprites/player/ship_0.png:19073:1", "i:b:/sprites/player/ship_1.png:18027:1", "i:b:/sprites/player/ship_2.png:17760:1", "i:b:/sprites/player/ship_3.png:18391:1", "c:b:/com/badlogic/gdx/utils/lsans-15.fnt:17711:1",
-"c:b:/com/badlogic/gdx/utils/lsans-15.png:10270:1", "c:b:/com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:820:1", "c:b:/com/badlogic/gdx/graphics/g3d/particles/particles.vertex.glsl:2886:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/default.fragment.glsl:5874:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/default.vertex.glsl:9096:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/depth.fragment.glsl:869:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/depth.vertex.glsl:2931:1"]);
+"null cannot be cast to non-null type kotlin.ranges.IntRange", "range", "null cannot be cast to non-null type java.lang.String", "Script download success: ", "Script download failed: ", "IndexedDB Error putting file: ", "Cannot coerce value to an empty range: maximum ", " is less than minimum ", "...", "separator", "prefix", "postfix", "truncated", "buffer", "pt", "en", "es", "de", "fr", "it", "id", "tr", "ru", "ja", "PORTUGUES", "ENGLISH", "ESPANOL", "DEUTSCH", "FRANCAIS", "ITALIANO", "INDONESIA", "TURKCE",
+"РУССКИЙ", "日本語", "play", "JOGAR", "pilot", "PILOTO", "pause", "PAUSADO", "resume", "CONTINUAR", "restart", "REINICIAR", "MENU PRINCIPAL", "victory", "MISSÃO CONCLUÍDA", "defeat", "AERONAVE ABATIDA", "score", "PONTUAÇÃO", "highscore", "RECORDE", "combo", "COMBO", "ESCUDO", "ESPECIAL", "DIFICULDADE", "recruit", "RECRUTA", "pilot_difficulty", "ace", "ÁS", "legend", "LENDA", "back", "VOLTAR", "privacy", "POLÍTICA DE PRIVACIDADE", "tap_drag", "ARRASTE PARA PILOTAR", "boss", "ALERTA DE CHEFE", "subboss", "SUBCHEFE",
+"grade", "CLASSIFICAÇÃO", "earned", "MOEDAS COLETADAS", "music", "MÚSICA", "sfx", "EFEITOS SONOROS", "VIBRAÇÃO", "flash", "REDUZIR FLASHES", "hitbox", "MOSTRAR COLISÃO", "select", "SELECIONAR", "selected", "SELECIONADA", "next", "PRÓXIMA FASE", "locked", "BLOQUEADA", "upgrades", "UPGRADES ACUMULADOS", "IDIOMA", "control", "CONTROLE", "ctrl_auto", "TIRO AUTOMÁTICO", "ctrl_pad", "GAMEPAD", "ctrl_touch", "BOTÕES NA TELA", "ANÚNCIOS OFF", "buy", "COMPRAR", "coins", "MOEDAS", "no_coins", "MOEDAS INSUFICIENTES", "bought",
+"AERONAVE ADQUIRIDA!", "upgrade_shop", "LOJA DE UPGRADES", "level", "NÍVEL", "max_now", "MÁXIMO POR AGORA", "life", "VIDA", "armor", "BLINDAGEM", "ships", "NAVES", "time", "TEMPO", "targets", "ALVOS", "power", "PODER", "stage", "FASE", "fire", "TIRO", "missile", "MÍSSIL", "aim", "MIRA", "aim_on", "MIRA ATIVA", "aim_tap", "TOQUE NO ALVO", "shield_broken", "ESCUDO DO CHEFE QUEBRADO!", "subboss_down", "SUBCHEFE ABATIDO!", "missile_warn", "MÍSSEIS TRAVADOS! DESVIE!", "ship_down", "NAVE ABATIDA!", "remaining", "RESTAM",
+"shield_renew", "ESCUDO REATIVADO!", "RECOMPENSA", "watch_ad", "ASSISTIR ANÚNCIO", "no_thanks", "AGORA NÃO", "PLAY", "CAMPAIGN", "SETTINGS", "CREDITS", "EXIT", "PILOT", "PAUSED", "RESUME", "RESTART", "MAIN MENU", "MISSION COMPLETE", "AIRCRAFT DOWN", "SCORE", "HIGH SCORE", "SHIELD", "SPECIAL", "DIFFICULTY", "RECRUIT", "ACE", "LEGEND", "BACK", "PRIVACY POLICY", "DRAG TO FLY", "BOSS WARNING", "SUB-BOSS", "GRADE", "COINS COLLECTED", "MUSIC", "SOUND EFFECTS", "VIBRATION", "REDUCE FLASHES", "SHOW HITBOX", "SELECT",
+"SELECTED", "NEXT STAGE", "LOCKED", "STACKED UPGRADES", "LANGUAGE", "CONTROLS", "AUTO FIRE", "ON-SCREEN BUTTONS", "REMOVE ADS", "ADS OFF", "BUY", "COINS", "NOT ENOUGH COINS", "AIRCRAFT PURCHASED!", "UPGRADE SHOP", "LEVEL", "MAX FOR NOW", "LIFE", "ARMOR", "SHIPS", "TIME", "TARGETS", "POWER", "STAGE", "FIRE", "MISSILE", "LOCK", "LOCK ON", "TAP TARGET", "BOSS SHIELD DOWN!", "SUB-BOSS DEFEATED!", "MISSILES LOCKED! DODGE!", "SHIP DOWN!", "LEFT", "SHIELD RESTORED!", "REWARD", "WATCH AD", "NOT NOW", "JUGAR", "CAMPAÑA",
+"AJUSTES", "SALIR", "PAUSA", "MENÚ PRINCIPAL", "MISIÓN COMPLETA", "NAVE DERRIBADA", "PUNTUACIÓN", "RÉCORD", "DIFICULTAD", "RECLUTA", "AS", "LEYENDA", "VOLVER", "POLÍTICA DE PRIVACIDAD", "ARRASTRA PARA VOLAR", "ALERTA DE JEFE", "SUBJEFE", "CALIFICACIÓN", "MONEDAS OBTENIDAS", "EFECTOS DE SONIDO", "VIBRACIÓN", "REDUCIR DESTELLOS", "MOSTRAR COLISIÓN", "SELECCIONAR", "SELECCIONADA", "SIGUIENTE FASE", "MEJORAS ACUMULADAS", "CONTROLES", "DISPARO AUTOMÁTICO", "MANDO", "BOTONES EN PANTALLA", "QUITAR ANUNCIOS", "SIN ANUNCIOS",
+"MONEDAS", "MONEDAS INSUFICIENTES", "¡NAVE ADQUIRIDA!", "TIENDA DE MEJORAS", "NIVEL", "MÁXIMO POR AHORA", "BLINDAJE", "TIEMPO", "OBJETIVOS", "POTENCIA", "DISPARO", "MISIL", "FIJAR", "FIJADO", "TOCA EL OBJETIVO", "¡ESCUDO DEL JEFE ROTO!", "¡SUBJEFE DERROTADO!", "¡MISILES FIJADOS! ¡ESQUIVA!", "¡NAVE DERRIBADA!", "QUEDAN", "¡ESCUDO RESTAURADO!", "VER ANUNCIO", "AHORA NO", "SPIELEN", "KAMPAGNE", "EINSTELLUNGEN", "BEENDEN", "PAUSE", "FORTSETZEN", "NEUSTART", "HAUPTMENÜ", "MISSION ERFÜLLT", "JÄGER ABGESCHOSSEN", "PUNKTE",
+"REKORD", "SCHILD", "SPEZIAL", "SCHWIERIGKEIT", "REKRUT", "ASS", "LEGENDE", "ZURÜCK", "DATENSCHUTZ", "ZIEHEN ZUM FLIEGEN", "BOSS-ALARM", "UNTERBOSS", "WERTUNG", "MÜNZEN GESAMMELT", "MUSIK", "SOUNDEFFEKTE", "BLITZE REDUZIEREN", "TREFFERZONE ZEIGEN", "WÄHLEN", "GEWÄHLT", "NÄCHSTE STUFE", "GESPERRT", "GESAMMELTE UPGRADES", "SPRACHE", "STEUERUNG", "AUTOMATISCH FEUERN", "BILDSCHIRMTASTEN", "WERBUNG ENTFERNEN", "KEINE WERBUNG", "KAUFEN", "MÜNZEN", "NICHT GENUG MÜNZEN", "JÄGER GEKAUFT!", "UPGRADE-SHOP", "STUFE", "MAXIMUM VORERST",
+"LEBEN", "PANZERUNG", "SCHIFFE", "ZEIT", "ZIELE", "STÄRKE", "FEUER", "RAKETE", "ZIEL", "ZIEL FIXIERT", "ZIEL ANTIPPEN", "BOSS-SCHILD ZERSTÖRT!", "UNTERBOSS BESIEGT!", "RAKETEN ERFASST! AUSWEICHEN!", "SCHIFF VERLOREN!", "ÜBRIG", "SCHILD WIEDERHERGESTELLT!", "BELOHNUNG", "WERBUNG ANSEHEN", "JETZT NICHT", "JOUER", "CAMPAGNE", "PARAMÈTRES", "CRÉDITS", "QUITTER", "PILOTE", "REPRENDRE", "RECOMMENCER", "MISSION ACCOMPLIE", "APPAREIL ABATTU", "RECORD", "BOUCLIER", "SPÉCIAL", "DIFFICULTÉ", "RECRUE", "LÉGENDE", "RETOUR",
+"CONFIDENTIALITÉ", "GLISSEZ POUR VOLER", "ALERTE BOSS", "SOUS-BOSS", "NOTE", "PIÈCES OBTENUES", "MUSIQUE", "EFFETS SONORES", "RÉDUIRE LES FLASHS", "AFFICHER COLLISION", "CHOISIR", "CHOISI", "NIVEAU SUIVANT", "VERROUILLÉ", "AMÉLIORATIONS CUMULÉES", "LANGUE", "COMMANDES", "TIR AUTOMATIQUE", "MANETTE", "BOUTONS À L\'ÉCRAN", "SUPPRIMER LES PUBS", "SANS PUBS", "ACHETER", "PIÈCES", "PIÈCES INSUFFISANTES", "APPAREIL ACHETÉ !", "BOUTIQUE D\'AMÉLIORATIONS", "NIVEAU", "MAXIMUM ACTUEL", "VIE", "BLINDAGE", "VAISSEAUX",
+"TEMPS", "CIBLES", "PUISSANCE", "TIR", "VERROU", "TOUCHEZ LA CIBLE", "BOUCLIER DU BOSS BRISÉ !", "SOUS-BOSS VAINCU !", "MISSILES VERROUILLÉS ! ESQUIVEZ !", "VAISSEAU PERDU !", "RESTANTS", "BOUCLIER RESTAURÉ !", "RÉCOMPENSE", "REGARDER LA PUB", "PAS MAINTENANT", "GIOCA", "CAMPAGNA", "IMPOSTAZIONI", "CREDITI", "ESCI", "PILOTA", "RIPRENDI", "RIAVVIA", "MENU PRINCIPALE", "MISSIONE COMPLETATA", "VELIVOLO ABBATTUTO", "PUNTEGGIO", "SCUDO", "SPECIALE", "DIFFICOLTÀ", "ASSO", "LEGGENDA", "INDIETRO", "PRIVACY", "TRASCINA PER VOLARE",
+"ALLARME BOSS", "SOTTO-BOSS", "VALUTAZIONE", "MONETE RACCOLTE", "MUSICA", "EFFETTI SONORI", "VIBRAZIONE", "RIDUCI I LAMPI", "MOSTRA COLLISIONE", "SELEZIONA", "SELEZIONATO", "LIVELLO SUCCESSIVO", "BLOCCATO", "POTENZIAMENTI ACCUMULATI", "LINGUA", "COMANDI", "FUOCO AUTOMATICO", "CONTROLLER", "PULSANTI A SCHERMO", "RIMUOVI ANNUNCI", "SENZA ANNUNCI", "ACQUISTA", "MONETE", "MONETE INSUFFICIENTI", "VELIVOLO ACQUISTATO!", "NEGOZIO POTENZIAMENTI", "LIVELLO", "MASSIMO PER ORA", "VITA", "CORAZZA", "NAVI", "BERSAGLI", "POTENZA",
+"FUOCO", "MIRA FISSA", "TOCCA IL BERSAGLIO", "SCUDO DEL BOSS DISTRUTTO!", "SOTTO-BOSS SCONFITTO!", "MISSILI AGGANCIATI! SCHIVA!", "NAVE ABBATTUTA!", "RIMASTE", "SCUDO RIPRISTINATO!", "RICOMPENSA", "GUARDA L\'ANNUNCIO", "NON ORA", "MAIN", "KAMPANYE", "PENGATURAN", "KREDIT", "KELUAR", "JEDA", "LANJUTKAN", "ULANGI", "MENU UTAMA", "MISI SELESAI", "PESAWAT JATUH", "SKOR", "REKOR", "KOMBO", "PERISAI", "SPESIAL", "KESULITAN", "LEGENDA", "KEMBALI", "KEBIJAKAN PRIVASI", "GESER UNTUK TERBANG", "PERINGATAN BOS", "SUB-BOS",
+"NILAI", "KOIN TERKUMPUL", "EFEK SUARA", "GETARAN", "KURANGI KILATAN", "TAMPILKAN TABRAKAN", "PILIH", "TERPILIH", "TAHAP BERIKUTNYA", "TERKUNCI", "PENINGKATAN TERKUMPUL", "BAHASA", "KONTROL", "TEMBAK OTOMATIS", "TOMBOL LAYAR", "HAPUS IKLAN", "TANPA IKLAN", "BELI", "KOIN", "KOIN TIDAK CUKUP", "PESAWAT DIBELI!", "TOKO PENINGKATAN", "MAKSIMAL SAAT INI", "NYAWA", "BAJA", "PESAWAT", "WAKTU", "TARGET", "KEKUATAN", "TAHAP", "TEMBAK", "RUDAL", "KUNCI", "SENTUH TARGET", "PERISAI BOS HANCUR!", "SUB-BOS DIKALAHKAN!", "RUDAL TERKUNCI! HINDARI!",
+"PESAWAT JATUH!", "SISA", "PERISAI PULIH!", "HADIAH", "TONTON IKLAN", "NANTI SAJA", "OYNA", "SEFER", "AYARLAR", "EMEĞI GEÇENLER", "ÇIKIŞ", "PİLOT", "DURAKLATILDI", "DEVAM ET", "YENIDEN BAŞLAT", "ANA MENÜ", "GÖREV TAMAMLANDI", "UÇAK DÜŞTÜ", "PUAN", "KALKAN", "ÖZEL", "ZORLUK", "ACEMİ", "EFSANE", "GERİ", "GİZLİLİK POLİTİKASI", "UÇMAK İÇİN SÜRÜKLE", "PATRON UYARISI", "ALT PATRON", "DERECE", "TOPLANAN PARA", "MÜZİK", "SES EFEKTLERİ", "TİTREŞİM", "PARLAMAYI AZALT", "ÇARPIŞMAYI GÖSTER", "SEÇ", "SEÇİLDİ", "SONRAKİ BÖLÜM",
+"KİLİTLİ", "BİRİKEN YÜKSELTMELER", "DİL", "OTOMATİK ATEŞ", "OYUN KOLU", "EKRAN TUŞLARI", "REKLAMLARI KALDIR", "REKLAMSIZ", "SATIN AL", "PARA", "YETERSİZ PARA", "UÇAK SATIN ALINDI!", "YÜKSELTME DÜKKANI", "SEVİYE", "ŞİMDİLİK AZAMİ", "CAN", "ZIRH", "UÇAKLAR", "SÜRE", "HEDEFLER", "GÜÇ", "BÖLÜM", "ATEŞ", "FÜZE", "KİLİT", "KİLİTLENDİ", "HEDEFE DOKUN", "PATRON KALKANI KIRILDI!", "ALT PATRON YENİLDİ!", "FÜZELER KİLİTLENDİ! KAÇIN!", "UÇAK DÜŞTÜ!", "KALAN", "KALKAN YENİLENDİ!", "ÖDÜL", "REKLAMI İZLE", "ŞİMDİ DEĞİL", "ИГРАТЬ",
+"КАМПАНИЯ", "АНГАР", "НАСТРОЙКИ", "АВТОРЫ", "ВЫХОД", "ПИЛОТ", "ПАУЗА", "ПРОДОЛЖИТЬ", "ЗАНОВО", "ГЛАВНОЕ МЕНЮ", "МИССИЯ ВЫПОЛНЕНА", "САМОЛЁТ СБИТ", "ОЧКИ", "РЕКОРД", "КОМБО", "ЩИТ", "СПЕЦИАЛЬНАЯ", "СЛОЖНОСТЬ", "НОВОБРАНЕЦ", "АС", "ЛЕГЕНДА", "НАЗАД", "КОНФИДЕНЦИАЛЬНОСТЬ", "ВЕДИТЕ ПАЛЬЦЕМ", "ТРЕВОГА: БОСС", "СУБ-БОСС", "ОЦЕНКА", "СОБРАНО МОНЕТ", "МУЗЫКА", "ЗВУКОВЫЕ ЭФФЕКТЫ", "ВИБРАЦИЯ", "МЕНЬШЕ ВСПЫШЕК", "ПОКАЗАТЬ ХИТБОКС", "ВЫБРАТЬ", "ВЫБРАНО", "СЛЕДУЮЩИЙ УРОВЕНЬ", "ЗАБЛОКИРОВАНО", "НАКОПЛЕННЫЕ УЛУЧШЕНИЯ", "ЯЗЫК",
+"УПРАВЛЕНИЕ", "АВТООГОНЬ", "ГЕЙМПАД", "КНОПКИ НА ЭКРАНЕ", "УБРАТЬ РЕКЛАМУ", "БЕЗ РЕКЛАМЫ", "КУПИТЬ", "МОНЕТЫ", "НЕ ХВАТАЕТ МОНЕТ", "САМОЛЁТ КУПЛЕН!", "МАГАЗИН УЛУЧШЕНИЙ", "УРОВЕНЬ", "МАКСИМУМ ПОКА", "ЖИЗНЬ", "БРОНЯ", "САМОЛЁТЫ", "ВРЕМЯ", "ЦЕЛИ", "МОЩЬ", "ОГОНЬ", "РАКЕТА", "ЗАХВАТ", "ЗАХВАЧЕНО", "КОСНИТЕСЬ ЦЕЛИ", "ЩИТ БОССА ПРОБИТ!", "СУБ-БОСС ПОВЕРЖЕН!", "РАКЕТЫ НАВЕДЕНЫ! УКЛОНЯЙСЯ!", "САМОЛЁТ ПОТЕРЯН!", "ОСТАЛОСЬ", "ЩИТ ВОССТАНОВЛЕН!", "НАГРАДА", "СМОТРЕТЬ РЕКЛАМУ", "НЕ СЕЙЧАС", "プレイ", "キャンペーン", "ハンガー", "設定",
+"クレジット", "終了", "パイロット", "一時停止", "再開", "やり直し", "メインメニュー", "ミッション達成", "機体撃墜", "スコア", "ハイスコア", "コンボ", "シールド", "スペシャル", "難易度", "新兵", "エース", "レジェンド", "戻る", "プライバシーポリシー", "ドラッグで操縦", "ボス警報", "中ボス", "評価", "獲得コイン", "音楽", "効果音", "振動", "点滅を減らす", "当たり判定表示", "選択", "選択中", "次のステージ", "ロック中", "強化の蓄積", "言語", "操作方法", "自動射撃", "ゲームパッド", "画面ボタン", "広告を削除", "広告なし", "購入", "コイン", "コインが足りません", "機体を購入しました!", "強化ショップ", "レベル", "現在の上限", "ライフ", "装甲", "機体", "時間", "目標", "パワー", "ステージ", "ショット", "ミサイル", "ロック", "目標をタップ", "ボスのシールド破壊!", "中ボス撃破!",
+"ミサイルロック! 回避せよ!", "機体喪失!", "残り", "シールド復活!", "報酬", "広告を見る", "今はいい", "default_aircraft", "PADRÃO DA AERONAVE", "aircraft_matrix", "MATRIZ TÁTICA DE AERONAVES", "perm_upgrades", "UPGRADES PERMANENTES", "back_hangar", "VOLTAR AO HANGAR", "speed", "VELOCIDADE", "defense", "DEFESA", "stat_control", "weapon", "ARMA", "passive", "PASSIVA", "up_firerate", "CADÊNCIA", "up_firerate_d", "Aumenta a frequência dos disparos", "up_spread", "DISPERSÃO", "up_spread_d", "Adiciona projéteis laterais", "up_missile", "MÍSSEIS", "up_missile_d",
+"Mísseis guiados mais fortes", "up_laser", "LASER", "up_laser_d", "Amplifica o feixe de energia", "up_armor", "up_armor_d", "Reduz o dano recebido", "up_crit", "CRÍTICO", "up_crit_d", "Eleva a chance de dano crítico", "limit_progress", "LIMITE ATUAL - AVANCE NA CAMPANHA", "shop_powerups", "LOJA DE POWER-UPS", "end_mission", "ENCERRAR MISSÃO", "off_damage", "DANO +20s", "off_rate", "CADÊNCIA +20s", "off_spread", "TIRO ABERTO +20s", "off_shield", "ESCUDO (7 TIROS)", "off_random", "PODER ALEATÓRIO", "off_bomb",
+"BOMBA", "bomb_limit", "BOMBAS NO LIMITE: 10", "NOME DO PILOTO", "pilot_photo", "FOTO DO PILOTO", "photo_set", "DEFINIDA", "photo_choose", "ESCOLHER", "name_updated", "NOME ATUALIZADO", "photo_updated", "FOTO ATUALIZADA", "photo_unchanged", "FOTO NÃO ALTERADA", "graphics", "QUALIDADE GRÁFICA", "gfx_low", "BAIXA", "gfx_med", "MÉDIA", "gfx_high", "ALTA", "gfx_ultra", "ULTRA", "ATIVADO", "DESATIVADO", "opening_store", "ABRINDO A LOJA...", "LOJA INDISPONÍVEL", "purchase_failed", "COMPRA NÃO CONCLUÍDA", "ads_removed_ok",
+"ANÚNCIOS REMOVIDOS - OBRIGADO!", "loading_ad", "CARREGANDO ANÚNCIO...", "watch_and_get", "ASSISTA A UM ANÚNCIO E RECEBA:", "continue_no_prize", "CONTINUAR SEM PRÊMIO", "last_aircraft", "SUA ÚLTIMA AERONAVE FOI ABATIDA!", "emergency", "REFORÇOS DE EMERGÊNCIA", "overload", "SOBRECARGA: INIMIGOS MULTIPLICADOS", "powers_kept", "PODERES MANTIDOS COM O TEMPO RESTANTE", "best_combo", "MELHOR COMBO", "total_coins", "MOEDAS TOTAIS", "AIRCRAFT DEFAULT", "START MISSION", "CHOOSE AIRCRAFT", "GAME OPTIONS", "NO ADS FOREVER",
+"TEAM AND THANKS", "QUIT GAME", "TACTICAL AIRCRAFT MATRIX", "PERMANENT UPGRADES", "BACK TO HANGAR", "SPEED", "DEFENSE", "HANDLING", "WEAPON", "PASSIVE", "FIRE RATE", "Increases shot frequency", "SPREAD", "Adds side projectiles", "MISSILES", "Stronger homing missiles", "Amplifies the energy beam", "Reduces damage taken", "CRITICAL", "Raises critical hit chance", "CURRENT LIMIT - ADVANCE THE CAMPAIGN", "POWER-UP SHOP", "END MISSION", "DAMAGE +20s", "FIRE RATE +20s", "SPREAD +20s", "SHIELD (7 HITS)", "RANDOM POWER",
+"BOMB", "BOMBS AT LIMIT: 10", "PILOT NAME", "PILOT PHOTO", "SET", "CHOOSE", "NAME UPDATED", "PHOTO UPDATED", "PHOTO UNCHANGED", "GRAPHICS QUALITY", "LOW", "MEDIUM", "HIGH", "ON", "OFF", "OPENING STORE...", "STORE UNAVAILABLE", "PURCHASE NOT COMPLETED", "ADS REMOVED - THANK YOU!", "LOADING AD...", "WATCH AN AD AND GET:", "CONTINUE WITHOUT PRIZE", "YOUR LAST AIRCRAFT WAS DOWNED!", "EMERGENCY REINFORCEMENTS", "OVERLOAD: ENEMIES MULTIPLIED", "POWERS KEPT WITH REMAINING TIME", "BEST COMBO", "TOTAL COINS", "PREDETERMINADO",
+"INICIAR MISIÓN", "ELEGIR NAVE", "OPCIONES DEL JUEGO", "SIN ANUNCIOS PARA SIEMPRE", "EQUIPO Y AGRADECIMIENTOS", "SALIR DEL JUEGO", "MATRIZ TÁCTICA DE NAVES", "MEJORAS PERMANENTES", "VOLVER AL HANGAR", "VELOCIDAD", "DEFENSA", "MANEJO", "PASIVA", "CADENCIA", "Aumenta la frecuencia de disparo", "DISPERSIÓN", "Añade proyectiles laterales", "MISILES", "Misiles guiados más fuertes", "LÁSER", "Amplifica el haz de energía", "Reduce el daño recibido", "Aumenta el daño crítico", "LÍMITE ACTUAL - AVANZA EN LA CAMPAÑA",
+"TERMINAR MISIÓN", "DAÑO +20s", "CADENCIA +20s", "DISPERSIÓN +20s", "ESCUDO (7 GOLPES)", "PODER ALEATORIO", "BOMBAS AL LÍMITE: 10", "NOMBRE DEL PILOTO", "FOTO DEL PILOTO", "ELEGIR", "NOMBRE ACTUALIZADO", "FOTO ACTUALIZADA", "FOTO SIN CAMBIOS", "CALIDAD GRÁFICA", "MEDIA", "ACTIVADO", "DESACTIVADO", "ABRIENDO TIENDA...", "TIENDA NO DISPONIBLE", "COMPRA NO COMPLETADA", "¡ANUNCIOS ELIMINADOS - GRACIAS!", "CARGANDO ANUNCIO...", "MIRA UN ANUNCIO Y RECIBE:", "CONTINUAR SIN PREMIO", "¡TU ÚLTIMA NAVE FUE DERRIBADA!",
+"REFUERZOS DE EMERGENCIA", "SOBRECARGA: ENEMIGOS MULTIPLICADOS", "PODERES CONSERVADOS CON EL TIEMPO RESTANTE", "MEJOR COMBO", "MONEDAS TOTALES", "STANDARD", "MISSION STARTEN", "JÄGER WÄHLEN", "SPIELOPTIONEN", "FÜR IMMER OHNE WERBUNG", "TEAM UND DANK", "SPIEL BEENDEN", "TAKTISCHE JÄGERMATRIX", "DAUERHAFTE UPGRADES", "ZURÜCK ZUM HANGAR", "VERTEIDIGUNG", "WAFFE", "PASSIV", "FEUERRATE", "Erhöht die Schussfrequenz", "STREUUNG", "Fügt seitliche Geschosse hinzu", "RAKETEN", "Stärkere Lenkraketen", "Verstärkt den Energiestrahl",
+"Verringert erlittenen Schaden", "KRITISCH", "Erhöht die kritische Trefferchance", "AKTUELLES LIMIT - KAMPAGNE FORTSETZEN", "POWER-UP-SHOP", "MISSION BEENDEN", "SCHADEN +20s", "FEUERRATE +20s", "STREUUNG +20s", "SCHILD (7 TREFFER)", "ZUFALLSKRAFT", "BOMBE", "BOMBEN AM LIMIT: 10", "PILOTENNAME", "PILOTENFOTO", "GESETZT", "NAME AKTUALISIERT", "FOTO AKTUALISIERT", "FOTO UNVERÄNDERT", "GRAFIKQUALITÄT", "NIEDRIG", "MITTEL", "HOCH", "AN", "AUS", "SHOP WIRD GEÖFFNET...", "SHOP NICHT VERFÜGBAR", "KAUF NICHT ABGESCHLOSSEN",
+"WERBUNG ENTFERNT - DANKE!", "WERBUNG WIRD GELADEN...", "WERBUNG ANSEHEN UND ERHALTEN:", "OHNE PREIS FORTFAHREN", "DEIN LETZTER JÄGER WURDE ZERSTÖRT!", "NOTVERSTÄRKUNG", "ÜBERLADUNG: GEGNER VERVIELFACHT", "KRÄFTE MIT RESTZEIT BEHALTEN", "BESTES COMBO", "MÜNZEN GESAMT", "PAR DÉFAUT", "LANCER LA MISSION", "CHOISIR L\'APPAREIL", "OPTIONS DU JEU", "SANS PUBS POUR TOUJOURS", "ÉQUIPE ET REMERCIEMENTS", "QUITTER LE JEU", "MATRICE TACTIQUE D\'APPAREILS", "AMÉLIORATIONS PERMANENTES", "RETOUR AU HANGAR", "VITESSE", "DÉFENSE",
+"MANIABILITÉ", "ARME", "PASSIF", "CADENCE", "Augmente la fréquence de tir", "DISPERSION", "Ajoute des projectiles latéraux", "Missiles guidés plus puissants", "Amplifie le faisceau d\'énergie", "Réduit les dégâts subis", "CRITIQUE", "Augmente les coups critiques", "LIMITE ACTUELLE - AVANCEZ DANS LA CAMPAGNE", "BOUTIQUE DE BONUS", "TERMINER LA MISSION", "DÉGÂTS +20s", "CADENCE +20s", "DISPERSION +20s", "BOUCLIER (7 COUPS)", "POUVOIR ALÉATOIRE", "BOMBES AU MAXIMUM : 10", "NOM DU PILOTE", "PHOTO DU PILOTE", "DÉFINIE",
+"NOM MIS À JOUR", "PHOTO MISE À JOUR", "PHOTO INCHANGÉE", "QUALITÉ GRAPHIQUE", "BASSE", "MOYENNE", "HAUTE", "ACTIVÉ", "DÉSACTIVÉ", "OUVERTURE DE LA BOUTIQUE...", "BOUTIQUE INDISPONIBLE", "ACHAT NON FINALISÉ", "PUBS SUPPRIMÉES - MERCI !", "CHARGEMENT DE LA PUB...", "REGARDEZ UNE PUB ET RECEVEZ :", "CONTINUER SANS PRIX", "VOTRE DERNIER APPAREIL EST TOMBÉ !", "RENFORTS D\'URGENCE", "SURCHARGE : ENNEMIS MULTIPLIÉS", "POUVOIRS CONSERVÉS AVEC LE TEMPS RESTANT", "MEILLEUR COMBO", "PIÈCES TOTALES", "PREDEFINITO", "AVVIA MISSIONE",
+"SCEGLI VELIVOLO", "OPZIONI DI GIOCO", "SENZA ANNUNCI PER SEMPRE", "TEAM E RINGRAZIAMENTI", "ESCI DAL GIOCO", "MATRICE TATTICA VELIVOLI", "POTENZIAMENTI PERMANENTI", "TORNA ALL\'HANGAR", "VELOCITÀ", "DIFESA", "MANEGGEVOLEZZA", "CADENZA", "Aumenta la frequenza di fuoco", "DISPERSIONE", "Aggiunge proiettili laterali", "MISSILI", "Missili guidati più potenti", "Amplifica il raggio di energia", "Riduce i danni subiti", "CRITICO", "Aumenta i colpi critici", "LIMITE ATTUALE - AVANZA NELLA CAMPAGNA", "NEGOZIO POWER-UP",
+"TERMINA MISSIONE", "DANNO +20s", "CADENZA +20s", "DISPERSIONE +20s", "SCUDO (7 COLPI)", "POTERE CASUALE", "BOMBE AL LIMITE: 10", "NOME DEL PILOTA", "FOTO DEL PILOTA", "IMPOSTATA", "SCEGLI", "NOME AGGIORNATO", "FOTO AGGIORNATA", "FOTO INVARIATA", "QUALITÀ GRAFICA", "BASSA", "ATTIVO", "DISATTIVO", "APERTURA NEGOZIO...", "NEGOZIO NON DISPONIBILE", "ACQUISTO NON COMPLETATO", "ANNUNCI RIMOSSI - GRAZIE!", "CARICAMENTO ANNUNCIO...", "GUARDA UN ANNUNCIO E RICEVI:", "CONTINUA SENZA PREMIO", "IL TUO ULTIMO VELIVOLO È CADUTO!",
+"RINFORZI DI EMERGENZA", "SOVRACCARICO: NEMICI MOLTIPLICATI", "POTERI MANTENUTI CON IL TEMPO RIMASTO", "COMBO MIGLIORE", "MONETE TOTALI", "BAWAAN", "MULAI MISI", "PILIH PESAWAT", "OPSI GAME", "BEBAS IKLAN SELAMANYA", "TIM DAN TERIMA KASIH", "KELUAR GAME", "MATRIKS TAKTIS PESAWAT", "PENINGKATAN PERMANEN", "KEMBALI KE HANGAR", "KECEPATAN", "PERTAHANAN", "KENDALI", "SENJATA", "PASIF", "KECEPATAN TEMBAK", "Menambah frekuensi tembakan", "SEBARAN", "Menambah proyektil samping", "Rudal pengejar lebih kuat", "Memperkuat sinar energi",
+"Mengurangi kerusakan diterima", "KRITIS", "Menambah peluang serangan kritis", "BATAS SAAT INI - LANJUTKAN KAMPANYE", "TOKO POWER-UP", "AKHIRI MISI", "TEMBAK +20s", "SEBARAN +20s", "PERISAI (7 TEMBAKAN)", "KEKUATAN ACAK", "BOM", "BOM MAKSIMAL: 10", "NAMA PILOT", "FOTO PILOT", "DIATUR", "NAMA DIPERBARUI", "FOTO DIPERBARUI", "FOTO TIDAK BERUBAH", "KUALITAS GRAFIS", "RENDAH", "SEDANG", "TINGGI", "AKTIF", "NONAKTIF", "MEMBUKA TOKO...", "TOKO TIDAK TERSEDIA", "PEMBELIAN GAGAL", "IKLAN DIHAPUS - TERIMA KASIH!", "MEMUAT IKLAN...",
+"TONTON IKLAN DAN DAPATKAN:", "LANJUT TANPA HADIAH", "PESAWAT TERAKHIRMU JATUH!", "BALA BANTUAN DARURAT", "KELEBIHAN: MUSUH BERLIPAT", "KEKUATAN DISIMPAN DENGAN SISA WAKTU", "KOMBO TERBAIK", "TOTAL KOIN", "VARSAYILAN", "GÖREVE BAŞLA", "UÇAK SEÇ", "OYUN SEÇENEKLERİ", "SONSUZA DEK REKLAMSIZ", "EKİP VE TEŞEKKÜRLER", "OYUNDAN ÇIK", "TAKTİK UÇAK MATRİSİ", "KALICI YÜKSELTMELER", "HANGARA DÖN", "HIZ", "SAVUNMA", "SİLAH", "PASİF", "ATEŞ HIZI", "Atış sıklığını artırır", "YAYILIM", "Yan mermiler ekler", "FÜZELER", "Daha güçlü güdümlü füzeler",
+"LAZER", "Enerji ışınını güçlendirir", "Alınan hasarı azaltır", "KRİTİK", "Kritik vuruş şansını artırır", "MEVCUT SINIR - SEFERDE İLERLE", "GÜÇLENDİRME DÜKKANI", "GÖREVİ BİTİR", "HASAR +20s", "ATEŞ HIZI +20s", "YAYILIM +20s", "KALKAN (7 VURUŞ)", "RASTGELE GÜÇ", "BOMBA SINIRDA: 10", "PİLOT ADI", "PİLOT FOTOĞRAFI", "AYARLANDI", "AD GÜNCELLENDİ", "FOTOĞRAF GÜNCELLENDİ", "FOTOĞRAF DEĞİŞMEDİ", "GRAFİK KALİTESİ", "DÜŞÜK", "ORTA", "YÜKSEK", "AÇIK", "KAPALI", "MAĞAZA AÇILIYOR...", "MAĞAZA KULLANILAMIYOR", "SATIN ALMA TAMAMLANMADI",
+"REKLAMLAR KALDIRILDI - TEŞEKKÜRLER!", "REKLAM YÜKLENİYOR...", "REKLAM İZLE VE KAZAN:", "ÖDÜLSÜZ DEVAM ET", "SON UÇAĞIN DÜŞTÜ!", "ACİL TAKVİYE", "AŞIRI YÜK: DÜŞMANLAR ÇOĞALDI", "GÜÇLER KALAN SÜREYLE KORUNDU", "EN İYİ KOMBO", "TOPLAM PARA", "ПО УМОЛЧАНИЮ", "НАЧАТЬ МИССИЮ", "ВЫБРАТЬ САМОЛЁТ", "НАСТРОЙКИ ИГРЫ", "НАВСЕГДА БЕЗ РЕКЛАМЫ", "КОМАНДА И БЛАГОДАРНОСТИ", "ВЫЙТИ ИЗ ИГРЫ", "ТАКТИЧЕСКАЯ МАТРИЦА", "ПОСТОЯННЫЕ УЛУЧШЕНИЯ", "НАЗАД В АНГАР", "СКОРОСТЬ", "ЗАЩИТА", "УПРАВЛЯЕМОСТЬ", "ОРУЖИЕ", "ПАССИВКА", "СКОРОСТРЕЛЬНОСТЬ",
+"Увеличивает частоту выстрелов", "РАЗБРОС", "Добавляет боковые снаряды", "РАКЕТЫ", "Более мощные самонаводящиеся ракеты", "ЛАЗЕР", "Усиливает энергетический луч", "Снижает получаемый урон", "КРИТ", "Повышает шанс критического удара", "ТЕКУЩИЙ ПРЕДЕЛ - ПРОДВИГАЙТЕСЬ ДАЛЬШЕ", "МАГАЗИН УСИЛЕНИЙ", "ЗАВЕРШИТЬ МИССИЮ", "УРОН +20с", "СКОРОСТРЕЛЬНОСТЬ +20с", "РАЗБРОС +20с", "ЩИТ (7 УДАРОВ)", "СЛУЧАЙНАЯ СИЛА", "БОМБА", "БОМБ МАКСИМУМ: 10", "ИМЯ ПИЛОТА", "ФОТО ПИЛОТА", "ЗАДАНО", "ИМЯ ОБНОВЛЕНО", "ФОТО ОБНОВЛЕНО", "ФОТО НЕ ИЗМЕНЕНО",
+"КАЧЕСТВО ГРАФИКИ", "НИЗКОЕ", "СРЕДНЕЕ", "ВЫСОКОЕ", "УЛЬТРА", "ВКЛ", "ВЫКЛ", "ОТКРЫТИЕ МАГАЗИНА...", "МАГАЗИН НЕДОСТУПЕН", "ПОКУПКА НЕ ЗАВЕРШЕНА", "РЕКЛАМА УБРАНА - СПАСИБО!", "ЗАГРУЗКА РЕКЛАМЫ...", "ПОСМОТРИТЕ РЕКЛАМУ И ПОЛУЧИТЕ:", "ПРОДОЛЖИТЬ БЕЗ НАГРАДЫ", "ВАШ ПОСЛЕДНИЙ САМОЛЁТ СБИТ!", "ЭКСТРЕННОЕ ПОДКРЕПЛЕНИЕ", "ПЕРЕГРУЗКА: ВРАГОВ БОЛЬШЕ", "СИЛЫ СОХРАНЕНЫ С ОСТАВШИМСЯ ВРЕМЕНЕМ", "ЛУЧШЕЕ КОМБО", "ВСЕГО МОНЕТ", "機体の既定", "ミッション開始", "機体を選ぶ", "ゲーム設定", "ずっと広告なし", "チームと感謝", "ゲーム終了", "戦術機体マトリクス", "恒久強化", "ハンガーに戻る",
+"速度", "防御", "操作性", "武器", "パッシブ", "連射速度", "射撃の頻度を上げる", "拡散", "側面の弾を追加する", "より強力な追尾ミサイル", "レーザー", "エネルギー光線を増幅する", "受けるダメージを減らす", "クリティカル", "会心の一撃の確率を上げる", "現在の上限 - キャンペーンを進めよう", "パワーアップ商店", "ミッション終了", "ダメージ +20秒", "連射 +20秒", "拡散 +20秒", "シールド (7発)", "ランダムパワー", "ボム", "ボム上限: 10", "パイロット名", "パイロット写真", "設定済み", "選ぶ", "名前を更新しました", "写真を更新しました", "写真は変更なし", "画質", "低", "中", "高", "ウルトラ", "オン", "オフ", "ストアを開いています...", "ストア利用不可", "購入は完了しませんでした", "広告を削除しました - ありがとう!", "広告を読み込み中...", "広告を見て入手:", "報酬なしで続行", "最後の機体が撃墜された!", "緊急増援",
+"オーバーロード: 敵が増加", "残り時間とともに強化を維持", "最高コンボ", "総コイン", "exception", "singletonList(...)", "elements", "Index overflow has happened.", "title", "subtitle", "NeonButton(id=", ", rect=", ", title=", ", subtitle=", ", magenta=", "Streak(angle=", ", speed=", ", phase=", ", thickness=", ", blueShift=", "VertexArray", "VertexBufferObject", "VertexBufferObjectSubData", "VertexBufferObjectWithVAO", "Mesh attempting to access memory outside of the index buffer (count: ", ", offset: ", ", max: ", "und", "CA", "zh", "CN", "FR",
+"DE", "IT", "JP", "ko", "KR", "TW", "GB", "US", "texture cannot be null.", "List is empty.", "destination", "asList(...)", "Error reading file: ", "attributes must be >= 1", "vertex shader must not be null", "fragment shader must not be null", "Fragment shader:\n", "Vertex shader\n", "An attempted fetch uniform from uncompiled shader \n", "No uniform with name \'", "\' in shader", "a_normal", "u_sampler", "#ifdef GL_ES\nprecision mediump float;\n#endif\n", "uniform sampler2D u_sampler", "void main() {\n   gl_FragColor = ",
+"vec4(1, 1, 1, 1)", "v_col", " * ", " texture2D(u_sampler", ",  v_tex", ") *", ";\n}", "pairs", "null cannot be cast to non-null type kotlin.collections.Map<K of kotlin.collections.MapsKt__MapsKt.emptyMap, V of kotlin.collections.MapsKt__MapsKt.emptyMap>", "map", "Already prepared", "Call prepare() before calling getPixmap()", "This TextureData implementation does not upload data itself", "File is null, it does not exist: ", "Pixmap already disposed!", "unknown format: ", "Unknown Gdx2DPixmap Format: ", "Index: ",
+"element", "Empty list doesn\'t contain element at index ", "No buffer allocated!", "IndexBufferObject cannot be used after it has been disposed.", "data must be a ByteBuffer or FloatBuffer", "dst must be a ByteBuffer", "Can\'t copy to a ", " instance", "Buffers must be of same type or ByteBuffer", "buffer not allocated with newUnsafeByteBuffer or already disposed", "Couldn\'t create FreeType stroker, FreeType error code: ", "SourceOver", "NearestNeighbour", "BiLinear", "New position ", " is outside of range [0;",
+"Couldn\'t get glyph, FreeType error code: ", "Can only free direct buffer", "MirroredRepeat", "ClampToEdge", "Repeat", "BIG_ENDIAN", "LITTLE_ENDIAN", "Capacity is negative: ", " is not set", " at ", "[ByteBuffer position=", ", limit=", ", capacity=", ", mark ", "Unknown Format: ", "Intensity", "LuminanceAlpha", "RGB565", "RGBA4444", "RGB888", "RGBA8888", "Index ", "This buffer is not allocated in linear memory and does not wrap native JS buffer", "FileType \'", "\' Not supported in web backend", "File not found: ",
+" (", "Cannot write to a classpath file: ", "Cannot write to an internal file: ", "Error writing file: ", "Classpath", "Internal", "External", "Absolute", "Local", "b", "i", "l", "f", "Couldn\'t flush preferences", "�", "Replacement preconditions do not hold", "UTF-8", "IGNORE", "REPLACE", "REPORT", "newAction must be non-null", "Pixmap", "Custom", "texture width and height must be square when using mipmapping.", "Malformed input of length ", "Unmappable characters of length ", "Binary", "Directory", "accent",
+"accent2", "aircraft", "ClickSpark(x=", ", y=", ", vx=", ", vy=", ", life=", "BRASIL", "ARLEY VARGAS", "AURORA BR-01", "Canhões duplos de íons", "Tempestade do Cruzeiro", "Combo aumenta o dano", "RÚSSIA", "IRINA VOLKOV", "BURAN RX-7", "Canhão de plasma pesado", "Pulso Glacial", "Blindagem absorve impacto", "ESTADOS UNIDOS", "MASON COLE", "EAGLE AX-9", "Gatling com munição traçante", "Ataque Águia", "Mísseis procuram alvos", "JAPÃO", "AIKO TANAKA", "RAIJIN JX-4", "Lasers gêmeos de precisão", "Corte do Trovão",
+"Drones energizam o feixe", "fill", "Point", "Line", "Filled", "other", "Desired length ", " is less than zero.", "List has more than one element.", "Collection is empty.", "Collection has more than one element.", "chars", "Array has more than one element.", "Limit must be non-negative, but was ", "country", "weaponStyle", "primary", "bodyColor", "accentColor", "AircraftDefinition(id=", ", country=", ", pilot=", ", name=", ", weaponStyle=", ", primary=", ", special=", ", passive=", ", power=", ", defense=",
+", control=", ", bodyColor=", ", accentColor=", "Pixmap has already been packed with name: ", ".9", "Page size too small for pixmap.", "Page size too small for pixmap: ", "  ", "(.+)_(\\d+)$", "Step must be non-zero.", "Step must be greater than Int.MIN_VALUE to avoid overflow on negation.", "added manager for application, ", " managers active", "Controllers", "NÍVEL DE AMEAÇA: ", "<", ">", "PROGRESSO: ", "/30", "FASE ", "SUB: ", "CHEFE: ", " - ", "PODERES: ", "NOME DO PILOTO: ", "FOTO DO PILOTO: ESCOLHER",
+"FOTO DO PILOTO: DEFINIDA", "   ", "ULTRA / 4K", "SKY VANGUARD: GLOBAL ASSAULT", "CONCEITO E DIREÇÃO: MESTRE ARLEY", "CAMPANHA: 5 PAÍSES E 30 FASES", "4 PILOTOS E AERONAVES ORIGINAIS", "POWER-UPS TEMPORÁRIOS COM ATIVAÇÃO MANUAL", "SPRITES ORIENTADOS PARA O JOGADOR", "Char sequence is empty.", "Action must be non-null", "RAPID", "HEAVY", "GATLING", "environment", "subBoss", "bossSprite", "stages", "Costa do Rio", "Litoral futurista e ilhas defensivas", "Caça Jaguar", "Porta-aviões Trovão", "ship_top", "Amazônia Oculta",
+"Rios, tempestades e bases na floresta", "Drone Harpia", "Plataforma Curupira", "turret_top", "Cerrado de Aço", "Planícies, refinarias e comboios blindados", "Tanque Lobo-Guará", "Fortaleza Anhanguera", "tank_missile", "São Paulo Neon", "Megacidade noturna e corredores aéreos", "Esquadrão Falcão", "Torre Bandeirante", "Atlântico em Guerra", "Tempestade, navios e plataformas oceânicas", "Submarino Abissal", "Cruzador Iara", "Pantanal Ômega", "Pântanos militarizados e usinas móveis", "Colosso Jacaré", "Guardião Tupã",
+"bomber_gray", "Operação Cruzeiro", "Deserto de Nevada", "Bases secretas e cânions", "Interceptador Raptor", "Trem Blindado Liberty", "tank_top", "Costa da Califórnia", "Portos, pontes e frotas automatizadas", "Drone Seeker", "Cruzador Pacific", "Chicago de Ferro", "Arranha-céus e fábricas bélicas", "Torre Sentinel", "Aranha Mecânica Union", "Montanhas Rochosas", "Neve, radares e silos de mísseis", "Tanque Grizzly", "Fortaleza Eagle", "Nova York Sitiada", "Cidade em evacuação e enxames de drones", "Esquadrão Phantom",
+"Colosso Manhattan", "Pentágono ORION", "Complexo subterrâneo de comando", "Guardião Patriot", "Núcleo Liberty Prime", "Escudo Continental", "Tóquio Neon", "Chuva, trens e letreiros holográficos", "Caça Kitsune", "Mecha Shogun", "Baía de Osaka", "Portos automatizados e navios-drones", "Submarino Kappa", "Cruzador Yamabiko", "Monte Fuji", "Cinzas vulcânicas e laboratórios ocultos", "Drone Tengu", "Fortaleza Oni", "Kyoto Cibernética", "Templos tecnológicos e defesas laser", "Torre Ronin", "Dragão Mecânico", "Hokkaido Glacial",
+"Nevasca, bases e tanques de plasma", "Tanque Yuki", "Colosso Susanoo", "Elevador Orbital", "Ascensão da atmosfera até o espaço", "Guardião Amaterasu", "Raijin Omega", "Tempestade Raijin", "Sibéria Congelada", "Florestas nevadas e comboios pesados", "Tanque Volk", "Fortaleza Boreal", "Mar de Barents", "Gelo quebrado, submarinos e tempestades", "Submarino Moroz", "Leviatã Ártico", "sub_top", "Moscou Escarlate", "Defesas urbanas e canhões de energia", "Torre Kremlin", "Titã Moscóvia", "Urais Industriais", "Minas, fundições e trens de guerra",
+"Colosso Ural", "Forja Perun", "Cosmódromo Baikonur", "Foguetes, hangares e plataformas aéreas", "Interceptor Sputnik", "Cidadela Vostok", "Órbita Soviética", "Satélites armados e destroços espaciais", "Guardião Zarya", "Coração de Kosmos", "Inverno Vermelho", "Costa de Roma", "Ruínas costeiras e baterias automatizadas", "Caça Lupo", "Cruzador Roma", "Veneza Submersa", "Canais, tempestades e drones anfíbios", "Submarino Gondola", "Leviatã Adriático", "Alpes de Titânio", "Montanhas, túneis e fortalezas aéreas",
+"Tanque Alpino", "Colosso Dolomita", "Milão Mecânica", "Torres industriais e tráfego aéreo", "Torre Duomo", "Arquiteto Nero", "Vesúvio em Chamas", "Lava, cinzas e usinas geotérmicas", "Drone Vulcano", "Imperador Magma", "Fortaleza Mediterrânea", "Batalha final sobre o mar e a órbita", "Guardião Centurião", "ORION Imperator", "ITÁLIA", "Cerco Mediterrâneo", "getter", "setter", "Toggle(key=", ", getter=", ", setter=", "begin must be called before end.", "index can\'t be > size: ", "bounces cannot be < 2 or > 5: ",
+"Step is zero.", "standard", "entries", "CountryCampaign(name=", ", difficultyScale=", ", stages=", "sprite", "StageSeed(name=", ", environment=", ", subBoss=", ", boss=", ", sprite=", "StageDefinition(globalIndex=", ", countryIndex=", ", bossSprite=", "Digite seu nome de piloto", "ABRINDO GALERIA...", "https://sites.google.com/view/vanguardglobalassault", "prepare() must not be called on a PixmapTextureData instance as it is already prepared.", "ENERGY", "FIRE_RATE", "MULTIPLIER", "DRONE", "MAGNET", "CHAIN",
+"REGEN", "PHOENIX", "ORBITAL", "TIME_CORE", "BLACK_HOLE", "BERSERK", "REFLECTOR", "CLONE", "createDownloadListener.onSuccess.afterUpdate path=", "writing file path=", "createDownloadListener.onSuccess", "write error path=", "write stream closed path=", "line=", "Invalid assets description. ", "1", "c", "$this$DelimitedRangesSequence", "ParagraphBySpace", "ParagraphByGlyph", "WrappedLinesBySpace", "WrappedLinesByGlyph", "AllLinesBySpace", "AllLinesByGlyph", "Asset download failed: ", "createDownloadListener.onFailure.afterUpdate path=",
+", hasResult=", "Asset download success: ", "Logical", "Pixels", "Couldn\'t render glyph, FreeType error code: ", "Glyph is not yet rendered", "ARSENAL NEXUS", "_d", "backgrounds/stage_00.jpg", "backgrounds/stage_01.jpg", "backgrounds/stage_02.jpg", "backgrounds/stage_03.jpg", "backgrounds/stage_04.jpg", "backgrounds/stage_05.jpg", "backgrounds/stage_06.jpg", "backgrounds/stage_07.jpg", "backgrounds/stage_08.jpg", "backgrounds/stage_09.jpg", "backgrounds/stage_10.jpg", "backgrounds/stage_11.jpg", "backgrounds/stage_12.jpg",
+"backgrounds/stage_13.jpg", "backgrounds/stage_14.jpg", "backgrounds/stage_15.jpg", "backgrounds/stage_16.jpg", "backgrounds/stage_17.jpg", "backgrounds/stage_18.jpg", "backgrounds/stage_19.jpg", "backgrounds/stage_20.jpg", "backgrounds/stage_21.jpg", "backgrounds/stage_22.jpg", "backgrounds/stage_23.jpg", "backgrounds/stage_24.jpg", "backgrounds/stage_25.jpg", "backgrounds/stage_26.jpg", "backgrounds/stage_27.jpg", "backgrounds/stage_28.jpg", "backgrounds/stage_29.jpg", "lastCountry", "fase", "fighter_red",
+"sprites/enemies/fighter_red.png", "sprites/enemies/bomber_gray.png", "drone_blue", "sprites/enemies/drone_blue.png", "tank_front", "sprites/enemies/tank_front.png", "sprites/enemies/tank_top.png", "sprites/enemies/tank_missile.png", "sprites/enemies/turret_top.png", "turret_green", "sprites/enemies/turret_green.png", "sprites/enemies/ship_top.png", "sub_front", "sprites/enemies/sub_front.png", "sprites/enemies/sub_top.png", "scout_new", "sprites/enemies/scout_new.png", "striker_new", "sprites/enemies/striker_new.png",
+"drone_new", "sprites/enemies/drone_new.png", "bomber_new", "sprites/enemies/bomber_new.png", "tank_new", "sprites/enemies/tank_new.png", "e_jet", "sprites/enemies/e_jet.png", "e_gunship", "sprites/enemies/e_gunship.png", "e_heli", "sprites/enemies/e_heli.png", "e_pod", "sprites/enemies/e_pod.png", "e_ship_0", "sprites/enemies/e_ship_0.png", "e_ship_1", "sprites/enemies/e_ship_1.png", "e_ship_2", "sprites/enemies/e_ship_2.png", "e_ship_3", "sprites/enemies/e_ship_3.png", "e_ship_4", "sprites/enemies/e_ship_4.png",
+"e_ship_5", "sprites/enemies/e_ship_5.png", "e_tank_", "sprites/enemies/e_tank_", "e_base_0", "sprites/enemies/e_base_0.png", "e_base_1", "sprites/enemies/e_base_1.png", "e_base_2", "sprites/enemies/e_base_2.png", "boss_0", "sprites/enemies/boss_0.png", "boss_1", "sprites/enemies/boss_1.png", "boss_2", "sprites/enemies/boss_2.png", "boss_3", "sprites/enemies/boss_3.png", "boss_4", "sprites/enemies/boss_4.png", "boss_5", "sprites/enemies/boss_5.png", "e_tank_0", "e_tank_1", "e_tank_2", "e_tank_3", "e_tank_4",
+"e_tank_5", "e_tank_6", "boss_", "copyOf(...)", "ROF", "SPR", "MIS", "LAS", "SHD", "BMB", "MLT", "DRN", "MAG", "CRT", "CHN", "ARM", "REG", "PHX", "ORB", "TIM", "BLK", "BRK", "RFL", "CLN", "DMG", "Requested element count ", "center", "vee", "sine", "cross", "columns", "spread", "line", "comparator", "pattern", " ATIVADO", " DESLIGADO", "e_ship_", "e_base_", "NÚCLEO ", " — CHEFE ENFURECIDO", " MOEDA", "singleton(...)", "vida-extra", "AERONAVE ABATIDA!", "+1 VIDA  E  +2 BOMBAS", "GAMEPAD: A = ASSISTIR   B = RECUSAR",
+"R", "A", "M", "L", "E", "B", "X", "I", "C", "T", "O", "G", "F", "Q", "H", "K", "V", "Z", "P", "toString(...)", " x", " — ", "COMBO x", "  +", "  -  ESCUDO ", "UP +", "UP -", "MOEDAS: ", "PODERES TEMPORÁRIOS — TOQUE PARA ATIVAR/DESATIVAR", " N", " MOEDAS", "PODER ATIVO CONSOME TEMPO. DESATIVADO PRESERVA OS SEGUNDOS.", " COMPRADO", "description", "Offer(power=", ", description=", ", baseCost=", "DONE ignored because already settled url=", "label", "ShopOffer(label=", ", cost=", "initializer", ", status=", ", loaded=",
+", total=", ", percent=", "offset + length must be <= size: ", "IndexedDB Error removing file: ", "Default", "NumberPad", "PhonePad", "Email", "Password", "URI", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", "notWrapped", "wrapped", "lastWrapped", "CLEAR", "CLEAR_WHITE", "BLACK", "LIGHT_GRAY", "GRAY", "DARK_GRAY", "BLUE", "NAVY", "ROYAL", "SLATE", "SKY", "CYAN", "TEAL", "GREEN", "CHARTREUSE", "LIME", "FOREST", "OLIVE", "YELLOW", "GOLD", "GOLDENROD", "ORANGE", "BROWN", "TAN", "FIREBRICK",
+"RED", "SCARLET", "CORAL", "SALMON", "PINK", "MAGENTA", "PURPLE", "VIOLET", "MAROON", "texture", "muzzles", "EnemyVisual(texture=", ", width=", ", height=", ", rotation=", ", collisionRadius=", ", muzzles=", "SCOUT", "STRIKER", "BOMBER", "TANK", "MINIBOSS", "WaveEvent(time=", ", count=", ", pattern=", " - FASE ", ": x", "onDone", "br_1", "br_2", "jp_full", "videos/end_", ".mp4", "assetPaths", "onFinished", "tex", "desc", "REGRESSA COMO HERÓI", "RETURNS A HERO", "MISSÃO CUMPRIDA", "GALERIA DE AMEAÇAS", "THREAT GALLERY",
+"GUARDIÃO TUPÃ", "Brasil · Chefe final", "Brazil · Final boss", "LIBERTY PRIME", "EUA · Chefe final", "USA · Final boss", "RAIJIN OMEGA", "Japão · Chefe final", "Japan · Final boss", "CORAÇÃO DE KOSMOS", "Rússia · Chefe final", "Russia · Final boss", "ORION IMPERATOR", "Itália · Chefe final", "Italy · Final boss", "MECHA SHOGUN", "Japão · Chefe intermediário", "Japan · Mid boss", "INTERCEPTOR VESPA", "Caça leve e veloz", "Fast light fighter", "GUNSHIP TROVÃO", "Nave de ataque pesada", "Heavy attack gunship",
+"HELICÓPTERO HARPIA", "Metralha em voo rasante", "Strafing helicopter", "sprites/enemies/e_tank_0.png", "TANQUE LOBO-GUARÁ", "Blindado de superfície", "Armored ground tank", "CORVETA ABISSO", "Navio lança-mísseis", "Missile warship", "BATERIA COSTEIRA", "Base fixa antiaérea", "Fixed AA emplacement", "POD SENTINELA", "Drone orbital vigia", "Orbital sentry drone", "EQUIPE", "STAFF", "CONCEPT & DIRECTION: MASTER ARLEY", "5 PAÍSES · 30 FASES · 4 AERONAVES", "5 NATIONS · 30 STAGES · 4 AIRCRAFT", "FEITO COM LIBGDX + KOTLIN",
+"BUILT WITH LIBGDX + KOTLIN", "OBRIGADO POR JOGAR, PILOTO.", "THANK YOU FOR PLAYING, PILOT.", "FIM", "THE END", "FIVE NATIONS. ONE UNITED FRONT.", "FROM THE COAST OF BRAZIL TO THE ORBIT OVER ITALY,", "THE SKY VANGUARD PILOTS BROKE THE ORION INVASION.", "THE SKIES ARE SILENT NOW — AND THEY ARE COMING HOME.", "CINCO NAÇÕES. UMA SÓ FRENTE DE BATALHA.", "DO LITORAL DO BRASIL ATÉ A ÓRBITA DA ITÁLIA,", "OS PILOTOS DA SKY VANGUARD DERRUBARAM A INVASÃO ORION.", "AGORA O CÉU ESTÁ EM SILÊNCIO — E ELES VOLTAM PARA CASA.",
+"PULAR", "SKIP", "CANNON", "PLASMA", "TRACER", "SonicWave(originX=", ", originY=", ", radius=", ", delay=", ", damage=", "ReinforcementOrder(type=", ", remaining=", ", serial=", "value", "substring(...)", "entre-fases", "LIGHT", "FOTO DO PILOTO ATUALIZADA", "CADENCIA DE TIRO", "TIRO TRIPLO", "ENERGIA", "UPGRADE", "+500 MOEDAS  +  ", "i:b:/audio/boss_warning.wav:39734:1", "i:b:/audio/click.wav:3572:1", "i:b:/audio/explosion.wav:24298:1", "i:b:/audio/fase1.ogg:813393:1", "i:b:/audio/fase10.ogg:980900:1", "i:b:/audio/fase11.ogg:219592:1",
+"i:b:/audio/fase12.ogg:528733:1", "i:b:/audio/fase13.ogg:301534:1", "i:b:/audio/fase14.ogg:280632:1", "i:b:/audio/fase15.ogg:317800:1", "i:b:/audio/fase2.ogg:675440:1", "i:b:/audio/fase3.ogg:328609:1", "i:b:/audio/fase4.ogg:328609:1", "i:b:/audio/fase5.ogg:855034:1", "i:b:/audio/fase6.ogg:282945:1", "i:b:/audio/fase7.ogg:408356:1", "i:b:/audio/fase8.ogg:695377:1", "i:b:/audio/fase9.ogg:695377:1", "i:b:/audio/hangar.ogg:438896:1", "i:b:/audio/menu.ogg:1202324:1", "i:b:/audio/menu_music.wav:352844:1", "i:b:/audio/powerup.wav:11068:1",
+"i:b:/audio/shield.wav:22094:1", "i:b:/audio/shot.wav:3130:1", "i:b:/audio/special.wav:39734:1", "i:b:/audio/stage_music.wav:352844:1", "i:b:/audio/tela upgrade.ogg:697872:1", "i:b:/backgrounds/stage_00.jpg:532220:1", "i:b:/backgrounds/stage_01.jpg:485053:1", "i:b:/backgrounds/stage_02.jpg:426433:1", "i:b:/backgrounds/stage_03.jpg:437812:1", "i:b:/backgrounds/stage_04.jpg:413546:1", "i:b:/backgrounds/stage_05.jpg:566604:1", "i:b:/backgrounds/stage_06.jpg:474180:1", "i:b:/backgrounds/stage_07.jpg:532658:1", "i:b:/backgrounds/stage_08.jpg:492756:1",
+"i:b:/backgrounds/stage_09.jpg:578934:1", "i:b:/backgrounds/stage_10.jpg:530075:1", "i:b:/backgrounds/stage_11.jpg:540193:1", "i:b:/backgrounds/stage_12.jpg:408294:1", "i:b:/backgrounds/stage_13.jpg:454960:1", "i:b:/backgrounds/stage_14.jpg:389324:1", "i:b:/backgrounds/stage_15.jpg:439509:1", "i:b:/backgrounds/stage_16.jpg:472245:1", "i:b:/backgrounds/stage_17.jpg:556022:1", "i:b:/backgrounds/stage_18.jpg:445499:1", "i:b:/backgrounds/stage_19.jpg:556022:1", "i:b:/backgrounds/stage_20.jpg:506271:1", "i:b:/backgrounds/stage_21.jpg:574565:1",
+"i:b:/backgrounds/stage_22.jpg:455773:1", "i:b:/backgrounds/stage_23.jpg:545564:1", "i:b:/backgrounds/stage_24.jpg:532220:1", "i:b:/backgrounds/stage_25.jpg:454960:1", "i:b:/backgrounds/stage_26.jpg:578934:1", "i:b:/backgrounds/stage_27.jpg:509101:1", "i:b:/backgrounds/stage_28.jpg:389324:1", "i:b:/backgrounds/stage_29.jpg:437812:1", "i:b:/data/aircraft.json:1107:1", "i:b:/data/bosses.json:137:1", "i:b:/data/campaign_30_stages.json:7170:1", "i:b:/data/difficulty.json:210:1", "i:b:/data/enemies.json:344:1", "i:b:/data/pilots.json:542:1",
+"i:b:/data/upgrades.json:1087:1", "i:b:/fonts/noto_bold.ttf:27528:1", "i:b:/fonts/noto_jp_bold.ttf:120864:1", "i:b:/fonts/noto_jp_regular.ttf:119588:1", "i:b:/fonts/noto_regular.ttf:27572:1", "i:b:/fonts/OFL_rajdhani.txt:4373:1", "i:b:/fonts/rajdhani_bold.ttf:31776:1", "i:b:/fonts/rajdhani_medium.ttf:29480:1", "i:b:/menu_background_4k.png:317009:1", "i:b:/menu_main_hd.jpg:273772:1", "i:b:/sprites/enemies/bomber_gray.png:17750:1", "i:b:/sprites/enemies/boss_0.png:25871:1", "i:b:/sprites/enemies/boss_1.png:17494:1",
+"i:b:/sprites/enemies/boss_2.png:33211:1", "i:b:/sprites/enemies/boss_3.png:25895:1", "i:b:/sprites/enemies/boss_4.png:23717:1", "i:b:/sprites/enemies/boss_5.png:23328:1", "i:b:/sprites/enemies/drone_blue.png:15229:1", "i:b:/sprites/enemies/e_base_0.png:18018:1", "i:b:/sprites/enemies/e_base_1.png:24378:1", "i:b:/sprites/enemies/e_base_2.png:12784:1", "i:b:/sprites/enemies/e_gunship.png:17750:1", "i:b:/sprites/enemies/e_heli.png:19011:1", "i:b:/sprites/enemies/e_jet.png:27775:1", "i:b:/sprites/enemies/e_pod.png:15229:1",
+"i:b:/sprites/enemies/e_ship_0.png:13645:1", "i:b:/sprites/enemies/e_ship_1.png:8077:1", "i:b:/sprites/enemies/e_ship_2.png:15584:1", "i:b:/sprites/enemies/e_ship_3.png:14019:1", "i:b:/sprites/enemies/e_ship_4.png:12814:1", "i:b:/sprites/enemies/e_ship_5.png:8477:1", "i:b:/sprites/enemies/e_tank_0.png:16641:1", "i:b:/sprites/enemies/e_tank_1.png:23057:1", "i:b:/sprites/enemies/e_tank_2.png:22797:1", "i:b:/sprites/enemies/e_tank_3.png:20049:1", "i:b:/sprites/enemies/e_tank_4.png:11901:1", "i:b:/sprites/enemies/e_tank_5.png:7177:1",
+"i:b:/sprites/enemies/e_tank_6.png:13317:1", "i:b:/sprites/enemies/fighter_red.png:15476:1", "i:b:/sprites/enemies/ship_top.png:8077:1", "i:b:/sprites/enemies/sub_front.png:12814:1", "i:b:/sprites/enemies/sub_top.png:8477:1", "i:b:/sprites/enemies/tank_front.png:23057:1", "i:b:/sprites/enemies/tank_missile.png:20049:1", "i:b:/sprites/enemies/tank_top.png:22797:1", "i:b:/sprites/enemies/turret_green.png:12784:1", "i:b:/sprites/enemies/turret_top.png:24378:1", "i:b:/sprites/player/drone_0.png:16798:1", "i:b:/sprites/player/drone_1.png:15361:1",
+"i:b:/sprites/player/drone_2.png:13649:1", "i:b:/sprites/player/drone_3.png:15052:1", "i:b:/sprites/player/missile.png:5295:1", "i:b:/sprites/player/missile2.png:5242:1", "i:b:/sprites/player/pilot_1_brasil.png:16273:1", "i:b:/sprites/player/ship_0.png:19073:1", "i:b:/sprites/player/ship_1.png:18027:1", "i:b:/sprites/player/ship_2.png:17760:1", "i:b:/sprites/player/ship_3.png:18391:1", "c:b:/com/badlogic/gdx/utils/lsans-15.fnt:17711:1", "c:b:/com/badlogic/gdx/utils/lsans-15.png:10270:1", "c:b:/com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:820:1",
+"c:b:/com/badlogic/gdx/graphics/g3d/particles/particles.vertex.glsl:2886:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/default.fragment.glsl:5874:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/default.vertex.glsl:9096:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/depth.fragment.glsl:869:1", "c:b:/com/badlogic/gdx/graphics/g3d/shaders/depth.vertex.glsl:2931:1"]);
 jl_String.prototype.toString = function() {
     return $rt_ustr(this);
 };
@@ -60485,6 +60872,8 @@ let $rt_jso_marker = Symbol('jsoClass');
     c.onTimer = $rt_callWithReceiver(cgxgtbwa_AssetDownloadImpl$retryOrFail$lambda$_6_0_onTimer$exported$0);
     c = cgxgtbwft_LocalDBStorage$removeFile$lambda$_3_0.prototype;
     c.handleEvent = $rt_callWithReceiver(cgxgtbwft_LocalDBStorage$removeFile$lambda$_3_0_handleEvent$exported$0);
+    c = cvsw_WebPlatformServices$pickPilotPhoto$lambda$_5_0.prototype;
+    c.recebeu = $rt_callWithReceiver(cvsw_WebPlatformServices$pickPilotPhoto$lambda$_5_0_recebeu$exported$0);
     c = cgxgtbw_WebInput$getTextInput$lambda$_69_0.prototype;
     c.handleEvent = $rt_callWithReceiver(cgxgtbw_WebInput$getTextInput$lambda$_69_0_handleEvent$exported$0);
     c = cgxgtbw_WebInput$getTextInput$lambda$_69_1.prototype;
@@ -60497,6 +60886,8 @@ let $rt_jso_marker = Symbol('jsoClass');
     c.handleEvent = $rt_callWithReceiver(cgxgtbw_WebInput$getTextInput$lambda$_69_5_handleEvent$exported$0);
     c = cgxgtbw_WebInput$getTextInput$lambda$_69_6.prototype;
     c.onTimer = $rt_callWithReceiver(cgxgtbw_WebInput$getTextInput$lambda$_69_6_onTimer$exported$0);
+    c = cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0.prototype;
+    c.recebeu = $rt_callWithReceiver(cvsw_WebLauncherKt$mostrarAnuncioPremiado$lambda$_2_0_recebeu$exported$0);
     c = cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0.prototype;
     c.onTimer = $rt_callWithReceiver(cgxgtbw_WebInput$lambda$getTextInput$4$lambda$_82_0_onTimer$exported$0);
 })();
