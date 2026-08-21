@@ -67,14 +67,59 @@ img { max-width: 100%; display: block; }
 .marca .vm { color: var(--ciano); }
 .marca .games { color: var(--magenta); }
 
-.barra nav { margin-left: auto; display: flex; gap: 20px; flex-wrap: wrap; }
-.barra nav a {
+.barra nav { margin-left: auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.barra nav a,
+.barra nav summary {
   color: var(--texto-fraco);
   text-decoration: none;
   font-size: 14.5px;
   font-weight: 600;
 }
-.barra nav a:hover { color: var(--ciano); }
+.barra nav a:hover,
+.barra nav summary:hover { color: var(--ciano); }
+
+.menu-jogar { position: relative; }
+.menu-jogar summary {
+  cursor: pointer;
+  list-style: none;
+  white-space: nowrap;
+}
+.menu-jogar summary::-webkit-details-marker { display: none; }
+.menu-jogar summary::after {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin: 0 0 3px 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform .16s ease;
+}
+.menu-jogar[open] summary::after { transform: rotate(225deg) translate(-2px, -2px); }
+.submenu-jogar {
+  position: absolute;
+  z-index: 80;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 270px;
+  padding: 8px;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  background: rgba(18, 16, 42, .98);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .45);
+}
+.barra nav .submenu-jogar a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 9px;
+  color: var(--texto);
+}
+.barra nav .submenu-jogar a:hover { background: var(--superficie2); }
+.submenu-jogar strong,
+.submenu-jogar span { display: block; }
+.submenu-jogar strong { color: var(--texto); font-size: 14px; }
+.submenu-jogar span { margin-top: 1px; color: var(--texto-fraco); font-size: 12px; font-weight: 500; }
 
 /* ---------- destaque (hero) ---------- */
 
@@ -271,6 +316,7 @@ footer.rodape a { margin: 0 8px; }
 @media (max-width: 620px) {
   .barra .envolucro { height: auto; padding-top: 10px; padding-bottom: 10px; flex-wrap: wrap; gap: 10px 16px; }
   .barra nav { margin-left: 0; width: 100%; gap: 16px; }
+  .submenu-jogar { left: 0; right: auto; width: min(270px, calc(100vw - 40px)); }
   .destaque { min-height: 300px; }
   .destaque .conteudo { padding: 22px; }
   .destaque::after {

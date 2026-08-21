@@ -254,6 +254,23 @@ noindex_nofollow = [p.name for p, t in textos.items() if 'content="noindex, nofo
 checar(not noindex_nofollow, "páginas fora do índice ainda permitem seguir links",
        str(noindex_nofollow[:3]))
 
+paginas_menu_jogar = [
+    RAIZ / "index.html",
+    RAIZ / "sky-vanguard" / "index.html",
+    RAIZ / "sugar-strike" / "index.html",
+    SAIDA / "index.html",
+]
+menu_incompleto = []
+for pagina in paginas_menu_jogar:
+    t = pagina.read_text(encoding="utf-8")
+    if ('class="menu-jogar"' not in t or
+            'href="/sky-vanguard/jogar/"' not in t or
+            'href="/sugar-strike/jogar/"' not in t):
+        menu_incompleto.append(pagina.relative_to(RAIZ).as_posix())
+checar(not menu_incompleto,
+       "o menu Jogar no navegador lista Sky Vanguard e Sugar Strike",
+       str(menu_incompleto))
+
 # ---------------------------------------------------------------------------
 print("\n5. Matérias publicadas")
 # ---------------------------------------------------------------------------

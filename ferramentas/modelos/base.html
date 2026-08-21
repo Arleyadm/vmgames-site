@@ -33,7 +33,7 @@
 <meta name="twitter:image:alt" content="{{ og_imagem_alt|default(og_titulo)|default(titulo_aba) }}">
 
 <link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="{{ site.url }}/blog/feed.xml">
-<link rel="stylesheet" href="/estilo.css">
+<link rel="stylesheet" href="/estilo.css?v=20260820-2">
 <link rel="stylesheet" href="/blog/blog.css?v=20260820-4">
 {%- if acento %}
 <style>body.blog{--acento:{{ acento }};--acento-fraco:{{ acento_fraco }};}</style>
@@ -59,7 +59,19 @@
     <nav aria-label="Navegação principal">
       <a href="/#jogos">Jogos</a>
       <a href="/blog/"{% if secao == 'blog' %} aria-current="true"{% endif %}>Blog</a>
-      <a href="/sugar-strike/jogar/">Jogar no navegador</a>
+      <details class="menu-jogar">
+        <summary>Jogar no navegador</summary>
+        <div class="submenu-jogar">
+          <a href="/sky-vanguard/jogar/">
+            <strong>Sky Vanguard</strong>
+            <span>Jogo de nave arcade</span>
+          </a>
+          <a href="/sugar-strike/jogar/">
+            <strong>Sugar Strike</strong>
+            <span>FPS multiplayer online</span>
+          </a>
+        </div>
+      </details>
       <a href="/sobre.html">Sobre</a>
     </nav>
     <form class="busca-cabecalho" role="search" action="/blog/busca/" method="get">
