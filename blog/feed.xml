@@ -7,8 +7,108 @@
     <atom:link href="https://vmgames.com.br/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Notícias de games, lançamentos, análises, guias e promoções em português. Publicado pela VM Games, estúdio independente de Catalão, Goiás.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Fri, 21 Aug 2026 00:47:22 -0300</lastBuildDate>
+    <lastBuildDate>Fri, 21 Aug 2026 07:24:51 -0300</lastBuildDate>
     <ttl>60</ttl>
+    <item>
+      <title>Vender skins na Steam dá dinheiro? Entenda o limite da Carteira Steam</title>
+      <link>https://vmgames.com.br/blog/vender-skins-steam-saldo-nao-vira-dinheiro/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/vender-skins-steam-saldo-nao-vira-dinheiro/</guid>
+      <pubDate>Fri, 21 Aug 2026 01:39:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>PC</category>
+      <description>Saiba o que realmente acontece ao vender skins no Mercado Steam e como evitar golpes que prometem transformar saldo em dinheiro.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/vender-skins-steam-saldo-nao-vira-dinheiro.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Links de afiliados em conteúdo gamer: como recomendar sem perder confiança</title>
+      <link>https://vmgames.com.br/blog/links-afiliados-games-como-divulgar/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/links-afiliados-games-como-divulgar/</guid>
+      <pubDate>Fri, 21 Aug 2026 01:38:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>Veja como usar links de afiliados em conteúdo gamer com transparência, intenção de busca e métricas que não sacrificam a confiança.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/links-afiliados-games-como-divulgar.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Como dar aulas de jogos online sem prometer vitória ou ranking</title>
+      <link>https://vmgames.com.br/blog/dar-aulas-coaching-games-online/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/dar-aulas-coaching-games-online/</guid>
+      <pubDate>Fri, 21 Aug 2026 01:37:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>eSports</category>
+      <description>Aprenda a estruturar aulas e coaching de games com preço, escopo, segurança e expectativas honestas para aluno e instrutor.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/dar-aulas-coaching-games-online.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Trabalhar testando jogos: o que um QA faz e como evitar vagas falsas</title>
+      <link>https://vmgames.com.br/blog/trabalhar-testando-jogos-vagas-golpes/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/trabalhar-testando-jogos-vagas-golpes/</guid>
+      <pubDate>Fri, 21 Aug 2026 01:36:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>Descubra o trabalho real de QA em games, habilidades úteis para começar e sinais de golpe em falsas ofertas de testador.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/trabalhar-testando-jogos-vagas-golpes.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Quanto custa publicar um jogo na Steam e quando a taxa pode voltar</title>
+      <link>https://vmgames.com.br/blog/publicar-jogo-steam-custos-steam-direct/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/publicar-jogo-steam-custos-steam-direct/</guid>
+      <pubDate>Fri, 21 Aug 2026 01:35:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>PC</category>
+      <description>Entenda a taxa Steam Direct, a condição de recuperação e os custos esquecidos por quem planeja vender um jogo próprio.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/publicar-jogo-steam-custos-steam-direct.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Como vender assets de games no Fab: comissão, pagamento e portfólio</title>
+      <link>https://vmgames.com.br/blog/vender-assets-games-fab-como-comecar/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/vender-assets-games-fab-como-comecar/</guid>
+      <pubDate>Fri, 21 Aug 2026 01:34:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>Veja como começar a vender assets no Fab, qual participação é informada pela Epic e como criar um catálogo útil e confiável.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/vender-assets-games-fab-como-comecar.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Fortnite permite vender itens em ilhas: entenda as transações e os pagamentos</title>
+      <link>https://vmgames.com.br/blog/fortnite-vender-itens-ilha-transacoes/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/fortnite-vender-itens-ilha-transacoes/</guid>
+      <pubDate>Fri, 21 Aug 2026 01:33:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Notícias</category>
+      <description>Entenda as transações dentro de ilhas do Fortnite, a divisão temporária de 2026 e por que estimativas não garantem pagamento final.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/fortnite-vender-itens-ilha-transacoes.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Assinaturas no Roblox: como monetizar uma experiência sem vender vantagem injusta</title>
+      <link>https://vmgames.com.br/blog/assinaturas-roblox-monetizar-experiencia/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/assinaturas-roblox-monetizar-experiencia/</guid>
+      <pubDate>Fri, 21 Aug 2026 01:32:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>Saiba como funcionam as assinaturas do Roblox, diferenças para passes e práticas que preservam a confiança dos jogadores.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/assinaturas-roblox-monetizar-experiencia.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Renda em lives de games: como não depender apenas de inscrições</title>
+      <link>https://vmgames.com.br/blog/renda-live-games-fontes-sem-depender-subs/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/renda-live-games-fontes-sem-depender-subs/</guid>
+      <pubDate>Fri, 21 Aug 2026 01:31:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>Veja como diversificar a renda de uma live gamer, medir custos e evitar depender de uma única plataforma ou fonte de pagamento.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/renda-live-games-fontes-sem-depender-subs.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Super Thanks no YouTube: como gamers podem receber apoio nos vídeos</title>
+      <link>https://vmgames.com.br/blog/youtube-super-thanks-games-como-funciona/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/youtube-super-thanks-games-como-funciona/</guid>
+      <pubDate>Fri, 21 Aug 2026 01:30:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>Entenda quem pode ativar o Super Thanks, quais vídeos ficam de fora e como usar o recurso com transparência em um canal gamer.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/youtube-super-thanks-games-como-funciona.webp" type="image/webp" length="0"/>
+    </item>
     <item>
       <title>Qual PS5 escolher: modelo com disco, Digital ou PS5 Pro?</title>
       <link>https://vmgames.com.br/blog/qual-ps5-comprar-disco-digital-pro/</link>
@@ -208,106 +308,6 @@
       <category>Lançamentos</category>
       <description>The Sinking City 2 já está disponível no Xbox Series X|S com estrutura de survival horror, recursos escassos e investigações opcionais.</description>
       <enclosure url="https://vmgames.com.br/blog/img/capas/the-sinking-city-2-survival-horror.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Modern Warfare 4: data, plataformas, campanha, DMZ e multiplayer</title>
-      <link>https://vmgames.com.br/blog/modern-warfare-4-guia-lancamento/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/modern-warfare-4-guia-lancamento/</guid>
-      <pubDate>Thu, 20 Aug 2026 12:11:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Lançamentos</category>
-      <description>Call of Duty: Modern Warfare 4 será lançado em 23 de outubro para PS5, Xbox Series, PC e Switch 2; veja campanha, DMZ e multiplayer.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/modern-warfare-4-guia-lancamento.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Star Wars Zero Company chega em 27 de agosto; veja como funciona o RPG tático</title>
-      <link>https://vmgames.com.br/blog/star-wars-zero-company-data-gameplay/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/star-wars-zero-company-data-gameplay/</guid>
-      <pubDate>Thu, 20 Aug 2026 12:10:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Lançamentos</category>
-      <description>Star Wars Zero Company será lançado em 27 de agosto para PC, PS5 e Xbox Series com combate tático por turnos, base operacional e equipe personalizável.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/star-wars-zero-company-data-gameplay.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Apex Legends Marked: veja as principais mudanças da temporada</title>
-      <link>https://vmgames.com.br/blog/apex-legends-marked-mudancas/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/apex-legends-marked-mudancas/</guid>
-      <pubDate>Thu, 20 Aug 2026 12:09:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Guias</category>
-      <description>A temporada Marked de Apex Legends reformula Bloodhound, traz acessórios corrompidos, mudanças nas armas de energia e novo calendário ranqueado.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/apex-legends-marked-mudancas.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Cardpocalypse será o jogo grátis da Epic a partir de 20 de agosto</title>
-      <link>https://vmgames.com.br/blog/cardpocalypse-gratis-epic/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/cardpocalypse-gratis-epic/</guid>
-      <pubDate>Wed, 19 Aug 2026 21:44:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Promoções</category>
-      <description>Cardpocalypse será distribuído gratuitamente pela Epic Games Store entre 20 e 27 de agosto, segundo a programação da loja.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/cardpocalypse-gratis-epic.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Arslan Ash vence Tekken 8 na Evo 2026 e amplia domínio no torneio</title>
-      <link>https://vmgames.com.br/blog/arslan-ash-evo-2026-tekken/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/arslan-ash-evo-2026-tekken/</guid>
-      <pubDate>Wed, 19 Aug 2026 21:43:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>eSports</category>
-      <description>Arslan Ash conquistou o torneio de Tekken 8 da Evo 2026 em Las Vegas, resultado confirmado pela Bandai Namco.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/arslan-ash-evo-2026-tekken.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Preços das GeForce RTX 50 disparam nos EUA, com alta de até 39%</title>
-      <link>https://vmgames.com.br/blog/precos-geforce-rtx-50-agosto-2026/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/precos-geforce-rtx-50-agosto-2026/</guid>
-      <pubDate>Wed, 19 Aug 2026 21:42:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Hardware</category>
-      <description>Levantamentos do varejo dos EUA apontam aumentos expressivos nas GeForce RTX 50 em agosto, chegando a 39% em alguns modelos.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/precos-geforce-rtx-50-agosto-2026.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Fortnite recebe temporada Override com Sonic em 20 de agosto</title>
-      <link>https://vmgames.com.br/blog/fortnite-override-sonic/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/fortnite-override-sonic/</guid>
-      <pubDate>Wed, 19 Aug 2026 21:41:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Mobile</category>
-      <description>A Temporada 4 do Capítulo 7 de Fortnite, chamada Override, começa em 20 de agosto e inclui uma colaboração com Sonic.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/fortnite-override-sonic.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Switch 2 ficará mais caro nos EUA e Europa a partir de setembro</title>
-      <link>https://vmgames.com.br/blog/switch-2-aumento-preco-setembro/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/switch-2-aumento-preco-setembro/</guid>
-      <pubDate>Wed, 19 Aug 2026 21:40:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Nintendo</category>
-      <description>A Nintendo aumentará o preço do Switch 2 nos Estados Unidos e na Europa em 1º de setembro, mas ainda não informou o novo valor para a América Latina.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/switch-2-aumento-preco-setembro.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Xbox leva quatro clássicos do console original ao PC e portáteis</title>
-      <link>https://vmgames.com.br/blog/xbox-retrocompatibilidade-pc/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/xbox-retrocompatibilidade-pc/</guid>
-      <pubDate>Wed, 19 Aug 2026 21:39:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Xbox</category>
-      <description>A retrocompatibilidade do Xbox chegou ao PC com quatro jogos do console original, melhorias gráficas e suporte a licenças digitais existentes.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/xbox-retrocompatibilidade-pc.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>PS Plus recebe Kingdom Come 2, Vampire Survivors e mais jogos em agosto</title>
-      <link>https://vmgames.com.br/blog/ps-plus-catalogo-agosto-2026/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/ps-plus-catalogo-agosto-2026/</guid>
-      <pubDate>Wed, 19 Aug 2026 21:38:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>PlayStation</category>
-      <description>O catálogo de agosto do PS Plus Extra e Deluxe já está disponível com Helldivers 2, Kingdom Come: Deliverance 2, Vampire Survivors e outros jogos.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/ps-plus-catalogo-agosto-2026.webp" type="image/webp" length="0"/>
     </item>
   </channel>
 </rss>
