@@ -647,11 +647,12 @@ class TelaOnline {
 
       // Miniatura do carro escolhido.
       const carro = Assets.img("car_" + limitar(j.carId, 0, 9));
-      const alturaCarro = alturaLinha * 0.72;
+      const escalaMiniatura = (limitar(j.carId, 0, 9) === 9) ? 1.15 : 1;
+      const alturaCarro = alturaLinha * 0.72 * escalaMiniatura;
       if (carro) {
         const larguraCarro = alturaCarro * (carro.width / Math.max(1, carro.height));
         ctx.globalAlpha = j.online ? 1 : 0.35;
-        ctx.drawImage(carro, esquerda + largura * 0.018, y, larguraCarro, alturaCarro);
+        ctx.drawImage(carro, esquerda + largura * 0.018, y - (alturaCarro - alturaLinha * 0.72) * 0.5, larguraCarro, alturaCarro);
         ctx.globalAlpha = 1;
       }
 

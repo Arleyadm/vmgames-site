@@ -128,9 +128,12 @@ class CarPreviewView {
     const bmp = this.carBmp;
     if (bmp && bmp.width > 0 && bmp.height > 0) {
       const aspect = bmp.height / bmp.width;
-      let sw = width * 0.74;
+      // O Frost Hyper tem mais margem transparente no topo do sprite inclinado.
+      // Compensamos somente o desenho, sem mudar atributos ou colisao do carro.
+      const visualScale = (c.id === 9) ? 1.14 : 1;
+      let sw = width * 0.74 * visualScale;
       let sh = sw * aspect;
-      const maxH = height * 0.82;
+      const maxH = height * ((c.id === 9) ? 0.90 : 0.82);
       if (sh > maxH) { sh = maxH; sw = sh / aspect; }
       const centerY = height * 0.54;
       const pintado = this.pintarSprite(bmp, c.accentColor);

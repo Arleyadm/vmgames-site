@@ -1177,6 +1177,30 @@ class Renderer {
     }
   }
 
+  /**
+   * Recorta apenas as margens transparentes conhecidas da vegetacao.
+   * O ponto inferior do recorte passa a ser o pe visual do desenho; assim
+   * arbustos com muito espaco vazio no PNG nao parecem flutuar sobre a pista.
+   */
+  propSourceCrop(type, bmp) {
+    let crop = null;
+    switch (type) {
+      case SpriteType.BUSH: crop = [0.048, 0.142, 0.952, 0.824]; break;
+      case SpriteType.BUSH_ROUND: crop = [0.116, 0.130, 0.884, 0.842]; break;
+      case SpriteType.BUSH_LIGHT: crop = [0.052, 0.168, 0.950, 0.836]; break;
+      case SpriteType.BUSH_FLOWER: crop = [0.048, 0.142, 0.952, 0.824]; break;
+      case SpriteType.GRASS_CLUMP: crop = [0.126, 0.216, 0.874, 0.782]; break;
+      case SpriteType.TREE_PALM: crop = [0.138, 0.048, 0.886, 0.938]; break;
+      default: break;
+    }
+    if (crop === null) return { x: 0, y: 0, w: bmp.naturalWidth, h: bmp.naturalHeight };
+    const x = Math.round(bmp.naturalWidth * crop[0]);
+    const y = Math.round(bmp.naturalHeight * crop[1]);
+    const right = Math.round(bmp.naturalWidth * crop[2]);
+    const bottom = Math.round(bmp.naturalHeight * crop[3]);
+    return { x: x, y: y, w: Math.max(1, right - x), h: Math.max(1, bottom - y) };
+  }
+
   drawBitmapProp(ctx, bmp, sp, baseX, baseY, drawUnit, safeSizeFactor, farVisibility, clipY) {
     // V68: cenario lateral mais solido e imersivo.
     // - vegetacao entra mais perto do jogador;
@@ -1239,7 +1263,13 @@ class Renderer {
     }
     spriteH = Math.min(spriteH, maxH);
 
-    const aspect = bmp.naturalWidth / bmp.naturalHeight;
+    const source = (isTreeLike || isBushLike)
+      ? this.propSourceCrop(sp.type, bmp)
+      : { x: 0, y: 0, w: bmp.naturalWidth, h: bmp.naturalHeight };
+    // Recortar a transparencia nao deve inflar o objeto: mantemos exatamente
+    // o tamanho que os pixels visiveis ja tinham e mudamos apenas a ancoragem.
+    spriteH *= source.h / Math.max(1, bmp.naturalHeight);
+    const aspect = source.w / source.h;
     let spriteW = spriteH * aspect;
     let maxW;
     switch (sp.type) {
@@ -1303,7 +1333,7 @@ class Renderer {
     this.spritePaint.alpha = propAlpha;
     ctx.globalAlpha = propAlpha / 255;
     ctx.imageSmoothingEnabled = true;
-    ctx.drawImage(bmp, 0, 0, bmp.naturalWidth, bmp.naturalHeight,
+    ctx.drawImage(bmp, source.x, source.y, source.w, source.h,
       this.rect.left, this.rect.top, spriteW, groundedY - topY);
     this.spritePaint.alpha = 255;
     ctx.globalAlpha = 1;
@@ -1370,15 +1400,20 @@ class Renderer {
     if (isRoadObject) {
       farVisibility = 1;
     } else {
-      const yStart = (isTreeLike || isBushLike) ? 0.455 : 0.405;
-      const ySpan = (isTreeLike || isBushLike) ? 0.255 : 0.235;
-      const roadStart = (isTreeLike || isBushLike) ? this.width * 0.035 : this.width * 0.028;
-      const roadSpan = (isTreeLike || isBushLike) ? this.width * 0.120 : this.width * 0.105;
+      // A vegetacao nasce mais perto da camera. Antes ela recebia um salto de
+      // opacidade ainda no horizonte, parecendo surgir no meio da pista.
+      const yStart = isTreeLike ? 0.500 : (isBushLike ? 0.530 : 0.405);
+      const ySpan = isTreeLike ? 0.270 : (isBushLike ? 0.235 : 0.235);
+      const roadStart = (isTreeLike || isBushLike) ? this.width * 0.052 : this.width * 0.028;
+      const roadSpan = (isTreeLike || isBushLike) ? this.width * 0.135 : this.width * 0.105;
       const yVisibility = limitar((screenY - this.height * yStart) / (this.height * ySpan), 0, 1);
       const roadVisibility = limitar((seg.p1.screen.w - roadStart) / roadSpan, 0, 1);
       let vis = Math.min(yVisibility, roadVisibility);
-      if ((isTreeLike || isBushLike) && vis > 0.04) {
-        vis = 0.16 + vis * 0.84;
+      if (isTreeLike || isBushLike) {
+        // smoothstep com uma pequena zona invisivel: entrada tardia, continua
+        // e sem o antigo "estalo" de transparencia.
+        vis = limitar((vis - 0.075) / 0.925, 0, 1);
+        vis = vis * vis * (3 - 2 * vis);
       }
       farVisibility = vis;
     }
@@ -1718,7 +1753,8 @@ class Renderer {
       // nem gigante na camera. O carro de IA perto deve parecer quase
       // do tamanho do carro do jogador, aumentando so um pouco ao aproximar.
       const aspect = bmp.naturalHeight / bmp.naturalWidth;
-      let w = Math.max(3, unit * 0.40);
+      const opponentSpriteScale = (car.spriteIndex === 9) ? 1.18 : 1;
+      let w = Math.max(3, unit * 0.40 * opponentSpriteScale);
       const maxW = car.isRemote ? this.width * 0.325 : this.width * 0.305;
       if (w > maxW) w = maxW;
       let h = w * aspect;
@@ -1858,12 +1894,12 @@ class Renderer {
 
     if (bmp !== null) {
       const aspect = bmp.naturalHeight / bmp.naturalWidth;
-      // V82: o Obsidian GT (carro preto) estava pequeno apenas quando era o carro do jogador.
-      // A IA continua com o tamanho antigo; aqui ajustamos so a escala visual do player.
-      const playerSpriteScale = (player.car.id === 5) ? 1.22 : 1;
+      // Compensacao visual dos sprites com mais margem transparente. Nao altera
+      // fisica, velocidade ou colisao; somente o tamanho desenhado do jogador.
+      const playerSpriteScale = (player.car.id === 5) ? 1.22 : ((player.car.id === 9) ? 1.20 : 1);
       let h = this.height * (0.312 + speedP * 0.030) * playerSpriteScale;
       let w = h / aspect;
-      const maxW = this.width * ((player.car.id === 5) ? 0.385 : 0.34);
+      const maxW = this.width * ((player.car.id === 5 || player.car.id === 9) ? 0.385 : 0.34);
       if (w > maxW) {
         w = maxW;
         h = w * aspect;
