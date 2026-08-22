@@ -2120,7 +2120,9 @@ Renderer.FLASH_COLOR = Cor.argb(170, 0xFF, 0x3C, 0x3C);
  */
 Renderer.PROP_SPRITES = {};
 Renderer.PROP_SPRITES[SpriteType.BUSH] = "arbustos";
-Renderer.PROP_SPRITES[SpriteType.TREE_ROUND] = "arvore_folhosa";
+// TREE_ROUND usava a árvore infantil de círculos; qualquer ocorrência antiga
+// agora recebe a árvore realista para nunca reaparecer durante a corrida.
+Renderer.PROP_SPRITES[SpriteType.TREE_ROUND] = "tree_oak";
 Renderer.PROP_SPRITES[SpriteType.TREE_PINE] = "arvore_pinheiro";
 Renderer.PROP_SPRITES[SpriteType.TREE_PALM] = "arvore_praia";
 Renderer.PROP_SPRITES[SpriteType.CACTUS_DESERT] = "cacto_deserto";

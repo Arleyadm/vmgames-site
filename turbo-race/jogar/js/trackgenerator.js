@@ -227,11 +227,10 @@ class TrackGenerator {
       for (let i = range.first; i <= range.last; i++) {
         if (i >= 0 && i < total) this.segments[i].isPitStop = true;
       }
-      // Portal do box: apenas visual.
+      // O conjunto de placas suspensas foi removido de todas as fases.
       const portalIndex = limitar(range.first - 6, 0, total - 1);
-      this.segments[portalIndex].sprites.push(new Sprite(SpriteType.PORTAL, 0, 1.08));
 
-      // Deixa o trecho do portal mais reto para dar sensacao de passagem.
+      // Mantém o trecho do box mais reto para facilitar a entrada.
       for (let k = portalIndex - 5; k <= portalIndex + 8; k++) {
         if (k >= 0 && k < total) this.segments[k].curve *= 0.18;
       }
@@ -369,7 +368,7 @@ class TrackGenerator {
     if (n.includes("Toscana")) return [SpriteType.TREE_CYPRESS, SpriteType.TREE_OAK];
     if (n.includes("Kyoto") || n.includes("Quioto") || n.includes("Yokohama") ||
         n.includes("Osaka") || n.includes("Roma")) {
-      return [SpriteType.TREE_CYPRESS, SpriteType.TREE_ROUND, SpriteType.TREE_OAK];
+      return [SpriteType.TREE_CYPRESS, SpriteType.TREE_OAK, SpriteType.TREE_BIRCH];
     }
     if (stage.isNight || n.includes("Neon") || n.includes("Tokyo") ||
         n.includes("Tóquio") || n.includes("Shibuya") ||
@@ -377,9 +376,9 @@ class TrackGenerator {
       return [SpriteType.SIGN_DIRECTIONAL, SpriteType.TREE_CYPRESS, SpriteType.TREE_OAK];
     }
     if (n.includes("Amazônia") || n.includes("Pantanal") || n.includes("Serra")) {
-      return [SpriteType.TREE_ROUND, SpriteType.TREE_OAK, SpriteType.TREE_PALM];
+      return [SpriteType.TREE_OAK, SpriteType.TREE_BIRCH, SpriteType.TREE_PALM];
     }
-    return [SpriteType.TREE_ROUND, SpriteType.TREE_OAK];
+    return [SpriteType.TREE_OAK, SpriteType.TREE_BIRCH];
   }
 
   secondarySceneryTypes() {
@@ -502,7 +501,7 @@ class TrackGenerator {
     while (i < total - 30) {
       const seg = this.segments[i];
       if (!seg.isPitStop && !seg.isTunnel) {
-        const natureMain = primaryOptions.length > 0 ? this.pick(primaryOptions) : SpriteType.TREE_ROUND;
+        const natureMain = primaryOptions.length > 0 ? this.pick(primaryOptions) : SpriteType.TREE_OAK;
         const natureSecondary = secondaryOptions.length > 0 ? this.pick(secondaryOptions) : SpriteType.BUSH_ROUND;
         const desertStage = primaryOptions.every(t => t === SpriteType.CACTUS_DESERT);
 
