@@ -2684,7 +2684,9 @@ class TelaDeCorrida {
         self.tiltMotionLastAt = (typeof performance !== "undefined" ? performance.now() : Date.now());
         // Mesmo calculo do Android: event.values[1] / 6, com zona morta e
         // filtro leve para o carro nao tremer quando o aparelho esta parado.
-        let alvo = limitar(gravidade.y / 6, -1, 1);
+        // A Gamepad/Android e a API Web usam sinais opostos neste eixo.
+        // Invertemos para inclinar à direita e o carro virar à direita.
+        let alvo = limitar(-gravidade.y / 6, -1, 1);
         if (Math.abs(alvo) < 0.055) alvo = 0;
         self.tiltFiltered += (alvo - self.tiltFiltered) * 0.32;
         self.setTilt(Math.abs(self.tiltFiltered) < 0.035 ? 0 : self.tiltFiltered);
@@ -2711,7 +2713,7 @@ class TelaDeCorrida {
       let delta = bruto - self.tiltOrientationNeutral;
       while (delta > 180) delta -= 360;
       while (delta < -180) delta += 360;
-      let alvo = limitar(delta / 18, -1, 1);
+      let alvo = limitar(-delta / 18, -1, 1);
       if (Math.abs(alvo) < 0.06) alvo = 0;
       self.tiltFiltered += (alvo - self.tiltFiltered) * 0.28;
       self.setTilt(Math.abs(self.tiltFiltered) < 0.035 ? 0 : self.tiltFiltered);
