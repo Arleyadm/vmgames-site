@@ -24,6 +24,7 @@ const OnlineSession = {
   puddlesWater: true,
   puddlesOil: false,
   raceLaunchId: "",
+  raceGoAtMs: 0,
   raceOpening: false,
 
   refreshPlayerId() {
@@ -49,6 +50,7 @@ const OnlineSession = {
     this.puddlesWater = true;
     this.puddlesOil = false;
     this.raceLaunchId = "";
+    this.raceGoAtMs = 0;
     this.raceOpening = false;
     this.refreshPlayerId();
   }
@@ -135,6 +137,9 @@ class OnlineService {
     ws.onopen = function () {
       self.tentativasDeVolta = 0;
       self._avisar("onStatus", "Conectado. Aguardando a sala…");
+      // Mede a latencia já na entrada. Sem isto uma largada feita antes do
+      // primeiro ping periódico não consegue compensar o tempo de rede.
+      self._enviar({ t: "ping", stamp: Date.now() });
       self._comecarPing();
     };
 
@@ -199,7 +204,16 @@ class OnlineService {
 
       case "largada": {
         // A semente e o que faz todo mundo correr exatamente a mesma pista.
+        const prazoRecebido = Math.max(0, Number(msg.sincronizarEmMs || msg.emMs || 0));
+        const esperaCorrigida = Math.max(0, prazoRecebido - Math.max(0, this.latenciaMs) * 0.5);
+        const agoraMonotonico = (typeof performance !== "undefined" && performance.now)
+          ? performance.now()
+          : Date.now();
         OnlineSession.raceLaunchId = String(msg.corridaId || msg.semente);
+        // Prazo absoluto local: o carregamento da pista é descontado depois.
+        // Assim PC e celular dão a largada no mesmo instante, mesmo que um
+        // deles leve mais tempo para abrir a tela da corrida.
+        OnlineSession.raceGoAtMs = agoraMonotonico + esperaCorrigida;
         OnlineSession.stageIndex = msg.fase;
         OnlineSession.raceLaps = limitar(Math.trunc(msg.voltas || OnlineSession.raceLaps || 3), 1, 10);
         OnlineSession.raceWeather = String(msg.clima || OnlineSession.raceWeather || "auto");
@@ -215,6 +229,8 @@ class OnlineService {
           voltas: OnlineSession.raceLaps,
           corridaId: msg.corridaId,
           emMs: msg.emMs || 0,
+          sincronizarEmMs: msg.sincronizarEmMs || msg.emMs || 0,
+          largadaLocalEm: OnlineSession.raceGoAtMs,
           jogadores: msg.jogadores || []
         });
         return;

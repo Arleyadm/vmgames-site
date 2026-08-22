@@ -485,9 +485,17 @@ class TelaDeCorrida {
       ? limitar(Math.trunc(sessao.raceLaps || this.stage.laps), 1, 10)
       : this.stage.laps;
     this.state = new GameState(this.stage.timeLimit, this.trackLength, totalDeVoltas);
+    if (sessao.enabled && sessao.raceGoAtMs > 0) {
+      const agoraMonotonico = (typeof performance !== "undefined" && performance.now)
+        ? performance.now()
+        : Date.now();
+      // O prazo foi criado ao receber a mensagem do servidor. Subtrair o
+      // tempo gasto montando a pista evita que o celular largue depois do PC.
+      this.state.countdown = Math.max(0.05, (sessao.raceGoAtMs - agoraMonotonico) / 1000);
+    }
     this.state.totalRacers = this.bluetoothService ? 2 : this.stage.trafficCount + 1;
     this.state.rank = this.state.totalRacers;
-    if (!this.save.tutorialSeen) {
+    if (!this.save.tutorialSeen && !sessao.enabled) {
       this.state.phase = GamePhase.TUTORIAL;
     }
 
