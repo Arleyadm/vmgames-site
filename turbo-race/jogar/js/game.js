@@ -322,7 +322,24 @@ class TelaDeCorrida {
         onDisconnected(msg) { /* usado só no saguão */ },
         onRawMessage(msg) { /* provocações livres */ },
         onRoomUpdate(resumo) { /* usado só no saguão */ },
-        onRaceStart(info) { /* a largada já aconteceu quando esta tela abriu */ },
+        onRaceStart(info) {
+          // Todos já confirmaram que a pista está carregada. Zera qualquer
+          // estado provisório e aplica o prazo comum do GO.
+          const agora = (typeof performance !== "undefined" && performance.now)
+            ? performance.now()
+            : Date.now();
+          self.state.phase = GamePhase.COUNTDOWN;
+          self.state.countdown = Math.max(0.05, (Number(info.largadaLocalEm || OnlineSession.raceGoAtMs) - agora) / 1000);
+          self.state.completedLaps = 0;
+          self.state.elapsed = 0;
+          self.player.position = 0;
+          self.player.speed = 0;
+          for (const car of self.remoteCars.values()) {
+            car.z = 0;
+            car.completedLaps = 0;
+            car.speed = 0;
+          }
+        },
 
         onStateReceived(state) {
           const remoteId = (state.playerId && state.playerId !== "")
@@ -378,6 +395,9 @@ class TelaDeCorrida {
       });
     }
     if (this.state) this.refreshTotalRacersForMultiplayer();
+    if (service && typeof service.reportLoaded === "function") {
+      service.reportLoaded(sessaoOnline().raceLaunchId);
+    }
   }
 
   refreshTotalRacersForMultiplayer() {
@@ -485,13 +505,16 @@ class TelaDeCorrida {
       ? limitar(Math.trunc(sessao.raceLaps || this.stage.laps), 1, 10)
       : this.stage.laps;
     this.state = new GameState(this.stage.timeLimit, this.trackLength, totalDeVoltas);
-    if (sessao.enabled && sessao.raceGoAtMs > 0) {
-      const agoraMonotonico = (typeof performance !== "undefined" && performance.now)
-        ? performance.now()
-        : Date.now();
-      // O prazo foi criado ao receber a mensagem do servidor. Subtrair o
-      // tempo gasto montando a pista evita que o celular largue depois do PC.
-      this.state.countdown = Math.max(0.05, (sessao.raceGoAtMs - agoraMonotonico) / 1000);
+    if (sessao.enabled) {
+      if (sessao.raceGoAtMs > 0) {
+        const agoraMonotonico = (typeof performance !== "undefined" && performance.now)
+          ? performance.now()
+          : Date.now();
+        this.state.countdown = Math.max(0.05, (sessao.raceGoAtMs - agoraMonotonico) / 1000);
+      } else {
+        // A pista foi preparada, mas o servidor ainda espera os outros pilotos.
+        this.state.countdown = 3600;
+      }
     }
     this.state.totalRacers = this.bluetoothService ? 2 : this.stage.trafficCount + 1;
     this.state.rank = this.state.totalRacers;

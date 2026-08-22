@@ -123,6 +123,18 @@ class TelaOnline {
 
   _ouvinte() {
     const self = this;
+    function abrirCorrida(largada) {
+      if (OnlineSession.raceOpening) return;
+      OnlineSession.raceOpening = true;
+      OnlineSession.enabled = true;
+      OnlineSession.stageIndex = largada.fase;
+      self.app.irPara("corrida", {
+        stageIndex: largada.fase,
+        online: true,
+        semente: largada.semente,
+        playerName: self.app.save.playerName
+      });
+    }
     return {
       onStatus(msg) { self.mensagem = msg; },
 
@@ -140,17 +152,11 @@ class TelaOnline {
         if (eu) self.pronto = eu.pronto;
       },
 
-      onRaceStart(largada) {
-        // A semente é o que faz todo mundo correr a mesma pista.
-        OnlineSession.enabled = true;
-        OnlineSession.stageIndex = largada.fase;
-        self.app.irPara("corrida", {
-          stageIndex: largada.fase,
-          online: true,
-          semente: largada.semente,
-          playerName: self.app.save.playerName
-        });
-      },
+      onRacePrepare(largada) { abrirCorrida(largada); },
+
+      // Compatibilidade com servidor antigo: se não houver `preparar`, a
+      // própria largada ainda abre a corrida.
+      onRaceStart(largada) { abrirCorrida(largada); },
 
       onChat(c) {
         self.conversa.push({ nome: c.nome, texto: c.texto, em: self.tempo });

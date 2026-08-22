@@ -202,37 +202,34 @@ class OnlineService {
         return;
       }
 
+      case "preparar": {
+        // Primeira metade da barreira: abre e monta a pista, mas ainda não
+        // inicia a contagem. O GameView avisará `carregado` quando estiver pronto.
+        this._aplicarRegrasDaMensagem(msg);
+        OnlineSession.raceGoAtMs = 0;
+        OnlineSession.enabled = true;
+        this._avisar("onRacePrepare", this._dadosDaCorrida(msg));
+        return;
+      }
+
       case "largada": {
-        // A semente e o que faz todo mundo correr exatamente a mesma pista.
+        // Segunda metade da barreira: todos já montaram a pista. Agora o mesmo
+        // prazo local libera o GO em PC e celular.
+        this._aplicarRegrasDaMensagem(msg);
         const prazoRecebido = Math.max(0, Number(msg.sincronizarEmMs || msg.emMs || 0));
         const esperaCorrigida = Math.max(0, prazoRecebido - Math.max(0, this.latenciaMs) * 0.5);
         const agoraMonotonico = (typeof performance !== "undefined" && performance.now)
           ? performance.now()
           : Date.now();
-        OnlineSession.raceLaunchId = String(msg.corridaId || msg.semente);
-        // Prazo absoluto local: o carregamento da pista é descontado depois.
-        // Assim PC e celular dão a largada no mesmo instante, mesmo que um
-        // deles leve mais tempo para abrir a tela da corrida.
         OnlineSession.raceGoAtMs = agoraMonotonico + esperaCorrigida;
-        OnlineSession.stageIndex = msg.fase;
-        OnlineSession.raceLaps = limitar(Math.trunc(msg.voltas || OnlineSession.raceLaps || 3), 1, 10);
-        OnlineSession.raceWeather = String(msg.clima || OnlineSession.raceWeather || "auto");
-        OnlineSession.puddlesWater = msg.pocaAgua !== false;
-        OnlineSession.puddlesOil = msg.pocaOleo === true;
         OnlineSession.enabled = true;
-        this._avisar("onRaceStart", {
-          semente: msg.semente,
-          fase: msg.fase,
-          clima: OnlineSession.raceWeather,
-          pocaAgua: OnlineSession.puddlesWater,
-          pocaOleo: OnlineSession.puddlesOil,
-          voltas: OnlineSession.raceLaps,
-          corridaId: msg.corridaId,
+        const dados = this._dadosDaCorrida(msg);
+        Object.assign(dados, {
           emMs: msg.emMs || 0,
           sincronizarEmMs: msg.sincronizarEmMs || msg.emMs || 0,
-          largadaLocalEm: OnlineSession.raceGoAtMs,
-          jogadores: msg.jogadores || []
+          largadaLocalEm: OnlineSession.raceGoAtMs
         });
+        this._avisar("onRaceStart", dados);
         return;
       }
 
@@ -305,6 +302,28 @@ class OnlineService {
     OnlineSession.puddlesOil = resumo.pocaOleo === true;
   }
 
+  _aplicarRegrasDaMensagem(msg) {
+    OnlineSession.raceLaunchId = String(msg.corridaId || msg.semente);
+    OnlineSession.stageIndex = msg.fase;
+    OnlineSession.raceLaps = limitar(Math.trunc(msg.voltas || OnlineSession.raceLaps || 3), 1, 10);
+    OnlineSession.raceWeather = String(msg.clima || OnlineSession.raceWeather || "auto");
+    OnlineSession.puddlesWater = msg.pocaAgua !== false;
+    OnlineSession.puddlesOil = msg.pocaOleo === true;
+  }
+
+  _dadosDaCorrida(msg) {
+    return {
+      semente: msg.semente,
+      fase: msg.fase,
+      clima: OnlineSession.raceWeather,
+      pocaAgua: OnlineSession.puddlesWater,
+      pocaOleo: OnlineSession.puddlesOil,
+      voltas: OnlineSession.raceLaps,
+      corridaId: msg.corridaId,
+      jogadores: msg.jogadores || []
+    };
+  }
+
   _comecarPing() {
     this._pararPing();
     const self = this;
@@ -375,6 +394,10 @@ class OnlineService {
   setMaxPlayers(max) { this._enviar({ t: "maximo", max: limitar(Math.trunc(max), 2, 24) }); }
 
   startRace() { this._enviar({ t: "largar" }); }
+
+  reportLoaded(corridaId) {
+    this._enviar({ t: "carregado", corridaId: String(corridaId || OnlineSession.raceLaunchId) });
+  }
 
   /** Avisa o servidor que voce cruzou a linha; a ordem de chegada e ele quem decide. */
   reportFinish(tempoSegundos) { this._enviar({ t: "chegou", tempo: tempoSegundos }); }
