@@ -548,7 +548,7 @@ class TelaDeMenu {
       }
       return;
     }
-    if (tipo === "move") {
+    if (tipo === "move" || tipo === "mover") {
       // Saiu de cima do botao com o dedo apoiado: cancela, igual ao Android.
       if (this.pressionado && this.botaoEm(x, y) !== this.pressionado) this.pressionado = null;
       return;

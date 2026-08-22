@@ -40,6 +40,21 @@ class TelaOnline {
     this.faseRolagem = 0;
     this.escolhendoFase = false;
 
+    // As três listas do online rolam por arrasto, roda ou trackpad.
+    this.salasRolagem = 0;
+    this.salasRolagemMax = 0;
+    this.jogadoresRolagem = 0;
+    this.jogadoresRolagemMax = 0;
+    this.faseRolagemMax = 0;
+    this.salasListaRet = Ret.novo();
+    this.jogadoresListaRet = Ret.novo();
+    this.fasesListaRet = Ret.novo();
+    this.arrastoLista = null;
+    this.arrastoInicioY = 0;
+    this.arrastoUltimoY = 0;
+    this.arrastouLista = false;
+    this.botaoPressionado = null;
+
     this.botoes = [];            // preenchidos a cada render, testados no toque
     this.conversa = [];          // últimas provocações recebidas
     this.formularioSala = null;
@@ -55,6 +70,14 @@ class TelaOnline {
     this.erro = "";
     this.pronto = false;
     this.escolhendoFase = false;
+    this.salasRolagem = 0;
+    this.salasRolagemMax = 0;
+    this.jogadoresRolagem = 0;
+    this.jogadoresRolagemMax = 0;
+    this.faseRolagem = 0;
+    this.faseRolagemMax = 0;
+    this.arrastoLista = null;
+    this.botaoPressionado = null;
     this.conversa.length = 0;
     this.app.sound.startMusic("menu_music");
     this._buscarLista();
@@ -456,6 +479,7 @@ class TelaOnline {
     ctx.fillStyle = Cor.css(Cor.rgb(0xF4, 0xF4, 0xF4));
     ctx.font = "bold " + (altura * 0.042) + "px " + FONTE;
     ctx.fillText("Salas abertas", esquerda + largura * 0.02, topo + altura * 0.065);
+    this.salasRolagemMax = 0;
 
     if (this.salasAbertas === null) {
       ctx.fillStyle = Cor.css(Cor.argb(170, 0xF4, 0xF4, 0xF4));
@@ -480,12 +504,24 @@ class TelaOnline {
     }
 
     const alturaLinha = altura * 0.088;
-    const cabem = Math.max(1, Math.floor((base - topo - altura * 0.09) / alturaLinha));
-    const visiveis = this.salasAbertas.slice(0, cabem);
+    const listaTopo = topo + altura * 0.09;
+    const listaBase = base - altura * 0.018;
+    Ret.definir(this.salasListaRet, esquerda + largura * 0.010, listaTopo,
+      direita - largura * 0.010, listaBase);
+    const conteudoAltura = this.salasAbertas.length * alturaLinha;
+    this.salasRolagemMax = Math.max(0, conteudoAltura - Ret.altura(this.salasListaRet));
+    this.salasRolagem = limitar(this.salasRolagem, 0, this.salasRolagemMax);
 
-    for (let i = 0; i < visiveis.length; i++) {
-      const sala = visiveis[i];
-      const y = topo + altura * 0.09 + i * alturaLinha;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(this.salasListaRet.left, this.salasListaRet.top,
+      Ret.largura(this.salasListaRet), Ret.altura(this.salasListaRet));
+    ctx.clip();
+
+    for (let i = 0; i < this.salasAbertas.length; i++) {
+      const sala = this.salasAbertas[i];
+      const y = listaTopo - this.salasRolagem + i * alturaLinha;
+      if (y + alturaLinha < listaTopo || y > listaBase) continue;
       const r = Ret.novo(esquerda + largura * 0.015, y, direita - largura * 0.015, y + alturaLinha * 0.86);
       const cheia = sala.jogadores >= sala.maxJogadores;
       const bloqueada = cheia || sala.correndo;
@@ -511,9 +547,11 @@ class TelaOnline {
       ctx.textAlign = "left";
 
       if (!bloqueada) {
-        this.botoes.push({ r: r, acao: () => this.entrarNaSala(sala.id) });
+        this.botoes.push({ r: r, clip: this.salasListaRet, acao: () => this.entrarNaSala(sala.id) });
       }
     }
+    ctx.restore();
+    this._desenharBarraRolagem(ctx, this.salasListaRet, this.salasRolagem, this.salasRolagemMax, altura);
   }
 
   _desenharRodape(ctx, largura, altura) {
@@ -640,10 +678,24 @@ class TelaOnline {
       esquerda + largura * 0.018, topo + altura * 0.055);
 
     const alturaLinha = altura * 0.069;
-    const limiteVisivel = 6;
-    for (let i = 0; i < resumo.jogadores.length && i < limiteVisivel; i++) {
+    const listaTopo = topo + altura * 0.078;
+    const listaBase = base - altura * 0.052;
+    Ret.definir(this.jogadoresListaRet, esquerda + largura * 0.010, listaTopo,
+      direita - largura * 0.010, listaBase);
+    const conteudoAltura = resumo.jogadores.length * alturaLinha;
+    this.jogadoresRolagemMax = Math.max(0, conteudoAltura - Ret.altura(this.jogadoresListaRet));
+    this.jogadoresRolagem = limitar(this.jogadoresRolagem, 0, this.jogadoresRolagemMax);
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(this.jogadoresListaRet.left, this.jogadoresListaRet.top,
+      Ret.largura(this.jogadoresListaRet), Ret.altura(this.jogadoresListaRet));
+    ctx.clip();
+
+    for (let i = 0; i < resumo.jogadores.length; i++) {
       const j = resumo.jogadores[i];
-      const y = topo + altura * 0.085 + i * alturaLinha;
+      const y = listaTopo - this.jogadoresRolagem + i * alturaLinha;
+      if (y + alturaLinha < listaTopo || y > listaBase) continue;
 
       // Miniatura do carro escolhido.
       const carro = Assets.img("car_" + limitar(j.carId, 0, 9));
@@ -677,13 +729,9 @@ class TelaOnline {
       }
       ctx.textAlign = "left";
     }
-
-    if (resumo.jogadores.length > limiteVisivel) {
-      ctx.fillStyle = Cor.css(Cor.rgb(0x00, 0xF5, 0xD4));
-      ctx.font = "bold " + (altura * 0.026) + "px " + FONTE;
-      ctx.fillText("+ " + (resumo.jogadores.length - limiteVisivel) + " pilotos na sala",
-        esquerda + largura * 0.018, base - altura * 0.028);
-    }
+    ctx.restore();
+    this._desenharBarraRolagem(ctx, this.jogadoresListaRet,
+      this.jogadoresRolagem, this.jogadoresRolagemMax, altura);
 
     if (resumo.jogadores.length < resumo.minJogadores) {
       ctx.fillStyle = Cor.css(Cor.argb(180, 0xFF, 0xD2, 0x4D));
@@ -754,9 +802,21 @@ class TelaOnline {
     const larguraCelula = (direita - esquerda) / colunas;
     const alturaCelula = altura * 0.115;
     const linhasVisiveis = 5;
-    const primeira = this.faseRolagem * colunas;
+    const totalLinhas = Math.ceil(StageCatalog.count() / colunas);
+    this.faseRolagemMax = Math.max(0, totalLinhas - linhasVisiveis);
+    this.faseRolagem = limitar(this.faseRolagem, 0, this.faseRolagemMax);
+    const primeiraLinha = Math.floor(this.faseRolagem);
+    const deslocamento = (this.faseRolagem - primeiraLinha) * alturaCelula;
+    const primeira = primeiraLinha * colunas;
+    Ret.definir(this.fasesListaRet, esquerda, topo, direita, topo + linhasVisiveis * alturaCelula);
 
-    for (let i = 0; i < colunas * linhasVisiveis; i++) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(this.fasesListaRet.left, this.fasesListaRet.top,
+      Ret.largura(this.fasesListaRet), Ret.altura(this.fasesListaRet));
+    ctx.clip();
+
+    for (let i = 0; i < colunas * (linhasVisiveis + 1); i++) {
       const indice = primeira + i;
       if (indice >= StageCatalog.count()) break;
       const fase = StageCatalog.byIndex(indice);
@@ -764,9 +824,9 @@ class TelaOnline {
       const lin = Math.floor(i / colunas);
       const r = Ret.novo(
         esquerda + col * larguraCelula + largura * 0.006,
-        topo + lin * alturaCelula,
+        topo + lin * alturaCelula - deslocamento,
         esquerda + (col + 1) * larguraCelula - largura * 0.006,
-        topo + (lin + 1) * alturaCelula - altura * 0.014
+        topo + (lin + 1) * alturaCelula - altura * 0.014 - deslocamento
       );
 
       const atual = indice === (this.resumo ? this.resumo.fase : -1);
@@ -786,11 +846,13 @@ class TelaOnline {
       const nome = fase.name.length > 20 ? fase.name.slice(0, 19) + "…" : fase.name;
       ctx.fillText(nome, r.left + largura * 0.010, r.top + altura * 0.068);
 
-      this.botoes.push({ r: r, acao: () => this.trocarFase(indice) });
+      this.botoes.push({ r: r, clip: this.fasesListaRet, acao: () => this.trocarFase(indice) });
     }
+    ctx.restore();
+    this._desenharBarraRolagem(ctx, this.fasesListaRet,
+      this.faseRolagem * alturaCelula, this.faseRolagemMax * alturaCelula, altura);
 
     // Rolagem
-    const totalLinhas = Math.ceil(StageCatalog.count() / colunas);
     const larguraBotao = largura * 0.14;
     const alturaBotao = altura * 0.09;
     const y = altura * 0.855;
@@ -809,7 +871,7 @@ class TelaOnline {
       corBorda: Cor.rgb(0xFF, 0xD2, 0x4D),
       apagado: this.faseRolagem + linhasVisiveis >= totalLinhas,
       acao: () => {
-        if (this.faseRolagem + linhasVisiveis < totalLinhas) this.faseRolagem += linhasVisiveis;
+        this.faseRolagem = Math.min(this.faseRolagemMax, this.faseRolagem + linhasVisiveis);
       }
     });
   }
@@ -839,6 +901,21 @@ class TelaOnline {
       corBorda: Cor.rgb(0x00, 0xF5, 0xD4),
       acao: () => { this.etapa = ETAPA_ESCOLHA; this.erro = ""; this._buscarLista(); }
     });
+  }
+
+  /** Indicador discreto comum às listas de salas, pilotos e fases. */
+  _desenharBarraRolagem(ctx, area, valor, maximo, alturaTela) {
+    if (!(maximo > 0) || Ret.altura(area) <= 0) return;
+    const largura = Math.max(3, alturaTela * 0.006);
+    const trilhoH = Ret.altura(area);
+    const marcaH = Math.max(alturaTela * 0.045, trilhoH * (trilhoH / (trilhoH + maximo)));
+    const t = limitar(valor / maximo, 0, 1);
+    const x = area.right - largura * 1.4;
+    const y = area.top + (trilhoH - marcaH) * t;
+    ctx.fillStyle = Cor.css(Cor.argb(55, 0xF4, 0xF4, 0xF4));
+    ctx.fillRect(x, area.top, largura, trilhoH);
+    ctx.fillStyle = Cor.css(Cor.argb(205, 0x00, 0xF5, 0xD4));
+    ctx.fillRect(x, y, largura, marcaH);
   }
 
   // ---- Botão genérico ----
@@ -877,16 +954,87 @@ class TelaOnline {
   // -----------------------------------------------------------------------
 
   aoApontar(tipo, x, y) {
-    if (tipo !== "baixo") return;
+    const acao = String(tipo || "").toLowerCase();
+    if (acao === "baixo") {
+      this.arrastoLista = this._listaEm(x, y);
+      this.arrastoInicioY = y;
+      this.arrastoUltimoY = y;
+      this.arrastouLista = false;
+      this.botaoPressionado = this._botaoEm(x, y);
+      return;
+    }
+
+    if (acao === "move" || acao === "mover") {
+      if (!this.arrastoLista) return;
+      const dy = y - this.arrastoUltimoY;
+      this.arrastoUltimoY = y;
+      if (Math.abs(y - this.arrastoInicioY) > Math.max(8, this.app.altura * 0.012)) {
+        this.arrastouLista = true;
+        this.botaoPressionado = null;
+      }
+      this._rolarLista(this.arrastoLista, -dy);
+      return;
+    }
+
+    if (acao === "cancelar") {
+      this.arrastoLista = null;
+      this.botaoPressionado = null;
+      this.arrastouLista = false;
+      return;
+    }
+
+    if (acao !== "cima") return;
+    const botao = this._botaoEm(x, y);
+    if (!this.arrastouLista && botao && this._mesmoBotao(botao, this.botaoPressionado)) {
+      this.app.sound.playClick();
+      botao.acao();
+    }
+    this.arrastoLista = null;
+    this.botaoPressionado = null;
+    this.arrastouLista = false;
+  }
+
+  _botaoEm(x, y) {
     // De trás para frente: o último desenhado está por cima.
     for (let i = this.botoes.length - 1; i >= 0; i--) {
       const b = this.botoes[i];
-      if (Ret.contem(b.r, x, y)) {
-        this.app.sound.playClick();
-        b.acao();
-        return;
-      }
+      if (b.clip && !Ret.contem(b.clip, x, y)) continue;
+      if (Ret.contem(b.r, x, y)) return b;
     }
+    return null;
+  }
+
+  _mesmoBotao(a, b) {
+    if (!a || !b || !a.r || !b.r) return false;
+    const tolerancia = 1;
+    return Math.abs(a.r.left - b.r.left) <= tolerancia &&
+      Math.abs(a.r.top - b.r.top) <= tolerancia &&
+      Math.abs(a.r.right - b.r.right) <= tolerancia &&
+      Math.abs(a.r.bottom - b.r.bottom) <= tolerancia;
+  }
+
+  _listaEm(x, y) {
+    if (this.escolhendoFase && this.faseRolagemMax > 0 && Ret.contem(this.fasesListaRet, x, y)) return "fases";
+    if (this.etapa === ETAPA_ESCOLHA && this.salasRolagemMax > 0 && Ret.contem(this.salasListaRet, x, y)) return "salas";
+    if (this.etapa === ETAPA_SALA && !this.escolhendoFase && this.jogadoresRolagemMax > 0 && Ret.contem(this.jogadoresListaRet, x, y)) return "jogadores";
+    return null;
+  }
+
+  _rolarLista(lista, delta) {
+    if (lista === "salas") {
+      this.salasRolagem = limitar(this.salasRolagem + delta, 0, this.salasRolagemMax);
+    } else if (lista === "jogadores") {
+      this.jogadoresRolagem = limitar(this.jogadoresRolagem + delta, 0, this.jogadoresRolagemMax);
+    } else if (lista === "fases") {
+      const alturaLinha = Math.max(1, this.app.altura * 0.115);
+      this.faseRolagem = limitar(this.faseRolagem + delta / alturaLinha, 0, this.faseRolagemMax);
+    }
+  }
+
+  /** Roda do mouse ou gesto de dois dedos no trackpad. */
+  aoGirarRoda(delta, x, y) {
+    const lista = this._listaEm(x, y);
+    if (lista) this._rolarLista(lista, delta);
   }
 
   aoTeclar(evento, apertou) {

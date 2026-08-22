@@ -759,7 +759,7 @@ class TelaDeConfiguracoes {
       return;
     }
 
-    if (tipo === "mover") {
+    if (tipo === "mover" || tipo === "move") {
       if (!this.arrastando) return;
       const dy = y - this.ultimoY;
       this.ultimoY = y;
@@ -768,6 +768,11 @@ class TelaDeConfiguracoes {
       return;
     }
 
+    if (tipo === "cancelar") {
+      this.arrastando = false;
+      this.arrastou = false;
+      return;
+    }
     if (tipo !== "cima") return;
     this.arrastando = false;
     if (this.arrastou) return; // foi rolagem, nao clique

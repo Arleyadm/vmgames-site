@@ -206,11 +206,29 @@ const Jogo = (function () {
 
     tela.addEventListener("pointerdown", function (e) {
       sound.destravar();     // o navegador só libera som depois de um gesto
+      if (tela.setPointerCapture) {
+        try { tela.setPointerCapture(e.pointerId); } catch (_) { /* navegador antigo */ }
+      }
+      e.preventDefault();
       despachar("baixo", e);
     });
-    tela.addEventListener("pointermove", function (e) { despachar("move", e); });
-    tela.addEventListener("pointerup", function (e) { despachar("cima", e); });
-    tela.addEventListener("pointercancel", function (e) { despachar("cima", e); });
+    tela.addEventListener("pointermove", function (e) { e.preventDefault(); despachar("move", e); });
+    tela.addEventListener("pointerup", function (e) {
+      e.preventDefault();
+      despachar("cima", e);
+      if (tela.releasePointerCapture) {
+        try { tela.releasePointerCapture(e.pointerId); } catch (_) { /* ja liberado */ }
+      }
+    });
+    tela.addEventListener("pointercancel", function (e) { despachar("cancelar", e); });
+    tela.addEventListener("wheel", function (e) {
+      if (!telaAtual || telaAtual.autoLoop || typeof telaAtual.aoGirarRoda !== "function") return;
+      const p = posicaoNoCanvas(e);
+      const box = tela.getBoundingClientRect();
+      const escalaY = box.height > 0 ? tela.height / box.height : 1;
+      telaAtual.aoGirarRoda(e.deltaY * escalaY, p.x, p.y);
+      e.preventDefault();
+    }, { passive: false });
     tela.addEventListener("contextmenu", function (e) { e.preventDefault(); });
 
     window.addEventListener("keydown", function (e) {

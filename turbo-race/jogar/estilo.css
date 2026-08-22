@@ -19,7 +19,9 @@ html, body {
   -webkit-tap-highlight-color: transparent;
   /* Impede o arrastar da página puxar a tela para baixo no celular. */
   overscroll-behavior: none;
-  touch-action: none;
+  /* A pagina continua travada por overflow, mas overlays HTML podem rolar.
+     O canvas abaixo mantem touch-action:none durante menus e corridas. */
+  touch-action: pan-y;
 }
 
 #tela {
@@ -38,8 +40,9 @@ html, body {
   position: fixed;
   inset: 0;
   pointer-events: none;
+  touch-action: pan-y;
 }
-#camada-html > * { pointer-events: auto; }
+#camada-html > * { pointer-events: auto; touch-action: pan-y; }
 #camada-html video {
   position: absolute;
   inset: 0;

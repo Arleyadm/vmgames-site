@@ -828,7 +828,7 @@ class TelaDaGaragem {
       return;
     }
 
-    if (tipo === "mover") {
+    if (tipo === "mover" || tipo === "move") {
       if (this.arrastandoLista) {
         const dy = y - this.ponteiroY;
         this.upgradesListScroll = limitar(this.upgradesListScroll - dy, 0, this.upgradesListMax);
@@ -857,6 +857,14 @@ class TelaDaGaragem {
     // "cancelar" e qualquer outro tipo: solta tudo sem disparar clique.
     this.pressionado = null;
     this.arrastandoLista = false;
+  }
+
+  /** Roda do mouse/trackpad sobre a lista de melhorias. */
+  aoGirarRoda(delta, x, y) {
+    this.medir(this.app.largura, this.app.altura);
+    if (x !== undefined && y !== undefined && !Ret.contem(this.upgradesListRet, x, y)) return;
+    this.upgradesListScroll = limitar(this.upgradesListScroll + delta, 0, this.upgradesListMax);
+    this.posicionarLista();
   }
 
   botaoEm(x, y) {
