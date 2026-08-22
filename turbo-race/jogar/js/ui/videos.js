@@ -347,6 +347,7 @@ class TelaDeVideo {
   openMenu() {
     if (this.openMenuDone) return;
     this.openMenuDone = true;
+    if (this.nome === "menu_intro") this.app.save.introSeen = true;
     this.app.irPara(this.depois);
   }
 

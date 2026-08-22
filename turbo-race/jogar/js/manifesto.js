@@ -5,6 +5,7 @@
  */
 const MAPA_IMAGENS = {
   "arbustos": "assets/img/arbustos.png",
+  "arvore_folhosa": "assets/img/arvore_folhosa.webp",
   "arvore_pinheiro": "assets/img/arvore_pinheiro.webp",
   "arvore_praia": "assets/img/arvore_praia.png",
   "bg_canyon_bridge_08": "assets/img/bg_canyon_bridge_08.webp",
@@ -67,6 +68,7 @@ const MAPA_IMAGENS = {
   "countdown_3": "assets/img/countdown_3.webp",
   "countdown_go": "assets/img/countdown_go.webp",
   "defeat_scene": "assets/img/defeat_scene.webp",
+  "finish_portal_custom": "assets/img/finish_portal_custom.webp",
   "grass_clump": "assets/img/grass_clump.webp",
   "guardrail_side": "assets/img/guardrail_side.webp",
   "icone": "assets/img/icone.png",

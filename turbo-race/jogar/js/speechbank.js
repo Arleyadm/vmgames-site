@@ -105,18 +105,6 @@ const SpeechBank = (function () {
     return openers[openerIndex] + ", " + verbs[verbIndex] + " " + places[placeIndex] + "!";
   }
 
-  /**
-   * O Kotlin cortava a frase em 46 caracteres com take(46), e isso partia
-   * palavra no meio ("e agora ou nun"). Aqui o corte volta ate o ultimo espaco
-   * e fecha com reticencias — mesmo limite, leitura melhor.
-   */
-  function encurtar(frase) {
-    if (frase.length <= 46) return frase;
-    const cortada = frase.substring(0, 46);
-    const espaco = cortada.lastIndexOf(" ");
-    return (espaco > 20 ? cortada.substring(0, espaco) : cortada.trim()) + "…";
-  }
-
   function styleFor(car) {
     const h = hashCodeDeTexto(car.driverName) ^ (car.spriteIndex * 97);
     return ((h >>> 1) % aiOpenersByStyle.length);
@@ -133,30 +121,30 @@ const SpeechBank = (function () {
 
     nextPlayerItem(used, itemName) {
       const frase = compose(CAT_PLAYER_ITEM, [String(itemName).toUpperCase(), "Upgrade", "Item especial", "Turbo Race"], itemActions, contexts, used);
-      return encurtar(frase);
+      return frase.slice(0, 46);
     },
 
     nextAiRival(car, used) {
       const style = styleFor(car);
-      return encurtar(compose(CAT_AI_RIVAL + style, aiOpenersByStyle[style], actions, contexts, used));
+      return compose(CAT_AI_RIVAL + style, aiOpenersByStyle[style], actions, contexts, used).slice(0, 46);
     },
 
     nextAiOvertakePlayer(car, used) {
       const style = styleFor(car);
       const verbs = ["te passei", "abri vantagem", "peguei sua linha", "entrei no vácuo", "fui por dentro", "fui por fora", "ganhei posição", "tomei a curva"];
-      return encurtar(compose(CAT_AI_OVERTAKE + style, aiOpenersByStyle[style], verbs, contexts, used));
+      return compose(CAT_AI_OVERTAKE + style, aiOpenersByStyle[style], verbs, contexts, used).slice(0, 46);
     },
 
     nextAiGotPassed(car, used) {
       const style = styleFor(car);
       const verbs = ["vou dar o troco", "não acabou", "vou colar de novo", "vou buscar essa posição", "boa manobra", "vou responder na reta", "tô na sua cola", "essa disputa é minha"];
-      return encurtar(compose(CAT_AI_GOT_PASSED + style, aiOpenersByStyle[style], verbs, contexts, used));
+      return compose(CAT_AI_GOT_PASSED + style, aiOpenersByStyle[style], verbs, contexts, used).slice(0, 46);
     },
 
     nextAiTurbo(car, used) {
       const style = styleFor(car);
       const verbs = ["turbo ligado", "motor no máximo", "pressão total", "agora eu sumo", "boost ativado", "pneu gritando", "sem aliviar", "reta engolida"];
-      return encurtar(compose(CAT_AI_TURBO + style, aiOpenersByStyle[style], verbs, contexts, used));
+      return compose(CAT_AI_TURBO + style, aiOpenersByStyle[style], verbs, contexts, used).slice(0, 46);
     }
   };
 })();

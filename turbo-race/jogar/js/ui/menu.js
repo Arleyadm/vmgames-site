@@ -427,41 +427,6 @@ class TelaDeMenu {
     ctx.fillText(this.coinsText, cx, y + 8 * dp + moedasTam * 0.82);
   }
 
-  /**
-   * Troca a palavra "BLUETOOTH" gravada na arte do botao de multijogador por
-   * "SALA ONLINE". Redesenha so a faixa de baixo do botao, no mesmo verde do
-   * original, para nao destoar do resto da arte.
-   */
-  corrigirRotuloDoMultijogador(ctx, img, alvo, dp) {
-    // Mesmo calculo do desenharFitCenter, para achar onde a imagem caiu.
-    const escala = Math.min(Ret.largura(alvo) / img.width, Ret.altura(alvo) / img.height);
-    const w = img.width * escala;
-    const h = img.height * escala;
-    const esquerda = Ret.centroX(alvo) - w / 2;
-    const topo = Ret.centroY(alvo) - h / 2;
-
-    // A faixa do subtitulo fica na parte de baixo do miolo do botao. As bordas
-    // laterais do desenho sao decorativas, entao a tampa fica dentro delas.
-    const faixa = Ret.novo(
-      esquerda + w * 0.20,
-      topo + h * 0.55,
-      esquerda + w * 0.80,
-      topo + h * 0.80
-    );
-
-    const verde = ctx.createLinearGradient(0, faixa.top, 0, faixa.bottom);
-    verde.addColorStop(0, Cor.css(Cor.argb(0xFF, 0x13, 0x6B, 0x3A)));
-    verde.addColorStop(1, Cor.css(Cor.argb(0xFF, 0x0C, 0x4C, 0x28)));
-    ctx.fillStyle = verde;
-    ctx.fillRect(faixa.left, faixa.top, Ret.largura(faixa), Ret.altura(faixa));
-
-    ctx.textAlign = "center";
-    ctx.font = "bold " + (h * 0.15) + "px " + FONTE;
-    ctx.fillStyle = Cor.css(Cor.argb(0xFF, 0xCF, 0xFF, 0xE4));
-    ctx.fillText("SALA ONLINE", Ret.centroX(faixa), faixa.top + Ret.altura(faixa) * 0.74);
-    ctx.textAlign = "left";
-  }
-
   /** Coluna da direita: os cinco ImageButton em fitCenter. */
   desenharBotoes(ctx, dp) {
     for (let i = 0; i < this.ordem.length; i++) {
@@ -489,11 +454,6 @@ class TelaDeMenu {
       const img = Assets.img(this.imagens[nome]);
       if (img) {
         desenharFitCenter(ctx, img, alvo);
-        // A arte veio do app, e no botao de multijogador ela traz "BLUETOOTH"
-        // gravado. No navegador nao existe Bluetooth: a corrida entre jogadores
-        // acontece numa sala online. Cobrimos a faixa e escrevemos o nome certo,
-        // em vez de encomendar arte nova so por causa de uma palavra.
-        if (nome === "btnMultiplayer") this.corrigirRotuloDoMultijogador(ctx, img, alvo, dp);
       } else {
         // Reserva enquanto a imagem nao chega: caixa de vidro com o rotulo.
         const vidro = ctx.createLinearGradient(0, alvo.top, 0, alvo.bottom);
@@ -548,7 +508,7 @@ class TelaDeMenu {
       }
       return;
     }
-    if (tipo === "move" || tipo === "mover") {
+    if (tipo === "move") {
       // Saiu de cima do botao com o dedo apoiado: cancela, igual ao Android.
       if (this.pressionado && this.botaoEm(x, y) !== this.pressionado) this.pressionado = null;
       return;
@@ -587,11 +547,8 @@ class TelaDeMenu {
         this.app.irPara("config");
         break;
       case "btnExit":
-        // DIFERENCA DE PROPOSITO: no app era finishAffinity(), que fechava o
-        // jogo. Uma pagina nao pode fechar a propria aba (o window.close() so
-        // funciona em janela aberta por script), e fechar a aba do jogador sem
-        // ele mandar seria grosseiro. Entao ficamos no menu e avisamos.
-        this.mostrarAviso("Para sair, feche a aba do navegador.");
+        // Na versão web, sair do jogo devolve o jogador à home da VM Games.
+        window.location.assign("https://vmgames.com.br/");
         break;
     }
   }

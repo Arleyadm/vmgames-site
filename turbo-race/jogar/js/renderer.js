@@ -1177,30 +1177,6 @@ class Renderer {
     }
   }
 
-  /**
-   * Recorta apenas as margens transparentes conhecidas da vegetacao.
-   * O ponto inferior do recorte passa a ser o pe visual do desenho; assim
-   * arbustos com muito espaco vazio no PNG nao parecem flutuar sobre a pista.
-   */
-  propSourceCrop(type, bmp) {
-    let crop = null;
-    switch (type) {
-      case SpriteType.BUSH: crop = [0.048, 0.142, 0.952, 0.824]; break;
-      case SpriteType.BUSH_ROUND: crop = [0.116, 0.130, 0.884, 0.842]; break;
-      case SpriteType.BUSH_LIGHT: crop = [0.052, 0.168, 0.950, 0.836]; break;
-      case SpriteType.BUSH_FLOWER: crop = [0.048, 0.142, 0.952, 0.824]; break;
-      case SpriteType.GRASS_CLUMP: crop = [0.126, 0.216, 0.874, 0.782]; break;
-      case SpriteType.TREE_PALM: crop = [0.138, 0.048, 0.886, 0.938]; break;
-      default: break;
-    }
-    if (crop === null) return { x: 0, y: 0, w: bmp.naturalWidth, h: bmp.naturalHeight };
-    const x = Math.round(bmp.naturalWidth * crop[0]);
-    const y = Math.round(bmp.naturalHeight * crop[1]);
-    const right = Math.round(bmp.naturalWidth * crop[2]);
-    const bottom = Math.round(bmp.naturalHeight * crop[3]);
-    return { x: x, y: y, w: Math.max(1, right - x), h: Math.max(1, bottom - y) };
-  }
-
   drawBitmapProp(ctx, bmp, sp, baseX, baseY, drawUnit, safeSizeFactor, farVisibility, clipY) {
     // V68: cenario lateral mais solido e imersivo.
     // - vegetacao entra mais perto do jogador;
@@ -1263,13 +1239,7 @@ class Renderer {
     }
     spriteH = Math.min(spriteH, maxH);
 
-    const source = (isTreeLike || isBushLike)
-      ? this.propSourceCrop(sp.type, bmp)
-      : { x: 0, y: 0, w: bmp.naturalWidth, h: bmp.naturalHeight };
-    // Recortar a transparencia nao deve inflar o objeto: mantemos exatamente
-    // o tamanho que os pixels visiveis ja tinham e mudamos apenas a ancoragem.
-    spriteH *= source.h / Math.max(1, bmp.naturalHeight);
-    const aspect = source.w / source.h;
+    const aspect = bmp.naturalWidth / bmp.naturalHeight;
     let spriteW = spriteH * aspect;
     let maxW;
     switch (sp.type) {
@@ -1333,7 +1303,7 @@ class Renderer {
     this.spritePaint.alpha = propAlpha;
     ctx.globalAlpha = propAlpha / 255;
     ctx.imageSmoothingEnabled = true;
-    ctx.drawImage(bmp, source.x, source.y, source.w, source.h,
+    ctx.drawImage(bmp, 0, 0, bmp.naturalWidth, bmp.naturalHeight,
       this.rect.left, this.rect.top, spriteW, groundedY - topY);
     this.spritePaint.alpha = 255;
     ctx.globalAlpha = 1;
@@ -1364,6 +1334,12 @@ class Renderer {
   drawSprite(ctx, stage, seg, sp, unit) {
     if (unit <= 0) return;
     if (this.width <= 0 || this.height <= 0) return;
+
+    // Removidos globalmente: o portal de placas ocupava grande parte da tela
+    // e a arvore redonda tinha um estilo cartunesco diferente do restante do
+    // cenario. O filtro aqui garante que nao aparecam em nenhuma das 28 fases,
+    // inclusive ao repetir uma pista com uma semente salva anteriormente.
+    if (sp.type === SpriteType.PORTAL || sp.type === SpriteType.TREE_ROUND) return;
 
     /*
      * V49 - perspectiva lateral corrigida:
@@ -1400,24 +1376,24 @@ class Renderer {
     if (isRoadObject) {
       farVisibility = 1;
     } else {
-      // A vegetacao nasce mais perto da camera. Antes ela recebia um salto de
-      // opacidade ainda no horizonte, parecendo surgir no meio da pista.
-      const yStart = isTreeLike ? 0.500 : (isBushLike ? 0.530 : 0.405);
-      const ySpan = isTreeLike ? 0.270 : (isBushLike ? 0.235 : 0.235);
-      const roadStart = (isTreeLike || isBushLike) ? this.width * 0.052 : this.width * 0.028;
-      const roadSpan = (isTreeLike || isBushLike) ? this.width * 0.135 : this.width * 0.105;
+      // As arvores so entram quando o segmento ja esta bem mais proximo do
+      // piloto. Antes elas nasciam perto do horizonte, onde a pista e estreita,
+      // e por alguns quadros pareciam estar plantadas no meio do asfalto.
+      const yStart = isTreeLike ? 0.58 : (isBushLike ? 0.455 : 0.405);
+      const ySpan = isTreeLike ? 0.22 : (isBushLike ? 0.255 : 0.235);
+      const roadStart = isTreeLike ? this.width * 0.070 : ((isBushLike ? this.width * 0.035 : this.width * 0.028));
+      const roadSpan = isTreeLike ? this.width * 0.125 : ((isBushLike ? this.width * 0.120 : this.width * 0.105));
       const yVisibility = limitar((screenY - this.height * yStart) / (this.height * ySpan), 0, 1);
       const roadVisibility = limitar((seg.p1.screen.w - roadStart) / roadSpan, 0, 1);
       let vis = Math.min(yVisibility, roadVisibility);
-      if (isTreeLike || isBushLike) {
-        // smoothstep com uma pequena zona invisivel: entrada tardia, continua
-        // e sem o antigo "estalo" de transparencia.
-        vis = limitar((vis - 0.075) / 0.925, 0, 1);
-        vis = vis * vis * (3 - 2 * vis);
+      // Arbustos preservam o ganho antigo. Arvores usam o alfa linear para
+      // surgirem suavemente, sem o salto repentino de 16% de opacidade.
+      if (isBushLike && vis > 0.04) {
+        vis = 0.16 + vis * 0.84;
       }
       farVisibility = vis;
     }
-    if (!isRoadObject && farVisibility <= ((isTreeLike || isBushLike) ? 0.02 : 0.04)) return;
+    if (!isRoadObject && farVisibility <= (isTreeLike ? 0.06 : (isBushLike ? 0.02 : 0.04))) return;
 
     const safeSizeFactor = isRoadObject
       ? limitar(sp.sizeFactor, 0.90, 1.35)
@@ -1457,9 +1433,9 @@ class Renderer {
         default:
           typeGap = drawUnit * 0.82; break;
       }
-      const perspectivePush = this.width * (isTreeLike ? 0.075 : (isBushLike ? 0.060 : 0.125)) * (1 - farVisibility);
+      const perspectivePush = this.width * (isTreeLike ? 0.110 : (isBushLike ? 0.060 : 0.125)) * (1 - farVisibility);
       let roadGap;
-      if (isTreeLike) roadGap = Math.max(typeGap, seg.p1.screen.w * 0.18, this.width * 0.012) + perspectivePush;
+      if (isTreeLike) roadGap = Math.max(typeGap, seg.p1.screen.w * 0.22, this.width * 0.020) + perspectivePush;
       else if (isBushLike) roadGap = Math.max(typeGap, seg.p1.screen.w * 0.14, this.width * 0.010) + perspectivePush;
       else roadGap = Math.max(typeGap, seg.p1.screen.w * 0.30, this.width * 0.018) + perspectivePush;
       baseX = (side < 0)
@@ -1753,13 +1729,11 @@ class Renderer {
       // nem gigante na camera. O carro de IA perto deve parecer quase
       // do tamanho do carro do jogador, aumentando so um pouco ao aproximar.
       const aspect = bmp.naturalHeight / bmp.naturalWidth;
-      const opponentSpriteScale = (car.spriteIndex === 9) ? 1.36 : 1;
-      let w = Math.max(3, unit * 0.40 * opponentSpriteScale);
-      const maxW = (car.isRemote ? this.width * 0.325 : this.width * 0.305) *
-        (car.spriteIndex === 9 ? 1.12 : 1);
+      let w = Math.max(3, unit * 0.40);
+      const maxW = car.isRemote ? this.width * 0.325 : this.width * 0.305;
       if (w > maxW) w = maxW;
       let h = w * aspect;
-      const maxH = this.height * (car.spriteIndex === 9 ? 0.39 : 0.345);
+      const maxH = this.height * 0.345;
       if (h > maxH && aspect > 0) {
         h = maxH;
         w = h / aspect;
@@ -1895,14 +1869,12 @@ class Renderer {
 
     if (bmp !== null) {
       const aspect = bmp.naturalHeight / bmp.naturalWidth;
-      // Compensacao visual dos sprites com mais margem transparente. Nao altera
-      // fisica, velocidade ou colisao; somente o tamanho desenhado do jogador.
-      // O Frost Hyper (id 9) tem cerca de um terco do quadro transparente
-      // acima da carroceria. 1.50 iguala a area realmente visivel aos demais.
-      const playerSpriteScale = (player.car.id === 5) ? 1.22 : ((player.car.id === 9) ? 1.50 : 1);
+      // V82: o Obsidian GT (carro preto) estava pequeno apenas quando era o carro do jogador.
+      // A IA continua com o tamanho antigo; aqui ajustamos so a escala visual do player.
+      const playerSpriteScale = (player.car.id === 5) ? 1.22 : 1;
       let h = this.height * (0.312 + speedP * 0.030) * playerSpriteScale;
       let w = h / aspect;
-      const maxW = this.width * (player.car.id === 9 ? 0.43 : (player.car.id === 5 ? 0.385 : 0.34));
+      const maxW = this.width * ((player.car.id === 5) ? 0.385 : 0.34);
       if (w > maxW) {
         w = maxW;
         h = w * aspect;
@@ -2159,9 +2131,7 @@ Renderer.FLASH_COLOR = Cor.argb(170, 0xFF, 0x3C, 0x3C);
  */
 Renderer.PROP_SPRITES = {};
 Renderer.PROP_SPRITES[SpriteType.BUSH] = "arbustos";
-// TREE_ROUND usava a árvore infantil de círculos; qualquer ocorrência antiga
-// agora recebe a árvore realista para nunca reaparecer durante a corrida.
-Renderer.PROP_SPRITES[SpriteType.TREE_ROUND] = "tree_oak";
+Renderer.PROP_SPRITES[SpriteType.TREE_ROUND] = "arvore_folhosa";
 Renderer.PROP_SPRITES[SpriteType.TREE_PINE] = "arvore_pinheiro";
 Renderer.PROP_SPRITES[SpriteType.TREE_PALM] = "arvore_praia";
 Renderer.PROP_SPRITES[SpriteType.CACTUS_DESERT] = "cacto_deserto";

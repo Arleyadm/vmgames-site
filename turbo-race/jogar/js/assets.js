@@ -28,8 +28,8 @@ const Assets = (function () {
   const DA_CORRIDA = [
     "control_arrow_left", "control_arrow_right", "control_pedal_accel", "control_pedal_brake",
     "countdown_1", "countdown_2", "countdown_3", "countdown_go",
-    "victory_scene", "defeat_scene", "guardrail_side",
-    "arbustos", "arvore_pinheiro", "arvore_praia", "cacto_deserto",
+    "victory_scene", "defeat_scene", "finish_portal_custom", "guardrail_side",
+    "arbustos", "arvore_folhosa", "arvore_pinheiro", "arvore_praia", "cacto_deserto",
     "bush_flower", "bush_light", "bush_round", "grass_clump",
     "tree_birch", "tree_cypress", "tree_oak", "tree_snow",
     "placa_canyon", "placa_chevron", "placa_chevron_horizontal", "placa_curva", "placa_direcional",
