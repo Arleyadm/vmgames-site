@@ -439,8 +439,11 @@ class TelaDeCorrida {
     // As demais fases continuam usando race_music_* com reserva em race_music.
     if (this.sound) this.sound.startMusic(this.musicRawNameForStage(this.stageIndex, this.stage), "race_music");
 
-    // Clima aleatório opcional definido nas configurações.
-    if (this.save && this.save.randomWeatherEnabled) {
+    // Em sala online, as regras escolhidas pelo anfitrião valem para todos.
+    // Fora dela, continua valendo a preferência local já existente.
+    if (sessao.enabled && sessao.raceWeather && sessao.raceWeather !== "auto") {
+      this.raceWeatherMode = sessao.raceWeather;
+    } else if (this.save && this.save.randomWeatherEnabled) {
       const modes = ["sun", "rain_light", "rain_heavy", "snow", "fog", "night"];
       this.raceWeatherMode = modes[MathUtils.randomInt(0, modes.length - 1)];
     } else {
@@ -470,7 +473,10 @@ class TelaDeCorrida {
     );
 
     // Estado
-    this.state = new GameState(this.stage.timeLimit, this.trackLength, this.stage.laps);
+    const totalDeVoltas = sessao.enabled
+      ? limitar(Math.trunc(sessao.raceLaps || this.stage.laps), 1, 10)
+      : this.stage.laps;
+    this.state = new GameState(this.stage.timeLimit, this.trackLength, totalDeVoltas);
     this.state.totalRacers = this.bluetoothService ? 2 : this.stage.trafficCount + 1;
     this.state.rank = this.state.totalRacers;
     if (!this.save.tutorialSeen) {
@@ -760,8 +766,16 @@ class TelaDeCorrida {
 
   decorateTrackHazards() {
     if (!this.stage || this.segments.length === 0) return;
-    const useWater = this.isRainWeatherActive();
-    const hazardType = useWater ? SpriteType.PUDDLE_WATER : SpriteType.PUDDLE_OIL;
+    const sessao = sessaoOnline();
+    let tipos;
+    if (sessao.enabled) {
+      tipos = [];
+      if (sessao.puddlesWater) tipos.push(SpriteType.PUDDLE_WATER);
+      if (sessao.puddlesOil) tipos.push(SpriteType.PUDDLE_OIL);
+      if (tipos.length === 0) return;
+    } else {
+      tipos = [this.isRainWeatherActive() ? SpriteType.PUDDLE_WATER : SpriteType.PUDDLE_OIL];
+    }
     let ranges;
     switch (this.stage.countryIndex) {
       case 0: ranges = [Math.trunc(this.segments.length * 0.18), Math.trunc(this.segments.length * 0.58)]; break;
@@ -769,7 +783,9 @@ class TelaDeCorrida {
       case 2: ranges = [Math.trunc(this.segments.length * 0.30), Math.trunc(this.segments.length * 0.78)]; break;
       default: ranges = [Math.trunc(this.segments.length * 0.26), Math.trunc(this.segments.length * 0.68)]; break;
     }
-    for (const base of ranges) {
+    for (let faixa = 0; faixa < ranges.length; faixa++) {
+      const base = ranges[faixa];
+      const hazardType = tipos[faixa % tipos.length];
       let idx = limitar(base, 24, this.segments.length - 1 - 24);
       let guard = 0;
       while (guard < 26 && (this.segments[idx].isPitStop || this.segments[idx].curve > 5.4 || this.segments[idx].curve < -5.4)) {

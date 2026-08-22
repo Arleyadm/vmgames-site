@@ -42,6 +42,7 @@ class TelaOnline {
 
     this.botoes = [];            // preenchidos a cada render, testados no toque
     this.conversa = [];          // últimas provocações recebidas
+    this.formularioSala = null;
   }
 
   // -----------------------------------------------------------------------
@@ -60,6 +61,7 @@ class TelaOnline {
   }
 
   sair() {
+    this.fecharConfiguracaoSala();
     // Sair do saguão desfaz a sala. Se a corrida já começou, quem desliga é a
     // tela de corrida — por isso o teste do enabled.
     if (this.service && !OnlineSession.enabled) {
@@ -158,18 +160,122 @@ class TelaOnline {
     this.etapa = ETAPA_ESCOLHA;
   }
 
-  criarSala() {
+  configuracaoPadrao() {
     const save = this.app.save;
+    const fase = limitar(save.unlockedStages - 1, 0, StageCatalog.count() - 1);
+    return {
+      salaNome: "Sala de " + save.playerName,
+      max: 4,
+      fase: fase,
+      voltas: StageCatalog.byIndex(fase).laps || 3,
+      clima: "auto",
+      pocaAgua: true,
+      pocaOleo: false
+    };
+  }
+
+  abrirConfiguracaoSala() {
+    if (this.formularioSala) return;
+    const padrao = this.configuracaoPadrao();
+    const opcoesFase = [];
+    for (let i = 0; i < StageCatalog.count(); i++) {
+      const fase = StageCatalog.byIndex(i);
+      opcoesFase.push(`<option value="${i}">${i + 1}. ${fase.countryName} — ${fase.name}</option>`);
+    }
+
+    const overlay = document.createElement("div");
+    overlay.className = "sala-config-overlay";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-label", "Configurar sala online");
+    overlay.innerHTML = `
+      <form class="sala-config-card">
+        <header class="sala-config-header">
+          <span class="sala-config-kicker">JOGAR ONLINE</span>
+          <h1>CONFIGURAR SALA</h1>
+          <p>Monte a corrida do seu jeito e convide até 24 pilotos.</p>
+        </header>
+        <section class="sala-config-bloco">
+          <h2>IDENTIDADE DA SALA</h2>
+          <div class="sala-config-grid sala-config-grid-identidade">
+            <label><span>Nome da sala</span><input name="salaNome" maxlength="24" autocomplete="off"></label>
+            <label><span>Máximo de jogadores</span><input name="max" type="number" min="2" max="24" inputmode="numeric"></label>
+          </div>
+        </section>
+        <section class="sala-config-bloco">
+          <h2>PISTA E CORRIDA</h2>
+          <div class="sala-config-grid">
+            <label class="sala-config-largo"><span>Pista</span><select name="fase">${opcoesFase.join("")}</select></label>
+            <label><span>Voltas</span><input name="voltas" type="number" min="1" max="10" inputmode="numeric"></label>
+            <label><span>Clima</span><select name="clima"><option value="auto">Automático</option><option value="sun">Sol</option><option value="rain_light">Chuva leve</option><option value="rain_heavy">Chuva forte</option><option value="snow">Neve</option><option value="fog">Neblina</option><option value="night">Noite</option></select></label>
+          </div>
+        </section>
+        <section class="sala-config-bloco">
+          <h2>DESAFIOS DA PISTA</h2>
+          <div class="sala-config-opcoes">
+            <label class="sala-config-toggle"><span><b>Poças d'água</b><small>Perda de aderência em trechos molhados</small></span><input name="pocaAgua" type="checkbox"><i></i></label>
+            <label class="sala-config-toggle"><span><b>Poças de óleo</b><small>Derrapagens e mais risco nas curvas</small></span><input name="pocaOleo" type="checkbox"><i></i></label>
+          </div>
+        </section>
+        <footer class="sala-config-acoes"><button class="sala-config-voltar" type="button">VOLTAR</button><button class="sala-config-criar" type="submit">CRIAR SALA</button></footer>
+      </form>`;
+
+    const form = overlay.querySelector("form");
+    form.elements.salaNome.value = padrao.salaNome;
+    form.elements.max.value = padrao.max;
+    form.elements.fase.value = padrao.fase;
+    form.elements.voltas.value = padrao.voltas;
+    form.elements.clima.value = padrao.clima;
+    form.elements.pocaAgua.checked = padrao.pocaAgua;
+    form.elements.pocaOleo.checked = padrao.pocaOleo;
+    form.elements.fase.addEventListener("change", () => {
+      form.elements.voltas.value = StageCatalog.byIndex(Number(form.elements.fase.value)).laps || 3;
+    });
+    form.querySelector(".sala-config-voltar").addEventListener("click", () => this.fecharConfiguracaoSala());
+    form.addEventListener("submit", evento => {
+      evento.preventDefault();
+      const configuracao = {
+        salaNome: String(form.elements.salaNome.value || padrao.salaNome).trim().slice(0, 24) || padrao.salaNome,
+        max: limitar(Math.trunc(Number(form.elements.max.value) || 4), 2, 24),
+        fase: limitar(Math.trunc(Number(form.elements.fase.value) || 0), 0, StageCatalog.count() - 1),
+        voltas: limitar(Math.trunc(Number(form.elements.voltas.value) || 3), 1, 10),
+        clima: String(form.elements.clima.value || "auto"),
+        pocaAgua: form.elements.pocaAgua.checked,
+        pocaOleo: form.elements.pocaOleo.checked
+      };
+      this.fecharConfiguracaoSala();
+      this.criarSala(configuracao);
+    });
+    this.app.camadaHtml.appendChild(overlay);
+    this.formularioSala = overlay;
+  }
+
+  fecharConfiguracaoSala() {
+    if (this.formularioSala && this.formularioSala.parentNode) this.formularioSala.parentNode.removeChild(this.formularioSala);
+    this.formularioSala = null;
+  }
+
+  criarSala(configuracao) {
+    const save = this.app.save;
+    const regras = configuracao || this.configuracaoPadrao();
     this._abrirConexao({
       criar: true,
       nome: save.playerName,
       carId: save.selectedCarId,
-      max: 4,
-      // A sala já nasce na fase que o jogador liberou por último: é a que ele
-      // conhece melhor e a que todos os convidados conseguem correr.
-      fase: limitar(save.unlockedStages - 1, 0, StageCatalog.count() - 1),
-      salaNome: "Sala de " + save.playerName
+      max: regras.max,
+      fase: regras.fase,
+      salaNome: regras.salaNome,
+      clima: regras.clima,
+      pocaAgua: regras.pocaAgua,
+      pocaOleo: regras.pocaOleo,
+      voltas: regras.voltas
     });
+  }
+
+  nomeDoClima(valor) {
+    return ({
+      auto: "AUTOMÁTICO", sun: "SOL", rain_light: "CHUVA LEVE",
+      rain_heavy: "CHUVA FORTE", snow: "NEVE", fog: "NEBLINA", night: "NOITE"
+    })[String(valor || "auto")] || "AUTOMÁTICO";
   }
 
   entrarPorCodigo() {
@@ -297,7 +403,7 @@ class TelaOnline {
 
   _desenharEscolha(ctx, largura, altura) {
     this._titulo(ctx, largura, altura, "SALA ONLINE",
-      "Corra a mesma fase com até 8 jogadores, de qualquer lugar");
+      "Crie sua corrida para até 24 jogadores, de qualquer lugar");
 
     const larguraBotao = largura * 0.30;
     const alturaBotao = altura * 0.115;
@@ -306,10 +412,10 @@ class TelaOnline {
 
     this._botao(ctx, {
       r: Ret.novo(esquerda, y, esquerda + larguraBotao, y + alturaBotao),
-      rotulo: "CRIAR SALA",
-      sub: "você vira o anfitrião",
+      rotulo: "CONFIGURAR SALA",
+      sub: "pista, clima, voltas e desafios",
       corBorda: Cor.rgb(0x00, 0xF5, 0xD4),
-      acao: () => this.criarSala()
+      acao: () => this.abrirConfiguracaoSala()
     });
     y += alturaBotao * 1.28;
 
@@ -459,7 +565,7 @@ class TelaOnline {
     ctx.textAlign = "left";
 
     // --- Fase da corrida ---
-    const rFase = Ret.novo(largura * 0.055, altura * 0.245, largura * 0.46, altura * 0.365);
+    const rFase = Ret.novo(largura * 0.055, altura * 0.245, largura * 0.46, altura * 0.80);
     ctx.fillStyle = Cor.css(Cor.argb(130, 0x0A, 0x0E, 0x1C));
     retanguloArredondado(ctx, rFase, altura * 0.022);
     ctx.fill();
@@ -475,8 +581,31 @@ class TelaOnline {
     ctx.fillText(fase.name, rFase.left + largura * 0.018, rFase.top + altura * 0.083);
     ctx.fillStyle = Cor.css(Cor.argb(180, 0xF4, 0xF4, 0xF4));
     ctx.font = (altura * 0.028) + "px " + FONTE;
-    ctx.fillText(fase.countryName + " · " + fase.laps + " voltas",
+    ctx.fillText(fase.countryName + " · " + (resumo.voltas || fase.laps) + " voltas",
       rFase.left + largura * 0.018, rFase.top + altura * 0.113);
+
+    const detalhes = [
+      ["CLIMA", this.nomeDoClima(resumo.clima)],
+      ["ÁGUA", resumo.pocaAgua !== false ? "SIM" : "NÃO"],
+      ["ÓLEO", resumo.pocaOleo === true ? "SIM" : "NÃO"],
+      ["PILOTOS", "ATÉ " + resumo.maxJogadores]
+    ];
+    for (let i = 0; i < detalhes.length; i++) {
+      const coluna = i % 2;
+      const linha = Math.floor(i / 2);
+      const x = rFase.left + largura * (0.018 + coluna * 0.185);
+      const y = rFase.top + altura * (0.19 + linha * 0.105);
+      ctx.fillStyle = Cor.css(Cor.argb(150, 0xF4, 0xF4, 0xF4));
+      ctx.font = "bold " + (altura * 0.021) + "px " + FONTE;
+      ctx.fillText(detalhes[i][0], x, y);
+      ctx.fillStyle = Cor.css(Cor.rgb(0xF4, 0xF4, 0xF4));
+      ctx.font = "bold " + (altura * 0.030) + "px " + FONTE;
+      ctx.fillText(detalhes[i][1], x, y + altura * 0.040);
+    }
+
+    ctx.fillStyle = Cor.css(Cor.argb(170, 0xF4, 0xF4, 0xF4));
+    ctx.font = (altura * 0.025) + "px " + FONTE;
+    ctx.fillText(resumo.nome || "Sala online", rFase.left + largura * 0.018, rFase.bottom - altura * 0.035);
 
     if (souAnfitriao) {
       this.botoes.push({ r: rFase, acao: () => { this.escolhendoFase = true; this.faseRolagem = 0; } });
@@ -510,8 +639,9 @@ class TelaOnline {
     ctx.fillText("Na sala (" + resumo.jogadores.length + "/" + resumo.maxJogadores + ")",
       esquerda + largura * 0.018, topo + altura * 0.055);
 
-    const alturaLinha = altura * 0.078;
-    for (let i = 0; i < resumo.jogadores.length && i < 8; i++) {
+    const alturaLinha = altura * 0.069;
+    const limiteVisivel = 6;
+    for (let i = 0; i < resumo.jogadores.length && i < limiteVisivel; i++) {
       const j = resumo.jogadores[i];
       const y = topo + altura * 0.085 + i * alturaLinha;
 
@@ -545,6 +675,13 @@ class TelaOnline {
         ctx.fillText("esperando", direita - largura * 0.018, y + alturaCarro * 0.72);
       }
       ctx.textAlign = "left";
+    }
+
+    if (resumo.jogadores.length > limiteVisivel) {
+      ctx.fillStyle = Cor.css(Cor.rgb(0x00, 0xF5, 0xD4));
+      ctx.font = "bold " + (altura * 0.026) + "px " + FONTE;
+      ctx.fillText("+ " + (resumo.jogadores.length - limiteVisivel) + " pilotos na sala",
+        esquerda + largura * 0.018, base - altura * 0.028);
     }
 
     if (resumo.jogadores.length < resumo.minJogadores) {

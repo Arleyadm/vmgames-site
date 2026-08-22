@@ -136,3 +136,66 @@ html, body {
   0%, 45% { transform: rotate(0deg); }
   55%, 100% { transform: rotate(90deg); }
 }
+
+/* Configurador da sala: HTML para permitir campos e rolagem nativa no celular. */
+.sala-config-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: clamp(18px, 4vh, 42px) max(18px, env(safe-area-inset-right)) max(26px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+  background: radial-gradient(circle at 50% 0, rgba(32, 38, 105, .94), rgba(5, 6, 17, .99) 62%);
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.sala-config-card {
+  width: min(960px, 100%);
+  margin: 0 auto;
+  padding: clamp(18px, 3vw, 34px);
+  border: 1.5px solid rgba(72, 239, 255, .72);
+  border-radius: 28px;
+  background: linear-gradient(150deg, rgba(11, 20, 50, .97), rgba(41, 7, 57, .97));
+  box-shadow: 0 0 45px rgba(0, 245, 255, .18), inset 0 0 34px rgba(255, 45, 170, .08);
+  user-select: text;
+}
+.sala-config-header { text-align: center; margin-bottom: 22px; }
+.sala-config-kicker { display: block; color: #ffd24d; font-size: 12px; font-weight: 900; letter-spacing: .28em; }
+.sala-config-header h1 { margin: 5px 0 4px; color: #48efff; font-size: clamp(27px, 5vw, 48px); line-height: 1; text-shadow: 0 0 20px rgba(255, 45, 170, .62); }
+.sala-config-header p { margin: 8px 0 0; color: #d2c7f0; font-size: clamp(13px, 2vw, 17px); }
+.sala-config-bloco { margin-top: 14px; padding: 18px; border: 1px solid rgba(0, 245, 255, .42); border-radius: 20px; background: linear-gradient(180deg, rgba(9, 18, 43, .9), rgba(23, 7, 41, .84)); }
+.sala-config-bloco:nth-of-type(2) { border-color: rgba(255, 45, 170, .46); }
+.sala-config-bloco h2 { margin: 0 0 13px; color: #48efff; font-size: 14px; letter-spacing: .08em; }
+.sala-config-bloco:nth-of-type(2) h2 { color: #ff5ab9; }
+.sala-config-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+.sala-config-grid-identidade { grid-template-columns: 2fr 1fr; }
+.sala-config-grid label, .sala-config-toggle { display: flex; flex-direction: column; gap: 7px; }
+.sala-config-grid label > span { color: #d2c7f0; font-size: 13px; font-weight: 800; }
+.sala-config-grid input, .sala-config-grid select { width: 100%; min-height: 48px; padding: 0 13px; border: 1px solid rgba(255, 45, 170, .62); border-radius: 12px; outline: none; background: #1e092e; color: #fff; font: 700 15px "Segoe UI", Arial, sans-serif; touch-action: manipulation; }
+.sala-config-grid input:focus, .sala-config-grid select:focus { border-color: #48efff; box-shadow: 0 0 0 3px rgba(0, 245, 255, .12); }
+.sala-config-largo { grid-column: 1 / -1; }
+.sala-config-opcoes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.sala-config-toggle { position: relative; min-height: 72px; padding: 14px 64px 14px 15px; border: 1px solid rgba(255, 210, 77, .38); border-radius: 15px; background: rgba(9, 14, 35, .72); justify-content: center; cursor: pointer; touch-action: manipulation; }
+.sala-config-toggle b { display: block; color: #fff; font-size: 15px; }
+.sala-config-toggle small { display: block; margin-top: 3px; color: #aeb7d3; font-size: 11px; line-height: 1.25; }
+.sala-config-toggle input { position: absolute; opacity: 0; }
+.sala-config-toggle i { position: absolute; right: 15px; top: 50%; width: 39px; height: 23px; transform: translateY(-50%); border-radius: 20px; background: #403957; box-shadow: inset 0 0 0 1px #756d91; }
+.sala-config-toggle i::after { content: ""; position: absolute; left: 3px; top: 3px; width: 17px; height: 17px; border-radius: 50%; background: #d2c7f0; transition: .18s; }
+.sala-config-toggle input:checked + i { background: #1aa9b5; box-shadow: 0 0 14px rgba(0, 245, 255, .45); }
+.sala-config-toggle input:checked + i::after { left: 19px; background: #73fbff; }
+.sala-config-acoes { display: grid; grid-template-columns: 1fr 1.5fr; gap: 12px; margin-top: 18px; }
+.sala-config-acoes button { min-height: 54px; border-radius: 14px; color: #fff; font: 900 16px "Segoe UI", Arial, sans-serif; letter-spacing: .03em; cursor: pointer; touch-action: manipulation; }
+.sala-config-voltar { border: 1px solid rgba(255, 45, 170, .72); background: linear-gradient(90deg, #8a1f63, #4e1d75); }
+.sala-config-criar { border: 1px solid #73fbff; background: linear-gradient(90deg, #196dff, #742cff); box-shadow: 0 0 22px rgba(0, 245, 255, .18); }
+
+@media (max-width: 640px), (max-height: 520px) {
+  .sala-config-overlay { padding: 12px; }
+  .sala-config-card { padding: 15px; border-radius: 20px; }
+  .sala-config-header { margin-bottom: 12px; }
+  .sala-config-bloco { padding: 13px; margin-top: 10px; }
+  .sala-config-grid, .sala-config-grid-identidade, .sala-config-opcoes { grid-template-columns: 1fr 1fr; }
+  .sala-config-largo { grid-column: 1 / -1; }
+  .sala-config-header p, .sala-config-toggle small { display: none; }
+  .sala-config-toggle { min-height: 64px; padding-left: 11px; }
+}

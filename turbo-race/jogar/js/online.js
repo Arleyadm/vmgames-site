@@ -19,6 +19,10 @@ const OnlineSession = {
   enabled: false,
   localPlayerId: "",
   maxPlayers: 4,
+  raceLaps: 3,
+  raceWeather: "auto",
+  puddlesWater: true,
+  puddlesOil: false,
   raceLaunchId: "",
   raceOpening: false,
 
@@ -40,6 +44,10 @@ const OnlineSession = {
     this.isHost = false;
     this.stageIndex = 0;
     this.maxPlayers = 4;
+    this.raceLaps = 3;
+    this.raceWeather = "auto";
+    this.puddlesWater = true;
+    this.puddlesOil = false;
     this.raceLaunchId = "";
     this.raceOpening = false;
     this.refreshPlayerId();
@@ -77,7 +85,7 @@ class OnlineService {
   // -----------------------------------------------------------------------
 
   /**
-   * opcoes: { criar, sala, nome, carId, max, fase, salaNome }
+   * opcoes: { criar, sala, nome, carId, max, fase, salaNome, clima, pocaAgua, pocaOleo, voltas }
    *  - criar: true monta uma sala nova e devolve o codigo
    *  - sala: entra numa sala pelo codigo
    *  - sem os dois: cai em qualquer sala com vaga, ou cria uma
@@ -97,9 +105,13 @@ class OnlineService {
       partes.push("token=" + encodeURIComponent(this.token));
     } else if (o.criar) {
       partes.push("criar=1");
-      partes.push("max=" + limitar(Math.trunc(o.max || 4), 2, 8));
+      partes.push("max=" + limitar(Math.trunc(o.max || 4), 2, 24));
       partes.push("fase=" + limitar(Math.trunc(o.fase || 0), 0, StageCatalog.count() - 1));
       if (o.salaNome) partes.push("salaNome=" + encodeURIComponent(String(o.salaNome).slice(0, 24)));
+      partes.push("clima=" + encodeURIComponent(String(o.clima || "auto")));
+      partes.push("pocaAgua=" + (o.pocaAgua === false ? "0" : "1"));
+      partes.push("pocaOleo=" + (o.pocaOleo === false ? "0" : "1"));
+      partes.push("voltas=" + limitar(Math.trunc(o.voltas || 3), 1, 10));
     } else if (o.sala) {
       partes.push("sala=" + encodeURIComponent(String(o.sala).toUpperCase().slice(0, 8)));
     }
@@ -167,6 +179,7 @@ class OnlineService {
         OnlineSession.isHost = this.anfitriao;
         OnlineSession.stageIndex = msg.resumo ? msg.resumo.fase : 0;
         OnlineSession.maxPlayers = msg.resumo ? msg.resumo.maxJogadores : 4;
+        this._atualizarRegrasDaCorrida(msg.resumo);
 
         this._avisar("onConnected");
         this._avisar("onRoomUpdate", this.resumo);
@@ -179,6 +192,7 @@ class OnlineService {
         OnlineSession.isHost = this.anfitriao;
         OnlineSession.stageIndex = msg.resumo.fase;
         OnlineSession.maxPlayers = msg.resumo.maxJogadores;
+        this._atualizarRegrasDaCorrida(msg.resumo);
         this._avisar("onRoomUpdate", this.resumo);
         return;
       }
@@ -187,10 +201,18 @@ class OnlineService {
         // A semente e o que faz todo mundo correr exatamente a mesma pista.
         OnlineSession.raceLaunchId = String(msg.corridaId || msg.semente);
         OnlineSession.stageIndex = msg.fase;
+        OnlineSession.raceLaps = limitar(Math.trunc(msg.voltas || OnlineSession.raceLaps || 3), 1, 10);
+        OnlineSession.raceWeather = String(msg.clima || OnlineSession.raceWeather || "auto");
+        OnlineSession.puddlesWater = msg.pocaAgua !== false;
+        OnlineSession.puddlesOil = msg.pocaOleo === true;
         OnlineSession.enabled = true;
         this._avisar("onRaceStart", {
           semente: msg.semente,
           fase: msg.fase,
+          clima: OnlineSession.raceWeather,
+          pocaAgua: OnlineSession.puddlesWater,
+          pocaOleo: OnlineSession.puddlesOil,
+          voltas: OnlineSession.raceLaps,
           corridaId: msg.corridaId,
           emMs: msg.emMs || 0,
           jogadores: msg.jogadores || []
@@ -257,6 +279,14 @@ class OnlineService {
     const l = this.listener;
     if (!l || typeof l[metodo] !== "function") return;
     try { l[metodo](argumento); } catch (e) { console.error("Erro no ouvinte da sala:", e); }
+  }
+
+  _atualizarRegrasDaCorrida(resumo) {
+    if (!resumo) return;
+    OnlineSession.raceLaps = limitar(Math.trunc(resumo.voltas || 3), 1, 10);
+    OnlineSession.raceWeather = String(resumo.clima || "auto");
+    OnlineSession.puddlesWater = resumo.pocaAgua !== false;
+    OnlineSession.puddlesOil = resumo.pocaOleo === true;
   }
 
   _comecarPing() {
@@ -326,7 +356,7 @@ class OnlineService {
     this._enviar({ t: "fase", fase: limitar(Math.trunc(indice), 0, StageCatalog.count() - 1) });
   }
 
-  setMaxPlayers(max) { this._enviar({ t: "maximo", max: limitar(Math.trunc(max), 2, 8) }); }
+  setMaxPlayers(max) { this._enviar({ t: "maximo", max: limitar(Math.trunc(max), 2, 24) }); }
 
   startRace() { this._enviar({ t: "largar" }); }
 
