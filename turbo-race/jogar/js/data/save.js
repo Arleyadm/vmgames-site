@@ -375,7 +375,17 @@ class SaveManager {
   set introSeen(v) { this.putBoolean("intro_seen", v); }
 
   // ---------- Sala online ----------
-  get onlineServerUrl() { return this.getString("online_server", SaveManager.SERVIDOR_PADRAO); }
+  get onlineServerUrl() {
+    const salvo = String(this.getString("online_server", SaveManager.SERVIDOR_PADRAO) || "").trim();
+    // Celulares que abriram a primeira publicação podem ter guardado o serviço
+    // antigo. Ele possui uma lista de salas separada, então computador e celular
+    // pareciam enxergar partidas diferentes. Migra sem apagar o restante do save.
+    if (/^wss?:\/\/turborace-servidor\.onrender\.com(?:\/|$)/i.test(salvo)) {
+      this._apagar("online_server");
+      return SaveManager.SERVIDOR_PADRAO;
+    }
+    return salvo || SaveManager.SERVIDOR_PADRAO;
+  }
   set onlineServerUrl(v) { this.putString("online_server", String(v || "").trim() || SaveManager.SERVIDOR_PADRAO); }
 }
 
