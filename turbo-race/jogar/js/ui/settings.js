@@ -12,8 +12,8 @@
  *  - os Toast viram um aviso desenhado no rodape (mostrarAviso);
  *  - o EditText do nome e o endereco do servidor sao editados por prompt() do
  *    navegador, que e o equivalente mais honesto de um campo de texto aqui;
- *  - o painel "CONTROLE BLUETOOTH / USB" mapeava KEYCODE_* do Android; aqui
- *    ele mapeia KeyboardEvent.code, que e o que o SaveManager guarda;
+ *  - o teclado usa KeyboardEvent.code e o controle Bluetooth/USB usa a
+ *    Gamepad API. Os dois mapeamentos ficam separados e salvos no navegador;
  *  - a foto do perfil sai do ActivityResultContracts.OpenDocument e vira um
  *    <input type="file"> lido como data URL (o SaveManager guarda o data URL).
  */
@@ -33,9 +33,8 @@ const CFG_GLASS_ROSA_TOPO = Cor.argb(0xD8, 0x17, 0x08, 0x2F);
 const CFG_GLASS_ROSA_BASE = Cor.argb(0xC4, 0x2C, 0x07, 0x3B);
 
 /*
- * SO NA WEB: as acoes que aparecem no painel do teclado. O app tinha treze
- * botoes de mapeamento (farol, GAS+, GELO, fantasma, upgrades, select); aqui
- * a lista fica nas seis acoes que o teclado precisa mesmo ter a mao.
+ * SO NA WEB: o teclado continua com os seis comandos principais que ja
+ * existiam. Logo abaixo, o painel do Android traz as treze acoes do controle.
  */
 const CFG_ACOES_TECLADO = [
   SaveManager.GAMEPAD_LEFT,
@@ -56,6 +55,38 @@ const CFG_ROTULOS_TECLADO = {
   pause: "Pause"
 };
 
+const CFG_ACOES_CONTROLE = [
+  SaveManager.GAMEPAD_LEFT,
+  SaveManager.GAMEPAD_RIGHT,
+  SaveManager.GAMEPAD_ACCEL,
+  SaveManager.GAMEPAD_BRAKE,
+  SaveManager.GAMEPAD_TURBO,
+  SaveManager.GAMEPAD_HEADLIGHT,
+  SaveManager.GAMEPAD_GAS_PLUS,
+  SaveManager.GAMEPAD_FREEZE,
+  SaveManager.GAMEPAD_GHOST,
+  SaveManager.GAMEPAD_UPGRADE_NEXT,
+  SaveManager.GAMEPAD_UPGRADE_USE,
+  SaveManager.GAMEPAD_PAUSE,
+  SaveManager.GAMEPAD_SELECT
+];
+
+const CFG_ROTULOS_CONTROLE = {
+  left: "Esquerda",
+  right: "Direita",
+  accel: "Acelerar",
+  brake: "Freio/Ré",
+  turbo: "Turbo",
+  headlight: "Farol",
+  gas_plus: "GAS+",
+  freeze: "Gelo",
+  ghost: "Fantasma",
+  upgrade_next: "Trocar item",
+  upgrade_use: "Usar item",
+  pause: "Pause",
+  select: "Select"
+};
+
 class TelaDeConfiguracoes {
 
   constructor(app) {
@@ -63,7 +94,10 @@ class TelaDeConfiguracoes {
     this.save = app.save;
     // No Kotlin cada Activity criava o seu SoundManager; aqui ele e unico.
     this.menuSound = app.sound;
+    this.waitingKeyboardAction = null;
     this.waitingGamepadAction = null;
+    this.gamepadPreviousButtons = [];
+    this.gamepadConnectedName = "";
 
     // Campo de texto do nome: como no EditText, o valor so vai para o
     // SaveManager quando o jogador aperta SALVAR PERFIL.
@@ -104,9 +138,12 @@ class TelaDeConfiguracoes {
     this.radioTilt = Ret.novo();
     this.serverPanel = Ret.novo();   // so na web
     this.btnOnlineServer = Ret.novo(); // so na web
+    this.keyboardPanel = Ret.novo();
+    this.btnMapKeys = [];
+    this.btnResetKeyboard = Ret.novo();
     this.gamepadPanel = Ret.novo();
     this.switchGamepad = Ret.novo();
-    this.btnMapKeys = [];            // so na web: um botao por acao do teclado
+    this.btnMapGamepad = [];
     this.btnResetGamepad = Ret.novo();
     this.btnBack = Ret.novo();
 
@@ -127,7 +164,9 @@ class TelaDeConfiguracoes {
     this.arrastou = false;
     this.aviso = "";
     this.avisoTempo = 0;
+    this.waitingKeyboardAction = null;
     this.waitingGamepadAction = null;
+    this.gamepadPreviousButtons = [];
 
     window.addEventListener("keydown", this.ouvinteTeclado);
 
@@ -137,6 +176,7 @@ class TelaDeConfiguracoes {
 
   sair() {
     window.removeEventListener("keydown", this.ouvinteTeclado);
+    this.waitingKeyboardAction = null;
     this.waitingGamepadAction = null;
     // O onDestroy do Kotlin chamava releaseKeepMusic() porque cada Activity
     // tinha o proprio SoundManager. Aqui ele e do app inteiro: nao solta nada.
@@ -150,6 +190,7 @@ class TelaDeConfiguracoes {
         this.aviso = "";
       }
     }
+    this.pollGamepadMapping();
   }
 
   // ---------------------------------------------------------
@@ -236,11 +277,27 @@ class TelaDeConfiguracoes {
     this.updateGamepadStatusText();
   }
 
-  startGamepadMapping(action) {
-    this.waitingGamepadAction = action;
-    this.gamepadStatusText = "Mapeando " + this.gamepadActionName(action) +
+  startKeyboardMapping(action) {
+    this.waitingGamepadAction = null;
+    this.waitingKeyboardAction = action;
+    this.keyboardStatusText = "Mapeando " + this.gamepadActionName(action) +
       "... aperte a tecla desejada. ESC cancela.";
     this.mostrarAviso("Aperte uma tecla para " + this.gamepadActionName(action));
+  }
+
+  startGamepadMapping(action) {
+    const pad = this.getConnectedGamepad();
+    if (!pad) {
+      this.mostrarAviso("Conecte ou ative um controle Bluetooth/USB.");
+      this.updateGamepadStatusText();
+      return;
+    }
+    this.waitingKeyboardAction = null;
+    this.waitingGamepadAction = action;
+    this.gamepadPreviousButtons = Array.from(pad.buttons || [], (b) => this.gamepadButtonPressed(b));
+    this.gamepadStatusText = "Mapeando " + this.gamepadActionName(action) +
+      "... aperte o botão desejado. ESC cancela.";
+    this.mostrarAviso("Aperte um botão do controle para " + this.gamepadActionName(action));
   }
 
   /**
@@ -248,17 +305,23 @@ class TelaDeConfiguracoes {
    * tecla vira o novo atalho. No Android o KEYCODE_BACK cancelava; aqui e ESC.
    */
   dispatchKeyEvent(event) {
-    const actionToMap = this.waitingGamepadAction;
+    if (this.waitingGamepadAction !== null && event.code === "Escape") {
+      event.preventDefault();
+      this.waitingGamepadAction = null;
+      this.updateGamepadStatusText();
+      return true;
+    }
+    const actionToMap = this.waitingKeyboardAction;
     if (actionToMap !== null) {
       event.preventDefault();
       if (event.code === "Escape") {
-        this.waitingGamepadAction = null;
+        this.waitingKeyboardAction = null;
         this.updateGamepadStatusText();
         return true;
       }
       if (event.code) {
         this.save.setKeyboardKey(actionToMap, event.code);
-        this.waitingGamepadAction = null;
+        this.waitingKeyboardAction = null;
         this.updateGamepadStatusText();
         this.mostrarAviso(this.gamepadActionName(actionToMap) + " = " +
           this.save.getKeyboardKeyLabel(actionToMap));
@@ -269,9 +332,52 @@ class TelaDeConfiguracoes {
   }
 
   updateGamepadStatusText() {
+    this.keyboardStatusText = "Toque numa ação e aperte a nova tecla. ESC cancela.";
+    const pad = this.getConnectedGamepad();
+    this.gamepadConnectedName = pad ? String(pad.id || "Controle conectado") : "";
     this.gamepadStatusText =
-      "Controle externo: " + (this.save.gamepadEnabled ? "ligado" : "desligado") +
-      "  •  toque numa ação e aperte a tecla nova. O analógico esquerdo também vira o carro.";
+      (pad ? "Conectado: " + this.gamepadConnectedName : "Nenhum controle detectado") +
+      "  •  analógico esquerdo também vira o carro.";
+  }
+
+  getConnectedGamepad() {
+    if (typeof navigator === "undefined" || !navigator.getGamepads) return null;
+    try {
+      const pads = navigator.getGamepads();
+      for (let i = 0; i < pads.length; i++) {
+        if (pads[i] && pads[i].connected) return pads[i];
+      }
+    } catch (e) {
+      /* navegador sem permissao para ler o controle */
+    }
+    return null;
+  }
+
+  gamepadButtonPressed(button) {
+    return !!button && (typeof button === "object" ? (button.pressed || button.value > 0.55) : button > 0.55);
+  }
+
+  pollGamepadMapping() {
+    const pad = this.getConnectedGamepad();
+    const nome = pad ? String(pad.id || "Controle conectado") : "";
+    if (nome !== this.gamepadConnectedName && this.waitingGamepadAction === null) {
+      this.updateGamepadStatusText();
+    }
+    if (!pad || this.waitingGamepadAction === null) return;
+
+    const atual = Array.from(pad.buttons || [], (b) => this.gamepadButtonPressed(b));
+    for (let i = 0; i < atual.length; i++) {
+      if (atual[i] && !this.gamepadPreviousButtons[i]) {
+        const action = this.waitingGamepadAction;
+        this.save.setGamepadButton(action, i);
+        this.waitingGamepadAction = null;
+        this.gamepadPreviousButtons = atual;
+        this.updateGamepadStatusText();
+        this.mostrarAviso(this.gamepadActionName(action) + " = " + this.save.getGamepadButtonLabel(action));
+        return;
+      }
+    }
+    this.gamepadPreviousButtons = atual;
   }
 
   gamepadActionName(action) {
@@ -295,10 +401,17 @@ class TelaDeConfiguracoes {
 
   /** Botao "Restaurar padrão" do painel do teclado (so na web). */
   resetKeyboardMapping() {
-    this.waitingGamepadAction = null;
+    this.waitingKeyboardAction = null;
     this.save.resetKeyboardMapping();
     this.updateGamepadStatusText();
     this.mostrarAviso("Mapeamento padrão restaurado.");
+  }
+
+  resetGamepadMapping() {
+    this.waitingGamepadAction = null;
+    this.save.resetGamepadMapping();
+    this.updateGamepadStatusText();
+    this.mostrarAviso("Controle restaurado para o padrão do Android.");
   }
 
   // ---------------------------------------------------------
@@ -407,13 +520,45 @@ class TelaDeConfiguracoes {
       this.serverPanel.right - dp(14), this.serverPanel.top + dp(14) + dp(24) + dp(8) + dp(44));
     y = this.serverPanel.bottom + dp(12);
 
-    // ---- gamepadPanel: SO NA WEB e um painel de teclado ----
-    const porLinha = duasColunas ? 6 : 3;
-    const linhasDeTecla = Math.ceil(CFG_ACOES_TECLADO.length / porLinha);
+    // ---- keyboardPanel: mantem os atalhos do teclado do computador ----
+    const porLinhaTeclado = duasColunas ? 6 : 3;
+    const linhasDeTecla = Math.ceil(CFG_ACOES_TECLADO.length / porLinhaTeclado);
     const alturaTecla = dp(52);
-    const alturaTeclado = dp(14) + dp(24) + dp(6) + linhaAlt + dp(22) + dp(10) +
+    const alturaTeclado = dp(14) + dp(24) + dp(6) + dp(22) + dp(10) +
       linhasDeTecla * (alturaTecla + dp(8)) + dp(9) + dp(44) + dp(14);
-    Ret.definir(this.gamepadPanel, padLat, y, padLat + larg, y + alturaTeclado);
+    Ret.definir(this.keyboardPanel, padLat, y, padLat + larg, y + alturaTeclado);
+
+    let ky = this.keyboardPanel.top + dp(14) + dp(24) + dp(6);
+    const kL = this.keyboardPanel.left + dp(14);
+    const kR = this.keyboardPanel.right - dp(14);
+    this.keyboardStatusY = ky + dp(14);
+    ky += dp(22) + dp(10);
+
+    this.btnMapKeys = [];
+    const largTecla = (kR - kL - dp(8) * (porLinhaTeclado - 1)) / porLinhaTeclado;
+    for (let i = 0; i < CFG_ACOES_TECLADO.length; i++) {
+      const coluna = i % porLinhaTeclado;
+      const linha = Math.trunc(i / porLinhaTeclado);
+      const bx = kL + coluna * (largTecla + dp(8));
+      const by = ky + linha * (alturaTecla + dp(8));
+      this.btnMapKeys.push({
+        action: CFG_ACOES_TECLADO[i],
+        ret: Ret.novo(bx, by, bx + largTecla, by + alturaTecla)
+      });
+    }
+    ky += linhasDeTecla * (alturaTecla + dp(8)) + dp(9);
+
+    const largReset = Math.min(dp(260), larg);
+    const resetTecladoX = Ret.centroX(this.keyboardPanel) - largReset / 2;
+    Ret.definir(this.btnResetKeyboard, resetTecladoX, ky, resetTecladoX + largReset, ky + dp(44));
+    y = this.keyboardPanel.bottom + dp(12);
+
+    // ---- gamepadPanel: as mesmas 13 opcoes do projeto Android ----
+    const porLinhaControle = duasColunas ? 5 : 3;
+    const linhasControle = Math.ceil(CFG_ACOES_CONTROLE.length / porLinhaControle);
+    const alturaControleExterno = dp(14) + dp(24) + dp(6) + linhaAlt + dp(22) + dp(10) +
+      linhasControle * (alturaTecla + dp(8)) + dp(9) + dp(44) + dp(14);
+    Ret.definir(this.gamepadPanel, padLat, y, padLat + larg, y + alturaControleExterno);
 
     let gy = this.gamepadPanel.top + dp(14) + dp(24) + dp(6);
     const gL = this.gamepadPanel.left + dp(14);
@@ -423,23 +568,22 @@ class TelaDeConfiguracoes {
     this.gamepadStatusY = gy + dp(14);
     gy += dp(22) + dp(10);
 
-    this.btnMapKeys = [];
-    const largTecla = (gR - gL - dp(8) * (porLinha - 1)) / porLinha;
-    for (let i = 0; i < CFG_ACOES_TECLADO.length; i++) {
-      const coluna = i % porLinha;
-      const linha = Math.trunc(i / porLinha);
-      const bx = gL + coluna * (largTecla + dp(8));
+    this.btnMapGamepad = [];
+    const largBotaoControle = (gR - gL - dp(8) * (porLinhaControle - 1)) / porLinhaControle;
+    for (let i = 0; i < CFG_ACOES_CONTROLE.length; i++) {
+      const coluna = i % porLinhaControle;
+      const linha = Math.trunc(i / porLinhaControle);
+      const bx = gL + coluna * (largBotaoControle + dp(8));
       const by = gy + linha * (alturaTecla + dp(8));
-      this.btnMapKeys.push({
-        action: CFG_ACOES_TECLADO[i],
-        ret: Ret.novo(bx, by, bx + largTecla, by + alturaTecla)
+      this.btnMapGamepad.push({
+        action: CFG_ACOES_CONTROLE[i],
+        ret: Ret.novo(bx, by, bx + largBotaoControle, by + alturaTecla)
       });
     }
-    gy += linhasDeTecla * (alturaTecla + dp(8)) + dp(9);
+    gy += linhasControle * (alturaTecla + dp(8)) + dp(9);
 
-    const largReset = Math.min(dp(260), larg);
-    const resetX = Ret.centroX(this.gamepadPanel) - largReset / 2;
-    Ret.definir(this.btnResetGamepad, resetX, gy, resetX + largReset, gy + dp(44));
+    const resetControleX = Ret.centroX(this.gamepadPanel) - largReset / 2;
+    Ret.definir(this.btnResetGamepad, resetControleX, gy, resetControleX + largReset, gy + dp(44));
     y = this.gamepadPanel.bottom;
 
     // ---- btnBack ----
@@ -548,12 +692,31 @@ class TelaDeConfiguracoes {
     ctx.fillStyle = Cor.css(CFG_AMBER, 220);
     ctx.fillText("TROCAR", this.btnOnlineServer.right - dp(12), Ret.centroY(this.btnOnlineServer) + dp(4));
 
-    // ---- SO NA WEB: teclado (no app este painel era do controle Bluetooth/USB) ----
+    // ---- SO NA WEB: teclado do computador ----
+    this.painelDeVidro(ctx, this.keyboardPanel, true);
+    ctx.textAlign = "left";
+    ctx.font = "bold " + dp(17) + "px " + FONTE;
+    ctx.fillStyle = Cor.css(CFG_NEON_MAGENTA);
+    ctx.fillText("TECLADO", this.keyboardPanel.left + dp(14), this.keyboardPanel.top + dp(14) + dp(17));
+
+    ctx.font = dp(13) + "px " + FONTE;
+    ctx.fillStyle = Cor.css(CFG_TEXT_DIM);
+    ctx.fillText(this.textoCabendo(ctx, this.keyboardStatusText, Ret.largura(this.keyboardPanel) - dp(28)),
+      this.keyboardPanel.left + dp(14), this.keyboardStatusY);
+
+    for (const item of this.btnMapKeys) {
+      const esperando = this.waitingKeyboardAction === item.action;
+      this.desenharBotaoDeTecla(ctx, item.ret, CFG_ROTULOS_TECLADO[item.action] || item.action,
+        esperando ? "..." : this.save.getKeyboardKeyLabel(item.action), esperando);
+    }
+    this.desenharBotao(ctx, this.btnResetKeyboard, "Restaurar teclado", dp(13), false);
+
+    // ---- Controle Bluetooth/USB: as mesmas opcoes do app Android ----
     this.painelDeVidro(ctx, this.gamepadPanel, false);
     ctx.textAlign = "left";
     ctx.font = "bold " + dp(17) + "px " + FONTE;
     ctx.fillStyle = Cor.css(CFG_NEON_CYAN);
-    ctx.fillText("TECLADO", this.gamepadPanel.left + dp(14), this.gamepadPanel.top + dp(14) + dp(17));
+    ctx.fillText("CONTROLE BLUETOOTH / USB", this.gamepadPanel.left + dp(14), this.gamepadPanel.top + dp(14) + dp(17));
 
     this.desenharInterruptor(ctx, this.switchGamepad, "Usar controle externo", this.save.gamepadEnabled, CFG_NEON_CYAN);
 
@@ -562,12 +725,12 @@ class TelaDeConfiguracoes {
     ctx.fillText(this.textoCabendo(ctx, this.gamepadStatusText, Ret.largura(this.gamepadPanel) - dp(28)),
       this.gamepadPanel.left + dp(14), this.gamepadStatusY);
 
-    for (const item of this.btnMapKeys) {
+    for (const item of this.btnMapGamepad) {
       const esperando = this.waitingGamepadAction === item.action;
-      this.desenharBotaoDeTecla(ctx, item.ret, CFG_ROTULOS_TECLADO[item.action] || item.action,
-        esperando ? "..." : this.save.getKeyboardKeyLabel(item.action), esperando);
+      this.desenharBotaoDeTecla(ctx, item.ret, CFG_ROTULOS_CONTROLE[item.action] || item.action,
+        esperando ? "..." : this.save.getGamepadButtonLabel(item.action), esperando);
     }
-    this.desenharBotao(ctx, this.btnResetGamepad, "Restaurar padrão", dp(13), false);
+    this.desenharBotao(ctx, this.btnResetGamepad, "Restaurar controle", dp(13), false);
 
     // ---- btnBack ----
     this.desenharBotao(ctx, this.btnBack, "VOLTAR", dp(17), false);
@@ -811,15 +974,21 @@ class TelaDeConfiguracoes {
     if (Ret.contem(this.btnOnlineServer, x, py)) { this.trocarServidorOnline(); return; }
 
     // --- SO NA WEB: teclado ---
+    for (const item of this.btnMapKeys) {
+      if (Ret.contem(item.ret, x, py)) { this.startKeyboardMapping(item.action); return; }
+    }
+    if (Ret.contem(this.btnResetKeyboard, x, py)) { this.resetKeyboardMapping(); return; }
+
+    // --- controle Bluetooth / USB ---
     if (Ret.contem(this.switchGamepad, x, py)) {
       this.save.gamepadEnabled = !this.save.gamepadEnabled;
       this.updateGamepadStatusText();
       return;
     }
-    for (const item of this.btnMapKeys) {
+    for (const item of this.btnMapGamepad) {
       if (Ret.contem(item.ret, x, py)) { this.startGamepadMapping(item.action); return; }
     }
-    if (Ret.contem(this.btnResetGamepad, x, py)) { this.resetKeyboardMapping(); return; }
+    if (Ret.contem(this.btnResetGamepad, x, py)) { this.resetGamepadMapping(); return; }
 
     // --- btnBack ---
     if (Ret.contem(this.btnBack, x, py)) { this.app.irPara("menu"); return; }

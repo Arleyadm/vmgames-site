@@ -332,6 +332,37 @@ class SaveManager {
   get gamepadEnabled() { return this.getBoolean("gamepad_enabled", true); }
   set gamepadEnabled(v) { this.putBoolean("gamepad_enabled", v); }
 
+  /** Devolve o indice do botao da Gamepad API ligado a uma acao. */
+  getGamepadButton(action) {
+    return this.getInt("gamepad_button_" + action,
+      Object.prototype.hasOwnProperty.call(SaveManager.botoesGamepadPadrao, action)
+        ? SaveManager.botoesGamepadPadrao[action]
+        : -1);
+  }
+
+  setGamepadButton(action, buttonIndex) {
+    const indice = Math.trunc(Number(buttonIndex));
+    if (!Number.isFinite(indice) || indice < 0) return;
+    this.putInt("gamepad_button_" + action, indice);
+  }
+
+  getGamepadButtonLabel(action) {
+    const indice = this.getGamepadButton(action);
+    const nomes = {
+      0: "A / X", 1: "B / O", 2: "X / □", 3: "Y / △",
+      4: "L1 / LB", 5: "R1 / RB", 6: "L2 / LT", 7: "R2 / RT",
+      8: "SELECT", 9: "START", 10: "L3", 11: "R3",
+      12: "D-PAD ↑", 13: "D-PAD ↓", 14: "D-PAD ←", 15: "D-PAD →"
+    };
+    return Object.prototype.hasOwnProperty.call(nomes, indice) ? nomes[indice] : "BOTÃO " + (indice + 1);
+  }
+
+  resetGamepadMapping() {
+    for (const action of Object.keys(SaveManager.botoesGamepadPadrao)) {
+      this._apagar("gamepad_button_" + action);
+    }
+  }
+
   /** Devolve o KeyboardEvent.code ligado a uma acao. */
   getKeyboardKey(action) {
     return this.getString("keyboard_key_" + action, SaveManager.teclasPadrao[action] || "");
@@ -431,6 +462,23 @@ SaveManager.teclasPadrao = {
   upgrade_use: "KeyE",
   pause: "Escape",
   select: "Enter"
+};
+
+/** Mesmos comandos padrao do controle Bluetooth/USB do projeto Android. */
+SaveManager.botoesGamepadPadrao = {
+  left: 14,
+  right: 15,
+  accel: 7,
+  brake: 6,
+  turbo: 0,
+  headlight: 2,
+  gas_plus: 3,
+  freeze: 1,
+  ghost: 11,
+  upgrade_next: 4,
+  upgrade_use: 5,
+  pause: 9,
+  select: 8
 };
 
 SaveManager.garagePaintColors = [

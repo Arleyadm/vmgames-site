@@ -148,10 +148,9 @@ class TelaDeCorrida {
     this.gamepadAxisX = 0;
     this.gamepadGasAxis = 0;
     this.gamepadBrakeAxis = 0;
-    // Botões do controle no quadro anterior, para detectar o "acabou de apertar"
-    // que no Android vinha de graça com o KeyEvent.ACTION_DOWN.
-    this.gamepadTurboWasDown = false;
-    this.gamepadPauseWasDown = false;
+    // Estado anterior de cada acao configuravel, para detectar o "acabou de
+    // apertar" que no Android vinha de graca com o KeyEvent.ACTION_DOWN.
+    this.gamepadActionWasDown = Object.create(null);
 
     // Aviso grande no centro quando o jogador ultrapassa alguém.
     this.positionFlashTimer = 0;
@@ -524,6 +523,7 @@ class TelaDeCorrida {
     this.gamepadAxisX = 0;
     this.gamepadGasAxis = 0;
     this.gamepadBrakeAxis = 0;
+    this.gamepadActionWasDown = Object.create(null);
     this.pitBoostItemArmed = !!this.save && this.save.pitBoostItems > 0;
     this.freezeRivalsItemArmed = !!this.save && this.save.freezeRivalsItems > 0;
     this.ghostModeItemArmed = !!this.save && this.save.ghostModeItems > 0;
@@ -2272,7 +2272,13 @@ class TelaDeCorrida {
     for (let i = 0; i < lista.length; i++) {
       if (lista[i] && lista[i].connected) { pad = lista[i]; break; }
     }
-    if (!pad) return false;
+    if (!pad) {
+      this.gamepadAxisX = 0;
+      this.gamepadGasAxis = 0;
+      this.gamepadBrakeAxis = 0;
+      this.gamepadActionWasDown = Object.create(null);
+      return false;
+    }
 
     function axis(valor) {
       const v = valor || 0;
@@ -2288,14 +2294,26 @@ class TelaDeCorrida {
       const b = pad.buttons[indice];
       return !!b && (typeof b === "object" ? b.pressed : b > 0.5);
     }
+    const self = this;
+    function indiceDaAcao(acao) { return self.save.getGamepadButton(acao); }
+    function valorDaAcao(acao) { return botao(indiceDaAcao(acao)); }
+    function acaoPressionada(acao) { return pressionado(indiceDaAcao(acao)); }
+    function acabouDeApertar(acao) {
+      const agora = acaoPressionada(acao);
+      const antes = !!self.gamepadActionWasDown[acao];
+      self.gamepadActionWasDown[acao] = agora;
+      return agora && !antes;
+    }
 
-    // Analógico esquerdo; se estiver parado, usa o direcional (o antigo HAT_X).
+    // Analogico esquerdo sempre funciona. Se estiver parado, usa os botoes
+    // escolhidos para esquerda/direita (D-Pad no mapeamento padrao).
     const analogico = axis(pad.axes[0]);
     this.gamepadAxisX = (Math.abs(analogico) >= 0.12)
       ? analogico
-      : ((pressionado(14) ? -1 : 0) + (pressionado(15) ? 1 : 0));
-    this.gamepadGasAxis = botao(7);
-    this.gamepadBrakeAxis = botao(6);
+      : ((acaoPressionada(SaveManager.GAMEPAD_LEFT) ? -1 : 0) +
+        (acaoPressionada(SaveManager.GAMEPAD_RIGHT) ? 1 : 0));
+    this.gamepadGasAxis = valorDaAcao(SaveManager.GAMEPAD_ACCEL);
+    this.gamepadBrakeAxis = valorDaAcao(SaveManager.GAMEPAD_BRAKE);
 
     // V81: ao soltar analógico/gatilho, limpa imediatamente o comando.
     // Antes o último estado podia ficar preso até outro toque acontecer.
@@ -2306,17 +2324,31 @@ class TelaDeCorrida {
     }
     if (!this.gamepadBrake && this.gamepadBrakeAxis <= 0.18) this.controls.brake = false;
 
-    // O botão A (turbo) e o START (pause) não chegam como tecla; detectamos a
-    // borda de subida aqui, no lugar do KeyEvent.ACTION_DOWN do Android.
-    const turboAgora = pressionado(0);
-    if (turboAgora && !this.gamepadTurboWasDown && this.state && this.state.phase === GamePhase.RUNNING) {
+    // As treze acoes seguem o mapeamento escolhido em Configuracoes.
+    if (acabouDeApertar(SaveManager.GAMEPAD_TURBO) && this.state && this.state.phase === GamePhase.RUNNING) {
       this.activateTurboFromInput();
     }
-    this.gamepadTurboWasDown = turboAgora;
-
-    const pauseAgora = pressionado(9) || pressionado(8);
-    if (pauseAgora && !this.gamepadPauseWasDown) this.togglePauseFromInput();
-    this.gamepadPauseWasDown = pauseAgora;
+    if (acabouDeApertar(SaveManager.GAMEPAD_HEADLIGHT) && this.state && this.state.phase === GamePhase.RUNNING) {
+      this.headlightsOn = !this.headlightsOn;
+    }
+    if (acabouDeApertar(SaveManager.GAMEPAD_GAS_PLUS) && this.state && this.state.phase === GamePhase.RUNNING) {
+      this.usePitBoostButton();
+    }
+    if (acabouDeApertar(SaveManager.GAMEPAD_FREEZE) && this.state && this.state.phase === GamePhase.RUNNING) {
+      this.useFreezeRivalsButton();
+    }
+    if (acabouDeApertar(SaveManager.GAMEPAD_GHOST) && this.state && this.state.phase === GamePhase.RUNNING) {
+      this.useGhostModeButton();
+    }
+    if (acabouDeApertar(SaveManager.GAMEPAD_UPGRADE_NEXT) && this.state && this.state.phase === GamePhase.RUNNING) {
+      this.cycleSelectedRaceUpgrade();
+    }
+    if (acabouDeApertar(SaveManager.GAMEPAD_UPGRADE_USE) && this.state && this.state.phase === GamePhase.RUNNING) {
+      this.activateSelectedRaceUpgrade();
+    }
+    const pauseNovo = acabouDeApertar(SaveManager.GAMEPAD_PAUSE);
+    const selectNovo = acabouDeApertar(SaveManager.GAMEPAD_SELECT);
+    if (pauseNovo || selectNovo) this.togglePauseFromInput();
 
     return true;
   }
