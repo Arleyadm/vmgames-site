@@ -434,6 +434,6 @@ SaveManager.garagePaintColors = [
 ];
 
 /** Sala online do Turbo Race no Render (a mesma ideia da sala do Sugar Strike). */
-SaveManager.SERVIDOR_PADRAO = "wss://turborace-servidor.onrender.com/corrida";
+SaveManager.SERVIDOR_PADRAO = "wss://turbo-race-sala.onrender.com/corrida";
 
 window.SaveManager = SaveManager;
