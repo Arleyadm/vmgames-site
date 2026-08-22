@@ -78,6 +78,7 @@ class OnlineService {
     this.tentativasDeVolta = 0;
     this.ultimoPingMs = 0;
     this.latenciaMs = 0;
+    this.deslocamentoServidorMs = null;
     this.timerDePing = 0;
     this.opcoes = null;
   }
@@ -217,7 +218,11 @@ class OnlineService {
         // prazo local libera o GO em PC e celular.
         this._aplicarRegrasDaMensagem(msg);
         const prazoRecebido = Math.max(0, Number(msg.sincronizarEmMs || msg.emMs || 0));
-        const esperaCorrigida = Math.max(0, prazoRecebido - Math.max(0, this.latenciaMs) * 0.5);
+        const prazoServidor = Number(msg.largadaServidorEm);
+        const agoraParede = Date.now();
+        const esperaCorrigida = Number.isFinite(prazoServidor) && Number.isFinite(this.deslocamentoServidorMs)
+          ? Math.max(0, prazoServidor - (agoraParede + this.deslocamentoServidorMs))
+          : Math.max(0, prazoRecebido - Math.max(0, this.latenciaMs) * 0.5);
         const agoraMonotonico = (typeof performance !== "undefined" && performance.now)
           ? performance.now()
           : Date.now();
@@ -279,7 +284,15 @@ class OnlineService {
       }
 
       case "pong": {
-        if (msg.stamp) this.latenciaMs = Math.max(0, Date.now() - Number(msg.stamp));
+        if (msg.stamp) {
+          const recebidoEm = Date.now();
+          const enviadoEm = Number(msg.stamp);
+          this.latenciaMs = Math.max(0, recebidoEm - enviadoEm);
+          const servidorEm = Number(msg.servidorEm);
+          if (Number.isFinite(servidorEm)) {
+            this.deslocamentoServidorMs = servidorEm + this.latenciaMs * 0.5 - recebidoEm;
+          }
+        }
         return;
       }
 
@@ -396,6 +409,9 @@ class OnlineService {
   startRace() { this._enviar({ t: "largar" }); }
 
   reportLoaded(corridaId) {
+    // A ordem das mensagens no WebSocket é preservada: o servidor responde
+    // este ping antes de processar o `carregado` e liberar a contagem.
+    this._enviar({ t: "ping", stamp: Date.now() });
     this._enviar({ t: "carregado", corridaId: String(corridaId || OnlineSession.raceLaunchId) });
   }
 

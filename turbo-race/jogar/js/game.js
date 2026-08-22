@@ -767,6 +767,17 @@ class TelaDeCorrida {
   }
 
   updateCountdown(dt) {
+    // Multiplayer usa o prazo monotônico em todos os quadros. Assim, uma
+    // engasgada ou o limite do acumulador de física não alonga a contagem no
+    // celular em relação ao computador.
+    const sessao = sessaoOnline();
+    if (this.bluetoothService && sessao.raceGoAtMs > 0) {
+      const agora = (typeof performance !== "undefined" && performance.now)
+        ? performance.now()
+        : Date.now();
+      this.state.countdown = Math.max(0, (sessao.raceGoAtMs - agora) / 1000);
+    }
+
     let stageNumber;
     if (this.state.countdown > 2.5) stageNumber = 3;
     else if (this.state.countdown > 1.5) stageNumber = 2;
@@ -774,7 +785,9 @@ class TelaDeCorrida {
     else stageNumber = 0;
     this.triggerCountdownStage(stageNumber);
 
-    this.state.countdown -= dt;
+    if (!(this.bluetoothService && sessao.raceGoAtMs > 0)) {
+      this.state.countdown -= dt;
+    }
     if (this.state.countdown <= 0) {
       this.state.phase = GamePhase.RUNNING;
       if (this.sound) this.sound.startEngine();
