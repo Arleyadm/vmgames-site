@@ -1,13 +1,321 @@
 "use strict";
-class TurboRaceApp {
-  constructor(){this.canvas=document.getElementById("jogo");this.ctx=this.canvas.getContext("2d");this.camadaHtml=document.getElementById("camada-html");this.avisoOrientacao=document.getElementById("aviso-orientacao");this.save=new SaveManager();this.sound=new SoundManager(this.save);this.largura=1;this.altura=1;this.tela=null;this.ultimo=performance.now();this.telas={menu:()=>new TelaDeMenu(this),worldtour:()=>new TelaWorldTour(this),garagem:()=>new TelaDaGaragem(this),config:()=>new TelaDeConfiguracoes(this),online:()=>new TelaOnline(this),corrida:()=>new TelaDeCorrida(this),video:()=>new TelaDeVideo(this)};this._eventos();this._orientacao();this.redimensionar();}
-  _eventos(){window.addEventListener("resize",()=>this.redimensionar());document.addEventListener("visibilitychange",()=>document.hidden?this.sound.pauseAll():this.sound.resumeAll());const nomes={pointerdown:"baixo",pointermove:"move",pointerup:"cima",pointercancel:"cima"};for(const tipo of Object.keys(nomes)){this.canvas.addEventListener(tipo,e=>{const rolagemNativa=!!this.tela?.usaRolagemNativa;if(!rolagemNativa)e.preventDefault();if(tipo==="pointerdown"){this.sound.destravar();if(!rolagemNativa)try{if(this.canvas.setPointerCapture&&e.pointerId!=null)this.canvas.setPointerCapture(e.pointerId);}catch(_){/* alguns navegadores recusam captura em toque sintetico */}}if(rolagemNativa&&tipo==="pointermove")return;const r=this.canvas.getBoundingClientRect();const x=(e.clientX-r.left)*this.largura/r.width,y=(e.clientY-r.top)*this.altura/r.height;const nome=rolagemNativa&&tipo==="pointercancel"?"cancelar":nomes[tipo];this.tela?.aoApontar?.(nome,x,y,e);});}window.addEventListener("keydown",e=>this.tela?.aoTeclar?.(e,true));window.addEventListener("keyup",e=>this.tela?.aoTeclar?.(e,false));this.canvas.addEventListener("wheel",e=>{if(this.tela?.usaRolagemNativa)return;e.preventDefault();this.tela?.aoGirarRoda?.(e.deltaY);},{passive:false});}
-  redimensionar(){const d=Math.min(devicePixelRatio||1,2),r=this.canvas.getBoundingClientRect();this.largura=Math.max(320,Math.round(r.width*d));this.altura=Math.max(180,Math.round(r.height*d));this.canvas.width=this.largura;this.canvas.height=this.altura;this.tela?.medir?.(this.largura,this.altura);}
-  _orientacao(){if(!this.avisoOrientacao)return;this.avisoOrientacao.addEventListener("click",async()=>{try{if(!document.fullscreenElement&&document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();}catch(_){}try{if(screen.orientation?.lock)await screen.orientation.lock("landscape");}catch(_){};});}
-  _limparRolagemDeMenu(){document.documentElement.classList.remove("configuracoes-rolaveis");document.body.classList.remove("configuracoes-rolaveis");document.querySelectorAll("body > .rolagem-nativa").forEach(e=>e.remove());document.body.scrollTop=0;document.documentElement.scrollTop=0;window.scrollTo(0,0);}
-  irPara(nome,parametros){this.tela?.sair?.();this._limparRolagemDeMenu();this.camadaHtml.replaceChildren();const fabrica=this.telas[nome]||this.telas.menu;this.tela=fabrica();this.tela.entrar?.(parametros||{});this.tela.medir?.(this.largura,this.altura);}
-  iniciar(){this.irPara(this.save.introSeen?"menu":"video",this.save.introSeen?{}:{tipo:"intro",depois:"menu"});requestAnimationFrame(t=>this.loop(t));}
-  loop(agora){const dt=Math.min(.05,(agora-this.ultimo)/1000||0);this.ultimo=agora;this.tela?.update?.(dt);this.ctx.clearRect(0,0,this.largura,this.altura);this.tela?.render?.(this.ctx,this.largura,this.altura);requestAnimationFrame(t=>this.loop(t));}
+/*
+ * Cola do jogo no navegador.
+ *
+ * No Android cada tela era uma Activity e o sistema cuidava de trocar entre
+ * elas. Aqui existe um canvas só, e este arquivo faz o papel do sistema:
+ * guarda a tela atual, roda o laço, redimensiona e entrega o toque e o teclado
+ * para quem estiver no ar.
+ *
+ * A tela de corrida (TelaDeCorrida) é a exceção: ela roda o próprio
+ * requestAnimationFrame, porque a física precisa de passo fixo e o porte do
+ * GameLoop.kt ficou dentro dela. Quando a corrida está no ar, o laço daqui sai
+ * do caminho.
+ */
+
+const Jogo = (function () {
+
+  const tela = document.getElementById("tela");
+  const ctx = tela.getContext("2d", { alpha: false });
+  const camadaHtml = document.getElementById("camada-html");
+  const aviso = document.getElementById("aviso-carregando");
+  const barraDeProgresso = document.getElementById("progresso");
+
+  const save = new SaveManager();
+  const sound = new SoundManager(save);
+
+  let telaAtual = null;
+  let nomeDaTelaAtual = "";
+  let ultimoQuadro = 0;
+  let rodando = false;
+
+  // O canvas trabalha em pixels de verdade; o CSS cuida do tamanho na página.
+  let largura = 1280;
+  let altura = 720;
+
+  const app = {
+    save: save,
+    sound: sound,
+    camadaHtml: camadaHtml,
+    canvas: tela,
+    get largura() { return largura; },
+    get altura() { return altura; },
+    irPara: irPara,
+    telaAtual() { return nomeDaTelaAtual; }
+  };
+
+  // -----------------------------------------------------------------------
+  // Tamanho do canvas
+  // -----------------------------------------------------------------------
+
+  function redimensionar() {
+    // Teto de 2x: acima disso o ganho visual é pequeno e o custo de pintura na
+    // CPU é grande — e este jogo desenha tudo no Canvas 2D, sem GPU por
+    // triângulo. É o mesmo problema de desempenho que o app tem no SurfaceView.
+    const escala = Math.min(window.devicePixelRatio || 1, 2);
+    const larguraCss = tela.clientWidth || window.innerWidth;
+    const alturaCss = tela.clientHeight || window.innerHeight;
+
+    const novaLargura = Math.max(320, Math.round(larguraCss * escala));
+    const novaAltura = Math.max(200, Math.round(alturaCss * escala));
+    if (novaLargura === largura && novaAltura === altura && tela.width === largura) return;
+
+    largura = novaLargura;
+    altura = novaAltura;
+    tela.width = largura;
+    tela.height = altura;
+
+    if (telaAtual && typeof telaAtual.setup === "function") {
+      telaAtual.setup(largura, altura);
+    }
+    if (telaAtual && typeof telaAtual.aoRedimensionar === "function") {
+      telaAtual.aoRedimensionar(largura, altura);
+    }
+  }
+
+  /** Converte a posição do ponteiro na página para a posição dentro do canvas. */
+  function posicaoNoCanvas(evento) {
+    const caixa = tela.getBoundingClientRect();
+    return {
+      x: (evento.clientX - caixa.left) * (largura / Math.max(1, caixa.width)),
+      y: (evento.clientY - caixa.top) * (altura / Math.max(1, caixa.height))
+    };
+  }
+
+  // -----------------------------------------------------------------------
+  // Troca de tela
+  // -----------------------------------------------------------------------
+
+  function criarTela(nome, parametros) {
+    switch (nome) {
+      case "menu": return new TelaDeMenu(app);
+      case "worldtour": return new TelaWorldTour(app);
+      case "garagem": return new TelaDaGaragem(app);
+      case "config": return new TelaDeConfiguracoes(app);
+      case "online": return new TelaOnline(app);
+      case "video": return new TelaDeVideo(app);
+      case "corrida": return criarCorrida(parametros || {});
+      default: return new TelaDeMenu(app);
+    }
+  }
+
+  /**
+   * Monta a corrida. É o que a GameActivity.kt fazia no onCreate: cria a view,
+   * liga o áudio e o ouvinte, e entrega a fase escolhida.
+   */
+  function criarCorrida(parametros) {
+    const corrida = new TelaDeCorrida(tela);
+    corrida.autoLoop = true;   // ela roda o próprio requestAnimationFrame
+
+    const stageIndex = limitar(Math.trunc(parametros.stageIndex || 0), 0, StageCatalog.count() - 1);
+    const nomeDoJogador = parametros.playerName || save.playerName;
+
+    corrida.configure(stageIndex, save, sound, {
+      onExitToMenu() {
+        // Corrida online: sair da corrida devolve para o saguão, não para o menu.
+        irPara(OnlineSession.enabled ? "online" : "worldtour");
+      },
+      onOpenGarage() { irPara("garagem"); },
+      onCollision() {
+        if (save.vibrationEnabled && navigator.vibrate) {
+          try { navigator.vibrate(120); } catch (e) { /* o aparelho pode recusar */ }
+        }
+      },
+      onBeforeStageStart(start) {
+        // No app aqui entrava o intersticial do AdMob. Não há anúncio no
+        // navegador, então a corrida começa direto.
+        start();
+      },
+      onRaceResult(indiceDaFase, venceu, pontos, moedas) {
+        save.addCoins(moedas);
+        if (venceu) save.unlockStage(indiceDaFase + 1);
+      },
+      onCountryEnding(indiceDaFase) {
+        // V79/V109: zeramento por país. No multijogador não roda vídeo.
+        if (OnlineSession.enabled) return;
+        const videos = {
+          9: "finalizacao_brasil",
+          15: "finalizacao_estados_unidos",
+          21: "finalizacao_japao",
+          27: "final_italia"
+        };
+        const nome = videos[indiceDaFase];
+        if (!nome) return;
+        irPara("video", { nome: nome, depois: "worldtour", podePular: false });
+      }
+    }, nomeDoJogador);
+
+    if (parametros.online && OnlineSession.service) {
+      corrida.attachMultiplayer(OnlineSession.service);
+    }
+
+    corrida.setup(largura, altura);
+    corrida.resume();
+    return corrida;
+  }
+
+  function irPara(nome, parametros) {
+    if (telaAtual) {
+      if (typeof telaAtual.destroy === "function") telaAtual.destroy();
+      else if (typeof telaAtual.sair === "function") telaAtual.sair();
+    }
+
+    nomeDaTelaAtual = nome;
+    telaAtual = criarTela(nome, parametros);
+
+    if (typeof telaAtual.entrar === "function") telaAtual.entrar(parametros);
+    if (typeof telaAtual.setup === "function" && !telaAtual.autoLoop) {
+      telaAtual.setup(largura, altura);
+    }
+  }
+
+  // -----------------------------------------------------------------------
+  // Laço das telas de menu
+  // -----------------------------------------------------------------------
+
+  function quadro(agora) {
+    if (!rodando) return;
+    requestAnimationFrame(quadro);
+
+    if (!ultimoQuadro) ultimoQuadro = agora;
+    let dt = (agora - ultimoQuadro) / 1000;
+    ultimoQuadro = agora;
+    if (!(dt >= 0)) dt = 0;
+    if (dt > 0.12) dt = 0.12;   // aba voltando do fundo não dá salto
+
+    // A corrida desenha sozinha, no laço dela.
+    if (!telaAtual || telaAtual.autoLoop) return;
+
+    if (typeof telaAtual.update === "function") telaAtual.update(dt);
+    if (typeof telaAtual.render === "function") telaAtual.render(ctx, largura, altura);
+  }
+
+  // -----------------------------------------------------------------------
+  // Entrada
+  // -----------------------------------------------------------------------
+
+  function ligarEntrada() {
+    function despachar(tipo, evento) {
+      // A corrida escuta os próprios eventos no canvas (multi-toque), então
+      // não repassamos nada para ela daqui.
+      if (!telaAtual || telaAtual.autoLoop) return;
+      if (typeof telaAtual.aoApontar !== "function") return;
+      const p = posicaoNoCanvas(evento);
+      telaAtual.aoApontar(tipo, p.x, p.y);
+    }
+
+    tela.addEventListener("pointerdown", function (e) {
+      sound.destravar();     // o navegador só libera som depois de um gesto
+      if (tela.setPointerCapture) {
+        try { tela.setPointerCapture(e.pointerId); } catch (_) { /* navegador antigo */ }
+      }
+      e.preventDefault();
+      despachar("baixo", e);
+    });
+    tela.addEventListener("pointermove", function (e) { e.preventDefault(); despachar("move", e); });
+    tela.addEventListener("pointerup", function (e) {
+      e.preventDefault();
+      despachar("cima", e);
+      if (tela.releasePointerCapture) {
+        try { tela.releasePointerCapture(e.pointerId); } catch (_) { /* ja liberado */ }
+      }
+    });
+    tela.addEventListener("pointercancel", function (e) { despachar("cancelar", e); });
+    tela.addEventListener("wheel", function (e) {
+      if (!telaAtual || telaAtual.autoLoop || typeof telaAtual.aoGirarRoda !== "function") return;
+      const p = posicaoNoCanvas(e);
+      const box = tela.getBoundingClientRect();
+      const escalaY = box.height > 0 ? tela.height / box.height : 1;
+      telaAtual.aoGirarRoda(e.deltaY * escalaY, p.x, p.y);
+      e.preventDefault();
+    }, { passive: false });
+    tela.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+
+    window.addEventListener("keydown", function (e) {
+      sound.destravar();
+      if (!telaAtual || telaAtual.autoLoop) return;
+      if (typeof telaAtual.aoTeclar === "function") telaAtual.aoTeclar(e, true);
+    });
+    window.addEventListener("keyup", function (e) {
+      if (!telaAtual || telaAtual.autoLoop) return;
+      if (typeof telaAtual.aoTeclar === "function") telaAtual.aoTeclar(e, false);
+    });
+
+    window.addEventListener("resize", redimensionar);
+    window.addEventListener("orientationchange", function () {
+      setTimeout(redimensionar, 250);
+    });
+
+    // Aba escondida congela o requestAnimationFrame: pausar o áudio evita o
+    // motor ficar roncando em segundo plano.
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        if (telaAtual && typeof telaAtual.pause === "function") telaAtual.pause();
+        sound.pauseAll();
+      } else {
+        sound.resumeAll();
+        if (telaAtual && typeof telaAtual.resume === "function") telaAtual.resume();
+        ultimoQuadro = 0;
+      }
+    });
+
+    // Sair no meio da corrida online sem avisar deixa a vaga presa por 15s.
+    window.addEventListener("beforeunload", function () {
+      if (OnlineSession.service) OnlineSession.service.close();
+    });
+  }
+
+  // -----------------------------------------------------------------------
+  // Partida
+  // -----------------------------------------------------------------------
+
+  function mostrarProgresso(prontas, total) {
+    if (!barraDeProgresso) return;
+    const pct = total > 0 ? Math.round((prontas / total) * 100) : 0;
+    barraDeProgresso.style.width = pct + "%";
+  }
+
+  function comecar() {
+    redimensionar();
+    ligarEntrada();
+
+    // As imagens do menu primeiro: é a tela que abre. O resto entra em seguida,
+    // sem segurar a partida.
+    Assets.carregarEssenciais(mostrarProgresso).then(function () {
+      if (aviso) aviso.classList.add("sumindo");
+      setTimeout(function () { if (aviso) aviso.remove(); }, 450);
+
+      rodando = true;
+      requestAnimationFrame(quadro);
+
+      // A abertura só aparece uma vez por navegador; depois vai direto ao menu.
+      if (!save.introSeen && Assets.caminhoVideo("menu_intro")) {
+        save.introSeen = true;
+        irPara("video", { nome: "menu_intro", depois: "menu", podePular: true });
+      } else {
+        irPara("menu");
+      }
+
+      // Carrega o resto em segundo plano, na ordem em que o jogo costuma pedir.
+      Assets.carregarCarros().then(function () {
+        return Assets.carregarDaCorrida();
+      });
+    });
+  }
+
+  return {
+    comecar: comecar,
+    app: app,
+    irPara: irPara,
+    redimensionar: redimensionar,
+    telaAtual() { return telaAtual; }
+  };
+})();
+
+window.Jogo = Jogo;
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", Jogo.comecar);
+} else {
+  Jogo.comecar();
 }
-window.TurboRaceApp=TurboRaceApp;
-window.addEventListener("DOMContentLoaded",()=>{const p=document.getElementById("progresso");Assets.carregarEssenciais((n,t)=>p.textContent="Carregando "+n+"/"+t).then(()=>{document.getElementById("carregando").classList.add("oculto");window.app=new TurboRaceApp();app.iniciar();});});

@@ -128,9 +128,12 @@ class CarPreviewView {
     const bmp = this.carBmp;
     if (bmp && bmp.width > 0 && bmp.height > 0) {
       const aspect = bmp.height / bmp.width;
-      let sw = width * 0.74;
+      // O Frost Hyper tem mais margem transparente no topo do sprite inclinado.
+      // Compensamos somente o desenho, sem mudar atributos ou colisao do carro.
+      const visualScale = (c.id === 9) ? 1.38 : 1;
+      let sw = width * 0.74 * visualScale;
       let sh = sw * aspect;
-      const maxH = height * 0.82;
+      const maxH = height * ((c.id === 9) ? 0.96 : 0.82);
       if (sh > maxH) { sh = maxH; sw = sh / aspect; }
       const centerY = height * 0.54;
       const pintado = this.pintarSprite(bmp, c.accentColor);
@@ -515,12 +518,15 @@ class TelaDaGaragem {
     const cap = this.garageSpeedCapKmh(car.id);
     const currentMax = this.currentGarageSpeedKmh(car.id, speedLv, motorLv);
     const gears = limitar(4 + motorLv, 4, 8);
+    // Mesma informação do app, escrita mais curta: a coluna do meio é estreita
+    // e as frases longas do Android quebravam em sete linhas, empurrando metade
+    // do texto para fora da caixa.
     this.upgradeInfo = unlocked
-      ? ("Vel " + speedLv + "  •  Motor " + motorLv + "  •  Marchas R-1 até " + gears +
-         "\nMáx atual: " + currentMax + " km/h  •  Limite do carro: " + cap + " km/h" +
-         "\nTanque +" + (tankLv * 10) + "%  •  Turbo " + (3.0 + turboLv * 0.6).toFixed(1) + "s" +
-         "\nGAS+: " + this.save.pitBoostItems + "  •  GELO: " + this.save.freezeRivalsItems +
-         "  •  Cor: " + this.save.getPaintName(car.id))
+      ? ("Vel " + speedLv + " · Motor " + motorLv + " · " + gears + " marchas" +
+         "\nMáx " + currentMax + " km/h (teto " + cap + ")" +
+         "\nTanque +" + (tankLv * 10) + "% · Turbo " + (3.0 + turboLv * 0.6).toFixed(1) + "s" +
+         "\nGAS+ " + this.save.pitBoostItems + " · GELO " + this.save.freezeRivalsItems +
+         " · " + this.save.getPaintName(car.id))
       : ("Compre este carro para liberar upgrades. Todos começam em 320 km/h e evoluem até " + cap + " km/h.");
 
     this.configureUpgradeButton(this.btnUpgradeSpeed, "Velocidade", SaveManager.UPGRADE_SPEED, unlocked);
@@ -751,9 +757,15 @@ class TelaDaGaragem {
     const p1t = this.painel1.top + dp(10), p1b = this.painel1.bottom - dp(10);
     const linhaNavH = dp(46);
     this.previewRet = Ret.novo(p1l, p1t, p1r, p1b - linhaNavH - dp(6));
-    Ret.definir(this.btnPrev.ret, p1l, p1b - linhaNavH, p1l + dp(94), p1b);
-    Ret.definir(this.btnNext.ret, p1r - dp(94), p1b - linhaNavH, p1r, p1b);
-    this.carNameRet = Ret.novo(this.btnPrev.ret.right + dp(8), p1b - linhaNavH, this.btnNext.ret.left - dp(8), p1b);
+    // As setas tinham 94dp fixos. Nesta coluna, que é estreita, as duas
+    // sozinhas comiam a linha inteira e o nome do carro ficava com largura
+    // NEGATIVA — por isso ele aparecia por cima das setas. Agora cada seta pega
+    // no máximo 28% da linha, e o nome sempre fica com o meio sobrando.
+    const larguraDaLinha = p1r - p1l;
+    const larguraDaSeta = Math.min(dp(94), larguraDaLinha * 0.28);
+    Ret.definir(this.btnPrev.ret, p1l, p1b - linhaNavH, p1l + larguraDaSeta, p1b);
+    Ret.definir(this.btnNext.ret, p1r - larguraDaSeta, p1b - linhaNavH, p1r, p1b);
+    this.carNameRet = Ret.novo(this.btnPrev.ret.right + dp(6), p1b - linhaNavH, this.btnNext.ret.left - dp(6), p1b);
 
     // ---- Painel 2: atributos, informacoes e botao de acao (padding 12dp) ----
     const p2l = this.painel2.left + dp(12), p2r = this.painel2.right - dp(12);
@@ -762,14 +774,18 @@ class TelaDaGaragem {
     y += dp(15 * 1.25) + dp(6);
     const barras = [this.barSpeed, this.barAccel, this.barControl, this.barTurbo];
     this.rotulosY = [];
+    // Rótulo e barra ficaram um tico mais baixos que no XML (15/14dp → 13/12dp)
+    // e o botão de ação encolheu de 54 para 46dp. Isso libera cerca de 25dp para
+    // a caixa de informações, que antes só comportava uma linha e escondia a
+    // velocidade máxima e os itens comprados.
     for (let i = 0; i < barras.length; i++) {
-      this.rotulosY.push(y + dp(12));
-      y += dp(15);
-      Ret.definir(barras[i].ret, p2l, y, p2r, y + dp(14));
-      y += dp(14) + (i === barras.length - 1 ? dp(8) : dp(4));
+      this.rotulosY.push(y + dp(11));
+      y += dp(13);
+      Ret.definir(barras[i].ret, p2l, y, p2r, y + dp(12));
+      y += dp(12) + (i === barras.length - 1 ? dp(6) : dp(4));
     }
-    Ret.definir(this.btnAction.ret, p2l, this.painel2.bottom - dp(12) - dp(54), p2r, this.painel2.bottom - dp(12));
-    this.infoRet = Ret.novo(p2l, y, p2r, this.btnAction.ret.top - dp(8));
+    Ret.definir(this.btnAction.ret, p2l, this.painel2.bottom - dp(10) - dp(46), p2r, this.painel2.bottom - dp(10));
+    this.infoRet = Ret.novo(p2l, y, p2r, this.btnAction.ret.top - dp(6));
 
     // ---- Painel 3: titulo + lista rolante (padding 12dp) ----
     const p3l = this.painel3.left + dp(12), p3r = this.painel3.right - dp(12);
@@ -843,6 +859,14 @@ class TelaDaGaragem {
     this.arrastandoLista = false;
   }
 
+  /** Roda do mouse/trackpad sobre a lista de melhorias. */
+  aoGirarRoda(delta, x, y) {
+    this.medir(this.app.largura, this.app.altura);
+    if (x !== undefined && y !== undefined && !Ret.contem(this.upgradesListRet, x, y)) return;
+    this.upgradesListScroll = limitar(this.upgradesListScroll + delta, 0, this.upgradesListMax);
+    this.posicionarLista();
+  }
+
   botaoEm(x, y) {
     for (const botao of this.botoes) {
       // Item da lista so conta se o toque estiver dentro da area que rola.
@@ -900,8 +924,17 @@ class TelaDaGaragem {
     ctx.save();
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.font = "bold " + dp(18) + "px " + FONTE;
     ctx.fillStyle = Cor.css(Cor.WHITE);
+    // O espaco entre as duas setas e estreito, e nome comprido ("Clássico
+    // Vermelho") passava por cima delas. No Android o TextView encolhia
+    // sozinho (autoSizeTextType); aqui a conta e nossa.
+    let tamanhoDoNome = dp(18);
+    const espacoDoNome = Ret.largura(this.carNameRet);
+    ctx.font = "bold " + tamanhoDoNome + "px " + FONTE;
+    while (tamanhoDoNome > dp(10) && ctx.measureText(this.carName).width > espacoDoNome) {
+      tamanhoDoNome -= dp(0.5);
+      ctx.font = "bold " + tamanhoDoNome + "px " + FONTE;
+    }
     ctx.fillText(this.carName, Ret.centroX(this.carNameRet), Ret.centroY(this.carNameRet));
     ctx.restore();
 
@@ -1017,26 +1050,46 @@ class TelaDaGaragem {
     ctx.save();
     ctx.textAlign = "left";
     ctx.textBaseline = "alphabetic";
-    ctx.font = tamanho + "px " + FONTE;
     ctx.fillStyle = Cor.css(GARAGEM_TEXT_DIM);
+
     const largura = Ret.largura(ret);
-    const linhas = [];
-    for (const bruto of texto.split("\n")) {
-      let atual = "";
-      for (const palavra of bruto.split(" ")) {
-        const tentativa = atual.length === 0 ? palavra : atual + " " + palavra;
-        if (ctx.measureText(tentativa).width > largura && atual.length > 0) {
-          linhas.push(atual);
-          atual = palavra;
-        } else {
-          atual = tentativa;
+
+    /** Quebra o texto na largura da caixa, no tamanho de fonte pedido. */
+    const quebrar = (tam) => {
+      ctx.font = tam + "px " + FONTE;
+      const linhas = [];
+      for (const bruto of texto.split("\n")) {
+        let atual = "";
+        for (const palavra of bruto.split(" ")) {
+          const tentativa = atual.length === 0 ? palavra : atual + " " + palavra;
+          if (ctx.measureText(tentativa).width > largura && atual.length > 0) {
+            linhas.push(atual);
+            atual = palavra;
+          } else {
+            atual = tentativa;
+          }
         }
+        linhas.push(atual);
       }
-      linhas.push(atual);
+      return linhas;
+    };
+
+    // O XML tinha maxLines="6", mas em tela baixa nem seis linhas cabem e o
+    // texto escorria por cima do botao "USAR ESTE CARRO". Em vez de cortar
+    // informacao (velocidade maxima, marchas, itens comprados), encolhemos a
+    // fonte ate tudo caber — so cortamos se nem no menor tamanho couber.
+    let tam = tamanho;
+    let linhas = quebrar(tam);
+    const minimo = tamanho * 0.66;
+    while (tam > minimo && linhas.length * tam * 1.28 > Ret.altura(ret)) {
+      tam -= Math.max(0.5, tamanho * 0.06);
+      linhas = quebrar(tam);
     }
-    const alturaLinha = tamanho * 1.28;
-    let y = ret.top + tamanho;
-    for (let i = 0; i < linhas.length && i < 6; i++) { // maxLines="6"
+
+    const alturaLinha = tam * 1.28;
+    const cabem = Math.max(1, Math.floor(Ret.altura(ret) / alturaLinha));
+    let y = ret.top + tam;
+    for (let i = 0; i < linhas.length && i < cabem; i++) {
       ctx.fillText(linhas[i], ret.left, y);
       y += alturaLinha;
     }

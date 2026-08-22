@@ -19,6 +19,10 @@ const OnlineSession = {
   enabled: false,
   localPlayerId: "",
   maxPlayers: 4,
+  raceLaps: 3,
+  raceWeather: "auto",
+  puddlesWater: true,
+  puddlesOil: false,
   raceLaunchId: "",
   raceOpening: false,
 
@@ -40,6 +44,10 @@ const OnlineSession = {
     this.isHost = false;
     this.stageIndex = 0;
     this.maxPlayers = 4;
+    this.raceLaps = 3;
+    this.raceWeather = "auto";
+    this.puddlesWater = true;
+    this.puddlesOil = false;
     this.raceLaunchId = "";
     this.raceOpening = false;
     this.refreshPlayerId();
@@ -127,9 +135,6 @@ class OnlineService {
     ws.onopen = function () {
       self.tentativasDeVolta = 0;
       self._avisar("onStatus", "Conectado. Aguardando a sala…");
-      // Mede a latencia imediatamente; esperar o primeiro intervalo de 8 s
-      // podia deixar uma largada rapida sem compensacao de rede.
-      self._enviar({ t: "ping", stamp: Date.now() });
       self._comecarPing();
     };
 
@@ -174,6 +179,7 @@ class OnlineService {
         OnlineSession.isHost = this.anfitriao;
         OnlineSession.stageIndex = msg.resumo ? msg.resumo.fase : 0;
         OnlineSession.maxPlayers = msg.resumo ? msg.resumo.maxJogadores : 4;
+        this._atualizarRegrasDaCorrida(msg.resumo);
 
         this._avisar("onConnected");
         this._avisar("onRoomUpdate", this.resumo);
@@ -186,6 +192,7 @@ class OnlineService {
         OnlineSession.isHost = this.anfitriao;
         OnlineSession.stageIndex = msg.resumo.fase;
         OnlineSession.maxPlayers = msg.resumo.maxJogadores;
+        this._atualizarRegrasDaCorrida(msg.resumo);
         this._avisar("onRoomUpdate", this.resumo);
         return;
       }
@@ -194,17 +201,20 @@ class OnlineService {
         // A semente e o que faz todo mundo correr exatamente a mesma pista.
         OnlineSession.raceLaunchId = String(msg.corridaId || msg.semente);
         OnlineSession.stageIndex = msg.fase;
+        OnlineSession.raceLaps = limitar(Math.trunc(msg.voltas || OnlineSession.raceLaps || 3), 1, 10);
+        OnlineSession.raceWeather = String(msg.clima || OnlineSession.raceWeather || "auto");
+        OnlineSession.puddlesWater = msg.pocaAgua !== false;
+        OnlineSession.puddlesOil = msg.pocaOleo === true;
         OnlineSession.enabled = true;
         this._avisar("onRaceStart", {
           semente: msg.semente,
           fase: msg.fase,
-          clima: msg.clima || "auto",
-          pocaAgua: msg.pocaAgua !== false,
-          pocaOleo: msg.pocaOleo !== false,
-          voltas: limitar(Math.trunc(msg.voltas || 3), 1, 10),
+          clima: OnlineSession.raceWeather,
+          pocaAgua: OnlineSession.puddlesWater,
+          pocaOleo: OnlineSession.puddlesOil,
+          voltas: OnlineSession.raceLaps,
           corridaId: msg.corridaId,
           emMs: msg.emMs || 0,
-          sincronizarEmMs: msg.sincronizarEmMs || msg.emMs || 0,
           jogadores: msg.jogadores || []
         });
         return;
@@ -269,6 +279,14 @@ class OnlineService {
     const l = this.listener;
     if (!l || typeof l[metodo] !== "function") return;
     try { l[metodo](argumento); } catch (e) { console.error("Erro no ouvinte da sala:", e); }
+  }
+
+  _atualizarRegrasDaCorrida(resumo) {
+    if (!resumo) return;
+    OnlineSession.raceLaps = limitar(Math.trunc(resumo.voltas || 3), 1, 10);
+    OnlineSession.raceWeather = String(resumo.clima || "auto");
+    OnlineSession.puddlesWater = resumo.pocaAgua !== false;
+    OnlineSession.puddlesOil = resumo.pocaOleo === true;
   }
 
   _comecarPing() {
