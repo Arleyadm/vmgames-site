@@ -414,6 +414,26 @@ class TelaDeConfiguracoes {
     this.mostrarAviso("Controle restaurado para o padrão do Android.");
   }
 
+  /** Ativa o sensor dentro do proprio toque, exigencia do Safari no iPhone. */
+  selecionarModoInclinacao() {
+    this.save.controlType = SaveManager.CONTROL_TILT;
+    if (typeof TelaDeCorrida === "undefined" ||
+        typeof TelaDeCorrida.pedirPermissaoSensor !== "function") {
+      this.mostrarAviso("Este navegador não oferece sensor de inclinação.");
+      return;
+    }
+    const self = this;
+    TelaDeCorrida.pedirPermissaoSensor().then(function (status) {
+      if (status === "granted") {
+        self.mostrarAviso("Inclinação ativada. Movimente o celular para virar.");
+      } else if (status === "denied") {
+        self.mostrarAviso("Permita Movimento e Orientação nos ajustes do navegador.");
+      } else {
+        self.mostrarAviso("Sensor de inclinação indisponível neste aparelho.");
+      }
+    });
+  }
+
   // ---------------------------------------------------------
   // SO NA WEB: servidor da sala online
   // ---------------------------------------------------------
@@ -968,7 +988,7 @@ class TelaDeConfiguracoes {
     // --- controlPanel (o radioControl com os tres tipos) ---
     if (Ret.contem(this.radioTouch, x, py)) { this.save.controlType = SaveManager.CONTROL_TOUCH; return; }
     if (Ret.contem(this.radioButtons, x, py)) { this.save.controlType = SaveManager.CONTROL_BUTTONS; return; }
-    if (Ret.contem(this.radioTilt, x, py)) { this.save.controlType = SaveManager.CONTROL_TILT; return; }
+    if (Ret.contem(this.radioTilt, x, py)) { this.selecionarModoInclinacao(); return; }
 
     // --- SO NA WEB: servidor da sala online ---
     if (Ret.contem(this.btnOnlineServer, x, py)) { this.trocarServidorOnline(); return; }

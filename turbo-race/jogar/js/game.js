@@ -194,6 +194,15 @@ class TelaDeCorrida {
     // Dedos na tela, por pointerId. Reproduz o multi-toque do MotionEvent.
     this.ponteiros = new Map();
 
+    // Sensor de inclinacao. O Android usa o acelerometro (eixo Y); no
+    // navegador fazemos o mesmo por DeviceMotion e deixamos DeviceOrientation
+    // apenas como alternativa para aparelhos que nao entregam aceleracao.
+    this.tiltPermissionStatus = "unknown";
+    this.tiltMotionLastAt = 0;
+    this.tiltFiltered = 0;
+    this.tiltOrientationNeutral = null;
+    this.tiltOrientationAngle = null;
+
     // No Android os PNGs já vinham decodificados; aqui as imagens chegam de
     // forma assíncrona, então relemos a tabela do Assets até todas aparecerem.
     this.spritesPendentes = true;
@@ -2370,6 +2379,15 @@ class TelaDeCorrida {
     const self = this;
 
     this._aoApontarDown = function (ev) {
+      // Safari/iPhone exige que a permissao do sensor seja solicitada dentro
+      // de um gesto do jogador. Este toque e a segunda chance caso o modo ja
+      // estivesse salvo antes de abrir a corrida.
+      if (self.save && self.save.controlType === SaveManager.CONTROL_TILT &&
+          self.tiltPermissionStatus === "unknown") {
+        self.pedirPermissaoDeInclinacao().then(function (status) {
+          self.tiltPermissionStatus = status;
+        });
+      }
       // A captura mantém o dedo "preso" ao canvas mesmo se ele escorregar para
       // fora — é o que evita o botão ficar grudado. Mas ela lança quando o
       // ponteiro não está mais ativo, e uma exceção aqui engoliria o toque
@@ -2652,34 +2670,79 @@ class TelaDeCorrida {
       stageIndex === TelaDeCorrida.LAST_ITALY_STAGE_INDEX;
   }
 
-  /** Sensor de inclinação: no Android era o acelerômetro; aqui é o DeviceOrientationEvent. */
+  /** Sensor de inclinacao: prioriza o acelerometro, como no projeto Android. */
   _instalarSensorDeInclinacao() {
-    if (this._aoInclinar) return;
-    if (typeof window === "undefined" || !window.DeviceOrientationEvent) return;
+    if (this._aoInclinar || this._aoMover) return;
+    if (typeof window === "undefined") return;
     const self = this;
+
+    if (window.DeviceMotionEvent) {
+      this._aoMover = function (ev) {
+        if (!self.save || self.save.controlType !== SaveManager.CONTROL_TILT) return;
+        const gravidade = ev.accelerationIncludingGravity;
+        if (!gravidade || !Number.isFinite(gravidade.y)) return;
+        self.tiltMotionLastAt = (typeof performance !== "undefined" ? performance.now() : Date.now());
+        // Mesmo calculo do Android: event.values[1] / 6, com zona morta e
+        // filtro leve para o carro nao tremer quando o aparelho esta parado.
+        let alvo = limitar(gravidade.y / 6, -1, 1);
+        if (Math.abs(alvo) < 0.055) alvo = 0;
+        self.tiltFiltered += (alvo - self.tiltFiltered) * 0.32;
+        self.setTilt(Math.abs(self.tiltFiltered) < 0.035 ? 0 : self.tiltFiltered);
+      };
+      window.addEventListener("devicemotion", this._aoMover, { passive: true });
+    }
+
+    if (!window.DeviceOrientationEvent) return;
     this._aoInclinar = function (ev) {
       if (!self.save || self.save.controlType !== SaveManager.CONTROL_TILT) return;
-      // Em paisagem o "volante" é o beta; em retrato, o gamma.
-      // Dividir por ~30 dá uma sensibilidade confortável. Se a direção ficar
-      // invertida no seu aparelho, troque o sinal aqui.
-      const emPaisagem = Math.abs(window.orientation || 0) === 90;
-      const bruto = emPaisagem ? (ev.beta || 0) : (ev.gamma || 0);
-      self.setTilt(limitar(bruto / 30, -1, 1));
+      const agora = (typeof performance !== "undefined" ? performance.now() : Date.now());
+      if (agora - self.tiltMotionLastAt < 900) return; // DeviceMotion e mais fiel.
+      const anguloTela = (window.screen && window.screen.orientation &&
+        Number.isFinite(window.screen.orientation.angle))
+        ? window.screen.orientation.angle : Number(window.orientation || 0);
+      if (self.tiltOrientationAngle !== anguloTela) {
+        self.tiltOrientationAngle = anguloTela;
+        self.tiltOrientationNeutral = null;
+      }
+      const emPaisagem = Math.abs(anguloTela) === 90 || Math.abs(anguloTela) === 270;
+      const bruto = emPaisagem ? Number(ev.beta) : Number(ev.gamma);
+      if (!Number.isFinite(bruto)) return;
+      if (self.tiltOrientationNeutral === null) self.tiltOrientationNeutral = bruto;
+      let delta = bruto - self.tiltOrientationNeutral;
+      while (delta > 180) delta -= 360;
+      while (delta < -180) delta += 360;
+      let alvo = limitar(delta / 18, -1, 1);
+      if (Math.abs(alvo) < 0.06) alvo = 0;
+      self.tiltFiltered += (alvo - self.tiltFiltered) * 0.28;
+      self.setTilt(Math.abs(self.tiltFiltered) < 0.035 ? 0 : self.tiltFiltered);
     };
-    window.addEventListener("deviceorientation", this._aoInclinar);
+    window.addEventListener("deviceorientation", this._aoInclinar, { passive: true });
   }
 
-  /** No iOS o sensor só liga depois de um toque que peça permissão. */
+  /** No iOS os sensores so ligam depois de um toque que peca permissao. */
   pedirPermissaoDeInclinacao() {
+    return TelaDeCorrida.pedirPermissaoSensor();
+  }
+
+  static pedirPermissaoSensor() {
     try {
-      const D = window.DeviceOrientationEvent;
-      if (D && typeof D.requestPermission === "function") {
-        return D.requestPermission().catch(function () { return "denied"; });
+      if (typeof window === "undefined" || (!window.DeviceMotionEvent && !window.DeviceOrientationEvent)) {
+        return Promise.resolve("unsupported");
       }
+      const pedidos = [];
+      const Motion = window.DeviceMotionEvent;
+      const Orientation = window.DeviceOrientationEvent;
+      if (Motion && typeof Motion.requestPermission === "function") pedidos.push(Motion.requestPermission());
+      if (Orientation && typeof Orientation.requestPermission === "function" && Orientation !== Motion) {
+        pedidos.push(Orientation.requestPermission());
+      }
+      if (pedidos.length === 0) return Promise.resolve("granted");
+      return Promise.all(pedidos).then(function (resultados) {
+        return resultados.every(function (r) { return r === "granted"; }) ? "granted" : "denied";
+      }).catch(function () { return "denied"; });
     } catch (e) {
-      /* ignora */
+      return Promise.resolve("denied");
     }
-    return Promise.resolve("granted");
   }
 
   // =================== CICLO DE VIDA / LAÇO ===================
@@ -2790,6 +2853,10 @@ class TelaDeCorrida {
     if (this._aoInclinar) {
       window.removeEventListener("deviceorientation", this._aoInclinar);
       this._aoInclinar = null;
+    }
+    if (this._aoMover) {
+      window.removeEventListener("devicemotion", this._aoMover);
+      this._aoMover = null;
     }
     if (sessaoOnline().enabled) sessaoOnline().clear();
   }

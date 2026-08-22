@@ -1753,12 +1753,13 @@ class Renderer {
       // nem gigante na camera. O carro de IA perto deve parecer quase
       // do tamanho do carro do jogador, aumentando so um pouco ao aproximar.
       const aspect = bmp.naturalHeight / bmp.naturalWidth;
-      const opponentSpriteScale = (car.spriteIndex === 9) ? 1.18 : 1;
+      const opponentSpriteScale = (car.spriteIndex === 9) ? 1.36 : 1;
       let w = Math.max(3, unit * 0.40 * opponentSpriteScale);
-      const maxW = car.isRemote ? this.width * 0.325 : this.width * 0.305;
+      const maxW = (car.isRemote ? this.width * 0.325 : this.width * 0.305) *
+        (car.spriteIndex === 9 ? 1.12 : 1);
       if (w > maxW) w = maxW;
       let h = w * aspect;
-      const maxH = this.height * 0.345;
+      const maxH = this.height * (car.spriteIndex === 9 ? 0.39 : 0.345);
       if (h > maxH && aspect > 0) {
         h = maxH;
         w = h / aspect;
@@ -1896,10 +1897,12 @@ class Renderer {
       const aspect = bmp.naturalHeight / bmp.naturalWidth;
       // Compensacao visual dos sprites com mais margem transparente. Nao altera
       // fisica, velocidade ou colisao; somente o tamanho desenhado do jogador.
-      const playerSpriteScale = (player.car.id === 5) ? 1.22 : ((player.car.id === 9) ? 1.20 : 1);
+      // O Frost Hyper (id 9) tem cerca de um terco do quadro transparente
+      // acima da carroceria. 1.50 iguala a area realmente visivel aos demais.
+      const playerSpriteScale = (player.car.id === 5) ? 1.22 : ((player.car.id === 9) ? 1.50 : 1);
       let h = this.height * (0.312 + speedP * 0.030) * playerSpriteScale;
       let w = h / aspect;
-      const maxW = this.width * ((player.car.id === 5 || player.car.id === 9) ? 0.385 : 0.34);
+      const maxW = this.width * (player.car.id === 9 ? 0.43 : (player.car.id === 5 ? 0.385 : 0.34));
       if (w > maxW) {
         w = maxW;
         h = w * aspect;
