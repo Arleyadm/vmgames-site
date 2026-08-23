@@ -15,10 +15,11 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/google-play-games-pc-requisitos.webp
-  alt: "Arte abstrata da VM Games sobre jogos mobile no computador"
-  legenda: "O catálogo do Google Play Games pode ser executado em PCs compatíveis."
-  credito: "VM Games"
-  licenca: arte-propria
+  alt: "Imagem oficial do Google Play Games funcionando em celular e computador"
+  legenda: "O Google Play Games sincroniza jogos compatíveis entre dispositivos móveis e PC."
+  credito: "Google Play"
+  fonte_url: https://play.google.com/web/googleplaygames?hl=pt-BR
+  licenca: uso-editorial
 fontes:
   - url: https://support.google.com/googleplay/answer/11358071?hl=pt-BR
     veiculo: Ajuda do Google Play

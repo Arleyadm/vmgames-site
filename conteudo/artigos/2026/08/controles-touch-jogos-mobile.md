@@ -15,10 +15,11 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/controles-touch-jogos-mobile.webp
-  alt: "Arte abstrata da VM Games sobre botões virtuais em celular"
+  alt: "Captura real do Turbo Race executado com controles na tela"
   legenda: "Controles virtuais precisam considerar tamanho de tela e precisão dos dedos."
-  credito: "VM Games"
-  licenca: arte-propria
+  credito: "VM Games / captura do jogo"
+  fonte_url: https://vmgames.com.br/turbo-race/jogar/index.html
+  licenca: imagem-propria
 fontes:
   - url: https://gameaccessibilityguidelines.com/ensure-interactive-elements-virtual-controls-are-large-and-well-spaced-particularly-on-small-or-touch-screens/
     veiculo: Game Accessibility Guidelines

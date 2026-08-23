@@ -10,6 +10,10 @@ Este repositório contém o site da VM Games e a versão jogável do Turbo Race 
 
 Preserve o visual atual do menu, da garagem, da seleção de fases e do multiplayer. O jogo deve permanecer em modo paisagem no celular. Não restaure versões antigas da interface nem substitua grandes partes do jogo sem verificar o que já funciona.
 
+### Regra editorial obrigatória para imagens
+
+O responsável não aceita imagens criadas por inteligência artificial nas reportagens. Use somente imagens verdadeiras e relacionadas ao assunto, obtidas de fontes oficiais, assessorias, lojas ou páginas autorizadas. Registre no artigo a fonte, o crédito e a licença/origem editorial sempre que disponíveis. Não gere, não publique e não apresente arte de IA como imagem jornalística. Se não houver uma imagem real com uso seguro e origem verificável, mantenha a matéria sem nova imagem até encontrar uma fonte adequada.
+
 ## Repositório, publicação e referências
 
 - Repositório local usado: `C:\Users\arley\Documents\Codex\2026-08-21\x20-c\work\vmgames-site-publish`

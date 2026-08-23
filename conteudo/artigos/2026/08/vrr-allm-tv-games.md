@@ -15,10 +15,11 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/vrr-allm-tv-games.webp
-  alt: "Arte abstrata da VM Games sobre televisão e taxa variável"
-  legenda: "VRR e ALLM tratam problemas diferentes da experiência em jogos."
-  credito: "VM Games"
-  licenca: arte-propria
+  alt: "Imagem oficial do PlayStation 5 usada no anúncio de suporte a VRR"
+  legenda: "O VRR sincroniza a atualização da tela com a taxa de quadros entregue pelo jogo."
+  credito: "Sony Interactive Entertainment / PlayStation Blog"
+  fonte_url: https://blog.playstation.com/2022/04/25/variable-refresh-rate-support-for-ps5-is-rolling-out-this-week/
+  licenca: uso-editorial
 fontes:
   - url: https://www.hdmi.org/download/pressfileid/68/
     veiculo: HDMI Licensing Administrator

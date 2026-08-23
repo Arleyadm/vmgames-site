@@ -15,10 +15,11 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/como-acompanhar-lancamentos-steam.webp
-  alt: "Arte abstrata da VM Games com calendário e controle"
-  legenda: "Ferramentas da loja ajudam a organizar os próximos lançamentos."
-  credito: "VM Games"
-  licenca: arte-propria
+  alt: "Imagem institucional oficial da loja Steam"
+  legenda: "A seção Próximos lançamentos reúne jogos ordenados por data na loja Steam."
+  credito: "Valve / Steam"
+  fonte_url: https://store.steampowered.com/explore/upcoming/
+  licenca: uso-editorial
 fontes:
   - url: https://store.steampowered.com/explore/upcoming/
     veiculo: Steam

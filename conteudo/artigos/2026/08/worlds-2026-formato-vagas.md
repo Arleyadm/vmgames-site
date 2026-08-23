@@ -15,10 +15,11 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/worlds-2026-formato-vagas.webp
-  alt: "Arte abstrata da VM Games sobre chave de campeonato de esports"
-  legenda: "O formato suíço aproxima equipes com campanhas semelhantes."
-  credito: "VM Games"
-  licenca: arte-propria
+  alt: "Imagem oficial do anúncio de datas e cidades do Worlds 2026"
+  legenda: "O Worlds 2026 terá 19 equipes e será disputado em cidades dos Estados Unidos."
+  credito: "Riot Games / LoL Esports"
+  fonte_url: https://lolesports.com/en-US/news/msi-and-worlds-updates
+  licenca: uso-editorial
 fontes:
   - url: https://competitiveops.riotgames.com/en-US/league-of-legends
     veiculo: Riot Games Competitive Operations

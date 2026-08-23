@@ -114,10 +114,11 @@ injetar peça por conta própria em cima da leitura.
 
 ## Imagens
 
-Só entra imagem que pode ser publicada: arte própria, press kit, API licenciada ou licença
-compatível — e sempre com crédito. Quando não há imagem utilizável, `capa.py` desenha a
-arte da casa, assinada "arte ilustrativa", propositalmente abstrata para não ser confundida
-com captura de jogo.
+Só entra imagem verdadeira e relacionada ao assunto que possa ser publicada: captura real
+própria, material oficial, press kit, API licenciada ou licença compatível — sempre com
+crédito e URL de origem. Por decisão editorial do responsável, reportagens não usam imagens
+criadas por inteligência artificial nem artes ilustrativas sintéticas. Quando não houver uma
+imagem real com origem verificável e uso seguro, a matéria deve aguardar uma imagem adequada.
 
 ## Correções
 

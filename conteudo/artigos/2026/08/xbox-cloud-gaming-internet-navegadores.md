@@ -15,10 +15,11 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/xbox-cloud-gaming-internet-navegadores.webp
-  alt: "Arte abstrata da VM Games sobre jogos do Xbox transmitidos pela nuvem"
-  legenda: "O Cloud Gaming transmite jogos para dispositivos compatíveis."
-  credito: "VM Games"
-  licenca: arte-propria
+  alt: "Imagem oficial do Xbox Cloud Gaming com jogo transmitido em uma tela"
+  legenda: "O Xbox Cloud Gaming transmite jogos para dispositivos compatíveis pela internet."
+  credito: "Microsoft / Xbox"
+  fonte_url: https://www.xbox.com/en-US/cloud-gaming
+  licenca: uso-editorial
 fontes:
   - url: https://www.xbox.com/en-US/cloud-gaming
     veiculo: Xbox

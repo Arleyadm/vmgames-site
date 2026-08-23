@@ -15,10 +15,11 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/epic-games-jogos-gratis-como-resgatar.webp
-  alt: "Arte abstrata da VM Games sobre presente de jogo para PC"
-  legenda: "A Epic Games Store anuncia novos presentes semanais."
-  credito: "VM Games"
-  licenca: arte-propria
+  alt: "Arte oficial de um jogo distribuído gratuitamente pela Epic Games Store"
+  legenda: "A Epic Games Store anuncia novos jogos gratuitos toda semana."
+  credito: "Gambrinous / Epic Games Store"
+  fonte_url: https://store.epicgames.com/free-games?lang=pt-BR
+  licenca: uso-editorial
 fontes:
   - url: https://store.epicgames.com/free-games?lang=pt-BR
     veiculo: Epic Games Store

@@ -15,10 +15,11 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/como-avaliar-acessibilidade-em-jogos.webp
-  alt: "Arte abstrata da VM Games sobre controles e acessibilidade"
-  legenda: "Acessibilidade envolve visão, audição, mobilidade, cognição e fala."
-  credito: "VM Games"
-  licenca: arte-propria
+  alt: "Pessoa utilizando o controle adaptável oficial apresentado pelo Xbox"
+  legenda: "Controles adaptáveis são uma das ferramentas que ampliam as formas de jogar."
+  credito: "Microsoft / Xbox Wire"
+  fonte_url: https://news.xbox.com/en-us/2024/08/21/xbox-accessibility-adaptive-joystick-thumbstick-toppers/
+  licenca: uso-editorial
 fontes:
   - url: https://gameaccessibilityguidelines.com/basic/
     veiculo: Game Accessibility Guidelines

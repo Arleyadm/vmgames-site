@@ -15,10 +15,11 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/reembolso-steam-como-pedir.webp
-  alt: "Arte abstrata da VM Games sobre reembolso de jogo digital"
-  legenda: "O pedido é aberto pela área de ajuda da conta Steam."
-  credito: "VM Games"
-  licenca: arte-propria
+  alt: "Imagem institucional oficial da plataforma Steam"
+  legenda: "O pedido de reembolso é aberto pela área de ajuda da conta Steam."
+  credito: "Valve / Steam"
+  fonte_url: https://store.steampowered.com/steam_refunds/
+  licenca: uso-editorial
 fontes:
   - url: https://store.steampowered.com/steam_refunds/
     veiculo: Steam

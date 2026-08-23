@@ -15,10 +15,11 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/transferir-save-nintendo-switch.webp
-  alt: "Arte abstrata da VM Games sobre transferência entre consoles Nintendo"
+  alt: "Nintendo Switch e Nintendo Switch 2 durante transferência de jogos e dados"
   legenda: "A transferência local exige os dois consoles próximos e conectados."
-  credito: "VM Games"
-  licenca: arte-propria
+  credito: "Nintendo"
+  fonte_url: https://en-americas-support.nintendo.com/app/topics/detail/p/989/c/235/1000
+  licenca: uso-editorial
 fontes:
   - url: https://en-americas-support.nintendo.com/app/topics/detail/p/989/c/235/1000
     veiculo: Nintendo Support

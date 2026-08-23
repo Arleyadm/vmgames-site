@@ -15,10 +15,11 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/ssd-ps5-requisitos-instalacao.webp
-  alt: "Arte abstrata da VM Games sobre SSD para PlayStation 5"
-  legenda: "O PS5 possui um slot interno para SSD M.2 NVMe compatível."
-  credito: "VM Games"
-  licenca: arte-propria
+  alt: "Quadro do vídeo oficial de instalação de SSD M.2 no PlayStation 5"
+  legenda: "O suporte oficial mostra o slot interno destinado ao SSD M.2 NVMe compatível."
+  credito: "Sony Interactive Entertainment / PlayStation"
+  fonte_url: https://www.playstation.com/pt-br/support/hardware/ps5-install-m2-ssd/
+  licenca: uso-editorial
 fontes:
   - url: https://www.playstation.com/pt-br/support/hardware/ps5-install-m2-ssd/
     veiculo: Suporte PlayStation

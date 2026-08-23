@@ -15,10 +15,11 @@ recomendada: true
 confiabilidade: confirmado
 capa:
   arquivo: capas/steam-familias-compartilhar-jogos-regras.webp
-  alt: "Arte abstrata da VM Games sobre biblioteca familiar de jogos"
-  legenda: "Famílias Steam organiza uma biblioteca compartilhada para até seis integrantes."
-  credito: "VM Games"
-  licenca: arte-propria
+  alt: "Imagem oficial da apresentação do recurso Famílias Steam"
+  legenda: "A Valve apresentou o Famílias Steam como substituto do compartilhamento de biblioteca anterior."
+  credito: "Valve / Steam"
+  fonte_url: https://store.steampowered.com/news/app/593110/view/4605582245626919823
+  licenca: uso-editorial
 fontes:
   - url: https://store.steampowered.com/news/app/593110/view/4605582245626919823
     veiculo: Steam
