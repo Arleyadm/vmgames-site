@@ -132,8 +132,8 @@ Esses valores foram medidos pela área alfa realmente visível dos sprites e tes
   institucional. Não reutilizá-las como se fossem foto ou captura factual de reportagem.
 - Em reportagens, usar somente imagens reais/oficiais e verificáveis, com crédito e URL
   da fonte. O usuário proibiu expressamente imagens geradas por IA nas matérias.
-- O Search Console já possui a propriedade verificada de `vmgames.com.br`; em 23/08/2026
-  faltava apenas enviar o sitemap raiz `https://vmgames.com.br/sitemap.xml`.
+- O Search Console possui a propriedade verificada de `vmgames.com.br`. O sitemap raiz
+  `https://vmgames.com.br/sitemap.xml` foi enviado e aceito pelo painel em 23/08/2026.
 
 ## Última validação conhecida
 

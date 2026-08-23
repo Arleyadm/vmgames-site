@@ -117,9 +117,9 @@ Em ordem do que rende mais:
 1. **Dois blocos de anúncio no AdSense** — um *In-article* e um *Display responsivo*. Só o
    Arley pode criar. Preencher `no_texto` e `entre_cards` em `conteudo/config.json`.
    Enquanto vazios, esses espaços não aparecem (de propósito).
-2. **Search Console.** O domínio `vmgames.com.br` está verificado e a propriedade já
-   registra dados. Em 23/08/2026, a tela de Sitemaps ainda mostrava zero envios; cadastrar
-   `https://vmgames.com.br/sitemap.xml` é a única etapa pendente no painel.
+2. **Search Console concluído.** O domínio `vmgames.com.br` está verificado, a propriedade
+   já registra dados e `https://vmgames.com.br/sitemap.xml` foi enviado com confirmação do
+   Google em 23/08/2026. O painel fará o processamento periódico e notificará problemas.
 3. **Conferência visual.** O painel do navegador estava fechado, então nada foi verificado
    por captura de tela — só por estrutura, medida e teste. É a primeira coisa a fazer com
    o painel aberto: home, matéria e celular.
