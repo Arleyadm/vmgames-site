@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Painel administrativo | VM Games</title>
+  <link rel="stylesheet" href="admin.css?v=1">
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="/" aria-label="Voltar ao site"><span>VM</span> GAMES</a>
+    <button id="sair" class="botao discreto" type="button" hidden>Sair</button>
+  </header>
+
+  <main>
+    <section id="login" class="login-card" aria-labelledby="login-titulo">
+      <p class="rotulo">ÁREA RESTRITA</p>
+      <h1 id="login-titulo">Painel administrativo</h1>
+      <p class="apoio">Entre para acompanhar e moderar a comunidade VM Games.</p>
+      <form id="login-form">
+        <label>Usuário<input name="username" autocomplete="username" maxlength="80" required></label>
+        <label>Senha<input name="password" type="password" autocomplete="current-password" required></label>
+        <button class="botao primario" type="submit">Entrar no painel</button>
+        <p id="login-status" class="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="painel" hidden>
+      <div class="cabecalho-painel">
+        <div><p class="rotulo">CENTRAL DE CONTROLE</p><h1>Olá, administrador</h1><p class="apoio">Visão geral e moderação dos comentários do site.</p></div>
+        <button id="atualizar" class="botao secundario" type="button">Atualizar dados</button>
+      </div>
+      <div class="metricas" aria-label="Resumo do site">
+        <article><span id="total-curtidas">—</span><small>Curtidas</small></article>
+        <article><span id="total-publicados">—</span><small>Publicados</small></article>
+        <article><span id="total-ocultos">—</span><small>Ocultos</small></article>
+        <article><span id="total-paginas">—</span><small>Páginas comentadas</small></article>
+      </div>
+      <section class="comentarios">
+        <div class="barra-lista"><div><h2>Comentários recentes</h2><p class="apoio">Ocultar é reversível e retira o comentário do site.</p></div><label>Mostrar<select id="filtro"><option value="all">Todos</option><option value="approved">Publicados</option><option value="hidden">Ocultos</option></select></label></div>
+        <p id="painel-status" class="status" role="status" aria-live="polite"></p>
+        <div id="lista" class="lista"></div>
+      </section>
+    </section>
+  </main>
+  <script src="admin.js?v=1" defer></script>
+</body>
+</html>
