@@ -1,7 +1,7 @@
 # VM Games — https://vmgames.com.br
 User-agent: *
-Disallow: /admin/
 Allow: /
+Disallow: /admin/
 Disallow: /conteudo/
 Disallow: /ferramentas/
 Disallow: /blog/busca/

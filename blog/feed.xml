@@ -7,8 +7,128 @@
     <atom:link href="https://vmgames.com.br/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Notícias de games, lançamentos, análises, guias e promoções em português. Publicado pela VM Games, estúdio independente de Catalão, Goiás.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Fri, 21 Aug 2026 07:42:23 -0300</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2026 01:45:05 -0300</lastBuildDate>
     <ttl>60</ttl>
+    <item>
+      <title>Jogos grátis da Epic: como resgatar e não confundir com free-to-play</title>
+      <link>https://vmgames.com.br/blog/epic-games-jogos-gratis-como-resgatar/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/epic-games-jogos-gratis-como-resgatar/</guid>
+      <pubDate>Sun, 23 Aug 2026 09:50:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Promoções</category>
+      <description>Aprenda a resgatar jogos gratuitos da Epic Games Store e veja a diferença entre oferta temporária, demonstração e free-to-play.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/epic-games-jogos-gratis-como-resgatar.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Worlds 2026: como funciona o formato suíço e a classificação</title>
+      <link>https://vmgames.com.br/blog/worlds-2026-formato-vagas/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/worlds-2026-formato-vagas/</guid>
+      <pubDate>Sun, 23 Aug 2026 09:40:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>eSports</category>
+      <description>Entenda a fase de entrada, o sistema suíço e as condições para avançar no Worlds 2026 de League of Legends.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/worlds-2026-formato-vagas.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>VRR e ALLM na TV: o que muda nos jogos e quando ativar</title>
+      <link>https://vmgames.com.br/blog/vrr-allm-tv-games/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/vrr-allm-tv-games/</guid>
+      <pubDate>Sun, 23 Aug 2026 09:30:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Hardware</category>
+      <description>Entenda a diferença entre VRR e ALLM, os requisitos de HDMI e por que nem toda TV com 4K oferece os mesmos recursos.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/vrr-allm-tv-games.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Controles touch em jogos mobile: tamanho, posição e resposta</title>
+      <link>https://vmgames.com.br/blog/controles-touch-jogos-mobile/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/controles-touch-jogos-mobile/</guid>
+      <pubDate>Sun, 23 Aug 2026 09:20:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Mobile</category>
+      <description>Entenda o que torna um controle touch confortável e quais opções procurar antes de escolher um jogo mobile competitivo.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/controles-touch-jogos-mobile.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Como transferir usuário e save entre consoles Nintendo Switch</title>
+      <link>https://vmgames.com.br/blog/transferir-save-nintendo-switch/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/transferir-save-nintendo-switch/</guid>
+      <pubDate>Sun, 23 Aug 2026 09:10:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Nintendo</category>
+      <description>Veja o que é necessário para transferir usuário ou save entre consoles da família Nintendo Switch e quais jogos exigem cuidado especial.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/transferir-save-nintendo-switch.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Xbox Cloud Gaming: internet, navegadores e controles compatíveis</title>
+      <link>https://vmgames.com.br/blog/xbox-cloud-gaming-internet-navegadores/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/xbox-cloud-gaming-internet-navegadores/</guid>
+      <pubDate>Sun, 23 Aug 2026 09:00:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Xbox</category>
+      <description>Veja os requisitos oficiais de conexão e navegador para jogar pelo Xbox Cloud Gaming e como reduzir atrasos.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/xbox-cloud-gaming-internet-navegadores.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>SSD para PS5: requisitos oficiais antes de comprar e instalar</title>
+      <link>https://vmgames.com.br/blog/ssd-ps5-requisitos-instalacao/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/ssd-ps5-requisitos-instalacao/</guid>
+      <pubDate>Sun, 23 Aug 2026 08:50:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>PlayStation</category>
+      <description>Confira velocidade, dimensões, capacidade e dissipador necessários para escolher um SSD M.2 compatível com o PS5.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/ssd-ps5-requisitos-instalacao.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Google Play Games no PC: requisitos e como ativar a virtualização</title>
+      <link>https://vmgames.com.br/blog/google-play-games-pc-requisitos/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/google-play-games-pc-requisitos/</guid>
+      <pubDate>Sun, 23 Aug 2026 08:40:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>PC</category>
+      <description>Confira os requisitos do Google Play Games no PC e saiba por que SSD, conta de administrador e virtualização são necessários.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/google-play-games-pc-requisitos.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Reembolso no Steam: prazo, limite de jogo e como pedir</title>
+      <link>https://vmgames.com.br/blog/reembolso-steam-como-pedir/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/reembolso-steam-como-pedir/</guid>
+      <pubDate>Sun, 23 Aug 2026 08:30:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>Veja as regras oficiais do reembolso no Steam, o caminho para solicitar e os cuidados com DLC, pré-venda e compras dentro de jogos.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/reembolso-steam-como-pedir.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Como avaliar acessibilidade em jogos além da dificuldade</title>
+      <link>https://vmgames.com.br/blog/como-avaliar-acessibilidade-em-jogos/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/como-avaliar-acessibilidade-em-jogos/</guid>
+      <pubDate>Sun, 23 Aug 2026 08:20:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Reviews</category>
+      <description>Um roteiro prático para observar recursos de acessibilidade ao avaliar um jogo, sem reduzir o tema a modo fácil.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/como-avaliar-acessibilidade-em-jogos.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Como acompanhar lançamentos de jogos no Steam sem perder datas</title>
+      <link>https://vmgames.com.br/blog/como-acompanhar-lancamentos-steam/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/como-acompanhar-lancamentos-steam/</guid>
+      <pubDate>Sun, 23 Aug 2026 08:10:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Lançamentos</category>
+      <description>Aprenda a acompanhar próximos lançamentos no Steam e a reconhecer quando uma data ainda pode mudar.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/como-acompanhar-lancamentos-steam.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Famílias Steam: como funciona o compartilhamento de jogos</title>
+      <link>https://vmgames.com.br/blog/steam-familias-compartilhar-jogos-regras/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/steam-familias-compartilhar-jogos-regras/</guid>
+      <pubDate>Sun, 23 Aug 2026 08:00:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Notícias</category>
+      <description>Entenda quem pode participar de uma Família Steam, como a biblioteca compartilhada funciona e quais limites evitam uso indevido.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/steam-familias-compartilhar-jogos-regras.webp" type="image/webp" length="0"/>
+    </item>
     <item>
       <title>Vender skins na Steam dá dinheiro? Entenda o limite da Carteira Steam</title>
       <link>https://vmgames.com.br/blog/vender-skins-steam-saldo-nao-vira-dinheiro/</link>
@@ -188,126 +308,6 @@
       <category>Notícias</category>
       <description>A Twitch ampliou recursos de monetização e reduziu as metas do programa de Afiliado. Veja seguidores, horas, dias e média de espectadores exigidos.</description>
       <enclosure url="https://vmgames.com.br/blog/img/capas/twitch-afiliado-requisitos-monetizacao.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Monetização no YouTube para canais de games: requisitos e cuidados</title>
-      <link>https://vmgames.com.br/blog/monetizacao-youtube-games-requisitos/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/monetizacao-youtube-games-requisitos/</guid>
-      <pubDate>Fri, 21 Aug 2026 00:21:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Guias</category>
-      <description>Confira metas de inscritos, horas e Shorts para monetizar um canal de games no YouTube e as regras sobre conteúdo original e gameplay.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/monetizacao-youtube-games-requisitos.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Como gamers ganham dinheiro: cinco caminhos legítimos e os riscos</title>
-      <link>https://vmgames.com.br/blog/como-gamers-ganham-dinheiro-formas-legitimas/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/como-gamers-ganham-dinheiro-formas-legitimas/</guid>
-      <pubDate>Fri, 21 Aug 2026 00:20:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Guias</category>
-      <description>Veja formas legítimas de ganhar dinheiro com games, os requisitos das plataformas e por que nenhuma delas oferece lucro rápido ou garantido.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/como-gamers-ganham-dinheiro-formas-legitimas.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Sugar Strike leva FPS online a uma cidade de doces direto no navegador</title>
-      <link>https://vmgames.com.br/blog/sugar-strike-fps-online-navegador-como-funciona/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/sugar-strike-fps-online-navegador-como-funciona/</guid>
-      <pubDate>Thu, 20 Aug 2026 22:22:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Notícias</category>
-      <description>Entenda Sugar Strike, FPS multiplayer gratuito com salas online, dez armas, equipamentos e tecnologia 3D própria que roda no navegador.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/sugar-strike-fps-online-navegador-como-funciona.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Sky Vanguard pode ser jogado grátis no navegador e no Android</title>
-      <link>https://vmgames.com.br/blog/sky-vanguard-jogar-gratis-navegador-android/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/sky-vanguard-jogar-gratis-navegador-android/</guid>
-      <pubDate>Thu, 20 Aug 2026 22:21:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>PC</category>
-      <description>Sky Vanguard leva a ação dos fliperamas ao navegador e ao Android com 30 fases, chefes, evolução de nave e controles para PC e celular.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/sky-vanguard-jogar-gratis-navegador-android.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Turbo Race reúne 28 fases, garagem e multiplayer local no Android</title>
-      <link>https://vmgames.com.br/blog/turbo-race-28-fases-multiplayer-android/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/turbo-race-28-fases-multiplayer-android/</guid>
-      <pubDate>Thu, 20 Aug 2026 22:20:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Mobile</category>
-      <description>Conheça Turbo Race, jogo gratuito para Android com 28 fases, melhorias de carro, três formas de controle e multiplayer local sem internet.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/turbo-race-28-fases-multiplayer-android.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Fire Emblem: Fortune's Weave chega ao Switch 2 em setembro; veja o que muda</title>
-      <link>https://vmgames.com.br/blog/fire-emblem-fortunes-weave-switch-2/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/fire-emblem-fortunes-weave-switch-2/</guid>
-      <pubDate>Thu, 20 Aug 2026 12:18:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Nintendo</category>
-      <description>Fire Emblem: Fortune's Weave será lançado em 17 de setembro exclusivamente para Nintendo Switch 2, com quatro rotas, combates por turnos e mecânica para voltar jogadas.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/fire-emblem-fortunes-weave-switch-2.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Oblivion Remastered já está disponível no Switch 2; veja conteúdo e melhorias</title>
-      <link>https://vmgames.com.br/blog/oblivion-remastered-switch-2/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/oblivion-remastered-switch-2/</guid>
-      <pubDate>Thu, 20 Aug 2026 12:17:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Nintendo</category>
-      <description>The Elder Scrolls IV: Oblivion Remastered chegou ao Nintendo Switch 2 por US$ 49,99 com as expansões e melhorias visuais e de jogabilidade.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/oblivion-remastered-switch-2.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Elden Ring: Tarnished Edition chega ao Switch 2 em 28 de agosto</title>
-      <link>https://vmgames.com.br/blog/elden-ring-tarnished-edition-switch-2/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/elden-ring-tarnished-edition-switch-2/</guid>
-      <pubDate>Thu, 20 Aug 2026 12:16:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Nintendo</category>
-      <description>Elden Ring: Tarnished Edition será lançado em 28 de agosto para Nintendo Switch 2 por US$ 79,99, com campanha, multiplayer e criação de personagem.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/elden-ring-tarnished-edition-switch-2.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Minecraft chega ao Switch 2 em outubro com Vibrant Visuals e caminho de upgrade</title>
-      <link>https://vmgames.com.br/blog/minecraft-switch-2-data-upgrade/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/minecraft-switch-2-data-upgrade/</guid>
-      <pubDate>Thu, 20 Aug 2026 12:15:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Nintendo</category>
-      <description>Minecraft será lançado para Nintendo Switch 2 em 27 de outubro com Vibrant Visuals, melhorias de iluminação e atualização do pacote Super Mario.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/minecraft-switch-2-data-upgrade.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Pokémon Pokopia recebe área submarina; veja como acessar Bubbly Basin</title>
-      <link>https://vmgames.com.br/blog/pokemon-pokopia-expansion-pass-bubbly-basin/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/pokemon-pokopia-expansion-pass-bubbly-basin/</guid>
-      <pubDate>Thu, 20 Aug 2026 12:14:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Nintendo</category>
-      <description>Bubbly Basin, primeira parte do passe de Pokémon Pokopia, já está disponível no Switch 2; veja requisitos, conteúdo e bônus de compra.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/pokemon-pokopia-expansion-pass-bubbly-basin.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Xbox libera três jogos no Free Play Days até domingo</title>
-      <link>https://vmgames.com.br/blog/xbox-free-play-days-20-agosto-2026/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/xbox-free-play-days-20-agosto-2026/</guid>
-      <pubDate>Thu, 20 Aug 2026 12:13:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Promoções</category>
-      <description>Free Play Days libera Train Sim World 6, Icarus e Lynked para membros do Game Pass até 23 de agosto, com progresso e conquistas preservados na compra.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/xbox-free-play-days-20-agosto-2026.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>The Sinking City 2 troca mundo aberto por survival horror focado</title>
-      <link>https://vmgames.com.br/blog/the-sinking-city-2-survival-horror/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/the-sinking-city-2-survival-horror/</guid>
-      <pubDate>Thu, 20 Aug 2026 12:12:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Lançamentos</category>
-      <description>The Sinking City 2 já está disponível no Xbox Series X|S com estrutura de survival horror, recursos escassos e investigações opcionais.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/the-sinking-city-2-survival-horror.webp" type="image/webp" length="0"/>
     </item>
   </channel>
 </rss>

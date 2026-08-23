@@ -898,6 +898,7 @@ class Construtor:
         self.escrever("/robots.txt", f"""# VM Games — {self.base_url}
 User-agent: *
 Allow: /
+Disallow: /admin/
 Disallow: /conteudo/
 Disallow: /ferramentas/
 Disallow: /blog/busca/
