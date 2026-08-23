@@ -587,11 +587,12 @@ class TelaDeMenu {
         this.app.irPara("config");
         break;
       case "btnExit":
-        // DIFERENCA DE PROPOSITO: no app era finishAffinity(), que fechava o
-        // jogo. Uma pagina nao pode fechar a propria aba (o window.close() so
-        // funciona em janela aberta por script), e fechar a aba do jogador sem
-        // ele mandar seria grosseiro. Entao ficamos no menu e avisamos.
-        this.mostrarAviso("Para sair, feche a aba do navegador.");
+        // No navegador, sair significa voltar à página inicial da VM Games.
+        // Encerra primeiro uma possível conexão antiga para liberar a vaga.
+        if (typeof OnlineSession !== "undefined" && OnlineSession.service) {
+          OnlineSession.clear();
+        }
+        window.location.assign(window.location.origin + "/");
         break;
     }
   }
