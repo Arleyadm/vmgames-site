@@ -117,7 +117,9 @@ Em ordem do que rende mais:
 1. **Dois blocos de anúncio no AdSense** — um *In-article* e um *Display responsivo*. Só o
    Arley pode criar. Preencher `no_texto` e `entre_cards` em `conteudo/config.json`.
    Enquanto vazios, esses espaços não aparecem (de propósito).
-2. **Enviar `sitemap.xml` no Google Search Console.** O domínio já está verificado lá.
+2. **Search Console.** O domínio `vmgames.com.br` está verificado e a propriedade já
+   registra dados. Em 23/08/2026, a tela de Sitemaps ainda mostrava zero envios; cadastrar
+   `https://vmgames.com.br/sitemap.xml` é a única etapa pendente no painel.
 3. **Conferência visual.** O painel do navegador estava fechado, então nada foi verificado
    por captura de tela — só por estrutura, medida e teste. É a primeira coisa a fazer com
    o painel aberto: home, matéria e celular.
@@ -146,6 +148,17 @@ e Xbox Power.
 
 A Nintendo **não tem feed oficial funcionando** — para assunto de Nintendo, exigir duas
 fontes secundárias.
+
+## 8.1 Identidade visual e imagens
+
+- O novo kit oficial da VM Games foi fornecido por Arley em 23/08/2026. A assinatura
+  horizontal fica no cabeçalho; ícone, logo para dados estruturados, OG padrão e as nove
+  variações otimizadas ficam em `conteudo/midia/`. Consulte `ferramentas/MARCA.md`.
+- As artes da marca, mesmo quando produzidas com IA, só podem ser usadas como identidade
+  institucional autorizada. A regra editorial permanece: reportagem usa apenas imagem
+  real/oficial, com fonte e crédito; nunca imagem gerada por IA como fato jornalístico.
+- Para Discover, preservar `max-image-preview:large`, capas com ao menos 1200 px, crédito,
+  `sitemap-noticias.xml` e títulos diretos. Não prometer indexação ou posição no Google.
 
 ## 9. Como conferir se está tudo de pé
 

@@ -7,6 +7,8 @@
 <meta name="description" content="{{ descricao }}">
 <link rel="canonical" href="{{ canonical }}">
 <meta name="theme-color" content="#08060f">
+<link rel="icon" type="image/png" sizes="512x512" href="/blog/img/vmgames-icone.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/blog/img/marca/icone-192.png">
 {%- if nao_indexar %}
 <meta name="robots" content="noindex, follow">
 {%- else %}
@@ -33,7 +35,7 @@
 <meta name="twitter:image:alt" content="{{ og_imagem_alt|default(og_titulo)|default(titulo_aba) }}">
 
 <link rel="alternate" type="application/rss+xml" title="Blog VM Games" href="{{ site.url }}/blog/feed.xml">
-<link rel="stylesheet" href="/estilo.css?v=20260820-2">
+<link rel="stylesheet" href="/estilo.css?v=20260823-1">
 <link rel="stylesheet" href="/blog/blog.css?v=20260820-4">
 {%- if acento %}
 <style>body.blog{--acento:{{ acento }};--acento-fraco:{{ acento_fraco }};}</style>
@@ -55,7 +57,9 @@
 
 <header class="barra">
   <div class="envolucro largo">
-    <a class="marca" href="/"><span class="vm">VM</span> <span class="games">GAMES</span></a>
+    <a class="marca" href="/" aria-label="VM Games — página inicial">
+      <img src="/blog/img/vmgames-assinatura-horizontal.webp" width="410" height="100" alt="VM Games Studio">
+    </a>
     <nav aria-label="Navegação principal">
       <a href="/#jogos">Jogos</a>
       <a href="/blog/"{% if secao == 'blog' %} aria-current="true"{% endif %}>Blog</a>

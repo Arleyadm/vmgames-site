@@ -124,6 +124,17 @@ Esses valores foram medidos pela área alfa realmente visível dos sprites e tes
 8. Aguarde o GitHub Pages publicar. Confirme no HTML público o novo `TURBO_RACE_BUILD` e confira os arquivos com o novo `?v=`.
 9. Informe ao responsável o link com `?build=...` e o hash do commit.
 
+## Marca e imagens editoriais do site
+
+- O kit oficial da VM Games está documentado em `ferramentas/MARCA.md` e publicado de
+  forma otimizada a partir de `conteudo/midia/`.
+- As artes enviadas pelo proprietário podem ser usadas como logo, ícone e material
+  institucional. Não reutilizá-las como se fossem foto ou captura factual de reportagem.
+- Em reportagens, usar somente imagens reais/oficiais e verificáveis, com crédito e URL
+  da fonte. O usuário proibiu expressamente imagens geradas por IA nas matérias.
+- O Search Console já possui a propriedade verificada de `vmgames.com.br`; em 23/08/2026
+  faltava apenas enviar o sitemap raiz `https://vmgames.com.br/sitemap.xml`.
+
 ## Última validação conhecida
 
 A versão `20260822-03` foi aberta no site público. O responsável confirmou que o modo inclinação passou a funcionar; depois relatou apenas o sentido invertido, corrigido em `a7a0a65`. O site público foi verificado contendo os dois sinais negativos do acelerômetro/orientação. O Frost Hyper maior e a tela de configuração de controles também foram validados visualmente antes da publicação.

@@ -57,13 +57,11 @@ img { max-width: 100%; display: block; }
   height: 62px;
 }
 .marca {
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
   text-decoration: none;
-  color: var(--texto);
   white-space: nowrap;
+  flex: 0 0 auto;
 }
+.marca img { width: 185px; height: 45px; object-fit: contain; }
 .marca .vm { color: var(--ciano); }
 .marca .games { color: var(--magenta); }
 
