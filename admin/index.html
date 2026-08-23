@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow,noarchive">
   <title>Painel administrativo | VM Games</title>
-  <link rel="stylesheet" href="admin.css?v=1">
+  <link rel="stylesheet" href="admin.css?v=2">
 </head>
 <body>
   <header class="topo">
@@ -32,11 +32,20 @@
         <button id="atualizar" class="botao secundario" type="button">Atualizar dados</button>
       </div>
       <div class="metricas" aria-label="Resumo do site">
+        <article class="destaque"><span id="visitas-hoje">—</span><small>Visitas hoje</small></article>
+        <article><span id="visitas-7">—</span><small>Últimos 7 dias</small></article>
+        <article><span id="visitas-30">—</span><small>Últimos 30 dias</small></article>
+        <article><span id="visitantes-30">—</span><small>Visitantes em 30 dias</small></article>
+        <article><span id="visitas-total">—</span><small>Visitas registradas</small></article>
         <article><span id="total-curtidas">—</span><small>Curtidas</small></article>
         <article><span id="total-publicados">—</span><small>Publicados</small></article>
         <article><span id="total-ocultos">—</span><small>Ocultos</small></article>
         <article><span id="total-paginas">—</span><small>Páginas comentadas</small></article>
       </div>
+      <section class="analytics-grid" aria-label="Estatísticas de visitas">
+        <article class="bloco"><div class="titulo-bloco"><h2>Visitas nos últimos 14 dias</h2><p class="apoio">Uma visita por pessoa em cada página por dia.</p></div><div id="grafico" class="grafico"></div></article>
+        <article class="bloco"><div class="titulo-bloco"><h2>Páginas mais visitadas</h2><p class="apoio">Classificação dos últimos 30 dias.</p></div><div id="paginas-populares" class="paginas-populares"></div></article>
+      </section>
       <section class="comentarios">
         <div class="barra-lista"><div><h2>Comentários recentes</h2><p class="apoio">Ocultar é reversível e retira o comentário do site.</p></div><label>Mostrar<select id="filtro"><option value="all">Todos</option><option value="approved">Publicados</option><option value="hidden">Ocultos</option></select></label></div>
         <p id="painel-status" class="status" role="status" aria-live="polite"></p>
@@ -44,6 +53,6 @@
       </section>
     </section>
   </main>
-  <script src="admin.js?v=1" defer></script>
+  <script src="admin.js?v=2" defer></script>
 </body>
 </html>
