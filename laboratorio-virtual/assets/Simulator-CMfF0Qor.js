@@ -1,0 +1,1 @@
+import{k as i,j as r}from"./index-mNRJxsF8.js";import{E as o}from"./ExperimentSimulator-lIALUfsw.js";import"./rotate-ccw-HVBSgwJ3.js";import"./save-vQPBcyaH.js";const t=i("income");t.variables;function s(){return r.jsx(o,{definition:t})}export{s as default};
