@@ -1,0 +1,1 @@
+import{k as i,j as r}from"./index-BVx9yqQl.js";import{E as o}from"./ExperimentSimulator-ij-Iykgd.js";import"./rotate-ccw-DutUS97S.js";import"./save-BqO2rWI9.js";const t=i("industrial-history");t.variables;function n(){return r.jsx(o,{definition:t})}export{n as default};
