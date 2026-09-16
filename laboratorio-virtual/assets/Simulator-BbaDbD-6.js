@@ -1,1 +1,0 @@
-import{k as i,j as o}from"./index-DT573qFe.js";import{E as r}from"./ExperimentSimulator-Bf5nuzKU.js";import"./rotate-ccw-CUSH38Jz.js";import"./save-B_6Hffux.js";const t=i("solutions");t.variables;function a(){return o.jsx(r,{definition:t})}export{a as default};

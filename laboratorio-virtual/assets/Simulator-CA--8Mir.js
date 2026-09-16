@@ -1,1 +1,0 @@
-import{k as t,j as o}from"./index-DT573qFe.js";import{E as i}from"./ExperimentSimulator-Bf5nuzKU.js";import"./rotate-ccw-CUSH38Jz.js";import"./save-B_6Hffux.js";const r=t("color");r.variables;function s(){return o.jsx(i,{definition:r})}export{s as default};
