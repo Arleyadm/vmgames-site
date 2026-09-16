@@ -1,1 +1,0 @@
-import{k as i,j as r}from"./index-B-OwdrEX.js";import{E as o}from"./ExperimentSimulator-BceBcMif.js";import"./rotate-ccw-p9zJ04Ez.js";import"./save-H5cnr0nV.js";const t=i("tectonics");t.variables;function a(){return r.jsx(o,{definition:t})}export{a as default};
