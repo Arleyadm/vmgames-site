@@ -1,0 +1,1 @@
+import{k as i,j as r}from"./index-tho6J6Rx.js";import{E as o}from"./ExperimentSimulator-DvTt-lD3.js";import"./rotate-ccw-CynToNZW.js";import"./save-CCkuv4nh.js";const t=i("circuits");t.variables;function n(){return r.jsx(o,{definition:t})}export{n as default};
