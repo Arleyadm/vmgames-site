@@ -90,7 +90,7 @@
 
   <div class="grade">
 
-    <a class="cartao" href="laboratorio-virtual/">
+    <a class="cartao" href="laboratorio-virtual/" onclick="return acessarLaboratorio(event)">
       <div class="capa" style="background: radial-gradient(circle at 60% 45%, #ffbd5a, #17152e 22%, #08060f 70%); display: grid; place-items: center;">
         <span style="font-size: 3.2rem; color: #9fd6ff; text-shadow: 0 0 24px #62aaff;">✧</span>
       </div>
@@ -143,6 +143,18 @@
     </a>
 
   </div>
+
+  <script>
+    function acessarLaboratorio(event) {
+      const senha = window.prompt('Digite a senha para acessar o Laboratório Virtual:');
+      if (senha !== 'Diego') {
+        event.preventDefault();
+        window.alert('Senha incorreta.');
+        return false;
+      }
+      return true;
+    }
+  </script>
 
   <!-- ULTIMAS-DO-BLOG:inicio — bloco gerado por ferramentas/build.py, não editar à mão -->
   <div class="secao-titulo" id="blog">
