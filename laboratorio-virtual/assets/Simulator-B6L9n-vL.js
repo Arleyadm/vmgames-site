@@ -1,0 +1,1 @@
+import{k as r,j as i}from"./index-ep5SKXii.js";import{E as o}from"./ExperimentSimulator-Bkc6AY7s.js";import"./rotate-ccw-l7eOgjuD.js";import"./minus-zgPncrvk.js";import"./save-DnAZDGXf.js";const t=r("arguments");t.variables;function p(){return i.jsx(o,{definition:t})}export{p as default};
