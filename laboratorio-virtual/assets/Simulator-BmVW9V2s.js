@@ -1,1 +1,0 @@
-import{k as t,j as r}from"./index-aUVScTrJ.js";import{E as o}from"./ExperimentSimulator-B27flabj.js";import"./rotate-ccw-VRNE-Eh0.js";import"./save-Ba2FHhwU.js";const i=t("biomechanics");i.variables;function s(){return r.jsx(o,{definition:i})}export{s as default};
