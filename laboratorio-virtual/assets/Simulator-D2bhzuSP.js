@@ -1,1 +1,0 @@
-import{k as t,j as o}from"./index-C64rxTGl.js";import{E as i}from"./ExperimentSimulator-CVcc-rJg.js";import"./rotate-ccw-CBa3haW3.js";import"./minus-HSE-MUvI.js";import"./save-C_1XFtlF.js";const r=t("color");r.variables;function s(){return o.jsx(i,{definition:r})}export{s as default};
