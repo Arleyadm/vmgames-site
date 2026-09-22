@@ -147,7 +147,7 @@
   <script>
     function acessarLaboratorio(event) {
       const senha = window.prompt('Digite a senha para acessar o Laboratório Virtual:');
-      if (senha !== 'Diego') {
+      if (senha !== 'Diego' && senha !== 'Danilo') {
         event.preventDefault();
         window.alert('Senha incorreta.');
         return false;
