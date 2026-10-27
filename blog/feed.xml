@@ -7,307 +7,307 @@
     <atom:link href="https://vmgames.com.br/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Notícias de games, lançamentos, análises, guias e promoções em português. Publicado pela VM Games, estúdio independente de Catalão, Goiás.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Sun, 23 Aug 2026 01:45:05 -0300</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 23:13:54 -0300</lastBuildDate>
     <ttl>60</ttl>
     <item>
-      <title>Jogos grátis da Epic: como resgatar e não confundir com free-to-play</title>
-      <link>https://vmgames.com.br/blog/epic-games-jogos-gratis-como-resgatar/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/epic-games-jogos-gratis-como-resgatar/</guid>
-      <pubDate>Sun, 23 Aug 2026 09:50:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Promoções</category>
-      <description>Aprenda a resgatar jogos gratuitos da Epic Games Store e veja a diferença entre oferta temporária, demonstração e free-to-play.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/epic-games-jogos-gratis-como-resgatar.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Worlds 2026: como funciona o formato suíço e a classificação</title>
-      <link>https://vmgames.com.br/blog/worlds-2026-formato-vagas/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/worlds-2026-formato-vagas/</guid>
-      <pubDate>Sun, 23 Aug 2026 09:40:00 -0300</pubDate>
+      <title>Tick rate e hit registration: o que acontece entre seu tiro e o servidor</title>
+      <link>https://vmgames.com.br/blog/netcode-tick-rate-hit-registration/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/netcode-tick-rate-hit-registration/</guid>
+      <pubDate>Mon, 26 Oct 2026 14:40:00 -0300</pubDate>
       <dc:creator>Arley Vieira</dc:creator>
       <category>eSports</category>
-      <description>Entenda a fase de entrada, o sistema suíço e as condições para avançar no Worlds 2026 de League of Legends.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/worlds-2026-formato-vagas.webp" type="image/webp" length="0"/>
+      <description>Atualização do servidor é só uma parte de um sistema com previsão, interpolação e latência.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/netcode-tick-rate-hit-registration-real.webp" type="image/webp" length="0"/>
     </item>
     <item>
-      <title>VRR e ALLM na TV: o que muda nos jogos e quando ativar</title>
-      <link>https://vmgames.com.br/blog/vrr-allm-tv-games/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/vrr-allm-tv-games/</guid>
-      <pubDate>Sun, 23 Aug 2026 09:30:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Hardware</category>
-      <description>Entenda a diferença entre VRR e ALLM, os requisitos de HDMI e por que nem toda TV com 4K oferece os mesmos recursos.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/vrr-allm-tv-games.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Controles touch em jogos mobile: tamanho, posição e resposta</title>
-      <link>https://vmgames.com.br/blog/controles-touch-jogos-mobile/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/controles-touch-jogos-mobile/</guid>
-      <pubDate>Sun, 23 Aug 2026 09:20:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Mobile</category>
-      <description>Entenda o que torna um controle touch confortável e quais opções procurar antes de escolher um jogo mobile competitivo.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/controles-touch-jogos-mobile.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Como transferir usuário e save entre consoles Nintendo Switch</title>
-      <link>https://vmgames.com.br/blog/transferir-save-nintendo-switch/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/transferir-save-nintendo-switch/</guid>
-      <pubDate>Sun, 23 Aug 2026 09:10:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Nintendo</category>
-      <description>Veja o que é necessário para transferir usuário ou save entre consoles da família Nintendo Switch e quais jogos exigem cuidado especial.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/transferir-save-nintendo-switch.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Xbox Cloud Gaming: internet, navegadores e controles compatíveis</title>
-      <link>https://vmgames.com.br/blog/xbox-cloud-gaming-internet-navegadores/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/xbox-cloud-gaming-internet-navegadores/</guid>
-      <pubDate>Sun, 23 Aug 2026 09:00:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Xbox</category>
-      <description>Veja os requisitos oficiais de conexão e navegador para jogar pelo Xbox Cloud Gaming e como reduzir atrasos.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/xbox-cloud-gaming-internet-navegadores.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>SSD para PS5: requisitos oficiais antes de comprar e instalar</title>
-      <link>https://vmgames.com.br/blog/ssd-ps5-requisitos-instalacao/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/ssd-ps5-requisitos-instalacao/</guid>
-      <pubDate>Sun, 23 Aug 2026 08:50:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>PlayStation</category>
-      <description>Confira velocidade, dimensões, capacidade e dissipador necessários para escolher um SSD M.2 compatível com o PS5.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/ssd-ps5-requisitos-instalacao.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Google Play Games no PC: requisitos e como ativar a virtualização</title>
-      <link>https://vmgames.com.br/blog/google-play-games-pc-requisitos/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/google-play-games-pc-requisitos/</guid>
-      <pubDate>Sun, 23 Aug 2026 08:40:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>PC</category>
-      <description>Confira os requisitos do Google Play Games no PC e saiba por que SSD, conta de administrador e virtualização são necessários.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/google-play-games-pc-requisitos.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Reembolso no Steam: prazo, limite de jogo e como pedir</title>
-      <link>https://vmgames.com.br/blog/reembolso-steam-como-pedir/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/reembolso-steam-como-pedir/</guid>
-      <pubDate>Sun, 23 Aug 2026 08:30:00 -0300</pubDate>
+      <title>Servidor dedicado ou peer-to-peer: por que partidas online se comportam diferente</title>
+      <link>https://vmgames.com.br/blog/servidor-dedicado-peer-to-peer-jogos/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/servidor-dedicado-peer-to-peer-jogos/</guid>
+      <pubDate>Mon, 26 Oct 2026 14:32:00 -0300</pubDate>
       <dc:creator>Arley Vieira</dc:creator>
       <category>Guias</category>
-      <description>Veja as regras oficiais do reembolso no Steam, o caminho para solicitar e os cuidados com DLC, pré-venda e compras dentro de jogos.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/reembolso-steam-como-pedir.webp" type="image/webp" length="0"/>
+      <description>A arquitetura determina hospedagem, migração, latência e resistência a trapaças.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/servidor-dedicado-peer-to-peer-jogos-real.webp" type="image/webp" length="0"/>
     </item>
     <item>
-      <title>Como avaliar acessibilidade em jogos além da dificuldade</title>
-      <link>https://vmgames.com.br/blog/como-avaliar-acessibilidade-em-jogos/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/como-avaliar-acessibilidade-em-jogos/</guid>
-      <pubDate>Sun, 23 Aug 2026 08:20:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Reviews</category>
-      <description>Um roteiro prático para observar recursos de acessibilidade ao avaliar um jogo, sem reduzir o tema a modo fácil.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/como-avaliar-acessibilidade-em-jogos.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Como acompanhar lançamentos de jogos no Steam sem perder datas</title>
-      <link>https://vmgames.com.br/blog/como-acompanhar-lancamentos-steam/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/como-acompanhar-lancamentos-steam/</guid>
-      <pubDate>Sun, 23 Aug 2026 08:10:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Lançamentos</category>
-      <description>Aprenda a acompanhar próximos lançamentos no Steam e a reconhecer quando uma data ainda pode mudar.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/como-acompanhar-lancamentos-steam.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Famílias Steam: como funciona o compartilhamento de jogos</title>
-      <link>https://vmgames.com.br/blog/steam-familias-compartilhar-jogos-regras/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/steam-familias-compartilhar-jogos-regras/</guid>
-      <pubDate>Sun, 23 Aug 2026 08:00:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Notícias</category>
-      <description>Entenda quem pode participar de uma Família Steam, como a biblioteca compartilhada funciona e quais limites evitam uso indevido.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/steam-familias-compartilhar-jogos-regras.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Vender skins na Steam dá dinheiro? Entenda o limite da Carteira Steam</title>
-      <link>https://vmgames.com.br/blog/vender-skins-steam-saldo-nao-vira-dinheiro/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/vender-skins-steam-saldo-nao-vira-dinheiro/</guid>
-      <pubDate>Fri, 21 Aug 2026 01:39:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>PC</category>
-      <description>Saiba o que realmente acontece ao vender skins no Mercado Steam e como evitar golpes que prometem transformar saldo em dinheiro.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/vender-skins-steam-saldo-nao-vira-dinheiro-real.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Links de afiliados em conteúdo gamer: como recomendar sem perder confiança</title>
-      <link>https://vmgames.com.br/blog/links-afiliados-games-como-divulgar/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/links-afiliados-games-como-divulgar/</guid>
-      <pubDate>Fri, 21 Aug 2026 01:38:00 -0300</pubDate>
+      <title>Golpes no Discord gamer: Nitro grátis, torneios e falsas trocas</title>
+      <link>https://vmgames.com.br/blog/discord-golpes-nitro-torneio-skins/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/discord-golpes-nitro-torneio-skins/</guid>
+      <pubDate>Mon, 26 Oct 2026 14:24:00 -0300</pubDate>
       <dc:creator>Arley Vieira</dc:creator>
       <category>Guias</category>
-      <description>Veja como usar links de afiliados em conteúdo gamer com transparência, intenção de busca e métricas que não sacrificam a confiança.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/links-afiliados-games-como-divulgar-real.webp" type="image/webp" length="0"/>
+      <description>Links falsos e contas de amigos invadidas usam confiança e urgência para roubar login.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/discord-golpes-nitro-torneio-skins-real.webp" type="image/webp" length="0"/>
     </item>
     <item>
-      <title>Como dar aulas de jogos online sem prometer vitória ou ranking</title>
-      <link>https://vmgames.com.br/blog/dar-aulas-coaching-games-online/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/dar-aulas-coaching-games-online/</guid>
-      <pubDate>Fri, 21 Aug 2026 01:37:00 -0300</pubDate>
+      <title>Microtransações e crianças: como evitar gastos inesperados</title>
+      <link>https://vmgames.com.br/blog/microtransacoes-criancas-como-evitar-gastos/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/microtransacoes-criancas-como-evitar-gastos/</guid>
+      <pubDate>Mon, 26 Oct 2026 14:16:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>Aprovação de compra, senha e conversa sobre moeda virtual reduzem surpresas no cartão.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/microtransacoes-criancas-como-evitar-gastos-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Anti-cheat em nível de kernel: o que isso significa para o jogador</title>
+      <link>https://vmgames.com.br/blog/anti-cheat-kernel-o-que-significa-jogador/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/anti-cheat-kernel-o-que-significa-jogador/</guid>
+      <pubDate>Mon, 26 Oct 2026 14:08:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>PC</category>
+      <description>Sistemas profundos buscam trapaças sofisticadas, mas exigem confiança, atualização e transparência.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/anti-cheat-kernel-o-que-significa-jogador-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>MMR, elo e matchmaking: por que seu rank não conta toda a história</title>
+      <link>https://vmgames.com.br/blog/mmr-ranked-matchmaking-como-funciona/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/mmr-ranked-matchmaking-como-funciona/</guid>
+      <pubDate>Mon, 26 Oct 2026 14:00:00 -0300</pubDate>
       <dc:creator>Arley Vieira</dc:creator>
       <category>eSports</category>
-      <description>Aprenda a estruturar aulas e coaching de games com preço, escopo, segurança e expectativas honestas para aluno e instrutor.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/dar-aulas-coaching-games-online-real.webp" type="image/webp" length="0"/>
+      <description>Sistemas competitivos estimam habilidade, formam partidas e mostram uma classificação simplificada.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/mmr-ranked-matchmaking-como-funciona-real.webp" type="image/webp" length="0"/>
     </item>
     <item>
-      <title>Trabalhar testando jogos: o que um QA faz e como evitar vagas falsas</title>
-      <link>https://vmgames.com.br/blog/trabalhar-testando-jogos-vagas-golpes/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/trabalhar-testando-jogos-vagas-golpes/</guid>
-      <pubDate>Fri, 21 Aug 2026 01:36:00 -0300</pubDate>
+      <title>Speedrun: como recordes de jogos são verificados</title>
+      <link>https://vmgames.com.br/blog/speedrun-como-recordes-sao-verificados/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/speedrun-como-recordes-sao-verificados/</guid>
+      <pubDate>Mon, 26 Oct 2026 13:40:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>eSports</category>
+      <description>Categorias, vídeo completo, versão e análise da comunidade sustentam a credibilidade dos tempos.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/speedrun-como-recordes-sao-verificados-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>O que define um soulslike além da dificuldade</title>
+      <link>https://vmgames.com.br/blog/soulslike-o-que-define-genero/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/soulslike-o-que-define-genero/</guid>
+      <pubDate>Mon, 26 Oct 2026 13:32:00 -0300</pubDate>
       <dc:creator>Arley Vieira</dc:creator>
       <category>Guias</category>
-      <description>Descubra o trabalho real de QA em games, habilidades úteis para começar e sinais de golpe em falsas ofertas de testador.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/trabalhar-testando-jogos-vagas-golpes-real.webp" type="image/webp" length="0"/>
+      <description>Combate, risco, atalhos e narrativa ambiental formam uma estrutura mais rica que “jogo difícil”.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/soulslike-o-que-define-genero-real.webp" type="image/webp" length="0"/>
     </item>
     <item>
-      <title>Quanto custa publicar um jogo na Steam e quando a taxa pode voltar</title>
-      <link>https://vmgames.com.br/blog/publicar-jogo-steam-custos-steam-direct/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/publicar-jogo-steam-custos-steam-direct/</guid>
-      <pubDate>Fri, 21 Aug 2026 01:35:00 -0300</pubDate>
+      <title>Roguelike e roguelite: qual é a diferença entre os gêneros</title>
+      <link>https://vmgames.com.br/blog/roguelike-roguelite-diferencas-historia/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/roguelike-roguelite-diferencas-historia/</guid>
+      <pubDate>Mon, 26 Oct 2026 13:24:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>Permadeath, geração procedural e progressão permanente explicam por que os termos se confundem.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/roguelike-roguelite-diferencas-historia-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Como jogos grátis ganham dinheiro: o modelo free-to-play explicado</title>
+      <link>https://vmgames.com.br/blog/free-to-play-como-jogos-gratis-ganham-dinheiro/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/free-to-play-como-jogos-gratis-ganham-dinheiro/</guid>
+      <pubDate>Mon, 26 Oct 2026 13:16:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>Cosméticos, anúncios, passes e conveniência financiam o jogo — com impactos diferentes no design.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/free-to-play-como-jogos-gratis-ganham-dinheiro-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Battle Pass vale a pena? Como calcular tempo, preço e recompensa</title>
+      <link>https://vmgames.com.br/blog/battle-pass-vale-a-pena-como-calcular/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/battle-pass-vale-a-pena-como-calcular/</guid>
+      <pubDate>Mon, 26 Oct 2026 13:08:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>O passe pode parecer barato, mas exige horas e cria pressão para jogar.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/battle-pass-vale-a-pena-como-calcular-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Gacha, pity e banners: como esses sistemas funcionam</title>
+      <link>https://vmgames.com.br/blog/gacha-pity-banner-moeda-como-funciona/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/gacha-pity-banner-moeda-como-funciona/</guid>
+      <pubDate>Mon, 26 Oct 2026 13:00:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>Entenda probabilidade, garantia e moedas antes de gastar em personagens ou itens aleatórios.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/gacha-pity-banner-moeda-como-funciona-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Steam Workshop: como instalar, atualizar e remover mods corretamente</title>
+      <link>https://vmgames.com.br/blog/steam-workshop-instalar-remover-mods/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/steam-workshop-instalar-remover-mods/</guid>
+      <pubDate>Mon, 26 Oct 2026 12:40:00 -0300</pubDate>
       <dc:creator>Arley Vieira</dc:creator>
       <category>PC</category>
-      <description>Entenda a taxa Steam Direct, a condição de recuperação e os custos esquecidos por quem planeja vender um jogo próprio.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/publicar-jogo-steam-custos-steam-direct-real.webp" type="image/webp" length="0"/>
+      <description>Assinar um item é simples, mas dependências e saves exigem atenção.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/steam-workshop-instalar-remover-mods-real.webp" type="image/webp" length="0"/>
     </item>
     <item>
-      <title>Como vender assets de games no Fab: comissão, pagamento e portfólio</title>
-      <link>https://vmgames.com.br/blog/vender-assets-games-fab-como-comecar/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/vender-assets-games-fab-como-comecar/</guid>
-      <pubDate>Fri, 21 Aug 2026 01:34:00 -0300</pubDate>
+      <title>Como instalar mods com segurança e evitar arquivos maliciosos</title>
+      <link>https://vmgames.com.br/blog/modificar-jogos-mods-com-seguranca/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/modificar-jogos-mods-com-seguranca/</guid>
+      <pubDate>Mon, 26 Oct 2026 12:32:00 -0300</pubDate>
       <dc:creator>Arley Vieira</dc:creator>
       <category>Guias</category>
-      <description>Veja como começar a vender assets no Fab, qual participação é informada pela Epic e como criar um catálogo útil e confiável.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/vender-assets-games-fab-como-comecar-real.webp" type="image/webp" length="0"/>
+      <description>Backup, fonte confiável e compatibilidade de versão são essenciais antes de modificar um jogo.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/modificar-jogos-mods-com-seguranca-real.webp" type="image/webp" length="0"/>
     </item>
     <item>
-      <title>Fortnite permite vender itens em ilhas: entenda as transações e os pagamentos</title>
-      <link>https://vmgames.com.br/blog/fortnite-vender-itens-ilha-transacoes/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/fortnite-vender-itens-ilha-transacoes/</guid>
-      <pubDate>Fri, 21 Aug 2026 01:33:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Notícias</category>
-      <description>Entenda as transações dentro de ilhas do Fortnite, a divisão temporária de 2026 e por que estimativas não garantem pagamento final.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/fortnite-vender-itens-ilha-transacoes-real.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Assinaturas no Roblox: como monetizar uma experiência sem vender vantagem injusta</title>
-      <link>https://vmgames.com.br/blog/assinaturas-roblox-monetizar-experiencia/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/assinaturas-roblox-monetizar-experiencia/</guid>
-      <pubDate>Fri, 21 Aug 2026 01:32:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Guias</category>
-      <description>Saiba como funcionam as assinaturas do Roblox, diferenças para passes e práticas que preservam a confiança dos jogadores.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/assinaturas-roblox-monetizar-experiencia-real.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Renda em lives de games: como não depender apenas de inscrições</title>
-      <link>https://vmgames.com.br/blog/renda-live-games-fontes-sem-depender-subs/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/renda-live-games-fontes-sem-depender-subs/</guid>
-      <pubDate>Fri, 21 Aug 2026 01:31:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Guias</category>
-      <description>Veja como diversificar a renda de uma live gamer, medir custos e evitar depender de uma única plataforma ou fonte de pagamento.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/renda-live-games-fontes-sem-depender-subs-real.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Super Thanks no YouTube: como gamers podem receber apoio nos vídeos</title>
-      <link>https://vmgames.com.br/blog/youtube-super-thanks-games-como-funciona/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/youtube-super-thanks-games-como-funciona/</guid>
-      <pubDate>Fri, 21 Aug 2026 01:30:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Guias</category>
-      <description>Entenda quem pode ativar o Super Thanks, quais vídeos ficam de fora e como usar o recurso com transparência em um canal gamer.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/youtube-super-thanks-games-como-funciona-real.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Qual PS5 escolher: modelo com disco, Digital ou PS5 Pro?</title>
-      <link>https://vmgames.com.br/blog/qual-ps5-comprar-disco-digital-pro/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/qual-ps5-comprar-disco-digital-pro/</guid>
-      <pubDate>Fri, 21 Aug 2026 00:29:00 -0300</pubDate>
+      <title>Áudio estéreo ou surround virtual em games: qual escolher</title>
+      <link>https://vmgames.com.br/blog/audio-games-estereo-surround-virtual-headset/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/audio-games-estereo-surround-virtual-headset/</guid>
+      <pubDate>Mon, 26 Oct 2026 12:24:00 -0300</pubDate>
       <dc:creator>Arley Vieira</dc:creator>
       <category>Hardware</category>
-      <description>Compare PS5 com leitor, PS5 Digital e PS5 Pro considerando discos usados, armazenamento, unidade removível e qualidade visual.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/qual-ps5-comprar-disco-digital-pro.webp" type="image/webp" length="0"/>
+      <description>Posicionamento depende da mixagem do jogo, do fone e da adaptação do jogador.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/audio-games-estereo-surround-virtual-headset-real.webp" type="image/webp" length="0"/>
     </item>
     <item>
-      <title>Game Pass: entenda as diferenças entre Ultimate, Premium, Essential e PC</title>
-      <link>https://vmgames.com.br/blog/xbox-game-pass-planos-diferencas/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/xbox-game-pass-planos-diferencas/</guid>
-      <pubDate>Fri, 21 Aug 2026 00:28:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Xbox</category>
-      <description>Compare a lógica dos planos Xbox Game Pass Ultimate, Premium, Essential e PC antes de assinar ou trocar de nível.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/xbox-game-pass-planos-diferencas.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>Switch 2 roda jogos do primeiro Switch? Entenda a compatibilidade</title>
-      <link>https://vmgames.com.br/blog/switch-2-retrocompatibilidade-jogos-acessorios/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/switch-2-retrocompatibilidade-jogos-acessorios/</guid>
-      <pubDate>Fri, 21 Aug 2026 00:27:00 -0300</pubDate>
-      <dc:creator>Arley Vieira</dc:creator>
-      <category>Nintendo</category>
-      <description>Veja como funcionam jogos, saves, Joy-Con, Pro Controller, cartões virtuais e upgrades do primeiro Nintendo Switch no Switch 2.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/switch-2-retrocompatibilidade-jogos-acessorios.webp" type="image/webp" length="0"/>
-    </item>
-    <item>
-      <title>SSD para PS5: requisitos oficiais para não comprar o modelo errado</title>
-      <link>https://vmgames.com.br/blog/ssd-ps5-compativel-requisitos-guia/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/ssd-ps5-compativel-requisitos-guia/</guid>
-      <pubDate>Fri, 21 Aug 2026 00:26:00 -0300</pubDate>
+      <title>Drift no controle: causas, testes e quando acionar a garantia</title>
+      <link>https://vmgames.com.br/blog/drift-controle-causas-limpeza-garantia/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/drift-controle-causas-limpeza-garantia/</guid>
+      <pubDate>Mon, 26 Oct 2026 12:16:00 -0300</pubDate>
       <dc:creator>Arley Vieira</dc:creator>
       <category>Hardware</category>
-      <description>Veja interface, velocidade, capacidade, tamanho e dissipador exigidos para instalar um SSD M.2 compatível no PlayStation 5.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/ssd-ps5-compativel-requisitos-guia.webp" type="image/webp" length="0"/>
+      <description>Movimento sozinho pode vir de desgaste, sujeira, calibração ou defeito — e cada caso pede uma abordagem.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/drift-controle-causas-limpeza-garantia-real.webp" type="image/webp" length="0"/>
     </item>
     <item>
-      <title>Pode monetizar gameplay? O que o YouTube exige de canais de jogos</title>
-      <link>https://vmgames.com.br/blog/monetizar-gameplay-direitos-autorais-youtube/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/monetizar-gameplay-direitos-autorais-youtube/</guid>
-      <pubDate>Fri, 21 Aug 2026 00:25:00 -0300</pubDate>
+      <title>OLED e burn-in em games: qual é o risco e como reduzir</title>
+      <link>https://vmgames.com.br/blog/oled-burn-in-games-como-reduzir-risco/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/oled-burn-in-games-como-reduzir-risco/</guid>
+      <pubDate>Mon, 26 Oct 2026 12:08:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Hardware</category>
+      <description>Elementos fixos exigem cuidado, mas recursos modernos e uso variado diminuem a exposição.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/oled-burn-in-games-como-reduzir-risco-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>HDR em jogos: como configurar sem deixar a imagem lavada</title>
+      <link>https://vmgames.com.br/blog/hdr-games-configurar-sem-imagem-lavada/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/hdr-games-configurar-sem-imagem-lavada/</guid>
+      <pubDate>Mon, 26 Oct 2026 12:00:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Hardware</category>
+      <description>Brilho máximo, nível de preto e mapeamento de tons precisam estar alinhados entre jogo e tela.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/hdr-games-configurar-sem-imagem-lavada-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Input lag em TV e monitor: como reduzir o atraso nos jogos</title>
+      <link>https://vmgames.com.br/blog/input-lag-monitor-tv-games-reduzir/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/input-lag-monitor-tv-games-reduzir/</guid>
+      <pubDate>Mon, 26 Oct 2026 11:40:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Hardware</category>
+      <description>Modo Jogo, processamento de imagem e conexão correta fazem diferença maior que muitos acessórios.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/input-lag-monitor-tv-games-reduzir-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Gargalo de CPU ou GPU: como identificar sem cair em calculadora mágica</title>
+      <link>https://vmgames.com.br/blog/gargalo-cpu-gpu-pc-games-identificar/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/gargalo-cpu-gpu-pc-games-identificar/</guid>
+      <pubDate>Mon, 26 Oct 2026 11:32:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Hardware</category>
+      <description>Aprenda a observar uso, tempo de quadro e configurações antes de trocar peças.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/gargalo-cpu-gpu-pc-games-identificar-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Quanto de VRAM uma placa de vídeo precisa para jogos?</title>
+      <link>https://vmgames.com.br/blog/vram-placa-video-quanto-precisa-games/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/vram-placa-video-quanto-precisa-games/</guid>
+      <pubDate>Mon, 26 Oct 2026 11:24:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Hardware</category>
+      <description>Resolução, texturas e ray tracing importam mais do que um número isolado na embalagem.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/vram-placa-video-quanto-precisa-games-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Frame Generation aumenta FPS, mas melhora a resposta?</title>
+      <link>https://vmgames.com.br/blog/frame-generation-aumenta-fps-mas-latencia/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/frame-generation-aumenta-fps-mas-latencia/</guid>
+      <pubDate>Mon, 26 Oct 2026 11:16:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Hardware</category>
+      <description>Quadros gerados deixam o movimento mais fluido, porém não substituem uma base estável.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/frame-generation-aumenta-fps-mas-latencia-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>DLSS, FSR e XeSS: como escolher o melhor upscaling</title>
+      <link>https://vmgames.com.br/blog/dlss-fsr-xess-upscaling-como-escolher/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/dlss-fsr-xess-upscaling-como-escolher/</guid>
+      <pubDate>Mon, 26 Oct 2026 11:08:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Hardware</category>
+      <description>Entenda resolução interna, qualidade de imagem e compatibilidade antes de ativar reconstrução.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/dlss-fsr-xess-upscaling-como-escolher-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>60 FPS ou 120 FPS: quando a diferença realmente importa</title>
+      <link>https://vmgames.com.br/blog/60-fps-120-fps-diferenca-games/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/60-fps-120-fps-diferenca-games/</guid>
+      <pubDate>Mon, 26 Oct 2026 11:00:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Hardware</category>
+      <description>Taxa de quadros, frequência da tela e tempo de resposta precisam trabalhar juntos.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/60-fps-120-fps-diferenca-games-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Salvamento na nuvem: como evitar perder o progresso dos jogos</title>
+      <link>https://vmgames.com.br/blog/salvamento-nuvem-games-evitar-perder-progresso/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/salvamento-nuvem-games-evitar-perder-progresso/</guid>
+      <pubDate>Mon, 26 Oct 2026 10:40:00 -0300</pubDate>
       <dc:creator>Arley Vieira</dc:creator>
       <category>Guias</category>
-      <description>Saiba quando gameplay pode ser monetizada no YouTube, como verificar direitos comerciais e por que vídeos sem comentário podem ser recusados.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/monetizar-gameplay-direitos-autorais-youtube.webp" type="image/webp" length="0"/>
+      <description>Sincronização ajuda, mas conflito de arquivos e contas erradas ainda podem apagar horas de jogo.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/salvamento-nuvem-games-evitar-perder-progresso-real.webp" type="image/webp" length="0"/>
     </item>
     <item>
-      <title>Roblox DevEx: como Robux ganhos podem virar dinheiro de verdade</title>
-      <link>https://vmgames.com.br/blog/roblox-devex-trocar-robux-dinheiro/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/roblox-devex-trocar-robux-dinheiro/</guid>
-      <pubDate>Fri, 21 Aug 2026 00:24:00 -0300</pubDate>
+      <title>Crossplay, cross-save e cross-progression: entenda as diferenças</title>
+      <link>https://vmgames.com.br/blog/crossplay-cross-save-cross-progression-diferencas/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/crossplay-cross-save-cross-progression-diferencas/</guid>
+      <pubDate>Mon, 26 Oct 2026 10:32:00 -0300</pubDate>
       <dc:creator>Arley Vieira</dc:creator>
       <category>Guias</category>
-      <description>Entenda o Roblox DevEx, a diferença entre Robux comprados e ganhos, requisitos para saque e a taxa oficial de conversão.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/roblox-devex-trocar-robux-dinheiro.webp" type="image/webp" length="0"/>
+      <description>Os três termos parecem iguais, mas determinam com quem você joga e o que acompanha sua conta.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/crossplay-cross-save-cross-progression-diferencas-real.webp" type="image/webp" length="0"/>
     </item>
     <item>
-      <title>Criadores de mapas no Fortnite podem receber por engajamento; entenda</title>
-      <link>https://vmgames.com.br/blog/ganhar-dinheiro-mapas-fortnite-engajamento/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/ganhar-dinheiro-mapas-fortnite-engajamento/</guid>
-      <pubDate>Fri, 21 Aug 2026 00:23:00 -0300</pubDate>
+      <title>Controle parental em games: compras, tempo de jogo e privacidade</title>
+      <link>https://vmgames.com.br/blog/controle-parental-games-compras-tempo-jogo/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/controle-parental-games-compras-tempo-jogo/</guid>
+      <pubDate>Mon, 26 Oct 2026 10:24:00 -0300</pubDate>
       <dc:creator>Arley Vieira</dc:creator>
       <category>Guias</category>
-      <description>Veja como funciona o pagamento por engajamento para ilhas do Fortnite, quais métricas contam e os requisitos básicos para participar.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/ganhar-dinheiro-mapas-fortnite-engajamento.webp" type="image/webp" length="0"/>
+      <description>Como configurar limites sem depender apenas de conversa ou apenas de bloqueios técnicos.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/controle-parental-games-compras-tempo-jogo-real.webp" type="image/webp" length="0"/>
     </item>
     <item>
-      <title>Twitch reduz barreira para Afiliado; veja os requisitos de monetização</title>
-      <link>https://vmgames.com.br/blog/twitch-afiliado-requisitos-monetizacao/</link>
-      <guid isPermaLink="true">https://vmgames.com.br/blog/twitch-afiliado-requisitos-monetizacao/</guid>
-      <pubDate>Fri, 21 Aug 2026 00:22:00 -0300</pubDate>
+      <title>Como proteger contas de jogos com autenticação em dois fatores</title>
+      <link>https://vmgames.com.br/blog/proteger-conta-games-autenticacao-dois-fatores/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/proteger-conta-games-autenticacao-dois-fatores/</guid>
+      <pubDate>Mon, 26 Oct 2026 10:16:00 -0300</pubDate>
       <dc:creator>Arley Vieira</dc:creator>
-      <category>Notícias</category>
-      <description>A Twitch ampliou recursos de monetização e reduziu as metas do programa de Afiliado. Veja seguidores, horas, dias e média de espectadores exigidos.</description>
-      <enclosure url="https://vmgames.com.br/blog/img/capas/twitch-afiliado-requisitos-monetizacao.webp" type="image/webp" length="0"/>
+      <category>Guias</category>
+      <description>Um guia prático para reduzir invasões, roubo de itens e perda de acesso em contas gamer.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/proteger-conta-games-autenticacao-dois-fatores-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>NAT aberto, moderado ou estrito: por que isso afeta partidas online</title>
+      <link>https://vmgames.com.br/blog/nat-aberto-moderado-estrito-jogos-online/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/nat-aberto-moderado-estrito-jogos-online/</guid>
+      <pubDate>Mon, 26 Oct 2026 10:08:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>Veja como o tipo de NAT interfere em grupos, voz e conexão entre jogadores sem abrir a rede de forma insegura.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/nat-aberto-moderado-estrito-jogos-online-real.webp" type="image/webp" length="0"/>
+    </item>
+    <item>
+      <title>Ping e latência em jogos online: o que muda a partida e como melhorar</title>
+      <link>https://vmgames.com.br/blog/ping-latencia-jogos-online-como-melhorar/</link>
+      <guid isPermaLink="true">https://vmgames.com.br/blog/ping-latencia-jogos-online-como-melhorar/</guid>
+      <pubDate>Mon, 26 Oct 2026 10:00:00 -0300</pubDate>
+      <dc:creator>Arley Vieira</dc:creator>
+      <category>Guias</category>
+      <description>Entenda por que ping, jitter e perda de pacotes afetam jogos online e quais ajustes realmente ajudam.</description>
+      <enclosure url="https://vmgames.com.br/blog/img/capas/ping-latencia-jogos-online-como-melhorar-real.webp" type="image/webp" length="0"/>
     </item>
   </channel>
 </rss>

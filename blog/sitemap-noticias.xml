@@ -2,135 +2,333 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
-    <loc>https://vmgames.com.br/blog/epic-games-jogos-gratis-como-resgatar/</loc>
+    <loc>https://vmgames.com.br/blog/netcode-tick-rate-hit-registration/</loc>
     <news:news>
       <news:publication>
         <news:name>VM Games</news:name>
         <news:language>pt</news:language>
       </news:publication>
-      <news:publication_date>2026-08-23T09:50:00-03:00</news:publication_date>
-      <news:title>Jogos grátis da Epic: como resgatar e não confundir com free-to-play</news:title>
+      <news:publication_date>2026-10-26T14:40:00-03:00</news:publication_date>
+      <news:title>Tick rate e hit registration: o que acontece entre seu tiro e o servidor</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://vmgames.com.br/blog/worlds-2026-formato-vagas/</loc>
+    <loc>https://vmgames.com.br/blog/servidor-dedicado-peer-to-peer-jogos/</loc>
     <news:news>
       <news:publication>
         <news:name>VM Games</news:name>
         <news:language>pt</news:language>
       </news:publication>
-      <news:publication_date>2026-08-23T09:40:00-03:00</news:publication_date>
-      <news:title>Worlds 2026: como funciona o formato suíço e a classificação</news:title>
+      <news:publication_date>2026-10-26T14:32:00-03:00</news:publication_date>
+      <news:title>Servidor dedicado ou peer-to-peer: por que partidas online se comportam diferente</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://vmgames.com.br/blog/vrr-allm-tv-games/</loc>
+    <loc>https://vmgames.com.br/blog/discord-golpes-nitro-torneio-skins/</loc>
     <news:news>
       <news:publication>
         <news:name>VM Games</news:name>
         <news:language>pt</news:language>
       </news:publication>
-      <news:publication_date>2026-08-23T09:30:00-03:00</news:publication_date>
-      <news:title>VRR e ALLM na TV: o que muda nos jogos e quando ativar</news:title>
+      <news:publication_date>2026-10-26T14:24:00-03:00</news:publication_date>
+      <news:title>Golpes no Discord gamer: Nitro grátis, torneios e falsas trocas</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://vmgames.com.br/blog/controles-touch-jogos-mobile/</loc>
+    <loc>https://vmgames.com.br/blog/microtransacoes-criancas-como-evitar-gastos/</loc>
     <news:news>
       <news:publication>
         <news:name>VM Games</news:name>
         <news:language>pt</news:language>
       </news:publication>
-      <news:publication_date>2026-08-23T09:20:00-03:00</news:publication_date>
-      <news:title>Controles touch em jogos mobile: tamanho, posição e resposta</news:title>
+      <news:publication_date>2026-10-26T14:16:00-03:00</news:publication_date>
+      <news:title>Microtransações e crianças: como evitar gastos inesperados</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://vmgames.com.br/blog/transferir-save-nintendo-switch/</loc>
+    <loc>https://vmgames.com.br/blog/anti-cheat-kernel-o-que-significa-jogador/</loc>
     <news:news>
       <news:publication>
         <news:name>VM Games</news:name>
         <news:language>pt</news:language>
       </news:publication>
-      <news:publication_date>2026-08-23T09:10:00-03:00</news:publication_date>
-      <news:title>Como transferir usuário e save entre consoles Nintendo Switch</news:title>
+      <news:publication_date>2026-10-26T14:08:00-03:00</news:publication_date>
+      <news:title>Anti-cheat em nível de kernel: o que isso significa para o jogador</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://vmgames.com.br/blog/xbox-cloud-gaming-internet-navegadores/</loc>
+    <loc>https://vmgames.com.br/blog/mmr-ranked-matchmaking-como-funciona/</loc>
     <news:news>
       <news:publication>
         <news:name>VM Games</news:name>
         <news:language>pt</news:language>
       </news:publication>
-      <news:publication_date>2026-08-23T09:00:00-03:00</news:publication_date>
-      <news:title>Xbox Cloud Gaming: internet, navegadores e controles compatíveis</news:title>
+      <news:publication_date>2026-10-26T14:00:00-03:00</news:publication_date>
+      <news:title>MMR, elo e matchmaking: por que seu rank não conta toda a história</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://vmgames.com.br/blog/ssd-ps5-requisitos-instalacao/</loc>
+    <loc>https://vmgames.com.br/blog/speedrun-como-recordes-sao-verificados/</loc>
     <news:news>
       <news:publication>
         <news:name>VM Games</news:name>
         <news:language>pt</news:language>
       </news:publication>
-      <news:publication_date>2026-08-23T08:50:00-03:00</news:publication_date>
-      <news:title>SSD para PS5: requisitos oficiais antes de comprar e instalar</news:title>
+      <news:publication_date>2026-10-26T13:40:00-03:00</news:publication_date>
+      <news:title>Speedrun: como recordes de jogos são verificados</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://vmgames.com.br/blog/google-play-games-pc-requisitos/</loc>
+    <loc>https://vmgames.com.br/blog/soulslike-o-que-define-genero/</loc>
     <news:news>
       <news:publication>
         <news:name>VM Games</news:name>
         <news:language>pt</news:language>
       </news:publication>
-      <news:publication_date>2026-08-23T08:40:00-03:00</news:publication_date>
-      <news:title>Google Play Games no PC: requisitos e como ativar a virtualização</news:title>
+      <news:publication_date>2026-10-26T13:32:00-03:00</news:publication_date>
+      <news:title>O que define um soulslike além da dificuldade</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://vmgames.com.br/blog/reembolso-steam-como-pedir/</loc>
+    <loc>https://vmgames.com.br/blog/roguelike-roguelite-diferencas-historia/</loc>
     <news:news>
       <news:publication>
         <news:name>VM Games</news:name>
         <news:language>pt</news:language>
       </news:publication>
-      <news:publication_date>2026-08-23T08:30:00-03:00</news:publication_date>
-      <news:title>Reembolso no Steam: prazo, limite de jogo e como pedir</news:title>
+      <news:publication_date>2026-10-26T13:24:00-03:00</news:publication_date>
+      <news:title>Roguelike e roguelite: qual é a diferença entre os gêneros</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://vmgames.com.br/blog/como-avaliar-acessibilidade-em-jogos/</loc>
+    <loc>https://vmgames.com.br/blog/free-to-play-como-jogos-gratis-ganham-dinheiro/</loc>
     <news:news>
       <news:publication>
         <news:name>VM Games</news:name>
         <news:language>pt</news:language>
       </news:publication>
-      <news:publication_date>2026-08-23T08:20:00-03:00</news:publication_date>
-      <news:title>Como avaliar acessibilidade em jogos além da dificuldade</news:title>
+      <news:publication_date>2026-10-26T13:16:00-03:00</news:publication_date>
+      <news:title>Como jogos grátis ganham dinheiro: o modelo free-to-play explicado</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://vmgames.com.br/blog/como-acompanhar-lancamentos-steam/</loc>
+    <loc>https://vmgames.com.br/blog/battle-pass-vale-a-pena-como-calcular/</loc>
     <news:news>
       <news:publication>
         <news:name>VM Games</news:name>
         <news:language>pt</news:language>
       </news:publication>
-      <news:publication_date>2026-08-23T08:10:00-03:00</news:publication_date>
-      <news:title>Como acompanhar lançamentos de jogos no Steam sem perder datas</news:title>
+      <news:publication_date>2026-10-26T13:08:00-03:00</news:publication_date>
+      <news:title>Battle Pass vale a pena? Como calcular tempo, preço e recompensa</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://vmgames.com.br/blog/steam-familias-compartilhar-jogos-regras/</loc>
+    <loc>https://vmgames.com.br/blog/gacha-pity-banner-moeda-como-funciona/</loc>
     <news:news>
       <news:publication>
         <news:name>VM Games</news:name>
         <news:language>pt</news:language>
       </news:publication>
-      <news:publication_date>2026-08-23T08:00:00-03:00</news:publication_date>
-      <news:title>Famílias Steam: como funciona o compartilhamento de jogos</news:title>
+      <news:publication_date>2026-10-26T13:00:00-03:00</news:publication_date>
+      <news:title>Gacha, pity e banners: como esses sistemas funcionam</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/steam-workshop-instalar-remover-mods/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T12:40:00-03:00</news:publication_date>
+      <news:title>Steam Workshop: como instalar, atualizar e remover mods corretamente</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/modificar-jogos-mods-com-seguranca/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T12:32:00-03:00</news:publication_date>
+      <news:title>Como instalar mods com segurança e evitar arquivos maliciosos</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/audio-games-estereo-surround-virtual-headset/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T12:24:00-03:00</news:publication_date>
+      <news:title>Áudio estéreo ou surround virtual em games: qual escolher</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/drift-controle-causas-limpeza-garantia/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T12:16:00-03:00</news:publication_date>
+      <news:title>Drift no controle: causas, testes e quando acionar a garantia</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/oled-burn-in-games-como-reduzir-risco/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T12:08:00-03:00</news:publication_date>
+      <news:title>OLED e burn-in em games: qual é o risco e como reduzir</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/hdr-games-configurar-sem-imagem-lavada/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T12:00:00-03:00</news:publication_date>
+      <news:title>HDR em jogos: como configurar sem deixar a imagem lavada</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/input-lag-monitor-tv-games-reduzir/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T11:40:00-03:00</news:publication_date>
+      <news:title>Input lag em TV e monitor: como reduzir o atraso nos jogos</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/gargalo-cpu-gpu-pc-games-identificar/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T11:32:00-03:00</news:publication_date>
+      <news:title>Gargalo de CPU ou GPU: como identificar sem cair em calculadora mágica</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/vram-placa-video-quanto-precisa-games/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T11:24:00-03:00</news:publication_date>
+      <news:title>Quanto de VRAM uma placa de vídeo precisa para jogos?</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/frame-generation-aumenta-fps-mas-latencia/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T11:16:00-03:00</news:publication_date>
+      <news:title>Frame Generation aumenta FPS, mas melhora a resposta?</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/dlss-fsr-xess-upscaling-como-escolher/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T11:08:00-03:00</news:publication_date>
+      <news:title>DLSS, FSR e XeSS: como escolher o melhor upscaling</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/60-fps-120-fps-diferenca-games/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T11:00:00-03:00</news:publication_date>
+      <news:title>60 FPS ou 120 FPS: quando a diferença realmente importa</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/salvamento-nuvem-games-evitar-perder-progresso/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T10:40:00-03:00</news:publication_date>
+      <news:title>Salvamento na nuvem: como evitar perder o progresso dos jogos</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/crossplay-cross-save-cross-progression-diferencas/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T10:32:00-03:00</news:publication_date>
+      <news:title>Crossplay, cross-save e cross-progression: entenda as diferenças</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/controle-parental-games-compras-tempo-jogo/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T10:24:00-03:00</news:publication_date>
+      <news:title>Controle parental em games: compras, tempo de jogo e privacidade</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/proteger-conta-games-autenticacao-dois-fatores/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T10:16:00-03:00</news:publication_date>
+      <news:title>Como proteger contas de jogos com autenticação em dois fatores</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/nat-aberto-moderado-estrito-jogos-online/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T10:08:00-03:00</news:publication_date>
+      <news:title>NAT aberto, moderado ou estrito: por que isso afeta partidas online</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://vmgames.com.br/blog/ping-latencia-jogos-online-como-melhorar/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>VM Games</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-26T10:00:00-03:00</news:publication_date>
+      <news:title>Ping e latência em jogos online: o que muda a partida e como melhorar</news:title>
     </news:news>
   </url>
 </urlset>
